@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="mit os lec 4.">
+<title>MIT6S081Lec4</title>
+
+<link rel='canonical' href='https://echudet.github.io/p/mit6s081lec4/'>
+
+<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="MIT6S081Lec4">
+<meta property='og:description' content="mit os lec 4.">
+<meta property='og:url' content='https://echudet.github.io/p/mit6s081lec4/'>
+<meta property='og:site_name' content='echudet'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-11-10T22:02:50&#43;08:00'/><meta property='article:modified_time' content='2024-11-10T22:02:50&#43;08:00'/>
+<meta name="twitter:title" content="MIT6S081Lec4">
+<meta name="twitter:description" content="mit os lec 4.">
+    <link rel="shortcut icon" href="/timer.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu11199958555974308744.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">⌨️</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">echudet</a></h1>
+            <h2 class="site-description">探索编程的学生一枚</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/EchudeT'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://twitter.com'
+                        target="_blank"
+                        title="Twitter"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>档案</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#分页硬件的作用">分页硬件的作用</a></li>
+        <li><a href="#分页硬件的启动">分页硬件的启动</a></li>
+        <li><a href="#1-cpu中央处理器">1. <strong>CPU（中央处理器）</strong></a></li>
+        <li><a href="#2-biosuefi">2. <strong>BIOS/UEFI</strong></a></li>
+        <li><a href="#3-内存ram">3. <strong>内存（RAM）</strong></a></li>
+        <li><a href="#4-硬盘控制器">4. <strong>硬盘控制器</strong></a></li>
+        <li><a href="#5-io设备">5. <strong>I/O设备</strong></a></li>
+        <li><a href="#6-中断控制器">6. <strong>中断控制器</strong></a></li>
+        <li><a href="#为什么要初始化页表">为什么要初始化页表？</a></li>
+        <li><a href="#这个页表最初只映射内核的内存区域是什么意思">“这个页表最初只映射内核的内存区域”是什么意思？</a></li>
+        <li><a href="#这个代码是用来启动进程的这段代码是从哪里来的">“这个代码是用来启动进程的”这段代码是从哪里来的？</a></li>
+        <li><a href="#内核栈">内核栈</a></li>
+        <li><a href="#内核空间">内核空间</a></li>
+        <li><a href="#总结">总结</a></li>
+        <li><a href="#p-context-eip-指的是什么"><code>p-&gt;context-&gt;eip</code> 指的是什么？</a></li>
+        <li><a href="#p-context-中有什么内容"><code>p-&gt;context</code> 中有什么内容？</a></li>
+        <li><a href="#作用与重要性">作用与重要性</a></li>
+        <li><a href="#1-调用-kvmalloc">1. <strong>调用 <code>kvmalloc()</code></strong></a></li>
+        <li><a href="#2-调用-setupkvm">2. <strong>调用 <code>setupkvm()</code></strong></a></li>
+        <li><a href="#3-调用-mappages">3. <strong>调用 <code>mappages()</code></strong></a></li>
+        <li><a href="#4-调用-walkpgdir">4. <strong>调用 <code>walkpgdir()</code></strong></a></li>
+        <li><a href="#5-初始化页表项-pte">5. <strong>初始化页表项 (PTE)</strong></a></li>
+        <li><a href="#6-完成内核的基础映射">6. <strong>完成内核的基础映射</strong></a></li>
+        <li><a href="#7-未建立用户空间映射">7. <strong>未建立用户空间映射</strong></a></li>
+        <li><a href="#8-切换到新页表">8. <strong>切换到新页表</strong></a></li>
+        <li><a href="#1-物理内存分配器中的数据结构">1. <strong>物理内存分配器中的数据结构</strong></a></li>
+        <li><a href="#2-内存的安全保护">2. <strong>内存的安全保护</strong></a></li>
+        <li><a href="#3-分配器的初始化">3. <strong>分配器的初始化</strong></a></li>
+        <li><a href="#4-地址对齐和释放">4. <strong>地址对齐和释放</strong></a></li>
+        <li><a href="#5-地址映射">5. <strong>地址映射</strong></a></li>
+        <li><a href="#6-类型转换">6. <strong>类型转换</strong></a></li>
+        <li><a href="#7-用户地址空间中的栈与堆">7. <strong>用户地址空间中的栈与堆</strong></a></li>
+        <li><a href="#1-elf-格式与-exec-的基本流程">1. <strong>ELF 格式与 <code>exec</code> 的基本流程</strong></a></li>
+        <li><a href="#2-内存分配与段加载">2. <strong>内存分配与段加载</strong></a></li>
+        <li><a href="#3-处理-program-header">3. <strong>处理 Program Header</strong></a></li>
+        <li><a href="#4-用户栈的分配与初始化">4. <strong>用户栈的分配与初始化</strong></a></li>
+        <li><a href="#5-栈保护页">5. <strong>栈保护页</strong></a></li>
+        <li><a href="#6-错误处理与内存释放">6. <strong>错误处理与内存释放</strong></a></li>
+        <li><a href="#7-总结">7. <strong>总结</strong></a></li>
+        <li><a href="#1-增加栈的大小">1. <strong>增加栈的大小</strong></a></li>
+        <li><a href="#2-使用堆内存">2. <strong>使用堆内存</strong></a></li>
+        <li><a href="#3-参数从文件读取">3. <strong>参数从文件读取</strong></a></li>
+        <li><a href="#4-分块处理">4. <strong>分块处理</strong></a></li>
+        <li><a href="#5-环境变量">5. <strong>环境变量</strong></a></li>
+        <li><a href="#6-系统配置">6. <strong>系统配置</strong></a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/mit6s081/" >
+                Mit6s081
+            </a>
+        
+            <a href="/categories/os/" >
+                Os
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/mit6s081lec4/">MIT6S081Lec4</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            mit os lec 4.
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2024-11-10</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 28 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="lecture-4-page-tablesvm">Lecture 4 Page Tables(vm)
+</h1><p>vm -&gt; virtual memory ，map virtual to physical 隔离性</p>
+<p>正确设置的VM可以实现隔离性</p>
+<p>default下，不存在memory isolation</p>
+<ol>
+<li>
+<p>address spaces，地址空间</p>
+<ol>
+<li>
+<p>给包括内核所有程序专属空间，这些空间相互独立</p>
+</li>
+<li>
+<p>如何在物理内存上划分虚拟空间</p>
+<p>通过page table实现，kalloc储存余有空间的地址</p>
+<p>而page table 页表由处理器硬件或内存管理单元MMU实现，映射内存的VA-&gt;PG表存储在MMU中，也有表存储在内存中用来找到MMU中的表（e.g. SATP寄存器）</p>
+<p>MMU是不定存储的，必要时读取表</p>
+<p>改写SATP寄存器是内核的权利，用户无法改写</p>
+</li>
+</ol>
+</li>
+<li>
+<p>paging hw(risc-v)</p>
+<ol>
+<li>
+<p>SATP-64bits,可存储2^64个地址，过大</p>
+<p>实际上，它仅为page创建地址，一个page为4kb,</p>
+<p>index和offset，index指page序号（指向内存中的4kb），offset指page中具体的偏移</p>
+</li>
+<li>
+<p>实际上，高25bit并未使用（在RISC-V中)，中27位用于index，低12位用于offset(2^12 bits = 4 kb)，而物理内存可以比虚拟内存大，XV86为44位address + 12 offset，此处56为设计师设计的，并无具体含义</p>
+</li>
+<li>
+<p>虽然page table可存储2^27个条目，但它并非一次性存储在各个程序中，而是多级结构，先将27位划分为三个9bit，再指向不同的page directory（4096bytes），其中一个条目为8bytes，故其中含有512个PTE，VM的PT中最高级的9bit指向PD，得到一个物理page号，其指向中级PD，再得到一个PPN指向低级PD，再得到真正的物理地址</p>
+</li>
+<li>
+<p>PTE低十位一般用于标志位，</p>
+<p>RSW , Dirty, Accessed , Global, User, Execute, Write, Read, Valid</p>
+<p>9   &mdash;-&gt;    0</p>
+</li>
+<li>
+<p>当无法翻译的时候，会出现page fault</p>
+</li>
+<li>
+<p>satp在此多级过程中，会提供最高级PD的地址，然后高位9bit会在PD中寻找相应的PPN</p>
+</li>
+<li>
+<p>这三个PD都存放于物理地址</p>
+</li>
+<li>
+<p>从PD得到的PPN（非目标物理地址）是44bit的，会在后面补上12个0，再指向下一个PD</p>
+</li>
+<li>
+<p>读一次地址要访问三次地址，代价较高，故有页表缓存（TLB），又称PTE缓存。TLB会存储VA-&gt;PQ的映射</p>
+</li>
+<li>
+<p>当os切换page table时，会清空TLB缓存</p>
+<p>在RISC-V中，清空TLB指令为sfence_vma</p>
+<p>在RISC-V中，walk函数实现了与硬件MMU相同的功能</p>
+</li>
+<li>
+<p>三级页表一般是由硬件实现，而非操作系统</p>
+</li>
+<li>
+<p>page table 提供了一层抽象，这里的映射完全由操作系统控制，可实现多种功能，如page fault，os可以更新page table，并重新加载指令</p>
+</li>
+<li>
+<p>CPU每个核都有MMU和TLB</p>
+</li>
+</ol>
+</li>
+<li>
+<p>xv6 vm code + layout</p>
+<ol>
+<li>
+<p>kernelbase地址于0x800000时（kernel虚拟地址下的），产生的信息若地址低于它，则流向不同io设备，否则流向dram （当然可能也是unused，因为没那么多设备）</p>
+</li>
+<li>
+<p>总体物理地址的layout，是由主板决定的，并非仅是CPU决定</p>
+</li>
+<li>
+<p><img src="D:%5cUsers%5c%e5%85%b3%e9%9b%84%e6%ad%a3%5cDownloads%5c1724674585767.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="1724674585767"
+	
+	
+></p>
+</li>
+<li>
+<p>GuardPage 不会映射，起保护Kernel Stack的作用，</p>
+<p>kernel stack 与 kernel data 映射于一处</p>
+</li>
+<li>
+<p>每一个用户进程都有一个kernel stack</p>
+</li>
+<li>
+<p>用户进程会占用kernel的虚拟内存的free memory，</p>
+<p>用户的虚拟内存和kernel的一样大，但用户的空间利用率低</p>
+</li>
+<li>
+<p>kernel中大部分虚拟内存和真实内存是一一对应的，因此在启动虚拟内存映射时不会对kernel 的运行造成影响</p>
+</li>
+<li>
+<p>每个进程都有用户栈和内核栈（<code>p-&gt;kstack</code>）。当进程运行用户指令时，只有其用户栈被使用，其内核栈则是空的。然而当进程（通过系统调用或中断）进入内核时，内核代码就在进程的内核栈中执行；进程处于内核中时，其用户栈仍然保存着数据，只是暂时处于不活跃状态。进程的线程交替地使用着用户栈和内核栈。要注意内核栈是用户代码无法使用的，这样即使一个进程破坏了自己的用户栈，内核也能保持运行。</p>
+<ol>
+<li>xv6 使用结构体 <code>struct proc</code> 来维护一个进程的状态，其中最为重要的状态是进程的页表，内核栈，当前运行状态。我们接下来会用 <code>p-&gt;xxx</code> 来指代 <code>proc</code> 结构中的元素。</li>
+<li>当进程使用系统调用时，处理器转入内核栈中，提升硬件的特权级，然后运行系统调用对应的内核代码。当系统调用完成时，又从内核空间回到用户空间：降低硬件特权级，转入用户栈，恢复执行系统调用指令后面的那条用户指令。线程可以在内核中“阻塞”，等待 I/O, 在 I/O 结束后再恢复运行。</li>
+<li><code>p-&gt;state</code> 指示了进程的状态：新建、准备运行、运行、等待 I/O 或退出状态中。</li>
+<li><code>p-&gt;pgdir</code> 以 x86 硬件要求的格式保存了进程的页表。xv6 让分页硬件在进程运行时使用 <code>p-&gt;pgdir</code>。进程的页表还记录了保存进程内存的物理页的地址。</li>
+</ol>
+</li>
+<li>
+<p>当 PC 开机时，它会初始化自己然后从磁盘中载入 <em>boot loader</em> 到内存并运行。然后，<em>boot loader</em> 把 xv6 内核从磁盘中载入并从 <code>entry</code>（1040）开始运行。x86 的分页硬件在此时还没有开始工作；所以这时的虚拟地址是直接映射到物理地址上的。</p>
+<p>boot loader 把 xv6 内核装载到物理地址 0x100000 处。之所以没有装载到内核指令和内核数据应该出现的 0x80100000，是因为小型机器上很可能没有这么大的物理内存。而之所以在 0x100000 而不是 0x0 则是因为地址 0xa0000 到 0x100000 是属于 I/O 设备的。</p>
+<p>为了让内核的剩余部分能够运行，<code>entry</code> 的代码设置了页表，将 0x80000000（称为 <code>KERNBASE</code>（0207））开始的虚拟地址映射到物理地址 0x0 处。注意，页表经常会这样把两段不同的虚拟内存映射到相同的一段物理内存，我们将会看到更多类似的例子。</p>
+<ol>
+<li>
+<p>“页表经常会这样把两段不同的虚拟内存映射到相同的一段物理内存”指的是以下两段虚拟内存：</p>
+<ol>
+<li><strong>虚拟地址 0x0 到 0x400000</strong>：这段虚拟地址范围直接映射到物理地址 0x0 到 0x400000。在 <code>entry</code> 代码开始运行时，为了能够正常执行，这个映射是必要的，因为在系统启动时，虚拟地址和物理地址是直接对应的。</li>
+<li><strong>虚拟地址 KERNBASE 到 KERNBASE + 0x400000</strong>：这段虚拟地址范围对应的是高地址的内核空间，KERNBASE 通常为 0x80000000。为了让内核在其预期的高虚拟地址空间运行，<code>entry</code> 代码将这一段虚拟地址也映射到了物理地址 0x0 到 0x400000。</li>
+</ol>
+<p>这两段虚拟地址虽然不同，但它们都映射到了同一段物理内存，即物理地址 0x0 到 0x400000。这样做的目的是为了在内核加载的早期阶段能够在物理内存较小的情况下让内核正常工作。随着系统的进一步初始化和内存管理机制的完善，低地址的映射会被移除，内核最终会运行在高地址的虚拟内存空间中。</p>
+</li>
+</ol>
+</li>
+<li>
+<p>在xv6的启动过程中，分页硬件起到了至关重要的作用。简单来说，分页硬件负责将程序使用的虚拟地址翻译成实际的物理地址，这是实现虚拟内存管理的核心机制。</p>
+<h3 id="分页硬件的作用">分页硬件的作用
+</h3><ol>
+<li><strong>地址翻译</strong>：分页硬件的主要任务是将CPU在执行指令时产生的虚拟地址，按照页表的规定，转换为实际的物理地址。这使得每个进程可以拥有一个独立的虚拟地址空间，而不需要关心实际的物理内存布局。</li>
+<li><strong>内存保护</strong>：分页硬件可以通过页表中的权限位，控制对内存的访问权限。例如，它可以设置某些内存区域只读、不可执行，或者仅允许内核访问，从而提供内存保护机制，防止进程之间互相干扰。</li>
+<li><strong>支持进程隔离</strong>：分页硬件使得不同进程可以拥有各自的虚拟地址空间，这些空间彼此独立。即使多个进程使用相同的虚拟地址，它们在物理内存中映射到的实际地址也不同，从而实现了进程间的隔离。</li>
+</ol>
+<h3 id="分页硬件的启动">分页硬件的启动
+</h3><p>分页硬件的启动步骤如下：</p>
+<ol>
+<li><strong>设置页表</strong>：在启动分页硬件之前，内核首先要设置好页表。页表是一种数据结构，它记录了虚拟地址到物理地址的映射关系。xv6在启动过程中会建立一个初始的页表，这个页表会映射内核代码和数据到合适的物理地址。</li>
+<li><strong>加载页表地址到控制寄存器 %cr3</strong>：内核通过将页表的物理地址加载到控制寄存器 <code>%cr3</code> 中，告诉CPU当前要使用哪一个页表来进行地址翻译。这个步骤是让分页硬件知道应该使用哪一张表来进行虚拟地址到物理地址的转换。</li>
+<li><strong>启用分页</strong>：在设置好页表并将其地址加载到 <code>%cr3</code> 后，内核会设置控制寄存器 <code>%cr0</code> 中的分页启用位（<code>CR0_PG</code>），这一步骤正式启动了分页硬件。此时，CPU开始使用页表进行地址翻译，系统的内存管理机制进入正常工作状态。</li>
+<li><strong>切换到高地址执行</strong>：启用分页后，内核可以安全地从低地址跳转到高地址继续执行。由于页表已经将高地址映射到正确的物理内存位置，内核可以在它的预期虚拟地址空间中正常工作。</li>
+</ol>
+</li>
+<li>
+<p>在整个启动过程中，除了分页硬件外，还有几个关键的硬件组件也在发挥重要作用。这些硬件协同工作，确保操作系统能够成功启动并运行：</p>
+<h3 id="1-cpu中央处理器">1. <strong>CPU（中央处理器）</strong>
+</h3><ul>
+<li><strong>指令执行</strong>：CPU是整个启动过程的核心，它负责执行从<code>boot loader</code>到内核的所有指令。启动过程开始时，CPU从固化在硬件中的地址（通常是BIOS或EFI）开始执行，然后逐步加载和运行<code>boot loader</code>，再到加载和执行内核。</li>
+<li><strong>模式切换</strong>：CPU在启动过程中会从实模式切换到保护模式，最后进入分页模式。在实模式下，CPU只处理简单的地址计算，但在保护模式和分页模式下，CPU可以利用复杂的内存管理和保护机制。</li>
+</ul>
+<h3 id="2-biosuefi">2. <strong>BIOS/UEFI</strong>
+</h3><ul>
+<li><strong>硬件初始化</strong>：BIOS（基本输入输出系统）或UEFI（统一可扩展固件接口）是计算机开机时首先运行的固件，它负责初始化计算机的硬件组件，如CPU、内存、硬盘和I/O设备。</li>
+<li><strong>引导加载器加载</strong>：BIOS/UEFI在完成硬件初始化后，会将控制权交给<code>boot loader</code>，这通常是通过读取特定存储设备上的引导扇区来实现的。</li>
+</ul>
+<h3 id="3-内存ram">3. <strong>内存（RAM）</strong>
+</h3><ul>
+<li><strong>代码和数据存储</strong>：内存用于存储启动过程中加载的所有代码和数据，包括<code>boot loader</code>、内核代码、页表以及其他重要的数据结构。在内核启动并运行时，内存还会被用来存储进程的代码、数据和栈等。</li>
+<li><strong>栈操作</strong>：CPU在执行指令时使用内存中的栈来保存函数调用的信息、局部变量和返回地址。栈的正确初始化和管理对于顺利执行程序至关重要。</li>
+</ul>
+<h3 id="4-硬盘控制器">4. <strong>硬盘控制器</strong>
+</h3><ul>
+<li><strong>加载内核</strong>：硬盘控制器负责从硬盘中读取<code>boot loader</code>和内核。<code>boot loader</code>在启动时会通过硬盘控制器将内核从存储设备加载到内存的指定位置，以便CPU能够执行内核代码。</li>
+</ul>
+<h3 id="5-io设备">5. <strong>I/O设备</strong>
+</h3><ul>
+<li><strong>基本输入输出</strong>：在启动过程中，I/O设备（如键盘、显示器、串口等）通常会被初始化，以便在启动过程的早期阶段，系统可以输出调试信息或接受输入。</li>
+</ul>
+<h3 id="6-中断控制器">6. <strong>中断控制器</strong>
+</h3><ul>
+<li><strong>中断管理</strong>：中断控制器负责管理和处理硬件中断。在启动过程中，操作系统会设置中断向量表，以确保系统能够正确处理来自外部设备的中断请求。虽然在启动过程的早期阶段，系统可能不会处理复杂的中断，但中断控制器的初始化和配置是操作系统启动的一个重要步骤。</li>
+</ul>
+</li>
+<li>
+<p>创建第一个进程的过程可以分为几个重要步骤，以下是通俗但详细的讲解：</p>
+<ol>
+<li><strong>初始化阶段</strong>：首先，在系统启动时，<code>main</code> 函数会初始化一些必要的设备和子系统。然后，它调用了 <code>userinit</code> 函数来创建系统中的第一个进程。</li>
+<li><strong>分配进程槽位</strong>：<code>userinit</code> 函数调用了 <code>allocproc</code>，这是一个用于在内核中分配新进程的函数。<code>allocproc</code> 的任务是找到一个未被使用的进程槽位（结构体 <code>struct proc</code>），然后将其状态从未使用（<code>UNUSED</code>）标记为胚胎状态（<code>EMBRYO</code>），表示它正在被使用并分配给一个新进程。</li>
+<li><strong>设置内核栈</strong>：接下来，<code>allocproc</code> 为新进程分配一个内核栈，并设置好内核栈和一系列内核寄存器，使得当进程第一次运行时，它会“返回”到用户空间。这个过程通过 <code>forkret</code> 函数实现，该函数的作用是让内核线程从某个点开始执行，最后跳转到 <code>trapret</code>，准备好用户态的寄存器并跳转到用户代码执行。</li>
+<li><strong>初始化页表</strong>：为了让进程能够执行自己的代码，<code>userinit</code> 还需要为进程创建一个页表，这个页表最初只映射内核的内存区域。然后，<code>userinit</code> 调用了 <code>inituvm</code>，为进程分配了一页物理内存，并将初始化代码（<code>initcode.S</code>）拷贝到这段内存中。这个代码是用来启动进程的。</li>
+<li><strong>设置用户模式寄存器</strong>：在这个阶段，<code>userinit</code> 设置了进程的陷阱帧（<code>trapframe</code>），这是一个用于保存用户模式寄存器的结构。这里的关键是确保进程以用户模式（而不是内核模式）启动，并且能够处理硬件中断。</li>
+<li><strong>进程变为可运行状态</strong>：一旦所有这些设置完成，<code>userinit</code> 将进程的状态设置为 <code>RUNNABLE</code>，这意味着该进程现在可以被调度器选中运行了。</li>
+<li><strong>调度和运行</strong>：在 <code>main</code> 函数调用了 <code>userinit</code> 之后，系统调用 <code>scheduler</code> 函数来开始运行进程。调度器会找到一个处于 <code>RUNNABLE</code> 状态的进程，将其状态设为 <code>RUNNING</code>，然后通过 <code>swtch</code> 函数切换上下文，开始运行这个进程的内核线程。</li>
+<li><strong>用户代码的执行</strong>：最终，这个第一个进程的执行从 <code>initcode.S</code> 的第一个指令开始，该指令位于虚拟地址0。因为之前已经为该进程建立了页表，这些虚拟地址会被翻译为实际的物理内存地址，从而顺利执行进程的用户代码。</li>
+</ol>
+<p>通过这些步骤，系统成功创建并运行了第一个用户进程，这也是系统启动后的第一个进程。</p>
+</li>
+<li>
+<p>新进程分配的内核栈最初包含一些关键内容，这些内容是为了使新进程能够正确地启动和运行。具体来说，内核栈的初始内容包括：</p>
+<ol>
+<li><strong>上下文信息（<code>context</code>）</strong>：这是用于保存进程的寄存器状态的结构，包括指令指针（<code>eip</code>）和栈指针（<code>esp</code>）等。这些信息是为了保证进程能够从正确的位置继续执行。</li>
+<li><strong>返回地址</strong>：<code>allocproc</code> 会将返回地址设置为 <code>forkret</code>，这意味着当进程第一次运行时，它将从 <code>forkret</code> 开始执行。<code>forkret</code> 函数会进行一些初始化工作，然后返回到 <code>trapret</code> 函数。</li>
+<li><strong><code>trapret</code> 地址</strong>：这是栈上的另一个重要内容，它在 <code>forkret</code> 之后被调用，用来从用户态进入内核态时恢复用户寄存器，并最终返回到用户代码的执行。</li>
+</ol>
+<p>这些内容的作用是确保当新进程第一次被调度器选中运行时，它能够正确地进行从内核态到用户态的过渡，并开始执行用户代码。这种设置使得创建新进程和通过 <code>fork</code> 复制进程的过程可以共用同样的机制，从而简化了进程管理的逻辑。</p>
+</li>
+<li>
+<p>在一个进程中，除了内核栈以外，还包括以下重要内容：</p>
+<ol>
+<li><strong>用户栈（User Stack）</strong>：
+<ul>
+<li><strong>作用</strong>：用户栈用于存储用户态下的函数调用、局部变量和函数参数。每当进程进入用户态并执行用户代码时，它会使用用户栈。用户栈在每次系统调用或中断发生时会被保存，以便在返回到用户态时恢复。</li>
+</ul>
+</li>
+<li><strong>进程控制块（Process Control Block, PCB）</strong>：
+<ul>
+<li><strong>作用</strong>：这是内核用于管理和调度进程的一个重要数据结构。PCB 包含了进程的各种状态信息，如进程ID（PID）、进程状态（如 <code>RUNNING</code>, <code>SLEEPING</code>, <code>ZOMBIE</code> 等）、程序计数器（指示下一条指令的位置）、寄存器内容、打开的文件描述符列表、优先级、调度信息、以及内存管理信息（如页表指针）。</li>
+<li><strong>关键作用</strong>：PCB 是内核追踪进程的核心结构，它保存了进程执行所需的所有上下文信息。当进程被切换时，PCB 是用来保存和恢复上下文的关键。</li>
+</ul>
+</li>
+<li><strong>虚拟地址空间（Virtual Address Space）</strong>：
+<ul>
+<li><strong>作用</strong>：每个进程都有自己独立的虚拟地址空间。这个空间通常包括代码段（Text Segment）、数据段（Data Segment）、堆（Heap）和栈（Stack）。代码段包含可执行代码；数据段存放已初始化和未初始化的全局变量；堆用于动态内存分配；栈用于函数调用和局部变量。</li>
+<li><strong>关键作用</strong>：虚拟地址空间为每个进程提供了一个独立的运行环境，确保进程之间的内存隔离和安全。</li>
+</ul>
+</li>
+<li><strong>页表（Page Table）</strong>：
+<ul>
+<li><strong>作用</strong>：页表是内存管理单元（MMU）使用的数据结构，用于将进程的虚拟地址映射到物理地址。每个进程有自己的页表，内核利用它来管理内存和地址转换。</li>
+<li><strong>关键作用</strong>：页表实现了虚拟内存，使得进程可以假装拥有连续的内存地址，同时内核可以灵活地分配实际的物理内存。</li>
+</ul>
+</li>
+<li><strong>文件描述符表（File Descriptor Table）</strong>：
+<ul>
+<li><strong>作用</strong>：这是进程打开的所有文件的列表。每个打开的文件（或其他 I/O 资源，如管道、网络连接等）都有一个与之关联的文件描述符。</li>
+<li><strong>关键作用</strong>：文件描述符表使得进程可以进行文件 I/O 操作，如读写文件、网络通信等。每个文件描述符对应一个内核对象，内核通过这个对象管理文件操作。</li>
+</ul>
+</li>
+<li><strong>信号处理表（Signal Handling Table）</strong>：
+<ul>
+<li><strong>作用</strong>：用于定义进程如何处理各种信号。信号是操作系统向进程传递事件通知的一种方式（如中断、非法操作等）。</li>
+<li><strong>关键作用</strong>：信号处理表指定了进程遇到特定信号时要采取的操作（例如，忽略信号、执行默认操作或调用用户定义的处理函数）。</li>
+</ul>
+</li>
+<li><strong>进程工作目录和根目录</strong>：
+<ul>
+<li><strong>作用</strong>：进程有其当前工作目录（Current Working Directory, CWD）和根目录（Root Directory）。这些目录用于文件系统操作，指定文件路径是相对还是绝对。</li>
+<li><strong>关键作用</strong>：管理文件系统路径的上下文，使得进程能够访问和操作文件系统中的文件和目录。</li>
+</ul>
+</li>
+<li><strong>共享内存和映射区域</strong>：
+<ul>
+<li><strong>作用</strong>：这是进程可能使用的共享内存区域或通过内存映射文件的区域（如动态库映射）。</li>
+<li><strong>关键作用</strong>：提供进程间通信（IPC）机制，并允许进程高效访问大文件或共享数据段。</li>
+</ul>
+</li>
+</ol>
+<p>这些组件共同组成了一个进程的完整运行环境。它们协作使得操作系统可以多任务运行，安全地管理多个进程，以及在不同进程之间进行上下文切换。</p>
+</li>
+<li>
+<p>在创建第一个进程的过程中，初始化页表是至关重要的，因为页表用于将虚拟地址映射到物理地址。每个进程都有自己的虚拟地址空间，操作系统使用页表来管理这些地址与实际物理内存的对应关系。</p>
+<h3 id="为什么要初始化页表">为什么要初始化页表？
+</h3><p>初始化页表的主要目的是为新进程提供一个独立的虚拟地址空间，这样进程可以运行在它自己的地址空间中，而不会干扰其他进程。同时，页表的设置允许操作系统通过分页机制有效管理内存，确保安全性和内存隔离。</p>
+<ul>
+<li><strong>页表的重要性</strong>：在系统中，所有进程都运行在各自的虚拟地址空间中，而操作系统通过页表将这些虚拟地址转换为实际的物理地址。初始化页表为进程的运行提供了正确的地址映射，从而确保了进程能够访问内核和用户空间的必要资源。</li>
+</ul>
+<h3 id="这个页表最初只映射内核的内存区域是什么意思">“这个页表最初只映射内核的内存区域”是什么意思？
+</h3><p>当我们说“这个页表最初只映射内核的内存区域”时，指的是在初始阶段，页表只设置了内核空间的映射，而没有映射用户空间的地址。内核的地址空间包括内核代码、数据、堆、栈（包括内核栈）等内核所需的内存区域。</p>
+<ul>
+<li><strong>内核栈</strong>：内核栈是内核在执行时使用的栈，是每个进程在内核态运行时的重要部分。在进程执行系统调用或发生中断时，CPU 会从用户模式切换到内核模式，使用内核栈来处理内核态代码。这部分内存是内核地址空间的一部分，因此会被映射。</li>
+</ul>
+<p>所以，初始页表仅映射了内核的内存区域，意味着进程在最初的设置中只能访问内核空间的内存。这是为了保证进程一开始可以正常地在内核中执行。</p>
+<h3 id="这个代码是用来启动进程的这段代码是从哪里来的">“这个代码是用来启动进程的”这段代码是从哪里来的？
+</h3><p>这里提到的“代码是用来启动进程的”指的是 <code>initcode.S</code> 这段汇编代码，它是用于初始化并启动第一个用户进程的。</p>
+<ul>
+<li><strong><code>initcode.S</code> 的来源</strong>：<code>initcode.S</code> 是一个小型的汇编程序，它作为内核的一部分编译并链接到内核映像中。在构建内核时，链接器会将这段代码作为二进制数据嵌入到内核映像中。内核通过两个符号 <code>_binary_initcode_start</code> 和 <code>_binary_initcode_size</code> 标识这段代码的起始位置和大小。</li>
+<li><strong>作用</strong>：这段代码的主要作用是为第一个进程（<code>initproc</code>）提供一段简单的用户态代码。当第一个进程开始执行时，它会运行这段代码来初始化用户态的环境。其目的是确保进程能够顺利启动并进入用户态执行。这是内核为启动第一个进程提供的基础代码。</li>
+<li><strong>如何加载</strong>：在创建第一个进程时，内核会通过 <code>inituvm</code> 函数为该进程分配一页物理内存，并将 <code>initcode.S</code> 的二进制代码拷贝到这段内存中。这段内存被映射到进程的虚拟地址空间的地址0。当进程第一次运行时，处理器会从地址0开始执行 <code>initcode.S</code> 的指令。</li>
+</ul>
+<p>总结一下，初始化页表是为了设置进程的虚拟地址空间，而最初的页表只映射内核区域（包括内核栈），以便在内核态能够正常工作。<code>initcode.S</code> 是一段汇编代码，它从内核编译时嵌入内核中，被加载到第一个进程的内存中，用于启动并运行该进程。</p>
+</li>
+<li>
+<p>每个进程的内核栈<strong>不是相通的</strong>，而是<strong>独立的</strong>。但是，<strong>内核空间</strong>在所有进程之间是<strong>共享的</strong>，但各进程对其访问是受控的。</p>
+<h3 id="内核栈">内核栈
+</h3><ul>
+<li><strong>独立性</strong>：每个进程都有自己独立的内核栈。当一个进程从用户态切换到内核态（例如执行系统调用或处理中断）时，它使用自己的内核栈来保存调用信息、局部变量以及处理中断或系统调用所需的其他数据。由于每个进程的内核栈是独立的，进程之间不会互相影响。这种独立性确保了进程的内核态执行环境的安全性和稳定性。</li>
+<li><strong>切换上下文时的保存与恢复</strong>：当操作系统在多个进程之间切换时（即进行上下文切换），它会保存当前进程的内核栈状态，并恢复下一个要运行的进程的内核栈。这种机制保证了每个进程可以独立执行，而不会干扰其他进程的内核栈。</li>
+</ul>
+<h3 id="内核空间">内核空间
+</h3><ul>
+<li><strong>共享性</strong>：内核空间是所有进程共享的地址空间的一部分。它包含了内核代码、全局数据结构、设备驱动程序、内核栈等。这意味着所有进程都可以访问相同的内核代码和全局内核数据。内核空间通常位于每个进程的虚拟地址空间的高地址部分。</li>
+<li><strong>安全性</strong>：虽然内核空间在所有进程之间是共享的，但普通用户进程无法直接访问内核空间。这是通过硬件机制和内核态/用户态的权限控制来实现的。只有在进程运行于内核态时（例如在系统调用或中断处理期间），进程才能访问内核空间的内容。</li>
+<li><strong>统一的映射</strong>：所有进程的页表都会映射到相同的内核空间区域。这意味着当系统切换进程时，尽管进程的用户空间地址不同，但内核空间地址是一致的。这使得内核能够高效地管理和调度多个进程，而不必为每个进程维护独立的内核空间。</li>
+</ul>
+<h3 id="总结">总结
+</h3><ul>
+<li><strong>内核栈</strong>：每个进程有自己的内核栈，互不相通，保证了内核态的独立性和安全性。</li>
+<li><strong>内核空间</strong>：内核空间在所有进程之间是共享的，但受权限控制，只有在内核态下进程才能访问内核空间。</li>
+</ul>
+<p>这种设计确保了系统的安全性和稳定性，同时也保证了操作系统的效率。</p>
+</li>
+<li>
+<p><code>p-&gt;context-&gt;eip</code> 是进程控制块（<code>struct proc</code>）中的一个字段，用于保存进程在内核态的执行状态，特别是保存进程执行时的程序计数器（即指令指针）。具体来说：</p>
+<h3 id="p-context-eip-指的是什么"><code>p-&gt;context-&gt;eip</code> 指的是什么？
+</h3><ul>
+<li><strong><code>eip</code></strong>：<code>eip</code> 是 <code>x86</code> 架构中的指令指针寄存器（也称为程序计数器）。它保存了 CPU 下一条将要执行的指令的地址。在上下文切换时，操作系统会保存当前进程的 <code>eip</code> 值，以便在恢复这个进程时，它可以从之前中断的地方继续执行。</li>
+<li><strong><code>p-&gt;context-&gt;eip</code></strong>：<code>p-&gt;context</code> 是一个指向进程上下文结构的指针，这个结构保存了内核态下的 CPU 寄存器状态，其中包括 <code>eip</code>。当进程被切换出去时，<code>eip</code> 会被保存到 <code>p-&gt;context-&gt;eip</code>，当进程被切换回来的时候，<code>eip</code> 会从 <code>p-&gt;context-&gt;eip</code> 中恢复，这样进程就能继续从上次停止的地方执行。</li>
+</ul>
+<h3 id="p-context-中有什么内容"><code>p-&gt;context</code> 中有什么内容？
+</h3><p><code>p-&gt;context</code> 是一个用于保存进程在内核态执行时 CPU 寄存器状态的结构。它通常包含以下内容：</p>
+<ul>
+<li><strong><code>eip</code></strong>（指令指针）：保存下一条将要执行的指令的地址。</li>
+<li><strong><code>esp</code></strong>（栈指针）：保存当前的栈指针，用于指示当前的栈顶位置。</li>
+<li><strong><code>ebx</code></strong>、<strong><code>ecx</code></strong>、<strong><code>edx</code></strong>、<strong><code>esi</code></strong>、<strong><code>edi</code></strong>、<strong><code>ebp</code></strong>：这些都是通用寄存器，用于保存进程执行时的寄存器状态。</li>
+<li><strong><code>eflags</code></strong>：保存 CPU 的状态标志寄存器，用于记录当前进程执行时的状态（如中断是否启用、运算结果的标志等）。</li>
+</ul>
+<h3 id="作用与重要性">作用与重要性
+</h3><ul>
+<li><strong>上下文切换</strong>：当操作系统进行上下文切换时，会将当前进程的所有 CPU 寄存器状态保存到 <code>p-&gt;context</code> 中。然后操作系统会加载下一个进程的 <code>p-&gt;context</code>，恢复所有寄存器状态，使 CPU 继续执行该进程。这种机制确保了多任务操作系统可以高效地在多个进程之间切换，而不丢失每个进程的执行状态。</li>
+<li><strong>指令指针 <code>eip</code></strong> 的作用尤其重要，因为它决定了进程接下来会执行哪条指令。没有正确保存和恢复 <code>eip</code>，进程可能会从错误的地址继续执行，导致系统不稳定甚至崩溃。</li>
+</ul>
+<p>总的来说，<code>p-&gt;context</code> 结构中的内容是进程上下文切换的核心，它记录了进程在内核态下所有关键的寄存器状态，以确保进程可以在被中断后正确恢复并继续执行。</p>
+</li>
+</ol>
+</li>
+<li>
+<p>Lab时遇到的问题</p>
+<ol>
+<li>
+<p>“通过一个没有映射的页保护用户栈”是什么意思，怎么做到的</p>
+<p>这句话的意思是：<strong>xv6 通过在用户栈的末尾放置一个没有映射的页（即一个虚拟地址空间内的页表条目不指向任何物理内存），来保护用户栈免受溢出错误的影响。</strong></p>
+<p>具体来说，当程序运行时，用户栈是从高地址向低地址方向增长的。如果程序意外地超出了栈的范围（比如递归太深或者分配了过多的局部变量），它可能会尝试访问栈的下方区域。如果这块区域没有得到适当保护，程序就可能覆盖掉其他内存区域的数据，导致不可预测的行为。</p>
+<p>为了防止这种情况发生，xv6 在用户栈的下方添加了一个“没有映射”的页。这意味着该页的页表条目（PTE）没有指向任何实际的物理内存。如果程序尝试访问这个没有映射的页（例如由于栈溢出），CPU 的分页硬件就会检测到这个访问，并产生一个页面错误（page fault），从而终止程序或让操作系统采取相应的处理措施。这就能有效地防止栈溢出带来的潜在危害。</p>
+</li>
+<li>
+<p>建立一个地址空间的过程可以分为以下几个步骤：</p>
+<h3 id="1-调用-kvmalloc">1. <strong>调用 <code>kvmalloc()</code></strong>
+</h3><ul>
+<li><strong>位置</strong>：<code>main()</code> 调用 <code>kvmalloc</code>，位于代码的第1757行。</li>
+<li><strong>作用</strong>：<code>kvmalloc()</code> 是用于创建并切换到一个拥有内核所需映射的页表。它确保在操作系统启动时，内核可以正常运行。</li>
+<li><strong>关键操作</strong>：该函数调用 <code>setupkvm()</code> 来完成大部分工作。</li>
+</ul>
+<h3 id="2-调用-setupkvm">2. <strong>调用 <code>setupkvm()</code></strong>
+</h3><ul>
+<li>
+<p><strong>位置</strong>：第1737行。</p>
+</li>
+<li>
+<p><strong>作用</strong>：<code>setupkvm()</code> 是负责实际创建内核所需的页表映射的函数。</p>
+</li>
+<li>
+<p>具体步骤</p>
+<p>：</p>
+<ol>
+<li><strong>分配页目录页</strong>：<code>setupkvm()</code> 首先会分配一页内存来存储页目录，这是分页的最高层结构，用于指向页表。</li>
+<li><strong>调用 <code>mappages()</code></strong>：使用 <code>mappages()</code> 函数，创建映射表，这些映射表可以在 <code>kmap</code> 数组中找到。<code>kmap</code> 数组中包含了各种需要被映射的内存区域。</li>
+</ol>
+</li>
+</ul>
+<h3 id="3-调用-mappages">3. <strong>调用 <code>mappages()</code></strong>
+</h3><ul>
+<li>
+<p><strong>位置</strong>：第1679行。</p>
+</li>
+<li>
+<p><strong>作用</strong>：<code>mappages()</code> 用来在页表中建立虚拟内存到物理内存的映射。</p>
+</li>
+<li>
+<p>具体步骤</p>
+<p>：</p>
+<ol>
+<li><strong>逐页映射</strong>：<code>mappages()</code> 是逐页处理的，即一页一页地创建映射。对于每个虚拟地址，都需要建立相应的物理内存映射。</li>
+<li><strong>调用 <code>walkpgdir()</code></strong>：<code>mappages()</code> 通过调用 <code>walkpgdir()</code> 来找到该虚拟地址对应的页表项（PTE）。</li>
+<li><strong>设置 PTE</strong>：在页表项中记录物理页号、访问权限（如 <code>PTE_W</code>、<code>PTE_U</code>）和 <code>PTE_P</code> 标志位来表示该页表项是否有效。</li>
+</ol>
+</li>
+</ul>
+<h3 id="4-调用-walkpgdir">4. <strong>调用 <code>walkpgdir()</code></strong>
+</h3><ul>
+<li>
+<p><strong>位置</strong>：第1654行。</p>
+</li>
+<li>
+<p><strong>作用</strong>：<code>walkpgdir()</code> 模拟 x86 硬件分页机制，找到虚拟地址对应的页表项（PTE）。</p>
+</li>
+<li>
+<p>具体步骤</p>
+<p>：</p>
+<ol>
+<li><strong>定位页目录项</strong>：<code>walkpgdir()</code> 使用虚拟地址的前10位来查找页目录中对应的条目（位于第1659行）。</li>
+<li><strong>检查是否需要分配页表页</strong>：如果页目录条目不存在且 <code>alloc</code> 参数为真，则分配一个新的页表页，并将其物理地址存入页目录中。</li>
+<li><strong>定位页表项</strong>：然后使用虚拟地址的中间10位，找到该地址在页表中的对应条目（PTE）。</li>
+<li><strong>返回PTE地址</strong>：最后，<code>walkpgdir()</code> 返回该PTE的地址，供 <code>mappages()</code> 初始化。</li>
+</ol>
+</li>
+</ul>
+<h3 id="5-初始化页表项-pte">5. <strong>初始化页表项 (PTE)</strong>
+</h3><ul>
+<li>
+<p><strong>位置</strong>：在 <code>mappages()</code> 的第1691行。</p>
+</li>
+<li>
+<p><strong>作用</strong>：<code>mappages()</code> 在 <code>walkpgdir()</code> 返回的 PTE 地址处，初始化 PTE 条目。</p>
+</li>
+<li>
+<p>具体内容</p>
+<p>：</p>
+<ol>
+<li><strong>保存物理页号</strong>：PTE 中记录相应的物理内存页号。</li>
+<li><strong>设置权限标志</strong>：根据需要设置 PTE 的权限标志（如 <code>PTE_W</code> 表示可写，<code>PTE_U</code> 表示用户访问权限）。</li>
+<li><strong>标记页表项有效</strong>：通过设置 <code>PTE_P</code> 标志位，表明该页表项有效。</li>
+</ol>
+</li>
+</ul>
+<h3 id="6-完成内核的基础映射">6. <strong>完成内核的基础映射</strong>
+</h3><ul>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">setupkvm()
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>完成了</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">kmap
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>数组中内核地址空间的映射，包括：</p>
+<ol>
+<li><strong>内核指令和数据段</strong>的映射。</li>
+<li><strong>PHYSTOP 以下的物理内存</strong>的映射。</li>
+<li><strong>I/O 设备地址空间</strong>的映射。</li>
+</ol>
+</li>
+</ul>
+<h3 id="7-未建立用户空间映射">7. <strong>未建立用户空间映射</strong>
+</h3><ul>
+<li><strong>注意</strong>：在这个阶段，<code>setupkvm()</code> 仅仅完成了内核所需的映射，并未为用户空间内存建立映射。用户空间的映射将在稍后的执行过程中进行。</li>
+</ul>
+<h3 id="8-切换到新页表">8. <strong>切换到新页表</strong>
+</h3><ul>
+<li>当 <code>kvmalloc()</code> 完成时，它会切换到新创建的页表，这确保了内核可以使用新建立的映射来执行代码。</li>
+</ul>
+</li>
+<li>
+<p>如何管理空闲物理内存页的分配与释放。</p>
+<h3 id="1-物理内存分配器中的数据结构">1. <strong>物理内存分配器中的数据结构</strong>
+</h3><ul>
+<li><strong>空闲链表</strong>：分配器使用一个由空闲的物理内存页构成的链表来管理内存。链表中的每个元素是一个<code>struct run</code>结构体，用于表示一个空闲页。</li>
+<li><strong>自包含的结构</strong>：为了节省空间，分配器将<code>struct run</code>结构体存放在每个空闲页的开头部分，因为这些页本身是空闲的，没有其他数据。</li>
+</ul>
+<h3 id="2-内存的安全保护">2. <strong>内存的安全保护</strong>
+</h3><ul>
+<li><strong>Spin Lock</strong>：分配器使用自旋锁（spin lock）来保护空闲链表的操作，防止并发操作引起的数据不一致问题。这个锁和链表一起封装在一个结构体中，以确保锁可以保护到相关的所有数据。</li>
+</ul>
+<h3 id="3-分配器的初始化">3. <strong>分配器的初始化</strong>
+</h3><ul>
+<li><strong><code>kinit1</code>和<code>kinit2</code>函数</strong>：分配器初始化分两步完成，<code>kinit1</code>用于在系统启动初期分配前4MB的内存，因为此时不支持锁和高于4MB的内存操作。<code>kinit2</code>允许使用锁，并解锁了更多的内存供系统使用。</li>
+<li><strong><code>PHYSTOP</code>假设</strong>：在x86架构上，操作系统假设系统有240MB的物理内存（PHYSTOP），从内核结束地址到PHYSTOP之间的内存作为空闲内存池。<code>freerange</code>函数通过调用<code>kfree</code>将这部分内存页逐一加入空闲链表。</li>
+</ul>
+<h3 id="4-地址对齐和释放">4. <strong>地址对齐和释放</strong>
+</h3><ul>
+<li><strong>对齐处理</strong>：<code>freerange</code>函数使用<code>PGROUNDUP</code>确保内存页是以4096字节对齐的地址进行释放的，因为PTE（页表项）只能指向对齐的物理地址。</li>
+<li><strong><code>kfree</code>函数</strong>：<code>kfree</code>负责将物理页重新加入空闲链表。它首先将释放的内存页内容设置为全1，以确保访问已释放内存时立刻崩溃，而不是继续使用无效数据。</li>
+</ul>
+<h3 id="5-地址映射">5. <strong>地址映射</strong>
+</h3><ul>
+<li><strong>虚拟地址和物理地址</strong>：分配器通过虚拟地址找到对应的物理页。这是因为在系统的内存管理中，物理内存通常被映射到高地址的虚拟内存空间中。</li>
+</ul>
+<h3 id="6-类型转换">6. <strong>类型转换</strong>
+</h3><ul>
+<li><strong>双重用途的地址</strong>：分配器在操作地址时，既将地址当作整数进行运算，也将其当作指针来操作内存中的数据。这种用法导致了大量的类型转换，同时也说明了分配器在释放或分配内存时可能会隐式地改变内存的类型。</li>
+</ul>
+<h3 id="7-用户地址空间中的栈与堆">7. <strong>用户地址空间中的栈与堆</strong>
+</h3><ul>
+<li><strong>堆与栈的布局</strong>：堆位于栈的上方，栈本身占用一页内存，包含进程启动时的初始数据。栈的顶部包含命令行参数及其指针数组，并模仿函数<code>main(argc, argv)</code>的调用环境。</li>
+<li><strong>保护页</strong>：为了防止栈的溢出，栈的下方有一个未映射的保护页。如果栈增长超过这一页，会触发异常，从而保护系统不受非法访问的影响。</li>
+</ul>
+</li>
+<li>
+<p>操作系统中 <code>exec</code> 系统调用的工作原理，<code>exec</code> 用于创建和初始化用户进程的地址空间。</p>
+<h3 id="1-elf-格式与-exec-的基本流程">1. <strong>ELF 格式与 <code>exec</code> 的基本流程</strong>
+</h3><ul>
+<li><strong>ELF 文件</strong>：<code>exec</code> 通过读取并解析 ELF (Executable and Linkable Format) 文件来初始化用户地址空间。ELF 是一种通用的二进制文件格式，<code>exec</code> 首先检查文件的 ELF 头部以验证文件格式是否正确。</li>
+<li><strong>魔法数字检查</strong>：ELF 文件以 4 个“魔法数字”（<code>0x7F, 'E', 'L', 'F'</code>）开头。<code>exec</code> 首先通过检查这四个字节来确定文件是否是有效的 ELF 文件。如果魔法数字匹配，<code>exec</code> 继续处理文件，否则放弃执行。</li>
+</ul>
+<h3 id="2-内存分配与段加载">2. <strong>内存分配与段加载</strong>
+</h3><ul>
+<li><strong>页表设置</strong>：<code>exec</code> 通过 <code>setupkvm</code> 函数创建一个新的页表，其中不包含用户部分的映射。这为用户地址空间的初始化做好了准备。</li>
+<li><strong>内存分配与加载</strong>：<code>exec</code> 使用 <code>allocuvm</code> 为 ELF 文件的每个段分配内存。接着，<code>loaduvm</code> 将段的内容从文件中加载到内存中。<code>loaduvm</code> 通过 <code>walkpgdir</code> 找到内存中相应的物理地址，并通过 <code>readi</code> 从文件读取数据。</li>
+</ul>
+<h3 id="3-处理-program-header">3. <strong>处理 Program Header</strong>
+</h3><ul>
+<li><strong>段头解释</strong>：ELF 文件包含多个段头（Program Header），每个段头描述了一个需要载入内存的程序段。<code>exec</code> 依次处理每个段头，分配相应的内存并加载数据。</li>
+<li><strong><code>filesz</code> 与 <code>memsz</code></strong>：段头中的 <code>filesz</code> 是从文件中读取的字节数，<code>memsz</code> 是分配的内存大小。如果 <code>filesz</code> 小于 <code>memsz</code>，表示从文件读取的数据不足以填满分配的内存，未填充的部分通常用于存储未初始化的全局变量，并被填充为 0。</li>
+</ul>
+<h3 id="4-用户栈的分配与初始化">4. <strong>用户栈的分配与初始化</strong>
+</h3><ul>
+<li><strong>栈内存分配</strong>：<code>exec</code> 为用户栈分配一页内存，并在栈顶放置传入的参数字符串。参数字符串的指针被保存在 <code>ustack</code> 中，最后在参数列表 (<code>argv</code>) 的末尾放置一个空指针，以便程序知道参数列表的结束。</li>
+<li><strong>伪造的返回地址</strong>：在栈上，<code>ustack</code> 的前三个位置依次存放伪造的返回地址、参数个数 (<code>argc</code>)、以及参数列表的指针 (<code>argv</code>)。这使得当程序从 <code>main</code> 函数开始执行时，能够正确访问这些参数。</li>
+</ul>
+<h3 id="5-栈保护页">5. <strong>栈保护页</strong>
+</h3><ul>
+<li><strong>防止栈溢出</strong>：在分配栈页下方，<code>exec</code> 会设置一个无法访问的保护页。这个保护页用于防止栈意外增长超出分配的页数，从而引发内存访问错误。</li>
+<li><strong>处理大参数</strong>：如果传入的参数过大以至于超出栈的页，<code>exec</code> 通过 <code>copyout</code> 函数检测并返回错误，以避免栈溢出。</li>
+</ul>
+<h3 id="6-错误处理与内存释放">6. <strong>错误处理与内存释放</strong>
+</h3><ul>
+<li><strong>错误处理</strong>：如果 <code>exec</code> 在创建新的内存映像过程中发现错误（例如无效的程序段），它会跳转到 <code>bad</code> 标签处，释放已经分配的内存，并返回 <code>-1</code>，表示调用失败。</li>
+<li><strong>内存映像切换</strong>：只有在确认新内存映像已经正确构建后，<code>exec</code> 才会释放旧的内存映像。这是为了确保如果 <code>exec</code> 失败时，能够安全地返回错误代码 <code>-1</code>。成功完成后，<code>exec</code> 返回 <code>0</code>，表示执行成功。</li>
+</ul>
+<h3 id="7-总结">7. <strong>总结</strong>
+</h3><ul>
+<li><code>exec</code> 是一个关键的系统调用，用于将用户进程的地址空间初始化为一个新的执行映像。它通过加载 ELF 文件、分配内存、设置栈空间等操作，确保用户进程可以正确启动并运行。</li>
+</ul>
+</li>
+<li>
+<p>栈只分配一页内存，这在某些情况下可能会显得太小，特别是当程序需要处理大量的参数或者深度递归时。这种设计是为了简化内存管理和避免过度浪费，但也带来了某些局限性。如果需要处理超过一页内存的大参数，系统有以下几种方法来应对：</p>
+<h3 id="1-增加栈的大小">1. <strong>增加栈的大小</strong>
+</h3><p>在某些系统中，可以动态增加栈的大小。具体方法包括：</p>
+<ul>
+<li><strong>手动扩展</strong>：程序可以通过系统调用（例如 <code>mmap</code>）手动分配更多的栈空间。</li>
+<li><strong>自动扩展</strong>：某些操作系统会在检测到栈溢出时自动扩展栈空间。这个过程通常是由内核负责的，通过捕获页面错误并分配新页面来实现栈的自动扩展。</li>
+</ul>
+<h3 id="2-使用堆内存">2. <strong>使用堆内存</strong>
+</h3><ul>
+<li><strong>堆内存分配</strong>：程序可以使用堆（heap）来处理大数据，而不是依赖栈。通过调用 <code>malloc</code> 或者 <code>calloc</code> 这样的标准库函数，程序可以在堆上分配足够大的内存块来存储参数或其他数据。</li>
+<li><strong>传递指针</strong>：对于大参数，可以将参数放在堆中，然后在栈上只传递一个指向堆中数据的指针。这样可以有效减轻栈的压力，同时仍然能够处理大数据。</li>
+</ul>
+<h3 id="3-参数从文件读取">3. <strong>参数从文件读取</strong>
+</h3><ul>
+<li><strong>文件输入</strong>：如果参数数据特别大，可以将其放在文件中，程序启动后从文件中读取。这种方式避免了将大量数据直接传递给程序，而是通过文件 I/O 进行处理，灵活性较高。</li>
+</ul>
+<h3 id="4-分块处理">4. <strong>分块处理</strong>
+</h3><ul>
+<li><strong>分块加载</strong>：对于过大的参数，可以考虑将其分块加载到内存中。每次只处理其中的一部分数据，处理完后再读取下一部分。这样可以降低对栈的要求，同时保持程序对大数据的处理能力。</li>
+</ul>
+<h3 id="5-环境变量">5. <strong>环境变量</strong>
+</h3><ul>
+<li><strong>环境变量传递</strong>：有时可以通过环境变量传递一些参数，环境变量不受栈大小的限制，且可以在程序运行时随时读取。</li>
+</ul>
+<h3 id="6-系统配置">6. <strong>系统配置</strong>
+</h3><ul>
+<li><strong>修改系统配置</strong>：某些操作系统允许通过修改配置文件或编译参数来增加默认的栈大小。这种方法可以在需要处理大量参数的应用中增大栈空间，避免因栈空间不足导致的错误。</li>
+</ul>
+</li>
+<li>
+<p><strong>“超级页”的特点</strong></p>
+<p>“超级页”（Superpages）指的是在内存管理中使用较大的页面大小，而不是标准的4KB页。超级页通常为4MB或更大，具体特点包括：</p>
+<ol>
+<li><strong>减少页表开销</strong>：使用超级页可以显著减少页表的大小和复杂度，因为每个超级页覆盖的地址空间比标准页大得多。这意味着需要维护的页表项（PTE）更少，从而减轻了页表的管理负担。</li>
+<li><strong>提高TLB（Translation Lookaside Buffer）效率</strong>：TLB 是一个缓存，用于加速虚拟地址到物理地址的转换。由于超级页减少了页表项的数量，TLB 更有可能缓存所有需要的页表项，从而减少TLB缺失的几率，提高内存访问效率。</li>
+<li><strong>适合大内存应用</strong>：在拥有大量内存的机器上，使用超级页非常有效，因为它们可以减少页表的复杂性，提高内存管理的整体性能。</li>
+<li><strong>浪费内存的风险</strong>：当应用程序的内存需求较小时，超级页可能会导致内存浪费。例如，一个只需要8KB内存的程序，如果被分配了4MB的超级页，将会浪费大量未使用的内存。</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/mit6s081lec3/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">MIT6S081Lec3</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/mit6s081lec1/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">MIT6S081Lec1</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2024 echudet
+    </section>
+    
+    <section class="powerby">
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
