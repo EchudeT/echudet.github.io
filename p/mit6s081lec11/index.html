@@ -10,7 +10,7 @@
 <meta property='og:description' content="Thread switching">
 <meta property='og:url' content='https://echudet.github.io/p/mit6s081lec11/'>
 <meta property='og:site_name' content='echudet'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-09-21T22:02:50&#43;08:00'/><meta property='article:modified_time' content='2024-11-12T12:44:05&#43;08:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-09-21T22:02:50&#43;08:00'/><meta property='article:modified_time' content='2024-11-12T13:44:01&#43;08:00'/>
 <meta name="twitter:title" content="MIT6S081Lec11">
 <meta name="twitter:description" content="Thread switching">
     <link rel="shortcut icon" href="/timer.ico" />
@@ -267,51 +267,23 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li>
-      <ol>
-        <li>
-          <ol>
-            <li><a href="#预习">预习</a></li>
-          </ol>
-        </li>
-        <li><a href="#1-问题背景多核系统中的进程调度">1. <strong>问题背景：多核系统中的进程调度</strong></a></li>
-        <li><a href="#2-内核栈在多核环境中的问题">2. <strong>内核栈在多核环境中的问题</strong></a></li>
-        <li><a href="#3-解决方案每个-cpu-拥有自己的专用内核栈">3. <strong>解决方案：每个 CPU 拥有自己的专用内核栈</strong></a></li>
-        <li><a href="#4-内核线程和调度程序线程之间的切换机制">4. <strong>内核线程和调度程序线程之间的切换机制</strong></a>
-          <ol>
-            <li><a href="#切换过程如下">切换过程如下：</a></li>
-          </ol>
-        </li>
-        <li><a href="#5-避免共享内核栈的并发问题">5. <strong>避免共享内核栈的并发问题</strong></a></li>
-        <li><a href="#6--cpu为调度程序分配的内核栈的作用">6.  <strong>CPU为调度程序分配的内核栈的作用</strong></a>
-          <ol>
-            <li></li>
-          </ol>
-        </li>
-        <li><a href="#这种样式化切换是什么意思"><strong>&ldquo;这种样式化切换&quot;是什么意思？</strong></a></li>
-        <li><a href="#总结这段话的核心内容"><strong>总结这段话的核心内容</strong>：</a></li>
-        <li><a href="#传统的函数调用与返回"><strong>传统的函数调用与返回：</strong></a></li>
-        <li><a href="#协程的关键区别"><strong>协程的关键区别：</strong></a></li>
-        <li><a href="#1-这两个不变量是什么为什么叫做不变量">1. <strong>这两个不变量是什么，为什么叫做不变量？</strong></a></li>
-        <li><a href="#2-安全地从进程中切换出去和空闲-cpu-的调度程序必须安全地运行它是什么意思">2. <strong>“安全地从进程中切换出去”和“空闲 CPU 的调度程序必须安全地运行它”是什么意思？</strong></a></li>
-        <li><a href="#3-为什么说保持-p-lock-时这些属性通常不成立这些属性又是什么">3. <strong>为什么说“保持 <code>p-&gt;lock</code> 时，这些属性通常不成立”，“这些属性”又是什么？</strong></a></li>
-        <li><a href="#锁的释放时机问题"><strong>锁的释放时机问题：</strong></a></li>
-        <li><a href="#1-yield-中获取锁的时机">1. <strong><code>yield</code> 中获取锁的时机：</strong></a></li>
-        <li><a href="#2-锁在-scheduler-中释放的时机">2. <strong>锁在 <code>scheduler</code> 中释放的时机：</strong></a></li>
-        <li><a href="#3-为何不能提前释放锁">3. <strong>为何不能提前释放锁？</strong></a></li>
-        <li><a href="#4-调度器把-runnable-转换为-running-时的锁释放">4. <strong>调度器把 <code>RUNNABLE</code> 转换为 <code>RUNNING</code> 时的锁释放：</strong></a></li>
-        <li><a href="#总结锁的释放时机"><strong>总结锁的释放时机：</strong></a>
-          <ol>
-            <li></li>
-          </ol>
-        </li>
-        <li><a href="#总结">总结</a>
-          <ol>
-            <li><a href="#正课">正课</a></li>
-          </ol>
-        </li>
-      </ol>
-    </li>
+    <li><a href="#预习">预习</a></li>
+    <li><a href="#多路复用">多路复用</a></li>
+    <li><a href="#什么是多路复用">什么是多路复用</a></li>
+    <li><a href="#多路复用的挑战">多路复用的挑战</a></li>
+    <li><a href="#多路复用进程与线程的区别">多路复用进程与线程的区别</a></li>
+    <li><a href="#代码上下文切换">代码：上下文切换</a></li>
+    <li><a href="#代码调度">代码：调度</a></li>
+    <li><a href="#代码mycpu和myproc">代码：mycpu和myproc</a></li>
+    <li><a href="#正课">正课</a></li>
+    <li><a href="#线程概述">线程概述</a></li>
+    <li><a href="#xv6线程调度">XV6线程调度</a></li>
+    <li><a href="#xv6线程切换一">XV6线程切换（一）</a></li>
+    <li><a href="#xv6线程切换二">XV6线程切换（二）</a></li>
+    <li><a href="#xv6进程切换示例程序">XV6进程切换示例程序</a></li>
+    <li><a href="#xv6线程切换--yieldsched函数">XV6线程切换&ndash;yield/sched函数</a></li>
+    <li><a href="#xv6线程切换--scheduler">XV6线程切换&ndash;scheduler</a></li>
+    <li><a href="#xv6线程第一次调用switch函数">XV6线程第一次调用switch函数</a></li>
   </ol>
 </nav>
         </div>
@@ -397,7 +369,7 @@
 
 
                 <time>
-                    Nov 12, 2024 12:44 &#43;0800
+                    Nov 12, 2024 13:44 &#43;0800
                 </time>
             </div></footer>
     
@@ -411,19 +383,19 @@
     
     
     <h1 id="lecture-11-thread-switching">Lecture 11 Thread switching
-</h1><h4 id="预习">预习
-</h4><h5 id="多路复用">多路复用
-</h5><p>Xv6通过在两种情况下将每个CPU从一个进程切换到另一个进程来实现多路复用（Multiplexing）。</p>
+</h1><h2 id="预习">预习
+</h2><h2 id="多路复用">多路复用
+</h2><p>Xv6通过在两种情况下将每个CPU从一个进程切换到另一个进程来实现多路复用（Multiplexing）。</p>
 <p>第一：当进程等待设备或管道I/O完成，或等待子进程退出，或在<code>sleep</code>系统调用中等待时，xv6使用睡眠（sleep）和唤醒（wakeup）机制切换。</p>
 <p>第二：xv6周期性地强制切换以处理长时间计算而不睡眠的进程。</p>
 <p>这种多路复用产生了每个进程都有自己的CPU的错觉，就像xv6使用内存分配器和硬件页表来产生每个进程都有自己内存的错觉一样。</p>
-<h5 id="什么是多路复用">什么是多路复用
-</h5><p>多路复用（Multiplexing） 是一种在通信或计算领域的技术，允许多个信号或数据流通过同一个资源传输或处理。</p>
+<h2 id="什么是多路复用">什么是多路复用
+</h2><p>多路复用（Multiplexing） 是一种在通信或计算领域的技术，允许多个信号或数据流通过同一个资源传输或处理。</p>
 <p>它的主要目的是提高资源的利用效率，使得多个信号能够共享有限的硬件或通信通道，而不会相互干扰。</p>
 <p>在多路复用中，多个独立的数据流通过某种机制被组合在一起，在同一个信道或设备上传输或处理。</p>
 <p>多路复用通常在网络通信、操作系统资源管理等场景中广泛使用。</p>
-<h5 id="多路复用的挑战">多路复用的挑战
-</h5><p>实现多路复用带来了一些挑战。</p>
+<h2 id="多路复用的挑战">多路复用的挑战
+</h2><p>实现多路复用带来了一些挑战。</p>
 <p>首先，如何从一个进程切换到另一个进程？尽管上下文切换的思想很简单，但它的实现是xv6中最不透明的代码之一。</p>
 <p>第二，如何以对用户进程透明的方式强制切换？Xv6使用标准技术，通过定时器中断驱动上下文切换。</p>
 <p>第三，许多CPU可能同时在进程之间切换，使用一个用锁方案来避免争用是很有必要的。</p>
@@ -431,8 +403,8 @@
 <p>第五，多核机器的每个核心必须记住它正在执行哪个进程，以便系统调用正确影响对应进程的内核状态。</p>
 <p>最后，<code>sleep</code>允许一个进程放弃CPU，<code>wakeup</code>允许另一个进程唤醒第一个进程。需要小心避免导致唤醒通知丢失的竞争。</p>
 <p>Xv6试图尽可能简单地解决这些问题，但结果代码很复杂。</p>
-<h5 id="多路复用进程与线程的区别">多路复用进程与线程的区别
-</h5><div class="table-wrapper"><table>
+<h2 id="多路复用进程与线程的区别">多路复用进程与线程的区别
+</h2><div class="table-wrapper"><table>
   <thead>
       <tr>
           <th><strong>属性</strong></th>
@@ -468,18 +440,23 @@
       </tr>
   </tbody>
 </table></div>
-<h5 id="代码上下文切换">代码：上下文切换
-</h5><h5 id="p1dusersnotexv6p1png"><img src="D:%5cUsers%5cnote%5cXV6%5cp1.png"
-	
-	
-	
+<hr>
+<h2 id="代码上下文切换">代码：上下文切换
+</h2><p>图7.1概述了从一个用户进程（旧进程）切换到另一个用户进程（新进程）所涉及的步骤</p>
+<p><img src="/p/mit6s081lec11/p1.png"
+	width="1280"
+	height="534"
+	srcset="/p/mit6s081lec11/p1_hu15221383078518384773.png 480w, /p/mit6s081lec11/p1_hu15272853361892182139.png 1024w"
 	loading="lazy"
 	
 		alt="p1"
 	
 	
->
-</h5><p>图7.1概述了从一个用户进程（旧进程）切换到另一个用户进程（新进程）所涉及的步骤</p>
+		class="gallery-image" 
+		data-flex-grow="239"
+		data-flex-basis="575px"
+	
+></p>
 <p>一个到旧进程内核线程的用户-内核转换（系统调用或中断）</p>
 <p>一个到当前CPU调度程序线程的上下文切换</p>
 <p>一个到新进程内核线程的上下文切换</p>
@@ -487,38 +464,32 @@
 <p>调度程序在旧进程的内核栈上执行是不安全的：其他一些核心可能会唤醒进程并运行它，而在两个不同的核心上使用同一个栈将是一场灾难，因此xv6调度程序在每个CPU上都有一个专用线程（保存寄存器和栈）。</p>
 <blockquote>
 <p>这段话的核心问题在于<strong>多核系统中的进程调度</strong>，特别是在进程切换时如何安全地管理内核栈和寄存器状态。</p>
-<h3 id="1-问题背景多核系统中的进程调度">1. <strong>问题背景：多核系统中的进程调度</strong>
-</h3><p>在多核系统中，操作系统需要在多个 CPU 核上管理多个进程，并根据调度策略在进程之间切换执行。<strong>调度程序</strong>负责管理哪些进程在何时运行，以及如何在不同进程之间切换。</p>
+<p>在多核系统中，操作系统需要在多个 CPU 核上管理多个进程，并根据调度策略在进程之间切换执行。<strong>调度程序</strong>负责管理哪些进程在何时运行，以及如何在不同进程之间切换。</p>
 <p>每个进程在运行时都有<strong>用户态</strong>和<strong>内核态</strong>两种状态。当进程从用户态进入内核态时（例如，处理系统调用或中断），进程的状态需要保存在<strong>内核栈</strong>中。操作系统使用<strong>内核栈</strong>来保存进程当前的状态（如寄存器的值、程序计数器等），以便在切换回来时可以继续执行。</p>
-<h3 id="2-内核栈在多核环境中的问题">2. <strong>内核栈在多核环境中的问题</strong>
-</h3><p>这段话提到的一个重要问题是：在多核系统中，如果多个 CPU 核同时使用<strong>同一个内核栈</strong>，会导致严重的冲突和错误。这是因为：</p>
+<p>这段话提到的一个重要问题是：在多核系统中，如果多个 CPU 核同时使用<strong>同一个内核栈</strong>，会导致严重的冲突和错误。这是因为：</p>
 <ul>
 <li><strong>内核栈</strong>是每个进程在内核态运行时保存状态的地方。当进程从用户态切换到内核态（例如处理系统调用或中断）时，操作系统会将进程的寄存器、程序计数器等信息保存在这个内核栈中。</li>
 <li>如果某个进程被唤醒并在一个 CPU 核上运行，而调度程序正在另一个 CPU 核上切换该进程，这两个 CPU 核将会同时访问同一个内核栈，导致冲突。由于栈是一个线性结构，两个 CPU 同时操作会导致数据混乱和系统崩溃。</li>
 </ul>
 <p>因此，如果调度程序在<strong>旧的进程的内核栈</strong>上执行，而此时该进程在另一个 CPU 核上被唤醒并运行，就会导致两个 CPU 共享同一个栈，进而导致系统崩溃。</p>
-<h3 id="3-解决方案每个-cpu-拥有自己的专用内核栈">3. <strong>解决方案：每个 CPU 拥有自己的专用内核栈</strong>
-</h3><p>为了避免这个问题，<strong>xv6</strong> 操作系统的设计为每个 CPU 核提供了一个<strong>专用线程</strong>，并为这个线程分配了一个<strong>独立的栈</strong>。这个线程称为<strong>调度程序线程（scheduler thread）</strong>。</p>
+<p>为了避免这个问题，<strong>xv6</strong> 操作系统的设计为每个 CPU 核提供了一个<strong>专用线程</strong>，并为这个线程分配了一个<strong>独立的栈</strong>。这个线程称为<strong>调度程序线程（scheduler thread）</strong>。</p>
 <ul>
 <li><strong>调度程序线程</strong>负责在每个 CPU 上执行调度任务。当操作系统决定切换进程时，调度程序线程在它自己的栈上执行，不会干扰其他正在运行的进程。</li>
 <li>这种设计确保调度程序不依赖于任何特定的进程栈，而是有自己独立的栈空间。这样即使一个进程在多个 CPU 核之间切换，也不会出现多个 CPU 同时访问同一个栈的情况。</li>
 </ul>
-<h3 id="4-内核线程和调度程序线程之间的切换机制">4. <strong>内核线程和调度程序线程之间的切换机制</strong>
-</h3><p>在内核态，进程和调度程序之间需要频繁切换，特别是在多核系统中。这种切换通常会通过保存当前进程的状态（寄存器、程序计数器等）到内核栈上，然后调度程序在线程的栈上执行，决定下一个运行的进程。</p>
-<h4 id="切换过程如下">切换过程如下：
-</h4><ol>
+<p>在内核态，进程和调度程序之间需要频繁切换，特别是在多核系统中。这种切换通常会通过保存当前进程的状态（寄存器、程序计数器等）到内核栈上，然后调度程序在线程的栈上执行，决定下一个运行的进程。切换过程如下：</p>
+<ol>
 <li><strong>进程进入内核态</strong>：当某个进程由于系统调用或中断进入内核态时，它的状态（如寄存器内容、程序计数器）会保存在它的内核栈上。</li>
 <li><strong>调度程序介入</strong>：调度程序线程运行在每个 CPU 上，并有自己的内核栈。它从当前进程的内核栈中恢复保存的状态，执行调度逻辑，选择下一个要运行的进程。</li>
 <li><strong>切换到下一个进程</strong>：调度程序将切换到下一个进程，恢复该进程的状态，并从这个进程的内核栈中恢复执行。</li>
 </ol>
-<h3 id="5-避免共享内核栈的并发问题">5. <strong>避免共享内核栈的并发问题</strong>
-</h3><ul>
+<p><strong>避免共享内核栈的并发问题</strong></p>
+<ul>
 <li><strong>问题</strong>：在多核系统中，多个 CPU 核可能会同时运行调度程序和进程。如果它们共享同一个内核栈，会导致栈冲突和系统崩溃。</li>
 <li><strong>解决方案</strong>：xv6 为每个 CPU 提供了一个<strong>独立的调度程序线程和栈</strong>，以确保调度程序和进程不会同时使用同一个栈。</li>
 <li><strong>内核线程和调度程序的切换机制</strong>：调度程序在独立的栈上执行，避免了在多核环境中不同核心共享同一个栈的风险。</li>
 </ul>
-<h3 id="6--cpu为调度程序分配的内核栈的作用">6.  <strong>CPU为调度程序分配的内核栈的作用</strong>
-</h3><p>在多核系统中，<strong>每个 CPU</strong> 都有自己的<strong>专用内核栈</strong>，这个栈用于<strong>调度程序</strong>的执行。调度程序负责在进程之间切换，也就是当某个进程被暂停时，调度程序会选择下一个要运行的进程。</p>
+<p>在多核系统中，<strong>每个 CPU</strong> 都有自己的<strong>专用内核栈</strong>，这个栈用于<strong>调度程序</strong>的执行。调度程序负责在进程之间切换，也就是当某个进程被暂停时，调度程序会选择下一个要运行的进程。</p>
 <p>调度程序的内核栈主要有以下作用：</p>
 <ol>
 <li><strong>独立于进程的栈</strong>：调度程序有自己独立的栈，不依赖任何进程的栈。这样，当调度程序在多个 CPU 核上运行时，它们可以独立地管理每个 CPU 的调度过程，不会与正在运行的进程发生冲突。</li>
@@ -578,8 +549,8 @@
 <p>在我们的示例中，<code>sched</code>调用<code>swtch</code>切换到<code>cpu-&gt;scheduler</code>，即每个CPU的调度程序上下文。</p>
 <p>调度程序上下文之前通过<code>scheduler</code>对<code>swtch</code>（<em><strong>kernel/proc.c</strong></em>:475）的调用进行了保存。</p>
 <p>当我们追踪<code>swtch</code>到返回时，他返回到<code>scheduler</code>而不是<code>sched</code>，并且它的栈指针指向当前CPU的调用程序栈（scheduler stack）。</p>
-<h5 id="代码调度">代码：调度
-</h5><p>上一节介绍了<code>swtch</code>的底层细节；</p>
+<h2 id="代码调度">代码：调度
+</h2><p>上一节介绍了<code>swtch</code>的底层细节；</p>
 <p>现在，让我们以<code>swtch</code>为给定对象，检查从一个进程的内核线程通过调度程序切换到另一个进程的情况。</p>
 <p>调度器（scheduler）以每个CPU上一个特殊线程的形式存在，每个线程都运行<code>scheduler</code>函数。</p>
 <p>此函数负责选择下一个要运行的进程。</p>
@@ -597,32 +568,27 @@
 <p>因此，如果要打印xv6切换线程处的行号，将观察到以下简单模式：（<em><strong>kernel/proc.c</strong></em>:475），（<em><strong>kernel/proc.c</strong></em>:509），（<em><strong>kernel/proc.c</strong></em>:475），（<em><strong>kernel/proc.c</strong></em>:509）等等。</p>
 <p>在两个线程之间进行这种样式化切换的过程有时被称为协程（coroutines）；在本例中，<code>sched</code>和<code>scheduler</code>是彼此的协同程序。</p>
 <blockquote>
-<h3 id="这种样式化切换是什么意思"><strong>&ldquo;这种样式化切换&quot;是什么意思？</strong>
-</h3><p>“这种样式化切换”是指在 xv6 中，<strong>上下文切换</strong>时，程序总是以一种有规律的模式在两个地方来回切换：</p>
+<p>“这种样式化切换”是指在 xv6 中，<strong>上下文切换</strong>时，程序总是以一种有规律的模式在两个地方来回切换：</p>
 <ol>
 <li>调度程序的 <code>sched</code> 函数负责放弃当前进程的 CPU，保存进程状态，并切换到调度程序。</li>
 <li>调度程序再选择下一个要运行的进程，切换回它之前调用 <code>sched</code> 的进程。</li>
 </ol>
 <p>这种切换的模式是<strong>循环往复的</strong>，比如代码总是从 <code>sched</code> 返回到 <code>scheduler</code> 的特定行号，再从 <code>scheduler</code> 切换到某个进程的特定行号。这个有规律的模式就是所谓的“样式化切换”。</p>
-</blockquote>
-<blockquote>
-<h3 id="总结这段话的核心内容"><strong>总结这段话的核心内容</strong>：
-</h3><ol>
+<p><strong>总结这段话的核心内容</strong>：</p>
+<ol>
 <li><strong>进程锁和上下文切换</strong>：进程在调用 <code>sched</code> 时需要先持有自己的 <code>p-&gt;lock</code>，这是为了防止在 <code>swtch</code> 期间其他 CPU 并发地操作同一个进程。</li>
 <li><strong>swtch 的工作原理</strong>：<code>sched</code> 调用 <code>swtch</code> 将当前进程的状态保存到 <code>p-&gt;context</code>，然后切换到调度程序的上下文。调度程序随后选择下一个要运行的进程。</li>
 <li><strong>锁的特殊约定</strong>：xv6 打破了通常的“获取锁的线程负责释放锁”的惯例，<code>sched</code> 持有的锁传递给调度程序，以确保状态安全切换。</li>
 <li><strong>协程（coroutines）模式</strong>：调度程序和 <code>sched</code> 之间的这种循环切换，被称为协程，它们互相配合着切换工作，形成协作运行的模式。</li>
 </ol>
-</blockquote>
-<blockquote>
-<h3 id="传统的函数调用与返回"><strong>传统的函数调用与返回：</strong>
-</h3><ul>
+<p><strong>传统的函数调用与返回：</strong></p>
+<ul>
 <li>当你调用一个函数时，程序会暂停当前的执行流程，进入被调用的函数。</li>
 <li>当被调用的函数执行 <code>return</code> 后，程序回到调用点继续执行。</li>
 <li>但 <strong>函数调用是“单向的”</strong>：调用者调用被调用者，被调用者完成后返回调用者。调用者没有暂停或保存自己的状态等待被调用。</li>
 </ul>
-<h3 id="协程的关键区别"><strong>协程的关键区别：</strong>
-</h3><ol>
+<p><strong>协程的关键区别：</strong></p>
+<ol>
 <li><strong>协程可以“暂停”和“恢复”</strong>：协程允许在执行过程中<strong>暂停</strong>，并且可以<strong>在某个时刻恢复执行</strong>。当协程暂停时，它的执行上下文（包括局部变量、程序计数器等）被保存下来，当它被重新调用时，会从<strong>暂停的地方</strong>继续执行，而不是从调用点继续像函数返回那样。</li>
 <li><strong>协同执行</strong>：协程允许多个函数<strong>互相让出控制权</strong>，并在彼此之间切换。这与传统的函数调用不同，传统的调用只是单向的，而协程可以在不同协程之间来回切换，形成一种“合作式多任务”的执行方式。</li>
 </ol>
@@ -714,8 +680,7 @@
 <p>其中一个不变量是：如果进程是<code>RUNNING</code>状态，计时器中断的<code>yield</code>必须能够安全地从进程中切换出去；这意味着CPU寄存器必须保存进程的寄存器值（即<code>swtch</code>没有将它们移动到<code>context</code>中），并且<code>c-&gt;proc</code>必须指向进程。</p>
 <p>另一个不变量是：如果进程是<code>RUNNABLE</code>状态，空闲CPU的调度程序必须安全地运行它；这意味着<code>p-&gt;context</code>必须保存进程的寄存器（即，它们实际上不在实际寄存器中），没有CPU在进程的内核栈上执行，并且没有CPU的<code>c-&gt;proc</code>引用进程。请注意，在保持<code>p-&gt;lock</code>时，这些属性通常不成立。</p>
 <blockquote>
-<h3 id="1-这两个不变量是什么为什么叫做不变量">1. <strong>这两个不变量是什么，为什么叫做不变量？</strong>
-</h3><p>这段话提到的两个不变量是：</p>
+<p>这段话提到的两个不变量是：</p>
 <ul>
 <li>
 <p><strong>第一个不变量</strong>（对于 <code>RUNNING</code> 状态的进程）：</p>
@@ -732,9 +697,13 @@
 <p>。这意味着：</p>
 <ul>
 <li><code>p-&gt;context</code> 必须保存该进程的寄存器状态，因为它已经不再在 CPU 的实际寄存器中。</li>
-<li>没有 CPU 正在使用该进程的内核栈，确保没有其他 CPU 在执行该进程。</li>
-<li>没有 CPU 的 <code>c-&gt;proc</code>（当前正在运行的进程指针）引用该进程，说明没有任何 CPU 正在运行它。</li>
 </ul>
+</li>
+<li>
+<p>没有 CPU 正在使用该进程的内核栈，确保没有其他 CPU 在执行该进程。</p>
+</li>
+<li>
+<p>没有 CPU 的 <code>c-&gt;proc</code>（当前正在运行的进程指针）引用该进程，说明没有任何 CPU 正在运行它。</p>
 </li>
 </ul>
 </li>
@@ -743,14 +712,11 @@
 <ul>
 <li><strong>不变量</strong> 是指程序在运行时<strong>始终需要保持成立的条件</strong>，不论程序执行的状态如何。在这里，这两个不变量必须始终保持成立，以确保在上下文切换时，进程状态能够正确保存和恢复，从而保证系统的稳定性和安全性。</li>
 </ul>
-<h3 id="2-安全地从进程中切换出去和空闲-cpu-的调度程序必须安全地运行它是什么意思">2. <strong>“安全地从进程中切换出去”和“空闲 CPU 的调度程序必须安全地运行它”是什么意思？</strong>
-</h3><ul>
-<li><strong>“安全地从进程中切换出去”</strong>：
+<p><strong>“安全地从进程中切换出去”和“空闲 CPU 的调度程序必须安全地运行它”是什么意思？</strong></p>
 <ul>
+<li><strong>“安全地从进程中切换出去”</strong>：</li>
 <li>当一个正在运行的进程（<code>RUNNING</code> 状态）被计时器中断触发时，操作系统可能决定切换到另一个进程。这时，系统必须能够<strong>安全地切换</strong>，意味着当前进程的寄存器状态必须妥善保存，否则在切换回来时进程可能会丢失当前状态。因此，CPU 寄存器必须保持进程的寄存器值，不能在 <code>swtch</code> 中过早地将其保存到 <code>p-&gt;context</code> 中。</li>
 <li>简单来说，这意味着在切换到调度程序前，系统必须确保当前进程的所有运行状态都已正确保存，以便下次切换回来时能够恢复。</li>
-</ul>
-</li>
 <li><strong>“空闲 CPU 的调度程序必须安全地运行它”</strong>：
 <ul>
 <li>当某个 CPU 处于空闲状态，调度程序会从可运行的进程队列中选择一个RUNNABLE状态的进程并运行它。为了确保安全运行，系统必须确保：
@@ -763,24 +729,25 @@
 </ul>
 </li>
 </ul>
-<h3 id="3-为什么说保持-p-lock-时这些属性通常不成立这些属性又是什么">3. <strong>为什么说“保持 <code>p-&gt;lock</code> 时，这些属性通常不成立”，“这些属性”又是什么？</strong>
-</h3><ul>
+<p><strong>为什么说“保持 <code>p-&gt;lock</code> 时，这些属性通常不成立”，“这些属性”又是什么？</strong></p>
+<ul>
 <li>
 <p><strong>这些属性</strong> 指的是：</p>
 <ol>
 <li>当进程处于 <code>RUNNING</code> 状态时，计时器中断发生时，CPU 寄存器必须保持进程的寄存器值，<code>c-&gt;proc</code> 必须指向该进程。</li>
-<li>当进程处于 <code>RUNNABLE</code> 状态时，<code>p-&gt;context</code> 必须保存进程的寄存器状态，没有 CPU 在进程的内核栈上运行，没有 CPU 的 <code>c-&gt;proc</code> 指向它。</li>
 </ol>
 </li>
+</ul>
+<ol start="2">
+<li>当进程处于 <code>RUNNABLE</code> 状态时，<code>p-&gt;context</code> 必须保存进程的寄存器状态，没有 CPU 在进程的内核栈上运行，没有 CPU 的 <code>c-&gt;proc</code> 指向它。</li>
+</ol>
+<ul>
 <li>
 <p><strong>为什么保持 <code>p-&gt;lock</code> 时，这些属性通常不成立</strong>：</p>
 <ul>
-<li>在持有p-&gt;lock的过程中，系统可能正在进行上下文切换，此时进程的状态尚未完全确定。例如：
-<ul>
+<li>在持有p-&gt;lock的过程中，系统可能正在进行上下文切换，此时进程的状态尚未完全确定。例如：</li>
 <li>当进程正从 <code>RUNNING</code> 状态切换到 <code>RUNNABLE</code> 状态时，进程的寄存器可能还没有完全保存到 <code>p-&gt;context</code> 中。</li>
 <li>或者，进程的状态正在更新，可能还存在 CPU 在该进程的内核栈上运行，导致暂时的不一致。</li>
-</ul>
-</li>
 </ul>
 <p>因此，<strong>在上下文切换的过程中</strong>，这些不变量可能会短暂地被打破。这就是为什么在 <code>sched</code> 执行过程中，<strong>必须持有 <code>p-&gt;lock</code></strong>，确保在完成整个上下文切换前，其他 CPU 不会并发地修改该进程的状态。</p>
 </li>
@@ -789,16 +756,25 @@
 <p>维护上述不变量是xv6经常在一个线程中获取<code>p-&gt;lock</code>并在另一个线程中释放它的原因，例如在<code>yield</code>中获取并在<code>scheduler</code>中释放。</p>
 <p>一旦<code>yield</code>开始修改一个<code>RUNNING</code>进程的状态为<code>RUNNABLE</code>，锁必须保持被持有状态，直到不变量恢复：最早的正确释放点是<code>scheduler</code>（在其自身栈上运行）清除<code>c-&gt;proc</code>之后。类似地，一旦<code>scheduler</code>开始将<code>RUNNABLE</code>进程转换为<code>RUNNING</code>，在内核线程完全运行之前（在<code>swtch</code>之后，例如在<code>yield</code>中）绝不能释放锁。</p>
 <blockquote>
-<h3 id="锁的释放时机问题"><strong>锁的释放时机问题：</strong>
-</h3><p>在上下文切换和调度过程中，<strong>锁的释放时机</strong>非常关键。锁的作用是确保进程的状态在切换时不会被多个 CPU 并发修改或破坏，尤其是维护那些关键的<strong>不变量</strong>。具体来说，锁必须在整个上下文切换过程中保持，以防止状态不一致。下面详细解释锁的释放时机：</p>
-<h3 id="1-yield-中获取锁的时机">1. <strong><code>yield</code> 中获取锁的时机：</strong>
-</h3><ul>
-<li>当一个 <code>RUNNING</code> 状态的进程决定放弃 CPU（例如通过 <code>yield</code>），它需要先获取自己的锁（<code>p-&gt;lock</code>）。</li>
-<li>获取锁后，进程的状态开始从 <code>RUNNING</code> 改为 <code>RUNNABLE</code>。这个过程非常关键，因为它影响到进程的执行状态，以及 CPU 寄存器中的内容如何保存。</li>
-<li>在这个状态转换过程中，<strong>锁必须保持</strong>，直到确认状态安全地转换为 <code>RUNNABLE</code>，并且不会有其他 CPU 并发地访问或修改该进程的状态。</li>
+<p>在上下文切换和调度过程中，<strong>锁的释放时机</strong>非常关键。锁的作用是确保进程的状态在切换时不会被多个 CPU 并发修改或破坏，尤其是维护那些关键的<strong>不变量</strong>。具体来说，锁必须在整个上下文切换过程中保持，以防止状态不一致。下面详细解释锁的释放时机：</p>
+<ol>
+<li>
+<p><strong><code>yield</code> 中获取锁的时机：</strong></p>
+<ul>
+<li>
+<p>当一个 <code>RUNNING</code> 状态的进程决定放弃 CPU（例如通过 <code>yield</code>），它需要先获取自己的锁（<code>p-&gt;lock</code>）。</p>
+</li>
+<li>
+<p>获取锁后，进程的状态开始从 <code>RUNNING</code> 改为 <code>RUNNABLE</code>。这个过程非常关键，因为它影响到进程的执行状态，以及 CPU 寄存器中的内容如何保存。</p>
+</li>
+<li>
+<p>在这个状态转换过程中，<strong>锁必须保持</strong>，直到确认状态安全地转换为 <code>RUNNABLE</code>，并且不会有其他 CPU 并发地访问或修改该进程的状态。</p>
+</li>
 </ul>
-<h3 id="2-锁在-scheduler-中释放的时机">2. <strong>锁在 <code>scheduler</code> 中释放的时机：</strong>
-</h3><ul>
+</li>
+<li>
+<p><strong>锁在 <code>scheduler</code> 中释放的时机：</strong></p>
+<ul>
 <li>
 <p>一旦 <code>yield</code> 把进程的状态标记为 <code>RUNNABLE</code>，接下来调度程序（<code>scheduler</code>）会从可运行的进程列表中选择下一个进程，并进行上下文切换。</p>
 </li>
@@ -811,20 +787,38 @@
 </ul>
 </li>
 </ul>
-<h3 id="3-为何不能提前释放锁">3. <strong>为何不能提前释放锁？</strong>
-</h3><ul>
-<li>如果在 <code>yield</code> 修改状态后、上下文切换前提前释放锁，可能会导致系统中的其他 CPU 错误地认为这个进程已经处于稳定的 <code>RUNNABLE</code> 状态，并尝试同时调度和运行它。这会导致多个 CPU 操作同一个内核栈，从而导致数据冲突和不一致性。</li>
-<li>锁必须确保状态转换和上下文切换在完成后，才释放锁给其他调度程序或 CPU，以免破坏不变量。</li>
+</li>
+<li>
+<p><strong>为何不能提前释放锁？</strong></p>
+<ul>
+<li>
+<p>如果在 <code>yield</code> 修改状态后、上下文切换前提前释放锁，可能会导致系统中的其他 CPU 错误地认为这个进程已经处于稳定的 <code>RUNNABLE</code> 状态，并尝试同时调度和运行它。这会导致多个 CPU 操作同一个内核栈，从而导致数据冲突和不一致性。</p>
+</li>
+<li>
+<p>锁必须确保状态转换和上下文切换在完成后，才释放锁给其他调度程序或 CPU，以免破坏不变量。</p>
+</li>
 </ul>
-<h3 id="4-调度器把-runnable-转换为-running-时的锁释放">4. <strong>调度器把 <code>RUNNABLE</code> 转换为 <code>RUNNING</code> 时的锁释放：</strong>
-</h3><ul>
-<li>当调度器选择一个 <code>RUNNABLE</code> 的进程运行时，它会将该进程的状态从 <code>RUNNABLE</code> 转为 <code>RUNNING</code>。</li>
-<li>在这之前，调度器会持有该进程的锁，确保没有其他 CPU 并发修改它。</li>
-<li>在上下文切换完成（即 <code>swtch</code> 切换到该进程）后，调度器必须继续持有锁，直到切换完成，并且进程真正开始运行。</li>
-<li>一旦切换到该进程，锁可以安全地释放，因为该进程已经完全运行，状态已经稳定。</li>
+</li>
+<li>
+<p><strong>调度器把 <code>RUNNABLE</code> 转换为 <code>RUNNING</code> 时的锁释放：</strong></p>
+<ul>
+<li>
+<p>当调度器选择一个 <code>RUNNABLE</code> 的进程运行时，它会将该进程的状态从 <code>RUNNABLE</code> 转为 <code>RUNNING</code>。</p>
+</li>
+<li>
+<p>在这之前，调度器会持有该进程的锁，确保没有其他 CPU 并发修改它。</p>
+</li>
+<li>
+<p>在上下文切换完成（即 <code>swtch</code> 切换到该进程）后，调度器必须继续持有锁，直到切换完成，并且进程真正开始运行。</p>
+</li>
+<li>
+<p>一旦切换到该进程，锁可以安全地释放，因为该进程已经完全运行，状态已经稳定。</p>
+</li>
 </ul>
-<h3 id="总结锁的释放时机"><strong>总结锁的释放时机：</strong>
-</h3><ol>
+</li>
+</ol>
+<p><strong>总结锁的释放时机：</strong></p>
+<ol>
 <li><strong><code>yield</code> 后</strong>：锁不能立即释放，必须保持到调度器清理完 <code>c-&gt;proc</code>，并安全地将控制权交给另一个进程。</li>
 <li><strong><code>scheduler</code> 选择下一个进程后</strong>：当调度器把进程从 <code>RUNNABLE</code> 转换为 <code>RUNNING</code> 时，必须确保切换完成，才能释放锁。</li>
 </ol>
@@ -832,8 +826,8 @@
 </blockquote>
 <p><code>p-&gt;lock</code>还保护其他东西：<code>exit</code>和<code>wait</code>之间的相互作用，避免丢失<code>wakeup</code>的机制（参见第7.5节），以及避免一个进程退出和其他进程读写其状态之间的争用（例如，<code>exit</code>系统调用查看<code>p-&gt;pid</code>并设置<code>p-&gt;killed</code>(*<strong>kernel/proc.c*</strong>:611)）。</p>
 <p>为了清晰起见，也许为了性能起见，有必要考虑一下<code>p-&gt;lock</code>的不同功能是否可以拆分。</p>
-<h5 id="代码mycpu和myproc">代码：mycpu和myproc
-</h5><p>Xv6通常需要指向当前进程的<code>proc</code>结构体的指针。</p>
+<h2 id="代码mycpu和myproc">代码：mycpu和myproc
+</h2><p>Xv6通常需要指向当前进程的<code>proc</code>结构体的指针。</p>
 <p>在单处理器系统上，可以有一个指向当前<code>proc</code>的全局变量。</p>
 <p>但这不能用于多核系统，因为每个核执行的进程不同。</p>
 <p>解决这个问题的方法是基于每个核心都有自己的寄存器集，从而使用其中一个寄存器来帮助查找每个核心的信息。</p>
@@ -854,19 +848,16 @@
 <p>即使启用中断，<code>myproc</code>的返回值也可以安全使用：如果计时器中断将调用进程移动到另一个CPU，其<code>struct proc</code>指针不会改变。</p>
 <blockquote>
 <p>虽然在多核环境下多个 CPU 是并发执行的，但每次调用这些函数时，都会针对一个特定的 CPU 上的线程运行。</p>
-</blockquote>
-<blockquote>
-<h3 id="总结">总结
-</h3><p>Xv6 操作系统在多核系统上无法使用单一的全局变量来指向当前运行的进程。为了区分每个处理器核上执行的进程，Xv6 为每个 CPU 维护了一个 <code>struct cpu</code>，记录了当前 CPU 上正在运行的进程，以及其他 CPU 状态信息。为了能够快速访问每个核心的 <code>struct cpu</code>，Xv6 使用了 RISC-V 的 <code>tp</code> 寄存器，该寄存器保存每个 CPU 的 <code>hartid</code>（硬件线程 ID）。这使得 Xv6 能通过 <code>tp</code> 对应 <code>cpus</code> 数组进行索引，从而获取每个核的 <code>struct cpu</code>。</p>
+<p>Xv6 操作系统在多核系统上无法使用单一的全局变量来指向当前运行的进程。为了区分每个处理器核上执行的进程，Xv6 为每个 CPU 维护了一个 <code>struct cpu</code>，记录了当前 CPU 上正在运行的进程，以及其他 CPU 状态信息。为了能够快速访问每个核心的 <code>struct cpu</code>，Xv6 使用了 RISC-V 的 <code>tp</code> 寄存器，该寄存器保存每个 CPU 的 <code>hartid</code>（硬件线程 ID）。这使得 Xv6 能通过 <code>tp</code> 对应 <code>cpus</code> 数组进行索引，从而获取每个核的 <code>struct cpu</code>。</p>
 <ul>
 <li><code>mycpu()</code> 函数返回当前 CPU 的 <code>struct cpu</code> 指针。它通过 <code>tp</code> 寄存器找到对应的 CPU 结构体。</li>
 <li><code>myproc()</code> 函数返回当前 CPU 上运行的进程的 <code>struct proc</code> 指针。它通过禁用中断，调用 <code>mycpu()</code> 函数从当前 CPU 的 <code>struct cpu</code> 中取出正在运行的进程指针。</li>
 </ul>
 <p>为了避免在中断或线程迁移（例如由于计时器中断导致线程切换到另一个 CPU）时返回值不再有效，Xv6 要求在获取这些信息时禁用中断，并在使用完后再启用。</p>
 </blockquote>
-<h4 id="正课">正课
-</h4><h5 id="线程概述">线程概述
-</h5><p>今天的课程会讨论线程以及XV6如何实现线程切换。</p>
+<h2 id="正课">正课
+</h2><h2 id="线程概述">线程概述
+</h2><p>今天的课程会讨论线程以及XV6如何实现线程切换。</p>
 <p>今天这节课与之前介绍的系统调用，Interrupt，page table和锁的课程一样，都是有关XV6底层实现的课程。</p>
 <p>为什么计算机需要运行多线程？可以归结为以下原因：</p>
 <ul>
@@ -923,8 +914,8 @@
 <p>Linux中也用到了很多我们今天会介绍的技术，但是在Linux中跟踪每个进程的多个线程比XV6中每个进程只有一个线程要复杂的多。</p>
 <p>还有一些其他的方式可以支持在一台计算机上交织的运行多个任务，我们不会讨论它们，但是如果你感兴趣的话，你可以去搜索event-driven programming或者state machine，这些是在一台计算机上不使用线程但又能运行多个任务的技术。</p>
 <p>在所有的支持多任务的方法中，线程技术并不是非常有效的方法，但是线程通常是最方便，对程序员最友好的，并且可以用来支持大量不同任务的方法。</p>
-<h5 id="xv6线程调度">XV6线程调度
-</h5><p>实现内核中的线程系统存在以下挑战：</p>
+<h2 id="xv6线程调度">XV6线程调度
+</h2><p>实现内核中的线程系统存在以下挑战：</p>
 <ul>
 <li>
 <p>第一个是如何实现线程间的切换。</p>
@@ -971,8 +962,8 @@
 <p>而RUNABLE线程，因为并没有CPU与之关联，所以对于每一个RUNABLE线程，当我们将它从RUNNING转变成RUNABLE时，我们需要将它还在RUNNING时位于CPU的状态拷贝到内存中的某个位置，注意这里不是从内存中的某处进行拷贝，而是从CPU中的寄存器拷贝。</p>
 <p>我们需要拷贝的信息就是程序计数器（Program Counter）和寄存器。</p>
 <p>当线程调度器决定要运行一个RUNABLE线程时，这里涉及了很多步骤，但是其中一步是将之前保存的程序计数器和寄存器拷贝回调度器对应的CPU中。</p>
-<h5 id="xv6线程切换一">XV6线程切换（一）
-</h5><p>我们或许会运行多个用户空间进程，例如C compiler（CC），LS，Shell，它们或许会，也或许不会想要同时运行。</p>
+<h2 id="xv6线程切换一">XV6线程切换（一）
+</h2><p>我们或许会运行多个用户空间进程，例如C compiler（CC），LS，Shell，它们或许会，也或许不会想要同时运行。</p>
 <p>在用户空间，每个进程有自己的内存，每个进程都包含了一个用户程序栈（user stack），并且当进程运行的时候，它在RISC-V处理器中会有程序计数器和寄存器。</p>
 <p>当用户程序在运行时，实际上是用户进程中的一个用户线程在运行。</p>
 <p>如果程序执行了一个系统调用或者因为响应中断走到了内核中，那么相应的用户空间状态会被保存在程序的trapframe中（注，详见lec06），同时属于这个用户程序的内核线程被激活。</p>
@@ -997,8 +988,8 @@
 <li>之后，第二个用户进程的内核线程暂停自己，并恢复第二个用户进程的用户寄存器。</li>
 <li>最后返回到第二个用户进程继续执行。</li>
 </ol>
-<h5 id="xv6线程切换二">XV6线程切换（二）
-</h5><p>实际的线程切换流程会复杂的多。</p>
+<h2 id="xv6线程切换二">XV6线程切换（二）
+</h2><p>实际的线程切换流程会复杂的多。</p>
 <p>假设我们有进程P1正在运行，进程P2是RUNABLE当前并不在运行。</p>
 <p>假设在XV6中我们有2个CPU核，这意味着在硬件层面我们有CPU0和CPU1。</p>
 <p>我们从一个正在运行的用户空间进程切换到另一个RUNABLE但是还没有运行的用户空间进程的更完整的故事是：</p>
@@ -1080,8 +1071,8 @@
 <p>在XV6中，一个进程要么在用户空间执行指令，要么是在内核空间执行指令，要么它的状态被保存在context和trapframe中，并且没有执行任何指令。</p>
 <p>这里该怎么称呼它呢？你可以根据自己的喜好来称呼它，对于我来说，每个进程有两个线程，一个用户空间线程，一个内核空间线程，并且存在限制使得一个进程要么运行在用户空间线程，要么为了执行系统调用或者响应中断而运行在内核空间线程 ，但是永远也不会两者同时运行。</p>
 </blockquote>
-<h5 id="xv6进程切换示例程序">XV6进程切换示例程序
-</h5><p>我们先来看一下proc.h中的proc结构体，从结构体中我们可以看到很多之前介绍的内容。</p>
+<h2 id="xv6进程切换示例程序">XV6进程切换示例程序
+</h2><p>我们先来看一下proc.h中的proc结构体，从结构体中我们可以看到很多之前介绍的内容。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -1139,14 +1130,18 @@
 <li>state字段保存了当前进程状态，要么是RUNNING，要么是RUNABLE，要么是SLEEPING等等</li>
 <li>lock字段保护了很多数据，目前来说至少保护了对于state字段的更新。举个例子，因为有锁的保护，两个CPU的调度器线程不会同时拉取同一个RUNABLE进程并运行它</li>
 </ul>
-<p>接下来会运行一个简单的演示程序，在这个程序中我们会从一个进程切换到另一个。<img src="D:%5cUsers%5cnote%5cXV6%5cp2.png"
-	
-	
-	
+<p>接下来会运行一个简单的演示程序，在这个程序中我们会从一个进程切换到另一个。<img src="/p/mit6s081lec11/p2.png"
+	width="562"
+	height="544"
+	srcset="/p/mit6s081lec11/p2_hu1693358805321326060.png 480w, /p/mit6s081lec11/p2_hu527241409333239847.png 1024w"
 	loading="lazy"
 	
 		alt="image"
 	
+	
+		class="gallery-image" 
+		data-flex-grow="103"
+		data-flex-basis="247px"
 	
 ></p>
 <p>这个程序中会创建两个进程，两个进程会一直运行。</p>
@@ -1154,72 +1149,96 @@
 <p>但是它们都不会很频繁的打印输出（注，每隔1000000次循环才打印一个输出），并且它们也不会主动出让CPU（注，因为每个进程都执行的是没有sleep的死循环）。</p>
 <p>所以我们这里有了两个运算密集型进程，并且因为我们接下来启动的XV6只有一个CPU核，它们都运行在同一个CPU上。</p>
 <p>为了让这两个进程都能运行，有必要让两个进程之间能相互切换。</p>
-<p>接下来运行spin程序，<img src="D:%5cUsers%5cnote%5cXV6%5cp3.png"
-	
-	
-	
+<p>接下来运行spin程序，<img src="/p/mit6s081lec11/p3.png"
+	width="724"
+	height="324"
+	srcset="/p/mit6s081lec11/p3_hu2024462625367836819.png 480w, /p/mit6s081lec11/p3_hu1405761908147253642.png 1024w"
 	loading="lazy"
 	
 		alt="p3"
 	
 	
+		class="gallery-image" 
+		data-flex-grow="223"
+		data-flex-basis="536px"
+	
 ></p>
-<p>可以看到一直有字符在输出，一个进程在输出“/”，另一个进程在输出&rdquo;&quot;。</p>
+<p>可以看到一直有字符在输出，一个进程在输出“/”，另一个进程在输出&quot;&quot;。</p>
 <p>从输出看，虽然现在XV6只有一个CPU核，但是每隔一会，XV6就在两个进程之间切换。</p>
 <p>“/”输出了一会之后，定时器中断将CPU切换到另一个进程运行然后又输出“\”一会。所以可以看到定时器中断在起作用。</p>
 <p>接下来，在trap.c的devintr函数中的207行设置一个断点，这一行会识别出当前是在响应定时器中断。</p>
-<p><img src="D:%5cUsers%5cnote%5cXV6%5cp4.png"
-	
-	
-	
+<p><img src="/p/mit6s081lec11/p4.png"
+	width="918"
+	height="1036"
+	srcset="/p/mit6s081lec11/p4_hu5029313476404847184.png 480w, /p/mit6s081lec11/p4_hu5066168765813689661.png 1024w"
 	loading="lazy"
 	
 		alt="p4"
 	
 	
+		class="gallery-image" 
+		data-flex-grow="88"
+		data-flex-basis="212px"
+	
 ></p>
-<p><img src="D:%5cUsers%5cnote%5cXV6%5cp5.png"
-	
-	
-	
+<p><img src="/p/mit6s081lec11/p5.png"
+	width="798"
+	height="86"
+	srcset="/p/mit6s081lec11/p5_hu7357509958749080609.png 480w, /p/mit6s081lec11/p5_hu28250811026237817.png 1024w"
 	loading="lazy"
 	
 		alt="p5"
 	
 	
+		class="gallery-image" 
+		data-flex-grow="927"
+		data-flex-basis="2226px"
+	
 ></p>
 <p>之后在gdb中continue。立刻会停在中断的位置，因为定时器中断还是挺频繁的。现在我们可以确认我们在usertrap函数中，并且usertrap函数通过调用devintr函数来处理这里的中断（注，从下图的栈输出可以看出）。</p>
-<p><img src="D:%5cUsers%5cnote%5cXV6%5cp6.png"
-	
-	
-	
+<p><img src="/p/mit6s081lec11/p6.png"
+	width="780"
+	height="152"
+	srcset="/p/mit6s081lec11/p6_hu6811547187374485424.png 480w, /p/mit6s081lec11/p6_hu12400229481486757518.png 1024w"
 	loading="lazy"
 	
 		alt="p6"
 	
 	
+		class="gallery-image" 
+		data-flex-grow="513"
+		data-flex-basis="1231px"
+	
 ></p>
 <p>因为devintr函数处理定时器中断的代码基本没有内容，接下来我在gdb中输入finish来从devintr函数中返回到usertrap函数。</p>
 <p>当我们返回到usertrap函数时，虽然我们刚刚从devintr函数中返回，但是我们期望运行到下面的yield函数。所以我们期望devintr函数返回2。</p>
-<p><img src="D:%5cUsers%5cnote%5cXV6%5cp7.png"
-	
-	
-	
+<p><img src="/p/mit6s081lec11/p7.png"
+	width="714"
+	height="334"
+	srcset="/p/mit6s081lec11/p7_hu3964657701307735048.png 480w, /p/mit6s081lec11/p7_hu3297580789123514755.png 1024w"
 	loading="lazy"
 	
 		alt="p7"
 	
 	
+		class="gallery-image" 
+		data-flex-grow="213"
+		data-flex-basis="513px"
+	
 ></p>
 <p>可以从gdb中看到devintr的确返回的是2。</p>
-<p><img src="D:%5cUsers%5cnote%5cXV6%5cp8.png"
-	
-	
-	
+<p><img src="/p/mit6s081lec11/p8.png"
+	width="760"
+	height="224"
+	srcset="/p/mit6s081lec11/p8_hu12352301448078710713.png 480w, /p/mit6s081lec11/p8_hu14576638449005284615.png 1024w"
 	loading="lazy"
 	
 		alt="p8"
 	
+	
+		class="gallery-image" 
+		data-flex-grow="339"
+		data-flex-basis="814px"
 	
 ></p>
 <p>在yield函数中，当前进程会出让CPU并让另一个进程运行。</p>
@@ -1260,8 +1279,8 @@
 <p>尽管我们这节课主要是基于定时器中断来讨论，但是实际上XV6切换线程的绝大部分场景都不是因为定时器中断，比如说一些系统调用在等待一些事件并决定让出CPU。</p>
 <p>exit系统调用会做各种操作然后调用yield函数来出让CPU，这里的出让并不依赖定时器中断。</p>
 </blockquote>
-<h5 id="xv6线程切换--yieldsched函数">XV6线程切换&ndash;yield/sched函数
-</h5><p>回到devintr函数返回到usertrap函数中的位置。</p>
+<h2 id="xv6线程切换--yieldsched函数">XV6线程切换&ndash;yield/sched函数
+</h2><p>回到devintr函数返回到usertrap函数中的位置。</p>
 <p>在gdb里面输入几次step走到yield函数的调用。</p>
 <p>yield函数是整个线程切换的第一步，下面是yield函数的内容：</p>
 <div class="highlight"><div class="chroma">
@@ -1367,27 +1386,35 @@
 <p>所以swtch函数在保存完当前内核线程的内核寄存器之后，就会恢复当前CPU核的调度器线程的寄存器，并继续执行当前CPU核的调度器线程。</p>
 <p>接下来，我们快速的看一下我们将要切换到的context（注，也就是调度器线程的context）。</p>
 <p>因为我们只有一个CPU核，这里我在gdb中print cpus[0].context</p>
-<p><img src="D:%5cUsers%5cnote%5cXV6%5cp9.png"
-	
-	
-	
+<p><img src="/p/mit6s081lec11/p9.png"
+	width="958"
+	height="118"
+	srcset="/p/mit6s081lec11/p9_hu10285545358071669460.png 480w, /p/mit6s081lec11/p9_hu8796078071750968036.png 1024w"
 	loading="lazy"
 	
 		alt="p9"
 	
 	
+		class="gallery-image" 
+		data-flex-grow="811"
+		data-flex-basis="1948px"
+	
 ></p>
 <p>这里看到的就是之前保存的当前CPU核的调度器线程的寄存器。</p>
 <p>在这些寄存器中，最有趣的就是ra（Return Address）寄存器，因为ra寄存器保存的是当前函数的返回地址，所以调度器线程中的代码会返回到ra寄存器中的地址。</p>
 <p>通过查看kernel.asm，我们可以知道这个地址的内容是什么。也可以在gdb中输入“x/i 0x80001f2e”进行查看。</p>
-<p><img src="D:%5cUsers%5cnote%5cXV6%5cp10.png"
-	
-	
-	
+<p><img src="/p/mit6s081lec11/p10.png"
+	width="704"
+	height="70"
+	srcset="/p/mit6s081lec11/p10_hu16065095697725850952.png 480w, /p/mit6s081lec11/p10_hu1356209050733223766.png 1024w"
 	loading="lazy"
 	
 		alt="p10"
 	
+	
+		class="gallery-image" 
+		data-flex-grow="1005"
+		data-flex-basis="2413px"
 	
 ></p>
 <p>输出中包含了地址中的指令和指令所在的函数名。</p>
@@ -1435,44 +1462,44 @@
 </span><span class="lnt">38
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># Context switch
-</span></span><span class="line"><span class="cl">#
-</span></span><span class="line"><span class="cl">#   void swtch(struct context *old, struct context *new);
-</span></span><span class="line"><span class="cl"># 
-</span></span><span class="line"><span class="cl"># Save current registers in old. Load from new.	
-</span></span><span class="line"><span class="cl">.globl swtch
-</span></span><span class="line"><span class="cl">swtch:
-</span></span><span class="line"><span class="cl">        sd ra, 0(a0)
-</span></span><span class="line"><span class="cl">        sd sp, 8(a0)
-</span></span><span class="line"><span class="cl">        sd s0, 16(a0)
-</span></span><span class="line"><span class="cl">        sd s1, 24(a0)
-</span></span><span class="line"><span class="cl">        sd s2, 32(a0)
-</span></span><span class="line"><span class="cl">        sd s3, 40(a0)
-</span></span><span class="line"><span class="cl">        sd s4, 48(a0)
-</span></span><span class="line"><span class="cl">        sd s5, 56(a0)
-</span></span><span class="line"><span class="cl">        sd s6, 64(a0)
-</span></span><span class="line"><span class="cl">        sd s7, 72(a0)
-</span></span><span class="line"><span class="cl">        sd s8, 80(a0)
-</span></span><span class="line"><span class="cl">        sd s9, 88(a0)
-</span></span><span class="line"><span class="cl">        sd s10, 96(a0)
-</span></span><span class="line"><span class="cl">        sd s11, 104(a0)
+<pre tabindex="0" class="chroma"><code class="language-asm" data-lang="asm"><span class="line"><span class="cl"><span class="c1"># Context switch
+</span></span></span><span class="line"><span class="cl"><span class="c1">#
+</span></span></span><span class="line"><span class="cl"><span class="c1">#   void swtch(struct context *old, struct context *new);
+</span></span></span><span class="line"><span class="cl"><span class="c1"># 
+</span></span></span><span class="line"><span class="cl"><span class="c1"># Save current registers in old. Load from new.	
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="na">.globl</span> <span class="no">swtch</span>
+</span></span><span class="line"><span class="cl"><span class="nl">swtch:</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">sd</span> <span class="no">ra</span><span class="p">,</span> <span class="mi">0</span><span class="p">(</span><span class="no">a0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">sd</span> <span class="no">sp</span><span class="p">,</span> <span class="mi">8</span><span class="p">(</span><span class="no">a0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">sd</span> <span class="no">s0</span><span class="p">,</span> <span class="mi">16</span><span class="p">(</span><span class="no">a0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">sd</span> <span class="no">s1</span><span class="p">,</span> <span class="mi">24</span><span class="p">(</span><span class="no">a0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">sd</span> <span class="no">s2</span><span class="p">,</span> <span class="mi">32</span><span class="p">(</span><span class="no">a0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">sd</span> <span class="no">s3</span><span class="p">,</span> <span class="mi">40</span><span class="p">(</span><span class="no">a0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">sd</span> <span class="no">s4</span><span class="p">,</span> <span class="mi">48</span><span class="p">(</span><span class="no">a0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">sd</span> <span class="no">s5</span><span class="p">,</span> <span class="mi">56</span><span class="p">(</span><span class="no">a0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">sd</span> <span class="no">s6</span><span class="p">,</span> <span class="mi">64</span><span class="p">(</span><span class="no">a0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">sd</span> <span class="no">s7</span><span class="p">,</span> <span class="mi">72</span><span class="p">(</span><span class="no">a0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">sd</span> <span class="no">s8</span><span class="p">,</span> <span class="mi">80</span><span class="p">(</span><span class="no">a0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">sd</span> <span class="no">s9</span><span class="p">,</span> <span class="mi">88</span><span class="p">(</span><span class="no">a0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">sd</span> <span class="no">s10</span><span class="p">,</span> <span class="mi">96</span><span class="p">(</span><span class="no">a0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">sd</span> <span class="no">s11</span><span class="p">,</span> <span class="mi">104</span><span class="p">(</span><span class="no">a0</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        ld ra, 0(a1)
-</span></span><span class="line"><span class="cl">        ld sp, 8(a1)
-</span></span><span class="line"><span class="cl">        ld s0, 16(a1)
-</span></span><span class="line"><span class="cl">        ld s1, 24(a1)
-</span></span><span class="line"><span class="cl">        ld s2, 32(a1)
-</span></span><span class="line"><span class="cl">        ld s3, 40(a1)
-</span></span><span class="line"><span class="cl">        ld s4, 48(a1)
-</span></span><span class="line"><span class="cl">        ld s5, 56(a1)
-</span></span><span class="line"><span class="cl">        ld s6, 64(a1)
-</span></span><span class="line"><span class="cl">        ld s7, 72(a1)
-</span></span><span class="line"><span class="cl">        ld s8, 80(a1)
-</span></span><span class="line"><span class="cl">        ld s9, 88(a1)
-</span></span><span class="line"><span class="cl">        ld s10, 96(a1)
-</span></span><span class="line"><span class="cl">        ld s11, 104(a1)
+</span></span><span class="line"><span class="cl">        <span class="nf">ld</span> <span class="no">ra</span><span class="p">,</span> <span class="mi">0</span><span class="p">(</span><span class="no">a1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">ld</span> <span class="no">sp</span><span class="p">,</span> <span class="mi">8</span><span class="p">(</span><span class="no">a1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">ld</span> <span class="no">s0</span><span class="p">,</span> <span class="mi">16</span><span class="p">(</span><span class="no">a1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">ld</span> <span class="no">s1</span><span class="p">,</span> <span class="mi">24</span><span class="p">(</span><span class="no">a1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">ld</span> <span class="no">s2</span><span class="p">,</span> <span class="mi">32</span><span class="p">(</span><span class="no">a1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">ld</span> <span class="no">s3</span><span class="p">,</span> <span class="mi">40</span><span class="p">(</span><span class="no">a1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">ld</span> <span class="no">s4</span><span class="p">,</span> <span class="mi">48</span><span class="p">(</span><span class="no">a1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">ld</span> <span class="no">s5</span><span class="p">,</span> <span class="mi">56</span><span class="p">(</span><span class="no">a1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">ld</span> <span class="no">s6</span><span class="p">,</span> <span class="mi">64</span><span class="p">(</span><span class="no">a1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">ld</span> <span class="no">s7</span><span class="p">,</span> <span class="mi">72</span><span class="p">(</span><span class="no">a1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">ld</span> <span class="no">s8</span><span class="p">,</span> <span class="mi">80</span><span class="p">(</span><span class="no">a1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">ld</span> <span class="no">s9</span><span class="p">,</span> <span class="mi">88</span><span class="p">(</span><span class="no">a1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">ld</span> <span class="no">s10</span><span class="p">,</span> <span class="mi">96</span><span class="p">(</span><span class="no">a1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">ld</span> <span class="no">s11</span><span class="p">,</span> <span class="mi">104</span><span class="p">(</span><span class="no">a1</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        ret
+</span></span><span class="line"><span class="cl">        <span class="nf">ret</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>首先，ra寄存器被保存在了a0寄存器指向的地址。</p>
@@ -1515,8 +1542,8 @@
 <p>所以我们也可以在C函数中内嵌switch中的指令，但是这跟我们直接定义一个汇编函数是一样的。</p>
 <p>或者说swtch函数中的操作是在C语言的层级之下，所以并不能使用C语言。</p>
 </blockquote>
-<h5 id="xv6线程切换--scheduler">XV6线程切换&ndash;scheduler
-</h5><p>来看一下scheduler的完整代码，</p>
+<h2 id="xv6线程切换--scheduler">XV6线程切换&ndash;scheduler
+</h2><p>来看一下scheduler的完整代码，</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -1641,14 +1668,18 @@
 <p>现在我们在scheduler函数的循环中，代码会检查所有的进程并找到一个来运行。</p>
 <p>现在我们知道还有另一个进程，因为我们之前fork了另一个spin进程。</p>
 <p>这里我跳过进程检查，直接在找到RUNABLE进程的位置设置一个断点。</p>
-<p><img src="D:%5cUsers%5cnote%5cXV6%5cp11.png"
-	
-	
-	
+<p><img src="/p/mit6s081lec11/p11.png"
+	width="718"
+	height="412"
+	srcset="/p/mit6s081lec11/p11_hu8694052433713630363.png 480w, /p/mit6s081lec11/p11_hu3312515259515705091.png 1024w"
 	loading="lazy"
 	
 		alt="p11"
 	
+	
+		class="gallery-image" 
+		data-flex-grow="174"
+		data-flex-basis="418px"
 	
 ></p>
 <p>在代码的468行，获取了进程的锁，所以现在我们可以进行切换到进程的各种步骤。</p>
@@ -1680,8 +1711,8 @@
 <p>所以线程切换的过程中，处理器中的寄存器是唯一的不稳定状态，且需要保存并恢复。</p>
 <p>而所有其他在内存中的数据会保存在内存中不被改变，所以不用特意保存并恢复。</p>
 <p>我们只是保存并恢复了处理器中的寄存器，因为我们想在新的线程中也使用相同的一组寄存器。</p>
-<h5 id="xv6线程第一次调用switch函数">XV6线程第一次调用switch函数
-</h5><p>学生提问Linux内一个进程多个线程的实现方式，因为在XV6中，一个进程只有一个用户线程</p>
+<h2 id="xv6线程第一次调用switch函数">XV6线程第一次调用switch函数
+</h2><p>学生提问Linux内一个进程多个线程的实现方式，因为在XV6中，一个进程只有一个用户线程</p>
 <blockquote>
 <p>学生提问：操作系统都带了线程的实现，如果想要在多个CPU上运行一个进程内的多个线程，那需要通过操作系统来处理而不是用户空间代码，是吧？那这里的线程切换是怎么工作的？是每个线程都与进程一样了吗？操作系统还会遍历所有存在的线程吗？比如说我们有8个核，每个CPU核都会在多个进程的更多个线程之间切换。同时我们也不想只在一个CPU核上切换一个进程的多个线程，是吧？</p>
 <p>Robert教授：Linux是支持一个进程包含多个线程，Linux的实现比较复杂，或许最简单的解释方式是：几乎可以认为Linux中的每个线程都是一个完整的进程。</p>
@@ -1704,14 +1735,18 @@
 <p>学生提问：当调用swtch函数的时候，实际上是从一个线程对于switch的调用切换到了另一个线程对于switch的调用。所以线程第一次调用swtch函数时，需要伪造一个“另一个线程”对于switch的调用，是吧？因为也不能通过swtch函数随机跳到其他代码去。</p>
 <p>Robert教授：是的。我们来看一下第一次调用switch时，“另一个”调用swtch函数的线程的context对象。</p>
 <p>proc.c文件中的allocproc函数会被启动时的第一个进程和fork调用，allocproc会设置好新进程的context，如下所示：</p>
-<p><img src="D:%5cUsers%5cnote%5cXV6%5cp12.png"
-	
-	
-	
+<p><img src="/p/mit6s081lec11/p12.png"
+	width="536"
+	height="170"
+	srcset="/p/mit6s081lec11/p12_hu10011283022753249809.png 480w, /p/mit6s081lec11/p12_hu17797523608250037853.png 1024w"
 	loading="lazy"
 	
 		alt="p12"
 	
+	
+		class="gallery-image" 
+		data-flex-grow="315"
+		data-flex-basis="756px"
 	
 ></p>
 <p>实际上大部分寄存器的内容都无所谓。</p>
@@ -1850,7 +1885,7 @@
 
 
         <span>
-            最后更新于 Nov 12, 2024 12:44 &#43;0800
+            最后更新于 Nov 12, 2024 13:44 &#43;0800
         </span>
     </section></footer>
 

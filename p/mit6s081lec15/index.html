@@ -10,7 +10,7 @@
 <meta property='og:description' content="Crash recovery">
 <meta property='og:url' content='https://echudet.github.io/p/mit6s081lec15/'>
 <meta property='og:site_name' content='echudet'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-09-29T22:02:50&#43;08:00'/><meta property='article:modified_time' content='2024-11-12T12:44:05&#43;08:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-09-29T22:02:50&#43;08:00'/><meta property='article:modified_time' content='2024-11-12T13:44:01&#43;08:00'/>
 <meta name="twitter:title" content="MIT6S081Lec15">
 <meta name="twitter:description" content="Crash recovery">
     <link rel="shortcut icon" href="/timer.ico" />
@@ -267,14 +267,24 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li>
+    <li><a href="#课前预习">课前预习</a></li>
+    <li><a href="#日志层">日志层</a></li>
+    <li><a href="#日志设计">日志设计</a></li>
+    <li><a href="#代码日志">代码：日志</a></li>
+    <li><a href="#代码块分配器">代码：块分配器</a></li>
+    <li><a href="#正课">正课</a></li>
+    <li><a href="#file-system-crash概述">File system crash概述</a></li>
+    <li><a href="#file-system-crash示例">File system crash示例</a></li>
+    <li><a href="#file-system-logging">File system logging</a></li>
+    <li><a href="#log_write函数">log_write函数</a></li>
+    <li><a href="#end_op函数">end_op函数</a></li>
+    <li><a href="#file-system-recovering">File system recovering</a></li>
+    <li><a href="#log写磁盘流程">Log写磁盘流程</a></li>
+    <li><a href="#file-system-challenges">File system challenges</a>
       <ol>
-        <li>
-          <ol>
-            <li><a href="#课前预习">课前预习</a></li>
-            <li><a href="#正课">正课</a></li>
-          </ol>
-        </li>
+        <li><a href="#第一个是cache-eviction">第一个是cache eviction。</a></li>
+        <li><a href="#第二个挑战是文件系统操作必须适配log的大小">第二个挑战是，文件系统操作必须适配log的大小。</a></li>
+        <li><a href="#最后一个挑战是并发文件系统调用">最后一个挑战是并发文件系统调用。</a></li>
       </ol>
     </li>
   </ol>
@@ -362,7 +372,7 @@
 
 
                 <time>
-                    Nov 12, 2024 12:44 &#43;0800
+                    Nov 12, 2024 13:44 &#43;0800
                 </time>
             </div></footer>
     
@@ -376,9 +386,9 @@
     
     
     <h1 id="lec15-crash-recovery">Lec15 Crash recovery
-</h1><h4 id="课前预习">课前预习
-</h4><h5 id="日志层">日志层
-</h5><p>文件系统设计中最有趣的问题之一是崩溃恢复。</p>
+</h1><h2 id="课前预习">课前预习
+</h2><h2 id="日志层">日志层
+</h2><p>文件系统设计中最有趣的问题之一是崩溃恢复。</p>
 <p>出现此问题的原因是，许多文件系统操作都涉及到对磁盘的多次写入，并且在完成写操作的部分子集后崩溃可能会使磁盘上的文件系统处于不一致的状态。</p>
 <p>例如，假设在文件截断（将文件长度设置为零并释放其内容块）期间发生崩溃。根据磁盘写入的顺序，崩溃可能会留下对标记为空闲的内容块的引用的inode，也可能留下已分配但未引用的内容块。</p>
 <p>后者相对来说是良性的，但引用已释放块的inode在重新启动后可能会导致严重问题。</p>
@@ -399,8 +409,8 @@
 <li>如果崩溃发生在操作提交之后，则恢复将重播操作的所有写入操作，如果操作已开始将它们写入磁盘数据结构，则可能会重复这些操作。</li>
 </ul>
 <p>在任何一种情况下，日志都会使操作在崩溃时成为原子操作：恢复后，要么操作的所有写入都显示在磁盘上，要么都不显示。</p>
-<h5 id="日志设计">日志设计
-</h5><p>日志驻留在超级块中指定的已知固定位置。</p>
+<h2 id="日志设计">日志设计
+</h2><p>日志驻留在超级块中指定的已知固定位置。</p>
 <blockquote>
 <p><strong>超级块</strong> 是 xv6 文件系统中的一个重要结构，它存储了文件系统的基本信息和元数据。超级块在文件系统中扮演着类似于“目录”的角色，记录了关于文件系统布局的全局信息。超级块是存储在文件系统的特定块中，并且它会在文件系统被挂载时读入内存</p>
 <p>超级块的主要作用是提供以下关键信息：</p>
@@ -439,8 +449,8 @@
 <p>一个大文件的<code>write</code>可以写入多个数据块和多个位图块以及一个inode块；<code>unlink</code>大文件可能会写入许多位图块和inode。</p>
 <p>Xv6的<code>write</code>系统调用将大的写入分解为适合日志的多个较小的写入，<code>unlink</code>不会导致此问题，因为实际上Xv6文件系统只使用一个位图块。</p>
 <p>日志空间有限的另一个后果是，除非确定系统调用的写入将可容纳于日志中剩余的空间，否则日志系统无法允许启动系统调用。</p>
-<h5 id="代码日志">代码：日志
-</h5><p>在系统调用中一个典型的日志使用就像这样：</p>
+<h2 id="代码日志">代码：日志
+</h2><p>在系统调用中一个典型的日志使用就像这样：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -500,8 +510,8 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>这段代码被包装在一个循环中，该循环一次将大的写操作分解为几个扇区的单个事务，以避免日志溢出。作为此事务的一部分，对<code>writei</code>的调用写入许多块：文件的inode、一个或多个位图块以及一些数据块。</p>
-<h5 id="代码块分配器">代码：块分配器
-</h5><p>文件和目录内容存储在磁盘块中，磁盘块必须从空闲池中分配。xv6的块分配器在磁盘上维护一个空闲位图，每一位代表一个块。0表示对应的块是空闲的；1表示它正在使用中。程序<code>mkfs</code>设置对应于引导扇区、超级块、日志块、inode块和位图块的比特位。</p>
+<h2 id="代码块分配器">代码：块分配器
+</h2><p>文件和目录内容存储在磁盘块中，磁盘块必须从空闲池中分配。xv6的块分配器在磁盘上维护一个空闲位图，每一位代表一个块。0表示对应的块是空闲的；1表示它正在使用中。程序<code>mkfs</code>设置对应于引导扇区、超级块、日志块、inode块和位图块的比特位。</p>
 <p>块分配器提供两个功能：<code>balloc</code>分配一个新的磁盘块，<code>bfree</code>释放一个块。</p>
 <p><code>Balloc</code>中位于<em><strong>kernel/fs.c</strong></em>:71的循环从块0到<code>sb.size</code>（文件系统中的块数）遍历每个块。它查找位图中位为零的空闲块。</p>
 <p>如果<code>balloc</code>找到这样一个块，它将更新位图并返回该块。为了提高效率，循环被分成两部分。</p>
@@ -509,9 +519,9 @@
 <p>由于任何一个位图块在buffer cache中一次只允许一个进程使用，因此，如果两个进程同时尝试分配一个块，可能会发生争用。</p>
 <p><code>Bfree</code>（<em><strong>kernel/fs.c</strong></em>:90）找到正确的位图块并清除正确的位。同样，<code>bread</code>和<code>brelse</code>隐含的独占使用避免了显式锁定的需要。</p>
 <p>与本章其余部分描述的大部分代码一样，必须在事务内部调用<code>balloc</code>和<code>bfree</code>。</p>
-<h4 id="正课">正课
-</h4><h5 id="file-system-crash概述">File system crash概述
-</h5><p>今天的课程是有关文件系统中的Crash safety。</p>
+<h2 id="正课">正课
+</h2><h2 id="file-system-crash概述">File system crash概述
+</h2><p>今天的课程是有关文件系统中的Crash safety。</p>
 <p>这里的Crash safety并不是一个通用的解决方案，而是只关注一个特定的问题的解决方案，也就是crash或者电力故障可能会导致在磁盘上的文件系统处于不一致或者不正确状态的问题。</p>
 <p>当我说不正确的状态时，是指例如一个data block属于两个文件，或者一个inode被分配给了两个不同的文件。</p>
 <p>这个问题<strong>可能出现的场景</strong>可能是这样，当你在运行make指令时，make与文件系统会有频繁的交互，并读写文件，但是在make执行的过程中断电了，可能是你的笔记本电脑没电了，也可能就是停电了，之后电力恢复之后，你重启电脑并运行ls指令，你会期望你的文件系统仍然在一个好的可用的状态。</p>
@@ -551,8 +561,8 @@
 <li>操作系统可能又立刻crash了，因为文件系统中的一些数据结构现在可能处于一种文件系统无法处理的状态。</li>
 <li>或者，更可能的是操作系统没有crash，但是数据丢失了或者读写了错误的数据。</li>
 </ul>
-<h5 id="file-system-crash示例">File system crash示例
-</h5><p>为了更清晰的理解这里的风险，让我们看一些基于XV6的例子，并看一下哪里可能出错。</p>
+<h2 id="file-system-crash示例">File system crash示例
+</h2><p>为了更清晰的理解这里的风险，让我们看一些基于XV6的例子，并看一下哪里可能出错。</p>
 <p>XV6有一个非常简单的文件系统和磁盘数据的排布方式。</p>
 <p>在super block之后就是log block，我们今天主要介绍的就是log block。</p>
 <p>log block之后是inode block，每个block可能包含了多个inode。</p>
@@ -566,14 +576,18 @@
 <li>之后是更新root inode，因为文件x创建在根目录，所以需要更新根目录的inode的size字段，以包含这里新创建的文件x</li>
 <li>最后再次更新了文件x的inode</li>
 </ul>
-<p><img src="D:%5cUsers%5cnote%5cXV6%5cp26.png"
-	
-	
-	
+<p><img src="/p/mit6s081lec15/p26.png"
+	width="1017"
+	height="212"
+	srcset="/p/mit6s081lec15/p26_hu13609032275745756791.png 480w, /p/mit6s081lec15/p26_hu6504221620410115434.png 1024w"
 	loading="lazy"
 	
 		alt="p26"
 	
+	
+		class="gallery-image" 
+		data-flex-grow="479"
+		data-flex-basis="1151px"
 	
 ></p>
 <p>在出现电力故障之后，因为内存数据保存在RAM中，所有的内存数据都丢失了。</p>
@@ -591,14 +605,18 @@
 <p>如果这两个文件分别属于用户1和用户2，那么用户1就可以读到用户2的文件了。所以上面的解决方案也不好。</p>
 <p>所以调整写磁盘的顺序并不能彻底解决我们的问题，我们只是从一个问题换到了一个新的问题。</p>
 <p>让我们再看一个例子，这个例子中会向文件x写入“hi”（注，也就是14.5介绍的第二个部分）</p>
-<p><img src="D:%5cUsers%5cnote%5cXV6%5cp27.png"
-	
-	
-	
+<p><img src="/p/mit6s081lec15/p27.png"
+	width="914"
+	height="299"
+	srcset="/p/mit6s081lec15/p27_hu14353094372252244078.png 480w, /p/mit6s081lec15/p27_hu12476567672705489126.png 1024w"
 	loading="lazy"
 	
 		alt="p27"
 	
+	
+		class="gallery-image" 
+		data-flex-grow="305"
+		data-flex-basis="733px"
 	
 ></p>
 <p>一旦成功的创建了文件x，之后会调用write系统调用，我们在上节课看到了write系统调用也执行了多个写磁盘的操作。</p>
@@ -609,14 +627,18 @@
 <li>最后更新文件夹x的inode来更新size字段。</li>
 </ul>
 <p>这里我们也可以问自己一个问题，我们在下面的位置crash了会怎样？</p>
-<p><img src="D:%5cUsers%5cnote%5cXV6%5cp28.png"
-	
-	
-	
+<p><img src="/p/mit6s081lec15/p28.png"
+	width="1028"
+	height="155"
+	srcset="/p/mit6s081lec15/p28_hu11492647275442548050.png 480w, /p/mit6s081lec15/p28_hu26238801969509571.png 1024w"
 	loading="lazy"
 	
 		alt="p28"
 	
+	
+		class="gallery-image" 
+		data-flex-grow="663"
+		data-flex-basis="1591px"
 	
 ></p>
 <p>这里我们从bitmap block中分配了一个data block，但是又还没有更新到文件x的inode中。</p>
@@ -625,8 +647,8 @@
 <p>所以，为了避免丢失data block，我们将写block的顺序改成这样。现在我们考虑一下，如果故障发生在这两个操作中间会怎样？(略)</p>
 <p>这时inode会认为data block 595属于文件x，但是在磁盘上它还被标记为未被分配的。之后如果另一个文件被创建了，block 595可能会被另一个文件所使用。所以现在两个文件都会在自己的inode中记录block 595。如果两个文件属于两个用户，那么两个用户就可以读写彼此的数据了。很明显，我们不想这样，文件系统应该确保每一个data block要么属于且只属于一个文件，要么是空闲的。所以这里的修改会导致磁盘block在多个文件之间共享的安全问题，这明显是错误的。</p>
 <p>所以这里的问题并不在于操作的顺序，而在于我们这里有多个写磁盘的操作，这些操作必须作为一个原子操作出现在磁盘上。</p>
-<h5 id="file-system-logging">File system logging
-</h5><p>我们这节课要讨论的针对文件系统crash之后的问题的解决方案，其实就是logging。</p>
+<h2 id="file-system-logging">File system logging
+</h2><p>我们这节课要讨论的针对文件系统crash之后的问题的解决方案，其实就是logging。</p>
 <p>这是来自于数据库的一种解决方案。它有一些好的属性：</p>
 <p>解决方案。它有一些好的属性：</p>
 <ul>
@@ -690,8 +712,8 @@
 <p>当文件系统在运行时，在内存中也有header block的一份拷贝，拷贝中也包含了n和block编号的数组。</p>
 <p>这里的block编号数组就是log数据对应的实际block编号，并且相应的block也会缓存在block cache中，这个在Lec14有介绍过。</p>
 <p>与前一节课对应，log中第一个block编号是45，那么在block cache的某个位置，也会有block 45的cache。</p>
-<h5 id="log_write函数">log_write函数
-</h5><p>接下来让我们看一些代码来帮助我们理解这里是怎么工作的。</p>
+<h2 id="log_write函数">log_write函数
+</h2><p>接下来让我们看一些代码来帮助我们理解这里是怎么工作的。</p>
 <p>前面我提过事务（transaction），也就是我们不应该在所有的写操作完成之前写入commit record。</p>
 <p>这意味着文件系统操作必须表明事务的开始和结束。</p>
 <p>在XV6中，以创建文件的sys_open为例（在sysfile.c文件中）每个文件系统操作，都有begin_op和end_op分别表示事物的开始和结束。</p>
@@ -985,8 +1007,8 @@
 <p>学生提问：这是不是意味着，bwrite不能直接使用？</p>
 <p>Frans教授：是的，可以这么认为，文件系统中的所有bwrite都需要被log_write替换。</p>
 </blockquote>
-<h5 id="end_op函数">end_op函数
-</h5><p>位于log.c中的end_op函数中会发生什么？</p>
+<h2 id="end_op函数">end_op函数
+</h2><p>位于log.c中的end_op函数中会发生什么？</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -1239,8 +1261,8 @@
 <p>Frans教授：这里的接口是不太好。你可能会想问反正都要写入新数据，为什么要先读出目标block来。这里的代码肯定还有很多优化空间，但是为了看起来简单我们并没有这么做。</p>
 </blockquote>
 <p>以上就是commit内容。</p>
-<h5 id="file-system-recovering">File system recovering
-</h5><p>接下来我们看一下发生在XV6的启动过程中的文件系统的恢复流程。</p>
+<h2 id="file-system-recovering">File system recovering
+</h2><p>接下来我们看一下发生在XV6的启动过程中的文件系统的恢复流程。</p>
 <p>当系统crash并重启了，在XV6启动过程中做的一件事情就是调用initlog函数。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1304,19 +1326,23 @@
 <p>学生提问：如果一个进程向磁盘写了一些数据，但是在commit之前进程出现了故障，假设故障之后进程退出了，这样会有问题吗？</p>
 <p>Frans教授：简单回答是没问题，因此磁盘不会被更新，所以效果就像文件系统操作没有发生过一样。并且进程并不能在故障后恢复，唯一能在故障之后还能保持的是保存在磁盘中的状态。（注，应该是没有理解问题。进程通过write系统调用成功写入的数据，就算在成功落盘之前进程异常退出了，内核还是会写入到磁盘中，前提是内核还在运行。）</p>
 </blockquote>
-<h5 id="log写磁盘流程">Log写磁盘流程
-</h5><p>我已经在bwrite函数中加了一个print语句。</p>
+<h2 id="log写磁盘流程">Log写磁盘流程
+</h2><p>我已经在bwrite函数中加了一个print语句。</p>
 <p>bwrite函数是block cache中实际写磁盘的函数，所以我们将会看到实际写磁盘的记录。</p>
 <p>在上节课（Lec 14）我将print语句放在了log_write中，log_write只能代表文件系统操作的记录，并不能代表实际写磁盘的记录。</p>
 <p>我们这里会像上节课一样执行echo &ldquo;hi&rdquo; &gt; x，并看一下实际的写磁盘过程。</p>
-<p><img src="D:%5cUsers%5cnote%5cXV6%5cp29.png"
-	
-	
-	
+<p><img src="/p/mit6s081lec15/p29.png"
+	width="248"
+	height="604"
+	srcset="/p/mit6s081lec15/p29_hu14027739820400206619.png 480w, /p/mit6s081lec15/p29_hu4905950303556274497.png 1024w"
 	loading="lazy"
 	
 		alt="p29"
 	
+	
+		class="gallery-image" 
+		data-flex-grow="41"
+		data-flex-basis="98px"
 	
 ></p>
 <p>很明显这里的记录要比只在log_write中记录要长的多。</p>
@@ -1347,10 +1373,10 @@
 <p>这里立刻可以想到的一个问题是，通过观察这些记录，这是一个很有效的实现吗？很明显不是的，因为数据被写了两次。</p>
 <p>如果我写一个大文件，我需要在磁盘中将这个大文件写两次。所以这必然不是一个高性能的实现，为了实现Crash safety我们将原本的性能降低了一倍。</p>
 <p>当你们去读ext3论文时，你们应该时刻思考如何避免这里的性能降低一倍的问题。</p>
-<h5 id="file-system-challenges">File system challenges
-</h5><p>前面说到XV6的文件系统有一定的复杂性，接下来我将介绍一下三个复杂的地方或者也可以认为是三个挑战。</p>
-<h6 id="第一个是cache-eviction">第一个是cache eviction。
-</h6><p>假设transaction还在进行中，我们刚刚更新了block 45，正要更新下一个block，而整个buffer cache都满了并且决定撤回block 45。</p>
+<h2 id="file-system-challenges">File system challenges
+</h2><p>前面说到XV6的文件系统有一定的复杂性，接下来我将介绍一下三个复杂的地方或者也可以认为是三个挑战。</p>
+<h3 id="第一个是cache-eviction">第一个是cache eviction。
+</h3><p>假设transaction还在进行中，我们刚刚更新了block 45，正要更新下一个block，而整个buffer cache都满了并且决定撤回block 45。</p>
 <p>在buffer cache中撤回block 45意味着我们需要将其写入到磁盘的block 45位置，这里会不会有问题？如果我们这么做了的话，会破坏什么规则吗？</p>
 <p>是的，如果将block 45写入到磁盘之后发生了crash，就会破坏transaction的原子性。</p>
 <p>这里也破坏了前面说过的write ahead rule，write ahead rule的含义是，你需要先将所有的block写入到log中，之后才能实际的更新文件系统block。</p>
@@ -1360,8 +1386,8 @@
 <p>在之前（注，详见14.6）我们看过，如果引用计数不为0，那么buffer cache是不会撤回block cache的。</p>
 <p>相应的在将来的某个时间，所有的数据都写入到了log中，我们可以在cache中unpin block（注，在15.5中的install_trans函数中会有unpin，因为这时block已经写入到了log中）。</p>
 <p>所以这是第一个复杂的地方，我们需要pin/unpin buffer cache中的block。</p>
-<h6 id="第二个挑战是文件系统操作必须适配log的大小">第二个挑战是，文件系统操作必须适配log的大小。
-</h6><p>在XV6中，总共有30个log block（注，详见14.3）。</p>
+<h3 id="第二个挑战是文件系统操作必须适配log的大小">第二个挑战是，文件系统操作必须适配log的大小。
+</h3><p>在XV6中，总共有30个log block（注，详见14.3）。</p>
 <p>当然我们可以提升log的尺寸，在真实的文件系统中会有大得多的log空间。</p>
 <p>但是无所谓啦，不管log多大，文件系统操作必须能放在log空间中。</p>
 <p>如果一个文件系统操作尝试写入超过30个block，那么意味着部分内容需要直接写到文件系统区域，而这是不被允许的，因为这违背了write ahead rule。</p>
@@ -1481,8 +1507,8 @@
 <p>这里整个写操作不是原子的，但是这还好，因为write系统调用的语义并不要求所有1000个block都是原子的写入，它只要求我们不要损坏文件系统。</p>
 <p>所以XV6会将一个大的写操作分割成多个小的写操作，每一个小的写操作通过独立的transaction写入。这样文件系统本身不会陷入不正确的状态中。</p>
 <p>这里还需要注意，因为block在落盘之前需要在cache中pin住，所以buffer cache的尺寸也要大于log的尺寸。</p>
-<h6 id="最后一个挑战是并发文件系统调用">最后一个挑战是并发文件系统调用。
-</h6><p>让我先来解释一下这里会有什么问题，再看对应的解决方案。</p>
+<h3 id="最后一个挑战是并发文件系统调用">最后一个挑战是并发文件系统调用。
+</h3><p>让我先来解释一下这里会有什么问题，再看对应的解决方案。</p>
 <p>假设我们有一段log，和两个并发的执行的transaction，其中transaction t0在log的前半段记录，transaction t1在log的后半段记录。可能我们用完了log空间，但是任何一个transaction都还没完成。</p>
 <p>现在我们能提交任何一个transaction吗？我们不能，因为这样的话我们就提交了一个部分完成的transaction，这违背了write ahead rule，log本身也没有起到应该的作用。</p>
 <p>所以必须要保证多个并发transaction加在一起也适配log的大小。</p>
@@ -1642,7 +1668,7 @@
 
 
         <span>
-            最后更新于 Nov 12, 2024 12:44 &#43;0800
+            最后更新于 Nov 12, 2024 13:44 &#43;0800
         </span>
     </section></footer>
 
