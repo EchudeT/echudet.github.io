@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="File Systems">
-<title>MIT6S081Lec14</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="文件系统是数据存储和组织的核心组件。文件系统的原理在于通过层次结构将数据管理为文件和目录，提供命名、存储、检索、访问和保护数据的机制。它将逻辑文件名映射到物理存储位置，支持多种存储设备，并处理读写请求、权限管理及空间分配。文件系统为用户和应用程序提供了一种直观的方式来处理大量数据，确保数据能够安全、高效和可靠地存取，是操作系统实现持久化存储和数据共享的重要基础。">
+<title>MIT6S081：14File Systems</title>
 
-<link rel='canonical' href='https://echudet.github.io/p/mit6s081lec14/'>
+<link rel='canonical' href='https://echudet.github.io/p/mit6s08114file-systems/'>
 
-<link rel="stylesheet" href="/scss/style.min.a7f637593c1d99350f36f270c9abc65cf39ec34b45847eb2fa40efef51b94c92.css"><meta property='og:title' content="MIT6S081Lec14">
-<meta property='og:description' content="File Systems">
-<meta property='og:url' content='https://echudet.github.io/p/mit6s081lec14/'>
+<link rel="stylesheet" href="/scss/style.min.a7f637593c1d99350f36f270c9abc65cf39ec34b45847eb2fa40efef51b94c92.css"><meta property='og:title' content="MIT6S081：14File Systems">
+<meta property='og:description' content="文件系统是数据存储和组织的核心组件。文件系统的原理在于通过层次结构将数据管理为文件和目录，提供命名、存储、检索、访问和保护数据的机制。它将逻辑文件名映射到物理存储位置，支持多种存储设备，并处理读写请求、权限管理及空间分配。文件系统为用户和应用程序提供了一种直观的方式来处理大量数据，确保数据能够安全、高效和可靠地存取，是操作系统实现持久化存储和数据共享的重要基础。">
+<meta property='og:url' content='https://echudet.github.io/p/mit6s08114file-systems/'>
 <meta property='og:site_name' content='echudet'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-09-28T22:02:50&#43;08:00'/><meta property='article:modified_time' content='2024-11-12T23:05:03&#43;08:00'/><meta property='og:image' content='https://echudet.github.io/p/mit6s081lec14/bg.jpg' />
-<meta name="twitter:title" content="MIT6S081Lec14">
-<meta name="twitter:description" content="File Systems"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='https://echudet.github.io/p/mit6s081lec14/bg.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-09-28T22:02:50&#43;08:00'/><meta property='article:modified_time' content='2024-11-12T23:44:05&#43;08:00'/><meta property='og:image' content='https://echudet.github.io/p/mit6s08114file-systems/bg.jpg' />
+<meta name="twitter:title" content="MIT6S081：14File Systems">
+<meta name="twitter:description" content="文件系统是数据存储和组织的核心组件。文件系统的原理在于通过层次结构将数据管理为文件和目录，提供命名、存储、检索、访问和保护数据的机制。它将逻辑文件名映射到物理存储位置，支持多种存储设备，并处理读写请求、权限管理及空间分配。文件系统为用户和应用程序提供了一种直观的方式来处理大量数据，确保数据能够安全、高效和可靠地存取，是操作系统实现持久化存储和数据共享的重要基础。"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://echudet.github.io/p/mit6s08114file-systems/bg.jpg' />
     <link rel="shortcut icon" href="/timer.ico" />
 
     </head>
@@ -302,13 +302,13 @@
     <article class="has-image main-article">
     <header class="article-header">
         <div class="article-image">
-            <a href="/p/mit6s081lec14/">
-                <img src="/p/mit6s081lec14/bg_hu8799147378787759855.jpg"
-                        srcset="/p/mit6s081lec14/bg_hu8799147378787759855.jpg 800w, /p/mit6s081lec14/bg_hu3252640275973927771.jpg 1600w"
+            <a href="/p/mit6s08114file-systems/">
+                <img src="/p/mit6s08114file-systems/bg_hu8799147378787759855.jpg"
+                        srcset="/p/mit6s08114file-systems/bg_hu8799147378787759855.jpg 800w, /p/mit6s08114file-systems/bg_hu3252640275973927771.jpg 1600w"
                         width="800" 
                         height="800" 
                         loading="lazy"
-                        alt="Featured image of post MIT6S081Lec14" />
+                        alt="Featured image of post MIT6S081：14File Systems" />
                 
             </a>
         </div>
@@ -331,12 +331,12 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/mit6s081lec14/">MIT6S081Lec14</a>
+            <a href="/p/mit6s08114file-systems/">MIT6S081：14File Systems</a>
         </h2>
     
         
         <h3 class="article-subtitle">
-            File Systems
+            文件系统是数据存储和组织的核心组件。文件系统的原理在于通过层次结构将数据管理为文件和目录，提供命名、存储、检索、访问和保护数据的机制。它将逻辑文件名映射到物理存储位置，支持多种存储设备，并处理读写请求、权限管理及空间分配。文件系统为用户和应用程序提供了一种直观的方式来处理大量数据，确保数据能够安全、高效和可靠地存取，是操作系统实现持久化存储和数据共享的重要基础。
         </h3>
         
     </div>
@@ -385,7 +385,7 @@
 
 
                 <time>
-                    Nov 12, 2024 23:05 &#43;0800
+                    Nov 12, 2024 23:44 &#43;0800
                 </time>
             </div></footer>
     
@@ -439,10 +439,10 @@
 <p><strong>文件描述符层</strong>使用文件系统接口抽象了许多Unix资源（例如，管道、设备、文件等），简化了应用程序员的工作。</p>
 <p>文件系统必须有将索引节点和内容块存储在磁盘上哪些位置的方案。</p>
 <p>为此，xv6将磁盘划分为几个部分，如图8.2所示。</p>
-<p><img src="/p/mit6s081lec14/p19.png"
+<p><img src="/p/mit6s08114file-systems/p19.png"
 	width="880"
 	height="216"
-	srcset="/p/mit6s081lec14/p19_hu14595411311521921048.png 480w, /p/mit6s081lec14/p19_hu11989751336132836270.png 1024w"
+	srcset="/p/mit6s08114file-systems/p19_hu14595411311521921048.png 480w, /p/mit6s08114file-systems/p19_hu11989751336132836270.png 1024w"
 	loading="lazy"
 	
 		alt="p19"
@@ -976,10 +976,10 @@
 </blockquote>
 <h2 id="代码inode包含内容">代码：Inode包含内容
 </h2><p>磁盘上的inode结构体<code>struct dinode</code>包含一个<code>size</code>和一个块号数组（见图8.3）。</p>
-<p><img src="/p/mit6s081lec14/p20.png"
+<p><img src="/p/mit6s08114file-systems/p20.png"
 	width="804"
 	height="702"
-	srcset="/p/mit6s081lec14/p20_hu14986194811601962196.png 480w, /p/mit6s081lec14/p20_hu1987737314334122942.png 1024w"
+	srcset="/p/mit6s08114file-systems/p20_hu14986194811601962196.png 480w, /p/mit6s08114file-systems/p20_hu1987737314334122942.png 1024w"
 	loading="lazy"
 	
 		alt="p20"
@@ -1487,10 +1487,10 @@
 </ul>
 <p>不同的文件系统组织方式和每一层可能都略有不同，有的时候分层也没有那么严格，即使在XV6中分层也不是很严格，但是从概念上来说这里的结构对于理解文件系统还是有帮助的。</p>
 <p>实际上所有的文件系统都有组件对应这里不同的分层，例如buffer cache，logging，inode和路径名。</p>
-<p><img src="/p/mit6s081lec14/p21.png"
+<p><img src="/p/mit6s08114file-systems/p21.png"
 	width="1037"
 	height="605"
-	srcset="/p/mit6s081lec14/p21_hu8484048998491121083.png 480w, /p/mit6s081lec14/p21_hu12311631626987082659.png 1024w"
+	srcset="/p/mit6s08114file-systems/p21_hu8484048998491121083.png 480w, /p/mit6s08114file-systems/p21_hu12311631626987082659.png 1024w"
 	loading="lazy"
 	
 		alt="p21"
@@ -1518,10 +1518,10 @@
 <p>这里的接口还是挺简单的，包括了read/write，然后以block编号作为参数。</p>
 <p>虽然我们这里描述的过于简单了，但是实际的接口大概就是这样。</p>
 <p>在内部，SSD和HDD工作方式完全不一样，但是对于硬件的抽象屏蔽了这些差异。</p>
-<p><img src="/p/mit6s081lec14/p22.png"
+<p><img src="/p/mit6s08114file-systems/p22.png"
 	width="1030"
 	height="617"
-	srcset="/p/mit6s081lec14/p22_hu3549751186551560064.png 480w, /p/mit6s081lec14/p22_hu13967414081836493866.png 1024w"
+	srcset="/p/mit6s08114file-systems/p22_hu3549751186551560064.png 480w, /p/mit6s08114file-systems/p22_hu13967414081836493866.png 1024w"
 	loading="lazy"
 	
 		alt="p22"
@@ -1654,10 +1654,10 @@
 <li>第三阶段将“\n”换行符写入到文件</li>
 </ol>
 <p>如果你去看echo的代码实现，基本就是这3个阶段。</p>
-<p><img src="/p/mit6s081lec14/p23.png"
+<p><img src="/p/mit6s08114file-systems/p23.png"
 	width="412"
 	height="324"
-	srcset="/p/mit6s081lec14/p23_hu6585980430547922093.png 480w, /p/mit6s081lec14/p23_hu2845979455359144678.png 1024w"
+	srcset="/p/mit6s08114file-systems/p23_hu6585980430547922093.png 480w, /p/mit6s08114file-systems/p23_hu2845979455359144678.png 1024w"
 	loading="lazy"
 	
 		alt="p23"
@@ -1670,10 +1670,10 @@
 ></p>
 <p>上面就是echo的代码，它先检查参数，并将参数写入到文件描述符1，在最后写入一个换行符。</p>
 <p>让我们一个阶段一个阶段的看echo的执行过程，并理解对于文件系统发生了什么。</p>
-<p><img src="/p/mit6s081lec14/p25.png"
+<p><img src="/p/mit6s08114file-systems/p25.png"
 	width="242"
 	height="384"
-	srcset="/p/mit6s081lec14/p25_hu176464881452644642.png 480w, /p/mit6s081lec14/p25_hu5103932944255705960.png 1024w"
+	srcset="/p/mit6s08114file-systems/p25_hu176464881452644642.png 480w, /p/mit6s08114file-systems/p25_hu5103932944255705960.png 1024w"
 	loading="lazy"
 	
 		alt="p25"
@@ -1685,10 +1685,10 @@
 	
 ></p>
 <p>相比看代码，这里直接看磁盘的分布图更方便：</p>
-<p><img src="/p/mit6s081lec14/p24.png"
+<p><img src="/p/mit6s08114file-systems/p24.png"
 	width="1024"
 	height="428"
-	srcset="/p/mit6s081lec14/p24_hu7176191052840782122.png 480w, /p/mit6s081lec14/p24_hu11147931507535931379.png 1024w"
+	srcset="/p/mit6s08114file-systems/p24_hu7176191052840782122.png 480w, /p/mit6s08114file-systems/p24_hu11147931507535931379.png 1024w"
 	loading="lazy"
 	
 		alt="p24"
@@ -2299,7 +2299,7 @@
 
 
         <span>
-            最后更新于 Nov 12, 2024 23:05 &#43;0800
+            最后更新于 Nov 12, 2024 23:44 &#43;0800
         </span>
     </section></footer>
 

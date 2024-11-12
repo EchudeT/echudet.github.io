@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Multiprocessors and locking">
-<title>MIT6S081Lec10</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="多处理器系统和锁机制是实现高效并行计算和数据一致性的关键因素。多处理器在于利用多个CPU同时执行任务，显著提升计算能力和系统吞吐量。随着多处理器系统的普及，资源竞争问题变得更加突出，这时锁机制的地位显得尤为重要。锁通过对共享资源的访问进行同步控制，防止多个处理器同时修改数据导致的不一致问题。常用的锁机制包括互斥锁、读写锁和自旋锁，确保在多处理环境下保持数据的完整性和正确性。这种结合实现了高效的资源利用率，保证了多处理系统对复杂任务的快速响应和可靠处理。">
+<title>MIT6S081：10Multiprocessors and locking</title>
 
-<link rel='canonical' href='https://echudet.github.io/p/mit6s081lec10/'>
+<link rel='canonical' href='https://echudet.github.io/p/mit6s08110multiprocessors-and-locking/'>
 
-<link rel="stylesheet" href="/scss/style.min.a7f637593c1d99350f36f270c9abc65cf39ec34b45847eb2fa40efef51b94c92.css"><meta property='og:title' content="MIT6S081Lec10">
-<meta property='og:description' content="Multiprocessors and locking">
-<meta property='og:url' content='https://echudet.github.io/p/mit6s081lec10/'>
+<link rel="stylesheet" href="/scss/style.min.a7f637593c1d99350f36f270c9abc65cf39ec34b45847eb2fa40efef51b94c92.css"><meta property='og:title' content="MIT6S081：10Multiprocessors and locking">
+<meta property='og:description' content="多处理器系统和锁机制是实现高效并行计算和数据一致性的关键因素。多处理器在于利用多个CPU同时执行任务，显著提升计算能力和系统吞吐量。随着多处理器系统的普及，资源竞争问题变得更加突出，这时锁机制的地位显得尤为重要。锁通过对共享资源的访问进行同步控制，防止多个处理器同时修改数据导致的不一致问题。常用的锁机制包括互斥锁、读写锁和自旋锁，确保在多处理环境下保持数据的完整性和正确性。这种结合实现了高效的资源利用率，保证了多处理系统对复杂任务的快速响应和可靠处理。">
+<meta property='og:url' content='https://echudet.github.io/p/mit6s08110multiprocessors-and-locking/'>
 <meta property='og:site_name' content='echudet'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-09-17T22:02:50&#43;08:00'/><meta property='article:modified_time' content='2024-11-12T23:05:03&#43;08:00'/><meta property='og:image' content='https://echudet.github.io/p/mit6s081lec10/bg.png' />
-<meta name="twitter:title" content="MIT6S081Lec10">
-<meta name="twitter:description" content="Multiprocessors and locking"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='https://echudet.github.io/p/mit6s081lec10/bg.png' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-09-17T22:02:50&#43;08:00'/><meta property='article:modified_time' content='2024-11-12T23:44:05&#43;08:00'/><meta property='og:image' content='https://echudet.github.io/p/mit6s08110multiprocessors-and-locking/bg.png' />
+<meta name="twitter:title" content="MIT6S081：10Multiprocessors and locking">
+<meta name="twitter:description" content="多处理器系统和锁机制是实现高效并行计算和数据一致性的关键因素。多处理器在于利用多个CPU同时执行任务，显著提升计算能力和系统吞吐量。随着多处理器系统的普及，资源竞争问题变得更加突出，这时锁机制的地位显得尤为重要。锁通过对共享资源的访问进行同步控制，防止多个处理器同时修改数据导致的不一致问题。常用的锁机制包括互斥锁、读写锁和自旋锁，确保在多处理环境下保持数据的完整性和正确性。这种结合实现了高效的资源利用率，保证了多处理系统对复杂任务的快速响应和可靠处理。"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://echudet.github.io/p/mit6s08110multiprocessors-and-locking/bg.png' />
     <link rel="shortcut icon" href="/timer.ico" />
 
     </head>
@@ -304,13 +304,13 @@
     <article class="has-image main-article">
     <header class="article-header">
         <div class="article-image">
-            <a href="/p/mit6s081lec10/">
-                <img src="/p/mit6s081lec10/bg_hu12601174270838160475.png"
-                        srcset="/p/mit6s081lec10/bg_hu12601174270838160475.png 800w, /p/mit6s081lec10/bg_hu16748475921218369486.png 1600w"
+            <a href="/p/mit6s08110multiprocessors-and-locking/">
+                <img src="/p/mit6s08110multiprocessors-and-locking/bg_hu12601174270838160475.png"
+                        srcset="/p/mit6s08110multiprocessors-and-locking/bg_hu12601174270838160475.png 800w, /p/mit6s08110multiprocessors-and-locking/bg_hu16748475921218369486.png 1600w"
                         width="800" 
                         height="1200" 
                         loading="lazy"
-                        alt="Featured image of post MIT6S081Lec10" />
+                        alt="Featured image of post MIT6S081：10Multiprocessors and locking" />
                 
             </a>
         </div>
@@ -333,12 +333,12 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/mit6s081lec10/">MIT6S081Lec10</a>
+            <a href="/p/mit6s08110multiprocessors-and-locking/">MIT6S081：10Multiprocessors and locking</a>
         </h2>
     
         
         <h3 class="article-subtitle">
-            Multiprocessors and locking
+            多处理器系统和锁机制是实现高效并行计算和数据一致性的关键因素。多处理器在于利用多个CPU同时执行任务，显著提升计算能力和系统吞吐量。随着多处理器系统的普及，资源竞争问题变得更加突出，这时锁机制的地位显得尤为重要。锁通过对共享资源的访问进行同步控制，防止多个处理器同时修改数据导致的不一致问题。常用的锁机制包括互斥锁、读写锁和自旋锁，确保在多处理环境下保持数据的完整性和正确性。这种结合实现了高效的资源利用率，保证了多处理系统对复杂任务的快速响应和可靠处理。
         </h3>
         
     </div>
@@ -387,7 +387,7 @@
 
 
                 <time>
-                    Nov 12, 2024 23:05 &#43;0800
+                    Nov 12, 2024 23:44 &#43;0800
                 </time>
             </div></footer>
     
@@ -1329,7 +1329,7 @@
 
 
         <span>
-            最后更新于 Nov 12, 2024 23:05 &#43;0800
+            最后更新于 Nov 12, 2024 23:44 &#43;0800
         </span>
     </section></footer>
 

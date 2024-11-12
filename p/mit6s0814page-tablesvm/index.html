@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Page Tables(vm)">
-<title>MIT6S081Lec4</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="在操作系统的虚拟内存管理中，页表是实现地址转换和内存隔离的核心组件。其将虚拟地址映射到物理地址，分割内存为固定大小的页，并通过记录页与帧的对应关系，支持进程无缝访问内存资源。这种机制提升了内存使用效率，允许程序使用超过实际物理内存大小的数据空间，并提供进程之间的内存隔离保护，防止非法访问和数据泄漏。页表还支持特性如页级别的内存保护和按需加载，是确保系统各进程稳定、安全运行的关键部分。">
+<title>MIT6S081：4Page Tables(vm)</title>
 
-<link rel='canonical' href='https://echudet.github.io/p/mit6s081lec4/'>
+<link rel='canonical' href='https://echudet.github.io/p/mit6s0814page-tablesvm/'>
 
-<link rel="stylesheet" href="/scss/style.min.a7f637593c1d99350f36f270c9abc65cf39ec34b45847eb2fa40efef51b94c92.css"><meta property='og:title' content="MIT6S081Lec4">
-<meta property='og:description' content="Page Tables(vm)">
-<meta property='og:url' content='https://echudet.github.io/p/mit6s081lec4/'>
+<link rel="stylesheet" href="/scss/style.min.a7f637593c1d99350f36f270c9abc65cf39ec34b45847eb2fa40efef51b94c92.css"><meta property='og:title' content="MIT6S081：4Page Tables(vm)">
+<meta property='og:description' content="在操作系统的虚拟内存管理中，页表是实现地址转换和内存隔离的核心组件。其将虚拟地址映射到物理地址，分割内存为固定大小的页，并通过记录页与帧的对应关系，支持进程无缝访问内存资源。这种机制提升了内存使用效率，允许程序使用超过实际物理内存大小的数据空间，并提供进程之间的内存隔离保护，防止非法访问和数据泄漏。页表还支持特性如页级别的内存保护和按需加载，是确保系统各进程稳定、安全运行的关键部分。">
+<meta property='og:url' content='https://echudet.github.io/p/mit6s0814page-tablesvm/'>
 <meta property='og:site_name' content='echudet'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-09-07T22:02:50&#43;08:00'/><meta property='article:modified_time' content='2024-11-12T13:44:01&#43;08:00'/><meta property='og:image' content='https://echudet.github.io/p/mit6s081lec4/124146068.jpg' />
-<meta name="twitter:title" content="MIT6S081Lec4">
-<meta name="twitter:description" content="Page Tables(vm)"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='https://echudet.github.io/p/mit6s081lec4/124146068.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-09-07T22:02:50&#43;08:00'/><meta property='article:modified_time' content='2024-11-12T23:44:05&#43;08:00'/><meta property='og:image' content='https://echudet.github.io/p/mit6s0814page-tablesvm/124146068.jpg' />
+<meta name="twitter:title" content="MIT6S081：4Page Tables(vm)">
+<meta name="twitter:description" content="在操作系统的虚拟内存管理中，页表是实现地址转换和内存隔离的核心组件。其将虚拟地址映射到物理地址，分割内存为固定大小的页，并通过记录页与帧的对应关系，支持进程无缝访问内存资源。这种机制提升了内存使用效率，允许程序使用超过实际物理内存大小的数据空间，并提供进程之间的内存隔离保护，防止非法访问和数据泄漏。页表还支持特性如页级别的内存保护和按需加载，是确保系统各进程稳定、安全运行的关键部分。"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://echudet.github.io/p/mit6s0814page-tablesvm/124146068.jpg' />
     <link rel="shortcut icon" href="/timer.ico" />
 
     </head>
@@ -331,13 +331,13 @@
     <article class="has-image main-article">
     <header class="article-header">
         <div class="article-image">
-            <a href="/p/mit6s081lec4/">
-                <img src="/p/mit6s081lec4/124146068_hu2676404395156935220.jpg"
-                        srcset="/p/mit6s081lec4/124146068_hu2676404395156935220.jpg 800w, /p/mit6s081lec4/124146068_hu14892108923676048897.jpg 1600w"
+            <a href="/p/mit6s0814page-tablesvm/">
+                <img src="/p/mit6s0814page-tablesvm/124146068_hu2676404395156935220.jpg"
+                        srcset="/p/mit6s0814page-tablesvm/124146068_hu2676404395156935220.jpg 800w, /p/mit6s0814page-tablesvm/124146068_hu14892108923676048897.jpg 1600w"
                         width="800" 
                         height="433" 
                         loading="lazy"
-                        alt="Featured image of post MIT6S081Lec4" />
+                        alt="Featured image of post MIT6S081：4Page Tables(vm)" />
                 
             </a>
         </div>
@@ -360,12 +360,12 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/mit6s081lec4/">MIT6S081Lec4</a>
+            <a href="/p/mit6s0814page-tablesvm/">MIT6S081：4Page Tables(vm)</a>
         </h2>
     
         
         <h3 class="article-subtitle">
-            Page Tables(vm)
+            在操作系统的虚拟内存管理中，页表是实现地址转换和内存隔离的核心组件。其将虚拟地址映射到物理地址，分割内存为固定大小的页，并通过记录页与帧的对应关系，支持进程无缝访问内存资源。这种机制提升了内存使用效率，允许程序使用超过实际物理内存大小的数据空间，并提供进程之间的内存隔离保护，防止非法访问和数据泄漏。页表还支持特性如页级别的内存保护和按需加载，是确保系统各进程稳定、安全运行的关键部分。
         </h3>
         
     </div>
@@ -414,7 +414,7 @@
 
 
                 <time>
-                    Nov 12, 2024 13:44 &#43;0800
+                    Nov 12, 2024 23:44 &#43;0800
                 </time>
             </div></footer>
     
@@ -508,10 +508,10 @@
 <p>总体物理地址的layout，是由主板决定的，并非仅是CPU决定</p>
 </li>
 <li>
-<p><img src="/p/mit6s081lec4/image.png"
+<p><img src="/p/mit6s0814page-tablesvm/image.png"
 	width="1486"
 	height="844"
-	srcset="/p/mit6s081lec4/image_hu14242427645351412035.png 480w, /p/mit6s081lec4/image_hu6020751804304211344.png 1024w"
+	srcset="/p/mit6s0814page-tablesvm/image_hu14242427645351412035.png 480w, /p/mit6s0814page-tablesvm/image_hu6020751804304211344.png 1024w"
 	loading="lazy"
 	
 		alt="structure"
@@ -988,7 +988,7 @@
 
 
         <span>
-            最后更新于 Nov 12, 2024 13:44 &#43;0800
+            最后更新于 Nov 12, 2024 23:44 &#43;0800
         </span>
     </section></footer>
 

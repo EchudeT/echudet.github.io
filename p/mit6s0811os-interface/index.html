@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Isolation & system call entry/exit">
-<title>MIT6S081Lec6</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="操作系统接口是用户和应用程序与系统核心功能交互的重要桥梁。其通过一系列系统调用和API提供对底层资源的抽象访问，使得复杂的硬件操作对用户和开发者变得简洁而一致。操作系统接口负责管理进程、内存、文件系统、网络等功能，通过封装底层实现细节，保证用户程序可以独立于特定硬件平台运行。">
+<title>MIT6S081：1OS Interface</title>
 
-<link rel='canonical' href='https://echudet.github.io/p/mit6s081lec6/'>
+<link rel='canonical' href='https://echudet.github.io/p/mit6s0811os-interface/'>
 
-<link rel="stylesheet" href="/scss/style.min.a7f637593c1d99350f36f270c9abc65cf39ec34b45847eb2fa40efef51b94c92.css"><meta property='og:title' content="MIT6S081Lec6">
-<meta property='og:description' content="Isolation & system call entry/exit">
-<meta property='og:url' content='https://echudet.github.io/p/mit6s081lec6/'>
+<link rel="stylesheet" href="/scss/style.min.a7f637593c1d99350f36f270c9abc65cf39ec34b45847eb2fa40efef51b94c92.css"><meta property='og:title' content="MIT6S081：1OS Interface">
+<meta property='og:description' content="操作系统接口是用户和应用程序与系统核心功能交互的重要桥梁。其通过一系列系统调用和API提供对底层资源的抽象访问，使得复杂的硬件操作对用户和开发者变得简洁而一致。操作系统接口负责管理进程、内存、文件系统、网络等功能，通过封装底层实现细节，保证用户程序可以独立于特定硬件平台运行。">
+<meta property='og:url' content='https://echudet.github.io/p/mit6s0811os-interface/'>
 <meta property='og:site_name' content='echudet'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-09-14T22:02:50&#43;08:00'/><meta property='article:modified_time' content='2024-11-12T23:05:03&#43;08:00'/><meta property='og:image' content='https://echudet.github.io/p/mit6s081lec6/bg.jpg' />
-<meta name="twitter:title" content="MIT6S081Lec6">
-<meta name="twitter:description" content="Isolation & system call entry/exit"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='https://echudet.github.io/p/mit6s081lec6/bg.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-08-31T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2024-11-12T23:44:05&#43;08:00'/><meta property='og:image' content='https://echudet.github.io/p/mit6s0811os-interface/56d1b86047724f56a2793bda4a87bccb.jpg' />
+<meta name="twitter:title" content="MIT6S081：1OS Interface">
+<meta name="twitter:description" content="操作系统接口是用户和应用程序与系统核心功能交互的重要桥梁。其通过一系列系统调用和API提供对底层资源的抽象访问，使得复杂的硬件操作对用户和开发者变得简洁而一致。操作系统接口负责管理进程、内存、文件系统、网络等功能，通过封装底层实现细节，保证用户程序可以独立于特定硬件平台运行。"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://echudet.github.io/p/mit6s0811os-interface/56d1b86047724f56a2793bda4a87bccb.jpg' />
     <link rel="shortcut icon" href="/timer.ico" />
 
     </head>
@@ -268,22 +268,9 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#课程杂记">课程杂记</a>
-      <ol>
-        <li>
-          <ol>
-            <li><a href="#1-trap-发生时的初始状态">1. <strong>Trap 发生时的初始状态</strong></a></li>
-            <li><a href="#2-切换到-userveckerneltrampolines16">2. <strong>切换到 <code>uservec</code>（kernel/trampoline.S:16）</strong></a></li>
-            <li><a href="#3-uservec-的操作">3. <strong><code>uservec</code> 的操作</strong></a></li>
-            <li><a href="#4-切换到内核页表">4. <strong>切换到内核页表</strong></a></li>
-            <li><a href="#5-调用-usertrapkerneltrapc37">5. <strong>调用 <code>usertrap</code>（kernel/trap.c:37）</strong></a></li>
-            <li><a href="#6-准备返回用户空间">6. <strong>准备返回用户空间</strong></a></li>
-            <li><a href="#7-userret-的操作">7. <strong><code>userret</code> 的操作</strong></a></li>
-          </ol>
-        </li>
-        <li><a href="#关键点总结">关键点总结</a></li>
-      </ol>
-    </li>
+    <li><a href="#inode-是什么">Inode 是什么</a></li>
+    <li><a href="#特殊文件和普通文件的区别">特殊文件和普通文件的区别</a></li>
+    <li><a href="#设备文件">设备文件</a></li>
   </ol>
 </nav>
         </div>
@@ -298,13 +285,13 @@
     <article class="has-image main-article">
     <header class="article-header">
         <div class="article-image">
-            <a href="/p/mit6s081lec6/">
-                <img src="/p/mit6s081lec6/bg_hu14015367985888633494.jpg"
-                        srcset="/p/mit6s081lec6/bg_hu14015367985888633494.jpg 800w, /p/mit6s081lec6/bg_hu146234010150949629.jpg 1600w"
+            <a href="/p/mit6s0811os-interface/">
+                <img src="/p/mit6s0811os-interface/56d1b86047724f56a2793bda4a87bccb_hu12236026463376390743.jpg"
+                        srcset="/p/mit6s0811os-interface/56d1b86047724f56a2793bda4a87bccb_hu12236026463376390743.jpg 800w, /p/mit6s0811os-interface/56d1b86047724f56a2793bda4a87bccb_hu3600175493448403132.jpg 1600w"
                         width="800" 
-                        height="530" 
+                        height="472" 
                         loading="lazy"
-                        alt="Featured image of post MIT6S081Lec6" />
+                        alt="Featured image of post MIT6S081：1OS Interface" />
                 
             </a>
         </div>
@@ -327,12 +314,12 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/mit6s081lec6/">MIT6S081Lec6</a>
+            <a href="/p/mit6s0811os-interface/">MIT6S081：1OS Interface</a>
         </h2>
     
         
         <h3 class="article-subtitle">
-            Isolation &amp; system call entry/exit
+            操作系统接口是用户和应用程序与系统核心功能交互的重要桥梁。其通过一系列系统调用和API提供对底层资源的抽象访问，使得复杂的硬件操作对用户和开发者变得简洁而一致。操作系统接口负责管理进程、内存、文件系统、网络等功能，通过封装底层实现细节，保证用户程序可以独立于特定硬件平台运行。
         </h3>
         
     </div>
@@ -353,7 +340,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2024-09-14</time>
+                <time class="article-time--published">2024-08-31</time>
             </div>
         
 
@@ -368,7 +355,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 8 分钟
+                    阅读时长: 5 分钟
                 </time>
             </div>
         <div class="article-lastmod">
@@ -381,7 +368,7 @@
 
 
                 <time>
-                    Nov 12, 2024 23:05 &#43;0800
+                    Nov 12, 2024 23:44 &#43;0800
                 </time>
             </div></footer>
     
@@ -394,204 +381,108 @@
     <section class="article-content">
     
     
-    <h1 id="lecture-6-isolation--system-call-entryexit">Lecture 6 Isolation &amp; system call entry/exit
-</h1><h2 id="课程杂记">课程杂记
-</h2><ol>
-<li>
-<p>Traps and system calls</p>
+    <h1 id="lecture-1-os-interface">Lecture 1 OS Interface
+</h1><h2 id="inode-是什么">Inode 是什么
+</h2><p>Inode 是 UNIX 类文件系统中一个非常核心的概念，负责管理文件和目录的元数据。</p>
+<p>Inode 是文件系统中的一个数据结构，用来存储文件的元信息（metadata），<strong>而不包含文件的内容和文件名</strong>。每一个文件或者目录都会分配一个唯一的 Inode，Inode 中存储了与文件或目录相关的以下信息：</p>
 <ol>
-<li>
-<p>有三种事件会导致 CPU 搁置普通指令的执行，强制将<strong>控制权转移</strong>给处理该事件的特殊代码。</p>
-<ol>
-<li><strong>系统调用</strong>-&gt;用户程序执行 ecall 指令要求内核为其做某事时</li>
-<li><strong>异常</strong>-&gt;一条指令（用户或内核）做了一些非法的事情，如除以零</li>
-<li><strong>中断</strong>-&gt;当一个设备发出需要注意的信号时，例如当磁盘硬件完成一个读写 请求时</li>
+<li><strong>文件类型</strong>：是普通文件、目录还是设备文件（在 <code>stat</code> 结构体中的 <code>type</code> 字段表示）。</li>
+<li><strong>文件的大小</strong>：以字节为单位存储（在 <code>stat</code> 结构体中的 <code>size</code> 字段表示）。</li>
+<li><strong>硬链接数</strong>：有多少个不同的文件名指向这个 Inode（在 <code>stat</code> 结构体中的 <code>nlink</code> 字段表示）。</li>
+<li><strong>文件的访问权限</strong>：谁可以读取、写入或执行这个文件。</li>
+<li><strong>文件的时间戳</strong>：包括文件的创建时间、最后访问时间、最后修改时间等。</li>
+<li><strong>数据块指针</strong>：指向文件内容在硬盘上存储位置的指针。</li>
 </ol>
-</li>
-<li>
-<p>代码在执行时发生 trap，之后都会被<strong>恢复</strong>，而且不需要意识到发生了什么特殊的事情</p>
-</li>
-<li>
-<p>执行顺序：trap 迫使<strong>控制权转移</strong>到内核；内核<strong>保存寄存器和其他状态</strong>，以便恢复执行；内核<strong>执行适当的处理程序</strong>代码（例如，系统调用实现或设备驱动程序）；内核<strong>恢复保存的状态</strong>，并从 trap 中 <strong>返回</strong>；代码从原来的地方恢复。</p>
-</li>
-<li>
-<p>Xv6 trap 处理分为四个阶段：RISC-V CPU 采取的<strong>硬件</strong>行为，为内核 C 代码准备的<strong>汇编</strong>入口，处理 trap的 C <strong>处理程序</strong>，以及<strong>系统调用</strong>或<strong>设备驱动</strong>服务</p>
-</li>
-<li>
-<p>三种 trap 类型之间的 共性表明，内核可以用单一的代码入口处理所有的 trap，但事实证明，为三种不同的情况， 即来自用户空间的 trap、来自内核空间的 trap 和定时器中断，设置<strong>单独</strong>的汇编入口和 C trap 处理程序是很方便的。</p>
-</li>
-<li>
-<p>每个 RISC-V CPU都有一组控制寄存器，内核写入这些寄存器来告诉CPU 如何处理 trap， 内核可以通过读取这些寄存器来发现已经发生的 trap。这里是最重要的寄存器的概述。</p>
-<ul>
-<li>
-<p>stvec：内核在这里写下 <strong>trap 处理程序</strong>的<strong>地址</strong>；RISC-V 到这里来处理 trap。</p>
-</li>
-<li>
-<p>sepc：当 trap 发生时，RISC-V 会将<strong>程序计数器</strong>保存在这里（因为 PC 会被 stvec 覆 盖）。sret(从 trap 中返回)指令将 sepc 复制到 pc 中。内核可以写 sepc 来<strong>控制 sret 的返回</strong>到哪里。</p>
-</li>
-<li>
-<p>scause：RISC -V 在这里放了一个数字，描述了 <strong>trap 的原因</strong>。</p>
-</li>
-<li>
-<p>sscratch：内核在这里放置了一个值，这个值会方便 trap 恢复/储存<strong>用户上下文</strong>。</p>
-</li>
-<li>
-<p>sstatus：sstatus 中的 <strong>SIE 位控制设备中断</strong>是否被启用，如果内核清除 SIE，RISCV 将<strong>推迟设备中断</strong>，直到内核设置 SIE。<strong>SPP 位</strong>表示 trap 是来自<strong>用户</strong>模式还是<strong>监督者</strong>模式，并控制 sret <strong>返回到什么模式</strong>。</p>
-</li>
-</ul>
-</li>
-<li>
-<p>当需要执行 trap 时，RISC-V 硬件对所有的 trap 类型（除定时器中断外）进行以下操作：</p>
+<p>Inode 在文件系统中起着关键的作用，因为它连接了文件名和文件内容之间的关系。理解这一点可以从以下几个方面来说明：</p>
 <ol>
-<li>如果该 trap 是设备中断，且 sstatus SIE 位为 0，则不要执行以下任何操作。</li>
-<li>通过清除 SIE 来禁用中断。</li>
-<li>复制 pc 到 sepc 34</li>
-<li>将当前模式(用户或监督者)保存在 sstatus 的 SPP 位。</li>
-<li>在 scause 设置该次 trap 的原因。</li>
-<li>将模式转换为监督者。</li>
-<li>将 stvec 复制到 pc。</li>
-<li>执行新的 pc。</li>
+<li><strong>文件与文件名的分离</strong>：文件名只是一个指向 Inode 的引用，这意味着在文件系统中，多个不同的文件名可以指向同一个 Inode（也就是硬链接）。这就是为什么可以使用 <code>link</code> 系统调用创建多个文件名指向同一个文件。</li>
+<li><strong>文件的元数据管理</strong>：所有与文件相关的元数据都存储在 Inode 中。这包括文件类型、大小、权限、所有者等。当你需要获取文件的这些信息时，系统会查找文件的 Inode，而不需要访问文件的内容。</li>
+<li><strong>文件内容的定位</strong>：Inode 包含指向文件内容在磁盘上位置的指针。当你打开一个文件时，系统通过文件名查找到对应的 Inode，然后通过 Inode 中的数据块指针找到文件的实际内容。</li>
+<li><strong>删除文件</strong>：当你使用 <code>unlink</code> 系统调用删除文件时，系统只删除了文件名与 Inode 的关联。如果这个 Inode 没有其他链接（即 <code>nlink</code> 为 0），并且没有进程在使用这个文件，系统才会真正释放与该 Inode 相关联的磁盘空间。</li>
 </ol>
-</li>
-<li>
-<p>因为 RISC-V 硬件在 trap 过程中不切换页表，所以用户页表必须包含 uservec 的映射， 即 stvec 指向的 trap 处理程序地址。uservec 必须切换 satp，使其指向内核页表；为了在切 换后继续执行指令，uservec 必须被映射到内核页表与用户页表相同的地址。</p>
-</li>
-<li>
-<p>Xv6 用一个包含 uservec 的 trampoline 页来满足这些条件。Xv6 在内核页表和每个用户 页表中的同一个虚拟地址上映射了 trampoline 页。这个虚拟地址就是 TRAMPOLINE （如我 们在图 2.3 和图 3.3 中看到的）。trampoline.S 中包含 trampoline 的内容，（执行用户代码 时）stvec 设置为 uservec（kernel/trampoline.S:16）。</p>
-</li>
-<li>
-<p>trapframe 包含指向当前进程的内核栈、当前 CPU 的 hartid、usertrap 的地址和内核页 表的地址的指针，uservec 将这些值设置到相应的寄存器中，并将 satp 切换到内核页表和 刷新 TLB，然后调用 usertrap。</p>
-</li>
-<li>
-<p>用户空间 trap 处理流程详解</p>
-<p>当 RISC-V 系统中用户空间程序发生 trap（如系统调用、非法操作或设备中断）时，处理流程如下：</p>
-<h4 id="1-trap-发生时的初始状态">1. <strong>Trap 发生时的初始状态</strong>
-</h4><ul>
-<li>用户程序在用户模式下运行，并使用用户页表。</li>
-<li>程序可能触发 trap，原因可能是系统调用（ecall 指令）、非法指令或硬件中断。</li>
-</ul>
-<h4 id="2-切换到-userveckerneltrampolines16">2. <strong>切换到 <code>uservec</code>（kernel/trampoline.S:16）</strong>
-</h4><ul>
-<li>CPU 检测到 trap 并自动跳转到 <code>stvec</code> 指向的地址，即 <code>uservec</code>，这是一个位于内核中的 trap 处理程序的入口地址。</li>
-<li><strong>问题</strong>：此时仍在使用用户页表，用户页表可能无法映射内核的所有区域，直接访问内核会导致失败。</li>
-</ul>
-<h4 id="3-uservec-的操作">3. <strong><code>uservec</code> 的操作</strong>
-</h4><ul>
-<li><code>uservec</code> 是一个位于 trampoline 页的代码，trampoline 页同时映射在用户页表和内核页表中的相同虚拟地址上。</li>
-<li><code>uservec</code> 通过 <code>csrrw</code> 指令将寄存器 <code>a0</code> 与 <code>sscratch</code> 互换。此时，<code>a0</code> 变为可用，并指向了 <code>sscratch</code> 中的内核数据（通常为进程的 <code>trapframe</code>）。</li>
-<li><code>uservec</code> 保存用户程序的寄存器到进程的 <code>trapframe</code> 中。<code>trapframe</code> 是专门为每个进程分配的一页内存，映射在用户地址空间中（虚拟地址 <code>TRAPFRAME</code> 下）。</li>
-</ul>
-<h4 id="4-切换到内核页表">4. <strong>切换到内核页表</strong>
-</h4><ul>
-<li><code>uservec</code> 设置寄存器，使得 <code>satp</code> 寄存器指向内核页表，并刷新 TLB（Translation Lookaside Buffer，地址转换缓冲）。</li>
-<li>切换页表后，系统安全地进入内核地址空间，可以正常访问内核的所有内存和功能。</li>
-</ul>
-<h4 id="5-调用-usertrapkerneltrapc37">5. <strong>调用 <code>usertrap</code>（kernel/trap.c:37）</strong>
-</h4><ul>
-<li><code>uservec</code> 完成初步处理后，跳转到 <code>usertrap</code>，它负责进一步处理 trap。</li>
-<li><code>usertrap</code> 首先更改 <code>stvec</code> 指向 <code>kernelvec</code>，以处理在内核模式下可能发生的其他 trap。</li>
-<li>保存 <code>sepc</code>（用户程序计数器），因为在内核中可能会发生进程切换。</li>
-<li>根据 trap 的类型进行处理：
-<ul>
-<li>如果是系统调用，调用 <code>syscall</code> 处理。</li>
-<li>如果是设备中断，调用 <code>devintr</code> 处理。</li>
-<li>如果是异常，可能会杀死当前进程。</li>
-</ul>
-</li>
-</ul>
-<h4 id="6-准备返回用户空间">6. <strong>准备返回用户空间</strong>
-</h4><ul>
-<li>
-<p><code>usertrap</code> 完成处理后，准备返回用户空间。</p>
-</li>
-<li>
-<p>调用</p>
+<p>比如运行了下面这段代码：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">usertrapret
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="nf">open</span><span class="p">(</span><span class="s">&#34;a&#34;</span><span class="p">,</span> <span class="n">O_CREATE</span><span class="o">|</span><span class="n">O_WRONLY</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nf">link</span><span class="p">(</span><span class="s">&#34;a&#34;</span><span class="p">,</span> <span class="s">&#34;b&#34;</span><span class="p">);</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>（kernel/trap.c:90），它负责恢复用户空间的运行环境：</p>
-<ul>
-<li>设置 <code>stvec</code> 重新指向 <code>uservec</code>，以准备下一次 trap。</li>
-<li>恢复 <code>sepc</code> 到保存的用户程序计数器。</li>
-<li>跳转到 trampoline 页的 <code>userret</code>，准备切换回用户页表。</li>
-</ul>
-</li>
-</ul>
-<h4 id="7-userret-的操作">7. <strong><code>userret</code> 的操作</strong>
-</h4><ul>
-<li>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">userret
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>负责最后的状态恢复和切换回用户页表：</p>
-<ul>
-<li><code>userret</code> 将 <code>satp</code> 切换回用户页表，确保系统回到用户模式。</li>
-<li>恢复用户寄存器，包括 <code>a0</code> 和 <code>sscratch</code> 的最终交换，确保在下一次 trap 发生时这些寄存器可用。</li>
-<li>使用 <code>sret</code> 指令返回用户空间，从保存的用户程序计数器处继续执行用户代码。</li>
-</ul>
-</li>
-</ul>
-<h3 id="关键点总结">关键点总结
-</h3><ul>
-<li><strong>Trampoline 页</strong>：这是内核和用户页表中映射的特殊区域，确保了在页表切换前后的代码能正常运行。</li>
-<li><strong>sscratch 寄存器</strong>：用于在 trap 处理过程中保存和交换关键的寄存器值。</li>
-<li><strong>trapframe</strong>：保存所有用户寄存器的状态，便于在用户和内核模式之间切换时进行恢复和保存。</li>
-</ul>
-</li>
-<li>
-<p>当系统调用函数返回时，syscall 将其返回值记录在 <strong>p-&gt;trapframe-&gt;a0</strong> 中。用户空间 的 exec()将会返回该值，因为 RISC-V 上的 C 调用通常将返回值放在 a0 中。系统调用返回 负数表示错误，0 或正数表示成功。如果系统调用号无效，syscall 会打印错误并返回 1。</p>
-</li>
-<li>
-<p>内核 trap 代码将用 户寄存器保存到当前进程的 trapframe 中，内核代码可以在那里找到它们。函数 argint、 argaddr 和 argfd 从 trapframe 中以整数、指针或文件描述符的形式检索第 n 个系统调用参 数。它们都调用 argraw 在 trapframe 中检索相应的数据(kernel/syscall.c:35)。</p>
-</li>
-<li>
-<p>Xv6 对异常的响应是相当固定：如果一个异常发生在用户空间，内核就会杀死故障进程。 如果一个异常发生在内核中，内核就会 panic。真正的操作系统通常会以更有趣的方式进行 响应。</p>
-</li>
-<li>
-<p>当 CPU 不能将虚拟地址翻译成物理地址时，CPU 会产生一个页面故障异常(page-fault exception)。 RISC-V 有三种不同的页故障：load 页故障（当加载指令不能翻译其虚拟地址 时）、stote 页故障（当存储指令不能翻译其虚拟地址时）和指令页故障（当指令的地址不能 翻译时）。scause 寄存器中的值表示页面故障的类型，stval 寄存器中包含无法翻译的地址。</p>
-</li>
-<li>
-<p><strong>写时复制（Copy-On-Write, COW）Fork</strong></p>
-<p>在传统的 <code>fork</code> 操作中，父进程的整个内存空间（包括数据段、堆和栈）都会被复制给子进程。这种方法非常消耗资源，因为即使子进程只使用了父进程的一小部分内存，内核仍然需要进行全量的内存复制。</p>
-<p><strong>COW fork</strong> 提出了一个更高效的解决方案。通过在初始时不复制物理内存，而是让父进程和子进程共享同一块物理内存，操作系统可以大幅节省内存和时间。但这样做有一个问题：如果父进程和子进程都试图写入同一块内存，可能会互相干扰。为了避免这种情况，操作系统将这块共享的内存页标记为只读。</p>
-<p>当父进程或子进程试图写入这块内存时，CPU 会检测到这个写操作违反了只读权限，进而触发一个**页面故障（page fault）**异常。操作系统的页面故障处理程序会意识到这个异常来自于一个 COW 页面，并且会执行以下操作：</p>
+</div><p>这个例子创建了一个文件 <code>a</code>，并且为这个文件创建了一个硬链接 <code>b</code>。在这两行代码执行之后，文件 <code>a</code> 和 <code>b</code> 都指向同一个 Inode，它们的内容完全相同，任何一个文件的修改都会反映在另一个文件中。</p>
+<p>通过 Inode，你可以理解文件系统如何管理文件的元数据以及如何实现硬链接、文件删除等功能。简而言之，Inode 是文件系统中的核心结构，负责文件元数据的管理和文件内容的定位。</p>
+<hr>
+<h2 id="特殊文件和普通文件的区别">特殊文件和普通文件的区别
+</h2><p>指向设备的特殊文件和普通文件在文件系统中的处理方式和用途上有很大的不同。它们的主要区别如下：</p>
 <ol>
-<li>分配一个新的物理内存页。</li>
-<li>将原来共享的页面内容复制到新分配的页面。</li>
-<li>更新进程的页表，将这个新的页面映射为可写。</li>
-<li>重新执行引发页面故障的指令。</li>
+<li>
+<p><strong>文件类型和作用</strong></p>
+<ul>
+<li>
+<p><strong>普通文件</strong>：这是最常见的文件类型，用于存储用户的数据，例如文本文件、图像文件、程序文件等。普通文件包含实际的数据内容，文件系统通过 Inode 和数据块将文件名映射到硬盘上的实际数据。</p>
+</li>
+<li>
+<p><strong>特殊文件（设备文件）</strong>：特殊文件不包含用户数据，而是用于与硬件设备交互。设备文件通过文件系统接口将文件操作（如读写）映射到设备驱动程序。例如，<code>/dev/sda</code> 可能是一个硬盘设备文件，通过对这个文件进行操作，实际上是对对应的硬盘设备进行操作。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Inode 中的差异</strong></p>
+<ul>
+<li>
+<p><strong>普通文件的 Inode</strong>：普通文件的 Inode 包含文件的元数据（如文件类型、大小、权限等）和指向数据块的指针。这些指针指向存储在硬盘上文件内容的具体位置。</p>
+</li>
+<li>
+<p><strong>特殊文件的 Inode</strong>：设备文件的 Inode 也包含元数据，但它的指针部分不指向存储在硬盘上的数据块，而是包含与设备相关的标识信息，即主设备号（major number）和次设备号（minor number）。这些编号告诉内核应该使用哪个设备驱动程序以及如何与具体的设备进行通信。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>操作方式</strong></p>
+<ul>
+<li>
+<p><strong>普通文件操作</strong>：当你对普通文件进行读写操作时，文件系统会通过 Inode 查找文件内容在磁盘上的位置，并执行实际的数据读写。</p>
+</li>
+<li>
+<p><strong>特殊文件操作</strong>：当你对设备文件进行读写操作时，文件系统并不直接处理磁盘数据，而是将这些操作请求转发给对应的设备驱动程序。设备驱动程序根据操作类型（读或写）与实际的硬件设备进行交互。比如，对 <code>/dev/null</code> 文件的写操作，实际上什么也不做，而对 <code>/dev/sda</code> 的写操作，可能会导致硬盘上的数据被写入。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>使用场景</strong></p>
+<ul>
+<li>
+<p><strong>普通文件</strong>：用于存储和读取用户的应用数据，如文档、图像、程序代码等。</p>
+</li>
+<li>
+<p><strong>特殊文件</strong>：用于操作和控制硬件设备，比如：</p>
+<ul>
+<li><strong>字符设备文件</strong>（如 <code>/dev/tty</code>，对应终端设备）：处理字符流设备的读写，通常一次一个字符进行操作。</li>
+<li><strong>块设备文件</strong>（如 <code>/dev/sda</code>，对应硬盘设备）：处理块设备的读写操作，通常一次一个块（通常为512字节或更多）进行操作。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>系统调用的区别</strong></p>
+<ul>
+<li>
+<p><strong>普通文件</strong>：可以通过常规的系统调用如 <code>open</code>、<code>read</code>、<code>write</code>、<code>close</code> 等操作普通文件。</p>
+</li>
+<li>
+<p><strong>特殊文件</strong>：虽然设备文件也可以通过 <code>open</code>、<code>read</code>、<code>write</code> 等系统调用操作，但这些调用最终会被内核处理，并转交给设备的驱动程序，由驱动程序与硬件直接交互。</p>
+</li>
+</ul>
+</li>
 </ol>
-<p>这样，父进程和子进程各自获得了独立的、可写的内存，而这一切都是透明的，对应用程序来说是无感知的。</p>
-</li>
-<li>
-<p><strong>懒分配（Lazy Allocation）</strong></p>
-<p>懒分配是一种内存管理优化技术，它基于这样一个事实：应用程序往往请求比实际需要更多的内存。在懒分配的实现中，当应用程序调用 <code>sbrk</code>（或其他类似的内存分配系统调用）时，操作系统不会立即分配实际的物理内存，而只是扩大了进程的虚拟地址空间，并将新地址标记为无效。</p>
-<p>当应用程序尝试访问这些新地址时，会因为没有对应的物理内存而触发页面故障。此时，操作系统会为该页面实际分配物理内存，并将其映射到进程的页表中。这种按需分配的策略，确保了物理内存只在应用程序真正需要时才被分配，从而节省了内存资源。</p>
-</li>
-<li>
-<p><strong>从磁盘分页（Paging from Disk）</strong></p>
-<p>当系统内存不足时，操作系统可能需要将不常使用的内存页暂时移出物理内存，写入磁盘。这个过程叫做<strong>交换（swapping）</strong>。当一个被交换到磁盘的内存页再次被访问时，CPU 会触发一个页面故障，因为页表中的对应条目已经被标记为无效。</p>
-<p>操作系统会检查页面故障发生的地址，并判断该地址是否属于一个被换出的页面。如果是这样，内核会从磁盘中读取该页面，加载到物理内存，并更新页表，使其重新有效。随后，操作系统会恢复应用程序的执行，重新执行触发页面故障的指令。</p>
-</li>
-<li>
-<p><strong>自动扩展堆栈</strong>：如果进程需要更多的栈空间，而它当前的栈已经耗尽，操作系统可以通过页面故障来检测到这一情况，然后分配新的内存页来扩展栈。</p>
-</li>
-<li>
-<p><strong>内存映射文件</strong>：文件的内容可以直接映射到进程的内存空间中。如果映射的部分文件被访问而未加载，操作系统会通过页面故障来加载相应的文件部分。</p>
-</li>
-</ol>
-</li>
-</ol>
+<p>普通文件用于存储数据，文件系统会直接对其内容进行操作。而设备文件是与硬件交互的接口，操作这些文件时，实际上是在与对应的设备驱动程序交互，进而与实际的硬件设备交互。这种设计允许设备在 UNIX 文件系统中的统一表示，使得设备的操作与文件操作类似，保持了 UNIX 的一贯简洁和一致性。</p>
+<hr>
+<h2 id="设备文件">设备文件
+</h2><p>设备文件本身<strong>不能被修改</strong>，因为它不包含实际的数据内容。设备文件只是一个接口，通过它可以对硬件设备进行操作。例如，当你写数据到一个设备文件时，这些数据实际上是发送到对应的硬件设备（如硬盘）上，而不是存储在设备文件本身中。</p>
+<p>设备文件在硬盘上<strong>几乎不占用存储空间</strong>。因为设备文件只是一个特殊的文件系统条目，主要存储了设备的标识信息（如主设备号和次设备号），以及一些基础的元数据（例如文件权限、创建时间等）。这些信息占用的空间非常小，通常只需要几个字节到几十个字节。</p>
+<p>与普通文件不同，设备文件没有指向实际数据块的指针，也没有存储用户数据的空间。所以，尽管设备文件存在于文件系统中，但它们在硬盘上占用的存储空间是微乎其微的。</p>
 
 </section>
 
@@ -609,7 +500,7 @@
 
 
         <span>
-            最后更新于 Nov 12, 2024 23:05 &#43;0800
+            最后更新于 Nov 12, 2024 23:44 &#43;0800
         </span>
     </section></footer>
 

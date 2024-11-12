@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="OS Interface.">
-<title>MIT6S081Lec1</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="操作系统的组织结构和系统调用机制是其功能实现和服务提供的基础。操作系统通常采用分层设计，包括内核层、系统调用接口层和用户层。内核负责底层硬件管理和资源分配，提供内存管理、进程调度等核心功能；系统调用是应用程序与内核进行交互的接口，允许用户程序请求内核服务，如文件操作、进程控制等。系统调用通过特定的调用约定和上下文切换，在用户态与内核态之间安全、有序地传递请求和响应。此体系结构确保操作系统资源的有效管理和用户程序的安全执行，是计算机系统稳定、高效运行的关键保障。">
+<title>MIT6S081：3OS Organization &amp; System Calls</title>
 
-<link rel='canonical' href='https://echudet.github.io/p/mit6s081lec1/'>
+<link rel='canonical' href='https://echudet.github.io/p/mit6s0813os-organization-system-calls/'>
 
-<link rel="stylesheet" href="/scss/style.min.a7f637593c1d99350f36f270c9abc65cf39ec34b45847eb2fa40efef51b94c92.css"><meta property='og:title' content="MIT6S081Lec1">
-<meta property='og:description' content="OS Interface.">
-<meta property='og:url' content='https://echudet.github.io/p/mit6s081lec1/'>
+<link rel="stylesheet" href="/scss/style.min.a7f637593c1d99350f36f270c9abc65cf39ec34b45847eb2fa40efef51b94c92.css"><meta property='og:title' content="MIT6S081：3OS Organization & System Calls">
+<meta property='og:description' content="操作系统的组织结构和系统调用机制是其功能实现和服务提供的基础。操作系统通常采用分层设计，包括内核层、系统调用接口层和用户层。内核负责底层硬件管理和资源分配，提供内存管理、进程调度等核心功能；系统调用是应用程序与内核进行交互的接口，允许用户程序请求内核服务，如文件操作、进程控制等。系统调用通过特定的调用约定和上下文切换，在用户态与内核态之间安全、有序地传递请求和响应。此体系结构确保操作系统资源的有效管理和用户程序的安全执行，是计算机系统稳定、高效运行的关键保障。">
+<meta property='og:url' content='https://echudet.github.io/p/mit6s0813os-organization-system-calls/'>
 <meta property='og:site_name' content='echudet'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-08-31T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2024-11-12T13:44:01&#43;08:00'/><meta property='og:image' content='https://echudet.github.io/p/mit6s081lec1/56d1b86047724f56a2793bda4a87bccb.jpg' />
-<meta name="twitter:title" content="MIT6S081Lec1">
-<meta name="twitter:description" content="OS Interface."><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='https://echudet.github.io/p/mit6s081lec1/56d1b86047724f56a2793bda4a87bccb.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-09-01T22:02:50&#43;08:00'/><meta property='article:modified_time' content='2024-11-12T23:44:05&#43;08:00'/><meta property='og:image' content='https://echudet.github.io/p/mit6s0813os-organization-system-calls/2ed7cfb8882411ebb6edd017c2d2eca2.png' />
+<meta name="twitter:title" content="MIT6S081：3OS Organization & System Calls">
+<meta name="twitter:description" content="操作系统的组织结构和系统调用机制是其功能实现和服务提供的基础。操作系统通常采用分层设计，包括内核层、系统调用接口层和用户层。内核负责底层硬件管理和资源分配，提供内存管理、进程调度等核心功能；系统调用是应用程序与内核进行交互的接口，允许用户程序请求内核服务，如文件操作、进程控制等。系统调用通过特定的调用约定和上下文切换，在用户态与内核态之间安全、有序地传递请求和响应。此体系结构确保操作系统资源的有效管理和用户程序的安全执行，是计算机系统稳定、高效运行的关键保障。"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://echudet.github.io/p/mit6s0813os-organization-system-calls/2ed7cfb8882411ebb6edd017c2d2eca2.png' />
     <link rel="shortcut icon" href="/timer.ico" />
 
     </head>
@@ -268,9 +268,9 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#inode-是什么">Inode 是什么</a></li>
-    <li><a href="#特殊文件和普通文件的区别">特殊文件和普通文件的区别</a></li>
-    <li><a href="#设备文件">设备文件</a></li>
+    <li><a href="#os-隔离性防御性">OS 隔离性、防御性</a></li>
+    <li><a href="#system-calls">System Calls</a></li>
+    <li><a href="#xv6的组织结构">xv6的组织结构</a></li>
   </ol>
 </nav>
         </div>
@@ -285,13 +285,13 @@
     <article class="has-image main-article">
     <header class="article-header">
         <div class="article-image">
-            <a href="/p/mit6s081lec1/">
-                <img src="/p/mit6s081lec1/56d1b86047724f56a2793bda4a87bccb_hu12236026463376390743.jpg"
-                        srcset="/p/mit6s081lec1/56d1b86047724f56a2793bda4a87bccb_hu12236026463376390743.jpg 800w, /p/mit6s081lec1/56d1b86047724f56a2793bda4a87bccb_hu3600175493448403132.jpg 1600w"
+            <a href="/p/mit6s0813os-organization-system-calls/">
+                <img src="/p/mit6s0813os-organization-system-calls/2ed7cfb8882411ebb6edd017c2d2eca2_hu119084697642800105.png"
+                        srcset="/p/mit6s0813os-organization-system-calls/2ed7cfb8882411ebb6edd017c2d2eca2_hu119084697642800105.png 800w, /p/mit6s0813os-organization-system-calls/2ed7cfb8882411ebb6edd017c2d2eca2_hu11319963432029651837.png 1600w"
                         width="800" 
-                        height="472" 
+                        height="450" 
                         loading="lazy"
-                        alt="Featured image of post MIT6S081Lec1" />
+                        alt="Featured image of post MIT6S081：3OS Organization &amp; System Calls" />
                 
             </a>
         </div>
@@ -314,12 +314,12 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/mit6s081lec1/">MIT6S081Lec1</a>
+            <a href="/p/mit6s0813os-organization-system-calls/">MIT6S081：3OS Organization &amp; System Calls</a>
         </h2>
     
         
         <h3 class="article-subtitle">
-            OS Interface.
+            操作系统的组织结构和系统调用机制是其功能实现和服务提供的基础。操作系统通常采用分层设计，包括内核层、系统调用接口层和用户层。内核负责底层硬件管理和资源分配，提供内存管理、进程调度等核心功能；系统调用是应用程序与内核进行交互的接口，允许用户程序请求内核服务，如文件操作、进程控制等。系统调用通过特定的调用约定和上下文切换，在用户态与内核态之间安全、有序地传递请求和响应。此体系结构确保操作系统资源的有效管理和用户程序的安全执行，是计算机系统稳定、高效运行的关键保障。
         </h3>
         
     </div>
@@ -340,7 +340,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2024-08-31</time>
+                <time class="article-time--published">2024-09-01</time>
             </div>
         
 
@@ -355,7 +355,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 5 分钟
+                    阅读时长: 8 分钟
                 </time>
             </div>
         <div class="article-lastmod">
@@ -368,7 +368,7 @@
 
 
                 <time>
-                    Nov 12, 2024 13:44 &#43;0800
+                    Nov 12, 2024 23:44 &#43;0800
                 </time>
             </div></footer>
     
@@ -381,108 +381,128 @@
     <section class="article-content">
     
     
-    <h1 id="lecture-1-os-interface">Lecture 1 OS Interface
-</h1><h2 id="inode-是什么">Inode 是什么
-</h2><p>Inode 是 UNIX 类文件系统中一个非常核心的概念，负责管理文件和目录的元数据。</p>
-<p>Inode 是文件系统中的一个数据结构，用来存储文件的元信息（metadata），<strong>而不包含文件的内容和文件名</strong>。每一个文件或者目录都会分配一个唯一的 Inode，Inode 中存储了与文件或目录相关的以下信息：</p>
-<ol>
-<li><strong>文件类型</strong>：是普通文件、目录还是设备文件（在 <code>stat</code> 结构体中的 <code>type</code> 字段表示）。</li>
-<li><strong>文件的大小</strong>：以字节为单位存储（在 <code>stat</code> 结构体中的 <code>size</code> 字段表示）。</li>
-<li><strong>硬链接数</strong>：有多少个不同的文件名指向这个 Inode（在 <code>stat</code> 结构体中的 <code>nlink</code> 字段表示）。</li>
-<li><strong>文件的访问权限</strong>：谁可以读取、写入或执行这个文件。</li>
-<li><strong>文件的时间戳</strong>：包括文件的创建时间、最后访问时间、最后修改时间等。</li>
-<li><strong>数据块指针</strong>：指向文件内容在硬盘上存储位置的指针。</li>
+    <h1 id="lecture-3-os-organization--system-calls">Lecture 3 OS Organization &amp; System Calls
+</h1><h2 id="os-隔离性防御性">OS 隔离性、防御性
+</h2><ol>
+<li>为了不变成一个恶意程序，Shell在发现自己运行了一段时间之后，需要让别的程序也有机会能运行。这种机制有时候称为协同调度（Cooperative Scheduling）。</li>
+<li>这个特性是非常有用的，不论应用程序在执行什么操作，multiplexing都会迫使应用程序时不时的释放CPU，这样其他的应用程序才能运行。</li>
+<li>使用操作系统的一个原因，甚至可以说是主要原因就是为了实现multiplexing和内存隔离。如果你不使用操作系统，并且应用程序直接与硬件交互，就很难实现这两点。所以，将操作系统设计成一个库，并不是一种常见的设计。你或许可以在一些实时操作系统中看到这样的设计，因为在这些实时操作系统中，应用程序之间彼此相互信任。但是在大部分的其他操作系统中，都会强制实现硬件资源的隔离。</li>
+<li>需要通过硬件来实现这的强隔离性。这里的硬件支持包括了两部分，第一部分是user/kernel mode，kernel mode在RISC-V中被称为Supervisor mode但是其实是同一个东西；第二部分是page table或者虚拟内存（Virtual Memory）。</li>
+<li>处理器会有两种操作模式，第一种是user mode，第二种是kernel mode。当运行在kernel mode时，CPU可以运行特定权限的指令（privileged instructions）；当运行在user mode时，CPU只能运行普通权限的指令（unprivileged instructions）。</li>
+<li>实际上RISC-V还有第三种模式称为machine mode。在大多数场景下，我们会忽略这种模式，所以我也不太会介绍这种模式。</li>
+<li>在处理器的一个bit，当它为1的时候是user mode，当它为0时是kernel mode。当处理器在解析指令时，如果指令是特殊权限指令，并且该bit被设置为1，处理器会拒绝执行这条指令，就像在运算时不能除以0一样。</li>
+<li>让整个操作系统代码都运行在kernel mode。大多数的Unix操作系统实现都运行在kernel mode。比如，XV6中，所有的操作系统服务都在kernel mode中，这种形式被称为Monolithic Kernel Design（<a class="link" href="https://en.wikipedia.org/wiki/Monolithic_kernel"  target="_blank" rel="noopener"
+    >宏内核</a>）。</li>
+<li>另一种设计主要关注点是减少内核中的代码，它被称为Micro Kernel Design（<a class="link" href="https://en.wikipedia.org/wiki/Microkernel"  target="_blank" rel="noopener"
+    >微内核</a>）。在这种模式下，希望在kernel mode中运行尽可能少的代码。所以这种设计下还是有内核，但是内核只有非常少的几个模块，例如，内核通常会有一些IPC的实现或者是Message passing；非常少的虚拟内存的支持，可能只支持了page table；以及分时复用CPU的一些支持。微内核的目的在于将大部分的操作系统运行在内核之外。因为在内核中的代码的数量较小，更少的代码意味着更少的Bug。</li>
+<li>在实际中，两种内核设计都会出现，出于历史原因大部分的桌面操作系统是宏内核，如果你运行需要大量内核计算的应用程序，例如在数据中心服务器上的操作系统，通常也是使用的宏内核，主要的原因是Linux提供了很好的性能。但是很多嵌入式系统，例如Minix，Cell，这些都是微内核设计。这两种设计都很流行，如果你从头开始写一个操作系统，你可能会从一个微内核设计开始。</li>
 </ol>
-<p>Inode 在文件系统中起着关键的作用，因为它连接了文件名和文件内容之间的关系。理解这一点可以从以下几个方面来说明：</p>
+<h2 id="system-calls">System Calls
+</h2><ol>
+<li>
+<p>有一种方式能够让应用程序可以将控制权转移给内核（Entering Kernel）。在RISC-V中，有一个专门的指令用来实现这个功能，叫做ECALL。ECALL接收一个数字参数，当一个用户程序想要将程序执行的控制权转移到内核，它只需要执行ECALL指令，并传入一个数字。这里的数字参数代表了应用程序想要调用的System Call。</p>
+</li>
+<li>
+<p>不论是Shell还是其他的应用程序，当它在用户空间执行fork时，它并不是直接调用操作系统中对应的函数，而是调用ECALL指令，并将fork对应的数字作为参数传给ECALL。之后再通过ECALL跳转到内核。</p>
+</li>
+<li>
+<p>左边是用户空间，右边是内核空间。在内核侧，有一个位于syscall.c的函数syscall，每一个从应用程序发起的系统调用都会调用到这个syscall函数，syscall函数会检查ECALL的参数，通过这个参数内核可以知道需要调用的是fork</p>
+</li>
+<li>
+<p>内核有时候也被称为可被信任的计算空间（Trusted Computing Base），在一些安全的术语中也被称为TCB。</p>
+</li>
+<li>
+<p><img src="/.%5cimage3.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image3"
+	
+	
+></p>
 <ol>
-<li><strong>文件与文件名的分离</strong>：文件名只是一个指向 Inode 的引用，这意味着在文件系统中，多个不同的文件名可以指向同一个 Inode（也就是硬链接）。这就是为什么可以使用 <code>link</code> 系统调用创建多个文件名指向同一个文件。</li>
-<li><strong>文件的元数据管理</strong>：所有与文件相关的元数据都存储在 Inode 中。这包括文件类型、大小、权限、所有者等。当你需要获取文件的这些信息时，系统会查找文件的 Inode，而不需要访问文件的内容。</li>
-<li><strong>文件内容的定位</strong>：Inode 包含指向文件内容在磁盘上位置的指针。当你打开一个文件时，系统通过文件名查找到对应的 Inode，然后通过 Inode 中的数据块指针找到文件的实际内容。</li>
-<li><strong>删除文件</strong>：当你使用 <code>unlink</code> 系统调用删除文件时，系统只删除了文件名与 Inode 的关联。如果这个 Inode 没有其他链接（即 <code>nlink</code> 为 0），并且没有进程在使用这个文件，系统才会真正释放与该 Inode 相关联的磁盘空间。</li>
-</ol>
-<p>比如运行了下面这段代码：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="nf">open</span><span class="p">(</span><span class="s">&#34;a&#34;</span><span class="p">,</span> <span class="n">O_CREATE</span><span class="o">|</span><span class="n">O_WRONLY</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="nf">link</span><span class="p">(</span><span class="s">&#34;a&#34;</span><span class="p">,</span> <span class="s">&#34;b&#34;</span><span class="p">);</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>这个例子创建了一个文件 <code>a</code>，并且为这个文件创建了一个硬链接 <code>b</code>。在这两行代码执行之后，文件 <code>a</code> 和 <code>b</code> 都指向同一个 Inode，它们的内容完全相同，任何一个文件的修改都会反映在另一个文件中。</p>
-<p>通过 Inode，你可以理解文件系统如何管理文件的元数据以及如何实现硬链接、文件删除等功能。简而言之，Inode 是文件系统中的核心结构，负责文件元数据的管理和文件内容的定位。</p>
-<hr>
-<h2 id="特殊文件和普通文件的区别">特殊文件和普通文件的区别
-</h2><p>指向设备的特殊文件和普通文件在文件系统中的处理方式和用途上有很大的不同。它们的主要区别如下：</p>
+<li>
+<p>在这段代码中，<code>p-&gt;trapframe</code> 和 <code>p-&gt;trapframe-&gt;a0</code> 是与系统调用处理相关的两个重要部分。为了理解它们的意义，我们需要明确 <code>trapframe</code> 是什么，以及 <code>a0</code> 在其中的作用。</p>
+<p><code>p-&gt;trapframe</code> 的意义</p>
+<ul>
+<li><strong><code>trapframe</code> 结构</strong>：<code>trapframe</code> 是一个结构体，它保存了当进程从用户态切换到内核态时，CPU 寄存器的状态。这通常发生在进程进行系统调用、发生中断或异常时。操作系统会在内核栈中创建一个 <code>trapframe</code>，用于保存当前的 CPU 状态（包括通用寄存器、指令指针、栈指针等）。</li>
+<li><strong><code>p-&gt;trapframe</code></strong>：这里的 <code>p</code> 是指向进程控制块（<code>struct proc</code>）的指针，而 <code>p-&gt;trapframe</code> 则是该进程的 <code>trapframe</code>。当进程进入内核态时，操作系统会使用 <code>p-&gt;trapframe</code> 来保存进程的 CPU 寄存器状态。</li>
+</ul>
+<p><code>p-&gt;trapframe-&gt;a0</code> 的意义</p>
+<ul>
+<li><strong><code>a0</code></strong>：在 <code>trapframe</code> 结构体中，<code>a0</code> 是保存系统调用返回值的寄存器。通常在 <code>xv6</code> 操作系统中，<code>a0</code> 是一个寄存器，用于保存从系统调用返回时的结果。每个系统调用执行完后，返回的结果会存放在 <code>trapframe-&gt;a0</code> 中，然后在从内核返回用户态时，这个值会被传递给用户进程。</li>
+<li><strong><code>p-&gt;trapframe-&gt;a0 = syscall[num]()</code></strong>：这行代码表示执行一个系统调用，并将系统调用的返回值保存到 <code>p-&gt;trapframe-&gt;a0</code> 中。<code>syscall[num]()</code> 是一个函数指针数组，<code>num</code> 是系统调用号，根据这个号找到对应的系统调用函数并执行。执行后的返回值被存入 <code>a0</code> 中，稍后当进程返回用户态时，这个值将被返回给进程的用户代码。</li>
+</ul>
+<p>总结</p>
+<ul>
+<li><strong><code>p-&gt;trapframe</code></strong>：保存了当前进程的 CPU 寄存器状态，当进程从用户态进入内核态时使用。</li>
+<li><strong><code>p-&gt;trapframe-&gt;a0</code></strong>：用于保存系统调用的返回值，这个值会在系统调用执行完毕后传递回用户态的进程。</li>
+</ul>
+<p>这种机制保证了用户进程在进行系统调用时能够正确地与内核交互，并获取系统调用的结果。</p>
+</li>
+<li>
+<p><code>p-&gt;context</code> 和 <code>p-&gt;trapframe</code> 是两种不同的数据结构，它们分别用于保存不同阶段的进程状态，具有不同的用途和作用。不过，它们也有相似之处，都是为了实现进程的正确执行和状态保存。</p>
+<p><strong><code>p-&gt;context</code> 与 <code>p-&gt;trapframe</code> 的不同之处</strong></p>
 <ol>
-<li>
-<p><strong>文件类型和作用</strong></p>
+<li><strong>用途和作用不同</strong>:
 <ul>
-<li>
-<p><strong>普通文件</strong>：这是最常见的文件类型，用于存储用户的数据，例如文本文件、图像文件、程序文件等。普通文件包含实际的数据内容，文件系统通过 Inode 和数据块将文件名映射到硬盘上的实际数据。</p>
-</li>
-<li>
-<p><strong>特殊文件（设备文件）</strong>：特殊文件不包含用户数据，而是用于与硬件设备交互。设备文件通过文件系统接口将文件操作（如读写）映射到设备驱动程序。例如，<code>/dev/sda</code> 可能是一个硬盘设备文件，通过对这个文件进行操作，实际上是对对应的硬盘设备进行操作。</p>
-</li>
+<li><strong><code>p-&gt;context</code></strong>：
+<ul>
+<li><strong>作用</strong>：<code>p-&gt;context</code> 主要用于保存进程在 <strong>内核态</strong> 的上下文（即寄存器状态），特别是当进程在内核态运行且发生上下文切换时（例如调度器将进程挂起以运行另一个进程）。它保存的是内核态寄存器的状态，包括程序计数器（<code>eip</code>）、栈指针（<code>esp</code>）等。这个上下文会在进程被重新调度运行时恢复，以确保进程从上次被挂起的地方继续执行。</li>
+<li><strong>使用场景</strong>：<code>p-&gt;context</code> 的保存与恢复主要发生在进程的上下文切换过程中，即当操作系统在多个进程之间切换时。<code>p-&gt;context</code> 保存的是内核态的运行状态，而不是用户态的状态。</li>
 </ul>
 </li>
-<li>
-<p><strong>Inode 中的差异</strong></p>
+<li><strong><code>p-&gt;trapframe</code></strong>：
 <ul>
-<li>
-<p><strong>普通文件的 Inode</strong>：普通文件的 Inode 包含文件的元数据（如文件类型、大小、权限等）和指向数据块的指针。这些指针指向存储在硬盘上文件内容的具体位置。</p>
-</li>
-<li>
-<p><strong>特殊文件的 Inode</strong>：设备文件的 Inode 也包含元数据，但它的指针部分不指向存储在硬盘上的数据块，而是包含与设备相关的标识信息，即主设备号（major number）和次设备号（minor number）。这些编号告诉内核应该使用哪个设备驱动程序以及如何与具体的设备进行通信。</p>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>操作方式</strong></p>
-<ul>
-<li>
-<p><strong>普通文件操作</strong>：当你对普通文件进行读写操作时，文件系统会通过 Inode 查找文件内容在磁盘上的位置，并执行实际的数据读写。</p>
-</li>
-<li>
-<p><strong>特殊文件操作</strong>：当你对设备文件进行读写操作时，文件系统并不直接处理磁盘数据，而是将这些操作请求转发给对应的设备驱动程序。设备驱动程序根据操作类型（读或写）与实际的硬件设备进行交互。比如，对 <code>/dev/null</code> 文件的写操作，实际上什么也不做，而对 <code>/dev/sda</code> 的写操作，可能会导致硬盘上的数据被写入。</p>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>使用场景</strong></p>
-<ul>
-<li>
-<p><strong>普通文件</strong>：用于存储和读取用户的应用数据，如文档、图像、程序代码等。</p>
-</li>
-<li>
-<p><strong>特殊文件</strong>：用于操作和控制硬件设备，比如：</p>
-<ul>
-<li><strong>字符设备文件</strong>（如 <code>/dev/tty</code>，对应终端设备）：处理字符流设备的读写，通常一次一个字符进行操作。</li>
-<li><strong>块设备文件</strong>（如 <code>/dev/sda</code>，对应硬盘设备）：处理块设备的读写操作，通常一次一个块（通常为512字节或更多）进行操作。</li>
+<li><strong>作用</strong>：<code>p-&gt;trapframe</code> 则主要用于保存进程从 <strong>用户态</strong> 切换到 <strong>内核态</strong> 时的 CPU 寄存器状态。它保存的寄存器状态包括通用寄存器、程序计数器、栈指针、段寄存器等，基本上就是用户态的所有寄存器状态。这是为了当系统调用、中断或异常发生时，能够保存用户态的状态，然后在处理完毕后可以恢复并返回用户态继续执行。</li>
+<li><strong>使用场景</strong>：<code>p-&gt;trapframe</code> 的保存与恢复发生在用户态和内核态之间的切换过程中。例如，当进程执行系统调用时，CPU 的寄存器状态会被保存到 <code>trapframe</code>，以便在系统调用完成后正确返回用户态。</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>
-<p><strong>系统调用的区别</strong></p>
+<li><strong>保存内容不同</strong>：
 <ul>
-<li>
-<p><strong>普通文件</strong>：可以通过常规的系统调用如 <code>open</code>、<code>read</code>、<code>write</code>、<code>close</code> 等操作普通文件。</p>
+<li><strong><code>p-&gt;context</code></strong>：保存的是内核态的寄存器状态，特别是与内核栈相关的状态信息，例如 <code>eip</code>（指向内核代码中的某个位置）、<code>esp</code>（指向内核栈中的某个位置）等。</li>
+<li><strong><code>p-&gt;trapframe</code></strong>：保存的是用户态的寄存器状态以及一些与系统调用和中断相关的状态信息，例如用户态的 <code>eip</code>、<code>esp</code> 以及系统调用号、参数等。</li>
+</ul>
 </li>
-<li>
-<p><strong>特殊文件</strong>：虽然设备文件也可以通过 <code>open</code>、<code>read</code>、<code>write</code> 等系统调用操作，但这些调用最终会被内核处理，并转交给设备的驱动程序，由驱动程序与硬件直接交互。</p>
-</li>
+<li><strong>使用的时机不同</strong>：
+<ul>
+<li><strong><code>p-&gt;context</code></strong>：在进程调度时使用，当系统切换到其他进程时，当前进程的内核态上下文会被保存到 <code>p-&gt;context</code>，并在下次调度回该进程时恢复。</li>
+<li><strong><code>p-&gt;trapframe</code></strong>：在系统调用或中断发生时使用，当进程从用户态进入内核态时，<code>trapframe</code> 用于保存当前的用户态寄存器状态，以便在系统调用或中断处理完毕后能够正确地返回用户态。</li>
 </ul>
 </li>
 </ol>
-<p>普通文件用于存储数据，文件系统会直接对其内容进行操作。而设备文件是与硬件交互的接口，操作这些文件时，实际上是在与对应的设备驱动程序交互，进而与实际的硬件设备交互。这种设计允许设备在 UNIX 文件系统中的统一表示，使得设备的操作与文件操作类似，保持了 UNIX 的一贯简洁和一致性。</p>
-<hr>
-<h2 id="设备文件">设备文件
-</h2><p>设备文件本身<strong>不能被修改</strong>，因为它不包含实际的数据内容。设备文件只是一个接口，通过它可以对硬件设备进行操作。例如，当你写数据到一个设备文件时，这些数据实际上是发送到对应的硬件设备（如硬盘）上，而不是存储在设备文件本身中。</p>
-<p>设备文件在硬盘上<strong>几乎不占用存储空间</strong>。因为设备文件只是一个特殊的文件系统条目，主要存储了设备的标识信息（如主设备号和次设备号），以及一些基础的元数据（例如文件权限、创建时间等）。这些信息占用的空间非常小，通常只需要几个字节到几十个字节。</p>
-<p>与普通文件不同，设备文件没有指向实际数据块的指针，也没有存储用户数据的空间。所以，尽管设备文件存在于文件系统中，但它们在硬盘上占用的存储空间是微乎其微的。</p>
+<p><strong><code>p-&gt;context</code> 与 <code>p-&gt;trapframe</code> 的相同之处</strong></p>
+<ol>
+<li><strong>都是用来保存状态的</strong>：
+<ul>
+<li>无论是 <code>p-&gt;context</code> 还是 <code>p-&gt;trapframe</code>，它们的主要作用都是为了保存进程在某个时刻的 CPU 状态，以便在之后能够正确恢复进程的执行。</li>
+</ul>
+</li>
+<li><strong>都与进程切换有关</strong>：
+<ul>
+<li>虽然 <code>p-&gt;context</code> 和 <code>p-&gt;trapframe</code> 用于不同的切换场景（进程上下文切换 vs 用户态和内核态切换），但它们都涉及到进程在不同执行阶段的切换。</li>
+</ul>
+</li>
+</ol>
+<p>总结</p>
+<ul>
+<li><strong><code>p-&gt;context</code></strong> 保存的是进程在 <strong>内核态</strong> 下的上下文信息，主要用于进程的上下文切换（即调度器在不同进程之间切换时）。</li>
+<li><strong><code>p-&gt;trapframe</code></strong> 保存的是进程在 <strong>用户态</strong> 和 <strong>内核态</strong> 切换时的状态信息，主要用于处理系统调用、中断或异常时的状态保存和恢复。</li>
+</ul>
+<p>二者的作用和使用场景不同，但它们的共同目标都是为了确保进程的执行能够在不同的切换过程中被正确保存和恢复。</p>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="xv6的组织结构">xv6的组织结构
+</h2><ol>
+<li>xv6 使用了传统的<strong>内核</strong>概念 - 一个向其他运行中程序提供服务的特殊程序。每一个运行中程序（称之为<strong>进程</strong>）都拥有包含指令、数据、栈的内存空间。指令实现了程序的运算，数据是用于运算过程的变量，栈管理了程序的过程调用。</li>
+<li>内核使用了 CPU 的硬件保护机制来保证用户进程只能访问自己的内存空间。内核拥有实现保护机制所需的硬件权限(hardware privileges)，而用户程序没有这些权限。当一个用户程序进行一次系统调用时，硬件会提升特权级并且开始执行一些内核中预定义的功能。</li>
+</ol>
 
 </section>
 
@@ -500,7 +520,7 @@
 
 
         <span>
-            最后更新于 Nov 12, 2024 13:44 &#43;0800
+            最后更新于 Nov 12, 2024 23:44 &#43;0800
         </span>
     </section></footer>
 

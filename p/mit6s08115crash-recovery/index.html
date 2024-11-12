@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Crash recovery">
-<title>MIT6S081Lec15</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="崩溃恢复是保障系统可靠性和数据完整性的关键机制，其重要性在于能够在系统遭遇故障或意外关机时，迅速恢复到一致性状态，防止数据丢失和损坏。崩溃恢复通常依赖于日志系统或检查点机制，通过记录操作日志或定期保存系统状态，实现恢复过程。在系统重新启动后，操作系统会借助这些日志或检查点信息重做或撤销未完成的操作，以此来重建数据的一致性状态。这一过程极大地减少了停机时间和服务中断，确保关键应用能够不间断运行，从而增强系统的稳健性。">
+<title>MIT6S081：15Crash recovery</title>
 
-<link rel='canonical' href='https://echudet.github.io/p/mit6s081lec15/'>
+<link rel='canonical' href='https://echudet.github.io/p/mit6s08115crash-recovery/'>
 
-<link rel="stylesheet" href="/scss/style.min.a7f637593c1d99350f36f270c9abc65cf39ec34b45847eb2fa40efef51b94c92.css"><meta property='og:title' content="MIT6S081Lec15">
-<meta property='og:description' content="Crash recovery">
-<meta property='og:url' content='https://echudet.github.io/p/mit6s081lec15/'>
+<link rel="stylesheet" href="/scss/style.min.a7f637593c1d99350f36f270c9abc65cf39ec34b45847eb2fa40efef51b94c92.css"><meta property='og:title' content="MIT6S081：15Crash recovery">
+<meta property='og:description' content="崩溃恢复是保障系统可靠性和数据完整性的关键机制，其重要性在于能够在系统遭遇故障或意外关机时，迅速恢复到一致性状态，防止数据丢失和损坏。崩溃恢复通常依赖于日志系统或检查点机制，通过记录操作日志或定期保存系统状态，实现恢复过程。在系统重新启动后，操作系统会借助这些日志或检查点信息重做或撤销未完成的操作，以此来重建数据的一致性状态。这一过程极大地减少了停机时间和服务中断，确保关键应用能够不间断运行，从而增强系统的稳健性。">
+<meta property='og:url' content='https://echudet.github.io/p/mit6s08115crash-recovery/'>
 <meta property='og:site_name' content='echudet'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-09-29T22:02:50&#43;08:00'/><meta property='article:modified_time' content='2024-11-12T23:05:03&#43;08:00'/><meta property='og:image' content='https://echudet.github.io/p/mit6s081lec15/bg.jpg' />
-<meta name="twitter:title" content="MIT6S081Lec15">
-<meta name="twitter:description" content="Crash recovery"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='https://echudet.github.io/p/mit6s081lec15/bg.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-09-29T22:02:50&#43;08:00'/><meta property='article:modified_time' content='2024-11-12T23:44:05&#43;08:00'/><meta property='og:image' content='https://echudet.github.io/p/mit6s08115crash-recovery/bg.jpg' />
+<meta name="twitter:title" content="MIT6S081：15Crash recovery">
+<meta name="twitter:description" content="崩溃恢复是保障系统可靠性和数据完整性的关键机制，其重要性在于能够在系统遭遇故障或意外关机时，迅速恢复到一致性状态，防止数据丢失和损坏。崩溃恢复通常依赖于日志系统或检查点机制，通过记录操作日志或定期保存系统状态，实现恢复过程。在系统重新启动后，操作系统会借助这些日志或检查点信息重做或撤销未完成的操作，以此来重建数据的一致性状态。这一过程极大地减少了停机时间和服务中断，确保关键应用能够不间断运行，从而增强系统的稳健性。"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://echudet.github.io/p/mit6s08115crash-recovery/bg.jpg' />
     <link rel="shortcut icon" href="/timer.ico" />
 
     </head>
@@ -302,13 +302,13 @@
     <article class="has-image main-article">
     <header class="article-header">
         <div class="article-image">
-            <a href="/p/mit6s081lec15/">
-                <img src="/p/mit6s081lec15/bg_hu5277658011936752031.jpg"
-                        srcset="/p/mit6s081lec15/bg_hu5277658011936752031.jpg 800w, /p/mit6s081lec15/bg_hu12529128250392577342.jpg 1600w"
+            <a href="/p/mit6s08115crash-recovery/">
+                <img src="/p/mit6s08115crash-recovery/bg_hu5277658011936752031.jpg"
+                        srcset="/p/mit6s08115crash-recovery/bg_hu5277658011936752031.jpg 800w, /p/mit6s08115crash-recovery/bg_hu12529128250392577342.jpg 1600w"
                         width="800" 
                         height="450" 
                         loading="lazy"
-                        alt="Featured image of post MIT6S081Lec15" />
+                        alt="Featured image of post MIT6S081：15Crash recovery" />
                 
             </a>
         </div>
@@ -331,12 +331,12 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/mit6s081lec15/">MIT6S081Lec15</a>
+            <a href="/p/mit6s08115crash-recovery/">MIT6S081：15Crash recovery</a>
         </h2>
     
         
         <h3 class="article-subtitle">
-            Crash recovery
+            崩溃恢复是保障系统可靠性和数据完整性的关键机制，其重要性在于能够在系统遭遇故障或意外关机时，迅速恢复到一致性状态，防止数据丢失和损坏。崩溃恢复通常依赖于日志系统或检查点机制，通过记录操作日志或定期保存系统状态，实现恢复过程。在系统重新启动后，操作系统会借助这些日志或检查点信息重做或撤销未完成的操作，以此来重建数据的一致性状态。这一过程极大地减少了停机时间和服务中断，确保关键应用能够不间断运行，从而增强系统的稳健性。
         </h3>
         
     </div>
@@ -385,7 +385,7 @@
 
 
                 <time>
-                    Nov 12, 2024 23:05 &#43;0800
+                    Nov 12, 2024 23:44 &#43;0800
                 </time>
             </div></footer>
     
@@ -589,10 +589,10 @@
 <li>之后是更新root inode，因为文件x创建在根目录，所以需要更新根目录的inode的size字段，以包含这里新创建的文件x</li>
 <li>最后再次更新了文件x的inode</li>
 </ul>
-<p><img src="/p/mit6s081lec15/p26.png"
+<p><img src="/p/mit6s08115crash-recovery/p26.png"
 	width="1017"
 	height="212"
-	srcset="/p/mit6s081lec15/p26_hu13609032275745756791.png 480w, /p/mit6s081lec15/p26_hu6504221620410115434.png 1024w"
+	srcset="/p/mit6s08115crash-recovery/p26_hu13609032275745756791.png 480w, /p/mit6s08115crash-recovery/p26_hu6504221620410115434.png 1024w"
 	loading="lazy"
 	
 		alt="p26"
@@ -618,10 +618,10 @@
 <p>如果这两个文件分别属于用户1和用户2，那么用户1就可以读到用户2的文件了。所以上面的解决方案也不好。</p>
 <p>所以调整写磁盘的顺序并不能彻底解决我们的问题，我们只是从一个问题换到了一个新的问题。</p>
 <p>让我们再看一个例子，这个例子中会向文件x写入“hi”（注，也就是14.5介绍的第二个部分）</p>
-<p><img src="/p/mit6s081lec15/p27.png"
+<p><img src="/p/mit6s08115crash-recovery/p27.png"
 	width="914"
 	height="299"
-	srcset="/p/mit6s081lec15/p27_hu14353094372252244078.png 480w, /p/mit6s081lec15/p27_hu12476567672705489126.png 1024w"
+	srcset="/p/mit6s08115crash-recovery/p27_hu14353094372252244078.png 480w, /p/mit6s08115crash-recovery/p27_hu12476567672705489126.png 1024w"
 	loading="lazy"
 	
 		alt="p27"
@@ -640,10 +640,10 @@
 <li>最后更新文件夹x的inode来更新size字段。</li>
 </ul>
 <p>这里我们也可以问自己一个问题，我们在下面的位置crash了会怎样？</p>
-<p><img src="/p/mit6s081lec15/p28.png"
+<p><img src="/p/mit6s08115crash-recovery/p28.png"
 	width="1028"
 	height="155"
-	srcset="/p/mit6s081lec15/p28_hu11492647275442548050.png 480w, /p/mit6s081lec15/p28_hu26238801969509571.png 1024w"
+	srcset="/p/mit6s08115crash-recovery/p28_hu11492647275442548050.png 480w, /p/mit6s08115crash-recovery/p28_hu26238801969509571.png 1024w"
 	loading="lazy"
 	
 		alt="p28"
@@ -1344,10 +1344,10 @@
 <p>bwrite函数是block cache中实际写磁盘的函数，所以我们将会看到实际写磁盘的记录。</p>
 <p>在上节课（Lec 14）我将print语句放在了log_write中，log_write只能代表文件系统操作的记录，并不能代表实际写磁盘的记录。</p>
 <p>我们这里会像上节课一样执行echo &ldquo;hi&rdquo; &gt; x，并看一下实际的写磁盘过程。</p>
-<p><img src="/p/mit6s081lec15/p29.png"
+<p><img src="/p/mit6s08115crash-recovery/p29.png"
 	width="248"
 	height="604"
-	srcset="/p/mit6s081lec15/p29_hu14027739820400206619.png 480w, /p/mit6s081lec15/p29_hu4905950303556274497.png 1024w"
+	srcset="/p/mit6s08115crash-recovery/p29_hu14027739820400206619.png 480w, /p/mit6s08115crash-recovery/p29_hu4905950303556274497.png 1024w"
 	loading="lazy"
 	
 		alt="p29"
@@ -1681,7 +1681,7 @@
 
 
         <span>
-            最后更新于 Nov 12, 2024 23:05 &#43;0800
+            最后更新于 Nov 12, 2024 23:44 &#43;0800
         </span>
     </section></footer>
 

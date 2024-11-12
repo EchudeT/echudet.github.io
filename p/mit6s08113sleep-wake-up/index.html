@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Sleep & Wake up">
-<title>MIT6S081Lec13</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="进程的“睡眠”和“唤醒”机制是进程调度和资源管理的重要部分。其原理是通过将不需要立即执行的进程置于睡眠状态，释放CPU资源，从而提高系统效率。当进程进入睡眠状态时，它会主动放弃CPU，进行等待某事件的完成。一旦该事件发生，操作系统会通过中断、信号或条件变量等方式唤醒进程，重新将其调度到可执行状态。睡眠和唤醒机制有助于优化资源分配，减少忙等，提高多任务处理的效率，并确保系统响应性和性能的优化。">
+<title>MIT6S081：13Sleep &amp; Wake up</title>
 
-<link rel='canonical' href='https://echudet.github.io/p/mit6s081lec13/'>
+<link rel='canonical' href='https://echudet.github.io/p/mit6s08113sleep-wake-up/'>
 
-<link rel="stylesheet" href="/scss/style.min.a7f637593c1d99350f36f270c9abc65cf39ec34b45847eb2fa40efef51b94c92.css"><meta property='og:title' content="MIT6S081Lec13">
-<meta property='og:description' content="Sleep & Wake up">
-<meta property='og:url' content='https://echudet.github.io/p/mit6s081lec13/'>
+<link rel="stylesheet" href="/scss/style.min.a7f637593c1d99350f36f270c9abc65cf39ec34b45847eb2fa40efef51b94c92.css"><meta property='og:title' content="MIT6S081：13Sleep & Wake up">
+<meta property='og:description' content="进程的“睡眠”和“唤醒”机制是进程调度和资源管理的重要部分。其原理是通过将不需要立即执行的进程置于睡眠状态，释放CPU资源，从而提高系统效率。当进程进入睡眠状态时，它会主动放弃CPU，进行等待某事件的完成。一旦该事件发生，操作系统会通过中断、信号或条件变量等方式唤醒进程，重新将其调度到可执行状态。睡眠和唤醒机制有助于优化资源分配，减少忙等，提高多任务处理的效率，并确保系统响应性和性能的优化。">
+<meta property='og:url' content='https://echudet.github.io/p/mit6s08113sleep-wake-up/'>
 <meta property='og:site_name' content='echudet'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-09-22T22:02:50&#43;08:00'/><meta property='article:modified_time' content='2024-11-12T23:05:03&#43;08:00'/><meta property='og:image' content='https://echudet.github.io/p/mit6s081lec13/bg.jpg' />
-<meta name="twitter:title" content="MIT6S081Lec13">
-<meta name="twitter:description" content="Sleep & Wake up"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='https://echudet.github.io/p/mit6s081lec13/bg.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-09-22T22:02:50&#43;08:00'/><meta property='article:modified_time' content='2024-11-12T23:44:05&#43;08:00'/><meta property='og:image' content='https://echudet.github.io/p/mit6s08113sleep-wake-up/bg.jpg' />
+<meta name="twitter:title" content="MIT6S081：13Sleep & Wake up">
+<meta name="twitter:description" content="进程的“睡眠”和“唤醒”机制是进程调度和资源管理的重要部分。其原理是通过将不需要立即执行的进程置于睡眠状态，释放CPU资源，从而提高系统效率。当进程进入睡眠状态时，它会主动放弃CPU，进行等待某事件的完成。一旦该事件发生，操作系统会通过中断、信号或条件变量等方式唤醒进程，重新将其调度到可执行状态。睡眠和唤醒机制有助于优化资源分配，减少忙等，提高多任务处理的效率，并确保系统响应性和性能的优化。"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://echudet.github.io/p/mit6s08113sleep-wake-up/bg.jpg' />
     <link rel="shortcut icon" href="/timer.ico" />
 
     </head>
@@ -297,13 +297,13 @@
     <article class="has-image main-article">
     <header class="article-header">
         <div class="article-image">
-            <a href="/p/mit6s081lec13/">
-                <img src="/p/mit6s081lec13/bg_hu2695699755507973958.jpg"
-                        srcset="/p/mit6s081lec13/bg_hu2695699755507973958.jpg 800w, /p/mit6s081lec13/bg_hu3457364587767499983.jpg 1600w"
+            <a href="/p/mit6s08113sleep-wake-up/">
+                <img src="/p/mit6s08113sleep-wake-up/bg_hu2695699755507973958.jpg"
+                        srcset="/p/mit6s08113sleep-wake-up/bg_hu2695699755507973958.jpg 800w, /p/mit6s08113sleep-wake-up/bg_hu3457364587767499983.jpg 1600w"
                         width="800" 
                         height="450" 
                         loading="lazy"
-                        alt="Featured image of post MIT6S081Lec13" />
+                        alt="Featured image of post MIT6S081：13Sleep &amp; Wake up" />
                 
             </a>
         </div>
@@ -326,12 +326,12 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/mit6s081lec13/">MIT6S081Lec13</a>
+            <a href="/p/mit6s08113sleep-wake-up/">MIT6S081：13Sleep &amp; Wake up</a>
         </h2>
     
         
         <h3 class="article-subtitle">
-            Sleep &amp; Wake up
+            进程的“睡眠”和“唤醒”机制是进程调度和资源管理的重要部分。其原理是通过将不需要立即执行的进程置于睡眠状态，释放CPU资源，从而提高系统效率。当进程进入睡眠状态时，它会主动放弃CPU，进行等待某事件的完成。一旦该事件发生，操作系统会通过中断、信号或条件变量等方式唤醒进程，重新将其调度到可执行状态。睡眠和唤醒机制有助于优化资源分配，减少忙等，提高多任务处理的效率，并确保系统响应性和性能的优化。
         </h3>
         
     </div>
@@ -380,7 +380,7 @@
 
 
                 <time>
-                    Nov 12, 2024 23:05 &#43;0800
+                    Nov 12, 2024 23:44 &#43;0800
                 </time>
             </div></footer>
     
@@ -940,10 +940,10 @@
 <p>人们发明了很多不同的Coordination的实现方式，但是与许多Unix风格操作系统一样，XV6使用的是Sleep&amp;Wakeup这种方式。</p>
 <p>介绍完背景了，接下来我们看一下XV6的代码。</p>
 <p>为了准备这节课，我重写了UART的驱动代码，XV6通过这里的驱动代码从console中读写字符。</p>
-<p><img src="/p/mit6s081lec13/p13.png"
+<p><img src="/p/mit6s08113sleep-wake-up/p13.png"
 	width="488"
 	height="416"
-	srcset="/p/mit6s081lec13/p13_hu9048506392882014657.png 480w, /p/mit6s081lec13/p13_hu4195329335850157704.png 1024w"
+	srcset="/p/mit6s08113sleep-wake-up/p13_hu9048506392882014657.png 480w, /p/mit6s08113sleep-wake-up/p13_hu4195329335850157704.png 1024w"
 	loading="lazy"
 	
 		alt="p13"
@@ -963,10 +963,10 @@
 <p>如大多数操作系统一样，XV6也的确存在更好的等待方式。</p>
 <p>UART硬件会在完成传输一个字符后，触发一个中断。</p>
 <p>所以UART驱动中除了uartwrite函数外，还有名为uartintr的中断处理程序。这个中断处理程序会在UART硬件触发中断时由trap.c代码调用。</p>
-<p><img src="/p/mit6s081lec13/p14.png"
+<p><img src="/p/mit6s08113sleep-wake-up/p14.png"
 	width="1032"
 	height="622"
-	srcset="/p/mit6s081lec13/p14_hu15900266075412204530.png 480w, /p/mit6s081lec13/p14_hu17020798669946552960.png 1024w"
+	srcset="/p/mit6s08113sleep-wake-up/p14_hu15900266075412204530.png 480w, /p/mit6s08113sleep-wake-up/p14_hu17020798669946552960.png 1024w"
 	loading="lazy"
 	
 		alt="p14"
@@ -1040,10 +1040,10 @@
 <p>这样中断处理程序就有可能运行并且设置done标志位为1。</p>
 <p>之后在sleep函数返回时，再次获取锁。</p>
 <p>让我来修改代码，并看看相应的运行结果是什么。现有的代码中，uartwrite在最开始获取了锁，并在最后释放了锁。</p>
-<p><img src="/p/mit6s081lec13/p15.png"
+<p><img src="/p/mit6s08113sleep-wake-up/p15.png"
 	width="652"
 	height="436"
-	srcset="/p/mit6s081lec13/p15_hu4295009018915899424.png 480w, /p/mit6s081lec13/p15_hu16512682733592663328.png 1024w"
+	srcset="/p/mit6s08113sleep-wake-up/p15_hu4295009018915899424.png 480w, /p/mit6s08113sleep-wake-up/p15_hu16512682733592663328.png 1024w"
 	loading="lazy"
 	
 		alt="p15"
@@ -1055,10 +1055,10 @@
 	
 ></p>
 <p>中断处理程序也在最开始获取锁，之后释放锁。</p>
-<p><img src="/p/mit6s081lec13/p16.png"
+<p><img src="/p/mit6s08113sleep-wake-up/p16.png"
 	width="644"
 	height="284"
-	srcset="/p/mit6s081lec13/p16_hu14699424372301306542.png 480w, /p/mit6s081lec13/p16_hu6634492582513114666.png 1024w"
+	srcset="/p/mit6s08113sleep-wake-up/p16_hu14699424372301306542.png 480w, /p/mit6s08113sleep-wake-up/p16_hu6634492582513114666.png 1024w"
 	loading="lazy"
 	
 		alt="p16"
@@ -1072,10 +1072,10 @@
 <p>接下来，我们会探索为什么只接收一个参数的broken_sleep在这不能工作。</p>
 <p>为了让锁能正常工作，我们需要在调用broken_sleep函数之前释放uart_tx_lock，并在broken_sleep返回时重新获取锁。</p>
 <p>broken_sleep内的代码与之前在白板上演示的是一样的。也就是首先将进程状态设置为SLEEPING，并且保存tx_chan到进程结构体中，最后调用switch函数。</p>
-<p><img src="/p/mit6s081lec13/p17.png"
+<p><img src="/p/mit6s08113sleep-wake-up/p17.png"
 	width="544"
 	height="532"
-	srcset="/p/mit6s081lec13/p17_hu10102088166559816494.png 480w, /p/mit6s081lec13/p17_hu8733463034169091858.png 1024w"
+	srcset="/p/mit6s08113sleep-wake-up/p17_hu10102088166559816494.png 480w, /p/mit6s08113sleep-wake-up/p17_hu8733463034169091858.png 1024w"
 	loading="lazy"
 	
 		alt="p17"
@@ -1127,10 +1127,10 @@
 </blockquote>
 <h2 id="如何避免lost-wakeup">如何避免Lost wakeup
 </h2><p>现在我们的目标是消灭掉lost wakeup。这可以通过消除下面的窗口时间来实现。</p>
-<p><img src="/p/mit6s081lec13/p18.png"
+<p><img src="/p/mit6s08113sleep-wake-up/p18.png"
 	width="316"
 	height="104"
-	srcset="/p/mit6s081lec13/p18_hu9843325075709440457.png 480w, /p/mit6s081lec13/p18_hu8888509490397141538.png 1024w"
+	srcset="/p/mit6s08113sleep-wake-up/p18_hu9843325075709440457.png 480w, /p/mit6s08113sleep-wake-up/p18_hu8888509490397141538.png 1024w"
 	loading="lazy"
 	
 		alt="p18"
@@ -1276,10 +1276,10 @@
 <p>如果你还记得的话，wakeup在唤醒一个进程前，需要先获取进程的锁。</p>
 <p>所以在整个时间uartwrite检查条件之前到sleep函数中调用sched函数之间，这个线程一直持有了保护sleep条件的锁或者p-&gt;lock。</p>
 <p>让我回到UART的代码并强调一下这一点。</p>
-<p><img src="/p/mit6s081lec13/p15.png"
+<p><img src="/p/mit6s08113sleep-wake-up/p15.png"
 	width="652"
 	height="436"
-	srcset="/p/mit6s081lec13/p15_hu4295009018915899424.png 480w, /p/mit6s081lec13/p15_hu16512682733592663328.png 1024w"
+	srcset="/p/mit6s08113sleep-wake-up/p15_hu4295009018915899424.png 480w, /p/mit6s08113sleep-wake-up/p15_hu16512682733592663328.png 1024w"
 	loading="lazy"
 	
 		alt="p15"
@@ -2235,7 +2235,7 @@
 
 
         <span>
-            最后更新于 Nov 12, 2024 23:05 &#43;0800
+            最后更新于 Nov 12, 2024 23:44 &#43;0800
         </span>
     </section></footer>
 

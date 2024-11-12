@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Virtual memory for applications  ">
-<title>MIT6S081Lec17</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="虚拟内存在操作系统中扮演着重要角色，通过抽象物理内存的复杂性为每个进程提供一个统一、隔离的地址空间。这一机制允许程序运行时拥有自己的内存视图，确保不会相互干扰，提升了系统的稳定性与安全性。虚拟内存将物理内存和磁盘空间结合，允许系统运行比实际物理内存更大的程序。通过分页或分段等技术，操作系统能够在后台进行内存和存储之间的智能管理，使用页面置换算法来优化性能，保证多任务处理的高效性。这个机制不仅提高了内存利用率，还使得程序开发更为高效，因为开发者无需处理内存分配的复杂细节。">
+<title>MIT6S081：17Virtual memory for applications</title>
 
-<link rel='canonical' href='https://echudet.github.io/p/mit6s081lec17/'>
+<link rel='canonical' href='https://echudet.github.io/p/mit6s08117virtual-memory-for-applications/'>
 
-<link rel="stylesheet" href="/scss/style.min.a7f637593c1d99350f36f270c9abc65cf39ec34b45847eb2fa40efef51b94c92.css"><meta property='og:title' content="MIT6S081Lec17">
-<meta property='og:description' content="Virtual memory for applications  ">
-<meta property='og:url' content='https://echudet.github.io/p/mit6s081lec17/'>
+<link rel="stylesheet" href="/scss/style.min.a7f637593c1d99350f36f270c9abc65cf39ec34b45847eb2fa40efef51b94c92.css"><meta property='og:title' content="MIT6S081：17Virtual memory for applications">
+<meta property='og:description' content="虚拟内存在操作系统中扮演着重要角色，通过抽象物理内存的复杂性为每个进程提供一个统一、隔离的地址空间。这一机制允许程序运行时拥有自己的内存视图，确保不会相互干扰，提升了系统的稳定性与安全性。虚拟内存将物理内存和磁盘空间结合，允许系统运行比实际物理内存更大的程序。通过分页或分段等技术，操作系统能够在后台进行内存和存储之间的智能管理，使用页面置换算法来优化性能，保证多任务处理的高效性。这个机制不仅提高了内存利用率，还使得程序开发更为高效，因为开发者无需处理内存分配的复杂细节。">
+<meta property='og:url' content='https://echudet.github.io/p/mit6s08117virtual-memory-for-applications/'>
 <meta property='og:site_name' content='echudet'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-10-02T22:02:50&#43;08:00'/><meta property='article:modified_time' content='2024-11-12T23:05:03&#43;08:00'/><meta property='og:image' content='https://echudet.github.io/p/mit6s081lec17/bg.jpg' />
-<meta name="twitter:title" content="MIT6S081Lec17">
-<meta name="twitter:description" content="Virtual memory for applications  "><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='https://echudet.github.io/p/mit6s081lec17/bg.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-10-02T22:02:50&#43;08:00'/><meta property='article:modified_time' content='2024-11-12T23:44:05&#43;08:00'/><meta property='og:image' content='https://echudet.github.io/p/mit6s08117virtual-memory-for-applications/bg.jpg' />
+<meta name="twitter:title" content="MIT6S081：17Virtual memory for applications">
+<meta name="twitter:description" content="虚拟内存在操作系统中扮演着重要角色，通过抽象物理内存的复杂性为每个进程提供一个统一、隔离的地址空间。这一机制允许程序运行时拥有自己的内存视图，确保不会相互干扰，提升了系统的稳定性与安全性。虚拟内存将物理内存和磁盘空间结合，允许系统运行比实际物理内存更大的程序。通过分页或分段等技术，操作系统能够在后台进行内存和存储之间的智能管理，使用页面置换算法来优化性能，保证多任务处理的高效性。这个机制不仅提高了内存利用率，还使得程序开发更为高效，因为开发者无需处理内存分配的复杂细节。"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://echudet.github.io/p/mit6s08117virtual-memory-for-applications/bg.jpg' />
     <link rel="shortcut icon" href="/timer.ico" />
 
     </head>
@@ -313,13 +313,13 @@
     <article class="has-image main-article">
     <header class="article-header">
         <div class="article-image">
-            <a href="/p/mit6s081lec17/">
-                <img src="/p/mit6s081lec17/bg_hu5588127264095518809.jpg"
-                        srcset="/p/mit6s081lec17/bg_hu5588127264095518809.jpg 800w, /p/mit6s081lec17/bg_hu4311978051039720966.jpg 1600w"
+            <a href="/p/mit6s08117virtual-memory-for-applications/">
+                <img src="/p/mit6s08117virtual-memory-for-applications/bg_hu5588127264095518809.jpg"
+                        srcset="/p/mit6s08117virtual-memory-for-applications/bg_hu5588127264095518809.jpg 800w, /p/mit6s08117virtual-memory-for-applications/bg_hu4311978051039720966.jpg 1600w"
                         width="800" 
                         height="496" 
                         loading="lazy"
-                        alt="Featured image of post MIT6S081Lec17" />
+                        alt="Featured image of post MIT6S081：17Virtual memory for applications" />
                 
             </a>
         </div>
@@ -342,12 +342,12 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/mit6s081lec17/">MIT6S081Lec17</a>
+            <a href="/p/mit6s08117virtual-memory-for-applications/">MIT6S081：17Virtual memory for applications</a>
         </h2>
     
         
         <h3 class="article-subtitle">
-            Virtual memory for applications  
+            虚拟内存在操作系统中扮演着重要角色，通过抽象物理内存的复杂性为每个进程提供一个统一、隔离的地址空间。这一机制允许程序运行时拥有自己的内存视图，确保不会相互干扰，提升了系统的稳定性与安全性。虚拟内存将物理内存和磁盘空间结合，允许系统运行比实际物理内存更大的程序。通过分页或分段等技术，操作系统能够在后台进行内存和存储之间的智能管理，使用页面置换算法来优化性能，保证多任务处理的高效性。这个机制不仅提高了内存利用率，还使得程序开发更为高效，因为开发者无需处理内存分配的复杂细节。
         </h3>
         
     </div>
@@ -396,7 +396,7 @@
 
 
                 <time>
-                    Nov 12, 2024 23:05 &#43;0800
+                    Nov 12, 2024 23:44 &#43;0800
                 </time>
             </div></footer>
     
@@ -1082,10 +1082,10 @@
 </div><p>在test_sqrt_region中，会以随机数来遍历表单，并通过实际运算对应的平方根值，来检查表单中相应位置值是不是保存了正确的平方根值。</p>
 <p>在test_sqrt_region运行的过程中，会产生Page Fault，因为现在还并没有分配任何物理内存Page。</p>
 <p>应用程序该如何收到Page Fault呢？</p>
-<p><img src="/p/mit6s081lec17/p30.png"
+<p><img src="/p/mit6s08117virtual-memory-for-applications/p30.png"
 	width="800"
 	height="622"
-	srcset="/p/mit6s081lec17/p30_hu8689687964618436358.png 480w, /p/mit6s081lec17/p30_hu15381687237367237157.png 1024w"
+	srcset="/p/mit6s08117virtual-memory-for-applications/p30_hu8689687964618436358.png 480w, /p/mit6s08117virtual-memory-for-applications/p30_hu15381687237367237157.png 1024w"
 	loading="lazy"
 	
 		alt="p30"
@@ -1098,10 +1098,10 @@
 ></p>
 <p>在setup_sqrt_region函数中有一段代码，通过将handle_sigsegv函数注册到了SIGSEGV事件。</p>
 <p>这样当segfault或者Page Fault发生时，内核会调用handle_sigsegv函数。</p>
-<p><img src="/p/mit6s081lec17/p31.png"
+<p><img src="/p/mit6s08117virtual-memory-for-applications/p31.png"
 	width="750"
 	height="452"
-	srcset="/p/mit6s081lec17/p31_hu12587021300830208574.png 480w, /p/mit6s081lec17/p31_hu7924339075352379419.png 1024w"
+	srcset="/p/mit6s08117virtual-memory-for-applications/p31_hu12587021300830208574.png 480w, /p/mit6s08117virtual-memory-for-applications/p31_hu7924339075352379419.png 1024w"
 	loading="lazy"
 	
 		alt="p31"
@@ -1349,10 +1349,10 @@
 </div><p>make_clist会构建一个LISTSZ大小的链表，分配新的元素，并将新元素加到链表的起始位置，之后更新链表尾指针指向链表新的起始位置，这样就能构成一个循环链表。</p>
 <p>这里更有趣的部分是，GC部分怎么实现。</p>
 <p>首先让我们看看如果没有虚拟内存会怎样。我们只需要查看两个API：new和readptr。</p>
-<p><img src="/p/mit6s081lec17/p32.png"
+<p><img src="/p/mit6s08117virtual-memory-for-applications/p32.png"
 	width="594"
 	height="370"
-	srcset="/p/mit6s081lec17/p32_hu17105423584646106132.png 480w, /p/mit6s081lec17/p32_hu12474184965734027237.png 1024w"
+	srcset="/p/mit6s08117virtual-memory-for-applications/p32_hu17105423584646106132.png 480w, /p/mit6s08117virtual-memory-for-applications/p32_hu12474184965734027237.png 1024w"
 	loading="lazy"
 	
 		alt="p32"
@@ -1367,10 +1367,10 @@
 <p>先假设我们不需要扫描，也不需要collect。</p>
 <p>接下来会检查是否有足够的空间，如果有足够的空间，我们就将指针地址增加一些，以分配内存空间给新的对象，最后返回。</p>
 <p>如果没有足够的空间，我们需要调用flip，也就是运行GC。</p>
-<p><img src="/p/mit6s081lec17/p33.png"
+<p><img src="/p/mit6s08117virtual-memory-for-applications/p33.png"
 	width="692"
 	height="554"
-	srcset="/p/mit6s081lec17/p33_hu16898069880985445187.png 480w, /p/mit6s081lec17/p33_hu3940753797790679317.png 1024w"
+	srcset="/p/mit6s08117virtual-memory-for-applications/p33_hu16898069880985445187.png 480w, /p/mit6s08117virtual-memory-for-applications/p33_hu3940753797790679317.png 1024w"
 	loading="lazy"
 	
 		alt="p33"
@@ -1382,10 +1382,10 @@
 	
 ></p>
 <p>flip首先会切换from和to指针，之后将这个应用程序的两个根节点从from空间forward到to空间。接下来我们看一下forward函数。</p>
-<p><img src="/p/mit6s081lec17/p34.png"
+<p><img src="/p/mit6s08117virtual-memory-for-applications/p34.png"
 	width="716"
 	height="394"
-	srcset="/p/mit6s081lec17/p34_hu6363137880725121647.png 480w, /p/mit6s081lec17/p34_hu11552956348787182468.png 1024w"
+	srcset="/p/mit6s08117virtual-memory-for-applications/p34_hu6363137880725121647.png 480w, /p/mit6s08117virtual-memory-for-applications/p34_hu11552956348787182468.png 1024w"
 	loading="lazy"
 	
 		alt="p34"
@@ -1398,10 +1398,10 @@
 ></p>
 <p>这个函数会forward指针o指向的对象，首先检查指针o是不是在from空间，如果是的话，并且之前没有被拷贝过，那么就将它拷贝到to空间。</p>
 <p>如果之前拷贝过，那么就可以用to空间的指针代替对象指针，并将其返回。</p>
-<p><img src="/p/mit6s081lec17/p35.png"
+<p><img src="/p/mit6s08117virtual-memory-for-applications/p35.png"
 	width="644"
 	height="254"
-	srcset="/p/mit6s081lec17/p35_hu3053779400168255817.png 480w, /p/mit6s081lec17/p35_hu137529026090888139.png 1024w"
+	srcset="/p/mit6s08117virtual-memory-for-applications/p35_hu3053779400168255817.png 480w, /p/mit6s08117virtual-memory-for-applications/p35_hu137529026090888139.png 1024w"
 	loading="lazy"
 	
 		alt="p35"
@@ -1415,10 +1415,10 @@
 <p>对于readptr，如果我们没有使用虚拟内存。</p>
 <p>会对指针p做forward操作，forward操作的意思是如果对象在from空间，那么就将其拷贝到to空间，所以这里会有耗时的检查。</p>
 <p>接下来我们看一下这里如何使用虚拟内存。</p>
-<p><img src="/p/mit6s081lec17/p36.png"
+<p><img src="/p/mit6s08117virtual-memory-for-applications/p36.png"
 	width="1145"
 	height="1227"
-	srcset="/p/mit6s081lec17/p36_hu4063919198517707276.png 480w, /p/mit6s081lec17/p36_hu10121875604825681120.png 1024w"
+	srcset="/p/mit6s08117virtual-memory-for-applications/p36_hu4063919198517707276.png 480w, /p/mit6s08117virtual-memory-for-applications/p36_hu10121875604825681120.png 1024w"
 	loading="lazy"
 	
 		alt="p36"
@@ -1434,10 +1434,10 @@
 <p>之后我们裁剪这个Shared-memory object到from和to空间的大小。</p>
 <p>之后我们通过mmap先将其映射一次，以供mutator也就是实际的应用程序使用。然后再映射一次，以供GC使用。这里shm_open，ftruncate，和两次mmap，等效于map2。</p>
 <p>回过去看之前的代码，</p>
-<p><img src="/p/mit6s081lec17/p35.png"
+<p><img src="/p/mit6s08117virtual-memory-for-applications/p35.png"
 	width="644"
 	height="254"
-	srcset="/p/mit6s081lec17/p35_hu3053779400168255817.png 480w, /p/mit6s081lec17/p35_hu137529026090888139.png 1024w"
+	srcset="/p/mit6s08117virtual-memory-for-applications/p35_hu3053779400168255817.png 480w, /p/mit6s08117virtual-memory-for-applications/p35_hu137529026090888139.png 1024w"
 	loading="lazy"
 	
 		alt="p35"
@@ -1450,10 +1450,10 @@
 ></p>
 <p>使用了虚拟内存之后，readptr将不做任何事情，直接将参数返回。</p>
 <p>当然，如果我们使用这里的指针，并且指针对应的对象位于unscanned区域，我们会得到Page Fault。</p>
-<p><img src="/p/mit6s081lec17/p37.png"
+<p><img src="/p/mit6s08117virtual-memory-for-applications/p37.png"
 	width="768"
 	height="354"
-	srcset="/p/mit6s081lec17/p37_hu10110572656905954947.png 480w, /p/mit6s081lec17/p37_hu3546012909068055607.png 1024w"
+	srcset="/p/mit6s08117virtual-memory-for-applications/p37_hu10110572656905954947.png 480w, /p/mit6s08117virtual-memory-for-applications/p37_hu3546012909068055607.png 1024w"
 	loading="lazy"
 	
 		alt="p37"
@@ -1469,10 +1469,10 @@
 <p>而同时，应用程序或者mutator不能访问这些Page，如果访问了的话，这会产生Page Fault。</p>
 <p>一旦scan执行完成，handler中会将Page设置成对应用程序可访问的（注，也就是调用mprotect）。</p>
 <p>在flip函数中，</p>
-<p><img src="/p/mit6s081lec17/p38.png"
+<p><img src="/p/mit6s08117virtual-memory-for-applications/p38.png"
 	width="692"
 	height="554"
-	srcset="/p/mit6s081lec17/p38_hu16898069880985445187.png 480w, /p/mit6s081lec17/p38_hu3940753797790679317.png 1024w"
+	srcset="/p/mit6s08117virtual-memory-for-applications/p38_hu16898069880985445187.png 480w, /p/mit6s08117virtual-memory-for-applications/p38_hu3940753797790679317.png 1024w"
 	loading="lazy"
 	
 		alt="p38"
@@ -1528,7 +1528,7 @@
 
 
         <span>
-            最后更新于 Nov 12, 2024 23:05 &#43;0800
+            最后更新于 Nov 12, 2024 23:44 &#43;0800
         </span>
     </section></footer>
 

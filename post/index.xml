@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>echudet</copyright>
-        <lastBuildDate>Tue, 12 Nov 2024 23:05:03 +0800</lastBuildDate><atom:link href="https://echudet.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 12 Nov 2024 23:44:05 +0800</lastBuildDate><atom:link href="https://echudet.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>MIT6S081：23RCU</title>
         <link>https://echudet.github.io/p/mit6s08123rcu/</link>
         <pubDate>Tue, 08 Oct 2024 22:02:50 +0800</pubDate>
@@ -10233,12 +10233,12 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 </description>
         </item>
         <item>
-        <title>MIT6S081Lec17</title>
-        <link>https://echudet.github.io/p/mit6s081lec17/</link>
+        <title>MIT6S081：17Virtual memory for applications</title>
+        <link>https://echudet.github.io/p/mit6s08117virtual-memory-for-applications/</link>
         <pubDate>Wed, 02 Oct 2024 22:02:50 +0800</pubDate>
         
-        <guid>https://echudet.github.io/p/mit6s081lec17/</guid>
-        <description>&lt;img src="https://echudet.github.io/p/mit6s081lec17/bg.jpg" alt="Featured image of post MIT6S081Lec17" /&gt;&lt;h1 id=&#34;lecture-17-virtual-memory-for-applications&#34;&gt;Lecture 17 Virtual memory for applications
+        <guid>https://echudet.github.io/p/mit6s08117virtual-memory-for-applications/</guid>
+        <description>&lt;img src="https://echudet.github.io/p/mit6s08117virtual-memory-for-applications/bg.jpg" alt="Featured image of post MIT6S081：17Virtual memory for applications" /&gt;&lt;h1 id=&#34;lecture-17-virtual-memory-for-applications&#34;&gt;Lecture 17 Virtual memory for applications
 &lt;/h1&gt;&lt;h2 id=&#34;课前预习&#34;&gt;课前预习
 &lt;/h2&gt;&lt;h2 id=&#34;论文速览&#34;&gt;论文速览
 &lt;/h2&gt;&lt;p&gt;在&lt;strong&gt;简介&lt;/strong&gt;部分提到，论文的核心讨论点是：虚拟内存（Virtual Memory）不仅仅可以用来扩展操作系统的地址空间，还能用于很多其他的目的，例如内存共享、写时复制（copy-on-write）以及处理保护违规。作者探讨了操作系统应提供给用户程序的虚拟内存基本原语，特别是这些原语如何支持不同的用户级应用。&lt;/p&gt;
@@ -10911,10 +10911,10 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;/div&gt;&lt;p&gt;在test_sqrt_region中，会以随机数来遍历表单，并通过实际运算对应的平方根值，来检查表单中相应位置值是不是保存了正确的平方根值。&lt;/p&gt;
 &lt;p&gt;在test_sqrt_region运行的过程中，会产生Page Fault，因为现在还并没有分配任何物理内存Page。&lt;/p&gt;
 &lt;p&gt;应用程序该如何收到Page Fault呢？&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec17/p30.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08117virtual-memory-for-applications/p30.png&#34;
 	width=&#34;800&#34;
 	height=&#34;622&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec17/p30_hu8689687964618436358.png 480w, https://echudet.github.io/p/mit6s081lec17/p30_hu15381687237367237157.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08117virtual-memory-for-applications/p30_hu8689687964618436358.png 480w, https://echudet.github.io/p/mit6s08117virtual-memory-for-applications/p30_hu15381687237367237157.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p30&#34;
@@ -10927,10 +10927,10 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &gt;&lt;/p&gt;
 &lt;p&gt;在setup_sqrt_region函数中有一段代码，通过将handle_sigsegv函数注册到了SIGSEGV事件。&lt;/p&gt;
 &lt;p&gt;这样当segfault或者Page Fault发生时，内核会调用handle_sigsegv函数。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec17/p31.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08117virtual-memory-for-applications/p31.png&#34;
 	width=&#34;750&#34;
 	height=&#34;452&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec17/p31_hu12587021300830208574.png 480w, https://echudet.github.io/p/mit6s081lec17/p31_hu7924339075352379419.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08117virtual-memory-for-applications/p31_hu12587021300830208574.png 480w, https://echudet.github.io/p/mit6s08117virtual-memory-for-applications/p31_hu7924339075352379419.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p31&#34;
@@ -11178,10 +11178,10 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;/div&gt;&lt;p&gt;make_clist会构建一个LISTSZ大小的链表，分配新的元素，并将新元素加到链表的起始位置，之后更新链表尾指针指向链表新的起始位置，这样就能构成一个循环链表。&lt;/p&gt;
 &lt;p&gt;这里更有趣的部分是，GC部分怎么实现。&lt;/p&gt;
 &lt;p&gt;首先让我们看看如果没有虚拟内存会怎样。我们只需要查看两个API：new和readptr。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec17/p32.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08117virtual-memory-for-applications/p32.png&#34;
 	width=&#34;594&#34;
 	height=&#34;370&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec17/p32_hu17105423584646106132.png 480w, https://echudet.github.io/p/mit6s081lec17/p32_hu12474184965734027237.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08117virtual-memory-for-applications/p32_hu17105423584646106132.png 480w, https://echudet.github.io/p/mit6s08117virtual-memory-for-applications/p32_hu12474184965734027237.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p32&#34;
@@ -11196,10 +11196,10 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;先假设我们不需要扫描，也不需要collect。&lt;/p&gt;
 &lt;p&gt;接下来会检查是否有足够的空间，如果有足够的空间，我们就将指针地址增加一些，以分配内存空间给新的对象，最后返回。&lt;/p&gt;
 &lt;p&gt;如果没有足够的空间，我们需要调用flip，也就是运行GC。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec17/p33.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08117virtual-memory-for-applications/p33.png&#34;
 	width=&#34;692&#34;
 	height=&#34;554&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec17/p33_hu16898069880985445187.png 480w, https://echudet.github.io/p/mit6s081lec17/p33_hu3940753797790679317.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08117virtual-memory-for-applications/p33_hu16898069880985445187.png 480w, https://echudet.github.io/p/mit6s08117virtual-memory-for-applications/p33_hu3940753797790679317.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p33&#34;
@@ -11211,10 +11211,10 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;flip首先会切换from和to指针，之后将这个应用程序的两个根节点从from空间forward到to空间。接下来我们看一下forward函数。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec17/p34.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08117virtual-memory-for-applications/p34.png&#34;
 	width=&#34;716&#34;
 	height=&#34;394&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec17/p34_hu6363137880725121647.png 480w, https://echudet.github.io/p/mit6s081lec17/p34_hu11552956348787182468.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08117virtual-memory-for-applications/p34_hu6363137880725121647.png 480w, https://echudet.github.io/p/mit6s08117virtual-memory-for-applications/p34_hu11552956348787182468.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p34&#34;
@@ -11227,10 +11227,10 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &gt;&lt;/p&gt;
 &lt;p&gt;这个函数会forward指针o指向的对象，首先检查指针o是不是在from空间，如果是的话，并且之前没有被拷贝过，那么就将它拷贝到to空间。&lt;/p&gt;
 &lt;p&gt;如果之前拷贝过，那么就可以用to空间的指针代替对象指针，并将其返回。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec17/p35.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08117virtual-memory-for-applications/p35.png&#34;
 	width=&#34;644&#34;
 	height=&#34;254&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec17/p35_hu3053779400168255817.png 480w, https://echudet.github.io/p/mit6s081lec17/p35_hu137529026090888139.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08117virtual-memory-for-applications/p35_hu3053779400168255817.png 480w, https://echudet.github.io/p/mit6s08117virtual-memory-for-applications/p35_hu137529026090888139.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p35&#34;
@@ -11244,10 +11244,10 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;对于readptr，如果我们没有使用虚拟内存。&lt;/p&gt;
 &lt;p&gt;会对指针p做forward操作，forward操作的意思是如果对象在from空间，那么就将其拷贝到to空间，所以这里会有耗时的检查。&lt;/p&gt;
 &lt;p&gt;接下来我们看一下这里如何使用虚拟内存。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec17/p36.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08117virtual-memory-for-applications/p36.png&#34;
 	width=&#34;1145&#34;
 	height=&#34;1227&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec17/p36_hu4063919198517707276.png 480w, https://echudet.github.io/p/mit6s081lec17/p36_hu10121875604825681120.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08117virtual-memory-for-applications/p36_hu4063919198517707276.png 480w, https://echudet.github.io/p/mit6s08117virtual-memory-for-applications/p36_hu10121875604825681120.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p36&#34;
@@ -11263,10 +11263,10 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;之后我们裁剪这个Shared-memory object到from和to空间的大小。&lt;/p&gt;
 &lt;p&gt;之后我们通过mmap先将其映射一次，以供mutator也就是实际的应用程序使用。然后再映射一次，以供GC使用。这里shm_open，ftruncate，和两次mmap，等效于map2。&lt;/p&gt;
 &lt;p&gt;回过去看之前的代码，&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec17/p35.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08117virtual-memory-for-applications/p35.png&#34;
 	width=&#34;644&#34;
 	height=&#34;254&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec17/p35_hu3053779400168255817.png 480w, https://echudet.github.io/p/mit6s081lec17/p35_hu137529026090888139.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08117virtual-memory-for-applications/p35_hu3053779400168255817.png 480w, https://echudet.github.io/p/mit6s08117virtual-memory-for-applications/p35_hu137529026090888139.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p35&#34;
@@ -11279,10 +11279,10 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &gt;&lt;/p&gt;
 &lt;p&gt;使用了虚拟内存之后，readptr将不做任何事情，直接将参数返回。&lt;/p&gt;
 &lt;p&gt;当然，如果我们使用这里的指针，并且指针对应的对象位于unscanned区域，我们会得到Page Fault。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec17/p37.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08117virtual-memory-for-applications/p37.png&#34;
 	width=&#34;768&#34;
 	height=&#34;354&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec17/p37_hu10110572656905954947.png 480w, https://echudet.github.io/p/mit6s081lec17/p37_hu3546012909068055607.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08117virtual-memory-for-applications/p37_hu10110572656905954947.png 480w, https://echudet.github.io/p/mit6s08117virtual-memory-for-applications/p37_hu3546012909068055607.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p37&#34;
@@ -11298,10 +11298,10 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;而同时，应用程序或者mutator不能访问这些Page，如果访问了的话，这会产生Page Fault。&lt;/p&gt;
 &lt;p&gt;一旦scan执行完成，handler中会将Page设置成对应用程序可访问的（注，也就是调用mprotect）。&lt;/p&gt;
 &lt;p&gt;在flip函数中，&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec17/p38.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08117virtual-memory-for-applications/p38.png&#34;
 	width=&#34;692&#34;
 	height=&#34;554&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec17/p38_hu16898069880985445187.png 480w, https://echudet.github.io/p/mit6s081lec17/p38_hu3940753797790679317.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08117virtual-memory-for-applications/p38_hu16898069880985445187.png 480w, https://echudet.github.io/p/mit6s08117virtual-memory-for-applications/p38_hu3940753797790679317.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p38&#34;
@@ -11343,12 +11343,12 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 </description>
         </item>
         <item>
-        <title>MIT6S081Lec16</title>
-        <link>https://echudet.github.io/p/mit6s081lec16/</link>
+        <title>MIT6S081：16File system performance and fast crash recovery</title>
+        <link>https://echudet.github.io/p/mit6s08116file-system-performance-and-fast-crash-recovery/</link>
         <pubDate>Tue, 01 Oct 2024 22:02:50 +0800</pubDate>
         
-        <guid>https://echudet.github.io/p/mit6s081lec16/</guid>
-        <description>&lt;img src="https://echudet.github.io/p/mit6s081lec16/bg.jpg" alt="Featured image of post MIT6S081Lec16" /&gt;&lt;h1 id=&#34;lecture-16-file-system-performance-and-fast-crash-recovery&#34;&gt;Lecture 16 File system performance and fast crash recovery
+        <guid>https://echudet.github.io/p/mit6s08116file-system-performance-and-fast-crash-recovery/</guid>
+        <description>&lt;img src="https://echudet.github.io/p/mit6s08116file-system-performance-and-fast-crash-recovery/bg.jpg" alt="Featured image of post MIT6S081：16File system performance and fast crash recovery" /&gt;&lt;h1 id=&#34;lecture-16-file-system-performance-and-fast-crash-recovery&#34;&gt;Lecture 16 File system performance and fast crash recovery
 &lt;/h1&gt;&lt;h2 id=&#34;课前预习&#34;&gt;课前预习
 &lt;/h2&gt;&lt;h2 id=&#34;什么是文件系统&#34;&gt;什么是文件系统
 &lt;/h2&gt;&lt;p&gt;对于任何文件系统，我们都需要什么功能？文件系统所服务的操作系统有明确的要求。文件系统对应用程序的表现方式是：一个操作系统通常需要遵守某些约定的文件名，并且文件具有某些以特定方式解释的属性。&lt;/p&gt;
@@ -12109,12 +12109,12 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 </description>
         </item>
         <item>
-        <title>MIT6S081Lec15</title>
-        <link>https://echudet.github.io/p/mit6s081lec15/</link>
+        <title>MIT6S081：15Crash recovery</title>
+        <link>https://echudet.github.io/p/mit6s08115crash-recovery/</link>
         <pubDate>Sun, 29 Sep 2024 22:02:50 +0800</pubDate>
         
-        <guid>https://echudet.github.io/p/mit6s081lec15/</guid>
-        <description>&lt;img src="https://echudet.github.io/p/mit6s081lec15/bg.jpg" alt="Featured image of post MIT6S081Lec15" /&gt;&lt;h1 id=&#34;lec15-crash-recovery&#34;&gt;Lec15 Crash recovery
+        <guid>https://echudet.github.io/p/mit6s08115crash-recovery/</guid>
+        <description>&lt;img src="https://echudet.github.io/p/mit6s08115crash-recovery/bg.jpg" alt="Featured image of post MIT6S081：15Crash recovery" /&gt;&lt;h1 id=&#34;lec15-crash-recovery&#34;&gt;Lec15 Crash recovery
 &lt;/h1&gt;&lt;h2 id=&#34;课前预习&#34;&gt;课前预习
 &lt;/h2&gt;&lt;h2 id=&#34;日志层&#34;&gt;日志层
 &lt;/h2&gt;&lt;p&gt;文件系统设计中最有趣的问题之一是崩溃恢复。&lt;/p&gt;
@@ -12305,10 +12305,10 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;li&gt;之后是更新root inode，因为文件x创建在根目录，所以需要更新根目录的inode的size字段，以包含这里新创建的文件x&lt;/li&gt;
 &lt;li&gt;最后再次更新了文件x的inode&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec15/p26.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08115crash-recovery/p26.png&#34;
 	width=&#34;1017&#34;
 	height=&#34;212&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec15/p26_hu13609032275745756791.png 480w, https://echudet.github.io/p/mit6s081lec15/p26_hu6504221620410115434.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08115crash-recovery/p26_hu13609032275745756791.png 480w, https://echudet.github.io/p/mit6s08115crash-recovery/p26_hu6504221620410115434.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p26&#34;
@@ -12334,10 +12334,10 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;如果这两个文件分别属于用户1和用户2，那么用户1就可以读到用户2的文件了。所以上面的解决方案也不好。&lt;/p&gt;
 &lt;p&gt;所以调整写磁盘的顺序并不能彻底解决我们的问题，我们只是从一个问题换到了一个新的问题。&lt;/p&gt;
 &lt;p&gt;让我们再看一个例子，这个例子中会向文件x写入“hi”（注，也就是14.5介绍的第二个部分）&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec15/p27.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08115crash-recovery/p27.png&#34;
 	width=&#34;914&#34;
 	height=&#34;299&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec15/p27_hu14353094372252244078.png 480w, https://echudet.github.io/p/mit6s081lec15/p27_hu12476567672705489126.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08115crash-recovery/p27_hu14353094372252244078.png 480w, https://echudet.github.io/p/mit6s08115crash-recovery/p27_hu12476567672705489126.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p27&#34;
@@ -12356,10 +12356,10 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;li&gt;最后更新文件夹x的inode来更新size字段。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;这里我们也可以问自己一个问题，我们在下面的位置crash了会怎样？&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec15/p28.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08115crash-recovery/p28.png&#34;
 	width=&#34;1028&#34;
 	height=&#34;155&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec15/p28_hu11492647275442548050.png 480w, https://echudet.github.io/p/mit6s081lec15/p28_hu26238801969509571.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08115crash-recovery/p28_hu11492647275442548050.png 480w, https://echudet.github.io/p/mit6s08115crash-recovery/p28_hu26238801969509571.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p28&#34;
@@ -13060,10 +13060,10 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;bwrite函数是block cache中实际写磁盘的函数，所以我们将会看到实际写磁盘的记录。&lt;/p&gt;
 &lt;p&gt;在上节课（Lec 14）我将print语句放在了log_write中，log_write只能代表文件系统操作的记录，并不能代表实际写磁盘的记录。&lt;/p&gt;
 &lt;p&gt;我们这里会像上节课一样执行echo &amp;ldquo;hi&amp;rdquo; &amp;gt; x，并看一下实际的写磁盘过程。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec15/p29.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08115crash-recovery/p29.png&#34;
 	width=&#34;248&#34;
 	height=&#34;604&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec15/p29_hu14027739820400206619.png 480w, https://echudet.github.io/p/mit6s081lec15/p29_hu4905950303556274497.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08115crash-recovery/p29_hu14027739820400206619.png 480w, https://echudet.github.io/p/mit6s08115crash-recovery/p29_hu4905950303556274497.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p29&#34;
@@ -13383,12 +13383,12 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 </description>
         </item>
         <item>
-        <title>MIT6S081Lec14</title>
-        <link>https://echudet.github.io/p/mit6s081lec14/</link>
+        <title>MIT6S081：14File Systems</title>
+        <link>https://echudet.github.io/p/mit6s08114file-systems/</link>
         <pubDate>Sat, 28 Sep 2024 22:02:50 +0800</pubDate>
         
-        <guid>https://echudet.github.io/p/mit6s081lec14/</guid>
-        <description>&lt;img src="https://echudet.github.io/p/mit6s081lec14/bg.jpg" alt="Featured image of post MIT6S081Lec14" /&gt;&lt;h1 id=&#34;lecture-14-file-systems&#34;&gt;Lecture 14 File Systems
+        <guid>https://echudet.github.io/p/mit6s08114file-systems/</guid>
+        <description>&lt;img src="https://echudet.github.io/p/mit6s08114file-systems/bg.jpg" alt="Featured image of post MIT6S081：14File Systems" /&gt;&lt;h1 id=&#34;lecture-14-file-systems&#34;&gt;Lecture 14 File Systems
 &lt;/h1&gt;&lt;h2 id=&#34;预习&#34;&gt;预习
 &lt;/h2&gt;&lt;h2 id=&#34;概述&#34;&gt;概述
 &lt;/h2&gt;&lt;p&gt;xv6文件系统实现分为七层，如图8.1所示。&lt;/p&gt;
@@ -13429,10 +13429,10 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;&lt;strong&gt;文件描述符层&lt;/strong&gt;使用文件系统接口抽象了许多Unix资源（例如，管道、设备、文件等），简化了应用程序员的工作。&lt;/p&gt;
 &lt;p&gt;文件系统必须有将索引节点和内容块存储在磁盘上哪些位置的方案。&lt;/p&gt;
 &lt;p&gt;为此，xv6将磁盘划分为几个部分，如图8.2所示。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec14/p19.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08114file-systems/p19.png&#34;
 	width=&#34;880&#34;
 	height=&#34;216&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec14/p19_hu14595411311521921048.png 480w, https://echudet.github.io/p/mit6s081lec14/p19_hu11989751336132836270.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08114file-systems/p19_hu14595411311521921048.png 480w, https://echudet.github.io/p/mit6s08114file-systems/p19_hu11989751336132836270.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p19&#34;
@@ -13966,10 +13966,10 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;/blockquote&gt;
 &lt;h2 id=&#34;代码inode包含内容&#34;&gt;代码：Inode包含内容
 &lt;/h2&gt;&lt;p&gt;磁盘上的inode结构体&lt;code&gt;struct dinode&lt;/code&gt;包含一个&lt;code&gt;size&lt;/code&gt;和一个块号数组（见图8.3）。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec14/p20.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08114file-systems/p20.png&#34;
 	width=&#34;804&#34;
 	height=&#34;702&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec14/p20_hu14986194811601962196.png 480w, https://echudet.github.io/p/mit6s081lec14/p20_hu1987737314334122942.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08114file-systems/p20_hu14986194811601962196.png 480w, https://echudet.github.io/p/mit6s08114file-systems/p20_hu1987737314334122942.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p20&#34;
@@ -14477,10 +14477,10 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;/ul&gt;
 &lt;p&gt;不同的文件系统组织方式和每一层可能都略有不同，有的时候分层也没有那么严格，即使在XV6中分层也不是很严格，但是从概念上来说这里的结构对于理解文件系统还是有帮助的。&lt;/p&gt;
 &lt;p&gt;实际上所有的文件系统都有组件对应这里不同的分层，例如buffer cache，logging，inode和路径名。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec14/p21.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08114file-systems/p21.png&#34;
 	width=&#34;1037&#34;
 	height=&#34;605&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec14/p21_hu8484048998491121083.png 480w, https://echudet.github.io/p/mit6s081lec14/p21_hu12311631626987082659.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08114file-systems/p21_hu8484048998491121083.png 480w, https://echudet.github.io/p/mit6s08114file-systems/p21_hu12311631626987082659.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p21&#34;
@@ -14508,10 +14508,10 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;这里的接口还是挺简单的，包括了read/write，然后以block编号作为参数。&lt;/p&gt;
 &lt;p&gt;虽然我们这里描述的过于简单了，但是实际的接口大概就是这样。&lt;/p&gt;
 &lt;p&gt;在内部，SSD和HDD工作方式完全不一样，但是对于硬件的抽象屏蔽了这些差异。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec14/p22.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08114file-systems/p22.png&#34;
 	width=&#34;1030&#34;
 	height=&#34;617&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec14/p22_hu3549751186551560064.png 480w, https://echudet.github.io/p/mit6s081lec14/p22_hu13967414081836493866.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08114file-systems/p22_hu3549751186551560064.png 480w, https://echudet.github.io/p/mit6s08114file-systems/p22_hu13967414081836493866.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p22&#34;
@@ -14644,10 +14644,10 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;li&gt;第三阶段将“\n”换行符写入到文件&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;如果你去看echo的代码实现，基本就是这3个阶段。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec14/p23.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08114file-systems/p23.png&#34;
 	width=&#34;412&#34;
 	height=&#34;324&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec14/p23_hu6585980430547922093.png 480w, https://echudet.github.io/p/mit6s081lec14/p23_hu2845979455359144678.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08114file-systems/p23_hu6585980430547922093.png 480w, https://echudet.github.io/p/mit6s08114file-systems/p23_hu2845979455359144678.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p23&#34;
@@ -14660,10 +14660,10 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &gt;&lt;/p&gt;
 &lt;p&gt;上面就是echo的代码，它先检查参数，并将参数写入到文件描述符1，在最后写入一个换行符。&lt;/p&gt;
 &lt;p&gt;让我们一个阶段一个阶段的看echo的执行过程，并理解对于文件系统发生了什么。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec14/p25.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08114file-systems/p25.png&#34;
 	width=&#34;242&#34;
 	height=&#34;384&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec14/p25_hu176464881452644642.png 480w, https://echudet.github.io/p/mit6s081lec14/p25_hu5103932944255705960.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08114file-systems/p25_hu176464881452644642.png 480w, https://echudet.github.io/p/mit6s08114file-systems/p25_hu5103932944255705960.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p25&#34;
@@ -14675,10 +14675,10 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;相比看代码，这里直接看磁盘的分布图更方便：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec14/p24.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08114file-systems/p24.png&#34;
 	width=&#34;1024&#34;
 	height=&#34;428&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec14/p24_hu7176191052840782122.png 480w, https://echudet.github.io/p/mit6s081lec14/p24_hu11147931507535931379.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08114file-systems/p24_hu7176191052840782122.png 480w, https://echudet.github.io/p/mit6s08114file-systems/p24_hu11147931507535931379.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p24&#34;
@@ -15275,12 +15275,12 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 </description>
         </item>
         <item>
-        <title>MIT6S081Lec13</title>
-        <link>https://echudet.github.io/p/mit6s081lec13/</link>
+        <title>MIT6S081：13Sleep &amp; Wake up</title>
+        <link>https://echudet.github.io/p/mit6s08113sleep-wake-up/</link>
         <pubDate>Sun, 22 Sep 2024 22:02:50 +0800</pubDate>
         
-        <guid>https://echudet.github.io/p/mit6s081lec13/</guid>
-        <description>&lt;img src="https://echudet.github.io/p/mit6s081lec13/bg.jpg" alt="Featured image of post MIT6S081Lec13" /&gt;&lt;h1 id=&#34;lecture-13-sleep--wake-up&#34;&gt;Lecture 13 Sleep &amp;amp; Wake up
+        <guid>https://echudet.github.io/p/mit6s08113sleep-wake-up/</guid>
+        <description>&lt;img src="https://echudet.github.io/p/mit6s08113sleep-wake-up/bg.jpg" alt="Featured image of post MIT6S081：13Sleep &amp; Wake up" /&gt;&lt;h1 id=&#34;lecture-13-sleep--wake-up&#34;&gt;Lecture 13 Sleep &amp;amp; Wake up
 &lt;/h1&gt;&lt;h2 id=&#34;预习&#34;&gt;预习
 &lt;/h2&gt;&lt;h2 id=&#34;sleep与wakeup&#34;&gt;sleep与wakeup
 &lt;/h2&gt;&lt;p&gt;调度和锁有助于隐藏一个进程对另一个进程的存在，但到目前为止，我们还没有帮助进程进行有意交互的抽象。&lt;/p&gt;
@@ -15827,10 +15827,10 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;人们发明了很多不同的Coordination的实现方式，但是与许多Unix风格操作系统一样，XV6使用的是Sleep&amp;amp;Wakeup这种方式。&lt;/p&gt;
 &lt;p&gt;介绍完背景了，接下来我们看一下XV6的代码。&lt;/p&gt;
 &lt;p&gt;为了准备这节课，我重写了UART的驱动代码，XV6通过这里的驱动代码从console中读写字符。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec13/p13.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08113sleep-wake-up/p13.png&#34;
 	width=&#34;488&#34;
 	height=&#34;416&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec13/p13_hu9048506392882014657.png 480w, https://echudet.github.io/p/mit6s081lec13/p13_hu4195329335850157704.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08113sleep-wake-up/p13_hu9048506392882014657.png 480w, https://echudet.github.io/p/mit6s08113sleep-wake-up/p13_hu4195329335850157704.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p13&#34;
@@ -15850,10 +15850,10 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;如大多数操作系统一样，XV6也的确存在更好的等待方式。&lt;/p&gt;
 &lt;p&gt;UART硬件会在完成传输一个字符后，触发一个中断。&lt;/p&gt;
 &lt;p&gt;所以UART驱动中除了uartwrite函数外，还有名为uartintr的中断处理程序。这个中断处理程序会在UART硬件触发中断时由trap.c代码调用。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec13/p14.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08113sleep-wake-up/p14.png&#34;
 	width=&#34;1032&#34;
 	height=&#34;622&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec13/p14_hu15900266075412204530.png 480w, https://echudet.github.io/p/mit6s081lec13/p14_hu17020798669946552960.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08113sleep-wake-up/p14_hu15900266075412204530.png 480w, https://echudet.github.io/p/mit6s08113sleep-wake-up/p14_hu17020798669946552960.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p14&#34;
@@ -15927,10 +15927,10 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;这样中断处理程序就有可能运行并且设置done标志位为1。&lt;/p&gt;
 &lt;p&gt;之后在sleep函数返回时，再次获取锁。&lt;/p&gt;
 &lt;p&gt;让我来修改代码，并看看相应的运行结果是什么。现有的代码中，uartwrite在最开始获取了锁，并在最后释放了锁。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec13/p15.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08113sleep-wake-up/p15.png&#34;
 	width=&#34;652&#34;
 	height=&#34;436&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec13/p15_hu4295009018915899424.png 480w, https://echudet.github.io/p/mit6s081lec13/p15_hu16512682733592663328.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08113sleep-wake-up/p15_hu4295009018915899424.png 480w, https://echudet.github.io/p/mit6s08113sleep-wake-up/p15_hu16512682733592663328.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p15&#34;
@@ -15942,10 +15942,10 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;中断处理程序也在最开始获取锁，之后释放锁。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec13/p16.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08113sleep-wake-up/p16.png&#34;
 	width=&#34;644&#34;
 	height=&#34;284&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec13/p16_hu14699424372301306542.png 480w, https://echudet.github.io/p/mit6s081lec13/p16_hu6634492582513114666.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08113sleep-wake-up/p16_hu14699424372301306542.png 480w, https://echudet.github.io/p/mit6s08113sleep-wake-up/p16_hu6634492582513114666.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p16&#34;
@@ -15959,10 +15959,10 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;接下来，我们会探索为什么只接收一个参数的broken_sleep在这不能工作。&lt;/p&gt;
 &lt;p&gt;为了让锁能正常工作，我们需要在调用broken_sleep函数之前释放uart_tx_lock，并在broken_sleep返回时重新获取锁。&lt;/p&gt;
 &lt;p&gt;broken_sleep内的代码与之前在白板上演示的是一样的。也就是首先将进程状态设置为SLEEPING，并且保存tx_chan到进程结构体中，最后调用switch函数。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec13/p17.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08113sleep-wake-up/p17.png&#34;
 	width=&#34;544&#34;
 	height=&#34;532&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec13/p17_hu10102088166559816494.png 480w, https://echudet.github.io/p/mit6s081lec13/p17_hu8733463034169091858.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08113sleep-wake-up/p17_hu10102088166559816494.png 480w, https://echudet.github.io/p/mit6s08113sleep-wake-up/p17_hu8733463034169091858.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p17&#34;
@@ -16014,10 +16014,10 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;/blockquote&gt;
 &lt;h2 id=&#34;如何避免lost-wakeup&#34;&gt;如何避免Lost wakeup
 &lt;/h2&gt;&lt;p&gt;现在我们的目标是消灭掉lost wakeup。这可以通过消除下面的窗口时间来实现。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec13/p18.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08113sleep-wake-up/p18.png&#34;
 	width=&#34;316&#34;
 	height=&#34;104&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec13/p18_hu9843325075709440457.png 480w, https://echudet.github.io/p/mit6s081lec13/p18_hu8888509490397141538.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08113sleep-wake-up/p18_hu9843325075709440457.png 480w, https://echudet.github.io/p/mit6s08113sleep-wake-up/p18_hu8888509490397141538.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p18&#34;
@@ -16163,10 +16163,10 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;如果你还记得的话，wakeup在唤醒一个进程前，需要先获取进程的锁。&lt;/p&gt;
 &lt;p&gt;所以在整个时间uartwrite检查条件之前到sleep函数中调用sched函数之间，这个线程一直持有了保护sleep条件的锁或者p-&amp;gt;lock。&lt;/p&gt;
 &lt;p&gt;让我回到UART的代码并强调一下这一点。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec13/p15.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08113sleep-wake-up/p15.png&#34;
 	width=&#34;652&#34;
 	height=&#34;436&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec13/p15_hu4295009018915899424.png 480w, https://echudet.github.io/p/mit6s081lec13/p15_hu16512682733592663328.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08113sleep-wake-up/p15_hu4295009018915899424.png 480w, https://echudet.github.io/p/mit6s08113sleep-wake-up/p15_hu16512682733592663328.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p15&#34;
@@ -17108,12 +17108,12 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 </description>
         </item>
         <item>
-        <title>MIT6S081Lec11</title>
-        <link>https://echudet.github.io/p/mit6s081lec11/</link>
+        <title>MIT6S081：11Thread switching</title>
+        <link>https://echudet.github.io/p/mit6s08111thread-switching/</link>
         <pubDate>Sat, 21 Sep 2024 22:02:50 +0800</pubDate>
         
-        <guid>https://echudet.github.io/p/mit6s081lec11/</guid>
-        <description>&lt;img src="https://echudet.github.io/p/mit6s081lec11/bg.jpg" alt="Featured image of post MIT6S081Lec11" /&gt;&lt;h1 id=&#34;lecture-11-thread-switching&#34;&gt;Lecture 11 Thread switching
+        <guid>https://echudet.github.io/p/mit6s08111thread-switching/</guid>
+        <description>&lt;img src="https://echudet.github.io/p/mit6s08111thread-switching/bg.jpg" alt="Featured image of post MIT6S081：11Thread switching" /&gt;&lt;h1 id=&#34;lecture-11-thread-switching&#34;&gt;Lecture 11 Thread switching
 &lt;/h1&gt;&lt;h2 id=&#34;预习&#34;&gt;预习
 &lt;/h2&gt;&lt;h2 id=&#34;多路复用&#34;&gt;多路复用
 &lt;/h2&gt;&lt;p&gt;Xv6通过在两种情况下将每个CPU从一个进程切换到另一个进程来实现多路复用（Multiplexing）。&lt;/p&gt;
@@ -17174,10 +17174,10 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;hr&gt;
 &lt;h2 id=&#34;代码上下文切换&#34;&gt;代码：上下文切换
 &lt;/h2&gt;&lt;p&gt;图7.1概述了从一个用户进程（旧进程）切换到另一个用户进程（新进程）所涉及的步骤&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec11/p1.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08111thread-switching/p1.png&#34;
 	width=&#34;1280&#34;
 	height=&#34;534&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec11/p1_hu15221383078518384773.png 480w, https://echudet.github.io/p/mit6s081lec11/p1_hu15272853361892182139.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08111thread-switching/p1_hu15221383078518384773.png 480w, https://echudet.github.io/p/mit6s08111thread-switching/p1_hu15272853361892182139.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p1&#34;
@@ -17424,11 +17424,7 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;如果进程处于RUNNABLE状态，空闲的 CPU 调度程序必须能够&lt;/p&gt;
-&lt;p&gt;安全地运行该进程&lt;/p&gt;
-&lt;p&gt;。这意味着：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;p-&amp;gt;context&lt;/code&gt; 必须保存该进程的寄存器状态，因为它已经不再在 CPU 的实际寄存器中。&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;安全地运行该进程。这意味着：&lt;code&gt;p-&amp;gt;context&lt;/code&gt; 必须保存该进程的寄存器状态，因为它已经不再在 CPU 的实际寄存器中。&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;没有 CPU 正在使用该进程的内核栈，确保没有其他 CPU 在执行该进程。&lt;/p&gt;
@@ -17446,8 +17442,11 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;&lt;strong&gt;“安全地从进程中切换出去”和“空闲 CPU 的调度程序必须安全地运行它”是什么意思？&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;“安全地从进程中切换出去”&lt;/strong&gt;：&lt;/li&gt;
-&lt;li&gt;当一个正在运行的进程（&lt;code&gt;RUNNING&lt;/code&gt; 状态）被计时器中断触发时，操作系统可能决定切换到另一个进程。这时，系统必须能够&lt;strong&gt;安全地切换&lt;/strong&gt;，意味着当前进程的寄存器状态必须妥善保存，否则在切换回来时进程可能会丢失当前状态。因此，CPU 寄存器必须保持进程的寄存器值，不能在 &lt;code&gt;swtch&lt;/code&gt; 中过早地将其保存到 &lt;code&gt;p-&amp;gt;context&lt;/code&gt; 中。&lt;/li&gt;
+&lt;li&gt;当一个正在运行的进程（&lt;code&gt;RUNNING&lt;/code&gt; 状态）被计时器中断触发时，操作系统可能决定切换到另一个进程。这时，系统必须能够&lt;strong&gt;安全地切换&lt;/strong&gt;，意味着当前进程的寄存器状态必须妥善保存，否则在切换回来时进程可能会丢失当前状态。因此，CPU 寄存器必须保持进程的寄存器值，不能在 &lt;code&gt;swtch&lt;/code&gt; 中过早地将其保存到 &lt;code&gt;p-&amp;gt;context&lt;/code&gt; 中。
+&lt;ul&gt;
 &lt;li&gt;简单来说，这意味着在切换到调度程序前，系统必须确保当前进程的所有运行状态都已正确保存，以便下次切换回来时能够恢复。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;“空闲 CPU 的调度程序必须安全地运行它”&lt;/strong&gt;：
 &lt;ul&gt;
 &lt;li&gt;当某个 CPU 处于空闲状态，调度程序会从可运行的进程队列中选择一个RUNNABLE状态的进程并运行它。为了确保安全运行，系统必须确保：
@@ -17461,19 +17460,10 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;为什么说“保持 &lt;code&gt;p-&amp;gt;lock&lt;/code&gt; 时，这些属性通常不成立”，“这些属性”又是什么？&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;这些属性&lt;/strong&gt; 指的是：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;当进程处于 &lt;code&gt;RUNNING&lt;/code&gt; 状态时，计时器中断发生时，CPU 寄存器必须保持进程的寄存器值，&lt;code&gt;c-&amp;gt;proc&lt;/code&gt; 必须指向该进程。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;ol start=&#34;2&#34;&gt;
 &lt;li&gt;当进程处于 &lt;code&gt;RUNNABLE&lt;/code&gt; 状态时，&lt;code&gt;p-&amp;gt;context&lt;/code&gt; 必须保存进程的寄存器状态，没有 CPU 在进程的内核栈上运行，没有 CPU 的 &lt;code&gt;c-&amp;gt;proc&lt;/code&gt; 指向它。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;ul&gt;
-&lt;li&gt;
 &lt;p&gt;&lt;strong&gt;为什么保持 &lt;code&gt;p-&amp;gt;lock&lt;/code&gt; 时，这些属性通常不成立&lt;/strong&gt;：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;在持有p-&amp;gt;lock的过程中，系统可能正在进行上下文切换，此时进程的状态尚未完全确定。例如：&lt;/li&gt;
@@ -17481,8 +17471,6 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;li&gt;或者，进程的状态正在更新，可能还存在 CPU 在该进程的内核栈上运行，导致暂时的不一致。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;因此，&lt;strong&gt;在上下文切换的过程中&lt;/strong&gt;，这些不变量可能会短暂地被打破。这就是为什么在 &lt;code&gt;sched&lt;/code&gt; 执行过程中，&lt;strong&gt;必须持有 &lt;code&gt;p-&amp;gt;lock&lt;/code&gt;&lt;/strong&gt;，确保在完成整个上下文切换前，其他 CPU 不会并发地修改该进程的状态。&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;维护上述不变量是xv6经常在一个线程中获取&lt;code&gt;p-&amp;gt;lock&lt;/code&gt;并在另一个线程中释放它的原因，例如在&lt;code&gt;yield&lt;/code&gt;中获取并在&lt;code&gt;scheduler&lt;/code&gt;中释放。&lt;/p&gt;
 &lt;p&gt;一旦&lt;code&gt;yield&lt;/code&gt;开始修改一个&lt;code&gt;RUNNING&lt;/code&gt;进程的状态为&lt;code&gt;RUNNABLE&lt;/code&gt;，锁必须保持被持有状态，直到不变量恢复：最早的正确释放点是&lt;code&gt;scheduler&lt;/code&gt;（在其自身栈上运行）清除&lt;code&gt;c-&amp;gt;proc&lt;/code&gt;之后。类似地，一旦&lt;code&gt;scheduler&lt;/code&gt;开始将&lt;code&gt;RUNNABLE&lt;/code&gt;进程转换为&lt;code&gt;RUNNING&lt;/code&gt;，在内核线程完全运行之前（在&lt;code&gt;swtch&lt;/code&gt;之后，例如在&lt;code&gt;yield&lt;/code&gt;中）绝不能释放锁。&lt;/p&gt;
@@ -17508,14 +17496,17 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;一旦 &lt;code&gt;yield&lt;/code&gt; 把进程的状态标记为 &lt;code&gt;RUNNABLE&lt;/code&gt;，接下来调度程序（&lt;code&gt;scheduler&lt;/code&gt;）会从可运行的进程列表中选择下一个进程，并进行上下文切换。&lt;/p&gt;
-&lt;/li&gt;
+&lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;但是，在调度过程中，锁不能立即释放，因为此时进程的状态（&lt;code&gt;p-&amp;gt;state&lt;/code&gt; 和 &lt;code&gt;p-&amp;gt;context&lt;/code&gt;）还没有完全稳定。特别是，调度器还没有完成对 &lt;code&gt;c-&amp;gt;proc&lt;/code&gt; 的清除（&lt;code&gt;c-&amp;gt;proc&lt;/code&gt; 表示当前 CPU 上正在运行的进程）。&lt;/p&gt;
-&lt;p&gt;具体来说：&lt;/p&gt;
+&lt;p&gt;但是，在调度过程中，锁不能立即释放，因为此时进程的状态（&lt;code&gt;p-&amp;gt;state&lt;/code&gt; 和 &lt;code&gt;p-&amp;gt;context&lt;/code&gt;）还没有完全稳定。特别是，调度器还没有完成对 &lt;code&gt;c-&amp;gt;proc&lt;/code&gt; 的清除（&lt;code&gt;c-&amp;gt;proc&lt;/code&gt; 表示当前 CPU 上正在运行的进程）。具体来说：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;调度器会在其&lt;strong&gt;自身的栈&lt;/strong&gt;上运行，选择下一个要执行的进程。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;锁的释放时机&lt;/strong&gt;：调度器必须等到它完全切换到另一个进程后，并且确保当前进程的 &lt;code&gt;c-&amp;gt;proc&lt;/code&gt; 被清除（即当前 CPU 不再引用该进程）后，才可以释放 &lt;code&gt;p-&amp;gt;lock&lt;/code&gt;。&lt;/li&gt;
 &lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;锁的释放时机&lt;/strong&gt;：调度器必须等到它完全切换到另一个进程后，并且确保当前进程的 &lt;code&gt;c-&amp;gt;proc&lt;/code&gt; 被清除（即当前 CPU 不再引用该进程）后，才可以释放 &lt;code&gt;p-&amp;gt;lock&lt;/code&gt;。&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
@@ -17861,10 +17852,10 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;li&gt;state字段保存了当前进程状态，要么是RUNNING，要么是RUNABLE，要么是SLEEPING等等&lt;/li&gt;
 &lt;li&gt;lock字段保护了很多数据，目前来说至少保护了对于state字段的更新。举个例子，因为有锁的保护，两个CPU的调度器线程不会同时拉取同一个RUNABLE进程并运行它&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;接下来会运行一个简单的演示程序，在这个程序中我们会从一个进程切换到另一个。&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec11/p2.png&#34;
+&lt;p&gt;接下来会运行一个简单的演示程序，在这个程序中我们会从一个进程切换到另一个。&lt;img src=&#34;https://echudet.github.io/p/mit6s08111thread-switching/p2.png&#34;
 	width=&#34;562&#34;
 	height=&#34;544&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec11/p2_hu1693358805321326060.png 480w, https://echudet.github.io/p/mit6s081lec11/p2_hu527241409333239847.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08111thread-switching/p2_hu1693358805321326060.png 480w, https://echudet.github.io/p/mit6s08111thread-switching/p2_hu527241409333239847.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;image&#34;
@@ -17880,10 +17871,10 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;但是它们都不会很频繁的打印输出（注，每隔1000000次循环才打印一个输出），并且它们也不会主动出让CPU（注，因为每个进程都执行的是没有sleep的死循环）。&lt;/p&gt;
 &lt;p&gt;所以我们这里有了两个运算密集型进程，并且因为我们接下来启动的XV6只有一个CPU核，它们都运行在同一个CPU上。&lt;/p&gt;
 &lt;p&gt;为了让这两个进程都能运行，有必要让两个进程之间能相互切换。&lt;/p&gt;
-&lt;p&gt;接下来运行spin程序，&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec11/p3.png&#34;
+&lt;p&gt;接下来运行spin程序，&lt;img src=&#34;https://echudet.github.io/p/mit6s08111thread-switching/p3.png&#34;
 	width=&#34;724&#34;
 	height=&#34;324&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec11/p3_hu2024462625367836819.png 480w, https://echudet.github.io/p/mit6s081lec11/p3_hu1405761908147253642.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08111thread-switching/p3_hu2024462625367836819.png 480w, https://echudet.github.io/p/mit6s08111thread-switching/p3_hu1405761908147253642.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p3&#34;
@@ -17898,10 +17889,10 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;从输出看，虽然现在XV6只有一个CPU核，但是每隔一会，XV6就在两个进程之间切换。&lt;/p&gt;
 &lt;p&gt;“/”输出了一会之后，定时器中断将CPU切换到另一个进程运行然后又输出“\”一会。所以可以看到定时器中断在起作用。&lt;/p&gt;
 &lt;p&gt;接下来，在trap.c的devintr函数中的207行设置一个断点，这一行会识别出当前是在响应定时器中断。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec11/p4.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08111thread-switching/p4.png&#34;
 	width=&#34;918&#34;
 	height=&#34;1036&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec11/p4_hu5029313476404847184.png 480w, https://echudet.github.io/p/mit6s081lec11/p4_hu5066168765813689661.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08111thread-switching/p4_hu5029313476404847184.png 480w, https://echudet.github.io/p/mit6s08111thread-switching/p4_hu5066168765813689661.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p4&#34;
@@ -17912,10 +17903,10 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 		data-flex-basis=&#34;212px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec11/p5.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08111thread-switching/p5.png&#34;
 	width=&#34;798&#34;
 	height=&#34;86&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec11/p5_hu7357509958749080609.png 480w, https://echudet.github.io/p/mit6s081lec11/p5_hu28250811026237817.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08111thread-switching/p5_hu7357509958749080609.png 480w, https://echudet.github.io/p/mit6s08111thread-switching/p5_hu28250811026237817.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p5&#34;
@@ -17927,10 +17918,10 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;之后在gdb中continue。立刻会停在中断的位置，因为定时器中断还是挺频繁的。现在我们可以确认我们在usertrap函数中，并且usertrap函数通过调用devintr函数来处理这里的中断（注，从下图的栈输出可以看出）。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec11/p6.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08111thread-switching/p6.png&#34;
 	width=&#34;780&#34;
 	height=&#34;152&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec11/p6_hu6811547187374485424.png 480w, https://echudet.github.io/p/mit6s081lec11/p6_hu12400229481486757518.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08111thread-switching/p6_hu6811547187374485424.png 480w, https://echudet.github.io/p/mit6s08111thread-switching/p6_hu12400229481486757518.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p6&#34;
@@ -17943,10 +17934,10 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &gt;&lt;/p&gt;
 &lt;p&gt;因为devintr函数处理定时器中断的代码基本没有内容，接下来我在gdb中输入finish来从devintr函数中返回到usertrap函数。&lt;/p&gt;
 &lt;p&gt;当我们返回到usertrap函数时，虽然我们刚刚从devintr函数中返回，但是我们期望运行到下面的yield函数。所以我们期望devintr函数返回2。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec11/p7.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08111thread-switching/p7.png&#34;
 	width=&#34;714&#34;
 	height=&#34;334&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec11/p7_hu3964657701307735048.png 480w, https://echudet.github.io/p/mit6s081lec11/p7_hu3297580789123514755.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08111thread-switching/p7_hu3964657701307735048.png 480w, https://echudet.github.io/p/mit6s08111thread-switching/p7_hu3297580789123514755.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p7&#34;
@@ -17958,10 +17949,10 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;可以从gdb中看到devintr的确返回的是2。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec11/p8.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08111thread-switching/p8.png&#34;
 	width=&#34;760&#34;
 	height=&#34;224&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec11/p8_hu12352301448078710713.png 480w, https://echudet.github.io/p/mit6s081lec11/p8_hu14576638449005284615.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08111thread-switching/p8_hu12352301448078710713.png 480w, https://echudet.github.io/p/mit6s08111thread-switching/p8_hu14576638449005284615.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p8&#34;
@@ -18117,10 +18108,10 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;所以swtch函数在保存完当前内核线程的内核寄存器之后，就会恢复当前CPU核的调度器线程的寄存器，并继续执行当前CPU核的调度器线程。&lt;/p&gt;
 &lt;p&gt;接下来，我们快速的看一下我们将要切换到的context（注，也就是调度器线程的context）。&lt;/p&gt;
 &lt;p&gt;因为我们只有一个CPU核，这里我在gdb中print cpus[0].context&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec11/p9.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08111thread-switching/p9.png&#34;
 	width=&#34;958&#34;
 	height=&#34;118&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec11/p9_hu10285545358071669460.png 480w, https://echudet.github.io/p/mit6s081lec11/p9_hu8796078071750968036.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08111thread-switching/p9_hu10285545358071669460.png 480w, https://echudet.github.io/p/mit6s08111thread-switching/p9_hu8796078071750968036.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p9&#34;
@@ -18134,10 +18125,10 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;这里看到的就是之前保存的当前CPU核的调度器线程的寄存器。&lt;/p&gt;
 &lt;p&gt;在这些寄存器中，最有趣的就是ra（Return Address）寄存器，因为ra寄存器保存的是当前函数的返回地址，所以调度器线程中的代码会返回到ra寄存器中的地址。&lt;/p&gt;
 &lt;p&gt;通过查看kernel.asm，我们可以知道这个地址的内容是什么。也可以在gdb中输入“x/i 0x80001f2e”进行查看。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec11/p10.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08111thread-switching/p10.png&#34;
 	width=&#34;704&#34;
 	height=&#34;70&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec11/p10_hu16065095697725850952.png 480w, https://echudet.github.io/p/mit6s081lec11/p10_hu1356209050733223766.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08111thread-switching/p10_hu16065095697725850952.png 480w, https://echudet.github.io/p/mit6s08111thread-switching/p10_hu1356209050733223766.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p10&#34;
@@ -18399,10 +18390,10 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;现在我们在scheduler函数的循环中，代码会检查所有的进程并找到一个来运行。&lt;/p&gt;
 &lt;p&gt;现在我们知道还有另一个进程，因为我们之前fork了另一个spin进程。&lt;/p&gt;
 &lt;p&gt;这里我跳过进程检查，直接在找到RUNABLE进程的位置设置一个断点。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec11/p11.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08111thread-switching/p11.png&#34;
 	width=&#34;718&#34;
 	height=&#34;412&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec11/p11_hu8694052433713630363.png 480w, https://echudet.github.io/p/mit6s081lec11/p11_hu3312515259515705091.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08111thread-switching/p11_hu8694052433713630363.png 480w, https://echudet.github.io/p/mit6s08111thread-switching/p11_hu3312515259515705091.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p11&#34;
@@ -18466,10 +18457,10 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;学生提问：当调用swtch函数的时候，实际上是从一个线程对于switch的调用切换到了另一个线程对于switch的调用。所以线程第一次调用swtch函数时，需要伪造一个“另一个线程”对于switch的调用，是吧？因为也不能通过swtch函数随机跳到其他代码去。&lt;/p&gt;
 &lt;p&gt;Robert教授：是的。我们来看一下第一次调用switch时，“另一个”调用swtch函数的线程的context对象。&lt;/p&gt;
 &lt;p&gt;proc.c文件中的allocproc函数会被启动时的第一个进程和fork调用，allocproc会设置好新进程的context，如下所示：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec11/p12.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08111thread-switching/p12.png&#34;
 	width=&#34;536&#34;
 	height=&#34;170&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec11/p12_hu10011283022753249809.png 480w, https://echudet.github.io/p/mit6s081lec11/p12_hu17797523608250037853.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08111thread-switching/p12_hu10011283022753249809.png 480w, https://echudet.github.io/p/mit6s08111thread-switching/p12_hu17797523608250037853.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p12&#34;
@@ -18602,12 +18593,12 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 </description>
         </item>
         <item>
-        <title>MIT6S081Lec10</title>
-        <link>https://echudet.github.io/p/mit6s081lec10/</link>
+        <title>MIT6S081：10Multiprocessors and locking</title>
+        <link>https://echudet.github.io/p/mit6s08110multiprocessors-and-locking/</link>
         <pubDate>Tue, 17 Sep 2024 22:02:50 +0800</pubDate>
         
-        <guid>https://echudet.github.io/p/mit6s081lec10/</guid>
-        <description>&lt;img src="https://echudet.github.io/p/mit6s081lec10/bg.png" alt="Featured image of post MIT6S081Lec10" /&gt;&lt;h1 id=&#34;lecture-10-multiprocessors-and-locking&#34;&gt;Lecture 10 Multiprocessors and locking
+        <guid>https://echudet.github.io/p/mit6s08110multiprocessors-and-locking/</guid>
+        <description>&lt;img src="https://echudet.github.io/p/mit6s08110multiprocessors-and-locking/bg.png" alt="Featured image of post MIT6S081：10Multiprocessors and locking" /&gt;&lt;h1 id=&#34;lecture-10-multiprocessors-and-locking&#34;&gt;Lecture 10 Multiprocessors and locking
 &lt;/h1&gt;&lt;h2 id=&#34;预习&#34;&gt;预习
 &lt;/h2&gt;&lt;h2 id=&#34;为什么要用锁&#34;&gt;&lt;strong&gt;为什么要用锁&lt;/strong&gt;
 &lt;/h2&gt;&lt;p&gt;大多数内核，包括xv6，交错执行多个活动。交错的一个来源是多处理器硬件：计算机的多个CPU之间独立执行，如xv6的RISC-V。多个处理器共享物理内存，xv6利用共享（sharing）来维护所有CPU进行读写的数据结构。&lt;/p&gt;
@@ -19522,12 +19513,12 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 </description>
         </item>
         <item>
-        <title>MIT6S081Lec9</title>
-        <link>https://echudet.github.io/p/mit6s081lec9/</link>
+        <title>MIT6S081：9Interrupts</title>
+        <link>https://echudet.github.io/p/mit6s0819interrupts/</link>
         <pubDate>Mon, 16 Sep 2024 22:02:50 +0800</pubDate>
         
-        <guid>https://echudet.github.io/p/mit6s081lec9/</guid>
-        <description>&lt;img src="https://echudet.github.io/p/mit6s081lec9/bg.jpg" alt="Featured image of post MIT6S081Lec9" /&gt;&lt;h1 id=&#34;lecture-9-interrupts&#34;&gt;Lecture 9 Interrupts
+        <guid>https://echudet.github.io/p/mit6s0819interrupts/</guid>
+        <description>&lt;img src="https://echudet.github.io/p/mit6s0819interrupts/bg.jpg" alt="Featured image of post MIT6S081：9Interrupts" /&gt;&lt;h1 id=&#34;lecture-9-interrupts&#34;&gt;Lecture 9 Interrupts
 &lt;/h1&gt;&lt;h2 id=&#34;课程杂记&#34;&gt;课程杂记
 &lt;/h2&gt;&lt;ol&gt;
 &lt;li&gt;内存是如何被真实的操作系统（而不是像XV6这样的教学操作系统）所使用&lt;/li&gt;
@@ -20373,12 +20364,12 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 </description>
         </item>
         <item>
-        <title>MIT6S081Lec8</title>
-        <link>https://echudet.github.io/p/mit6s081lec8/</link>
+        <title>MIT6S081：8Page Fault</title>
+        <link>https://echudet.github.io/p/mit6s0818page-fault/</link>
         <pubDate>Sun, 15 Sep 2024 22:02:50 +0800</pubDate>
         
-        <guid>https://echudet.github.io/p/mit6s081lec8/</guid>
-        <description>&lt;img src="https://echudet.github.io/p/mit6s081lec8/bg.jpg" alt="Featured image of post MIT6S081Lec8" /&gt;&lt;h1 id=&#34;lecture-8-page-fault&#34;&gt;Lecture 8 Page Fault
+        <guid>https://echudet.github.io/p/mit6s0818page-fault/</guid>
+        <description>&lt;img src="https://echudet.github.io/p/mit6s0818page-fault/bg.jpg" alt="Featured image of post MIT6S081：8Page Fault" /&gt;&lt;h1 id=&#34;lecture-8-page-fault&#34;&gt;Lecture 8 Page Fault
 &lt;/h1&gt;&lt;h2 id=&#34;课程杂记&#34;&gt;课程杂记
 &lt;/h2&gt;&lt;ol&gt;
 &lt;li&gt;在XV6中，一旦用户空间进程触发了page fault，会导致进程被杀掉。目前为止，内存地址映射相对来说比较静态。不管是user page table还是kernel page table，都是在最开始的时候设置好，之后就不会再做任何变动。&lt;/li&gt;
@@ -20469,12 +20460,12 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 </description>
         </item>
         <item>
-        <title>MIT6S081Lec6</title>
-        <link>https://echudet.github.io/p/mit6s081lec6/</link>
+        <title>MIT6S081：6Isolation &amp; system call entry/exit</title>
+        <link>https://echudet.github.io/p/mit6s0816isolation-system-call-entry/exit/</link>
         <pubDate>Sat, 14 Sep 2024 22:02:50 +0800</pubDate>
         
-        <guid>https://echudet.github.io/p/mit6s081lec6/</guid>
-        <description>&lt;img src="https://echudet.github.io/p/mit6s081lec6/bg.jpg" alt="Featured image of post MIT6S081Lec6" /&gt;&lt;h1 id=&#34;lecture-6-isolation--system-call-entryexit&#34;&gt;Lecture 6 Isolation &amp;amp; system call entry/exit
+        <guid>https://echudet.github.io/p/mit6s0816isolation-system-call-entry/exit/</guid>
+        <description>&lt;img src="https://echudet.github.io/p/mit6s0816isolation-system-call-entry/exit/bg.jpg" alt="Featured image of post MIT6S081：6Isolation &amp; system call entry/exit" /&gt;&lt;h1 id=&#34;lecture-6-isolation--system-call-entryexit&#34;&gt;Lecture 6 Isolation &amp;amp; system call entry/exit
 &lt;/h1&gt;&lt;h2 id=&#34;课程杂记&#34;&gt;课程杂记
 &lt;/h2&gt;&lt;ol&gt;
 &lt;li&gt;
@@ -20675,12 +20666,12 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 </description>
         </item>
         <item>
-        <title>MIT6S081Lec5</title>
-        <link>https://echudet.github.io/p/mit6s081lec5/</link>
+        <title>MIT6S081：5Convention for RISC-V &amp; ASM</title>
+        <link>https://echudet.github.io/p/mit6s0815convention-for-risc-v-asm/</link>
         <pubDate>Sun, 08 Sep 2024 22:02:50 +0800</pubDate>
         
-        <guid>https://echudet.github.io/p/mit6s081lec5/</guid>
-        <description>&lt;img src="https://echudet.github.io/p/mit6s081lec5/bg.jpg" alt="Featured image of post MIT6S081Lec5" /&gt;&lt;h1 id=&#34;lecture-5-convention-for-risc-v--asm&#34;&gt;Lecture 5 Convention for RISC-V &amp;amp; ASM
+        <guid>https://echudet.github.io/p/mit6s0815convention-for-risc-v-asm/</guid>
+        <description>&lt;img src="https://echudet.github.io/p/mit6s0815convention-for-risc-v-asm/bg.jpg" alt="Featured image of post MIT6S081：5Convention for RISC-V &amp; ASM" /&gt;&lt;h1 id=&#34;lecture-5-convention-for-risc-v--asm&#34;&gt;Lecture 5 Convention for RISC-V &amp;amp; ASM
 &lt;/h1&gt;&lt;h2 id=&#34;课程杂记&#34;&gt;课程杂记
 &lt;/h2&gt;&lt;ol&gt;
 &lt;li&gt;
@@ -20740,12 +20731,12 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 </description>
         </item>
         <item>
-        <title>MIT6S081Lec4</title>
-        <link>https://echudet.github.io/p/mit6s081lec4/</link>
+        <title>MIT6S081：4Page Tables(vm)</title>
+        <link>https://echudet.github.io/p/mit6s0814page-tablesvm/</link>
         <pubDate>Sat, 07 Sep 2024 22:02:50 +0800</pubDate>
         
-        <guid>https://echudet.github.io/p/mit6s081lec4/</guid>
-        <description>&lt;img src="https://echudet.github.io/p/mit6s081lec4/124146068.jpg" alt="Featured image of post MIT6S081Lec4" /&gt;&lt;h1 id=&#34;lecture-4-page-tablesvm&#34;&gt;Lecture 4 Page Tables(vm)
+        <guid>https://echudet.github.io/p/mit6s0814page-tablesvm/</guid>
+        <description>&lt;img src="https://echudet.github.io/p/mit6s0814page-tablesvm/124146068.jpg" alt="Featured image of post MIT6S081：4Page Tables(vm)" /&gt;&lt;h1 id=&#34;lecture-4-page-tablesvm&#34;&gt;Lecture 4 Page Tables(vm)
 &lt;/h1&gt;&lt;h2 id=&#34;课程杂记&#34;&gt;课程杂记
 &lt;/h2&gt;&lt;p&gt;vm -&amp;gt; virtual memory ，map virtual to physical 隔离性&lt;/p&gt;
 &lt;p&gt;正确设置的VM可以实现隔离性&lt;/p&gt;
@@ -20826,10 +20817,10 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;总体物理地址的layout，是由主板决定的，并非仅是CPU决定&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec4/image.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s0814page-tablesvm/image.png&#34;
 	width=&#34;1486&#34;
 	height=&#34;844&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec4/image_hu14242427645351412035.png 480w, https://echudet.github.io/p/mit6s081lec4/image_hu6020751804304211344.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s0814page-tablesvm/image_hu14242427645351412035.png 480w, https://echudet.github.io/p/mit6s0814page-tablesvm/image_hu6020751804304211344.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;structure&#34;
@@ -21292,12 +21283,12 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 </description>
         </item>
         <item>
-        <title>MIT6S081Lec3</title>
-        <link>https://echudet.github.io/p/mit6s081lec3/</link>
+        <title>MIT6S081：3OS Organization &amp; System Calls</title>
+        <link>https://echudet.github.io/p/mit6s0813os-organization-system-calls/</link>
         <pubDate>Sun, 01 Sep 2024 22:02:50 +0800</pubDate>
         
-        <guid>https://echudet.github.io/p/mit6s081lec3/</guid>
-        <description>&lt;img src="https://echudet.github.io/p/mit6s081lec3/2ed7cfb8882411ebb6edd017c2d2eca2.png" alt="Featured image of post MIT6S081Lec3" /&gt;&lt;h1 id=&#34;lecture-3-os-organization--system-calls&#34;&gt;Lecture 3 OS Organization &amp;amp; System Calls
+        <guid>https://echudet.github.io/p/mit6s0813os-organization-system-calls/</guid>
+        <description>&lt;img src="https://echudet.github.io/p/mit6s0813os-organization-system-calls/2ed7cfb8882411ebb6edd017c2d2eca2.png" alt="Featured image of post MIT6S081：3OS Organization &amp; System Calls" /&gt;&lt;h1 id=&#34;lecture-3-os-organization--system-calls&#34;&gt;Lecture 3 OS Organization &amp;amp; System Calls
 &lt;/h1&gt;&lt;h2 id=&#34;os-隔离性防御性&#34;&gt;OS 隔离性、防御性
 &lt;/h2&gt;&lt;ol&gt;
 &lt;li&gt;为了不变成一个恶意程序，Shell在发现自己运行了一段时间之后，需要让别的程序也有机会能运行。这种机制有时候称为协同调度（Cooperative Scheduling）。&lt;/li&gt;
@@ -21422,12 +21413,12 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 </description>
         </item>
         <item>
-        <title>MIT6S081Lec1</title>
-        <link>https://echudet.github.io/p/mit6s081lec1/</link>
+        <title>MIT6S081：1OS Interface</title>
+        <link>https://echudet.github.io/p/mit6s0811os-interface/</link>
         <pubDate>Sat, 31 Aug 2024 00:00:00 +0000</pubDate>
         
-        <guid>https://echudet.github.io/p/mit6s081lec1/</guid>
-        <description>&lt;img src="https://echudet.github.io/p/mit6s081lec1/56d1b86047724f56a2793bda4a87bccb.jpg" alt="Featured image of post MIT6S081Lec1" /&gt;&lt;h1 id=&#34;lecture-1-os-interface&#34;&gt;Lecture 1 OS Interface
+        <guid>https://echudet.github.io/p/mit6s0811os-interface/</guid>
+        <description>&lt;img src="https://echudet.github.io/p/mit6s0811os-interface/56d1b86047724f56a2793bda4a87bccb.jpg" alt="Featured image of post MIT6S081：1OS Interface" /&gt;&lt;h1 id=&#34;lecture-1-os-interface&#34;&gt;Lecture 1 OS Interface
 &lt;/h1&gt;&lt;h2 id=&#34;inode-是什么&#34;&gt;Inode 是什么
 &lt;/h2&gt;&lt;p&gt;Inode 是 UNIX 类文件系统中一个非常核心的概念，负责管理文件和目录的元数据。&lt;/p&gt;
 &lt;p&gt;Inode 是文件系统中的一个数据结构，用来存储文件的元信息（metadata），&lt;strong&gt;而不包含文件的内容和文件名&lt;/strong&gt;。每一个文件或者目录都会分配一个唯一的 Inode，Inode 中存储了与文件或目录相关的以下信息：&lt;/p&gt;

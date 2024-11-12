@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Thread switching">
-<title>MIT6S081Lec11</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="线程切换是实现多线程并发执行的核心机制。线程切换的原理在于操作系统在同一进程内或不同进程间调度不同的线程，以便在多核处理器上并发执行任务，提高系统利用率和响应性。切换时，操作系统会保存当前线程的上下文（如寄存器状态和程序计数器），加载下一个被调度线程的上下文，恢复其执行状态。线程切换使得多任务处理更加高效，有助于资源共享、任务并行和提高应用程序的性能，是现代操作系统实现高速并发计算的基础。">
+<title>MIT6S081：11Thread switching</title>
 
-<link rel='canonical' href='https://echudet.github.io/p/mit6s081lec11/'>
+<link rel='canonical' href='https://echudet.github.io/p/mit6s08111thread-switching/'>
 
-<link rel="stylesheet" href="/scss/style.min.a7f637593c1d99350f36f270c9abc65cf39ec34b45847eb2fa40efef51b94c92.css"><meta property='og:title' content="MIT6S081Lec11">
-<meta property='og:description' content="Thread switching">
-<meta property='og:url' content='https://echudet.github.io/p/mit6s081lec11/'>
+<link rel="stylesheet" href="/scss/style.min.a7f637593c1d99350f36f270c9abc65cf39ec34b45847eb2fa40efef51b94c92.css"><meta property='og:title' content="MIT6S081：11Thread switching">
+<meta property='og:description' content="线程切换是实现多线程并发执行的核心机制。线程切换的原理在于操作系统在同一进程内或不同进程间调度不同的线程，以便在多核处理器上并发执行任务，提高系统利用率和响应性。切换时，操作系统会保存当前线程的上下文（如寄存器状态和程序计数器），加载下一个被调度线程的上下文，恢复其执行状态。线程切换使得多任务处理更加高效，有助于资源共享、任务并行和提高应用程序的性能，是现代操作系统实现高速并发计算的基础。">
+<meta property='og:url' content='https://echudet.github.io/p/mit6s08111thread-switching/'>
 <meta property='og:site_name' content='echudet'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-09-21T22:02:50&#43;08:00'/><meta property='article:modified_time' content='2024-11-12T23:05:03&#43;08:00'/><meta property='og:image' content='https://echudet.github.io/p/mit6s081lec11/bg.jpg' />
-<meta name="twitter:title" content="MIT6S081Lec11">
-<meta name="twitter:description" content="Thread switching"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='https://echudet.github.io/p/mit6s081lec11/bg.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-09-21T22:02:50&#43;08:00'/><meta property='article:modified_time' content='2024-11-12T23:44:05&#43;08:00'/><meta property='og:image' content='https://echudet.github.io/p/mit6s08111thread-switching/bg.jpg' />
+<meta name="twitter:title" content="MIT6S081：11Thread switching">
+<meta name="twitter:description" content="线程切换是实现多线程并发执行的核心机制。线程切换的原理在于操作系统在同一进程内或不同进程间调度不同的线程，以便在多核处理器上并发执行任务，提高系统利用率和响应性。切换时，操作系统会保存当前线程的上下文（如寄存器状态和程序计数器），加载下一个被调度线程的上下文，恢复其执行状态。线程切换使得多任务处理更加高效，有助于资源共享、任务并行和提高应用程序的性能，是现代操作系统实现高速并发计算的基础。"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://echudet.github.io/p/mit6s08111thread-switching/bg.jpg' />
     <link rel="shortcut icon" href="/timer.ico" />
 
     </head>
@@ -299,13 +299,13 @@
     <article class="has-image main-article">
     <header class="article-header">
         <div class="article-image">
-            <a href="/p/mit6s081lec11/">
-                <img src="/p/mit6s081lec11/bg_hu4518428176843800953.jpg"
-                        srcset="/p/mit6s081lec11/bg_hu4518428176843800953.jpg 800w, /p/mit6s081lec11/bg_hu13581772721640750802.jpg 1600w"
+            <a href="/p/mit6s08111thread-switching/">
+                <img src="/p/mit6s08111thread-switching/bg_hu4518428176843800953.jpg"
+                        srcset="/p/mit6s08111thread-switching/bg_hu4518428176843800953.jpg 800w, /p/mit6s08111thread-switching/bg_hu13581772721640750802.jpg 1600w"
                         width="800" 
                         height="450" 
                         loading="lazy"
-                        alt="Featured image of post MIT6S081Lec11" />
+                        alt="Featured image of post MIT6S081：11Thread switching" />
                 
             </a>
         </div>
@@ -328,12 +328,12 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/mit6s081lec11/">MIT6S081Lec11</a>
+            <a href="/p/mit6s08111thread-switching/">MIT6S081：11Thread switching</a>
         </h2>
     
         
         <h3 class="article-subtitle">
-            Thread switching
+            线程切换是实现多线程并发执行的核心机制。线程切换的原理在于操作系统在同一进程内或不同进程间调度不同的线程，以便在多核处理器上并发执行任务，提高系统利用率和响应性。切换时，操作系统会保存当前线程的上下文（如寄存器状态和程序计数器），加载下一个被调度线程的上下文，恢复其执行状态。线程切换使得多任务处理更加高效，有助于资源共享、任务并行和提高应用程序的性能，是现代操作系统实现高速并发计算的基础。
         </h3>
         
     </div>
@@ -382,7 +382,7 @@
 
 
                 <time>
-                    Nov 12, 2024 23:05 &#43;0800
+                    Nov 12, 2024 23:44 &#43;0800
                 </time>
             </div></footer>
     
@@ -456,10 +456,10 @@
 <hr>
 <h2 id="代码上下文切换">代码：上下文切换
 </h2><p>图7.1概述了从一个用户进程（旧进程）切换到另一个用户进程（新进程）所涉及的步骤</p>
-<p><img src="/p/mit6s081lec11/p1.png"
+<p><img src="/p/mit6s08111thread-switching/p1.png"
 	width="1280"
 	height="534"
-	srcset="/p/mit6s081lec11/p1_hu15221383078518384773.png 480w, /p/mit6s081lec11/p1_hu15272853361892182139.png 1024w"
+	srcset="/p/mit6s08111thread-switching/p1_hu15221383078518384773.png 480w, /p/mit6s08111thread-switching/p1_hu15272853361892182139.png 1024w"
 	loading="lazy"
 	
 		alt="p1"
@@ -706,11 +706,7 @@
 <ul>
 <li>
 <p>如果进程处于RUNNABLE状态，空闲的 CPU 调度程序必须能够</p>
-<p>安全地运行该进程</p>
-<p>。这意味着：</p>
-<ul>
-<li><code>p-&gt;context</code> 必须保存该进程的寄存器状态，因为它已经不再在 CPU 的实际寄存器中。</li>
-</ul>
+<p>安全地运行该进程。这意味着：<code>p-&gt;context</code> 必须保存该进程的寄存器状态，因为它已经不再在 CPU 的实际寄存器中。</p>
 </li>
 <li>
 <p>没有 CPU 正在使用该进程的内核栈，确保没有其他 CPU 在执行该进程。</p>
@@ -728,8 +724,11 @@
 <p><strong>“安全地从进程中切换出去”和“空闲 CPU 的调度程序必须安全地运行它”是什么意思？</strong></p>
 <ul>
 <li><strong>“安全地从进程中切换出去”</strong>：</li>
-<li>当一个正在运行的进程（<code>RUNNING</code> 状态）被计时器中断触发时，操作系统可能决定切换到另一个进程。这时，系统必须能够<strong>安全地切换</strong>，意味着当前进程的寄存器状态必须妥善保存，否则在切换回来时进程可能会丢失当前状态。因此，CPU 寄存器必须保持进程的寄存器值，不能在 <code>swtch</code> 中过早地将其保存到 <code>p-&gt;context</code> 中。</li>
+<li>当一个正在运行的进程（<code>RUNNING</code> 状态）被计时器中断触发时，操作系统可能决定切换到另一个进程。这时，系统必须能够<strong>安全地切换</strong>，意味着当前进程的寄存器状态必须妥善保存，否则在切换回来时进程可能会丢失当前状态。因此，CPU 寄存器必须保持进程的寄存器值，不能在 <code>swtch</code> 中过早地将其保存到 <code>p-&gt;context</code> 中。
+<ul>
 <li>简单来说，这意味着在切换到调度程序前，系统必须确保当前进程的所有运行状态都已正确保存，以便下次切换回来时能够恢复。</li>
+</ul>
+</li>
 <li><strong>“空闲 CPU 的调度程序必须安全地运行它”</strong>：
 <ul>
 <li>当某个 CPU 处于空闲状态，调度程序会从可运行的进程队列中选择一个RUNNABLE状态的进程并运行它。为了确保安全运行，系统必须确保：
@@ -743,19 +742,10 @@
 </li>
 </ul>
 <p><strong>为什么说“保持 <code>p-&gt;lock</code> 时，这些属性通常不成立”，“这些属性”又是什么？</strong></p>
-<ul>
-<li>
-<p><strong>这些属性</strong> 指的是：</p>
 <ol>
 <li>当进程处于 <code>RUNNING</code> 状态时，计时器中断发生时，CPU 寄存器必须保持进程的寄存器值，<code>c-&gt;proc</code> 必须指向该进程。</li>
-</ol>
-</li>
-</ul>
-<ol start="2">
 <li>当进程处于 <code>RUNNABLE</code> 状态时，<code>p-&gt;context</code> 必须保存进程的寄存器状态，没有 CPU 在进程的内核栈上运行，没有 CPU 的 <code>c-&gt;proc</code> 指向它。</li>
 </ol>
-<ul>
-<li>
 <p><strong>为什么保持 <code>p-&gt;lock</code> 时，这些属性通常不成立</strong>：</p>
 <ul>
 <li>在持有p-&gt;lock的过程中，系统可能正在进行上下文切换，此时进程的状态尚未完全确定。例如：</li>
@@ -763,8 +753,6 @@
 <li>或者，进程的状态正在更新，可能还存在 CPU 在该进程的内核栈上运行，导致暂时的不一致。</li>
 </ul>
 <p>因此，<strong>在上下文切换的过程中</strong>，这些不变量可能会短暂地被打破。这就是为什么在 <code>sched</code> 执行过程中，<strong>必须持有 <code>p-&gt;lock</code></strong>，确保在完成整个上下文切换前，其他 CPU 不会并发地修改该进程的状态。</p>
-</li>
-</ul>
 </blockquote>
 <p>维护上述不变量是xv6经常在一个线程中获取<code>p-&gt;lock</code>并在另一个线程中释放它的原因，例如在<code>yield</code>中获取并在<code>scheduler</code>中释放。</p>
 <p>一旦<code>yield</code>开始修改一个<code>RUNNING</code>进程的状态为<code>RUNNABLE</code>，锁必须保持被持有状态，直到不变量恢复：最早的正确释放点是<code>scheduler</code>（在其自身栈上运行）清除<code>c-&gt;proc</code>之后。类似地，一旦<code>scheduler</code>开始将<code>RUNNABLE</code>进程转换为<code>RUNNING</code>，在内核线程完全运行之前（在<code>swtch</code>之后，例如在<code>yield</code>中）绝不能释放锁。</p>
@@ -790,14 +778,17 @@
 <ul>
 <li>
 <p>一旦 <code>yield</code> 把进程的状态标记为 <code>RUNNABLE</code>，接下来调度程序（<code>scheduler</code>）会从可运行的进程列表中选择下一个进程，并进行上下文切换。</p>
-</li>
+<ul>
 <li>
-<p>但是，在调度过程中，锁不能立即释放，因为此时进程的状态（<code>p-&gt;state</code> 和 <code>p-&gt;context</code>）还没有完全稳定。特别是，调度器还没有完成对 <code>c-&gt;proc</code> 的清除（<code>c-&gt;proc</code> 表示当前 CPU 上正在运行的进程）。</p>
-<p>具体来说：</p>
+<p>但是，在调度过程中，锁不能立即释放，因为此时进程的状态（<code>p-&gt;state</code> 和 <code>p-&gt;context</code>）还没有完全稳定。特别是，调度器还没有完成对 <code>c-&gt;proc</code> 的清除（<code>c-&gt;proc</code> 表示当前 CPU 上正在运行的进程）。具体来说：</p>
 <ul>
 <li>调度器会在其<strong>自身的栈</strong>上运行，选择下一个要执行的进程。</li>
-<li><strong>锁的释放时机</strong>：调度器必须等到它完全切换到另一个进程后，并且确保当前进程的 <code>c-&gt;proc</code> 被清除（即当前 CPU 不再引用该进程）后，才可以释放 <code>p-&gt;lock</code>。</li>
 </ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>锁的释放时机</strong>：调度器必须等到它完全切换到另一个进程后，并且确保当前进程的 <code>c-&gt;proc</code> 被清除（即当前 CPU 不再引用该进程）后，才可以释放 <code>p-&gt;lock</code>。</p>
 </li>
 </ul>
 </li>
@@ -1143,10 +1134,10 @@
 <li>state字段保存了当前进程状态，要么是RUNNING，要么是RUNABLE，要么是SLEEPING等等</li>
 <li>lock字段保护了很多数据，目前来说至少保护了对于state字段的更新。举个例子，因为有锁的保护，两个CPU的调度器线程不会同时拉取同一个RUNABLE进程并运行它</li>
 </ul>
-<p>接下来会运行一个简单的演示程序，在这个程序中我们会从一个进程切换到另一个。<img src="/p/mit6s081lec11/p2.png"
+<p>接下来会运行一个简单的演示程序，在这个程序中我们会从一个进程切换到另一个。<img src="/p/mit6s08111thread-switching/p2.png"
 	width="562"
 	height="544"
-	srcset="/p/mit6s081lec11/p2_hu1693358805321326060.png 480w, /p/mit6s081lec11/p2_hu527241409333239847.png 1024w"
+	srcset="/p/mit6s08111thread-switching/p2_hu1693358805321326060.png 480w, /p/mit6s08111thread-switching/p2_hu527241409333239847.png 1024w"
 	loading="lazy"
 	
 		alt="image"
@@ -1162,10 +1153,10 @@
 <p>但是它们都不会很频繁的打印输出（注，每隔1000000次循环才打印一个输出），并且它们也不会主动出让CPU（注，因为每个进程都执行的是没有sleep的死循环）。</p>
 <p>所以我们这里有了两个运算密集型进程，并且因为我们接下来启动的XV6只有一个CPU核，它们都运行在同一个CPU上。</p>
 <p>为了让这两个进程都能运行，有必要让两个进程之间能相互切换。</p>
-<p>接下来运行spin程序，<img src="/p/mit6s081lec11/p3.png"
+<p>接下来运行spin程序，<img src="/p/mit6s08111thread-switching/p3.png"
 	width="724"
 	height="324"
-	srcset="/p/mit6s081lec11/p3_hu2024462625367836819.png 480w, /p/mit6s081lec11/p3_hu1405761908147253642.png 1024w"
+	srcset="/p/mit6s08111thread-switching/p3_hu2024462625367836819.png 480w, /p/mit6s08111thread-switching/p3_hu1405761908147253642.png 1024w"
 	loading="lazy"
 	
 		alt="p3"
@@ -1180,10 +1171,10 @@
 <p>从输出看，虽然现在XV6只有一个CPU核，但是每隔一会，XV6就在两个进程之间切换。</p>
 <p>“/”输出了一会之后，定时器中断将CPU切换到另一个进程运行然后又输出“\”一会。所以可以看到定时器中断在起作用。</p>
 <p>接下来，在trap.c的devintr函数中的207行设置一个断点，这一行会识别出当前是在响应定时器中断。</p>
-<p><img src="/p/mit6s081lec11/p4.png"
+<p><img src="/p/mit6s08111thread-switching/p4.png"
 	width="918"
 	height="1036"
-	srcset="/p/mit6s081lec11/p4_hu5029313476404847184.png 480w, /p/mit6s081lec11/p4_hu5066168765813689661.png 1024w"
+	srcset="/p/mit6s08111thread-switching/p4_hu5029313476404847184.png 480w, /p/mit6s08111thread-switching/p4_hu5066168765813689661.png 1024w"
 	loading="lazy"
 	
 		alt="p4"
@@ -1194,10 +1185,10 @@
 		data-flex-basis="212px"
 	
 ></p>
-<p><img src="/p/mit6s081lec11/p5.png"
+<p><img src="/p/mit6s08111thread-switching/p5.png"
 	width="798"
 	height="86"
-	srcset="/p/mit6s081lec11/p5_hu7357509958749080609.png 480w, /p/mit6s081lec11/p5_hu28250811026237817.png 1024w"
+	srcset="/p/mit6s08111thread-switching/p5_hu7357509958749080609.png 480w, /p/mit6s08111thread-switching/p5_hu28250811026237817.png 1024w"
 	loading="lazy"
 	
 		alt="p5"
@@ -1209,10 +1200,10 @@
 	
 ></p>
 <p>之后在gdb中continue。立刻会停在中断的位置，因为定时器中断还是挺频繁的。现在我们可以确认我们在usertrap函数中，并且usertrap函数通过调用devintr函数来处理这里的中断（注，从下图的栈输出可以看出）。</p>
-<p><img src="/p/mit6s081lec11/p6.png"
+<p><img src="/p/mit6s08111thread-switching/p6.png"
 	width="780"
 	height="152"
-	srcset="/p/mit6s081lec11/p6_hu6811547187374485424.png 480w, /p/mit6s081lec11/p6_hu12400229481486757518.png 1024w"
+	srcset="/p/mit6s08111thread-switching/p6_hu6811547187374485424.png 480w, /p/mit6s08111thread-switching/p6_hu12400229481486757518.png 1024w"
 	loading="lazy"
 	
 		alt="p6"
@@ -1225,10 +1216,10 @@
 ></p>
 <p>因为devintr函数处理定时器中断的代码基本没有内容，接下来我在gdb中输入finish来从devintr函数中返回到usertrap函数。</p>
 <p>当我们返回到usertrap函数时，虽然我们刚刚从devintr函数中返回，但是我们期望运行到下面的yield函数。所以我们期望devintr函数返回2。</p>
-<p><img src="/p/mit6s081lec11/p7.png"
+<p><img src="/p/mit6s08111thread-switching/p7.png"
 	width="714"
 	height="334"
-	srcset="/p/mit6s081lec11/p7_hu3964657701307735048.png 480w, /p/mit6s081lec11/p7_hu3297580789123514755.png 1024w"
+	srcset="/p/mit6s08111thread-switching/p7_hu3964657701307735048.png 480w, /p/mit6s08111thread-switching/p7_hu3297580789123514755.png 1024w"
 	loading="lazy"
 	
 		alt="p7"
@@ -1240,10 +1231,10 @@
 	
 ></p>
 <p>可以从gdb中看到devintr的确返回的是2。</p>
-<p><img src="/p/mit6s081lec11/p8.png"
+<p><img src="/p/mit6s08111thread-switching/p8.png"
 	width="760"
 	height="224"
-	srcset="/p/mit6s081lec11/p8_hu12352301448078710713.png 480w, /p/mit6s081lec11/p8_hu14576638449005284615.png 1024w"
+	srcset="/p/mit6s08111thread-switching/p8_hu12352301448078710713.png 480w, /p/mit6s08111thread-switching/p8_hu14576638449005284615.png 1024w"
 	loading="lazy"
 	
 		alt="p8"
@@ -1399,10 +1390,10 @@
 <p>所以swtch函数在保存完当前内核线程的内核寄存器之后，就会恢复当前CPU核的调度器线程的寄存器，并继续执行当前CPU核的调度器线程。</p>
 <p>接下来，我们快速的看一下我们将要切换到的context（注，也就是调度器线程的context）。</p>
 <p>因为我们只有一个CPU核，这里我在gdb中print cpus[0].context</p>
-<p><img src="/p/mit6s081lec11/p9.png"
+<p><img src="/p/mit6s08111thread-switching/p9.png"
 	width="958"
 	height="118"
-	srcset="/p/mit6s081lec11/p9_hu10285545358071669460.png 480w, /p/mit6s081lec11/p9_hu8796078071750968036.png 1024w"
+	srcset="/p/mit6s08111thread-switching/p9_hu10285545358071669460.png 480w, /p/mit6s08111thread-switching/p9_hu8796078071750968036.png 1024w"
 	loading="lazy"
 	
 		alt="p9"
@@ -1416,10 +1407,10 @@
 <p>这里看到的就是之前保存的当前CPU核的调度器线程的寄存器。</p>
 <p>在这些寄存器中，最有趣的就是ra（Return Address）寄存器，因为ra寄存器保存的是当前函数的返回地址，所以调度器线程中的代码会返回到ra寄存器中的地址。</p>
 <p>通过查看kernel.asm，我们可以知道这个地址的内容是什么。也可以在gdb中输入“x/i 0x80001f2e”进行查看。</p>
-<p><img src="/p/mit6s081lec11/p10.png"
+<p><img src="/p/mit6s08111thread-switching/p10.png"
 	width="704"
 	height="70"
-	srcset="/p/mit6s081lec11/p10_hu16065095697725850952.png 480w, /p/mit6s081lec11/p10_hu1356209050733223766.png 1024w"
+	srcset="/p/mit6s08111thread-switching/p10_hu16065095697725850952.png 480w, /p/mit6s08111thread-switching/p10_hu1356209050733223766.png 1024w"
 	loading="lazy"
 	
 		alt="p10"
@@ -1681,10 +1672,10 @@
 <p>现在我们在scheduler函数的循环中，代码会检查所有的进程并找到一个来运行。</p>
 <p>现在我们知道还有另一个进程，因为我们之前fork了另一个spin进程。</p>
 <p>这里我跳过进程检查，直接在找到RUNABLE进程的位置设置一个断点。</p>
-<p><img src="/p/mit6s081lec11/p11.png"
+<p><img src="/p/mit6s08111thread-switching/p11.png"
 	width="718"
 	height="412"
-	srcset="/p/mit6s081lec11/p11_hu8694052433713630363.png 480w, /p/mit6s081lec11/p11_hu3312515259515705091.png 1024w"
+	srcset="/p/mit6s08111thread-switching/p11_hu8694052433713630363.png 480w, /p/mit6s08111thread-switching/p11_hu3312515259515705091.png 1024w"
 	loading="lazy"
 	
 		alt="p11"
@@ -1748,10 +1739,10 @@
 <p>学生提问：当调用swtch函数的时候，实际上是从一个线程对于switch的调用切换到了另一个线程对于switch的调用。所以线程第一次调用swtch函数时，需要伪造一个“另一个线程”对于switch的调用，是吧？因为也不能通过swtch函数随机跳到其他代码去。</p>
 <p>Robert教授：是的。我们来看一下第一次调用switch时，“另一个”调用swtch函数的线程的context对象。</p>
 <p>proc.c文件中的allocproc函数会被启动时的第一个进程和fork调用，allocproc会设置好新进程的context，如下所示：</p>
-<p><img src="/p/mit6s081lec11/p12.png"
+<p><img src="/p/mit6s08111thread-switching/p12.png"
 	width="536"
 	height="170"
-	srcset="/p/mit6s081lec11/p12_hu10011283022753249809.png 480w, /p/mit6s081lec11/p12_hu17797523608250037853.png 1024w"
+	srcset="/p/mit6s08111thread-switching/p12_hu10011283022753249809.png 480w, /p/mit6s08111thread-switching/p12_hu17797523608250037853.png 1024w"
 	loading="lazy"
 	
 		alt="p12"
@@ -1898,7 +1889,7 @@
 
 
         <span>
-            最后更新于 Nov 12, 2024 23:05 &#43;0800
+            最后更新于 Nov 12, 2024 23:44 &#43;0800
         </span>
     </section></footer>
 

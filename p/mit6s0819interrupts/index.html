@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Interrupts">
-<title>MIT6S081Lec9</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="中断是实现实时响应和异步事件处理的关键机制。它能够在设备或其他事件需要CPU的即时处理时，通过硬件信号打断当前执行流程，将控制权迅速转移给操作系统的中断处理程序。操作系统会保存当前的执行状态，处理中断请求，然后恢复原先的操作。此机制允许CPU高效地处理外部设备事件，如输入输出操作、定时器溢出等，而无需轮询资源状态，从而提高系统效率和响应速度。中断确保了系统对外部变化的敏捷反应，是现代计算环境下实现多任务处理和实时操作的基础。">
+<title>MIT6S081：9Interrupts</title>
 
-<link rel='canonical' href='https://echudet.github.io/p/mit6s081lec9/'>
+<link rel='canonical' href='https://echudet.github.io/p/mit6s0819interrupts/'>
 
-<link rel="stylesheet" href="/scss/style.min.a7f637593c1d99350f36f270c9abc65cf39ec34b45847eb2fa40efef51b94c92.css"><meta property='og:title' content="MIT6S081Lec9">
-<meta property='og:description' content="Interrupts">
-<meta property='og:url' content='https://echudet.github.io/p/mit6s081lec9/'>
+<link rel="stylesheet" href="/scss/style.min.a7f637593c1d99350f36f270c9abc65cf39ec34b45847eb2fa40efef51b94c92.css"><meta property='og:title' content="MIT6S081：9Interrupts">
+<meta property='og:description' content="中断是实现实时响应和异步事件处理的关键机制。它能够在设备或其他事件需要CPU的即时处理时，通过硬件信号打断当前执行流程，将控制权迅速转移给操作系统的中断处理程序。操作系统会保存当前的执行状态，处理中断请求，然后恢复原先的操作。此机制允许CPU高效地处理外部设备事件，如输入输出操作、定时器溢出等，而无需轮询资源状态，从而提高系统效率和响应速度。中断确保了系统对外部变化的敏捷反应，是现代计算环境下实现多任务处理和实时操作的基础。">
+<meta property='og:url' content='https://echudet.github.io/p/mit6s0819interrupts/'>
 <meta property='og:site_name' content='echudet'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-09-16T22:02:50&#43;08:00'/><meta property='article:modified_time' content='2024-11-12T23:05:03&#43;08:00'/><meta property='og:image' content='https://echudet.github.io/p/mit6s081lec9/bg.jpg' />
-<meta name="twitter:title" content="MIT6S081Lec9">
-<meta name="twitter:description" content="Interrupts"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='https://echudet.github.io/p/mit6s081lec9/bg.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-09-16T22:02:50&#43;08:00'/><meta property='article:modified_time' content='2024-11-12T23:44:05&#43;08:00'/><meta property='og:image' content='https://echudet.github.io/p/mit6s0819interrupts/bg.jpg' />
+<meta name="twitter:title" content="MIT6S081：9Interrupts">
+<meta name="twitter:description" content="中断是实现实时响应和异步事件处理的关键机制。它能够在设备或其他事件需要CPU的即时处理时，通过硬件信号打断当前执行流程，将控制权迅速转移给操作系统的中断处理程序。操作系统会保存当前的执行状态，处理中断请求，然后恢复原先的操作。此机制允许CPU高效地处理外部设备事件，如输入输出操作、定时器溢出等，而无需轮询资源状态，从而提高系统效率和响应速度。中断确保了系统对外部变化的敏捷反应，是现代计算环境下实现多任务处理和实时操作的基础。"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://echudet.github.io/p/mit6s0819interrupts/bg.jpg' />
     <link rel="shortcut icon" href="/timer.ico" />
 
     </head>
@@ -293,13 +293,13 @@
     <article class="has-image main-article">
     <header class="article-header">
         <div class="article-image">
-            <a href="/p/mit6s081lec9/">
-                <img src="/p/mit6s081lec9/bg_hu17859475790908646460.jpg"
-                        srcset="/p/mit6s081lec9/bg_hu17859475790908646460.jpg 800w, /p/mit6s081lec9/bg_hu6601181001736459137.jpg 1600w"
+            <a href="/p/mit6s0819interrupts/">
+                <img src="/p/mit6s0819interrupts/bg_hu17859475790908646460.jpg"
+                        srcset="/p/mit6s0819interrupts/bg_hu17859475790908646460.jpg 800w, /p/mit6s0819interrupts/bg_hu6601181001736459137.jpg 1600w"
                         width="800" 
                         height="450" 
                         loading="lazy"
-                        alt="Featured image of post MIT6S081Lec9" />
+                        alt="Featured image of post MIT6S081：9Interrupts" />
                 
             </a>
         </div>
@@ -322,12 +322,12 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/mit6s081lec9/">MIT6S081Lec9</a>
+            <a href="/p/mit6s0819interrupts/">MIT6S081：9Interrupts</a>
         </h2>
     
         
         <h3 class="article-subtitle">
-            Interrupts
+            中断是实现实时响应和异步事件处理的关键机制。它能够在设备或其他事件需要CPU的即时处理时，通过硬件信号打断当前执行流程，将控制权迅速转移给操作系统的中断处理程序。操作系统会保存当前的执行状态，处理中断请求，然后恢复原先的操作。此机制允许CPU高效地处理外部设备事件，如输入输出操作、定时器溢出等，而无需轮询资源状态，从而提高系统效率和响应速度。中断确保了系统对外部变化的敏捷反应，是现代计算环境下实现多任务处理和实时操作的基础。
         </h3>
         
     </div>
@@ -376,7 +376,7 @@
 
 
                 <time>
-                    Nov 12, 2024 23:05 &#43;0800
+                    Nov 12, 2024 23:44 &#43;0800
                 </time>
             </div></footer>
     
@@ -1249,7 +1249,7 @@
 
 
         <span>
-            最后更新于 Nov 12, 2024 23:05 &#43;0800
+            最后更新于 Nov 12, 2024 23:44 &#43;0800
         </span>
     </section></footer>
 
