@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="">
-<title>Mit6s081Lec16</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="File system performance and fast crash recovery ">
+<title>MIT6S081Lec16</title>
 
 <link rel='canonical' href='https://echudet.github.io/p/mit6s081lec16/'>
 
-<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="Mit6s081Lec16">
-<meta property='og:description' content="">
+<link rel="stylesheet" href="/scss/style.min.a7f637593c1d99350f36f270c9abc65cf39ec34b45847eb2fa40efef51b94c92.css"><meta property='og:title' content="MIT6S081Lec16">
+<meta property='og:description' content="File system performance and fast crash recovery ">
 <meta property='og:url' content='https://echudet.github.io/p/mit6s081lec16/'>
 <meta property='og:site_name' content='echudet'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-11-10T22:02:54&#43;08:00'/><meta property='article:modified_time' content='2024-11-10T22:02:54&#43;08:00'/>
-<meta name="twitter:title" content="Mit6s081Lec16">
-<meta name="twitter:description" content="">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-10-01T22:02:50&#43;08:00'/><meta property='article:modified_time' content='2024-11-12T12:44:05&#43;08:00'/>
+<meta name="twitter:title" content="MIT6S081Lec16">
+<meta name="twitter:description" content="File system performance and fast crash recovery ">
     <link rel="shortcut icon" href="/timer.ico" />
 
     </head>
@@ -193,7 +193,7 @@
 
 
                 
-                <span>Search</span>
+                <span>搜索</span>
             </a>
         </li>
         
@@ -245,7 +245,107 @@
     </ol>
 </aside>
 
-    
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li>
+          <ol>
+            <li><a href="#课前预习">课前预习</a></li>
+            <li><a href="#正课">正课</a></li>
+            <li><a href="#qa">Q&amp;A</a></li>
+          </ol>
+        </li>
+        <li><a href="#1-拷贝的目的与对象">1. <strong>拷贝的目的与对象</strong></a></li>
+        <li><a href="#2-拷贝发生的时机与位置">2. <strong>拷贝发生的时机与位置</strong></a></li>
+        <li><a href="#3-什么时候清除拷贝的内容">3. <strong>什么时候清除拷贝的内容？</strong></a></li>
+        <li><a href="#4-拷贝的内容对后续事务的影响">4. <strong>拷贝的内容对后续事务的影响</strong></a></li>
+        <li><a href="#5-拷贝过程的完整总结">5. <strong>拷贝过程的完整总结</strong></a></li>
+        <li><a href="#总结-1">总结</a>
+          <ol>
+            <li></li>
+          </ol>
+        </li>
+        <li><a href="#1-日志的顺序写入">1. <strong>日志的顺序写入</strong></a></li>
+        <li><a href="#2-事务提交后的数据写入">2. <strong>事务提交后的数据写入</strong></a></li>
+        <li><a href="#3-恢复过程中的顺序执行">3. <strong>恢复过程中的顺序执行</strong></a></li>
+        <li><a href="#总结-2">总结：</a>
+          <ol>
+            <li></li>
+          </ol>
+        </li>
+        <li><a href="#具体流程解释">具体流程解释</a></li>
+        <li><a href="#恢复过程">恢复过程</a></li>
+        <li><a href="#总结-3">总结</a>
+          <ol>
+            <li></li>
+          </ol>
+        </li>
+        <li><a href="#ext3-文件系统的日志结构-1">ext3 文件系统的日志结构</a></li>
+        <li><a href="#日志的写入顺序">日志的写入顺序</a></li>
+        <li><a href="#commit-block-的位置和作用">Commit Block 的位置和作用</a></li>
+        <li><a href="#日志块的生命周期">日志块的生命周期</a></li>
+        <li><a href="#日志提交后的流程">日志提交后的流程</a></li>
+        <li><a href="#总结-4">总结</a>
+          <ol>
+            <li></li>
+          </ol>
+        </li>
+        <li><a href="#1-魔法数字的作用">1. <strong>魔法数字的作用</strong></a></li>
+        <li><a href="#2-为什么不完全依赖-descriptor-block">2. <strong>为什么不完全依赖 descriptor block？</strong></a></li>
+        <li><a href="#3-兼顾可靠性和性能">3. <strong>兼顾可靠性和性能</strong></a></li>
+        <li><a href="#4-历史和兼容性考虑">4. <strong>历史和兼容性考虑</strong></a></li>
+        <li><a href="#总结-5">总结</a>
+          <ol>
+            <li></li>
+          </ol>
+        </li>
+        <li><a href="#原因为什么阻止新的系统调用">原因：为什么阻止新的系统调用</a></li>
+        <li><a href="#影响有序性吗">影响有序性吗？</a></li>
+        <li><a href="#小结">小结</a>
+          <ol>
+            <li></li>
+          </ol>
+        </li>
+        <li><a href="#1-handle-的作用系统调用的标识">1. <strong><code>handle</code> 的作用：系统调用的标识</strong></a></li>
+        <li><a href="#2-handle-和事务transaction的关系">2. <strong><code>handle</code> 和事务（Transaction）的关系</strong></a></li>
+        <li><a href="#3-日志log中的-block-管理">3. <strong>日志（Log）中的 block 管理</strong></a></li>
+        <li><a href="#4-总结handle-是系统调用的标识符">4. <strong>总结：<code>handle</code> 是系统调用的标识符</strong></a>
+          <ol>
+            <li></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
 
             <main class="main full-width">
     <article class="main-article">
@@ -253,12 +353,28 @@
 
     <div class="article-details">
     
+    <header class="article-category">
+        
+            <a href="/categories/mit6s081/" >
+                Mit6s081
+            </a>
+        
+            <a href="/categories/os/" >
+                Os
+            </a>
+        
+    </header>
+    
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/mit6s081lec16/">Mit6s081Lec16</a>
+            <a href="/p/mit6s081lec16/">MIT6S081Lec16</a>
         </h2>
     
+        
+        <h3 class="article-subtitle">
+            File system performance and fast crash recovery 
+        </h3>
         
     </div>
 
@@ -278,7 +394,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2024-11-10</time>
+                <time class="article-time--published">2024-10-01</time>
             </div>
         
 
@@ -293,11 +409,22 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 0 分钟
+                    阅读时长: 67 分钟
                 </time>
             </div>
-        
-    </footer>
+        <div class="article-lastmod">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time>
+                    Nov 12, 2024 12:44 &#43;0800
+                </time>
+            </div></footer>
     
 
     
@@ -308,22 +435,931 @@
     <section class="article-content">
     
     
-    
+    <h1 id="lecture-16-file-system-performance-and-fast-crash-recovery">Lecture 16 File system performance and fast crash recovery
+</h1><h4 id="课前预习">课前预习
+</h4><h5 id="什么是文件系统">什么是文件系统
+</h5><p>对于任何文件系统，我们都需要什么功能？文件系统所服务的操作系统有明确的要求。文件系统对应用程序的表现方式是：一个操作系统通常需要遵守某些约定的文件名，并且文件具有某些以特定方式解释的属性。</p>
+<p>然而，文件系统的许多内部方面没有那么受约束，文件系统实现者可以在一定程度上自由地设计这些方面。磁盘上数据的布局（或者，如果文件系统不是本地的，它的网络协议）、内部缓存的细节以及用于调度磁盘IO的算法——在不违反文件系统应用程序接口规范的前提下，这些都是可以改变的。</p>
+<p>我们可能选择一种而不是另一种设计的原因有很多。与旧文件系统的兼容性可能是一个问题：例如，Linux提供了一个UMSDOS文件系统，它在标准MSDOS磁盘文件结构的基础上实现了POSIX文件系统的语义学。</p>
+<p>当试图解决Linux上文件系统恢复时间过长的问题时，我们牢记许多目标：</p>
+<ul>
+<li>使用新文件系统不会严重影响性能；</li>
+<li>不得破坏与现有应用程序的兼容性</li>
+<li>文件系统的可靠性不得以任何方式受到损害。</li>
+</ul>
+<h5 id="文件系统可靠性">文件系统可靠性
+</h5><p>当我们谈论文件系统的可靠性时，有许多问题利害攸关。就本特定项目而言，我们主要关心的是恢复崩溃文件系统内容的可靠性，我们可以确定其中的几个方面：</p>
+<p><strong>保持（Preservation）</strong>：崩溃前磁盘上稳定的数据永远不会被损坏。显然，崩溃时正在写入的文件不能保证完全完好无损，但是恢复系统不能碰磁盘上已经安全的任何文件。</p>
+<p><strong>可预测性（Predictability）</strong>：我们必须恢复的故障模式应该是可预测的，以便我们可靠地恢复。</p>
+<p><strong>原子性（Atomicity）</strong>：许多文件系统操作需要大量独立的IO来完成。一个很好的例子是将文件从一个目录重命名到另一个目录。如果这样的文件系统操作在磁盘上完全完成，或者在恢复完成后完全撤销，恢复就是原子性的。（对于重命名的例子，恢复应该在崩溃后保留提交给磁盘的旧文件名或新文件名，但不能两者都保留。）</p>
+<h5 id="文件系统日志的格式">文件系统日志的格式
+</h5><p>日志文件的工作很简单：它在我们提交事务的过程中记录文件系统元数据块的新内容。日志的唯一其他要求是我们必须能够原子地提交它包含的事务。</p>
+<p>我们向日志写入三种不同类型的数据块：元数据块、描述符块和头块（metadata, descriptor and header blocks）。</p>
+<p><strong>日志元数据块</strong>包含由事务更新的单个文件系统元数据块的全部内容。这意味着，无论我们对文件系统元数据块做了多么小的更改，我们都必须写出整个日志块来记录更改。然而，由于两个原因，这一成本相对较低：</p>
+<ul>
+<li>无论如何，日志写入非常快，因为对日志的大多数写入都是顺序的，我们可以很容易地将日志IO批处理成大型集群，磁盘控制器可以有效地处理这些集群；</li>
+<li>通过将更改后的元数据缓冲区的全部内容从文件系统缓存写入日志，我们可以避免在日志代码中执行大量CPU工作。</li>
+</ul>
+<p>Linux内核已经为我们提供了一种非常有效的机制，可以将buffer cache中现有块的内容写到磁盘上的不同位置。buffer cache中的每个缓冲区都由一个名为<code>buffer_head</code>的结构体描述，该结构体包括缓冲区的数据要写到哪个磁盘块的信息。如果我们想将整个缓冲区块在不干扰<code>buffer_head</code>的情况下写入新位置，我们可以简单地创建一个新的临时<code>buffer_head</code>，将旧的描述复制到其中，然后编辑临时<code>buffer_head</code>中的设备块编号字段，以指向日志文件中的块。然后，我们可以将临时<code>buffer_head</code>直接提交给设备IO系统，并在IO完成后丢弃它。</p>
+<p><strong>描述符块</strong>是描述其他日志元数据块的日志块，每当我们要将元数据块写出到日志时，我们需要记录下元数据通常安置在哪些磁盘块，这样恢复机制就可以将元数据复制回主文件系统中。在日志中的每一组元数据块之前都会写出一个描述符块，其中包含要写入的元数据块的数量加上它们的磁盘块号。</p>
+<p>描述符块和元数据块都按顺序写入日志，每当我们运行超过末尾时，都会从日志的开头重新开始。在任何时候，我们都维护当前的日志头（最后写入的块的块号）和尾部（日志中尚未取消固定的最老的块，如下所述）。每当我们用完日志空间时——日志的头部已经循环回来并赶上了尾部——我们会停止新的日志写入，直到日志的尾部被清理干净，以释放更多的空间。</p>
+<p>最后，日志文件包含一些位于固定位置的<strong>头块</strong>。这些头块记录了日志的当前头部和尾部，加上序列号。在恢复时，头块被扫描以找到序列号最高的块，当我们在恢复过程中扫描日志时，我们只是运行从尾部到头部的所有日志块，就像头块中记录的那样。</p>
+<h5 id="日志的提交和检查点">日志的提交和检查点
+</h5><p>在某个时候，要么是因为上次提交后我们已经等了足够长的时间，要么是因为日志中的空间不足，我们希望将未完成的文件系统更新作为一个新的复合事务提交到日志中。</p>
+<p>复合事务被完全提交后，我们仍然没有完成它。我们需要跟踪记录在事务中的元数据缓冲区，这样我们就可以注意到它们何时被写回磁盘上的主位置。</p>
+<p>回想一下，当我们提交事务时，新更新的文件系统块位于日志中，但尚未同步回磁盘上的永久家块（家块就是写入操作对应的磁盘中文件系统对应的块，我们需要保持旧块的这种不同步，以防在提交日志之前崩溃）。一旦提交了日志，磁盘上的旧版本就不再重要，我们可以在闲暇时将缓冲区写回它们的主位置。但是，在同步完这些缓冲区之前，我们不能删除日志中数据的副本。</p>
+<p>要完全提交并完成事务的检查点，我们将经历以下阶段：</p>
+<ol>
+<li>关闭事务。在此刻，我们会建立一个新的事务以记录未来开始的任何文件系统操作。任何现有的、不完整的操作仍然会使用现有的事务：我们不能在多个事务上拆分单个文件系统操作！</li>
+<li>开始将事务刷新到磁盘。在一个单独的log-writer内核线程的上下文中，我们开始向日志写入所有被事务修改过的元数据缓冲区。在这个阶段，我们还必须写入任何依赖数据（参见上面的部分：事务解剖）。</li>
+<li>提交缓冲区后，将其标记以固定事务，直到它不再脏（它已通过通常的写回机制写回主存储）。</li>
+<li>等待此事务中所有未完成的文件系统操作完成。我们可以在所有操作完成之前安全地开始写日志，允许这两个步骤在某种程度上重叠会更快。</li>
+<li>等待所有未完成的事务更新完全记录在日志中。</li>
+<li>更新日志头块以记录日志的新头部和尾部，将事务提交到磁盘。space released in the journal can now be reused by a later transaction.</li>
+<li>当我们将事务的更新缓冲区写到日志中时，我们将它们标记以将事务固定在日志中。只有当这些缓冲区已同步到磁盘上的主缓冲区时，它们才会解除固定。只有当事务的最后一个缓冲区取消固定时，我们才能重用事务占用的日志块。当发生这种情况时，写入另一组日志头，记录日志尾部的新位置。日志中释放的空间现在可以由以后的事务重用。</li>
+</ol>
+<h4 id="正课">正课
+</h4><h5 id="why-logging">Why logging
+</h5><p>这节课讲的是Linux中的广泛使用的ext3文件系统所使用的logging系统，同时我们也会讨论在高性能文件系统中添加log需要面对的一些问题。</p>
+<p>首先我会花几分钟来回顾一下，为什么我们要学习logging。</p>
+<ul>
+<li>
+<p>之所以我们认为logging很重要，是因为这是一个巨大的成功和重要的思想，几乎可以认为logging是一种魔法，它可以用在任何一个已知的存储系统的故障恢复流程中，它在很多地方都与你想存储的任何数据相关。</p>
+<p>所以你们可以在大量的存储场景中看到log，比如说数据库，文件系统，甚至一些需要在crash之后恢复的定制化的系统中。</p>
+</li>
+<li>
+<p>你们也可以发现log作为从故障中恢复的机制，在分布式系统中也有大量的应用。</p>
+<p>因为log是一种可以用来表示所有在crash之前发生事情的数据结构，如果能够理解log，那么就可以更容易的从crash中恢复过来。</p>
+</li>
+<li>
+<p>除此之外，当你尝试构建高性能logging系统时，log本身也有大量有意思的地方。</p>
+</li>
+</ul>
+<p>这里有一个术语，当我们谈到log时，与今天阅读的<a class="link" href="https://pdos.csail.mit.edu/6.828/2020/readings/journal-design.pdf"  target="_blank" rel="noopener"
+    >论文</a>所用到的journal是同一件事情，它们是同义词。</p>
+<p>除此之外，今天的论文是有关向ext2增加journal，并得到ext3文件系统（注，所以可以认为ext3文件系统就是ext2加上了logging系统）。</p>
+<p>接下来我将从这几个方面来讨论ext3文件系统：某种程度上将其与XV6进行对比；解释ext3是如何修复XV6的logging存在的性能问题；解释ext3在故障恢复时语义上的一些变化。</p>
+<h5 id="xv6-file-system-logging回顾">XV6 File system logging回顾
+</h5><p>首先来回顾一下XV6的logging系统。</p>
+<p>我们有一个磁盘用来存储XV6的文件系统，你可以认为磁盘分为了两个部分：</p>
+<ul>
+<li>
+<p>首先是文件系统目录的树结构，以root目录为根节点，往下可能有其他的目录，我们可以认为目录结构就是一个树状的数据结构。</p>
+<p>假设root目录下有两个子目录D1和D2，D1目录下有两个文件F1和F2，每个文件又包含了一些block。</p>
+<p>除此之外，还有一些其他并非是树状结构的数据，比如bitmap表明了每一个data block是空闲的还是已经被分配了。</p>
+<blockquote>
+<p>注，Frans和Robert在这里可能有些概念不统一，对于Frans来说，目录内容应该也属于文件内容，目录是一种特殊的文件，详见14.3；而对于Robert来说，目录内容是metadata。</p>
+</blockquote>
+<p>inode，目录内容，bitmap block，我们将会称之为metadata block，另一类就是持有了文件内容的block，或者叫data block。</p>
+</li>
+<li>
+<p>除了文件系统之外，XV6在磁盘最开始的位置还有一段log。</p>
+<p>XV6的log相对来说比较简单，它有header block，之后是一些包含了有变更的文件系统block，这里可以是metadata block也可以是data block。</p>
+<p>header block会记录之后的每一个log block应该属于文件系统中哪个block，假设第一个log block属于block 17，第二个属于block 29。</p>
+</li>
+</ul>
+<p>在计算机上，我们会有一些用户程序调用write/create系统调用来修改文件系统。</p>
+<p>在内核中存在block cache，最初write请求会被发到block cache。</p>
+<p>block cache就是磁盘中block在内存中的拷贝，所以最初对于文件block或者inode的更新走到了block cache。</p>
+<p>在write系统调用的最后，这些更新都被拷贝到了log中，之后我们会更新header block的计数来表明当前的transaction已经结束了。</p>
+<p>在文件系统的代码中，任何修改了文件系统的系统调用函数中，某个位置会有begin_op，表明马上就要进行一系列对于文件系统的更新了，不过在完成所有的更新之前，不要执行任何一个更新。</p>
+<p>在begin_op之后是一系列的read/write操作。最后是end_op，用来告诉文件系统现在已经完成了所有write操作。</p>
+<p>所以在begin_op和end_op之间，所有的write block操作只会走到block cache中。当系统调用走到了end_op函数，文件系统会将修改过的block cache拷贝到log中。</p>
+<p>在拷贝完成之后，文件系统会将修改过的block数量，通过一个磁盘写操作写入到log的header block，这次写入被称为commit point。</p>
+<p>在commit point之前，如果发生了crash，在重启时，整个transaction的所有写磁盘操作最后都不会应用。</p>
+<p>在commit point之后，即使立即发生了crash，重启时恢复软件会发现在log header中记录的修改过的block数量不为0，接下来就会将log header中记录的所有block，从log区域写入到文件系统区域。</p>
+<p>这里实际上使得系统调用中位于begin_op和end_op之间的所有写操作在面对crash时具备原子性。</p>
+<p>也就是说，要么文件系统在crash之前更新了log的header block，这样所有的写操作都能生效；要么crash发生在文件系统更新log的header block之前，这样没有一个写操作能生效。</p>
+<p>在crash并重启时，必须有一些恢复软件能读取log的header block，并判断里面是否记录了未被应用的block编号，如果有的话，需要写（也有可能是重写）log block到文件系统中对应的位置；如果没有的话，恢复软件什么也不用做。</p>
+<p>这里有几个超级重要的点，不仅针对XV6，对于大部分logging系统都适用：</p>
+<ul>
+<li>
+<p>包括XV6在内的所有logging系统，都需要遵守write ahead rule。</p>
+<p>这里的意思是，任何时候如果一堆写操作需要具备原子性，系统需要先将所有的写操作记录在log中，之后才能将这些写操作应用到文件系统的实际位置。</p>
+<p>也就是说，我们需要预先在log中定义好所有需要具备原子性的更新，之后才能应用这些更新。</p>
+<p>write ahead rule是logging能实现故障恢复的基础。</p>
+<p>write ahead rule使得一系列的更新在面对crash时具备了原子性。</p>
+</li>
+<li>
+<p>另一点是，XV6对于不同的系统调用复用的是同一段log空间，但是直到log中所有的写操作被更新到文件系统之前，我们都不能释放或者重用log。</p>
+<p>我将这个规则称为freeing rule，它表明我们不能覆盖或者重用log空间，直到保存了transaction所有更新的这段log，都已经反应在了文件系统中。</p>
+</li>
+</ul>
+<p>所以在XV6中，end_op做了大量的工作，首先是将所有的block记录在log中，之后是更新log header。</p>
+<p>在没有crash的正常情况，文件系统需要再次将所有的block写入到磁盘的文件系统中。</p>
+<p>磁盘中的文件系统更新完成之后，XV6文件系统还需要删除header block记录的变更了的block数量，以表明transaction已经完成了，之后就可以重用log空间。</p>
+<p>在向log写入任何新内容之前，删除header block中记录的block数量也很重要。</p>
+<p>因为你不会想要在header block中记录的还是前一个transaction的信息，而log中记录的又是一个新的transaction的数据。</p>
+<p>可以假设新的transaction对应的是与之前不同的block编号的数据，这样的话，在crash重启时，log中的数据会被写入到之前记录的旧的block编号位置。所以我们必须要先清除header block。</p>
+<p>freeing rule的意思就是，在从log中删除一个transaction之前，我们必须将所有log中的所有block都写到文件系统中。</p>
+<p>这些规则使得，就算一个文件系统更新可能会复杂且包含多个写操作，但是每次更新都是原子的，在crash并重启之后，要么所有的写操作都生效，要么没有写操作能生效。</p>
+<p>要介绍Linux的logging方案，就需要了解XV6的logging有什么问题？为什么Linux不使用与XV6完全一样的logging方案？这里的回答简单来说就是XV6的logging太慢了。</p>
+<p>XV6中的任何一个例如create/write的系统调用，需要在整个transaction完成之后才能返回。所以在创建文件的系统调用返回到用户空间之前，它需要完成所有end_op包含的内容，这包括了：</p>
+<ul>
+<li>将所有更新了的block写入到log</li>
+<li>更新header block</li>
+<li>将log中的所有block写回到文件系统分区中</li>
+<li>清除header block</li>
+</ul>
+<p>之后才能从系统调用中返回。</p>
+<p>在任何一个文件系统调用的commit过程中，不仅是占据了大量的时间，而且其他系统调用也不能对文件系统有任何的更新。</p>
+<p>所以这里的系统调用实际上是一次一个的发生，而每个系统调用需要许多个写磁盘的操作。</p>
+<p>这里每个系统调用需要等待它包含的所有写磁盘结束，对应的技术术语被称为synchronize。</p>
+<p>XV6的系统调用对于写磁盘操作来说是同步的（synchronized），所以它非常非常的慢。</p>
+<p>在使用机械硬盘时，它出奇的慢，因为每个写磁盘都需要花费10毫秒，而每个系统调用又包含了多个写磁盘操作。</p>
+<p>所以XV6每秒只能完成几个更改文件系统的系统调用。如果我们在SSD上运行XV6会快一些，但是离真正的高效还差得远。</p>
+<p>另一件需要注意的更具体的事情是，在XV6的logging方案中，每个block都被写了两次。第一次写入到了log，第二次才写入到实际的位置。</p>
+<p>虽然这么做有它的原因，但是ext3可以一定程度上修复这个问题。</p>
+<h5 id="ext3-file-system-log-format">ext3 file system log format
+</h5><p>ext3文件系统就是基于今天要阅读的<a class="link" href="https://pdos.csail.mit.edu/6.828/2020/readings/journal-design.pdf"  target="_blank" rel="noopener"
+    >论文</a>，再加上几年的开发得到的，并且ext3也曾经广泛的应用过。</p>
+<p>ext3是针对之前一种的文件系统（ext2）logging方案的修改，所以ext3就是在几乎不改变之前的ext2文件系统的前提下，在其上增加一层logging系统。</p>
+<p>所以某种程度来说，logging是一个容易升级的模块。</p>
+<p>ext3的数据结构与XV6是类似的。</p>
+<p>在内存中，存在block cache，这是一种write-back cache（注，区别于write-through cache，指的是cache稍后才会同步到真正的后端）。</p>
+<p>block cache中缓存了一些block，其中的一些是干净的数据，因为它们与磁盘上的数据是一致的；</p>
+<p>其他一些是脏数据，因为从磁盘读出来之后被修改过；</p>
+<p>有一些被固定在cache中，基于前面介绍的write-ahead rule和freeing rule，不被允许写回到磁盘中。</p>
+<p>除此之外，ext3还维护了一些transaction信息。它可以维护多个在不同阶段的transaction的信息。</p>
+<p>每个transaction的信息包含有：</p>
+<ul>
+<li>一个序列号</li>
+<li>一系列该transaction修改的block编号。这些block编号指向的是在cache中的block，因为任何修改最初都是在cache中完成。</li>
+<li>以及一系列的handle，handle对应了系统调用，并且这些系统调用是transaction的一部分，会读写cache中的block</li>
+</ul>
+<p>在磁盘上，与XV6一样：</p>
+<ul>
+<li>会有一个文件系统树，包含了inode，目录，文件等等</li>
+<li>会有bitmap block来表明每个data block是被分配的还是空闲的</li>
+<li>在磁盘的一个指定区域，会保存log</li>
+</ul>
+<p>目前为止，这与XV6非常相似。</p>
+<p>主要的区别在于ext3可以同时跟踪多个在不同执行阶段的transaction。</p>
+<p>接下来我们详细看一下ext3的log中有什么，这与XV6中的log有点不一样。</p>
+<p>在log的最开始，是super block。</p>
+<p>这是log的super block，而不是文件系统的super block。</p>
+<p>log的super block包含了log中第一个有效的transaction的起始位置和序列号。</p>
+<p>起始位置就是磁盘上log分区的block编号，序列号就是前面提到的每个transaction都有的序列号。</p>
+<p>log是磁盘上一段固定大小的连续的block。</p>
+<p>log中，除了super block以外的block存储了transaction。</p>
+<p>每个transaction在log中包含了：</p>
+<ul>
+<li>一个descriptor block，其中包含了log数据对应的实际block编号，这与XV6中的header block很像。</li>
+<li>之后是针对每一个block编号的更新数据。</li>
+<li>最后当一个transaction完成并commit了，会有一个commit block</li>
+</ul>
+<p>因为log中可能有多个transaction，commit block之后可能会跟着下一个transaction的descriptor block，data block和commit block。</p>
+<p>所以log可能会很长并包含多个transaction。我们可以认为super block中的起始位置和序列号属于最早的，排名最靠前的，并且是有效的transaction。</p>
+<p>这里有一些细节对于后面的内容很重要。</p>
+<p>在crash之后的恢复过程会扫描log，为了将descriptor block和commit block与data block区分开，descriptor block和commit block会以一个32bit的魔法数字作为起始。</p>
+<p>这个魔法数字不太可能出现在数据中，并且可以帮助恢复软件区分不同的block。</p>
+<blockquote>
+<p>学生提问：有没有可能使用一个descriptor block管理两个transaction？是不是只能一个transaction结束了才能开始下一个transaction？</p>
+<p>Robert教授：Log中会有多个transaction，但是的确一个时间只有一个正在进行的transaction。</p>
+<p>上面的图片没能很好的说明这一点，当前正在进行的transaction对应的是正在执行写操作的系统调用。</p>
+<p>所以当前正在进行的transaction只存在于内存中，对应的系统调用只会更新cache中的block，也就是内存中的文件系统block。</p>
+<p>当ext3决定结束当前正在进行的transaction，它会做两件事情：</p>
+<p>首先开始一个新的transaction，这将会是下一个transaction；其次将刚刚完成的transaction写入到磁盘中，这可能要花一点时间。</p>
+<p>所以完整的故事是，磁盘上的log分区有一系列旧的transaction，这些transaction已经commit了，除此之外，还有一个位于内存的正在进行的transaction。</p>
+<p>在磁盘上的transaction，只能以log记录的形式存在，并且还没有写到对应的文件系统block中。</p>
+<p>logging系统在后台会从最早的transaction开始，将transaction中的data block写入到对应的文件系统中。</p>
+<p>当整个transaction的data block都写完了，之后logging系统才能释放并重用log中的空间。</p>
+<p>所以log其实是个循环的数据结构，如果用到了log的最后，logging系统会从log的最开始位置重新使用。</p>
+</blockquote>
+<p>记住这里的log的结构，它对于后面的内容也很重要。</p>
+<h5 id="ext3如何提升性能">ext3如何提升性能
+</h5><p>ext3通过3种方式提升了性能：</p>
+<ul>
+<li>首先，它提供了异步的（asynchronous）系统调用，也就是说系统调用在写入到磁盘之前就返回了，系统调用只会更新缓存在内存中的block，并不用等待写磁盘操作。不过它可能会等待读磁盘。</li>
+<li>第二，它提供了批量执行（batching）的能力，可以将多个系统调用打包成一个transaction。</li>
+<li>最后，它提供了并发（concurrency）。</li>
+</ul>
+<p>这些基本上就是ext3有的，而XV6没有的特性。接下来我将一一介绍这里的特性。</p>
+<blockquote>
+<p>学生提问：有关batching，XV6不是也支持多个系统调用同时执行start_op和end_op，然后再一起commit吗？</p>
+<p>Robert教授：是的，XV6具备有限能力的batching。</p>
+</blockquote>
+<p>首先是<strong>异步的系统调用</strong>。</p>
+<p>这表示系统调用修改完位于缓存中的block之后就返回，并不会触发写磁盘。</p>
+<p>所以这里明显的优势就是系统调用能够快速的返回。</p>
+<p>同时它也使得I/O可以并行的运行，也就是说应用程序可以调用一些文件系统的系统调用，但是应用程序可以很快从系统调用中返回并继续运算，与此同时文件系统在后台会并行的完成之前的系统调用所要求的写磁盘操作。</p>
+<p>这被称为I/O concurrency，如果没有异步系统调用，很难获得I/O concurrency，或者说很难同时进行磁盘操作和应用程序运算，因为同步系统调用中，应用程序总是要等待磁盘操作结束才能从系统调用中返回。</p>
+<p>另一个异步系统调用带来的好处是，它使得大量的批量执行变得容易。</p>
+<p>异步系统调用的缺点是系统调用的返回并不能表示系统调用应该完成的工作实际完成了。</p>
+<p>举个例子，如果你创建了一个文件并写了一些数据然后关闭文件并在console向用户输出done，最后你把电脑的电给断了。</p>
+<p>尽管所有的系统调用都完成了，程序也输出了done，但是在你重启之后，你的数据并不一定存在。</p>
+<p>这意味着，在异步系统调用的世界里，如果应用程序关心可能发生的crash，那么应用程序代码应该更加的小心。</p>
+<p>这在XV6并不是什么大事，因为如果XV6中的write返回了，那么数据就在磁盘上，crash之后也还在。</p>
+<p>而ext3中，如果write返回了，你完全不能确定crash之后数据还在不在。</p>
+<p>所以一些应用程序的代码应该仔细编写，例如对于数据库，对于文本编辑器，我如果写了一个文件，我不想在我写文件过程断电然后再重启之后看到的是垃圾文件或者不完整的文件，我想看到的要么是旧的文件，要么是新的文件。</p>
+<p>所以文件系统对于这类应用程序也提供了一些工具以确保在crash之后可以有预期的结果。</p>
+<p>这里的工具是一个系统调用，叫做fsync，所有的UNIX都有这个系统调用。</p>
+<p>这个系统调用接收一个文件描述符作为参数，它会告诉文件系统去完成所有的与该文件相关的写磁盘操作，在所有的数据都确认写入到磁盘之后，fsync才会返回。</p>
+<p>所以如果你查看数据库，文本编辑器或者一些非常关心文件数据的应用程序的源代码，你将会看到精心放置的对于fsync的调用。</p>
+<p>fsync可以帮助解决异步系统调用的问题。</p>
+<p>对于大部分程序，例如编译器，如果crash了编译器的输出丢失了其实没什么，所以许多程序并不会调用fsync，并且乐于获得异步系统调用带来的高性能。</p>
+<blockquote>
+<p>学生提问：这是不是有时也被称为flush，因为我之前经常听到这个单词？</p>
+<p>Robert教授：是的，一个合理的解释fsync的工作的方式是，它flush了所有文件相关的写磁盘操作到了磁盘中，之后再返回，所以flush也是针对这个场景的一个合理的单词。</p>
+</blockquote>
+<p>以上就是异步系统调用，下一个ext3使用的技术是<strong>批量执行</strong>（batching）。</p>
+<p>在任何时候，ext3只会有一个open transaction。</p>
+<p>ext3中的一个transaction可以包含多个不同的系统调用。</p>
+<p>所以ext3是这么工作的：它首先会宣告要开始一个新的transaction，接下来的几秒所有的系统调用都是这个大的transaction的一部分。</p>
+<p>我认为默认情况下，ext3每5秒钟都会创建一个新的transaction，所以每个transaction都会包含5秒钟内的系统调用，这些系统调用都打包在一个transaction中。</p>
+<p>在5秒钟结束的时候，ext3会commit这个包含了可能有数百个更新的大transaction。</p>
+<p>为什么这是个好的方案呢？</p>
+<ul>
+<li>
+<p>首先它在多个系统调用之间分摊了transaction带来的固有的损耗。</p>
+<p>固有的损耗包括写transaction的descriptor block和commit block；在一个机械硬盘中需要查找log的位置并等待磁碟旋转，</p>
+<p>这些都是成本很高的操作，现在只需要对一批系统调用执行一次，而不用对每个系统调用执行一次这些操作，所以batching可以降低这些损耗带来的影响。</p>
+</li>
+<li>
+<p>另外，它可以更容易触发write absorption。</p>
+<p>经常会有这样的情况，你有一堆系统调用最终在反复更新相同的一组磁盘block。</p>
+<p>举个例子，如果我创建了一些文件，我需要分配一些inode，inode或许都很小只有64个字节，一个block包含了很多个inode，所以同时创建一堆文件只会影响几个block的数据。</p>
+<p>类似的，如果我向一个文件写一堆数据，我需要申请大量的data block，我需要修改表示block空闲状态的bitmap block中的很多个bit位，如果我分配到的是相邻的data block，它们对应的bit会在同一个bitmap block中，所以我可能只是修改一个block的很多个bit位。</p>
+<p>所以一堆系统调用可能会反复更新一组相同的磁盘block。</p>
+<p>通过batching，多次更新同一组block会先快速的在内存的block cache中完成，之后在transaction结束时，一次性的写入磁盘的log中。</p>
+<p>这被称为write absorption，相比一个类似于XV6的同步文件系统，它可以极大的减少写磁盘的总时间。</p>
+</li>
+<li>
+<p>最后就是disk scheduling。</p>
+<p>假设我们要向磁盘写1000个block，不论是在机械硬盘还是SSD（机械硬盘效果会更好），一次性的向磁盘的连续位置写入1000个block，要比分1000次每次写一个不同位置的磁盘block快得多。</p>
+<p>我们写log就是向磁盘的连续位置写block。</p>
+<p>通过向磁盘提交大批量的写操作，可以更加的高效。</p>
+<p>这里我们不仅通过向log中连续位置写入大量block来获得更高的效率，甚至当我们向文件系统分区写入包含在一个大的transaction中的多个更新时，如果我们能将大量的写请求同时发送到驱动，即使它们位于磁盘的不同位置，我们也使得磁盘可以调度这些写请求，并以特定的顺序执行这些写请求，这也很有效。</p>
+<p>在一个机械硬盘上，如果一次发送大量需要更新block的写请求，驱动可以对这些写请求根据轨道号排序。</p>
+<p>甚至在一个固态硬盘中，通过一次发送给硬盘大量的更新操作也可以稍微提升性能。</p>
+<p>所以，只有发送给驱动大量的写操作，才有可能获得disk scheduling。这是batching带来的另一个好处。</p>
+</li>
+</ul>
+<p>ext3使用的最后一个技术就是concurrency，相比XV6这里包含了两种concurrency。</p>
+<ul>
+<li>
+<p>首先ext3允许多个系统调用同时执行，所以我们可以有并行执行的多个不同的系统调用。</p>
+<p>在ext3决定关闭并commit当前的transaction之前，系统调用不必等待其他的系统调用完成，它可以直接修改作为transaction一部分的block。</p>
+<p>许多个系统调用都可以并行的执行，并向当前transaction增加block，这在一个多核计算机上尤其重要，因为我们不会想要其他的CPU核在等待锁。</p>
+<p>在XV6中，如果当前的transaction还没有完成，新的系统调用不能继续执行。</p>
+<p>而在ext3中，大多数时候多个系统调用都可以更改当前正在进行的transaction。</p>
+</li>
+<li>
+<p>另一种ext3提供的并发是，可以有多个不同状态的transaction同时存在。</p>
+<p>所以尽管只有一个open transaction可以接收系统调用，但是其他之前的transaction可以并行的写磁盘。</p>
+<p>这里可以并行存在的不同transaction状态包括了：</p>
+<ul>
+<li>首先是一个open transaction</li>
+<li>若干个正在commit到log的transaction，我们并不需要等待这些transaction结束。当之前的transaction还没有commit并还在写log的过程中，新的系统调用仍然可以在当前的open transaction中进行。</li>
+<li>若干个正在从cache中向文件系统block写数据的transaction</li>
+<li>若干个正在被释放的transaction，这个并不占用太多的工作</li>
+</ul>
+</li>
+</ul>
+<p>通常来说会有位于不同阶段的多个transaction，新的系统调用不必等待旧的transaction提交到log或者写入到文件系统。</p>
+<p>对比之下，XV6中新的系统调用就需要等待前一个transaction完全完成。</p>
+<blockquote>
+<p>学生提问：如果一个block cache正在被更新，而这个block又正在被写入到磁盘的过程中，会怎样呢？</p>
+<p>Robert教授：这的确会是一个问题，这里有个潜在的困难点，因为transaction写入到log中的内容只能包含由该transaction中的系统调用所做的更新，而不能包含在该transaction之后的系统调用的更新。</p>
+<p>因为如果这么做了的话，那么可能log中会只包含系统调用的部分更新，而我们需要确保transaction包含系统调用的所有更新。所以我们不能承担transaction包含任何在该transaction之后的更新的风险。</p>
+<p>ext3是这样解决这个问题的，当它决定结束当前的open transaction时，它会在内存中拷贝所有相关的block，之后transaction的commit是基于这些block的拷贝进行的。</p>
+<p>所以transaction会有属于自己的block的拷贝。为了保证这里的效率，操作系统会使用copy-on-write（注，详见8.4）来避免不必要的拷贝，这样只有当对应的block在后面的transaction中被更新了，它在内存中才会实际被拷贝。</p>
+</blockquote>
+<p>concurrency之所以能帮助提升性能，是因为它可以帮助我们并行的运行系统调用，我们可以得到多核的并行能力。</p>
+<p>如果我们可以在运行应用程序和系统调用的同时，来写磁盘，我们可以得到I/O concurrency，也就是同时运行CPU和磁盘I/O。这些都能帮助我们更有效，更精细的使用硬件资源。</p>
+<h5 id="ext3文件系统调用格式">ext3文件系统调用格式
+</h5><p>接下来我们大概过一下Linux中的文件系统调用，并介绍抽象上每个系统调用的结构。</p>
+<p>在Linux的文件系统中，我们需要每个系统调用都声明一系列写操作的开始和结束。</p>
+<p>实际上在任何transaction系统中，都需要明确的表示开始和结束，这样之间的所有内容都是原子的。</p>
+<p>所以系统调用中会调用start函数。</p>
+<p>ext3需要知道当前正在进行的系统调用个数，所以每个系统调用在调用了start函数之后，会得到一个handle，它某种程度上唯一识别了当前系统调用。</p>
+<p>当前系统调用的所有写操作都是通过这个handle来识别跟踪的（注，handle是ext3 transaction中的一部分数据，详见16.3）。</p>
+<p>之后系统调用需要读写block，它可以通过get获取block在buffer中的缓存，同时告诉handle这个block需要被读或者被写。</p>
+<p>当这个系统调用结束时，它会调用stop函数，并将handle作为参数传入。</p>
+<p>除非transaction中所有已经开始的系统调用都完成了，transaction是不能commit的。</p>
+<p>因为可能有多个transaction，文件系统需要有种方式能够记住系统调用属于哪个transaction，这样当系统调用结束时，文件系统就知道这是哪个transaction正在等待的系统调用，所以handle需要作为参数传递给stop函数。</p>
+<p>因为每个transaction都有一堆block与之关联，修改这些block就是transaction的一部分内容，所以我们将handle作为参数传递给get函数是为了告诉logging系统，这个block是handle对应的transaction的一部分。</p>
+<p>stop函数并不会导致transaction的commit，它只是告诉logging系统，当前的transaction少了一个正在进行的系统调用。</p>
+<p>transaction只能在所有已经开始了的系统调用都执行了stop之后才能commit。所以transaction需要记住所有已经开始了的handle，这样才能在系统调用结束的时候做好记录。</p>
+<h5 id="ext3-transaction-commit步骤">ext3 transaction commit步骤
+</h5><p>基于上面的系统调用的结构，接下来我将介绍commit transaction完整的步骤。</p>
+<p>每隔5秒，文件系统都会commit当前的open transaction，下面是commit transaction涉及到的步骤：</p>
+<ol>
+<li>
+<p>首先需要阻止新的系统调用。</p>
+<p>当我们正在commit一个transaction时，我们不会想要有新增的系统调用，我们只会想要包含已经开始了的系统调用，所以我们需要阻止新的系统调用。</p>
+<p>这实际上会损害性能，因为在这段时间内系统调用需要等待并且不能执行。</p>
+</li>
+<li>
+<p>第二，需要等待包含在transaction中的已经开始了的系统调用们结束。</p>
+<p>所以我们需要等待transaction中未完成的系统调用完成，这样transaction能够反映所有的写操作。</p>
+</li>
+<li>
+<p>一旦transaction中的所有系统调用都完成了，也就是完成了更新cache中的数据，那么就可以开始一个新的transaction，并且让在第一步中等待的系统调用继续执行。</p>
+<p>所以现在需要为后续的系统调用开始一个新的transaction。</p>
+</li>
+<li>
+<p>还记得ext3中的log包含了descriptor，data和commit block吗？</p>
+<p>现在我们知道了transaction中包含的所有的系统调用所修改的block，因为系统调用在调用get函数时都将handle作为参数传入，表明了block对应哪个transaction。</p>
+<p>接下来我们可以更新descriptor block，其中包含了所有在transaction中被修改了的block编号。</p>
+</li>
+<li>
+<p>我们还需要将被修改了的block，从缓存中写入到磁盘的log中。</p>
+<p>之前有同学问过，新的transaction可能会修改相同的block，所以在这个阶段，我们写入到磁盘log中的是transaction结束时，对于相关block cache的拷贝。所以这一阶段是将实际的block写入到log中。</p>
+</li>
+<li>
+<p>接下来，我们需要等待前两步中的写log结束。</p>
+</li>
+<li>
+<p>之后我们可以写入commit block。</p>
+</li>
+<li>
+<p>接下来我们需要等待写commit block结束。</p>
+<p>结束之后，从技术上来说，当前transaction已经到达了commit point，也就是说transaction中的写操作可以保证在面对crash并重启时还是可见的。</p>
+<p>如果crash发生在写commit block之前，那么transaction中的写操作在crash并重启时会丢失。</p>
+</li>
+<li>
+<p>接下来我们可以将transaction包含的block写入到文件系统中的实际位置。</p>
+</li>
+<li>
+<p>在第9步中的所有写操作完成之后，我们才能重用transaction对应的那部分log空间。</p>
+</li>
+</ol>
+<p>在一个非常繁忙的系统中，log的头指针一直追着尾指针在跑（注，也就是说一直没有新的log空间）。</p>
+<p>在当前最早的transaction的所有步骤都完成之前，或许不能开始commit一个新的transaction，因为我们需要重复利用最早的transaction对应的log空间。</p>
+<p>不过人们通常会将log设置的足够大，让这种情况就不太可能发生。</p>
+<blockquote>
+<p>学生提问：你刚刚说没有进程会等待这些步骤完成，那么这些步骤是在哪里完成的呢？</p>
+<p>Robert教授：这些是在后台的内核线程完成的</p>
+<p>学生提问：我有个有关重用log空间的问题，假设我们使用了一段特定的log空间，并且这段log空间占据了是刚刚释放出来的所有log空间，但是还不够，那么文件系统会等待另一部分的log空间释放出来吗，还是会做点别的？</p>
+<p>Robert教授：是的，会等待。让我画张图来确保我回答的是正确的问题。我们可以认为log是磁盘中的一段线性空间，假设现存的transaction中最早的是T7，之后是T8，T9，我们想要将T10放在T9之后的空闲区域。</p>
+<p>我们或许要等待T7将所有的block写入到文件系统对应的位置，这样我们才能释放T7对应的空间。这意味着T10中的步骤需要暂停以等待T7释放出来。这是你的问题吗？</p>
+<p>同一个学生：是的，所以可能是这样，我先写入T10的block到现有的log空闲区域，但是如果最后log足够大并且我们用光了空闲区域，我们就需要等待T7的空间被释放出来，是吗？</p>
+<p>Robert教授：是的，如果需要写入的数据足够多，并且log迅速的用光了。我们甚至都不能在释放log空间之前开始新的系统调用。如果你们关注细节的话，这里会有一些潜在的死锁。首先系统调用需要预声明需要多少个block，这样logging系统才知道对于该transaction需要多少log空间，因为我们不会在没有足够空间来commit transaction时，开始一个新的transaction（注，难道不能将不能写入到磁盘log中的transaction先缓存在内存中吗？虽然这样可能会导致堆积）。</p>
+<p>学生提问：如果新的transaction需要的空间走到了T8，那么现在就需要等待T7，T8结束，这是怎么工作的呢？</p>
+<p>Robert教授：图中的T7，T8，T9其中的系统调用都完成了，并且都已经在commit到log中了。在上面的图中，我们会直接开始T10，新的系统调用会写入到transaction T10，最终当T10需要commit到log中，并且它大到需用用到T8的空间时，它需要等待T7，T8结束。</p>
+<p>文件系统会记录每个transaction的大小，这样文件系统就知道要等待多少个之前的transaction结束。所以这里还有不少的记录工作，这样文件系统才能理解所有旧的transaction的状态。</p>
+</blockquote>
+<p>有关如何重用log空间，这里有个小细节。</p>
+<p>在log的最开始有一个super block，所以在任何时候log都是由一个super block和一些transaction组成。</p>
+<p>假设T4是最新的transaction，之前是T1，T2，T3。</p>
+<p>我们是否能重用一段log空间，取决于相应的transaction，例如T2，是否已经commit并且写入到文件系统的实际位置中，这样在crash并重启时就不需要重新执行这段transaction了。</p>
+<p>同时也取决于T2之前的的所有transaction是否已经被释放了。所有的这些条件都满足时，我们就可以释放并重用T2对应的log空间。</p>
+<h5 id="ext3-file-system恢复过程">ext3 file system恢复过程
+</h5><p>为了简化重启时恢复软件的工作，当决定释放某段log空间时，文件系统会更新super block中的指针将其指向当前最早的transaction的起始位置。</p>
+<p>之后如果crash并重启，恢复软件会读取super block，并找到log的起始位置。</p>
+<p>所以如果crash了，内存中的所有数据都会消失，例如文件系统中记录的哪些block被写入到了磁盘中这些信息都会丢失，所以可以假设这时内存中没有可用的数据，唯一可用的数据存在于磁盘中。</p>
+<p>当然我们这里的讨论都是基于磁盘还是完好的，所以你可以认为只是一次电力故障，系统突然停止了运行过程，在电力恢复时，断电那一瞬间磁盘中的数据还存在。我们并没有考虑磁盘被损坏或者被摧毁的情况。</p>
+<p>crash或许会打断任何在进行中的transaction，或许transaction正在commit，或许transaction正在向文件系统写block。</p>
+<p>让我重新画一个例子，我们在log中有一个super block，之后是transaction T6，T7，T8，在T8之后是一个已近被释放了log空间的T5，假设T8已经用了T5的一部分空间。</p>
+<p>并且现在super block指向的是T6的起始位置，因为T6是最早的transaction。</p>
+<p>现在crash并重启，恢复软件读取super block就可以知道log的起始位置，之后恢复软件会在log中一直扫描并尝试找到log的结束位置，现在我们需要有一种方式确定log的结束位置。</p>
+<p>我们知道每个transaction包含了一个descriptor block，里面记录了该transaction中包含了多少个data block，假设descriptor block记录了17个block，那么恢复软件会扫描17个data block，最后是commit block。</p>
+<p>这样可以一直扫描到T8。</p>
+<p>在扫描T8时有两种可能，一种可能是T8完成了commit，并且包含了commit block。</p>
+<p>这时恢复软件并不知道T8就是最后一个transaction，所以它会接着看T8的commit block的下一个block，来看看这是不是一个有效的descriptor block。</p>
+<p>我们知道这不是一个descriptor block，而是一个包含在T5内的随机block。</p>
+<p>现在的问题是恢复软件如何可靠的区分出来呢？是的，每个descriptor和commit block都以某个魔法数字作为起始，这是一个32bit的数字。</p>
+<p>所以如果扫描完了T8，下一个block以魔法数字作为起始，那么恢复软件就会认为这是一个descriptor block。</p>
+<blockquote>
+<p>（注，也有可能T5正好完美的跟在T8后面，也就是说T8的commit block之后就是T5的descriptor block，同时T5的commit block也存在，所以这里必然还需要一些其他的机制，我猜是用到了transaction的序列号）</p>
+</blockquote>
+<p>但是，现在我们看到的block可能是包含了任意数据的data block，所以它可能是文件中的一个data block并且也是以魔法数字作为起始。</p>
+<p>所以这里的最后一个细节是，logging系统需要能区分一个以魔法数字作为起始的descriptor block和一个以魔法数字作为起始的data block。</p>
+<p>你可以想到各种方法来实现这种区分，ext3是这样做的，当它向log写一个block时，如果这个block既不是descriptor block也不是commit block，但是又以魔法数字作为起始，文件系统会以0替换前32bit，并在transaction的descriptor block中为该data block设置一个bit。</p>
+<p>这个bit表示，对应的data block本来是以魔法数字作为起始，但是现在我们将其替换成了0。而恢复软件会检查这个bit位，在将block写回到文件系统之前，会用魔法数字替换0。</p>
+<p>因此，在log中，除了descriptor和commit block，不会有其他的block以这32bit的魔法数字作为起始。</p>
+<p>所以我们不会有模棱两可的判断，如果一个commit block之后的block以魔法数字作为起始，那么它必然是一个descriptor block。</p>
+<p>所以恢复软件会从super block指向的位置开始一直扫描，直到：</p>
+<ul>
+<li>某个commit block之后的一个block并不是descriptor block</li>
+<li>某个commit block之后是descriptor block，但是根据descriptor block找到的并不是一个commit block</li>
+</ul>
+<p>这时，恢复软件会停止扫描，并认为最后一个有效的commit block是log的结束位置。</p>
+<p>或许在最后一个commit block之后会跟一个并没有commit完成的transaction（注，上面的第二种情况），但是恢复软件会忽略未完成的transaction，因为这个transaction并没有包含所有的写操作，所以它并不能原子性的恢复。</p>
+<p>之后恢复软件会回到log的最开始位置，并将每个log block写入到文件系统的实际位置，直到走到最后一个有效的commit block。</p>
+<p>之后才是启动剩下的操作系统，并且运行普通的程序。在恢复完成之前，是不能运行任何程序的，因为这个时候文件系统并不是有效的。</p>
+<blockquote>
+<p>学生提问：XV6相比这里的log机制，缺少了什么呢？</p>
+<p>Robert教授：XV6主要缺失的是在log中包含多个transaction的能力，在XV6的log中最多只会有一个transaction，所以在XV6中缺少了并发的能力。</p>
+<p>比如说当我在执行transaction T7的系统调用时，ext3可以同时向磁盘提交T6，而这在XV6中这是不可能的，因为log只保存了一个transaction。</p>
+<p>所以我们必须先完成一个transaction的所有工作，之后才能开始下一个transaction。所以XV6是简单且正确的，但是缺少了并发的能力。</p>
+<p>学生提问：但是在XV6我还是可以有多个transaction，只是说不能异步的执行它们，对吗？</p>
+<p>Robert教授：这里其实有点模糊，XV6实际上允许在一个transaction中包含多个系统调用（注，详见15.8），所以XV6有一些并发和batching的能力，但是当XV6决定要commit一个transaction时，在完全完成这个transaction之前，是不能执行任何新的系统调用的。</p>
+<p>因为直到前一个transaction完全完成，并没有log空间来存放新的系统调用。</p>
+<p>所以XV6要么是在运行一些系统调用，要么是在commit transaction，但是它不能同时干这两件事情，而ext3可以同时干这两件事情。</p>
+</blockquote>
+<h5 id="为什么新transaction需要等前一个transaction中系统调用执行完成">为什么新transaction需要等前一个transaction中系统调用执行完成
+</h5><p>以上就是ext3中相对来说直观的部分。实际上还有一些棘手的细节我想讨论一下。</p>
+<p>之前我提到过，ext3中存在一个open transaction，但是当ext3决定要关闭该transaction时，它需要等待该transaction中的所有系统调用都结束，之后才能开始新的transaction。</p>
+<p>假设我们现在有transaction T1，其中包含了多个系统调用。</p>
+<p>如果我们想要关闭T1，我们需要停止接收新的系统调用，因为我们想要等待现有的系统调用结束，这样才能commit transaction。</p>
+<p>所以直到这些系统调用都结束了，在ext3中不能允许开始任何新的系统调用。</p>
+<p>所以只有在T1中的系统调用完成之后，才能开始在接下来的transaction T2中接收系统调用。</p>
+<p>在这之间有一段时间，新的系统调用是被拦截的，这降低了性能，因为我们本来应该执行系统调用的但是又不被允许。</p>
+<p>这里的问题是，直到T1中所有的系统调用都结束之前，ext3为什么不让T2中的系统调用开始执行呢？</p>
+<p>让我们来看一下没有这个限制条件可能会带来的错误的场景。</p>
+<p>我们假设T1只包含了一个系统调用，这是一个create系统调用用来创建文件x。</p>
+<p>在create系统调用结束之前，文件系统决定开始一个新的transaction T2用来接收create之后的所有系统调用。</p>
+<p>我们假设T2在T1结束之前就开始了，T2对另一个文件y调用了unlink系统调用。unlink会释放与y关联的inode。</p>
+<p>假设在下面的时间点T2将inode标记为空闲的，create会为x分配inode，或许它在之后的一个时间点分配了inode。</p>
+<p>因为create在unlink释放inode之后分配的inode，它可能会重用同一个inode，所以x可能会获得y的inode，假设是inode 17。</p>
+<p>目前为止没有问题，因为unlink本来就是释放inode。</p>
+<p>当T1中的create结束之后，我们会关闭T1，在最后我们会将T1的所有更新都写入到磁盘的log中。</p>
+<p>之后unlink还要花点时间才能结束，但是在它结束之前计算机crash了。</p>
+<p>在重启并运行恢复软件时，可以发现T1已经commit了，而T2没有。</p>
+<p>所以恢复软件会完全忽略T2，这意味着T2中的unlink就跟没有发生过一样，恢复软件不会执行T2中的unlink，也就不会删除文件y。</p>
+<p>所以crash并重启之后y文件仍然存在，并还在使用inode 17。</p>
+<p>然而T1又完成了，x文件使用的也是inode 17，所以现在我们错误的有了两个文件都使用了相同的inode，这意味着它们共享了文件内容，向一个文件写数据会神奇的出现在另一个文件中。</p>
+<p>这完全是错误的，因为我们本来想的是删除y，并为x分配一个空闲的inode，而不是一个已经在使用中的inode。</p>
+<p>这里可以这么想，T2中的unlink修改了一个block，最终这个修改过的block被前一个transaction所使用。</p>
+<p>T2中修改的信息，被T1所使用了，这意味着我们丢失了T2的原子性。</p>
+<p>因为T2的目标是unlink的效果要么是全发生，要么是完全不发生。但是刚刚的例子中，因为T1使用了T2中释放的inode，这意味着T2中部分修改已经生效了，但是其他的修改随着crash又丢失了。</p>
+<p>或许你可以想到一些修复这里问题的方法，或许T1可以发现inode是由后一个transaction释放的而不去使用它。</p>
+<p>而ext3采用了一个非常简单的方法，在前一个transaction中所有系统调用都结束之前，它不允许任何新的系统调用执行。</p>
+<p>所以transaction T1也就不可能看到之后的transaction包含的更新。</p>
+<p>因为直到T1 commit了，整个unlink都不被允许执行。</p>
+<blockquote>
+<p>学生提问：当你关闭一个open transaction时，具体会发生什么呢？会对当前的缓存做一个快照吗？</p>
+<p>Robert教授：会的，当我们关闭一个transaction，文件系统会拷贝被transaction中的系统调用所修改的所有block，之后transaction才会commit这些block。后面的transaction会在真正的block cache上运行。当将block都commit到log之后，对于block cache的拷贝就可以丢弃了。</p>
+</blockquote>
+<h5 id="总结">总结
+</h5><p>最后我希望同学们记住的有关logging和ext3的是：</p>
+<ul>
+<li>
+<p>log是为了保证多个步骤的写磁盘操作具备原子性。在发生crash时，要么这些写操作都发生，要么都不发生。这是logging的主要作用。</p>
+</li>
+<li>
+<p>logging的正确性由write ahead rule来保证。</p>
+<p>你们将会在故障恢复相关的业务中经常看到write ahead rule或者write ahead log（WAL）。write ahead rule的意思是，你必须在做任何实际修改之前，将所有的更新commit到log中。在稍后的恢复过程中完全依赖write ahead rule。对于文件系统来说，logging的意义在于简单的快速恢复。log中可能包含了数百个block，你可以在一秒中之内重新执行这数百个block，不管你的文件系统有多大，之后又能正常使用了。</p>
+</li>
+<li>
+<p>最后有关ext3的一个细节点是，它使用了批量执行和并发来获得可观的性能提升，不过同时也带来了可观的复杂性的提升。</p>
+</li>
+</ul>
+<blockquote>
+<p>学生提问：你刚刚说有一个文件系统线程会做这里所有的工作，那么只能有一个这样的线程，否则的话就会有不同步的问题了，对吗？</p>
+<p>Robert教授：或许真的只有一个线程，我其实不知道有多少个线程，但是1是个不错的数字，因为logging的正确性取决于旧的transaction要在新的transaction之前提交。</p>
+<p>但是逻辑上来说又没有必要只有一个线程，你可以想象不同的transaction使用不同的线程来提交（注，只要锁加的合适多个线程应该也是没问题的）。</p>
+<p>学生提问：当你在讨论crash的时候，你有一个图是T8正在使用之前释放的T5的空间，如果T8在crash的时候还没有commit，并且T5的commit block正好在T8的descriptor block所指定的位置，这样会不会不正确的表明T8已经被commit了（注，这时T8有一个假的commit block）？</p>
+<p>Robert教授：让我尝试画出这里的场景。</p>
+<p>首先我们有一个古老的transaction T5，因为log的循环特性，在顺序上T8位于T5之前。</p>
+<p>因为T5已经被释放了，T8正在蚕食T5的log空间。</p>
+<p>假设T8没有完成commit，但是如果完成commit的话，T8的commit block会写到T5的commit block位置。</p>
+<p>T8并没有能写入commit block，T8前面所有的block都写入了，但是最后跟的是T5的commit block。</p>
+<p>这里的答案是，descriptor block和commit block都有transaction的<strong>序列号</strong>，所以T8的descriptor block里面的序列号是8，但是T5的commit block里面的序列号是5，所以两者不能匹配。</p>
+<p>学生提问：我们可以在transaction T8开始的时候就知道它的大小吗？</p>
+<p>Robert教授：这是个复杂的问题。</p>
+<p>当T8作为活跃的transaction开始时，系统调用会写入数据，这时文件系统并不知道T8有多大。</p>
+<p>当文件系统开始commit T8时，是知道T8有多大的，因为文件系统只会在T8中所有的系统调用都结束之后才commit它，而在那个时间点，文件系统知道所有的写操作，所以就知道T8究竟有多大。</p>
+<p>除此之外，descriptor block里面包含了所有block的实际编号，所以当写入transaction的第一个block，也就是descriptor block时，logging系统知道T8会包含多少个block。</p>
+<p>学生提问：为什么不在descriptor block里面记录commit信息。虽然这样可能不太好，因为要回到之前的一个位置去更新之前的一个block。</p>
+<p>Robert教授：所以这里的提议是，与其要一个专门的commit block，可以让descriptor block来实现commit block的功能。</p>
+<p>XV6与这个提议非常像，我认为可以这么做，至少在ext3中这么做了不会牺牲性能。</p>
+<p>你需要像XV6一样来组织这里的结构，也就是需要在descriptor block包含某个数据表明这是一个已经提交过的transaction。</p>
+<p>这样做的话，可以节省一个commit block的空间，但是不能节省整个时间。</p>
+<p>Linux文件系统的后续版本实现了你的提议，ext4做了以下工作来更有效的写commit block。</p>
+<p>ext4会同时写入所有的data block和commit block，它并不是等待所有的data block写完了之后才写的commit block。</p>
+<p>但是这里有个问题，磁盘可以无序的执行写操作，所以磁盘可能会先写commit block之后再写data block。</p>
+<p>如果中间有了crash，那么我们有了commit block，但是却没有全部的data block。</p>
+<p>ext4通过在commit block中增加校验和来避免这种问题。</p>
+<p>所以commit block写入之后发生了crash，如果data block没有全写入那么校验和不能得出正确的结果，恢复软件可以据此判断出错了。</p>
+<p>ext4可以通过这种方式在机械硬盘上写入一批block而避免磁碟旋转，进而提升磁盘性能。</p>
+<p>学生提问：log中的data block是怎么写入到文件系统中的？</p>
+<p>Robert教授：这个问题有多个答案。</p>
+<p>对于data block，ext3有三种模式，但是我只记得两个，journaled data和ordered data（注，第三种是writeback）。</p>
+<p>当你在配置ext3文件系统时，你需要告诉Linux你想要哪种模式。</p>
+<p>如果你想要的是journaled data，文件内容就是写入到log中，如果你向一个文件写数据，这会导致inode更新，log中会包含文件数据和更新了的inode，也就是说任何更新了的block都会记录在log中。这种方法非常慢，因为数据需要先写在log中，再写到文件系统中。所以journaled data很直观，但是很慢。</p>
+<p><strong>ordered data</strong>是最流行的模式，它不会将文件数据写入到log中，只会将metadata block，例如inode，目录block，写入到log中，文件的内容会直接写到文件系统的实际位置中。</p>
+<p>所以这种模式要快得多，因为你不用将文件内容写两次。但是它也会导致更多的复杂性，因为你不能随时写入文件内容。假设你执行一个写操作导致一个新的block被分配给一个文件，并将包含了新分配block编号的inode写入到log中并commit，在实际写入文件内容至刚刚分配的data block之前发生crash。</p>
+<p>在稍后的恢复流程中，你将会看到包含了新分配的block编号的inode，但是对应data block里面的内容却属于之前使用了这个data block的旧的文件。</p>
+<p>如果你运行的是一个类似Athena的多用户系统，那么可能就是一个用户拥有一个文件，其中的内容又属于另一个用户已经删除的文件，如果我们不是非常小心的处理写入数据和inode的顺序就会有这样的问题。</p>
+<p>ext3的ordered data通过先写入文件内容到磁盘中，再commit修改了的inode来解决这里的问题。</p>
+<p>如果你是个应用程序，你写了一个文件并导致一个新的文件系统data block被分配出来，文件系统会将新的文件内容写到新分配的data block中，之后才会commit transaction，进而导致inode更新并包含新分配的data block编号。</p>
+<p>如果在写文件数据和更新inode之间发生了crash，你也看不到其他人的旧的数据，因为这时就算有了更新了的data block，但是也没关系，因为现在不仅inode没有更新，连bitmap block也没更新，相应的data block还处于空闲状态，并且可以分配给其他的程序，你并不会因此丢失block。</p>
+<p>这里的效果就是我们写了一个data block但是最终并没有被任何文件所使用。</p>
+</blockquote>
+<h4 id="qa">Q&amp;A
+</h4><h5 id="拷贝具体过程">拷贝具体过程
+</h5><blockquote>
+<p>在 ext3 文件系统中，当关闭一个开放的事务（open transaction）时，涉及的拷贝过程是为了保证事务的一致性和数据的原子性。让我们逐步解析这个拷贝过程，了解它的各个环节及其对后续事务的影响。</p>
+<h3 id="1-拷贝的目的与对象">1. <strong>拷贝的目的与对象</strong>
+</h3><p>拷贝的目的主要是为了确保事务的一致性和隔离性。在事务提交之前，文件系统需要把修改过的块（block）从缓存中复制出来，确保这些修改在事务提交到日志（log）之前不会被其他事务覆盖。</p>
+<ul>
+<li><strong>拷贝的对象</strong>：拷贝的对象是 <strong>被当前事务（T1）修改过的所有数据块</strong>，包括文件内容块（data blocks）、inode 元数据块、目录块等。具体来说，任何在这个事务期间被修改的缓存块（block cache），都需要被拷贝。</li>
+<li><strong>为什么要拷贝？</strong>：因为在事务提交之前，这些数据块仍然是可修改的。如果没有拷贝，后续的系统调用或者新的事务（T2）可能会修改这些相同的块，从而导致在 <code>T1</code> 还未提交时，出现不一致的状态。通过拷贝，可以确保 <code>T1</code> 的事务在独立的副本上执行，直到它的修改完全提交到日志。</li>
+</ul>
+<h3 id="2-拷贝发生的时机与位置">2. <strong>拷贝发生的时机与位置</strong>
+</h3><p>拷贝的过程在事务关闭并准备提交时进行。具体过程如下：</p>
+<ul>
+<li><strong>拷贝的时机</strong>：当 <code>T1</code> 事务关闭并进入提交状态时，文件系统会将该事务中所有被修改的块拷贝出来。这些块的拷贝存放在内存中，形成事务的一个<strong>快照</strong>，即将所有被修改的块保存到独立的区域，以保证这些块不会被新的事务修改。</li>
+<li><strong>拷贝的方式</strong>：拷贝并不是从磁盘到内存，而是 <strong>缓存块（block cache）到独立的事务区域</strong>，这可以理解为内存中的一个独立缓冲区。这个缓冲区专门保存当前事务修改的块。</li>
+</ul>
+<h3 id="3-什么时候清除拷贝的内容">3. <strong>什么时候清除拷贝的内容？</strong>
+</h3><ul>
+<li><strong>清除的时机</strong>：当事务 <code>T1</code> 被成功提交到日志（即 descriptor block、data block 和 commit block 已全部写入日志），并且文件系统确认事务完成后，拷贝的这些块就不再需要了。这时，拷贝的内容会被丢弃，因为它们已经持久化到日志或者写回到实际的磁盘上。</li>
+<li><strong>清除的机制</strong>：系统会释放这些拷贝占用的内存资源，这样可以让新的事务和系统调用继续使用这些块。在 <code>T1</code> 事务提交并清除后，新的事务就可以直接使用这些被修改过的块，而不再需要访问拷贝的副本。</li>
+</ul>
+<h3 id="4-拷贝的内容对后续事务的影响">4. <strong>拷贝的内容对后续事务的影响</strong>
+</h3><p>拷贝的内容是事务 <code>T1</code> 中修改的块。这些拷贝的存在对后续事务 <code>T2</code> 有着重要的影响，主要体现在以下几点：</p>
+<ul>
+<li><strong>保证事务隔离</strong>：拷贝使得 <code>T1</code> 和后续事务 <code>T2</code> 在操作相同块时互相隔离。即使 <code>T2</code> 需要修改与 <code>T1</code> 相同的数据块，它也会在缓存中进行自己的修改，而不会影响 <code>T1</code> 的拷贝内容。这种隔离确保了不同事务之间的修改不会互相干扰。</li>
+<li><strong>确保事务原子性</strong>：拷贝的块在事务 <code>T1</code> 完全提交之前，是不会被其他事务修改的。这意味着即使 <code>T2</code> 修改了某个块，<code>T1</code> 的快照仍然保持一致。只有当 <code>T1</code> 提交并将修改持久化到磁盘后，<code>T2</code> 才能够基于 <code>T1</code> 的最终结果继续进行。</li>
+<li><strong>写时复制机制</strong>：这其实是一种**写时复制（Copy-on-Write, CoW）**机制。后续的事务在操作时，如果需要修改 <code>T1</code> 已经修改过的块，系统会先进行块的拷贝，然后让 <code>T2</code> 基于新副本进行修改，而 <code>T1</code> 的拷贝内容保持不变，直到 <code>T1</code> 提交。这种机制有效保障了数据一致性。</li>
+</ul>
+<h3 id="5-拷贝过程的完整总结">5. <strong>拷贝过程的完整总结</strong>
+</h3><ol>
+<li><strong>事务关闭时的拷贝</strong>：当事务 <code>T1</code> 关闭，文件系统会将当前事务中所有被修改的块从缓存中拷贝到一个独立的区域，确保这些块的修改不会被后续事务覆盖或干扰。</li>
+<li><strong>拷贝内容的保存位置</strong>：拷贝的块在内存中独立保存，形成事务 <code>T1</code> 的“快照”。后续事务会在未被拷贝的缓存块上执行，而不会直接修改这些已经拷贝的块。</li>
+<li><strong>清除拷贝的时机</strong>：当 <code>T1</code> 成功提交到日志，并且文件系统确认修改持久化到磁盘后，这些拷贝的块会被丢弃，释放内存资源。</li>
+<li><strong>后续事务的影响</strong>：拷贝确保了事务的隔离性和原子性。<code>T1</code> 的修改对 <code>T2</code> 是透明的，直到 <code>T1</code> 完全提交后，<code>T2</code> 才会基于 <code>T1</code> 的结果进行修改。</li>
+</ol>
+<h3 id="总结-1">总结
+</h3><ul>
+<li><strong>拷贝的对象</strong> 是当前事务修改的所有块。</li>
+<li><strong>拷贝的位置</strong> 是内存中的独立区域。</li>
+<li><strong>清除的时机</strong> 是当事务提交完成后，系统确认修改已经持久化。</li>
+<li><strong>拷贝对后续事务的影响</strong> 是确保事务之间的隔离性和一致性，防止数据被后续事务不正确地修改。</li>
+</ul>
+<p>这个机制保障了每个事务的操作都是独立的，修改不会被其他事务破坏，同时能确保在崩溃恢复时维持文件系统的一致性。</p>
+</blockquote>
+<h5 id="日志空间的操作执行的顺序">日志空间的操作执行的顺序
+</h5><blockquote>
+<p>在 ext3 文件系统中，日志（log）空间的操作是按照 <strong>事务提交顺序</strong> 来执行的，并不是并发执行的。文件系统采用的是 <strong>顺序日志写入</strong> 模式，这样能够保证数据的一致性和恢复时的确定性。</p>
+<h3 id="1-日志的顺序写入">1. <strong>日志的顺序写入</strong>
+</h3><p>当一个事务被提交时，文件系统会按照以下顺序执行操作：</p>
+<ol>
+<li><strong>Descriptor block</strong>：描述当前事务要修改的块编号。</li>
+<li><strong>Data block</strong>：写入缓存中修改过的数据。</li>
+<li><strong>Commit block</strong>：标志事务的完成。</li>
+</ol>
+<p>所有这些 block 都按照顺序依次写入日志空间，并确保 <strong>在写入 commit block 之前，所有的 data block 都已经写入日志</strong>。换句话说，事务的所有操作按照顺序写入日志，这种顺序性保证了日志的完整性和恢复时的安全性。</p>
+<h3 id="2-事务提交后的数据写入">2. <strong>事务提交后的数据写入</strong>
+</h3><p>当一个事务完成日志写入，并且 commit block 写入成功后，这个事务的所有操作就被认为是提交完成的。然而，这时修改的数据块还仅仅存在于日志中，而不是文件系统的实际位置。</p>
+<p>接下来，文件系统会将这些已经提交的事务数据（data block）从日志写入到实际的文件系统（也称为“写回”过程）。这个过程也是按照 <strong>事务提交的顺序</strong> 来执行的，而不是并发执行。</p>
+<ul>
+<li><strong>顺序写回数据</strong>：文件系统会按照事务提交的顺序依次将数据块从日志空间写回到文件系统的实际存储位置。虽然这个写回过程可能与系统中的其他操作并发进行，但每个事务的写入顺序是依赖事务提交顺序的。</li>
+<li><strong>避免并发冲突</strong>：为了避免文件系统的并发写入冲突，事务的写回过程是顺序化的。一个事务必须在之前的事务完全写入后，才能开始写回下一个事务。这确保了日志恢复的一致性和文件系统状态的可预测性。</li>
+</ul>
+<h3 id="3-恢复过程中的顺序执行">3. <strong>恢复过程中的顺序执行</strong>
+</h3><p>如果系统崩溃或故障，在系统重启时，恢复软件会从日志中按照事务的提交顺序，逐一将数据块恢复到文件系统中。恢复过程严格按照日志中的顺序执行，确保事务按提交顺序被恢复到文件系统的实际位置。</p>
+<h3 id="总结-2">总结：
+</h3><ul>
+<li><strong>提交顺序执行</strong>：虽然日志写入和写回的过程可能会与系统的其他操作并发进行，但每个事务的操作是按照它们提交的顺序依次执行的。文件系统确保事务的提交和数据写入严格遵循顺序，避免了并发冲突和数据不一致。</li>
+<li><strong>顺序性的重要性</strong>：保持顺序写入和写回能够保证日志恢复过程的可预测性和文件系统的一致性。</li>
+</ul>
+</blockquote>
+<h5 id="commit-block"><strong>commit block</strong>
+</h5><blockquote>
+<p>ext3 文件系统使用 <strong>commit block</strong> 来判断一个事务是否已经成功提交，因此读取日志空间的最后一个 block 是否是 commit block 是判断该事务是否已完成的关键方式。</p>
+<h3 id="具体流程解释">具体流程解释
+</h3><ol>
+<li>
+<p><strong>事务提交的流程</strong>：</p>
+<ul>
+<li>在一个事务的执行过程中，首先写入 <strong>descriptor block</strong>，该 block 描述了事务中哪些块会被修改。</li>
+<li>紧接着，文件系统会写入 <strong>data block</strong>，这些数据块包含了文件系统实际修改的内容。</li>
+<li>最后，文件系统会写入 <strong>commit block</strong>。这标志着这个事务已经完成。</li>
+</ul>
+</li>
+<li>
+<p><strong>判断事务是否完成</strong>：</p>
+<ul>
+<li>当系统在检查日志空间时，它会读取每个事务的最后一个 block。如果发现最后的 block 是 <strong>commit block</strong>，这就表明该事务已完成并成功提交。</li>
+<li>如果系统崩溃或中断，重启时，文件系统会扫描日志空间来恢复事务。如果一个事务中没有 <strong>commit block</strong>，则表示这个事务没有完成，因此系统会回滚该事务的所有操作，确保文件系统的一致性。</li>
+</ul>
+<p>具体来说，文件系统在重启时会：</p>
+<ul>
+<li>扫描日志空间中的所有 block。</li>
+<li>找到事务的 <strong>descriptor block</strong> 和对应的 <strong>data block</strong>。</li>
+<li>检查事务的最后一个 block 是否是 <strong>commit block</strong>。如果 commit block 存在，表示事务完成，数据可以被写入文件系统的永久位置；如果 commit block 缺失，则该事务未完成，文件系统会丢弃该事务的所有修改。</li>
+</ul>
+</li>
+<li>
+<p><strong>为什么 commit block 重要</strong>：</p>
+<ul>
+<li><strong>一致性保障</strong>：commit block 是文件系统的一个检查点，确保在事务执行的过程中，即使发生崩溃或系统故障，文件系统仍然能够恢复到一致的状态。commit block 之前的事务被认为是完全提交的，而 commit block 之前未写入的事务将被回滚。</li>
+<li><strong>事务回滚</strong>：如果在提交事务时，系统未能写入 commit block（比如系统崩溃），重启后的文件系统会回滚这一事务，以避免数据的不一致。只有包含 commit block 的事务数据才能被认为是持久化的。</li>
+</ul>
+</li>
+</ol>
+<h3 id="恢复过程">恢复过程
+</h3><p>在系统崩溃或非正常关闭的情况下，ext3 文件系统的日志恢复机制会通过以下步骤恢复文件系统的状态：</p>
+<ol>
+<li><strong>扫描日志空间</strong>：系统启动后，文件系统会扫描日志空间，寻找每个事务的 descriptor block 和 data block。</li>
+<li><strong>检查 commit block</strong>：系统检查事务的最后一个 block 是否为 commit block。
+<ul>
+<li><strong>如果 commit block 存在</strong>：表示事务完成，文件系统会将日志中的 data block 数据写回到文件系统的实际存储位置。</li>
+<li><strong>如果 commit block 不存在</strong>：表示事务未完成，文件系统会回滚这个事务，丢弃该事务的所有操作，保持文件系统的原始状态。</li>
+</ul>
+</li>
+</ol>
+<h3 id="总结-3">总结
+</h3><ul>
+<li><strong>commit block</strong> 是判断事务是否完成的核心标志。文件系统通过检查日志空间中的最后一个 block 是否为 commit block 来判断该事务是否已成功提交。</li>
+<li>如果 commit block 存在，说明事务成功完成，系统会把日志中的数据写回到文件系统实际的位置。如果 commit block 不存在，说明事务中断，系统会回滚该事务。</li>
+</ul>
+<p>这个设计确保了在崩溃恢复或系统重启时，ext3 文件系统可以有效地维持数据的一致性和完整性。</p>
+</blockquote>
+<h5 id="ext3-文件系统的日志结构">ext3 文件系统的日志结构
+</h5><blockquote>
+<p>在 ext3 文件系统中，日志 (log) 机制是基于<strong>事务日志</strong>（Journal）的，它用于跟踪对文件系统的修改，确保在系统崩溃或掉电等意外情况下可以恢复一致的文件系统状态。ext3 的日志是按事务提交的方式进行的，每个事务包含多个 block。具体来说，日志中的 block 结构分为几类，分别是<strong>descriptor block</strong>、<strong>data block</strong> 和 <strong>commit block</strong>。</p>
+<h3 id="ext3-文件系统的日志结构-1">ext3 文件系统的日志结构
+</h3><ol>
+<li><strong>Superblock</strong>：
+<ul>
+<li>这是文件系统的描述符，记录了日志的元信息。它保存了日志的位置、大小、状态等关键信息。Superblock 在整个文件系统中只有一个，并且包含关于日志区（Journal Area）的一些元数据。</li>
+</ul>
+</li>
+<li><strong>日志空间 (Journal Area)</strong>：
+<ul>
+<li>日志区域由多个 block 组成，用于记录文件系统的事务操作。这些 block 依次连接组成一个循环日志空间。日志空间的大小是在创建文件系统时指定的。</li>
+</ul>
+</li>
+<li><strong>日志中的 block 类型</strong>：
+<ul>
+<li><strong>Descriptor Block</strong>：这个 block 是每个事务的开头部分，用于描述这个事务中的修改。具体来说，它列出了哪些块在这个事务中被修改了，并且这些块的位置（即磁盘上的块编号）。Descriptor block 让文件系统在恢复时知道哪些块被修改。</li>
+<li><strong>Data Block</strong>：这些 block 存储具体的修改数据。它们紧跟在 descriptor block 后面。数据块包含了文件系统中的实际数据修改，比如某个文件的内容或元数据的修改。</li>
+<li><strong>Commit Block</strong>：这个 block 标记事务的结束，它告诉文件系统这个事务已经完成，所有的修改都可以视为已提交。Commit block 是事务提交的关键点。如果系统在 commit block 写入之前崩溃，整个事务都会被回滚。如果 commit block 已经写入，那么事务被视为成功提交。</li>
+</ul>
+</li>
+</ol>
+<h3 id="日志的写入顺序">日志的写入顺序
+</h3><p>一个完整的事务通常包含以下几个步骤：</p>
+<ol>
+<li><strong>Descriptor Block</strong>：
+<ul>
+<li>事务开始时，首先会写入一个 descriptor block，这个 block 列出了哪些磁盘块在此次事务中将被修改。</li>
+</ul>
+</li>
+<li><strong>Data Block</strong>：
+<ul>
+<li>接下来，紧跟在 descriptor block 之后，系统会将实际的数据（data block）写入日志。这些数据来自于缓存（buffer），并且每个数据块对应 descriptor block 中列出的某个块。</li>
+</ul>
+</li>
+<li><strong>Commit Block</strong>：
+<ul>
+<li>在所有数据块写入日志之后，文件系统会写入 commit block。这个 block 标记着这个事务已经完成，所有在这个事务中的修改都可以被持久化到磁盘的真实位置。</li>
+</ul>
+</li>
+</ol>
+<h3 id="commit-block-的位置和作用">Commit Block 的位置和作用
+</h3><p><strong>Commit block</strong> 并不是在每个数据块后立即写入，而是在整个事务的所有数据块写入日志之后，才会写入日志区域的最后一个 block。它的作用是表明这个事务已经提交成功。如果系统在写入 commit block 之前崩溃，那么即使之前写入的数据块已经在日志中，事务也会在系统重启时被回滚。</p>
+<p>具体来说，commit block 记录了当前事务的结束，并且在崩溃恢复时，系统会根据 commit block 判断哪些事务已经提交、哪些事务需要回滚：</p>
+<ul>
+<li><strong>事务提交成功</strong>：如果 commit block 已经写入日志，那么表示事务已经完整提交，系统可以安全地将数据块写入文件系统的实际位置。</li>
+<li><strong>事务未提交</strong>：如果系统崩溃时 commit block 尚未写入，则说明事务未完成。系统在恢复时会回滚这次事务，确保数据一致性。</li>
+</ul>
+<h3 id="日志块的生命周期">日志块的生命周期
+</h3><ul>
+<li><strong>事务日志写入后，commit block 确认提交</strong>：当事务的 descriptor block 和 data block 写入日志后，文件系统会写入 commit block。一旦 commit block 写入成功，这个事务就被认为提交完成。此时，文件系统可以将这些数据块（data block）从日志区域持久化写入实际文件系统的数据结构中。</li>
+<li><strong>是否所有 block 都变成 commit block？</strong>：并不是说写入到磁盘的所有 data block 会变成 commit block。commit block 只是一个标识符，标记事务的提交成功。data block 依然是数据块，它们并不会变成 commit block。</li>
+<li><strong>日志空间重用</strong>：一旦事务成功提交并且数据已经写入文件系统的真实位置，日志空间中的那些被使用的 block（包括 descriptor block、data block 和 commit block）会被标记为可重用。接下来进行的事务可以继续使用这部分日志空间进行新的事务记录。这就是日志的循环利用机制。</li>
+</ul>
+<h3 id="日志提交后的流程">日志提交后的流程
+</h3><ol>
+<li><strong>写入磁盘</strong>：提交事务成功之后，文件系统会将事务中涉及到的 data block 写入文件系统的实际位置（不是日志空间）。这些数据块会从缓存中持久化到文件系统对应的区域。</li>
+<li><strong>日志空间重用</strong>：当数据块写入实际文件系统后，相应的日志空间会被释放，以便记录新的事务。</li>
+</ol>
+<h3 id="总结-4">总结
+</h3><ul>
+<li><strong>日志空间结构</strong>：日志空间中包含 descriptor block（描述修改的块）、data block（存储具体数据的块）和 commit block（标记事务完成的块）。</li>
+<li><strong>commit block</strong>：它是在事务的所有 data block 写入日志之后写入，用于标记事务的成功提交。</li>
+<li><strong>数据持久化与重用</strong>：事务提交后，数据写入文件系统实际位置，日志空间被释放，可以循环使用。</li>
+</ul>
+<p>这种设计确保了文件系统的一致性，特别是在崩溃或故障恢复的场景下，通过日志系统，ext3 能够有效恢复文件系统的状态。</p>
+</blockquote>
+<h5 id="为何使用魔法数字">为何使用魔法数字
+</h5><blockquote>
+<p>你提出的建议确实从简化的角度出发是合理的，即在 descriptor block 中记录哪些是 data block，而不让 data block 自身存储魔法数字。这确实能避免 data block 中与魔法数字相关的冲突问题，但 ext3 文件系统中使用魔法数字的方式有其历史原因和技术权衡，具体来说：</p>
+<h3 id="1-魔法数字的作用">1. <strong>魔法数字的作用</strong>
+</h3><p>魔法数字在文件系统中扮演着一个识别块类型的重要角色。通过在每个 block 中使用魔法数字，文件系统可以快速识别 block 的类型并执行相应的操作。虽然你建议可以只在 descriptor block 中标识哪些是 data block，但魔法数字的存在带来了几项关键好处：</p>
+<ul>
+<li><strong>快速识别与检查</strong>：魔法数字使得文件系统在处理 block 时能够快速识别这是一个 data block 还是 descriptor block，而不需要依赖其他结构（如 descriptor block）来查找并区分块的类型。这种设计能够提高处理和识别的效率，特别是在日志恢复和崩溃后的检查过程中。</li>
+<li><strong>自我描述性</strong>：每个 block 都是自我描述的，魔法数字提供了一种内嵌的机制，便于在调试和修复时直接通过读取 block 数据来了解它的类型。这种自我描述的设计在维护和诊断中具有很大的价值。</li>
+</ul>
+<h3 id="2-为什么不完全依赖-descriptor-block">2. <strong>为什么不完全依赖 descriptor block？</strong>
+</h3><p>如果我们完全依赖 descriptor block 来标记哪些 block 是 data block，虽然能减少对魔法数字的需求，但会引入一些潜在的复杂性和风险：</p>
+<ul>
+<li><strong>恢复过程的复杂化</strong>：在崩溃恢复时，文件系统需要扫描事务日志来重建状态。如果所有的 block 类型信息仅存储在 descriptor block 中，那么在恢复过程中，文件系统需要额外查找和关联每个 block 和其对应的 descriptor block。这个过程会增加恢复的复杂度和时间。相反，魔法数字让每个 block 自带标识，恢复过程更加直接和高效。</li>
+<li><strong>处理时间增加</strong>：如果每次访问某个 block 时，系统都必须回溯到对应的 descriptor block 来确定其类型，文件系统的处理效率会降低。通过在 block 本身使用魔法数字，系统可以立即判断 block 的类型，而不必在事务日志中查找。</li>
+<li><strong>一致性检查困难</strong>：在某些场景下，比如调试、日志审计或者磁盘一致性检查，如果 block 本身没有类型标识符（即魔法数字），系统或运维人员必须依赖 descriptor block 来进行检查。如果 descriptor block 丢失或损坏，可能会导致无法正确识别和恢复 data block。</li>
+</ul>
+<h3 id="3-兼顾可靠性和性能">3. <strong>兼顾可靠性和性能</strong>
+</h3><p>ext3 的设计是平衡了性能和数据一致性。在大多数情况下，魔法数字提供了更直接的块类型识别方式，而不是让文件系统依赖 descriptor block 逐一去匹配。在实践中：</p>
+<ul>
+<li><strong>用魔法数字快速识别块类型</strong> 提供了高效的方式，在极端情况下（如崩溃恢复或诊断中），可以立即识别 block 的类型。</li>
+<li><strong>避免数据冲突</strong>：通过将某些具有冲突魔法数字的 data block 前 32 位替换为 0，并在 descriptor block 中设置标志位来记住这个修改，ext3 提供了一种既能避免冲突又保持性能的折衷方案。</li>
+</ul>
+<h3 id="4-历史和兼容性考虑">4. <strong>历史和兼容性考虑</strong>
+</h3><p>另外，文件系统的设计往往受到历史版本的影响。魔法数字的使用是 UNIX 系统中常见的一种自我描述性机制，它有助于跨平台和跨版本的兼容。尽管你提出的依赖 descriptor block 的方法在某些情况下更为简洁，但从设计的演化角度来看，使用魔法数字已经成为一种通用的、广泛接受的机制，修改这一点可能会影响到已有的工具和工作流。</p>
+<h3 id="总结-5">总结
+</h3><p>虽然理论上可以只依赖 descriptor block 来标识哪些 block 是 data block，省去魔法数字，但 ext3 通过使用魔法数字和补充的 bit 标记系统，确保了性能、可靠性和恢复过程的高效性。魔法数字提供了一种快速的、块级别的识别方式，使文件系统在正常运行和崩溃恢复过程中更加高效。这种设计是在可靠性、性能和历史兼容性之间的平衡折衷。</p>
+</blockquote>
+<h5 id="为什么在事务提交过程中系统会阻止新的系统调用">为什么在事务提交过程中，系统会阻止新的系统调用？
+</h5><blockquote>
+<p>注：其实正课末尾已解释</p>
+<p>在事务提交过程中，阻止新的系统调用是为了确保文件系统在处理当前事务时，保持一致性和数据的完整性。这种做法虽然会暂时影响性能（因为新的系统调用需要等待），但从文件系统的一致性角度来看，它是必要的。</p>
+<h3 id="原因为什么阻止新的系统调用">原因：为什么阻止新的系统调用
+</h3><ol>
+<li><strong>事务的原子性和一致性要求</strong>：
+<ul>
+<li>事务（transaction）在文件系统中是一个原子操作的集合，所有的操作要么全部成功提交，要么全部失败回滚。在提交事务时，文件系统需要确保这个事务中的所有系统调用都已经完成，且所有修改的数据块都已经记录在日志中。</li>
+<li>如果允许在事务提交过程中开始新的系统调用，可能会导致数据不一致。新的系统调用可能会修改与当前事务相同的数据块。如果这些修改在事务提交的过程中发生，文件系统可能无法区分哪些修改属于当前正在提交的事务，哪些属于新的事务，从而导致事务日志记录不完整或错误。</li>
+</ul>
+</li>
+<li><strong>防止数据块的竞争修改</strong>：
+<ul>
+<li>假设在提交事务时，有一个新的系统调用尝试修改与当前事务相同的磁盘块（block）。这就可能导致两个系统调用对同一个 block 进行操作，产生写入冲突。为了避免这种竞争条件的出现，文件系统在提交事务时会阻止新的系统调用。</li>
+<li>如果不阻止新的系统调用，新的系统调用可能会修改缓存中的相同 block，文件系统将无法保证提交的事务反映了缓存的正确状态。这会使得事务提交后的状态与预期的事务日志内容不符，损害文件系统的一致性。</li>
+</ul>
+</li>
+<li><strong>事务日志的完整性</strong>：
+<ul>
+<li>在提交事务的过程中，文件系统会将修改过的 block 写入事务日志的 data block，并记录在 descriptor block 中。当写入完成并提交 commit block 后，事务才能认为已经安全地写入磁盘，数据的持久性才得以保证。</li>
+<li>如果此时允许新的系统调用开始，新的写入可能会干扰正在进行的日志写入过程。这样，文件系统可能无法正确识别哪些 block 是由新系统调用修改的，哪些属于当前事务，从而破坏日志的完整性。</li>
+</ul>
+</li>
+<li><strong>事务提交的最终确定性</strong>：
+<ul>
+<li>当事务提交进入最后阶段（如写入 commit block 时），文件系统的状态必须是确定的。所有涉及到的系统调用都必须结束，并且系统需要保证事务中的所有修改已经记录在日志中。如果此时允许新的系统调用开始，可能会打破这种确定性，使得日志中的数据变得不可靠。</li>
+<li>为了确保事务在提交之后可以正确恢复和回滚，阻止新的系统调用是必要的，这样可以保证提交点（commit point）前后文件系统的状态是一致的。</li>
+</ul>
+</li>
+</ol>
+<h3 id="影响有序性吗">影响有序性吗？
+</h3><p>阻止新的系统调用不会影响文件系统的有序性，反而有助于保持事务之间的严格顺序和隔离性。具体来说：</p>
+<ol>
+<li><strong>系统调用的顺序性</strong>：在阻止新的系统调用的时间段内，文件系统仅仅是延迟了新系统调用的开始，但并没有打乱系统调用的顺序。事务提交之后，新的系统调用将按顺序继续执行。因此，文件系统的操作顺序仍然是有序的。</li>
+<li><strong>隔离性</strong>：文件系统中的事务需要提供一定程度的隔离性，确保在事务 A 提交前，事务 B 的修改不会影响事务 A。如果不阻止新的系统调用，这种隔离性将无法得到保证，可能导致事务 A 和事务 B 的修改交错进行，进而导致数据不一致。</li>
+</ol>
+<h3 id="小结">小结
+</h3><p>阻止新的系统调用在事务提交过程中是为了<strong>保证事务的一致性、原子性和日志的完整性</strong>。虽然这种做法会暂时影响系统的性能，但它确保了文件系统的正确性，避免了数据冲突和不一致的发生。阻止新的系统调用并不会影响系统调用的有序性，相反，它帮助维护了事务的隔离性和数据的可靠性。</p>
+</blockquote>
+<h5 id="handle-的作用"><code>handle</code> 的作用
+</h5><blockquote>
+<p><code>handle</code> 在 ext3 文件系统中的角色，确实是用于标识系统调用并追踪与该系统调用相关的所有写操作。让我们从你的描述出发，澄清 <code>handle</code> 的作用以及它在 ext3 文件系统中的实际用途。</p>
+<h3 id="1-handle-的作用系统调用的标识">1. <strong><code>handle</code> 的作用：系统调用的标识</strong>
+</h3><p>在 ext3 文件系统中，每个系统调用在开始时会调用 <code>start</code> 函数，随后会得到一个 <code>handle</code>。这个 <code>handle</code> 是用来<strong>唯一标识当前系统调用</strong>的。</p>
+<ul>
+<li><strong>唯一标识系统调用</strong>：每个系统调用在其生命周期内，<code>handle</code> 充当它的唯一识别符，帮助文件系统将其跟踪。文件系统中的所有写操作都通过这个 <code>handle</code> 关联到相应的系统调用和事务上。</li>
+<li><strong>跟踪写操作</strong>：在系统调用的过程中，如果它需要访问或修改某个 block（例如通过 <code>get_block</code> 函数），<code>handle</code> 会作为参数传递，表明该 block 的修改是由哪个系统调用发起的。</li>
+</ul>
+<p>因此，<code>handle</code> 不仅用于标识系统调用，同时也用于跟踪该系统调用中的所有写操作。每个系统调用与其操作的 block 通过 <code>handle</code> 建立联系。</p>
+<h3 id="2-handle-和事务transaction的关系">2. <strong><code>handle</code> 和事务（Transaction）的关系</strong>
+</h3><p>虽然 <code>handle</code> 是系统调用的标识符，但它也与整个事务的执行紧密关联。ext3 文件系统会周期性地将当前事务提交到磁盘，在事务提交过程中，<code>handle</code> 的作用包括以下几点：</p>
+<ul>
+<li><strong>识别系统调用所属的事务</strong>：文件系统需要知道哪些系统调用属于当前事务。当某个系统调用读取或修改 block 时，<code>handle</code> 传递给 logging 系统，表明这些 block 是该事务的一部分。因此，<code>handle</code> 也关联了系统调用与事务的关系。</li>
+<li><strong>跟踪事务中的系统调用进度</strong>：在事务提交时，所有与该事务相关的系统调用必须完成（即所有 <code>handle</code> 所代表的系统调用必须调用 <code>stop</code> 函数）才能进行提交。<code>stop</code> 函数通过 <code>handle</code> 通知文件系统，该系统调用已经完成，事务中的操作减少一个。</li>
+<li><strong>阻止新系统调用</strong>：在事务提交过程中，系统会阻止新的系统调用，以确保所有尚未完成的系统调用能够有序完成，并且所有的修改在提交时是一致的。</li>
+</ul>
+<h3 id="3-日志log中的-block-管理">3. <strong>日志（Log）中的 block 管理</strong>
+</h3><p>文件系统的日志（log）包含 descriptor block、data block 和 commit block。在系统调用过程中，通过 <code>handle</code> 确定哪些 block 被修改：</p>
+<ul>
+<li>当一个系统调用修改某个 block 时，文件系统会记录这些修改，并在事务提交时写入 descriptor block，标明哪些块被修改。</li>
+<li>这些 block 编号会被记录到 descriptor block 中，随后在数据被写入到日志后，再写入 commit block，表明事务的所有修改都已完成并提交。</li>
+</ul>
+<h3 id="4-总结handle-是系统调用的标识符">4. <strong>总结：<code>handle</code> 是系统调用的标识符</strong>
+</h3><p>你提到 <code>handle</code> 是作为系统调用的编号识别符，这个理解是准确的。在 ext3 文件系统中，<code>handle</code> 主要用于以下几个方面：</p>
+<ul>
+<li><strong>唯一标识系统调用</strong>：每个系统调用通过 <code>handle</code> 进行唯一标识，帮助文件系统跟踪哪些 block 被修改。</li>
+<li><strong>关联事务和系统调用</strong>：通过 <code>handle</code>，文件系统可以将系统调用与对应的事务关联起来，并确保所有系统调用完成后事务才能提交。</li>
+<li><strong>管理日志</strong>：<code>handle</code> 还用于将系统调用与其修改的 block 关联，确保这些修改能够正确写入日志和最终提交到文件系统中。</li>
+</ul>
+<p>在整个过程中，<code>handle</code> 起到的核心作用是帮助文件系统管理和跟踪每个系统调用以及它对文件系统的修改操作。</p>
+</blockquote>
+<h5 id="系统传递-block-编号的时机">系统传递 block 编号的时机
+</h5><p>传递 block 编号的具体时机是在事务执行的过程中，尤其是在系统调用读取或写入某个数据块时。以下是几个关键点：</p>
+<ul>
+<li><strong>读取时</strong>：当系统调用需要读取一个 block 时，文件系统会根据当前事务的 <code>handle</code> 记录哪些 block 被读取，并在事务日志中记录。</li>
+<li><strong>写入时</strong>：当系统调用修改某个 block 时，这个 block 的编号会被记录为修改的 block，并最终写入 descriptor block，确保在提交事务时，这些 block 能够正确写入到磁盘的 log 中。</li>
+</ul>
+
 </section>
 
 
     <footer class="article-footer">
     
 
-    </footer>
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
 
 
+
+        <span>
+            最后更新于 Nov 12, 2024 12:44 &#43;0800
+        </span>
+    </section></footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
     
 </article>
 
     
 
     
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/mit6s081lec23/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">MIT6S081Lec23</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/mit6s081lec22/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">MIT6S081Lec22</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/mit6s081lec21/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">MIT6S081Lec21</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/mit6s081lec20/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">MIT6S081Lec20</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/mit6s081lec19/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">MIT6S081Lec19</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
 
      
     

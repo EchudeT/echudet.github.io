@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="mit os lec 4.">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Page Tables(vm)">
 <title>MIT6S081Lec4</title>
 
 <link rel='canonical' href='https://echudet.github.io/p/mit6s081lec4/'>
 
-<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="MIT6S081Lec4">
-<meta property='og:description' content="mit os lec 4.">
+<link rel="stylesheet" href="/scss/style.min.a7f637593c1d99350f36f270c9abc65cf39ec34b45847eb2fa40efef51b94c92.css"><meta property='og:title' content="MIT6S081Lec4">
+<meta property='og:description' content="Page Tables(vm)">
 <meta property='og:url' content='https://echudet.github.io/p/mit6s081lec4/'>
 <meta property='og:site_name' content='echudet'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-11-10T22:02:50&#43;08:00'/><meta property='article:modified_time' content='2024-11-10T22:02:50&#43;08:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-09-07T22:02:50&#43;08:00'/><meta property='article:modified_time' content='2024-11-12T12:44:05&#43;08:00'/><meta property='og:image' content='https://echudet.github.io/p/mit6s081lec4/124146068.jpg' />
 <meta name="twitter:title" content="MIT6S081Lec4">
-<meta name="twitter:description" content="mit os lec 4.">
+<meta name="twitter:description" content="Page Tables(vm)"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://echudet.github.io/p/mit6s081lec4/124146068.jpg' />
     <link rel="shortcut icon" href="/timer.ico" />
 
     </head>
@@ -193,7 +194,7 @@
 
 
                 
-                <span>Search</span>
+                <span>搜索</span>
             </a>
         </li>
         
@@ -327,8 +328,20 @@
 
 
             <main class="main full-width">
-    <article class="main-article">
+    <article class="has-image main-article">
     <header class="article-header">
+        <div class="article-image">
+            <a href="/p/mit6s081lec4/">
+                <img src="/p/mit6s081lec4/124146068_hu2676404395156935220.jpg"
+                        srcset="/p/mit6s081lec4/124146068_hu2676404395156935220.jpg 800w, /p/mit6s081lec4/124146068_hu14892108923676048897.jpg 1600w"
+                        width="800" 
+                        height="433" 
+                        loading="lazy"
+                        alt="Featured image of post MIT6S081Lec4" />
+                
+            </a>
+        </div>
+    
 
     <div class="article-details">
     
@@ -352,7 +365,7 @@
     
         
         <h3 class="article-subtitle">
-            mit os lec 4.
+            Page Tables(vm)
         </h3>
         
     </div>
@@ -373,7 +386,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2024-11-10</time>
+                <time class="article-time--published">2024-09-07</time>
             </div>
         
 
@@ -391,8 +404,19 @@
                     阅读时长: 28 分钟
                 </time>
             </div>
-        
-    </footer>
+        <div class="article-lastmod">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time>
+                    Nov 12, 2024 12:44 &#43;0800
+                </time>
+            </div></footer>
     
 
     
@@ -483,14 +507,18 @@
 <p>总体物理地址的layout，是由主板决定的，并非仅是CPU决定</p>
 </li>
 <li>
-<p><img src="D:%5cUsers%5c%e5%85%b3%e9%9b%84%e6%ad%a3%5cDownloads%5c1724674585767.png"
-	
-	
-	
+<p><img src="/p/mit6s081lec4/image.png"
+	width="1486"
+	height="844"
+	srcset="/p/mit6s081lec4/image_hu14242427645351412035.png 480w, /p/mit6s081lec4/image_hu6020751804304211344.png 1024w"
 	loading="lazy"
 	
-		alt="1724674585767"
+		alt="structure"
 	
+	
+		class="gallery-image" 
+		data-flex-grow="176"
+		data-flex-basis="422px"
 	
 ></p>
 </li>
@@ -747,14 +775,15 @@
 <p><strong>作用</strong>：<code>setupkvm()</code> 是负责实际创建内核所需的页表映射的函数。</p>
 </li>
 <li>
-<p>具体步骤</p>
-<p>：</p>
+<p>具体步骤：</p>
 <ol>
 <li><strong>分配页目录页</strong>：<code>setupkvm()</code> 首先会分配一页内存来存储页目录，这是分页的最高层结构，用于指向页表。</li>
-<li><strong>调用 <code>mappages()</code></strong>：使用 <code>mappages()</code> 函数，创建映射表，这些映射表可以在 <code>kmap</code> 数组中找到。<code>kmap</code> 数组中包含了各种需要被映射的内存区域。</li>
 </ol>
 </li>
 </ul>
+<ol start="2">
+<li><strong>调用 <code>mappages()</code></strong>：使用 <code>mappages()</code> 函数，创建映射表，这些映射表可以在 <code>kmap</code> 数组中找到。<code>kmap</code> 数组中包含了各种需要被映射的内存区域。</li>
+</ol>
 <h3 id="3-调用-mappages">3. <strong>调用 <code>mappages()</code></strong>
 </h3><ul>
 <li>
@@ -764,8 +793,7 @@
 <p><strong>作用</strong>：<code>mappages()</code> 用来在页表中建立虚拟内存到物理内存的映射。</p>
 </li>
 <li>
-<p>具体步骤</p>
-<p>：</p>
+<p>具体步骤：</p>
 <ol>
 <li><strong>逐页映射</strong>：<code>mappages()</code> 是逐页处理的，即一页一页地创建映射。对于每个虚拟地址，都需要建立相应的物理内存映射。</li>
 <li><strong>调用 <code>walkpgdir()</code></strong>：<code>mappages()</code> 通过调用 <code>walkpgdir()</code> 来找到该虚拟地址对应的页表项（PTE）。</li>
@@ -782,8 +810,7 @@
 <p><strong>作用</strong>：<code>walkpgdir()</code> 模拟 x86 硬件分页机制，找到虚拟地址对应的页表项（PTE）。</p>
 </li>
 <li>
-<p>具体步骤</p>
-<p>：</p>
+<p>具体步骤：</p>
 <ol>
 <li><strong>定位页目录项</strong>：<code>walkpgdir()</code> 使用虚拟地址的前10位来查找页目录中对应的条目（位于第1659行）。</li>
 <li><strong>检查是否需要分配页表页</strong>：如果页目录条目不存在且 <code>alloc</code> 参数为真，则分配一个新的页表页，并将其物理地址存入页目录中。</li>
@@ -801,8 +828,7 @@
 <p><strong>作用</strong>：<code>mappages()</code> 在 <code>walkpgdir()</code> 返回的 PTE 地址处，初始化 PTE 条目。</p>
 </li>
 <li>
-<p>具体内容</p>
-<p>：</p>
+<p>具体内容：</p>
 <ol>
 <li><strong>保存物理页号</strong>：PTE 中记录相应的物理内存页号。</li>
 <li><strong>设置权限标志</strong>：根据需要设置 PTE 的权限标志（如 <code>PTE_W</code> 表示可写，<code>PTE_U</code> 表示用户访问权限）。</li>
@@ -812,25 +838,7 @@
 </ul>
 <h3 id="6-完成内核的基础映射">6. <strong>完成内核的基础映射</strong>
 </h3><ul>
-<li>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">setupkvm()
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>完成了</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">kmap
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>数组中内核地址空间的映射，包括：</p>
+<li>setupkvm()完成了kmap数组中内核地址空间的映射，包括：
 <ol>
 <li><strong>内核指令和数据段</strong>的映射。</li>
 <li><strong>PHYSTOP 以下的物理内存</strong>的映射。</li>
@@ -969,9 +977,45 @@
     <footer class="article-footer">
     
 
-    </footer>
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
 
 
+
+        <span>
+            最后更新于 Nov 12, 2024 12:44 &#43;0800
+        </span>
+    </section></footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
     
 </article>
 
@@ -986,12 +1030,12 @@
             
                 
 <article class="">
-    <a href="/p/mit6s081lec3/">
+    <a href="/p/mit6s081lec23/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">MIT6S081Lec3</h2>
+            <h2 class="article-title">MIT6S081Lec23</h2>
         </div>
     </a>
 </article>
@@ -999,12 +1043,51 @@
             
                 
 <article class="">
-    <a href="/p/mit6s081lec1/">
+    <a href="/p/mit6s081lec22/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">MIT6S081Lec1</h2>
+            <h2 class="article-title">MIT6S081Lec22</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/mit6s081lec21/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">MIT6S081Lec21</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/mit6s081lec20/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">MIT6S081Lec20</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/mit6s081lec19/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">MIT6S081Lec19</h2>
         </div>
     </a>
 </article>

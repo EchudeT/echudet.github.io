@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="">
-<title>Mit6s081Lec14</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="File Systems">
+<title>MIT6S081Lec14</title>
 
 <link rel='canonical' href='https://echudet.github.io/p/mit6s081lec14/'>
 
-<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="Mit6s081Lec14">
-<meta property='og:description' content="">
+<link rel="stylesheet" href="/scss/style.min.a7f637593c1d99350f36f270c9abc65cf39ec34b45847eb2fa40efef51b94c92.css"><meta property='og:title' content="MIT6S081Lec14">
+<meta property='og:description' content="File Systems">
 <meta property='og:url' content='https://echudet.github.io/p/mit6s081lec14/'>
 <meta property='og:site_name' content='echudet'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-11-10T22:02:53&#43;08:00'/><meta property='article:modified_time' content='2024-11-10T22:02:53&#43;08:00'/>
-<meta name="twitter:title" content="Mit6s081Lec14">
-<meta name="twitter:description" content="">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-09-28T22:02:50&#43;08:00'/><meta property='article:modified_time' content='2024-11-12T12:44:05&#43;08:00'/>
+<meta name="twitter:title" content="MIT6S081Lec14">
+<meta name="twitter:description" content="File Systems">
     <link rel="shortcut icon" href="/timer.ico" />
 
     </head>
@@ -193,7 +193,7 @@
 
 
                 
-                <span>Search</span>
+                <span>搜索</span>
             </a>
         </li>
         
@@ -245,7 +245,133 @@
     </ol>
 </aside>
 
-    
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li>
+          <ol>
+            <li><a href="#预习">预习</a></li>
+          </ol>
+        </li>
+        <li><a href="#1-buffer-cache-初始化">1. <strong>Buffer cache 初始化</strong></a></li>
+        <li><a href="#2-缓冲区的状态">2. <strong>缓冲区的状态</strong></a></li>
+        <li><a href="#3-buffer-获取流程">3. <strong>Buffer 获取流程</strong></a></li>
+        <li><a href="#4-确保缓存的一致性和唯一性">4. <strong>确保缓存的一致性和唯一性</strong></a></li>
+        <li><a href="#5-读取与写入">5. <strong>读取与写入</strong></a></li>
+        <li><a href="#6-释放缓冲区">6. <strong>释放缓冲区</strong></a></li>
+        <li><a href="#7-缓存管理与优化">7. <strong>缓存管理与优化</strong></a></li>
+        <li><a href="#总结">总结：</a>
+          <ol>
+            <li></li>
+          </ol>
+        </li>
+        <li><a href="#1-inode究竟是什么">1. <strong>inode究竟是什么？</strong></a></li>
+        <li><a href="#2-inode和dinode有什么关系">2. <strong>inode和dinode有什么关系？</strong></a></li>
+        <li><a href="#3-和inodedinode相关的字段及其作用">3. <strong>和inode/dinode相关的字段及其作用</strong></a></li>
+        <li><a href="#nlink-的含义"><strong>nlink 的含义</strong></a></li>
+        <li><a href="#举个例子来说明-nlink-的工作机制"><strong>举个例子来说明 nlink 的工作机制</strong>：</a></li>
+        <li><a href="#总结-1"><strong>总结</strong>：</a></li>
+        <li><a href="#4-和inodedinode相关的函数及其作用">4. <strong>和inode/dinode相关的函数及其作用</strong></a></li>
+        <li><a href="#总结-2">总结：</a>
+          <ol>
+            <li></li>
+          </ol>
+        </li>
+        <li><a href="#1-并发线程在-ilock-中等待-inode-的情况">1. <strong>并发线程在 ilock 中等待 inode 的情况</strong></a></li>
+        <li><a href="#2-截断文件的意思">2. <strong>&ldquo;截断&quot;文件的意思</strong></a></li>
+        <li><a href="#3-目录项与-inode-的关系">3. <strong>目录项与 inode 的关系</strong></a></li>
+        <li><a href="#4-具体流程和时间点">4. <strong>具体流程和时间点</strong></a></li>
+        <li><a href="#总结-3"><strong>总结</strong></a></li>
+        <li><a href="#1-ip-ref引用计数">1. <strong><code>ip-&gt;ref</code>（引用计数）</strong></a></li>
+        <li><a href="#2-nlink链接计数">2. <strong><code>nlink</code>（链接计数）</strong></a></li>
+        <li><a href="#3-两者的区别与关系">3. <strong>两者的区别与关系</strong></a></li>
+        <li><a href="#4-为什么两者都需要统计">4. <strong>为什么两者都需要统计？</strong></a></li>
+        <li><a href="#5-流程示例">5. <strong>流程示例</strong></a>
+          <ol>
+            <li></li>
+          </ol>
+        </li>
+        <li><a href="#1-目录的结构和作用">1. <strong>目录的结构和作用</strong></a></li>
+        <li><a href="#2-函数概览及其作用">2. <strong>函数概览及其作用</strong></a></li>
+        <li><a href="#3-偏移量的含义">3. <strong>偏移量的含义</strong></a></li>
+        <li><a href="#4-目录和文件之间的定位过程">4. <strong>目录和文件之间的定位过程</strong></a></li>
+        <li><a href="#5-总结">5. <strong>总结</strong></a>
+          <ol>
+            <li></li>
+          </ol>
+        </li>
+        <li><a href="#1-路径名查找和基本流程">1. <strong>路径名查找和基本流程</strong></a></li>
+        <li><a href="#2-namex-函数的查找逻辑">2. <strong><code>namex</code> 函数的查找逻辑</strong></a></li>
+        <li><a href="#3-处理最后一个路径元素">3. <strong>处理最后一个路径元素</strong></a></li>
+        <li><a href="#4-路径名查找中的-io-操作和并发">4. <strong>路径名查找中的 I/O 操作和并发</strong></a></li>
+        <li><a href="#5-并发风险和解决方案">5. <strong>并发风险和解决方案</strong></a></li>
+        <li><a href="#6-死锁问题和解决方案">6. <strong>死锁问题和解决方案</strong></a></li>
+        <li><a href="#7-关键函数和变量">7. <strong>关键函数和变量</strong></a>
+          <ol>
+            <li></li>
+          </ol>
+        </li>
+        <li><a href="#文件描述符层概述">文件描述符层概述</a>
+          <ol>
+            <li><a href="#每个进程的文件描述符表">每个进程的文件描述符表</a></li>
+            <li><a href="#引用计数与访问权限">引用计数与访问权限</a></li>
+            <li><a href="#全局文件表">全局文件表</a></li>
+            <li><a href="#文件操作的具体实现">文件操作的具体实现</a></li>
+            <li><a href="#文件操作函数-filestatfileread-和-filewrite">文件操作函数 filestat、fileread 和 filewrite</a></li>
+          </ol>
+        </li>
+        <li><a href="#系统调用的实现概述">系统调用的实现概述</a>
+          <ol>
+            <li><a href="#sys_link-和-sys_unlink"><code>sys_link</code> 和 <code>sys_unlink</code></a></li>
+            <li><a href="#create-函数"><code>create</code> 函数</a></li>
+            <li><a href="#sys_opensys_mkdir-和-sys_mknod"><code>sys_open</code>、<code>sys_mkdir</code> 和 <code>sys_mknod</code></a></li>
+            <li><a href="#sys_pipe"><code>sys_pipe</code></a></li>
+          </ol>
+        </li>
+        <li><a href="#现实操作系统中的缓冲区缓存">现实操作系统中的缓冲区缓存</a></li>
+        <li><a href="#日志系统的效率问题">日志系统的效率问题</a></li>
+        <li><a href="#文件系统崩溃恢复">文件系统崩溃恢复</a></li>
+        <li><a href="#磁盘布局与文件系统性能">磁盘布局与文件系统性能</a></li>
+        <li><a href="#磁盘故障处理">磁盘故障处理</a></li>
+        <li><a href="#文件系统的扩展性">文件系统的扩展性</a></li>
+        <li><a href="#文件系统中的高级功能">文件系统中的高级功能</a></li>
+        <li><a href="#现代-unix-系统中的文件访问">现代 Unix 系统中的文件访问</a>
+          <ol>
+            <li><a href="#正课">正课</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
 
             <main class="main full-width">
     <article class="main-article">
@@ -253,12 +379,28 @@
 
     <div class="article-details">
     
+    <header class="article-category">
+        
+            <a href="/categories/mit6s081/" >
+                Mit6s081
+            </a>
+        
+            <a href="/categories/os/" >
+                Os
+            </a>
+        
+    </header>
+    
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/mit6s081lec14/">Mit6s081Lec14</a>
+            <a href="/p/mit6s081lec14/">MIT6S081Lec14</a>
         </h2>
     
+        
+        <h3 class="article-subtitle">
+            File Systems
+        </h3>
         
     </div>
 
@@ -278,7 +420,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2024-11-10</time>
+                <time class="article-time--published">2024-09-28</time>
             </div>
         
 
@@ -293,11 +435,22 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 0 分钟
+                    阅读时长: 86 分钟
                 </time>
             </div>
-        
-    </footer>
+        <div class="article-lastmod">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time>
+                    Nov 12, 2024 12:44 &#43;0800
+                </time>
+            </div></footer>
     
 
     
@@ -308,22 +461,1982 @@
     <section class="article-content">
     
     
-    
+    <h1 id="lecture-14-file-systems">Lecture 14 File Systems
+</h1><h4 id="预习">预习
+</h4><h5 id="概述">概述
+</h5><p>xv6文件系统实现分为七层，如图8.1所示。</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>文件描述符（File descriptor）</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>路径名（Pathname）</td>
+      </tr>
+      <tr>
+          <td>目录（Directory）</td>
+      </tr>
+      <tr>
+          <td>索引结点（Inode）</td>
+      </tr>
+      <tr>
+          <td>日志（Logging）</td>
+      </tr>
+      <tr>
+          <td>缓冲区高速缓存（Buffer cache）</td>
+      </tr>
+      <tr>
+          <td>磁盘（Disk）</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>图8.1 XV6文件系统的层级</p>
+<p>磁盘层读取和写入virtio硬盘上的块。</p>
+<p>缓冲区<strong>高速缓存层</strong>缓存磁盘块并同步对它们的访问，确保每次只有一个内核进程可以修改存储在任何特定块中的数据。</p>
+<p><strong>日志记录层</strong>允许更高层在一次事务（transaction）中将更新包装到多个块，并确保在遇到崩溃时自动更新这些块（即，所有块都已更新或无更新）。</p>
+<p><strong>索引结点层</strong>提供单独的文件，每个文件表示为一个索引结点，其中包含唯一的索引号（i-number）和一些保存文件数据的块。</p>
+<p><strong>目录层</strong>将每个目录实现为一种特殊的索引结点，其内容是一系列目录项，每个目录项包含一个文件名和索引号。</p>
+<p><strong>路径名层</strong>提供了分层路径名，如***/usr/rtm/xv6/fs.c***，并通过递归查找来解析它们。</p>
+<p><strong>文件描述符层</strong>使用文件系统接口抽象了许多Unix资源（例如，管道、设备、文件等），简化了应用程序员的工作。</p>
+<p>文件系统必须有将索引节点和内容块存储在磁盘上哪些位置的方案。</p>
+<p>为此，xv6将磁盘划分为几个部分，如图8.2所示。</p>
+<p><img src="D:%5cUsers%5cnote%5cXV6%5cp19.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="p19"
+	
+	
+></p>
+<p>文件系统不使用块0（它保存引导扇区）。</p>
+<p>块1称为超级块：它包含有关文件系统的元数据（文件系统大小（以块为单位）、数据块数、索引节点数和日志中的块数）。</p>
+<p>从2开始的块保存日志。</p>
+<p>日志之后是索引节点，每个块有多个索引节点。</p>
+<p>然后是位图块，跟踪正在使用的数据块。</p>
+<p>其余的块是数据块：每个都要么在位图块中标记为空闲，要么保存文件或目录的内容。</p>
+<p>超级块由一个名为<code>mkfs</code>的单独的程序填充，该程序构建初始文件系统。</p>
+<p>本章的其余部分将从缓冲区高速缓存层开始讨论每一层。</p>
+<p>注意那些在较低层次上精心选择的抽象可以简化较高层次的设计的情况。</p>
+<h5 id="buffer-cache层">Buffer cache层
+</h5><p>Buffer cache有两个任务：</p>
+<ol>
+<li>同步对磁盘块的访问，以确保磁盘块在内存中只有一个副本，并且一次只有一个内核线程使用该副本</li>
+<li>缓存常用块，以便不需要从慢速磁盘重新读取它们。代码在<em><strong>bio.c</strong></em>中。</li>
+</ol>
+<p>Buffer cache层导出的主接口主要是<code>bread</code>和<code>bwrite</code>；</p>
+<p>前者获取一个<em>buf</em>，其中包含一个可以在内存中读取或修改的块的副本，后者将修改后的缓冲区写入磁盘上的相应块。</p>
+<p>内核线程必须通过调用<code>brelse</code>释放缓冲区。</p>
+<p>Buffer cache每个缓冲区使用一个睡眠锁，以确保每个缓冲区（因此也是每个磁盘块）每次只被一个线程使用；<code>bread</code>返回一个上锁的缓冲区，<code>brelse</code>释放该锁。</p>
+<p>让我们回到Buffer cache。</p>
+<p>Buffer cache中保存磁盘块的<strong>缓冲区数量固定</strong>，这意味着如果文件系统请求还未存放在缓存中的块，Buffer cache必须回收当前保存其他块内容的缓冲区。</p>
+<p>Buffer cache为新块回收最近使用最少的缓冲区。这样做的原因是认为最近使用最少的缓冲区是最不可能近期再次使用的缓冲区。</p>
+<h5 id="代码buffer-cache">代码：Buffer cache
+</h5><p>Buffer cache是以双链表表示的缓冲区。</p>
+<p><code>main</code>（<em><strong>kernel/main.c</strong></em>:27）调用的函数<code>binit</code>使用静态数组<code>buf</code>（<em><strong>kernel/bio.c</strong></em>:43-52）中的<code>NBUF</code>个缓冲区初始化列表。</p>
+<p>对Buffer cache的所有其他访问都通过<code>bcache.head</code>引用链表，而不是<code>buf</code>数组。</p>
+<p>缓冲区有两个与之关联的状态字段。</p>
+<p>字段<code>valid</code>表示缓冲区是否包含块的副本。</p>
+<p>字段<code>disk</code>表示缓冲区内容是否已交给磁盘，这可能会更改缓冲区（例如，将数据从磁盘写入<code>data</code>）。</p>
+<p><code>Bread</code>（<em><strong>kernel/bio.c</strong></em>:93）调用<code>bget</code>为给定扇区（<em><strong>kernel/bio.c</strong></em>:97）获取缓冲区。</p>
+<p>如果缓冲区需要从磁盘进行读取，<code>bread</code>会在返回缓冲区之前调用<code>virtio_disk_rw</code>来执行此操作。</p>
+<p><code>Bget</code>（<em><strong>kernel/bio.c</strong></em>:59）扫描缓冲区列表，查找具有给定设备和扇区号（<em><strong>kernel/bio.c</strong></em>:65-73）的缓冲区。</p>
+<p>如果存在这样的缓冲区，<code>bget</code>将获取缓冲区的睡眠锁。然后<code>Bget</code>返回锁定的缓冲区。</p>
+<p>如果对于给定的扇区没有缓冲区，<code>bget</code>必须创建一个，这可能会重用包含其他扇区的缓冲区。</p>
+<p>它再次扫描缓冲区列表，查找未在使用中的缓冲区（<code>b-&gt;refcnt = 0</code>）：任何这样的缓冲区都可以使用。</p>
+<p><code>Bget</code>编辑缓冲区元数据以记录新设备和扇区号，并获取其睡眠锁。</p>
+<p>注意，<code>b-&gt;valid = 0</code>的布置确保了<code>bread</code>将从磁盘读取块数据，而不是错误地使用缓冲区以前的内容。</p>
+<p>每个磁盘扇区最多有一个缓存缓冲区是非常重要的，并且因为文件系统使用缓冲区上的锁进行同步，可以确保读者看到写操作。</p>
+<p><code>Bget</code>的从第一个检查块是否缓存的循环到第二个声明块现在已缓存（通过设置<code>dev</code>、<code>blockno</code>和<code>refcnt</code>）的循环，一直持有<code>bcache.lock</code>来确保此不变量。</p>
+<p>这会导致检查块是否存在以及（如果不存在）指定一个缓冲区来存储块具有原子性。</p>
+<p><code>bget</code>在<code>bcache.lock</code>临界区域之外获取缓冲区的睡眠锁是安全的，因为非零<code>b-&gt;refcnt</code>防止缓冲区被重新用于不同的磁盘块。</p>
+<p>睡眠锁保护块缓冲内容的读写，而<code>bcache.lock</code>保护有关缓存哪些块的信息。</p>
+<p>如果所有缓冲区都处于忙碌，那么太多进程同时执行文件系统调用；<code>bget</code>将会<code>panic</code>。</p>
+<p>一个更优雅的响应可能是在缓冲区空闲之前休眠，尽管这样可能会出现死锁。</p>
+<p>一旦<code>bread</code>读取了磁盘（如果需要）并将缓冲区返回给其调用者，调用者就可以独占使用缓冲区，并可以读取或写入数据字节。</p>
+<p>如果调用者确实修改了缓冲区，则必须在释放缓冲区之前调用<code>bwrite</code>将更改的数据写入磁盘。</p>
+<p><code>Bwrite</code>（<em><strong>kernel/bio.c</strong></em>:107）调用<code>virtio_disk_rw</code>与磁盘硬件对话。</p>
+<p>当调用方使用完缓冲区后，它必须调用<code>brelse</code>来释放缓冲区(<code>brelse</code>是<code>b-release</code>的缩写，这个名字很隐晦，但值得学习：它起源于Unix，也用于BSD、Linux和Solaris）。</p>
+<p><code>brelse</code>（<em><strong>kernel/bio.c</strong></em>:117）释放睡眠锁并将缓冲区移动到链表的前面（<em><strong>kernel/bio.c</strong></em>:128-133）。</p>
+<p>移动缓冲区会使列表按缓冲区的使用频率排序（意思是释放）：列表中的第一个缓冲区是最近使用的，最后一个是最近使用最少的。</p>
+<p><code>bget</code>中的两个循环利用了这一点：在最坏的情况下，对现有缓冲区的扫描必须处理整个列表，但首先检查最新使用的缓冲区（从<code>bcache.head</code>开始，然后是下一个指针），在引用局部性良好的情况下将减少扫描时间。</p>
+<p>选择要重用的缓冲区时，通过自后向前扫描（跟随<code>prev</code>指针）选择最近使用最少的缓冲区。</p>
+<blockquote>
+<p>这个流程描述了 <strong>Buffer cache</strong> 在 <strong>XV6</strong> 操作系统中的管理方式。</p>
+<h3 id="1-buffer-cache-初始化">1. <strong>Buffer cache 初始化</strong>
+</h3><ul>
+<li><strong>Buffer cache</strong> 是通过双向链表来表示缓冲区。使用 <code>binit</code> 函数初始化缓存，创建了一个包含 <code>NBUF</code> 个缓冲区的静态数组 <code>buf</code>，并通过 <code>bcache.head</code> 引用缓冲区链表进行所有访问。</li>
+</ul>
+<h3 id="2-缓冲区的状态">2. <strong>缓冲区的状态</strong>
+</h3><ul>
+<li>每个缓冲区有两个状态字段：
+<ul>
+<li><code>valid</code>：表示缓冲区是否包含有效的磁盘块副本。</li>
+<li><code>disk</code>：表示缓冲区内容是否已提交到磁盘。</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-buffer-获取流程">3. <strong>Buffer 获取流程</strong>
+</h3><ul>
+<li><strong>bread</strong> 函数调用 <strong>bget</strong> 来获取给定扇区的缓冲区。它根据设备号和扇区号查找缓冲区。如果找到匹配的缓冲区，锁定它并返回。如果没有找到，则会尝试重用未使用的缓冲区。</li>
+<li><strong>bget</strong> 进行两轮扫描：
+<ol>
+<li><strong>第一轮</strong>：扫描查找是否已经有匹配的缓冲区缓存。如果找到，锁定并返回。</li>
+<li><strong>第二轮</strong>：如果没有找到匹配的缓存，则扫描未使用的缓冲区，修改元数据记录新设备和扇区号，并返回。</li>
+</ol>
+</li>
+</ul>
+<h3 id="4-确保缓存的一致性和唯一性">4. <strong>确保缓存的一致性和唯一性</strong>
+</h3><ul>
+<li>为确保同一个磁盘扇区在任何时刻只有一个缓存缓冲区，<strong>bget</strong> 在两个扫描中都持有 <strong>bcache.lock</strong>，使得查找和缓存块的过程是原子操作。</li>
+<li>缓冲区的引用计数 <code>refcnt</code> 确保缓冲区不会在锁定后被其他进程重用。</li>
+</ul>
+<h3 id="5-读取与写入">5. <strong>读取与写入</strong>
+</h3><ul>
+<li>当调用者获取到缓冲区后，可以读取或者写入数据。如果缓冲区需要从磁盘读取数据，<strong>bread</strong> 会通过 <code>virtio_disk_rw</code> 执行读取操作。</li>
+<li>如果调用者修改了缓冲区内容，必须通过调用 <strong>bwrite</strong> 函数将更改写入磁盘。</li>
+</ul>
+<h3 id="6-释放缓冲区">6. <strong>释放缓冲区</strong>
+</h3><ul>
+<li>调用者使用完缓冲区后，必须通过 <strong>brelse</strong> 来释放缓冲区。<strong>brelse</strong> 释放睡眠锁，并将缓冲区移动到链表前面，这样链表会按最近使用顺序排序（LRU策略）。</li>
+</ul>
+<h3 id="7-缓存管理与优化">7. <strong>缓存管理与优化</strong>
+</h3><ul>
+<li>通过链表的双向扫描，<strong>bget</strong>减少了缓冲区查找和重用的开销：
+<ul>
+<li>向前扫描是从最近使用的缓冲区开始查找，这种局部性提高了效率。</li>
+<li>向后扫描时选择最近最少使用的缓冲区来重用，保证了缓存的合理利用。</li>
+</ul>
+</li>
+<li>如果所有缓冲区都处于忙碌状态，<strong>bget</strong> 会触发 panic，虽然更优雅的处理方式是等待空闲缓冲区，但可能导致死锁。</li>
+</ul>
+<h3 id="总结">总结：
+</h3><p><strong>Buffer cache</strong> 管理流程的核心在于利用双向链表来组织缓冲区，并通过局部性优化缓冲区的查找和重用。同时，通过锁机制确保多个进程之间对缓冲区的访问和操作是安全的。</p>
+</blockquote>
+<h5 id="索引结点层">索引结点层
+</h5><p>术语inode（即索引结点）可以具有两种相关含义之一。</p>
+<p>它可能是指包含<u>文件大小</u>和<u>数据块编号列表</u>的磁盘上的数据结构。</p>
+<p>或者“inode”可能指内存中的inode，它包含磁盘上<u>inode的副本</u>以及<u>内核中所需的额外信息</u>。</p>
+<p>磁盘上的inode都被打包到一个称为inode块的连续磁盘区域中。</p>
+<p>每个inode的大小都相同，因此在给定数字n的情况下，很容易在磁盘上找到第n个inode。</p>
+<p>事实上，这个编号n，称为inode number或i-number，是在具体实现中标识inode的方式。</p>
+<p>磁盘上的inode由<code>struct dinode</code>（<em><strong>kernel/fs.h</strong></em>:32）定义。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// On-disk inode structure
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">struct</span> <span class="n">dinode</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">short</span> <span class="n">type</span><span class="p">;</span>           <span class="c1">// File type
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">short</span> <span class="n">major</span><span class="p">;</span>          <span class="c1">// Major device number (T_DEVICE only)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">short</span> <span class="n">minor</span><span class="p">;</span>          <span class="c1">// Minor device number (T_DEVICE only)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">short</span> <span class="n">nlink</span><span class="p">;</span>          <span class="c1">// Number of links to inode in file system
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">uint</span> <span class="n">size</span><span class="p">;</span>            <span class="c1">// Size of file (bytes)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">uint</span> <span class="n">addrs</span><span class="p">[</span><span class="n">NDIRECT</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>   <span class="c1">// Data block addresses
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>字段<code>type</code>区分文件、目录和特殊文件（设备）。<code>type</code>为零表示磁盘inode是空闲的。</p>
+<p>字段<code>nlink</code>统计引用此inode的目录条目数，以便识别何时应释放磁盘上的inode及其数据块。</p>
+<p>字段<code>size</code>记录文件中内容的字节数。</p>
+<p>字段<code>addrs</code>数组记录保存文件内容的磁盘块的块号。</p>
+<p>内核将活动的inode集合保存在内存中；<code>struct inode</code>（<em><strong>kernel/file.h</strong></em>:17）是磁盘上<code>struct dinode</code>的内存副本。</p>
+<p>只有当有C指针引用某个inode时，内核才会在内存中存储该inode。</p>
+<p><code>ref</code>字段统计引用内存中inode的C指针的数量，如果引用计数降至零，内核将从内存中丢弃该inode。</p>
+<p><code>iget</code>和<code>iput</code>函数分别获取和释放指向inode的指针，修改引用计数。</p>
+<p>指向inode的指针可以来自文件描述符、当前工作目录和如<code>exec</code>的瞬态内核代码。</p>
+<p>xv6的inode代码中有四种锁或类似锁的机制。</p>
+<p><code>icache.lock</code>保护以下两个不变量：inode最多在缓存中出现一次；缓存inode的<code>ref</code>字段记录指向缓存inode的内存指针数量。</p>
+<p>每个内存中的inode都有一个包含睡眠锁的<code>lock</code>字段，它确保以独占方式访问inode的字段（如文件长度）以及inode的文件或目录内容块。</p>
+<p>如果inode的<code>ref</code>大于零，则会导致系统在cache中维护inode，而不会对其他inode重用此缓存项。</p>
+<p>最后，每个inode都包含一个<code>nlink</code>字段（在磁盘上，如果已缓存则复制到内存中），该字段统计引用文件的目录项的数量；如果inode的链接计数大于零，xv6将不会释放inode。</p>
+<p><code>iget()</code>返回的<code>struct inode</code>指针在相应的<code>iput()</code>调用之前保证有效：inode不会被删除，指针引用的内存也不会被其他inode重用。</p>
+<p><code>iget()</code>提供对inode的非独占访问，因此可以有许多指向同一inode的指针。</p>
+<p>文件系统代码的许多部分都依赖于<code>iget()</code>的这种行为，既可以保存对inode的长期引用（如打开的文件和当前目录），也可以防止争用，同时避免操纵多个inode（如路径名查找）的代码产生死锁。</p>
+<p><code>iget</code>返回的<code>struct inode</code>可能没有任何有用的内容。</p>
+<p>为了确保它保存磁盘inode的副本，代码必须调用<code>ilock</code>。</p>
+<p>这将锁定inode（以便没有其他进程可以对其进行<code>ilock</code>），并从磁盘读取尚未读取的inode。</p>
+<p><code>iunlock</code>释放inode上的锁。</p>
+<p>将inode指针的获取与锁定分离有助于在某些情况下避免死锁，例如在目录查找期间。</p>
+<p>多个进程可以持有指向<code>iget</code>返回的inode的C指针，但一次只能有一个进程锁定inode。</p>
+<p>inode缓存只缓存内核代码或数据结构持有C指针的inode。</p>
+<p>它的主要工作实际上是同步多个进程的访问；缓存是次要的。</p>
+<p>如果经常使用inode，在inode缓存不保留它的情况下buffer cache可能会将其保留在内存中。</p>
+<p>inode缓存是直写的，这意味着修改已缓存inode的代码必须立即使用<code>iupdate</code>将其写入磁盘。</p>
+<blockquote>
+<h3 id="1-inode究竟是什么">1. <strong>inode究竟是什么？</strong>
+</h3><ul>
+<li>inode是一种用于描述文件的结构，可以表示为磁盘上的inode或内存中的inode：
+<ul>
+<li><strong>磁盘上的inode</strong>：是存储在磁盘上的数据结构，用于保存文件的元数据（例如文件大小、文件类型、数据块编号等）。</li>
+<li><strong>内存中的inode</strong>：是磁盘inode的副本，保存在内存中，并且包含内核需要的额外信息。内存中的inode用于跟踪活动文件和目录。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-inode和dinode有什么关系">2. <strong>inode和dinode有什么关系？</strong>
+</h3><ul>
+<li><strong>dinode</strong> 是 <strong>磁盘上的inode</strong> 的结构定义，用于表示存储在磁盘上的文件的元数据。</li>
+<li><strong>inode</strong> 是 <strong>内存中的dinode</strong> 的副本，它通过引用 dinode 的数据来进行文件操作。此外，内存中的 inode 还包含额外的信息，如引用计数和锁等。</li>
+</ul>
+<p>总的来说，<strong>dinode</strong> 是磁盘上的结构，而 <strong>inode</strong> 是其在内存中的表现形式，并增加了内核所需的额外字段。</p>
+<h3 id="3-和inodedinode相关的字段及其作用">3. <strong>和inode/dinode相关的字段及其作用</strong>
+</h3><ul>
+<li>
+<p>dinode（磁盘上的inode）字段（kernel/fs.h:32）</p>
+<p>：</p>
+<ol>
+<li><strong>type</strong>：表示文件的类型，如普通文件、目录、设备文件等。<code>type = 0</code> 表示该inode为空闲状态。</li>
+<li><strong>nlink</strong>：引用该inode的目录项的数量。用于跟踪文件的链接数量，如果 <code>nlink</code> 降为零，意味着没有文件指向该inode，系统可以释放inode及其关联的磁盘块。</li>
+</ol>
+<blockquote>
+<p>在文件系统中，<strong>link</strong> 指的是一个文件或目录在不同的目录项（directory entries）中有多个指向同一个 <strong>inode</strong> 的引用。这些指向同一个 <strong>inode</strong> 的引用称为 <strong>硬链接（hard links）</strong>。</p>
+<h3 id="nlink-的含义"><strong>nlink 的含义</strong>
+</h3><ul>
+<li><strong>nlink</strong> 是 inode 结构中的一个字段，记录了 <strong>指向该 inode 的目录项数量</strong>。简单来说，<strong>nlink</strong> 统计了文件有多少个硬链接。</li>
+<li>当 <strong>nlink</strong> 变为 0 时，意味着没有任何目录项再指向该 inode，此时文件的实际内容（包括占用的磁盘块）就可以被删除。</li>
+</ul>
+<h3 id="举个例子来说明-nlink-的工作机制"><strong>举个例子来说明 nlink 的工作机制</strong>：
+</h3><p>假设我们有一个文件系统，文件 <strong>file1</strong> 存在于目录 <strong>/home/user</strong> 中。</p>
+<ol>
+<li><strong>创建文件 <code>file1</code></strong>：</li>
+</ol>
+<ul>
+<li>当创建文件 <strong>file1</strong> 时，文件系统会为它分配一个新的 <strong>inode</strong>。</li>
+<li>该 <strong>inode</strong> 会包含 <strong>file1</strong> 的元数据，比如文件大小、存储位置等。</li>
+<li>同时，<strong>inode</strong> 的 <strong>nlink</strong> 字段被设置为 <strong>1</strong>，表示有一个目录项（/home/user/file1）指向这个 <strong>inode</strong>。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">abnfcodepreviewrun
+</span></span><span class="line"><span class="cl">/home/user/file1 -&gt; inode <span class="m">100</span>
+</span></span><span class="line"><span class="cl"><span class="nv">nlink</span> <span class="o">=</span> <span class="m">1</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li><strong>创建硬链接 <code>file2</code> 到 <code>file1</code></strong>：</li>
+</ol>
+<ul>
+<li>现在，我们执行命令 <code>ln /home/user/file1 /home/user/file2</code>，这是在同一个目录下创建一个新的文件名 <strong>file2</strong>，但 <strong>file2</strong> 和 <strong>file1</strong> 共享相同的 <strong>inode</strong>。</li>
+<li>也就是说，<strong>file1</strong> 和 <strong>file2</strong> 指向同一个 <strong>inode</strong>，它们共享文件的元数据和内容。</li>
+<li>此时，<strong>inode</strong> 的 <strong>nlink</strong> 字段增加到 <strong>2</strong>，因为有两个目录项（<strong>/home/user/file1</strong> 和 <strong>/home/user/file2</strong>）指向同一个 <strong>inode</strong>。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">xlcodepreviewrun
+</span></span><span class="line"><span class="cl">/home/user/file1 -&gt; inode <span class="m">100</span>
+</span></span><span class="line"><span class="cl">/home/user/file2 -&gt; inode <span class="m">100</span>
+</span></span><span class="line"><span class="cl"><span class="nv">nlink</span> <span class="o">=</span> <span class="m">2</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="3">
+<li><strong>删除文件 <code>file1</code></strong>：</li>
+</ol>
+<ul>
+<li>当我们删除 <strong>file1</strong> 时（通过 <code>rm /home/user/file1</code>），文件系统会移除目录项 <strong>/home/user/file1</strong>，但由于 <strong>nlink</strong> 仍为 <strong>1</strong>（<strong>file2</strong> 还存在），文件的 <strong>inode</strong> 和其数据依然保留。</li>
+<li>只有当 <strong>nlink</strong> 降为 <strong>0</strong> 时，文件的实际数据才会被删除。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">abnfcodepreviewrun
+</span></span><span class="line"><span class="cl">/home/user/file2 -&gt; inode <span class="m">100</span>
+</span></span><span class="line"><span class="cl"><span class="nv">nlink</span> <span class="o">=</span> <span class="m">1</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="4">
+<li><strong>删除 <code>file2</code></strong>：</li>
+</ol>
+<ul>
+<li>如果之后也删除了 <strong>file2</strong>，<strong>nlink</strong> 变为 <strong>0</strong>，此时该 <strong>inode</strong> 不再有任何目录项指向它，文件系统会将它的元数据和占用的磁盘块释放。</li>
+</ul>
+<h3 id="总结-1"><strong>总结</strong>：
+</h3><ul>
+<li><strong>nlink</strong> 记录了指向同一个文件（inode）的硬链接数。</li>
+<li>当创建多个硬链接时，所有的链接指向同一个 <strong>inode</strong>，因此它们共享文件的内容和元数据。</li>
+<li>只有当 <strong>nlink</strong> 变为 <strong>0</strong> 时，文件的内容和 inode 才会被真正删除。</li>
+</ul>
+</blockquote>
+<ol start="3">
+<li><strong>size</strong>：记录文件的字节数，即文件的大小。</li>
+<li><strong>addrs</strong>：保存文件内容的磁盘块编号列表，指向文件内容在磁盘上的存储位置。</li>
+</ol>
+</li>
+<li>
+<p>inode（内存中的inode）字段（kernel/file.h:17）</p>
+<p>：</p>
+<ol>
+<li><strong>ref</strong>：引用此inode的内存指针的数量。当 <code>ref &gt; 0</code> 时，该inode保存在内存中。</li>
+<li><strong>lock</strong>：inode的睡眠锁，确保独占访问inode的字段及文件内容块，防止多个进程同时操作相同的inode，造成竞争。</li>
+<li><strong>dev</strong>：inode所属的设备号，指向文件所在的设备。</li>
+<li><strong>inum</strong>：inode number（i-number），用于标识inode，是磁盘上inode的编号。</li>
+<li><strong>valid</strong>：用于标记此内存inode是否包含有效的磁盘inode数据。</li>
+<li><strong>nlink</strong>：引用计数字段，与磁盘上的 <code>nlink</code> 相同，用于同步两个层次的inode数据。</li>
+</ol>
+</li>
+</ul>
+<h3 id="4-和inodedinode相关的函数及其作用">4. <strong>和inode/dinode相关的函数及其作用</strong>
+</h3><ul>
+<li><strong>iget（kernel/fs.c）</strong>：
+<ul>
+<li>作用：从磁盘加载inode到内存，返回指向该inode的指针。该函数不提供inode的独占访问，但确保返回的inode指针在 <strong>iput</strong> 调用之前是有效的。</li>
+<li>功能：它管理内存中的inode，增减引用计数，确保内存中的inode不会在多个进程间被错误地重用。</li>
+</ul>
+</li>
+<li><strong>iput（kernel/fs.c）</strong>：
+<ul>
+<li>作用：减少inode的引用计数。当引用计数降为零时，释放inode，并可能从内存中丢弃该inode。</li>
+<li>功能：负责清理不再使用的inode，避免内存浪费。</li>
+</ul>
+</li>
+<li><strong>ilock（kernel/fs.c）</strong>：
+<ul>
+<li>作用：锁定inode，确保inode的独占访问，通常在修改inode或访问文件数据时使用。</li>
+<li>功能：从磁盘中读取未加载的inode，并保护多个进程对inode的并发访问。</li>
+</ul>
+</li>
+<li><strong>iunlock（kernel/fs.c）</strong>：
+<ul>
+<li>作用：解锁inode，允许其他进程继续对inode进行操作。</li>
+<li>功能：确保操作完成后，释放锁，使其他进程可以安全访问inode。</li>
+</ul>
+</li>
+<li><strong>iupdate（kernel/fs.c）</strong>：
+<ul>
+<li>作用：将内存中的inode更新到磁盘，确保内存inode的更改反映到磁盘上的inode。</li>
+<li>功能：保持磁盘上inode和内存中inode的一致性，避免数据丢失。</li>
+</ul>
+</li>
+<li><strong>brelse</strong>：
+<ul>
+<li>作用：释放缓冲区并将其返回到缓存中。</li>
+<li>功能：当对inode或文件操作结束时，缓解资源争用，将缓冲区释放回来。</li>
+</ul>
+</li>
+</ul>
+<h3 id="总结-2">总结：
+</h3><ul>
+<li><strong>inode</strong> 是文件的核心元数据结构，磁盘上通过 <strong>dinode</strong> 定义，内存中通过 <strong>inode</strong> 管理。</li>
+<li>两者通过字段如 <code>type</code>、<code>nlink</code> 和 <code>size</code> 共同维护文件的状态和信息。</li>
+<li>关键函数如 <strong>iget</strong>、<strong>iput</strong>、<strong>ilock</strong>、<strong>iunlock</strong> 负责对 inode 的引用、锁定和同步，确保文件系统在并发访问下的正确性。</li>
+</ul>
+</blockquote>
+<h5 id="代码inodes">代码：Inodes
+</h5><p>为了分配新的inode（例如，在创建文件时），xv6调用<code>ialloc</code>（<em><strong>kernel/fs.c</strong></em>:196）。</p>
+<p><code>ialloc</code>类似于<code>balloc</code>：它一次一个块地遍历磁盘上的索引节点结构体，查找标记为空闲的一个。</p>
+<p>当它找到一个时，它通过将新<code>type</code>写入磁盘来声明它，然后末尾通过调用<code>iget</code>（<em><strong>kernel/fs.c</strong></em>:210）从inode缓存返回一个条目。</p>
+<p><code>ialloc</code>的正确操作取决于这样一个事实：一次只有一个进程可以保存对<code>bp</code>的引用：<code>ialloc</code>可以确保其他进程不会同时看到inode可用并尝试声明它。</p>
+<p><code>Iget</code>（<em><strong>kernel/fs.c</strong></em>:243）在inode缓存中查找具有所需设备和inode编号的活动条目（<code>ip-&gt;ref &gt; 0</code>）。</p>
+<p>如果找到一个，它将返回对该inode的新引用（<em><strong>kernel/fs.c</strong></em>:252-256）。</p>
+<p>在<code>iget</code>扫描时，它会记录第一个空槽（<em><strong>kernel/fs.c</strong></em>:257-258）的位置，如果需要分配缓存项，它会使用这个槽。</p>
+<p>在读取或写入inode的元数据或内容之前，代码必须使用<code>ilock</code>锁定inode。</p>
+<p><code>Ilock</code>（<em><strong>kernel/fs.c</strong></em>:289）为此使用睡眠锁。一旦<code>ilock</code>以独占方式访问inode，它将根据需要从磁盘（更可能是buffer cache）读取inode。</p>
+<p>函数<code>iunlock</code>（<em><strong>kernel/fs.c</strong></em>:317）释放睡眠锁，这可能会导致任何睡眠进程被唤醒。</p>
+<p><code>Iput</code>（<em><strong>kernel/fs.c</strong></em>:333）通过减少引用计数（<em><strong>kernel/fs.c</strong></em>:356）释放指向inode的C指针。</p>
+<p>如果这是最后一次引用，inode缓存中该inode的槽现在将是空闲的，可以重用于其他inode。</p>
+<p>如果<code>iput</code>发现没有指向inode的C指针引用，并且inode没有指向它的链接（发生于无目录），则必须释放inode及其数据块。</p>
+<p><code>Iput</code>调用<code>itrunc</code>将文件截断为零字节，释放数据块；将索引节点类型设置为0（未分配）；并将inode写入磁盘（<em><strong>kernel/fs.c</strong></em>:338）。</p>
+<p><code>iput</code>中释放inode的锁定协议值得仔细研究。</p>
+<p>一个危险是并发线程可能正在<code>ilock</code>中等待使用该inode（例如，读取文件或列出目录），并且不会做好该inode已不再被分配的准备。</p>
+<p>这不可能发生，因为如果缓存的inode没有链接，并且<code>ip-&gt;ref</code>为1，那么系统调用就无法获取指向该inode的指针。</p>
+<p>那一个引用是调用<code>iput</code>的线程所拥有的引用。</p>
+<p>的确，<code>iput</code>在<code>icache.lock</code>的临界区域之外检查引用计数是否为1，但此时已知链接计数为零，因此没有线程会尝试获取新引用。</p>
+<p>另一个主要危险是，对<code>ialloc</code>的并发调用可能会选择<code>iput</code>正在释放的同一个inode。</p>
+<p>这只能在<code>iupdate</code>写入磁盘以使inode的<code>type</code>为零后发生。</p>
+<p>这个争用是良性的：分配线程将客气地等待获取inode的睡眠锁，然后再读取或写入inode，此时<code>iput</code>已完成。</p>
+<p><code>iput()</code>可以写入磁盘。</p>
+<p>这意味着任何使用文件系统的系统调用都可能写入磁盘，因为系统调用可能是最后一个引用该文件的系统调用。</p>
+<p>即使像<code>read()</code>这样看起来是只读的调用，也可能最终调用<code>iput()</code>。</p>
+<p>这反过来意味着，即使是只读系统调用，如果它们使用文件系统，也必须在事务中进行包装。</p>
+<p><code>iput()</code>和崩溃之间存在一种具有挑战性的交互。</p>
+<p><code>iput()</code>不会在文件的链接计数降至零时立即截断文件，因为某些进程可能仍在内存中保留对inode的引用：进程可能仍在读取和写入该文件，因为它已成功打开该文件。</p>
+<p>但是，如果在最后一个进程关闭该文件的文件描述符之前发生崩溃，则该文件将被标记为已在磁盘上分配，但没有目录项指向它。</p>
+<p>文件系统以两种方式之一处理这种情况。</p>
+<p>简单的解决方案用于恢复时：重新启动后，文件系统会扫描整个文件系统，以查找标记为已分配但没有指向它们的目录项的文件。</p>
+<p>如果存在任何此类文件，接下来可以将其释放。</p>
+<p>第二种解决方案不需要扫描文件系统。</p>
+<p>在此解决方案中，文件系统在磁盘（例如在超级块中）上记录链接计数降至零但引用计数不为零的文件的i-number。</p>
+<p>如果文件系统在其引用计数达到0时删除该文件，则会通过从列表中删除该inode来更新磁盘列表。</p>
+<p>恢复时，文件系统将释放列表中的任何文件。</p>
+<p>Xv6没有实现这两种解决方案，这意味着inode可能被标记为已在磁盘上分配，即使它们不再使用。这意味着随着时间的推移，xv6可能会面临磁盘空间不足的风险。</p>
+<blockquote>
+<h3 id="1-并发线程在-ilock-中等待-inode-的情况">1. <strong>并发线程在 ilock 中等待 inode 的情况</strong>
+</h3><p>这一点的意思是：多个进程或线程可能同时尝试访问同一个 inode，而这些进程通过锁机制（如 <code>ilock</code>）来确保独占访问。在某些情况下，某些线程可能正在等待获取这个 inode 的锁，比如在读取文件内容或者列出目录时（因为列出目录也是在访问目录 inode），这些操作需要独占锁。然而，<strong>一个潜在的危险</strong>是，如果 <code>iput()</code> 释放了该 inode，而其他线程正在等待这个 inode 的锁，这些线程可能会面对该 inode 已被删除或释放的情况。</p>
+<p><strong>具体流程可以分解为以下步骤：</strong></p>
+<ol>
+<li><strong>进程 A 获得 inode 锁</strong>：
+<ul>
+<li>进程 A 通过 <code>ilock()</code> 获得对某个 inode 的独占锁，执行文件读取或其他操作。此时 <code>ip-&gt;ref</code> 表示有指针引用该 inode。</li>
+</ul>
+</li>
+<li><strong>进程 B 等待 inode 锁</strong>：
+<ul>
+<li>进程 B 也尝试访问同一个 inode，但由于锁已被进程 A 占用，进程 B 进入等待状态，等待 <code>ilock()</code> 返回。</li>
+</ul>
+</li>
+<li><strong>进程 A 调用 <code>iput()</code></strong>：
+<ul>
+<li>进程 A 完成了对 inode 的操作，并调用 <code>iput()</code> 来减少引用计数，准备释放该 inode。此时，<code>iput()</code> 检查 inode 的引用计数 <code>ip-&gt;ref</code> 和链接计数 <code>nlink</code>。</li>
+<li>如果 inode 的链接计数 <code>nlink = 0</code> 并且引用计数 <code>ip-&gt;ref = 1</code>，意味着没有其他进程引用该 inode，这时 <code>iput()</code> 可以将其释放。</li>
+</ul>
+</li>
+<li><strong>潜在的问题：进程 B 继续等待</strong>：
+<ul>
+<li>如果没有锁定协议，那么当 <code>iput()</code> 释放 inode 后，进程 B 可能获得了一个已经被释放的 inode。为了避免这种情况，锁定机制确保了 inode 的引用计数和锁的使用没有冲突，也就是说，<code>iput()</code> 不会释放一个仍有其他进程等待的 inode，避免了资源错误释放。</li>
+</ul>
+</li>
+</ol>
+<h3 id="2-截断文件的意思">2. <strong>&ldquo;截断&quot;文件的意思</strong>
+</h3><ul>
+<li><strong>截断（truncate）</strong> 是指 <strong>减少文件的内容或大小</strong>。当我们说 &ldquo;iput() 不会立即截断文件&rdquo; 时，意思是即便某个文件的链接计数 <code>nlink</code> 已经为零（即没有目录项再指向这个文件），并且不再有任何进程打开这个文件，<code>iput()</code> 也不会立刻释放与文件相关的磁盘空间。</li>
+<li>这是因为进程可能仍然持有该文件的文件描述符，仍在访问文件。因此，在 <code>iput()</code> 中，仅当最后一个进程关闭该文件描述符，且文件的链接计数为零时，系统才会真正释放文件占用的磁盘空间。</li>
+</ul>
+<h3 id="3-目录项与-inode-的关系">3. <strong>目录项与 inode 的关系</strong>
+</h3><ul>
+<li><strong>目录项（directory entry）</strong> 是 <strong>文件系统中存储文件名与 inode 号的映射</strong>。目录项记录了文件名，并指向相应的 inode。换句话说，每个文件或目录都有一个或多个目录项，它们通过 <strong>inode number（i-number）</strong> 引用磁盘上的 inode 结构。</li>
+<li>当创建文件时，文件系统会为该文件分配一个 inode，并在目录中创建一个目录项，目录项保存文件名以及 inode 的编号。这就是文件名和 inode 之间的联系。</li>
+<li><strong>&ldquo;没有目录项指向它&rdquo;</strong> 的意思是，当一个文件的链接计数 <code>nlink</code> 降为零时，说明文件系统中没有任何目录项再指向这个 inode。换句话说，所有指向该文件的硬链接都已被删除，意味着该文件的文件名已经从文件系统中消失了。</li>
+<li><strong>文件描述符和目录项的关系</strong>：
+<ul>
+<li>打开文件时，进程会通过文件描述符访问该文件，文件描述符实际上是对 inode 的引用，而不是对目录项的直接引用。</li>
+<li>当所有进程关闭文件描述符，并且文件的 <code>nlink</code> 为零时，说明没有任何文件名指向该 inode，文件的磁盘空间才会真正释放。</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-具体流程和时间点">4. <strong>具体流程和时间点</strong>
+</h3><ul>
+<li><strong>进程 A 调用 <code>ilock()</code></strong>：
+<ul>
+<li>时间点：当进程 A 需要访问某个文件的 inode（比如读取文件或列出目录）。</li>
+<li>结果：进程 A 获得了 inode 的独占锁。</li>
+</ul>
+</li>
+<li><strong>进程 B 进入等待</strong>：
+<ul>
+<li>时间点：进程 B 也需要访问同一个 inode，但锁被进程 A 占用，因此 B 进入等待状态。</li>
+<li>结果：进程 B 等待，无法立即获得 inode 锁。</li>
+</ul>
+</li>
+<li><strong>进程 A 调用 <code>iput()</code></strong>：
+<ul>
+<li>时间点：进程 A 完成操作后，调用 <code>iput()</code> 释放 inode 引用。</li>
+<li>结果：
+<ol>
+<li>如果 <code>nlink = 0</code> 且 <code>ip-&gt;ref = 1</code>，<code>iput()</code> 开始准备释放该 inode。</li>
+<li>如果 <code>iput()</code> 发现有其他线程（进程 B）正在等待访问 inode，它会确保不会在有引用时释放 inode。</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><strong><code>iput()</code> 写入磁盘</strong>：
+<ul>
+<li>时间点：当 <code>iput()</code> 发现需要释放的 inode 在磁盘上有更新时，它会调用 <code>iupdate()</code> 写入磁盘，将 inode 的 <code>type</code> 设为 0。</li>
+<li>结果：此时 inode 被标记为无效（type 为 0），并且没有目录项指向它。</li>
+</ul>
+</li>
+<li><strong>系统崩溃时</strong>：
+<ul>
+<li>时间点：如果系统在进程 B 正在等待时崩溃，并且 inode 的 <code>nlink = 0</code> 但 <code>ref &gt; 0</code>，文件可能被保留在磁盘上（没有目录项指向它，但文件还在）。</li>
+<li>结果：此类文件会在系统重新启动时面临被回收或者手动删除的情况。</li>
+</ul>
+</li>
+</ul>
+<h3 id="总结-3"><strong>总结</strong>
+</h3><ul>
+<li>并发线程在访问 inode 时，锁定机制确保了不会出现 inode 被错误释放的情况。</li>
+<li>截断文件是指释放文件的磁盘空间，这仅在文件的 <code>nlink</code> 和 <code>ref</code> 都为零时发生。</li>
+<li>目录项是文件名和 inode 之间的映射关系，当所有目录项删除且文件描述符关闭时，inode 才会真正释放。</li>
+<li>具体流程中，<code>iput()</code> 检查 inode 的状态，决定是否立即释放它，同时处理可能的竞争条件。</li>
+</ul>
+</blockquote>
+<blockquote>
+<h3 id="1-ip-ref引用计数">1. <strong><code>ip-&gt;ref</code>（引用计数）</strong>
+</h3><ul>
+<li>
+<p><strong>作用</strong>：<code>ip-&gt;ref</code> 是 <strong>内存中的引用计数</strong>，用于跟踪有多少 <strong>内核指针（C 指针）</strong> 指向该 inode。每当某个系统调用获取对 inode 的引用时（例如，打开文件、使用文件描述符），引用计数就会增加。每当一个引用不再需要时（例如，关闭文件），引用计数就会减少。</p>
+</li>
+<li>
+<p>示例</p>
+<p>：</p>
+<ul>
+<li>当进程打开一个文件时，<code>ip-&gt;ref</code> 增加。</li>
+<li>当进程关闭文件时，<code>ip-&gt;ref</code> 减少。</li>
+</ul>
+</li>
+<li>
+<p><strong>作用场景</strong>：当 <code>ip-&gt;ref = 1</code> 时，通常表示内核中只有一个指针还引用该 inode（通常是当前 <code>iput()</code> 调用所持有的引用）。当引用计数降为 0 时，表示内存中没有任何系统调用或进程再引用该 inode，它可以被释放。</p>
+</li>
+</ul>
+<h3 id="2-nlink链接计数">2. <strong><code>nlink</code>（链接计数）</strong>
+</h3><ul>
+<li>
+<p><strong>作用</strong>：<code>nlink</code> 是 <strong>磁盘上目录项的计数</strong>，用于跟踪有多少个 <strong>目录项（directory entry）</strong> 指向该 inode。每当文件被硬链接时，链接计数增加；每当删除一个硬链接时，链接计数减少。</p>
+</li>
+<li>
+<p>示例</p>
+<p>：</p>
+<ul>
+<li>创建文件时，<code>nlink = 1</code>，表示一个目录项（即文件名）指向该 inode。</li>
+<li>创建一个硬链接（<code>ln</code> 命令）时，<code>nlink</code> 增加。删除文件或硬链接时，<code>nlink</code> 减少。</li>
+</ul>
+</li>
+<li>
+<p><strong>作用场景</strong>：当 <code>nlink = 0</code> 时，表示没有目录项指向该 inode，文件的名字已经从文件系统中删除。即使文件还在内存中被引用（例如，进程还在使用文件描述符），文件系统也不再通过目录访问到它。</p>
+</li>
+</ul>
+<h3 id="3-两者的区别与关系">3. <strong>两者的区别与关系</strong>
+</h3><ul>
+<li><strong><code>ip-&gt;ref</code> 计数内存中的引用</strong>：它反映的是内核当前有多少指针指向这个 inode，通常与文件描述符、当前工作目录等相关。当 <code>ip-&gt;ref = 0</code> 时，意味着没有进程再引用这个 inode，内核可以从内存中释放它。</li>
+<li><strong><code>nlink</code> 计数磁盘上的链接</strong>：它反映的是磁盘上有多少文件名（目录项）指向这个 inode。<code>nlink = 0</code> 时，表示文件在文件系统中不再可见，即已经被从目录中移除。</li>
+</ul>
+<h3 id="4-为什么两者都需要统计">4. <strong>为什么两者都需要统计？</strong>
+</h3><ul>
+<li><strong>独立作用</strong>：这两者统计不同层次的引用。<code>nlink</code> 反映文件在文件系统中的可见性，决定何时删除文件的目录项；而 <code>ip-&gt;ref</code> 则是内存中的引用，决定 inode 何时可以从内存中释放。</li>
+<li><strong>结合决定 inode 何时释放</strong>：即便 <code>nlink = 0</code>，也不能立刻释放 inode，因为文件可能仍然在被进程使用（<code>ip-&gt;ref &gt; 1</code>）。只有当 <code>nlink = 0</code> <strong>且</strong> <code>ip-&gt;ref = 1</code> 时，<code>iput()</code> 可以安全地释放 inode——此时，文件已经从文件系统中删除，没有目录项指向它，并且没有进程再引用它。</li>
+</ul>
+<h3 id="5-流程示例">5. <strong>流程示例</strong>
+</h3><ul>
+<li>当删除一个文件时，<code>nlink</code> 会降到 0，文件从目录中消失。但如果一个进程已经打开了该文件并正在使用它，<code>ip-&gt;ref</code> 会大于 1。</li>
+<li>直到最后一个进程关闭文件描述符，<code>ip-&gt;ref</code> 也降为 1，<code>iput()</code> 最终会释放 inode。这时，文件的所有数据会被清除，inode 和磁盘块被回收。</li>
+</ul>
+</blockquote>
+<h5 id="代码inode包含内容">代码：Inode包含内容
+</h5><p>磁盘上的inode结构体<code>struct dinode</code>包含一个<code>size</code>和一个块号数组（见图8.3）。</p>
+<p><img src="D:%5cUsers%5cnote%5cXV6%5cp20.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="p20"
+	
+	
+></p>
+<p>inode数据可以在<code>dinode</code>的<code>addrs</code>数组列出的块中找到。</p>
+<p>前面的<code>NDIRECT</code>个数据块被列在数组中的前<code>NDIRECT</code>个元素中；这些块称为直接块（direct blocks）。</p>
+<p>接下来的<code>NINDIRECT</code>个数据块不在inode中列出，而是在称为间接块（indirect block）的数据块中列出。</p>
+<p><code>addrs</code>数组中的最后一个元素给出了间接块的地址。</p>
+<p>因此，可以从inode中列出的块加载文件的前12 kB（<code>NDIRECT x BSIZE</code>）字节，而只有在查阅间接块后才能加载下一个256 kB（<code>NINDIRECT x BSIZE</code>）字节。</p>
+<p>这是一个很好的磁盘表示，但对于客户端来说较复杂。</p>
+<p>函数<code>bmap</code>管理这种表示，以便实现我们将很快看到的如<code>readi</code>和<code>writei</code>这样的更高级例程。</p>
+<p><code>bmap(struct inode *ip, uint bn)</code>返回索引结点<code>ip</code>的第<code>bn</code>个数据块的磁盘块号。</p>
+<p>如果<code>ip</code>还没有这样的块，<code>bmap</code>会分配一个。</p>
+<p>函数<code>bmap</code>（<em><strong>kernel/fs.c</strong></em>:378）从简单的情况开始：前面的<code>NDIRECT</code>个块在inode本身中列出（<em><strong>kernel/fs.c</strong></em>:383-387）中。</p>
+<p>下面<code>NINDIRECT</code>个块在<code>ip-&gt;addrs[NDIRECT]</code>的间接块中列出。</p>
+<p><code>Bmap</code>读取间接块（<em><strong>kernel/fs.c</strong></em>:394），然后从块内的正确位置（<em><strong>kernel/fs.c</strong></em>:395）读取块号。</p>
+<p>如果块号超过<code>NDIRECT+NINDIRECT</code>，则<code>bmap</code>调用<code>panic</code>崩溃；<code>writei</code>包含防止这种情况发生的检查（<em><strong>kernel/fs.c</strong></em>:490）。</p>
+<p><code>Bmap</code>根据需要分配块。<code>ip-&gt;addrs[]</code>或间接块中条目为零表示未分配块。当<code>bmap</code>遇到零时，它会用按需分配的新块（<em><strong>kernel/fs.c</strong></em>:384-385）（<em><strong>kernel/fs.c</strong></em>:392-393）替换它们。</p>
+<p><code>itrunc</code>释放文件的块，将inode的<code>size</code>重置为零。<code>Itrunc</code>（<em><strong>kernel/fs.c</strong></em>:410）首先释放直接块（<em><strong>kernel/fs.c</strong></em>:416-421），然后释放间接块中列出的块（<em><strong>kernel/fs.c</strong></em>:426-429），最后释放间接块本身（<em><strong>kernel/fs.c</strong></em>:431-432）。</p>
+<p><code>Bmap</code>使<code>readi</code>和<code>writei</code>很容易获取inode的数据。</p>
+<p><code>Readi</code>（<em><strong>kernel/fs.c</strong></em>:456）首先确保偏移量和计数不超过文件的末尾。</p>
+<p>开始于超过文件末尾的地方读取将返回错误（<em><strong>kernel/fs.c</strong></em>:461-462），而从文件末尾开始或穿过文件末尾的读取返回的字节数少于请求的字节数（<em><strong>kernel/fs.c</strong></em>:463-464）。</p>
+<p>主循环处理文件的每个块，将数据从缓冲区复制到<code>dst</code>（<em><strong>kernel/fs.c</strong></em>:466-474）。</p>
+<p><code>writei</code>（<em><strong>kernel/fs.c</strong></em>:483）与<code>readi</code>相同，但有三个例外：从文件末尾开始或穿过文件末尾的写操作会使文件增长到最大文件大小（<em><strong>kernel/fs.c</strong></em>:490-491）；循环将数据复制到缓冲区而不是输出（<em><strong>kernel/fs.c</strong></em>:36）；如果写入扩展了文件，<code>writei</code>必须更新其大小（<em><strong>kernel/fs.c</strong></em>:504-511）。</p>
+<p><code>readi</code>和<code>writei</code>都是从检查<code>ip-&gt;type == T_DEV</code>开始的。这种情况处理的是数据不在文件系统中的特殊设备；我们将在文件描述符层返回到这种情况。</p>
+<p>函数<code>stati</code>（<em><strong>kernel/fs.c</strong></em>:442）将inode元数据复制到<code>stat</code>结构体中，该结构通过<code>stat</code>系统调用向用户程序公开。</p>
+<h5 id="代码目录层">代码：目录层
+</h5><p>目录的内部实现很像文件。</p>
+<p>其inode的<code>type</code>为<code>T_DIR</code>，其数据是一系列目录条目（directory entries）。</p>
+<p>每个条目（entry）都是一个<code>struct dirent</code>（<em><strong>kernel/fs.h</strong></em>:56），其中包含一个名称<code>name</code>和一个inode编号<code>inum</code>。</p>
+<p>名称最多为<code>DIRSIZ</code>（14）个字符；如果较短，则以<code>NUL</code>（0）字节终止。</p>
+<p>inode编号为零的条目是空的。</p>
+<p>函数<code>dirlookup</code>（<em><strong>kernel/fs.c</strong></em>:527）在目录中搜索具有给定名称的条目。</p>
+<p>如果找到一个，它将返回一个指向相应inode的指针，解开锁定，并将<code>*poff</code>设置为目录中条目的字节偏移量，以满足调用方希望对其进行编辑的情形。</p>
+<p>如果<code>dirlookup</code>找到具有正确名称的条目，它将更新<code>*poff</code>并返回通过<code>iget</code>获得的未锁定的inode。</p>
+<p><code>Dirlookup</code>是<code>iget</code>返回未锁定indoe的原因。</p>
+<p>调用者已锁定<code>dp</code>，因此，如果对<code>.</code>，当前目录的别名，进行查找，则在返回之前尝试锁定indoe将导致重新锁定<code>dp</code>并产生死锁(还有更复杂的死锁场景，涉及多个进程和<code>..</code>，父目录的别名。<code>.</code>不是唯一的问题。）调用者可以解锁<code>dp</code>，然后锁定<code>ip</code>，确保它一次只持有一个锁。</p>
+<p>函数<code>dirlink</code>（<em><strong>kernel/fs.c</strong></em>:554）将给定名称和inode编号的新目录条目写入目录<code>dp</code>。</p>
+<p>如果名称已经存在，<code>dirlink</code>将返回一个错误（<em><strong>kernel/fs.c</strong></em>:560-564）。</p>
+<p>主循环读取目录条目，查找未分配的条目。</p>
+<p>当找到一个时，它会提前停止循环（<em><strong>kernel/fs.c</strong></em>:538-539），并将<code>off</code>设置为可用条目的偏移量。</p>
+<p>否则，循环结束时会将<code>off</code>设置为<code>dp-&gt;size</code>。</p>
+<p>无论哪种方式，<code>dirlink</code>都会通过在偏移<code>off</code>处写入（<em><strong>kernel/fs.c</strong></em>:574-577）来向目录添加一个新条目。</p>
+<blockquote>
+<h3 id="1-目录的结构和作用">1. <strong>目录的结构和作用</strong>
+</h3><ul>
+<li>
+<p>目录（Directory）是由一系列目录条目（directory entries）组成的，目录本身就是一个类型为T_DIR的 inode。目录条目是struct dirent类型的结构，每个条目包含：</p>
+<ul>
+<li><strong>name</strong>：文件名或目录名，最多可有 14 个字符（<code>DIRSIZ</code>），如果文件名较短，则以空字符（<code>NUL</code>）结束。</li>
+</ul>
+</li>
+<li>
+<p><strong>inum</strong>：该目录条目对应的 inode 编号。如果 <code>inum</code> 为 0，表示这个条目是空的，未使用。</p>
+</li>
+</ul>
+<h3 id="2-函数概览及其作用">2. <strong>函数概览及其作用</strong>
+</h3><ul>
+<li>
+<p><strong><code>dirlookup</code>（kernel/fs.c:527）</strong>：</p>
+</li>
+<li>
+<p><strong>作用</strong>：在目录中查找给定名称的条目，返回指向对应 inode 的指针。</p>
+</li>
+<li>
+<p><strong>位置</strong>：文件系统层次，用于搜索目录内是否有指定名称的文件或子目录。</p>
+</li>
+<li>
+<p>功能</p>
+<p>：</p>
+<ol>
+<li><strong>查找目录条目</strong>：扫描目录中的条目，通过匹配文件名找到相应的 inode。</li>
+<li><strong>返回 inode</strong>：如果找到匹配的条目，返回未锁定的 inode，并设置该条目的字节偏移量（*poff）。这个偏移量表示条目在目录数据中的位置，方便后续修改。</li>
+<li><strong>避免死锁</strong>：由于 <code>dirlookup</code> 返回的是未锁定的 inode，调用者在处理 inode 时可以解锁目录，避免像对 &ldquo;.&quot;（当前目录）和 &ldquo;..&quot;（父目录）这样的条目产生的死锁问题。</li>
+</ol>
+</li>
+<li>
+<p><strong><code>dirlink</code>（kernel/fs.c:554）</strong>：</p>
+</li>
+<li>
+<p><strong>作用</strong>：向目录中写入一个新条目，将给定的名称和 inode 编号关联起来。</p>
+</li>
+<li>
+<p><strong>位置</strong>：文件系统层次，用于将文件或子目录添加到目录中。</p>
+</li>
+<li>
+<p>功能</p>
+<p>：</p>
+<ol>
+<li><strong>检查名称是否存在</strong>：在目录中查找是否已有同名条目。如果存在，返回错误。</li>
+<li><strong>寻找空条目</strong>：如果条目不存在，它扫描目录，寻找空闲的目录条目（<code>inum</code> 为 0），如果找到，记录下这个条目的偏移量。</li>
+<li><strong>写入新条目</strong>：将新的目录条目写入目录，将给定的名称和 inode 编号保存到偏移位置。</li>
+</ol>
+</li>
+</ul>
+<h3 id="3-偏移量的含义">3. <strong>偏移量的含义</strong>
+</h3><ul>
+<li><strong>偏移量</strong> 是目录条目在 <strong>目录文件数据</strong> 中的位置。目录本质上是一个特殊的文件，其中包含每个条目的 inode 编号和对应的文件名。偏移量是目录条目在这个文件中的字节位置，用于定位、修改或删除目录条目。</li>
+<li>在 <strong><code>dirlookup</code></strong> 中，偏移量（<code>*poff</code>）被设置为找到的条目的位置，便于后续修改该条目。</li>
+<li>在 <strong><code>dirlink</code></strong> 中，偏移量指向空闲条目的位置或者目录末尾，用于添加新条目。</li>
+</ul>
+<h3 id="4-目录和文件之间的定位过程">4. <strong>目录和文件之间的定位过程</strong>
+</h3><ul>
+<li>
+<p><strong>目录与文件的定位</strong>：文件系统通过 <strong>目录项（directory entry）</strong> 将文件名与 inode 关联。每个目录条目保存文件名和 inode 编号。当我们访问一个文件时，系统先从目录中找到与文件名对应的 inode 编号，然后通过这个编号定位到磁盘上对应的 inode 结构。</p>
+</li>
+<li>
+<p><strong>查找过程（<code>dirlookup</code>）</strong>：</p>
+<ol>
+<li>
+<p>目录本身是一个 inode，它保存了该目录下所有文件的目录条目。</p>
+</li>
+<li>
+<p><code>dirlookup</code> 函数扫描目录条目，查找与给定文件名匹配的条目，并返回对应的 inode。</p>
+</li>
+<li>
+<p>一旦找到对应的 inode 编号，文件系统就可以通过这个 inode 编号进一步读取文件的元数据（如文件大小、数据块位置等）。</p>
+</li>
+</ol>
+</li>
+<li>
+<p><strong>添加过程（<code>dirlink</code>）</strong>：</p>
+<ol>
+<li>
+<p>在添加新文件或目录时，<code>dirlink</code> 首先查找目录中的空条目位置。</p>
+</li>
+<li>
+<p>然后，它将文件名和 inode 编号写入该条目，关联文件名与 inode。</p>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="5-总结">5. <strong>总结</strong>
+</h3><ul>
+<li>目录是由一系列目录条目组成的文件结构，每个条目记录了文件名和 inode 编号的对应关系。</li>
+<li>关键函数：</li>
+<li><strong><code>dirlookup</code></strong>：用于在目录中查找文件名，返回对应 inode 并提供目录条目的偏移量。</li>
+<li><strong><code>dirlink</code></strong>：用于向目录中添加新条目，将文件名和 inode 编号关联。</li>
+<li>偏移量用于定位目录条目在目录文件中的位置，便于读取或修改。</li>
+<li>目录项与 inode 的关系是：目录项通过 inode 编号定位文件，inode 保存了文件的元数据及存储信息。</li>
+</ul>
+</blockquote>
+<h5 id="代码路径名">代码：路径名
+</h5><p>路径名查找涉及一系列对<code>dirlookup</code>的调用，每个路径组件调用一个。</p>
+<p><code>Namei</code>（<em><strong>kernel/fs.c</strong></em>:661）计算<code>path</code>并返回相应的inode。</p>
+<p>函数<code>nameiparent</code>是一个变体：它在最后一个元素之前停止，返回父目录的inode并将最后一个元素复制到<code>name</code>中。</p>
+<p>两者都调用通用函数<code>namex</code>来完成实际工作。</p>
+<blockquote>
+<h3 id="1-路径名查找和基本流程">1. <strong>路径名查找和基本流程</strong>
+</h3><ul>
+<li><strong>路径名查找</strong> 涉及对 <strong><code>dirlookup</code></strong> 的多次调用，每个路径组件对应一次查找。例如，查找路径 <code>/a/b/c</code> 涉及查找 <code>/a</code>、<code>b</code>、<code>c</code>。</li>
+<li><strong><code>namei</code>（kernel/fs.c:661）</strong>：负责计算路径名并返回对应的 inode。</li>
+<li><strong><code>nameiparent</code></strong>：是 <code>namei</code> 的变体，它在查找路径时返回最后一个路径元素的 <strong>父目录</strong> 的 inode，并将最后一个路径元素复制到 <code>name</code>。</li>
+<li>两个函数都调用了通用函数 <strong><code>namex</code></strong> 来完成实际的路径查找工作。</li>
+</ul>
+</blockquote>
+<p><code>Namex</code>（<em><strong>kernel/fs.c</strong></em>:626）首先决定路径计算的开始位置。</p>
+<p>如果路径以斜线开始，则计算从根目录开始；否则，从当前目录开始（<em><strong>kernel/fs.c</strong></em>:630-633）。</p>
+<p>然后，它使用<code>skipelem</code>依次考察路径的每个元素（<em><strong>kernel/fs.c</strong></em>:635）。</p>
+<p>循环的每次迭代都必须在当前索引结点<code>ip</code>中查找<code>name</code>。</p>
+<p>迭代首先给<code>ip</code>上锁并检查它是否是一个目录。</p>
+<p>如果不是，则查找失败（<em><strong>kernel/fs.c</strong></em>:636-640）(锁定<code>ip</code>是必要的，不是因为<code>ip-&gt;type</code>可以被更改，而是因为在<code>ilock</code>运行之前，<code>ip-&gt;type</code>不能保证已从磁盘加载。）</p>
+<p>如果调用是<code>nameiparent</code>，并且这是最后一个路径元素，则根据<code>nameiparent</code>的定义，循环会提前停止；最后一个路径元素已经复制到<code>name</code>中，因此<code>namex</code>只需返回解锁的<code>ip</code>（<em><strong>kernel/fs.c</strong></em>:641-645）。</p>
+<p>最后，循环将使用<code>dirlookup</code>查找路径元素，并通过设置<code>ip = next</code>（<em><strong>kernel/fs.c</strong></em>:646-651）为下一次迭代做准备。当循环用完路径元素时，它返回<code>ip</code>。</p>
+<blockquote>
+<h3 id="2-namex-函数的查找逻辑">2. <strong><code>namex</code> 函数的查找逻辑</strong>
+</h3><ul>
+<li><code>namex</code>（kernel/fs.c:626）首先决定从哪里开始查找路径：
+<ul>
+<li>如果路径以斜杠 <code>/</code> 开头，从根目录开始。</li>
+<li>如果路径不是以斜杠开头，从当前目录开始（kernel/fs.c:630-633）。</li>
+</ul>
+</li>
+<li>然后通过 <strong><code>skipelem</code></strong> 分解路径的每个组件（例如，<code>a</code>、<code>b</code>、<code>c</code>）。</li>
+<li>每次迭代，<code>namex</code> 锁定当前的 inode（<code>ip</code>）并检查它是否是一个目录（kernel/fs.c:636-640）。如果不是目录，查找失败。</li>
+</ul>
+<h3 id="3-处理最后一个路径元素">3. <strong>处理最后一个路径元素</strong>
+</h3><ul>
+<li>如果调用的是 <strong><code>nameiparent</code></strong>，且查找到了路径的最后一个元素，那么 <code>namex</code> 会提前停止，并将最后一个路径元素的名称复制到 <code>name</code>，返回 <strong>父目录</strong> 的 inode（kernel/fs.c:641-645）。</li>
+<li>否则，<code>namex</code> 会使用 <strong><code>dirlookup</code></strong> 查找当前目录中的下一个路径元素，并为下一次迭代设置新的 inode（kernel/fs.c:646-651）。</li>
+</ul>
+</blockquote>
+<p><code>namex</code>过程可能需要很长时间才能完成：它可能涉及多个磁盘操作来读取路径名中所遍历目录的索引节点和目录块（如果它们不在buffer cache中）。</p>
+<p>Xv6经过精心设计，如果一个内核线程对<code>namex</code>的调用在磁盘I/O上阻塞，另一个查找不同路径名的内核线程可以同时进行。</p>
+<p><code>Namex</code>分别锁定路径中的每个目录，以便在不同目录中进行并行查找。</p>
+<blockquote>
+<h3 id="4-路径名查找中的-io-操作和并发">4. <strong>路径名查找中的 I/O 操作和并发</strong>
+</h3><ul>
+<li><strong><code>namex</code></strong> 可能需要多个磁盘操作来读取遍历路径中的目录和 inode，特别是在相关目录和 inode 不在 <strong>buffer cache</strong> 中时。这可能导致磁盘 I/O 延迟。</li>
+<li>xv6 设计允许多个内核线程并发查找不同的路径名。<strong>每个目录在查找时都被分别加锁</strong>，使得不同线程可以同时访问不同的目录，避免彼此阻塞。</li>
+</ul>
+</blockquote>
+<p>这种并发性带来了一些挑战。</p>
+<p>例如，当一个内核线程正在查找路径名时，另一个内核线程可能正在通过取消目录链接来更改目录树。</p>
+<p>一个潜在的风险是，查找可能正在搜索已被另一个内核线程删除且其块已被重新用于另一个目录或文件的目录。</p>
+<p>Xv6避免了这种竞争。</p>
+<p>例如，在<code>namex</code>中执行<code>dirlookup</code>时，lookup线程持有目录上的锁，<code>dirlookup</code>返回使用<code>iget</code>获得的inode。</p>
+<p><code>Iget</code>增加索引节点的引用计数。</p>
+<p>只有在从<code>dirlookup</code>接收inode之后，<code>namex</code>才会释放目录上的锁。</p>
+<p>现在，另一个线程可以从目录中取消inode的链接，但是xv6还不会删除inode，因为inode的引用计数仍然大于零。</p>
+<blockquote>
+<h3 id="5-并发风险和解决方案">5. <strong>并发风险和解决方案</strong>
+</h3><ul>
+<li><strong>并发风险</strong>：当一个线程在执行路径查找时，另一个线程可能在删除目录或更改目录树。查找可能正在访问已被删除的目录条目，其块可能被重新分配给其他文件或目录。</li>
+<li><strong>解决方案</strong>：在 <strong><code>namex</code></strong> 中，路径查找线程在执行 <strong><code>dirlookup</code></strong> 时会锁定目录。<code>dirlookup</code> 返回一个通过 <strong><code>iget</code></strong> 获取的 inode，并增加其引用计数。<strong>只有在获取到 inode 后，才会释放目录的锁</strong>。这样，即使另一个线程删除该 inode，它也不会立即被回收，因为引用计数仍然大于零。</li>
+</ul>
+</blockquote>
+<p>另一个风险是死锁。</p>
+<p>例如，查找“<code>.</code>”时，<code>next</code>指向与<code>ip</code>相同的inode。在释放<code>ip</code>上的锁之前锁定<code>next</code>将导致死锁。</p>
+<p>在释放<code>ip</code>上的锁之前锁定<code>next</code>将导致死锁。</p>
+<p>为了避免这种死锁，<code>namex</code>在获得下一个目录的锁之前解锁该目录。</p>
+<p>这里我们再次看到为什么<code>iget</code>和<code>ilock</code>之间的分离很重要。</p>
+<blockquote>
+<h3 id="6-死锁问题和解决方案">6. <strong>死锁问题和解决方案</strong>
+</h3><ul>
+<li><strong>死锁风险</strong>：如果在查找路径名如 <code>&quot;.&quot;</code> 时，<code>next</code> inode 和 <code>ip</code> 是同一个 inode，在释放 <code>ip</code> 的锁之前尝试锁定 <code>next</code> 会导致死锁。</li>
+<li><strong>解决方案</strong>：为了避免这种死锁，<code>namex</code> 在锁定下一个目录（<code>next</code>）之前，先解锁当前的 inode（<code>ip</code>）。这也是为什么 xv6 将 <strong><code>iget</code></strong> 和 <strong><code>ilock</code></strong> 分离的原因</li>
+</ul>
+</blockquote>
+<blockquote>
+<h3 id="7-关键函数和变量">7. <strong>关键函数和变量</strong>
+</h3><ul>
+<li><strong><code>namei</code></strong>：计算路径并返回对应的 inode。</li>
+<li><strong><code>nameiparent</code></strong>：返回父目录的 inode 并将最后的路径元素复制到 <code>name</code>。</li>
+<li><strong><code>namex</code></strong>：通用路径查找逻辑，处理路径分解、目录锁定与释放。</li>
+<li><strong><code>skipelem</code></strong>：解析路径名中的下一个元素。</li>
+<li><strong><code>dirlookup</code></strong>：查找目录中的指定条目，返回对应 inode。</li>
+<li><strong><code>iget</code></strong>：通过 inode 编号获取对应的 inode 并增加引用计数。</li>
+<li><strong><code>ilock</code></strong>：锁定 inode，确保对其独占访问。</li>
+</ul>
+</blockquote>
+<h5 id="文件描述符层">文件描述符层
+</h5><p>Unix界面的一个很酷的方面是，Unix中的大多数资源都表示为文件，包括控制台、管道等设备，当然还有真实文件。文件描述符层是实现这种一致性的层。</p>
+<p>正如我们在第1章中看到的，Xv6为每个进程提供了自己的打开文件表或文件描述符。</p>
+<p>每个打开的文件都由一个<code>struct file</code>（<em><strong>kernel/file.h</strong></em>:1）表示，它是inode或管道的封装，加上一个I/O偏移量。</p>
+<p>每次调用<code>open</code>都会创建一个新的打开文件（一个新的<code>struct file</code>）：如果多个进程独立地打开同一个文件，那么不同的实例将具有不同的I/O偏移量。</p>
+<p>另一方面，单个打开的文件（同一个<code>struct file</code>）可以多次出现在一个进程的文件表中，也可以出现在多个进程的文件表中。</p>
+<p>如果一个进程使用<code>open</code>打开文件，然后使用<code>dup</code>创建别名，或使用<code>fork</code>与子进程共享，就会发生这种情况。</p>
+<p>引用计数跟踪对特定打开文件的引用数。</p>
+<p>可以打开文件进行读取或写入，也可以同时进行读取和写入。</p>
+<p><code>readable</code>和<code>writable</code>字段可跟踪此操作。</p>
+<p>系统中所有打开的文件都保存在全局文件表<code>ftable</code>中。</p>
+<p>文件表具有分配文件（<code>filealloc</code>）、创建重复引用（<code>filedup</code>）、释放引用（<code>fileclose</code>）以及读取和写入数据（<code>fileread</code>和<code>filewrite</code>）的函数。</p>
+<p>前三个函数遵循现在熟悉的形式。</p>
+<p><code>Filealloc</code>（<em><strong>kernel/file.c</strong></em>:30）扫描文件表以查找未引用的文件（<code>f-&gt;ref == 0</code>），并返回一个新的引用；<code>filedup</code>（<em><strong>kernel/file.c</strong></em>:48）增加引用计数；<code>fileclose</code>（<em><strong>kernel/file.c</strong></em>:60）将其递减。</p>
+<p>当文件的引用计数达到零时，<code>fileclose</code>会根据<code>type</code>释放底层管道或inode。</p>
+<p>函数<code>filestat</code>、<code>fileread</code>和<code>filewrite</code>实现对文件的<code>stat</code>、<code>read</code>和<code>write</code>操作。</p>
+<p><code>Filestat</code>（<em><strong>kernel/file.c</strong></em>:88）只允许在inode上操作并且调用了<code>stati</code>。</p>
+<p><code>Fileread</code>和<code>filewrite</code>检查打开模式是否允许该操作，然后将调用传递给管道或inode的实现。如果文件表示inode，<code>fileread</code>和<code>filewrite</code>使用I/O偏移量作为操作的偏移量，然后将文件指针前进该偏移量（<em><strong>kernel/file.c</strong></em>:122-123）（<em><strong>kernel/file.c</strong></em>:153-154）。</p>
+<p>管道没有偏移的概念。</p>
+<p>回想一下，inode的函数要求调用方处理锁（<em><strong>kernel/file.c</strong></em>:94-96）（<em><strong>kernel/file.c</strong></em>:121-124）（<em><strong>kernel/file.c</strong></em>:163-166）。inode锁定有一个方便的副作用，即读取和写入偏移量以原子方式更新，因此，对同一文件的同时多次写入不能覆盖彼此的数据，尽管他们的写入最终可能是交错的。</p>
+<blockquote>
+<h3 id="文件描述符层概述">文件描述符层概述
+</h3><p>在 Unix 系统中，有一个很有趣的特点：几乎所有的资源都可以表示为文件。不只是硬盘上的文件，像控制台、管道（即进程间通信的通道）这些设备也被视为“文件”。为了实现这种一致性，Unix 使用了一个叫做“文件描述符层”的机制。</p>
+<h4 id="每个进程的文件描述符表">每个进程的文件描述符表
+</h4><p>在 Unix 系统中，每个进程都有自己独立的“打开文件表”，也就是我们常说的“文件描述符”。这个表格包含了每个进程当前打开的所有文件。每个打开的文件由一个 <code>struct file</code> 结构体表示（这个结构体定义在 <code>kernel/file.h:1</code>），它封装了文件的元信息（如文件的 inode，或者管道）和文件的读写位置（即 I/O 偏移量）。</p>
+<p>当你调用 <code>open</code> 打开一个文件时，操作系统会为这个文件创建一个新的 <code>struct file</code> 实例。所以，如果两个进程独立打开同一个文件，它们会得到不同的 <code>struct file</code> 实例，这样每个进程可以有各自独立的 I/O 偏移量。另一方面，如果一个进程通过 <code>dup</code> 复制文件描述符，或者通过 <code>fork</code> 创建子进程与子进程共享文件，那么它们可能会指向同一个 <code>struct file</code> 实例。</p>
+<h4 id="引用计数与访问权限">引用计数与访问权限
+</h4><p>每个 <code>struct file</code> 实例都有一个引用计数器，用于追踪有多少个文件描述符指向它。文件可以以只读、只写或读写的方式打开，<code>struct file</code> 中的 <code>readable</code> 和 <code>writable</code> 字段分别记录文件的读写权限。</p>
+<h4 id="全局文件表">全局文件表
+</h4><p>系统中所有进程的所有打开文件都被存储在一个全局文件表 <code>ftable</code> 中。这个表有几个关键的操作函数：</p>
+<ol>
+<li><strong>filealloc</strong>：分配一个新的文件对象。</li>
+<li><strong>filedup</strong>：为一个已经打开的文件创建一个重复的引用。</li>
+<li><strong>fileclose</strong>：释放对文件的引用。</li>
+<li><strong>fileread 和 filewrite</strong>：读写文件数据。</li>
+</ol>
+<h4 id="文件操作的具体实现">文件操作的具体实现
+</h4><p>前三个函数 (<code>filealloc</code>、<code>filedup</code>、<code>fileclose</code>) 实现起来相对简单：</p>
+<ul>
+<li><code>filealloc</code>（定义在 <code>kernel/file.c:30</code>）通过扫描全局文件表，找到一个未被引用的文件对象（<code>f-&gt;ref == 0</code>）并返回一个新的引用。</li>
+<li><code>filedup</code>（定义在 <code>kernel/file.c:48</code>）增加该文件的引用计数。</li>
+<li><code>fileclose</code>（定义在 <code>kernel/file.c:60</code>）减少引用计数。如果计数变成零，表示没有进程再使用这个文件，<code>fileclose</code> 会释放文件的底层资源（比如管道或 inode）。</li>
+</ul>
+<h4 id="文件操作函数-filestatfileread-和-filewrite">文件操作函数 filestat、fileread 和 filewrite
+</h4><ul>
+<li><code>filestat</code>（定义在 <code>kernel/file.c:88</code>）用于获取文件的状态信息，但只能对 inode 类型的文件执行此操作，并会调用 <code>stati</code> 函数获取信息。</li>
+<li><code>fileread</code> 和 <code>filewrite</code> 函数用于读取和写入文件数据。它们首先会检查文件的打开模式，确保允许进行所需的操作，然后将具体的操作传递给管道或 inode 的实现层。
+<ul>
+<li>如果文件是一个 inode，<code>fileread</code> 和 <code>filewrite</code> 会根据文件的 I/O 偏移量进行读写操作，之后会将该偏移量向前推进（定义在 <code>kernel/file.c:122-123</code> 和 <code>kernel/file.c:153-154</code>）。</li>
+<li>如果文件是一个管道，管道并不支持偏移量，所以操作逻辑会有所不同。</li>
+</ul>
+</li>
+</ul>
+<p>同时，所有 inode 操作都要求调用方自己负责管理锁定（在 <code>kernel/file.c:94-96</code>、<code>kernel/file.c:121-124</code> 和 <code>kernel/file.c:163-166</code> 中实现）。这种锁定有一个额外的好处：它确保了对同一个文件的并发写入不会相互覆盖，虽然数据写入的顺序可能会交错。</p>
+</blockquote>
+<h5 id="代码系统调用">代码：系统调用
+</h5><p>通过使用底层提供的函数，大多数系统调用的实现都很简单（请参阅<em><strong>kernel/sysfile.c</strong></em>）。</p>
+<p>有几个调用值得仔细看看。</p>
+<p>函数<code>sys_link</code>和<code>sys_unlink</code>编辑目录，创建或删除索引节点的引用。</p>
+<p>它们是使用事务能力的另一个很好的例子。</p>
+<p><code>sys_link</code>（<em><strong>kernel/sysfile.c</strong></em>:120）从获取其参数开始，两个字符串分别是<code>old</code>和<code>new</code>（<em><strong>kernel/sysfile.c</strong></em>:125）。</p>
+<p>假设<code>old</code>存在并且不是一个目录（<em><strong>kernel/sysfile.c</strong></em>:129-132），<code>sys_link</code>会增加其<code>ip-&gt;nlink</code>计数。</p>
+<p>然后<code>sys_link</code>调用<code>nameiparent</code>来查找<code>new</code>（<em><strong>kernel/sysfile.c</strong></em>:145）的父目录和最终路径元素，并创建一个指向<code>old</code>的inode（<em><strong>kernel/sysfile.c</strong></em>:148）的新目录条目。</p>
+<p><code>new</code>的父目录必须存在并且与现有inode位于同一设备上：inode编号在一个磁盘上只有唯一的含义。</p>
+<p>如果出现这样的错误，<code>sys_link</code>必须返回并减少<code>ip-&gt;nlink</code>。</p>
+<blockquote>
+<p>在 xv6 文件系统中，<code>ip</code> 和 <code>dp</code> 是常用的变量名，通常分别代表 <strong>inode 指针</strong> 和 <strong>目录 inode 指针</strong>。</p>
+</blockquote>
+<p>事务简化了实现，因为它需要更新多个磁盘块，但我们不必担心更新的顺序。</p>
+<p>他们要么全部成功，要么什么都不做。</p>
+<p>例如在没有事务的情况下，在创建一个链接之前更新<code>ip-&gt;nlink</code>会使文件系统暂时处于不安全状态，而在这两者之间发生的崩溃可能会造成严重破坏。</p>
+<p>对于事务，我们不必担心这一点</p>
+<p><code>Sys_link</code>为现有inode创建一个新名称。</p>
+<p>函数<code>create</code>（<em><strong>kernel/sysfile.c</strong></em>:242）为新inode创建一个新名称。</p>
+<p>它是三个文件创建系统调用的泛化：带有<code>O_CREATE</code>标志的<code>open</code>生成一个新的普通文件，<code>mkdir</code>生成一个新目录，<code>mkdev</code>生成一个新的设备文件。</p>
+<p>与<code>sys_link</code>一样，<code>create</code>从调用<code>nameiparent</code>开始，以获取父目录的inode。</p>
+<p>然后调用<code>dirlookup</code>检查名称是否已经存在（<em><strong>kernel/sysfile.c</strong></em>:252）。</p>
+<p>如果名称确实存在，<code>create</code>的行为取决于它用于哪个系统调用：<code>open</code>的语义与<code>mkdir</code>和<code>mkdev</code>不同。</p>
+<p>如果<code>create</code>是代表<code>open</code>（<code>type == T_FILE</code>）使用的，并且存在的名称本身是一个常规文件，那么<code>open</code>会将其视为成功，<code>create</code>也会这样做（<em><strong>kernel/sysfile.c</strong></em>:256）。否则，这是一个错误（<em><strong>kernel/sysfile.c</strong></em>:257-258）。</p>
+<p>如果名称不存在，<code>create</code>现在将使用<code>ialloc</code>（<em><strong>kernel/sysfile.c</strong></em>:261）分配一个新的inode。如果新inode是目录，<code>create</code>将使用<code>.</code>和<code>..</code>条目对它进行初始化。</p>
+<p>最后，既然数据已正确初始化，<code>create</code>可以将其链接到父目录（<em><strong>kernel/sysfile.c</strong></em>:274）。</p>
+<p><code>Create</code>与<code>sys_link</code>一样，同时持有两个inode锁：<code>ip</code>和<code>dp</code>。不存在死锁的可能性，因为索引结点<code>ip</code>是新分配的：系统中没有其他进程会持有<code>ip</code>的锁，然后尝试锁定<code>dp</code>。</p>
+<p>使用<code>create</code>，很容易实现<code>sys_open</code>、<code>sys_mkdir</code>和<code>sys_mknod</code>。</p>
+<p><code>Sys_open</code>（<em><strong>kernel/sysfile.c</strong></em>:287）是最复杂的，因为创建一个新文件只是它能做的一小部分。如果<code>open</code>被传递了<code>O_CREATE</code>标志，它将调用<code>create</code>（<em><strong>kernel/sysfile.c</strong></em>:301）。</p>
+<p>否则，它将调用<code>namei</code>（<em><strong>kernel/sysfile.c</strong></em>:307）。<code>Create</code>返回一个锁定的inode，但<code>namei</code>不锁定，因此<code>sys_open</code>必须锁定inode本身。</p>
+<p>这提供了一个方便的地方来检查目录是否仅为读取打开，而不是写入。</p>
+<p>假设inode是以某种方式获得的，<code>sys_open</code>分配一个文件和一个文件描述符（<em><strong>kernel/sysfile.c</strong></em>:325），然后填充该文件（<em><strong>kernel/sysfile.c</strong></em>:337-342）。</p>
+<p>请注意，没有其他进程可以访问部分初始化的文件，因为它仅位于当前进程的表中。</p>
+<p>在我们还没有文件系统之前，第7章就研究了管道的实现。</p>
+<p>函数<code>sys_pipe</code>通过提供创建管道对的方法将该实现连接到文件系统。</p>
+<p>它的参数是一个指向两个整数的指针，它将在其中记录两个新的文件描述符。然后分配管道并安装文件描述符。</p>
+<blockquote>
+<h3 id="系统调用的实现概述">系统调用的实现概述
+</h3><p>在 Unix 操作系统中，系统调用是用户程序与内核交互的主要途径。虽然系统调用的实现依赖于底层的操作函数，但大多数系统调用的代码相对简单（可以在 <code>kernel/sysfile.c</code> 中找到）。接下来，让我们重点看看几个值得关注的调用。</p>
+<h4 id="sys_link-和-sys_unlink"><code>sys_link</code> 和 <code>sys_unlink</code>
+</h4><p>这两个系统调用用于操作目录，分别创建或删除对文件的引用（即链接）。这两个函数展示了事务功能的另一个好处——它们可以确保多个磁盘操作要么全部成功，要么全部失败。</p>
+<ul>
+<li>
+<p><code>sys_link</code></p>
+<p>：它的功能是为一个已有文件创建一个新的名字（也就是硬链接）。它首先获取两个参数，分别是旧路径old和新路径new</p>
+<p>。假设old文件存在且不是一个目录，sys_link会增加这个文件的链接计数（ip-&gt;nlink），表示这个文件有了更多的引用。</p>
+<ul>
+<li>然后它会调用 <code>nameiparent</code> 函数，找到 <code>new</code> 的父目录，并在该目录下为 <code>old</code> 文件创建一个新条目。如果新条目的父目录不存在，或者新条目和旧条目不在同一个磁盘上，<code>sys_link</code> 就会返回错误并撤销刚刚增加的引用计数。</li>
+<li>事务使得这种操作更为安全，因为所有的磁盘块更新要么一起成功，要么一起失败。如果没有事务，某个步骤（如增加链接计数）出错，可能会导致文件系统不一致。</li>
+</ul>
+</li>
+</ul>
+<h4 id="create-函数"><code>create</code> 函数
+</h4><p><code>create</code> 函数用于创建一个新文件，它是三个系统调用的泛化：<code>open</code>（带 <code>O_CREATE</code> 标志时创建一个普通文件）、<code>mkdir</code>（创建目录）和 <code>mkdev</code>（创建设备文件）。</p>
+<ul>
+<li>与sys_link类似，create从获取父目录开始。首先调用nameiparent获取父目录的 inode，并使用dirlookup检查要创建的名称是否已经存在。
+<ul>
+<li>如果名称存在，<code>create</code> 的行为取决于调用者是 <code>open</code>、<code>mkdir</code> 还是 <code>mkdev</code>。如果调用者是 <code>open</code> 且要创建的对象是一个普通文件，那么 <code>create</code> 会将其视为成功。否则，这是一个错误。</li>
+<li>如果名称不存在，<code>create</code> 会分配一个新的 inode，并根据不同的文件类型（如目录）初始化它。之后，它会将新创建的文件链接到父目录。</li>
+</ul>
+</li>
+</ul>
+<p><code>create</code> 和 <code>sys_link</code> 都会同时持有两个 inode 的锁：新分配的文件（<code>ip</code>）和父目录（<code>dp</code>）。由于 <code>ip</code> 是新分配的，其他进程不可能持有 <code>ip</code> 的锁，这就避免了死锁的可能性。</p>
+<h4 id="sys_opensys_mkdir-和-sys_mknod"><code>sys_open</code>、<code>sys_mkdir</code> 和 <code>sys_mknod</code>
+</h4><p>通过 <code>create</code> 函数，很容易实现 <code>sys_open</code>（打开文件）、<code>sys_mkdir</code>（创建目录）和 <code>sys_mknod</code>（创建设备文件）。其中，<strong><code>sys_open</code></strong> 是最复杂的，因为它不仅仅负责创建新文件。</p>
+<ul>
+<li>如果调用时传递了<code>O_CREATE</code>标志，<code>sys_open</code>就会调用<code>create</code>来创建一个新文件。否则，它会调用<code>namei</code>获取文件的 <code>inode</code>（<code>namei</code>不会锁定 inode，因此<code>sys_open</code>需要自己加锁）。
+<ul>
+<li>在获得 inode 后，<code>sys_open</code> 会为该文件分配一个文件结构和文件描述符，并将其添加到进程的文件表中。</li>
+</ul>
+</li>
+</ul>
+<p>注意，此时文件只存在于当前进程的文件表中，其他进程无法访问这个“部分初始化”的文件，因此不存在竞争问题。</p>
+<h4 id="sys_pipe"><code>sys_pipe</code>
+</h4><p>在第7章中我们已经探讨了管道的实现。<code>sys_pipe</code> 函数将管道系统连接到文件系统中。它的作用是创建一对管道：一个用于读取，一个用于写入。调用时，传递的参数是一个指向两个整数的指针，这两个整数用于记录管道的两个文件描述符。随后，<code>sys_pipe</code> 会分配管道并在文件描述符表中为其安装对应的读写端。</p>
+</blockquote>
+<h5 id="真实世界">真实世界
+</h5><p>实际操作系统中的buffer cache比xv6复杂得多，但它有两个相同的用途：缓存和同步对磁盘的访问。</p>
+<p>与UNIX V6一样，Xv6的buffer cache使用简单的最近最少使用（LRU）替换策略；有许多更复杂的策略可以实现，每种策略都适用于某些工作场景，而不适用于其他工作场景。</p>
+<p>更高效的LRU缓存将消除链表，而改为使用哈希表进行查找，并使用堆进行LRU替换。</p>
+<p>现代buffer cache通常与虚拟内存系统集成，以支持内存映射文件。</p>
+<p>Xv6的日志系统效率低下。</p>
+<p>提交不能与文件系统调用同时发生。</p>
+<p>系统记录整个块，即使一个块中只有几个字节被更改。</p>
+<p>它执行同步日志写入，每次写入一个块，每个块可能需要整个磁盘旋转时间。</p>
+<p>真正的日志系统解决了所有这些问题。</p>
+<p>日志记录不是提供崩溃恢复的唯一方法。</p>
+<p>早期的文件系统在重新启动期间使用了一个清道夫程序（例如，UNIX的<code>fsck</code>程序）来检查每个文件和目录以及块和索引节点空闲列表，查找并解决不一致的问题。</p>
+<p>清理大型文件系统可能需要数小时的时间，而且在某些情况下，无法以导致原始系统调用原子化的方式解决不一致问题。</p>
+<p>从日志中恢复要快得多，并且在崩溃时会导致系统调用原子化。</p>
+<p>Xv6使用的索引节点和目录的基础磁盘布局与早期UNIX相同；这一方案多年来经久不衰。</p>
+<p>BSD的UFS/FFS和Linux的ext2/ext3使用基本相同的数据结构。</p>
+<p>文件系统布局中最低效的部分是目录，它要求在每次查找期间对所有磁盘块进行线性扫描。</p>
+<p>当目录只有几个磁盘块时，这是合理的，但对于包含许多文件的目录来说，开销巨大。</p>
+<p>Microsoft Windows的NTFS、Mac OS X的HFS和Solaris的ZFS（仅举几例）将目录实现为磁盘上块的平衡树。</p>
+<p>这很复杂，但可以保证目录查找在对数时间内完成（即时间复杂度为O(logn)）。</p>
+<p>Xv6对于磁盘故障的解决很初级：如果磁盘操作失败，Xv6就会调用<code>panic</code>。</p>
+<p>这是否合理取决于硬件：如果操作系统位于使用冗余屏蔽磁盘故障的特殊硬件之上，那么操作系统可能很少看到故障，因此<code>panic</code>是可以的。</p>
+<p>另一方面，使用普通磁盘的操作系统应该预料到会出现故障，并能更优雅地处理它们，这样一个文件中的块丢失不会影响文件系统其余部分的使用。</p>
+<p>Xv6要求文件系统安装在单个磁盘设备上，且大小不变。</p>
+<p>随着大型数据库和多媒体文件对存储的要求越来越高，操作系统正在开发各种方法来消除“每个文件系统一个磁盘”的瓶颈。</p>
+<p>基本方法是将多个物理磁盘组合成一个逻辑磁盘。</p>
+<p>RAID等硬件解决方案仍然是最流行的，但当前的趋势是在软件中尽可能多地实现这种逻辑。</p>
+<p>这些软件实现通常允许通过动态添加或删除磁盘来扩展或缩小逻辑设备等丰富功能。</p>
+<p>当然，一个能够动态增长或收缩的存储层需要一个能够做到这一点的文件系统：xv6使用的固定大小的inode块阵列在这样的环境中无法正常工作。</p>
+<p>将磁盘管理与文件系统分离可能是最干净的设计，但两者之间复杂的接口导致了一些系统（如Sun的ZFS）将它们结合起来。</p>
+<p>Xv6的文件系统缺少现代文件系统的许多其他功能；例如，它缺乏对快照和增量备份的支持。</p>
+<p>现代Unix系统允许使用与磁盘存储相同的系统调用访问多种资源：命名管道、网络连接、远程访问的网络文件系统以及监视和控制接口，如<code>/proc</code>（注：Linux 内核提供了一种通过<code>/proc</code>文件系统，在运行时访问内核内部数据结构、改变内核设置的机制。proc文件系统是一个伪文件系统，它只存在内存当中，而不占用外存空间。它以文件系统的方式为访问系统内核数据的操作提供接口。）。</p>
+<p>不同于xv6中<code>fileread</code>和<code>filewrite</code>的<code>if</code>语句，这些系统通常为每个打开的文件提供一个函数指针表，每个操作一个，并通过函数指针来援引inode的调用实现。</p>
+<p>网络文件系统和用户级文件系统提供了将这些调用转换为网络RPC并在返回之前等待响应的函数。</p>
+<blockquote>
+<h3 id="现实操作系统中的缓冲区缓存">现实操作系统中的缓冲区缓存
+</h3><p>在实际的操作系统中，<strong>缓冲区缓存</strong>要比 xv6 中复杂得多，但它们有相同的两个核心功能：<strong>缓存磁盘访问</strong> 和 <strong>管理对磁盘的同步访问</strong>。Xv6 使用了一种非常简单的缓存替换策略，即“<strong>最近最少使用</strong>（LRU）”，这意味着最久未使用的缓存项将被优先替换。当然，实际系统中有很多更复杂的替换策略，每种策略在不同的应用场景中表现更好。更高效的 LRU 实现通常会使用哈希表来快速查找数据，并通过堆来管理 LRU 替换顺序。此外，现代的缓冲区缓存通常与虚拟内存系统集成，这样就可以支持像内存映射文件这样的高级功能。</p>
+<h3 id="日志系统的效率问题">日志系统的效率问题
+</h3><p>Xv6 的日志系统效率很低，主要因为在<strong>提交（写入日志）时无法同时进行文件系统操作</strong>，而且系统会记录整个磁盘块，即使只修改了几个字节。这些写入操作是同步的，即每次只能写一个块，导致操作非常慢。如果磁盘需要旋转一次才能完成一个块的写入，那么这次旋转可能就是瓶颈。实际的日志系统会解决这些问题，让写入更高效。</p>
+<h3 id="文件系统崩溃恢复">文件系统崩溃恢复
+</h3><p>日志记录并不是恢复文件系统的一种唯一方法。早期的文件系统使用了清理程序（如 Unix 中的 <code>fsck</code> 程序）在重启时检查文件和目录的完整性，并修复不一致的问题。这种方法很慢，尤其是在文件系统很大的情况下，可能需要花费数小时。相比之下，<strong>使用日志系统的恢复速度要快得多</strong>，而且它能确保系统调用是原子性的——这意味着操作要么完全成功，要么什么都不会改变。</p>
+<h3 id="磁盘布局与文件系统性能">磁盘布局与文件系统性能
+</h3><p>Xv6 中使用的 <strong>inode（索引节点）和目录结构</strong> 是从早期 Unix 继承下来的，像 BSD 的 UFS/FFS 和 Linux 的 ext2/ext3 文件系统也使用了类似的结构。文件系统中的一个低效部分是<strong>目录查找</strong>，它在查找文件时需要对目录的所有磁盘块进行线性扫描，这对于包含大量文件的目录来说是一个巨大的性能开销。现代文件系统（如 Windows 的 NTFS、Mac OS X 的 HFS、Solaris 的 ZFS）通过在磁盘上使用<strong>平衡树结构</strong>来加速目录查找，使得查找时间复杂度变成 O(logn)，大大提升了性能。</p>
+<h3 id="磁盘故障处理">磁盘故障处理
+</h3><p>Xv6 对于磁盘故障的处理非常基础：<strong>一旦磁盘操作失败，系统就会调用 panic 进行崩溃</strong>。这种处理方式是否合理取决于硬件情况：如果系统使用的硬件有冗余机制来屏蔽磁盘故障（如 RAID），那么 panic 处理是可以接受的；但如果操作系统运行在普通硬件上，系统应该能够优雅地处理这些故障，防止单个文件损坏影响整个文件系统。</p>
+<h3 id="文件系统的扩展性">文件系统的扩展性
+</h3><p>Xv6 要求文件系统安装在单一的磁盘设备上，且文件系统大小是固定的。随着数据量的不断增长，这种设计已经无法满足现代应用的需求。如今，操作系统通过多种方法来打破“每个文件系统只能对应一个磁盘”的限制。<strong>RAID</strong> 是一种常见的硬件解决方案，它通过将多个物理磁盘组合成一个逻辑磁盘。但现代趋势是更多地依靠软件来实现这些功能，并支持动态添加或删除磁盘。</p>
+<h3 id="文件系统中的高级功能">文件系统中的高级功能
+</h3><p>Xv6 文件系统缺乏许多现代文件系统的高级功能。例如，它没有 <strong>快照（snapshot）和增量备份</strong> 的功能。快照可以在某一时刻冻结文件系统状态，从而支持快速备份，而增量备份只备份变化的数据，大大节省存储空间。</p>
+<h3 id="现代-unix-系统中的文件访问">现代 Unix 系统中的文件访问
+</h3><p>在现代的 Unix 系统中，很多不同类型的资源（如命名管道、网络连接、远程文件系统等）都可以通过与磁盘文件相同的系统调用（如 <code>read</code> 和 <code>write</code>）进行访问。这比 xv6 中使用简单的 <code>if</code> 语句来判断文件类型更灵活。在这些系统中，每个打开的文件都会有一个函数指针表，不同的操作会指向不同的实现函数。例如，<strong>网络文件系统</strong> 可能会将文件读写操作转化为网络请求并等待响应。</p>
+</blockquote>
+<h4 id="正课">正课
+</h4><h5 id="文件系统引入">文件系统引入
+</h5><p>今天介绍的是文件系统。实际上我们会花三节课的时间来学习文件系统。</p>
+<p>前两节课基于XV6来做介绍，第三节课基于Linux来做介绍。</p>
+<p>实际上，这将是有关XV6的最后一个话题，在这周之后我们就讲完了XV6。</p>
+<p>文件系统是操作系统中除了shell以外最常见的用户接口。</p>
+<p>我们希望通过这几节课来理解：文件系统的背后究竟是什么原理，文件系统是如何实现的。</p>
+<p>XV6的文件系统与你正在使用的文件系统有什么区别。</p>
+<blockquote>
+<p>学生回答：其中一点是，XV6支持的文件大小远小于其他文件系统。其次一些文件的文件名也较短。第三点，我不认为XV6的文件系统有copy-on-write。</p>
+<p>Frans教授：很好，那有什么相似的地方吗？</p>
+<p>学生回答：基本的结构是类似的，比如说都有文件名，都有inode，目录等等。</p>
+<p>Fans教授：很好，我再问一个同学，XV6的文件系统与你正在使用的文件系统有什么异同？</p>
+<p>学生回答：文件目录结构都是层级的。</p>
+</blockquote>
+<p>接下来让我列出一些文件系统突出的特性：</p>
+<ul>
+<li>其中一点刚刚有同学提到了，就是对于用户友好的文件名，具体来说就是层级的路径名，这可以帮助用户组织目录中的文件。</li>
+<li>通过将文件命名成方便易记的名字，可以在用户之间和进程之间更简单的共享文件。</li>
+<li>相比我们已经看过的XV6其他子系统，这一点或许是最重要的，文件系统提供了持久化。这意味着，我可以关闭一个计算机，过几天再开机而文件仍然在那，我可以继续基于文件工作。这一点与进程和其他资源不一样，这些资源在计算机重启时就会消失，之后你需要重新启动它们，但是文件系统就可以提供持久化。</li>
+</ul>
+<p>出于以下原因，文件系统背后的机制还比较有意思：</p>
+<ul>
+<li>文件系统<strong>对硬件的抽象</strong>较为有用，所以理解文件系统对于硬件的抽象是如何实现的还是有点意思的。</li>
+<li>除此之外，还有个关键且有趣的地方就是<strong>crash safety</strong>。有可能在文件系统的操作过程中，计算机崩溃了，在重启之后你的文件系统仍然能保持完好，文件系统的数据仍然存在，并且你可以继续使用你的大部分文件。如果文件系统操作过程中计算机崩溃了，然后你重启之后文件系统不存在了或者磁盘上的数据变了，那么崩溃的将会是你。所以crash safety是一个非常重要且经常出现的话题，我们下节课会专门介绍它。</li>
+<li>如何在磁盘上<strong>排布文件系统</strong>。例如目录和文件，它们都需要以某种形式在磁盘上存在，这样当你重启计算机时，所有的数据都能恢复。所以在磁盘上有一些数据结构表示了文件系统的结构和内容。在XV6中，使用的数据结构非常简单，因为XV6是专门为教学目的创建的。真实的文件系统通常会更加复杂。但是它们都是磁盘上保存的数据结构，我们在今天的课程会重点看这部分。</li>
+<li>最后一个有趣的话题是<strong>性能</strong>。文件系统所在的硬件设备通常都较慢，比如说向一个SSD磁盘写数据将会是毫秒级别的操作，而在一个毫秒内，计算机可以做大量的工作，所以尽量避免写磁盘很重要，我们将在几个地方看到提升性能的代码。比如说，所有的文件系统都有buffer cache或者叫block cache。同时这里会有更多的并发，比如说你正在查找文件路径名，这是一个多次交互的操作，首先要找到文件结构，然后查找一个目录的文件名，之后再去查找下一个目录等等。你会期望当一个进程在做路径名查找时，另一个进程可以并行的运行。这样的并行运行在文件系统中将会是一个大的话题。</li>
+</ul>
+<p>除此之外，你会对文件系统感兴趣是因为这是接下来两个lab的内容。下一个lab完全关注在文件系统，下下个lab结合了虚拟内存和文件系统。</p>
+<p>即使是这周的lab，也会尝试让buffer cache可以支持更多的并发。所以这就是为什么文件系统是有趣的。</p>
+<h5 id="file-system实现概述">File system实现概述
+</h5><p>为了理解文件系统必须提供什么能力，让我们再看一下一些与文件系统相关的基础系统调用。</p>
+<p>首先让我们来看一个简单的场景，假设我们创建了文件“x/y”，或者说在目录x中创建了文件y，同时我们需要提供一些标志位，现在我们还不太关心标志位所以我会忽略它。</p>
+<p>上面的系统调用会创建文件，并返回文件描述符给调用者。</p>
+<p>调用者也就是用户应用程序可以对文件描述符调用write，有关write我们在之前已经看过很多次了，这里我们向文件写入“abc”三个字符。</p>
+<p>从这两个调用已经可以看出一些信息了：</p>
+<ul>
+<li>首先出现在接口中的路径名是可读的名字，而不是一串数字，它是由用户选择的字符串。</li>
+<li>write系统调用并没有使用offset作为参数，所以写入到文件的哪个位置是隐式包含在文件系统中，文件系统在某个位置必然保存了文件的offset。因为如果你再调用write系统调用，新写入的数据会从第4个字节开始。</li>
+</ul>
+<p>除此之外，还有一些我们之前没有看过的有趣的系统调用。</p>
+<p>例如XV6和所有的Unix文件系统都支持通过系统调用创建链接，给同一个文件指定多个名字。你可以通过调用link系统调用，为之前创建的文件“x/y”创建另一个名字“x/z”。</p>
+<p>所以文件系统内部需要以某种方式跟踪指向同一个文件的多个文件名。</p>
+<p>我们还可能会在文件打开时，删除或者更新文件的命名空间。</p>
+<p>例如，用户可以通过unlink系统调用来删除特定的文件名。如果此时相应的文件描述符还是打开的状态，那我们还可以向文件写数据，并且这也能正常工作。</p>
+<p>所以，在文件系统内部，文件描述符必然与某个对象关联，而这个对象不依赖文件名。</p>
+<p>这样，即使文件名变化了，文件描述符仍然能够指向或者引用相同的文件对象。</p>
+<p>所以，实际上操作系统内部需要对于文件有内部的表现形式，并且这种表现形式与文件名无关。</p>
+<p>除此之外，我还想提一点。</p>
+<p>文件系统的目的是实现上面描述的API，也即是典型的文件系统API。</p>
+<p>但是，这并不是唯一构建一个存储系统的方式。</p>
+<p>如果只是在磁盘上存储数据，你可以想出一个完全不同的API。</p>
+<p>举个例子，数据库也能持久化的存储数据，但是数据库就提供了一个与文件系统完全不一样的API。</p>
+<p>所以记住这一点很重要：还存在其他的方式能组织存储系统。</p>
+<p>我们这节课关注在文件系统，文件系统通常由操作系统提供，而数据库如果没有直接访问磁盘的权限的话，通常是在文件系统之上实现的。</p>
+<p>（注，早期数据库通常直接基于磁盘构建自己的文件系统，因为早期操作系统自带的文件系统在性能上较差，且写入不是同步的，进而导致数据库的ACID不能保证。不过现代操作系统自带的文件系统已经足够好，所以现代的数据库大部分构建在操作系统自带的文件系统之上）</p>
+<blockquote>
+<p>学生提问：link增加了了对于文件的一个引用，unlink减少了一个引用？</p>
+<p>Frans教授：是的。我们稍后会介绍更多相关的内容。</p>
+<p>学生提问：能介绍一下soft link和hard link吗？</p>
+<p>Frans教授：我今天不会讨论这些内容。但是你们将会在下一个File system lab中实现soft link。所以XV6本身实现了hard link，需要你们来实现soft link。</p>
+<p>学生提问：link是对inode做操作，而不是对文件描述符做操作，对吧？</p>
+<p>Frans教授：是的，link是对inode做操作，我们接下来介绍这部分内容。</p>
+</blockquote>
+<p>接下来我们看一下文件系统的结构。文件系统究竟维护了什么样的结构来实现前面介绍的API呢？</p>
+<p>首先，最重要的可能就是inode，这是代表一个文件的对象，并且它不依赖于文件名。</p>
+<p>实际上，inode是通过自身的编号来进行区分的，这里的编号就是个整数。</p>
+<p>所以文件系统内部通过一个数字，而不是通过文件路径名引用inode。</p>
+<p>同时，基于之前的讨论，inode必须有一个link count来跟踪指向这个inode的文件名的数量。</p>
+<p>一个文件（inode）只能在<strong>link count</strong>为0的时候被删除。</p>
+<p>实际的过程可能会更加复杂，实际中还有一个<strong>openfd count</strong>，也就是当前打开了文件的文件描述符计数。</p>
+<p>一个文件只能在这两个计数器都为0的时候才能被删除。</p>
+<p>同时基于之前的讨论，我们也知道write和read都没有针对文件的<strong>offset参数</strong>，所以文件描述符必然自己悄悄维护了对于文件的offset。</p>
+<p>文件系统中核心的数据结构就是<strong>inode和file descriptor</strong>。后者主要与用户进程进行交互。</p>
+<p>尽管文件系统的API很相近并且内部实现可能非常不一样。</p>
+<p>但是很多文件系统都有类似的结构。</p>
+<p>因为文件系统还挺复杂的，所以最好按照分层的方式进行理解。</p>
+<p>可以这样看：</p>
+<ul>
+<li>在最底层是<strong>磁盘</strong>，也就是一些实际保存数据的存储设备，正是这些设备提供了持久化存储。</li>
+<li>在这之上是<strong>buffer cache</strong>或者说<strong>block cache</strong>，这些cache可以避免频繁的读写磁盘。这里我们将磁盘中的数据保存在了内存中。</li>
+<li>为了保证持久性，再往上通常会有一个<strong>logging层</strong>。许多文件系统都有某种形式的logging，我们下节课会讨论这部分内容，所以今天我就跳过它的介绍。</li>
+<li>在logging层之上，XV6有<strong>inode cache</strong>，这主要是为了同步（synchronization），我们稍后会介绍。inode通常小于一个disk block，所以多个inode通常会打包存储在一个disk block中。为了向单个inode提供同步操作，XV6维护了inode cache。</li>
+<li>再往上就是<strong>inode</strong>本身了。它实现了read/write。</li>
+<li>再往上，就是<strong>文件名</strong>，和<strong>文件描述符</strong>操作。</li>
+</ul>
+<p>不同的文件系统组织方式和每一层可能都略有不同，有的时候分层也没有那么严格，即使在XV6中分层也不是很严格，但是从概念上来说这里的结构对于理解文件系统还是有帮助的。</p>
+<p>实际上所有的文件系统都有组件对应这里不同的分层，例如buffer cache，logging，inode和路径名。</p>
+<p><img src="D:%5cUsers%5cnote%5cXV6%5cp21.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="p21"
+	
+	
+></p>
+<h5 id="文件系统使用磁盘">文件系统使用磁盘
+</h5><p>接下来，我将简单的介绍最底层，也即是存储设备。</p>
+<p>实际中有非常非常多不同类型的存储设备，这些设备的区别在于性能，容量，数据保存的期限等。</p>
+<p>其中两种最常见，并且你们应该也挺熟悉的是SSD和HDD。</p>
+<p>这两类存储虽然有着不同的性能，但是都在合理的成本上提供了大量的存储空间。</p>
+<p>SSD通常是0.1到1毫秒的访问时间，而HDD通常是在10毫秒量级完成读写一个disk block。</p>
+<p>这里有些术语有点让人困惑，它们是sectors和blocks。</p>
+<ul>
+<li>sector通常是<u>磁盘驱动</u>可以读写的<strong>最小单元</strong>，它过去通常是512字节。</li>
+<li>block通常是<u>操作系统</u>或者<u>文件系统</u>视角的<strong>数据</strong>。它由文件系统定义，在XV6中它是1024字节。所以XV6中一个block对应两个sector。通常来说一个block对应了一个或者多个sector。</li>
+</ul>
+<p>有的时候，人们也将磁盘上的sector称为block。所以这里的术语也不是很精确。</p>
+<p>这些存储设备连接到了电脑总线之上，总线也连接了CPU和内存。</p>
+<p>一个文件系统运行在CPU上，将内部的数据存储在内存，同时也会以读写block的形式存储在SSD或者HDD。</p>
+<p>这里的接口还是挺简单的，包括了read/write，然后以block编号作为参数。</p>
+<p>虽然我们这里描述的过于简单了，但是实际的接口大概就是这样。</p>
+<p>在内部，SSD和HDD工作方式完全不一样，但是对于硬件的抽象屏蔽了这些差异。</p>
+<p><img src="D:%5cUsers%5cnote%5cXV6%5cp22.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="p22"
+	
+	
+></p>
+<p>磁盘驱动通常会使用一些标准的协议，例如PCIE，与磁盘交互。</p>
+<p>从上向下看磁盘驱动的接口，大部分的磁盘看起来都一样，你可以提供block编号，在驱动中通过写设备的控制寄存器，然后设备就会完成相应的工作。</p>
+<p>这是从一个文件系统的角度的描述。</p>
+<p>尽管不同的存储设备有着非常不一样的属性，从驱动的角度来看，你可以以大致相同的方式对它们进行编程。</p>
+<p>有关存储设备我们就说这么多。</p>
+<blockquote>
+<p>学生提问：对于read/write的接口，是不是提供了同步/异步的选项？</p>
+<p>Frans教授：你可以认为一个磁盘的驱动与console的驱动是基本一样的。</p>
+<p>驱动向设备发送一个命令表明开始读或者写，过了一会当设备完成了操作，会产生一个中断表明完成了相应的命令。</p>
+<p>但是因为磁盘本身比console复杂的多，所以磁盘的驱动也会比我们之前看过的console的驱动复杂的多。</p>
+<p>不过驱动中的代码结构还是类似的，也有bottom部分和top部分，中断和读写控制寄存器（注，详见lec09）。</p>
+</blockquote>
+<p>从文件系统的角度来看磁盘还是很直观的。</p>
+<p>因为对于磁盘就是读写block或者sector，我们可以将磁盘看作是一个巨大的block的数组，数组从0开始，一直增长到磁盘的最后。</p>
+<p>而文件系统的工作就是将所有的数据结构以一种能够在重启之后重新构建文件系统的方式，存放在磁盘上。虽然有不同的方式，但是XV6使用了一种非常简单，但是还挺常见的布局结构。</p>
+<p>通常来说：</p>
+<ul>
+<li>block0要么没有用，要么被用作boot sector来启动操作系统。</li>
+<li>block1通常被称为<strong>super block</strong>，它描述了文件系统。它可能包含磁盘上有多少个block共同构成了文件系统这样的信息。我们之后会看到XV6在里面会存更多的信息，你可以通过block1构造出大部分的文件系统信息。</li>
+<li>在XV6中，<strong>log</strong>从block2开始，到block32结束。实际上log的大小可能不同，这里在super block中会定义log就是30个block。</li>
+<li>接下来在block32到block45之间，XV6存储了<strong>inode</strong>。我之前说过多个inode会打包存在一个block中，一个inode是64字节。</li>
+<li>之后是<strong>bitmap block</strong>，这是我们构建文件系统的默认方法，它只占据一个block。它记录了数据block是否空闲。</li>
+<li>之后就全是数据block了，数据block存储了文件的内容和目录的内容。</li>
+</ul>
+<p>通常来说，bitmap block，inode blocks和log blocks被统称为metadata block。</p>
+<p>它们虽然不存储实际的数据，但是它们存储了能帮助文件系统完成工作的元数据。</p>
+<blockquote>
+<p>学生提问：boot block是不是包含了操作系统启动的代码？</p>
+<p>Frans教授：完全正确，它里面通常包含了足够启动操作系统的代码。之后再从文件系统中加载操作系统的更多内容。</p>
+<p>学生提问：所以XV6是存储在虚拟磁盘上？</p>
+<p>Frans教授：在QEMU中，我们实际上走了捷径。QEMU中有个标志位-kernel，它指向了内核的镜像文件，QEMU会将这个镜像的内容加载到了物理内存的0x80000000。所以当我们使用QEMU时，我们不需要考虑boot sector。</p>
+<p>学生提问：所以当你运行QEMU时，你就是将程序通过命令行传入，然后直接就运行传入的程序，然后就不需要从虚拟磁盘上读取数据了？</p>
+<p>Frans教授：完全正确。</p>
+</blockquote>
+<p>假设inode是64字节，如果你想要读取inode10，那么你应该按照下面的公式去对应的block读取inode。</p>
+<p>$n_{block} = 32 + inode * 64 / 1024$</p>
+<p>所以inode0在block32，inode17会在block33。只要有inode的编号，我们总是可以找到inode在磁盘上存储的位置。</p>
+<h5 id="inode">inode
+</h5><p>接下来我们看一下磁盘上存储的inode究竟是什么？首先我们前面已经看过了，这是一个64字节的数据结构。</p>
+<ul>
+<li>通常来说它有一个type字段，表明inode是文件还是目录。</li>
+<li>nlink字段，也就是link计数器，用来跟踪究竟有多少文件名指向了当前的inode。</li>
+<li>size字段，表明了文件数据有多少个字节。</li>
+<li>不同文件系统中的表达方式可能不一样，不过在XV6中接下来是一些block的编号，例如编号0，编号1，等等。XV6的inode中总共有12个block编号。这些被称为direct block number。这12个block编号指向了构成文件的前12个block。举个例子，如果文件只有2个字节，那么只会有一个block编号0，它包含的数字是磁盘上文件前2个字节的block的位置。</li>
+<li>之后还有一个indirect block number，它对应了磁盘上一个block，这个block包含了256个block number，这256个block number包含了文件的数据。所以inode中block number 0到block number 11都是direct block number，而block number 12保存的indirect block number指向了另一个block。</li>
+</ul>
+<p>以上基本就是XV6中inode的组成部分。</p>
+<p>基于上面的内容，XV6中文件最大的长度是多少呢？</p>
+<blockquote>
+<p>学生回答：会是268*1024字节</p>
+</blockquote>
+<p>是的，最大文件尺寸对应的是下面的公式。</p>
+<p>$size_{max} = (256 + 12) * 1024$</p>
+<p>可以算出这里就是268KB，这么点大小能存个什么呢？所以这是个很小的文件长度，实际的文件系统，文件最大的长度会大的多得多。那可以做一些什么来让文件系统支持大得多的文件呢？</p>
+<blockquote>
+<p>学生回答：可以扩展inode中indirect部分吗？</p>
+</blockquote>
+<p>是的，可以用类似page table的方式，构建一个双重indirect block number指向一个block，这个block中再包含了256个indirect block number，每一个又指向了包含256个block number的block。</p>
+<p>这样的话，最大的文件长度会大得多（注，是256<em>256</em>1K）。</p>
+<p>这里修改了inode的数据结构，你可以使用类似page table的树状结构，也可以按照B树或者其他更复杂的树结构实现。</p>
+<p>XV6这里极其简单，基本是按照最早的Uinx实现方式来的，不过你可以实现更复杂的结构。</p>
+<p>实际上，在接下来的File system lab中，你将会实现双重indirect block number来支持更大的文件。</p>
+<blockquote>
+<p>学生提问：为什么每个block存储256个block编号？</p>
+<p>Frans教授：因为每个编号是4个字节。1024/4 = 256。这又带出了一个问题，如果block编号只是4个字节，磁盘最大能有多大？是的，2的32次方（注，4TB）。有些磁盘比这个数字要大，所以通常人们会使用比32bit更长的数字来表示block编号。</p>
+</blockquote>
+<p>在下一个File system lab，你们需要将inode中的一个block number变成双重indirect block number，这个双重indirect block number将会指向一个包含了256个indirect block number的block，其中的每一个indirect block number再指向一个包含了256个block number的block，这样文件就可以大得多。</p>
+<p>接下来，我们想要实现read系统调用。</p>
+<p>假设我们需要读取文件的第8000个字节，那么你该读取哪个block呢？从inode的数据结构中该如何计算呢？</p>
+<p>对于8000，我们首先除以1024，也就是block的大小，得到大概是7。</p>
+<p>这意味着第7个block就包含了第8000个字节。</p>
+<p>所以直接在inode的direct block number中，就包含了第8000个字节的block。</p>
+<p>为了找到这个字节在第7个block的哪个位置，我们需要用8000对1024求余数，我猜结果是是832。</p>
+<p>所以为了读取文件的第8000个字节，文件系统查看inode，先用8000除以1024得到block number，然后再用8000对1024求余读取block中对应的字节。</p>
+<p>总结一下，inode中的信息完全足够用来实现read/write系统调用，至少可以找到哪个disk block需要用来执行read/write系统调用。</p>
+<p>接下来我们讨论一下目录（directory）。</p>
+<p>文件系统的酷炫特性就是层次化的命名空间（hierarchical namespace），你可以在文件系统中保存对用户友好的文件名。</p>
+<p>大部分Unix文件系统有趣的点在于，一个目录本质上是一个文件加上一些文件系统能够理解的结构。</p>
+<p>在XV6中，这里的结构极其简单。每一个目录包含了directory entries，每一条entry都有固定的格式：</p>
+<ul>
+<li>前2个字节包含了目录中文件或者子目录的inode编号，</li>
+<li>接下来的14个字节包含了文件或者子目录名。</li>
+</ul>
+<p>所以每个entry总共是16个字节。</p>
+<p>对于实现路径名查找，这里的信息就足够了。假设我们要查找路径名“/y/x”，我们该怎么做呢？</p>
+<p>从路径名我们知道，应该从root inode开始查找。</p>
+<p>通常root inode会有固定的inode编号，在XV6中，这个编号是1。</p>
+<p>我们该如何根据编号找到root inode呢？从前一节我们可以知道，inode从block 32开始，如果是inode1，那么必然在block 32中的64到128字节的位置。</p>
+<p>所以文件系统可以直接读到root inode的内容。</p>
+<p>对于路径名查找程序，接下来就是扫描root inode包含的所有block，以找到“y”。</p>
+<p>该怎么找到root inode所有对应的block呢？根据前一节的内容就是读取所有的direct block number和indirect block number。</p>
+<p>结果可能是找到了，也可能是没有找到。如果找到了，那么目录y也会有一个inode编号，假设是251，我们可以继续从inode 251查找，先读取inode 251的内容，之后再扫描inode所有对应的block，找到“x”并得到文件x对应的inode编号，最后将其作为路径名查找的结果返回。</p>
+<blockquote>
+<p>学生提问：有没有一些元数据表明当前的inode是目录而不是一个文件？</p>
+<p>Frans教授：有的，实际上是在inode中。inode中的type字段表明这是一个目录还是一个文件。如果你对一个类型是文件的inode进行查找，文件系统会返回错误。</p>
+</blockquote>
+<p>这里的结构不是很有效。</p>
+<p>为了找到一个目录名，你需要线性扫描。实际的文件系统会使用更复杂的数据结构来使得查找更快，当然这又是设计数据结构的问题，而不是设计操作系统的问题。</p>
+<p>你可以使用你喜欢的数据结构并提升性能。出于简单和更容易解释的目的，XV6使用了这里这种非常简单的数据结构。</p>
+<h5 id="file-system工作示例">File system工作示例
+</h5><p>接下来我们看一下实际中，XV6的文件系统是如何工作的，这部分内容对于下一个lab是有帮助的。</p>
+<p>首先我会启动XV6，这里有件事情我想指出。启动XV6的过程中，调用了makefs指令，来创建一个文件系统。</p>
+<p>所以makefs创建了一个全新的磁盘镜像，在这个磁盘镜像中包含了我们在指令中传入的一些文件。makefs为你创建了一个包含这些文件的新的文件系统。</p>
+<p>XV6总是会打印文件系统的一些信息，所以从指令的下方可以看出有46个meta block，其中包括了：</p>
+<ul>
+<li>boot block</li>
+<li>super block</li>
+<li>30个log block</li>
+<li>13个inode block</li>
+<li>1个bitmap block</li>
+</ul>
+<p>之后是954个data block。所以这是一个袖珍级的文件系统，总共就包含了1000个block。在File system lab中，你们会去支持更大的文件系统。</p>
+<p>我还稍微修改了一下XV6，使得任何时候写入block都会打印出block的编号。我们从console的输出可以看出，在XV6启动过程中，会有一些对于文件系统的调用，并写入了block 33，45，32。</p>
+<p>接下来我们运行一些命令，来看一下特定的命令对哪些block做了写操作，并理解为什么要对这些block写入数据。</p>
+<p>我们通过echo “hi” &gt; x，来创建一个文件x，并写入字符“hi”。我会将输出拷贝出来，并做分隔以方便我们更好的理解。</p>
+<p>这里会有几个阶段</p>
+<ol>
+<li>第一阶段是创建文件</li>
+<li>第二阶段将“hi”写入文件</li>
+<li>第三阶段将“\n”换行符写入到文件</li>
+</ol>
+<p>如果你去看echo的代码实现，基本就是这3个阶段。</p>
+<p><img src="D:%5cUsers%5cnote%5cXV6%5cp23.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="p23"
+	
+	
+></p>
+<p>上面就是echo的代码，它先检查参数，并将参数写入到文件描述符1，在最后写入一个换行符。</p>
+<p>让我们一个阶段一个阶段的看echo的执行过程，并理解对于文件系统发生了什么。</p>
+<p><img src="D:%5cUsers%5cnote%5cXV6%5cp25.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="p25"
+	
+	
+></p>
+<p>相比看代码，这里直接看磁盘的分布图更方便：</p>
+<p><img src="D:%5cUsers%5cnote%5cXV6%5cp24.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="p24"
+	
+	
+></p>
+<p>write 33代表了写inode。</p>
+<p>看起来给我们分配的inode位于block 33。之所以有两个write 33，第一个是为了标记inode将要被使用。</p>
+<p>在XV6中，我记得是使用inode中的type字段来标识inode是否空闲，这个字段同时也会用来表示inode是一个文件还是一个目录。</p>
+<p>所以这里将inode的type从空闲改成了文件，并写入磁盘表示这个inode已经被使用了。第二个write 33就是实际的写入inode的内容。inode的内容会包含linkcount为1以及其他内容。</p>
+<p>write 46是向第一个data block写数据，那么这个data block属于谁呢？</p>
+<blockquote>
+<p>学生回答：属于根目录。</p>
+</blockquote>
+<p>是的，block 46是根目录的第一个block。为什么它需要被写入数据呢？</p>
+<blockquote>
+<p>学生回答：因为我们正在向根目录创建一个新文件。</p>
+</blockquote>
+<p>是的，这里我们向根目录增加了一个新的entry，其中包含了文件名x，以及我们刚刚分配的inode编号。</p>
+<p>接下来的write 32又是什么意思呢？block 32保存的仍然是inode，那么inode中的什么发生了变化使得需要将更新后的inode写入磁盘？是的，根目录的大小变了，因为我们刚刚添加了16个字节的entry来代表文件x的信息。</p>
+<p>最后又有一次write 33，我在稍后会介绍这次写入的内容，这里我们再次更新了文件x的inode， 尽管我们又还没有写入任何数据。</p>
+<p>以上就是第一阶段创建文件的过程。第二阶段是向文件写入“hi”。</p>
+<p>首先是write 45，这是更新bitmap。文件系统首先会扫描bitmap来找到一个还没有使用的data block，未被使用的data block对应bit 0。</p>
+<p>找到之后，文件系统需要将该bit设置为1，表示对应的data block已经被使用了。所以更新block 45是为了更新bitmap。</p>
+<p>接下来的两次write 595表明，文件系统挑选了data block 595。</p>
+<p>所以在文件x的inode中，第一个direct block number是595。因为写入了两个字符，所以write 595被调用了两次。</p>
+<p>第二阶段最后的write 33是更新文件x对应的inode中的size字段，因为现在文件x中有了两个字符。</p>
+<blockquote>
+<p>学生提问：block 595看起来在磁盘中很靠后了，是因为前面的block已经被系统内核占用了吗？</p>
+<p>Frans教授：我们可以看前面makefs指令，makefs存了很多文件在磁盘镜像中，这些都发生在创建文件x之前，所以磁盘中很大一部分已经被这些文件填满了。</p>
+<p>学生提问：第二阶段最后的write 33是否会将block 595与文件x的inode关联起来？</p>
+<p>Frans教授：会的。这里的write 33会发生几件事情：首先inode的size字段会更新；第一个direct block number会更新。这两个信息都会通过write 33一次更新到磁盘上的inode中。</p>
+</blockquote>
+<p>以上就是磁盘中文件系统的组织结构的核心，希望你们都能理解背后的原理。</p>
+<h5 id="xv6创建inode代码展示">XV6创建inode代码展示
+</h5><p>接下来我们通过查看XV6中的代码，更进一步的了解文件系统。因为我们前面已经分配了inode，我们先来看一下这是如何发生的。</p>
+<p>sysfile.c中包含了所有与文件系统相关的函数，分配inode发生在sys_open函数中，这个函数会负责创建文件。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">uint64</span>
+</span></span><span class="line"><span class="cl"><span class="nf">sys_open</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">char</span> <span class="n">path</span><span class="p">[</span><span class="n">MAXPATH</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">fd</span><span class="p">,</span> <span class="n">omode</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">struct</span> <span class="n">file</span> <span class="o">*</span><span class="n">f</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">struct</span> <span class="n">inode</span> <span class="o">*</span><span class="n">ip</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">if</span><span class="p">((</span><span class="n">n</span> <span class="o">=</span> <span class="nf">argstr</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">MAXPATH</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="nf">argint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">omode</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nf">begin_op</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">if</span><span class="p">(</span><span class="n">omode</span> <span class="o">&amp;</span> <span class="n">O_CREATE</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ip</span> <span class="o">=</span> <span class="nf">create</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">T_FILE</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">ip</span> <span class="o">==</span> <span class="mi">0</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">      <span class="nf">end_op</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">((</span><span class="n">ip</span> <span class="o">=</span> <span class="nf">namei</span><span class="p">(</span><span class="n">path</span><span class="p">))</span> <span class="o">==</span> <span class="mi">0</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">      <span class="nf">end_op</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">ilock</span><span class="p">(</span><span class="n">ip</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">ip</span><span class="o">-&gt;</span><span class="n">type</span> <span class="o">==</span> <span class="n">T_DIR</span> <span class="o">&amp;&amp;</span> <span class="n">omode</span> <span class="o">!=</span> <span class="n">O_RDONLY</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">      <span class="nf">iunlockput</span><span class="p">(</span><span class="n">ip</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="nf">end_op</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">if</span><span class="p">(</span><span class="n">ip</span><span class="o">-&gt;</span><span class="n">type</span> <span class="o">==</span> <span class="n">T_DEVICE</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">ip</span><span class="o">-&gt;</span><span class="n">major</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">ip</span><span class="o">-&gt;</span><span class="n">major</span> <span class="o">&gt;=</span> <span class="n">NDEV</span><span class="p">)){</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">iunlockput</span><span class="p">(</span><span class="n">ip</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">end_op</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">if</span><span class="p">((</span><span class="n">f</span> <span class="o">=</span> <span class="nf">filealloc</span><span class="p">())</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="p">(</span><span class="n">fd</span> <span class="o">=</span> <span class="nf">fdalloc</span><span class="p">(</span><span class="n">f</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="nf">fileclose</span><span class="p">(</span><span class="n">f</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">iunlockput</span><span class="p">(</span><span class="n">ip</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">end_op</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">if</span><span class="p">(</span><span class="n">ip</span><span class="o">-&gt;</span><span class="n">type</span> <span class="o">==</span> <span class="n">T_DEVICE</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">f</span><span class="o">-&gt;</span><span class="n">type</span> <span class="o">=</span> <span class="n">FD_DEVICE</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">f</span><span class="o">-&gt;</span><span class="n">major</span> <span class="o">=</span> <span class="n">ip</span><span class="o">-&gt;</span><span class="n">major</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">f</span><span class="o">-&gt;</span><span class="n">type</span> <span class="o">=</span> <span class="n">FD_INODE</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">f</span><span class="o">-&gt;</span><span class="n">off</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="n">f</span><span class="o">-&gt;</span><span class="n">ip</span> <span class="o">=</span> <span class="n">ip</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">f</span><span class="o">-&gt;</span><span class="n">readable</span> <span class="o">=</span> <span class="o">!</span><span class="p">(</span><span class="n">omode</span> <span class="o">&amp;</span> <span class="n">O_WRONLY</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">f</span><span class="o">-&gt;</span><span class="n">writable</span> <span class="o">=</span> <span class="p">(</span><span class="n">omode</span> <span class="o">&amp;</span> <span class="n">O_WRONLY</span><span class="p">)</span> <span class="o">||</span> <span class="p">(</span><span class="n">omode</span> <span class="o">&amp;</span> <span class="n">O_RDWR</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">if</span><span class="p">((</span><span class="n">omode</span> <span class="o">&amp;</span> <span class="n">O_TRUNC</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">ip</span><span class="o">-&gt;</span><span class="n">type</span> <span class="o">==</span> <span class="n">T_FILE</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">itrunc</span><span class="p">(</span><span class="n">ip</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nf">iunlock</span><span class="p">(</span><span class="n">ip</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">end_op</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">fd</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在sys_open函数中，会调用create函数。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">static</span> <span class="k">struct</span> <span class="n">inode</span><span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="nf">create</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">path</span><span class="p">,</span> <span class="kt">short</span> <span class="n">type</span><span class="p">,</span> <span class="kt">short</span> <span class="n">major</span><span class="p">,</span> <span class="kt">short</span> <span class="n">minor</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">struct</span> <span class="n">inode</span> <span class="o">*</span><span class="n">ip</span><span class="p">,</span> <span class="o">*</span><span class="n">dp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">char</span> <span class="n">name</span><span class="p">[</span><span class="n">DIRSIZ</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">if</span><span class="p">((</span><span class="n">dp</span> <span class="o">=</span> <span class="nf">nameiparent</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nf">ilock</span><span class="p">(</span><span class="n">dp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">if</span><span class="p">((</span><span class="n">ip</span> <span class="o">=</span> <span class="nf">dirlookup</span><span class="p">(</span><span class="n">dp</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">iunlockput</span><span class="p">(</span><span class="n">dp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">ilock</span><span class="p">(</span><span class="n">ip</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">type</span> <span class="o">==</span> <span class="n">T_FILE</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">ip</span><span class="o">-&gt;</span><span class="n">type</span> <span class="o">==</span> <span class="n">T_FILE</span> <span class="o">||</span> <span class="n">ip</span><span class="o">-&gt;</span><span class="n">type</span> <span class="o">==</span> <span class="n">T_DEVICE</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="n">ip</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">iunlockput</span><span class="p">(</span><span class="n">ip</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">if</span><span class="p">((</span><span class="n">ip</span> <span class="o">=</span> <span class="nf">ialloc</span><span class="p">(</span><span class="n">dp</span><span class="o">-&gt;</span><span class="n">dev</span><span class="p">,</span> <span class="n">type</span><span class="p">))</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">panic</span><span class="p">(</span><span class="s">&#34;create: ialloc&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nf">ilock</span><span class="p">(</span><span class="n">ip</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">ip</span><span class="o">-&gt;</span><span class="n">major</span> <span class="o">=</span> <span class="n">major</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">ip</span><span class="o">-&gt;</span><span class="n">minor</span> <span class="o">=</span> <span class="n">minor</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">ip</span><span class="o">-&gt;</span><span class="n">nlink</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">iupdate</span><span class="p">(</span><span class="n">ip</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">if</span><span class="p">(</span><span class="n">type</span> <span class="o">==</span> <span class="n">T_DIR</span><span class="p">){</span>  <span class="c1">// Create . and .. entries.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">dp</span><span class="o">-&gt;</span><span class="n">nlink</span><span class="o">++</span><span class="p">;</span>  <span class="c1">// for &#34;..&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">iupdate</span><span class="p">(</span><span class="n">dp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// No ip-&gt;nlink++ for &#34;.&#34;: avoid cyclic ref count.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span><span class="p">(</span><span class="nf">dirlink</span><span class="p">(</span><span class="n">ip</span><span class="p">,</span> <span class="s">&#34;.&#34;</span><span class="p">,</span> <span class="n">ip</span><span class="o">-&gt;</span><span class="n">inum</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="nf">dirlink</span><span class="p">(</span><span class="n">ip</span><span class="p">,</span> <span class="s">&#34;..&#34;</span><span class="p">,</span> <span class="n">dp</span><span class="o">-&gt;</span><span class="n">inum</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="nf">panic</span><span class="p">(</span><span class="s">&#34;create dots&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">if</span><span class="p">(</span><span class="nf">dirlink</span><span class="p">(</span><span class="n">dp</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">ip</span><span class="o">-&gt;</span><span class="n">inum</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">panic</span><span class="p">(</span><span class="s">&#34;create: dirlink&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nf">iunlockput</span><span class="p">(</span><span class="n">dp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">ip</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>create函数中首先会解析路径名并找到最后一个目录，之后会查看文件是否存在，如果存在的话会返回错误。之后就会调用ialloc（inode allocate），这个函数会为文件x分配inode。ialloc函数位于fs.c文件中。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// Allocate an inode on device dev.
+</span></span></span><span class="line"><span class="cl"><span class="c1">// Mark it as allocated by  giving it type type.
+</span></span></span><span class="line"><span class="cl"><span class="c1">// Returns an unlocked but allocated and referenced inode.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">struct</span> <span class="n">inode</span><span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="nf">ialloc</span><span class="p">(</span><span class="n">uint</span> <span class="n">dev</span><span class="p">,</span> <span class="kt">short</span> <span class="n">type</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">inum</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">struct</span> <span class="n">buf</span> <span class="o">*</span><span class="n">bp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">struct</span> <span class="n">dinode</span> <span class="o">*</span><span class="n">dip</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">for</span><span class="p">(</span><span class="n">inum</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">inum</span> <span class="o">&lt;</span> <span class="n">sb</span><span class="p">.</span><span class="n">ninodes</span><span class="p">;</span> <span class="n">inum</span><span class="o">++</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">bp</span> <span class="o">=</span> <span class="nf">bread</span><span class="p">(</span><span class="n">dev</span><span class="p">,</span> <span class="nf">IBLOCK</span><span class="p">(</span><span class="n">inum</span><span class="p">,</span> <span class="n">sb</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="n">dip</span> <span class="o">=</span> <span class="p">(</span><span class="k">struct</span> <span class="n">dinode</span><span class="o">*</span><span class="p">)</span><span class="n">bp</span><span class="o">-&gt;</span><span class="n">data</span> <span class="o">+</span> <span class="n">inum</span><span class="o">%</span><span class="n">IPB</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">dip</span><span class="o">-&gt;</span><span class="n">type</span> <span class="o">==</span> <span class="mi">0</span><span class="p">){</span>  <span class="c1">// a free inode
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="nf">memset</span><span class="p">(</span><span class="n">dip</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="o">*</span><span class="n">dip</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">      <span class="n">dip</span><span class="o">-&gt;</span><span class="n">type</span> <span class="o">=</span> <span class="n">type</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="nf">log_write</span><span class="p">(</span><span class="n">bp</span><span class="p">);</span>   <span class="c1">// mark it allocated on the disk
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="nf">brelse</span><span class="p">(</span><span class="n">bp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="nf">iget</span><span class="p">(</span><span class="n">dev</span><span class="p">,</span> <span class="n">inum</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">brelse</span><span class="p">(</span><span class="n">bp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">panic</span><span class="p">(</span><span class="s">&#34;ialloc: no inodes&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>以上就是ialloc函数，与XV6中的大部分函数一样，它很简单，但是又不是很高效。</p>
+<p>它会遍历所有可能的inode编号，找到inode所在的block，再看位于block中的inode数据的type字段。</p>
+<p>如果这是一个空闲的inode，那么将其type字段设置为文件，这会将inode标记为已被分配。</p>
+<p>函数中的log_write就是我们之前看到在console中有关写block的输出。这里的log_write是我们看到的整个输出的第一个。</p>
+<p>以上就是第一次写磁盘涉及到的函数调用。</p>
+<p>这里有个有趣的问题，如果有多个进程同时调用create函数会发生什么？对于一个多核的计算机，进程可能并行运行，两个进程可能同时会调用到ialloc函数，然后进而调用bread（block read）函数。</p>
+<p>所以必须要有一些机制确保这两个进程不会互相影响。</p>
+<p>让我们看一下位于bio.c的buffer cache代码。首先看一下bread函数</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// Return a locked buf with the contents of the indicated block.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">struct</span> <span class="n">buf</span><span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="nf">bread</span><span class="p">(</span><span class="n">uint</span> <span class="n">dev</span><span class="p">,</span> <span class="n">uint</span> <span class="n">blockno</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">struct</span> <span class="n">buf</span> <span class="o">*</span><span class="n">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">b</span> <span class="o">=</span> <span class="nf">bget</span><span class="p">(</span><span class="n">dev</span><span class="p">,</span> <span class="n">blockno</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">b</span><span class="o">-&gt;</span><span class="n">valid</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">virtio_disk_rw</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">b</span><span class="o">-&gt;</span><span class="n">valid</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>bread函数首先会调用bget函数，bget会为我们从buffer cache中找到block的缓存。让我们看一下bget函数</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// Look through buffer cache for block on device dev.
+</span></span></span><span class="line"><span class="cl"><span class="c1">// If not found, allocate a buffer.
+</span></span></span><span class="line"><span class="cl"><span class="c1">// In either case, return locked buffer.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">static</span> <span class="k">struct</span> <span class="n">buf</span><span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="nf">bget</span><span class="p">(</span><span class="n">uint</span> <span class="n">dev</span><span class="p">,</span> <span class="n">uint</span> <span class="n">blockno</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">struct</span> <span class="n">buf</span> <span class="o">*</span><span class="n">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nf">acquire</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bcache</span><span class="p">.</span><span class="n">lock</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// Is the block already cached?
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">for</span><span class="p">(</span><span class="n">b</span> <span class="o">=</span> <span class="n">bcache</span><span class="p">.</span><span class="n">head</span><span class="p">.</span><span class="n">next</span><span class="p">;</span> <span class="n">b</span> <span class="o">!=</span> <span class="o">&amp;</span><span class="n">bcache</span><span class="p">.</span><span class="n">head</span><span class="p">;</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">b</span><span class="o">-&gt;</span><span class="n">dev</span> <span class="o">==</span> <span class="n">dev</span> <span class="o">&amp;&amp;</span> <span class="n">b</span><span class="o">-&gt;</span><span class="n">blockno</span> <span class="o">==</span> <span class="n">blockno</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">      <span class="n">b</span><span class="o">-&gt;</span><span class="n">refcnt</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="nf">release</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bcache</span><span class="p">.</span><span class="n">lock</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="nf">acquiresleep</span><span class="p">(</span><span class="o">&amp;</span><span class="n">b</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="n">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// Not cached.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// Recycle the least recently used (LRU) unused buffer.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">for</span><span class="p">(</span><span class="n">b</span> <span class="o">=</span> <span class="n">bcache</span><span class="p">.</span><span class="n">head</span><span class="p">.</span><span class="n">prev</span><span class="p">;</span> <span class="n">b</span> <span class="o">!=</span> <span class="o">&amp;</span><span class="n">bcache</span><span class="p">.</span><span class="n">head</span><span class="p">;</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="o">-&gt;</span><span class="n">prev</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">b</span><span class="o">-&gt;</span><span class="n">refcnt</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">b</span><span class="o">-&gt;</span><span class="n">dev</span> <span class="o">=</span> <span class="n">dev</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">b</span><span class="o">-&gt;</span><span class="n">blockno</span> <span class="o">=</span> <span class="n">blockno</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">b</span><span class="o">-&gt;</span><span class="n">valid</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">b</span><span class="o">-&gt;</span><span class="n">refcnt</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="nf">release</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bcache</span><span class="p">.</span><span class="n">lock</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="nf">acquiresleep</span><span class="p">(</span><span class="o">&amp;</span><span class="n">b</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="n">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">panic</span><span class="p">(</span><span class="s">&#34;bget: no buffers&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这里的代码还有点复杂。我猜你们之前已经看过这里的代码，那么这里的代码在干嘛？</p>
+<blockquote>
+<p>学生回答：这里遍历了linked-list，来看看现有的cache是否符合要找的block。</p>
+</blockquote>
+<p>是的，我们这里看一下block 33的cache是否存在，如果存在的话，将block对象的引用计数（refcnt）加1，之后再释放bcache锁，因为现在我们已经完成了对于cache的检查并找到了block cache。之后，代码会尝试获取block cache的锁。</p>
+<p>所以，如果有多个进程同时调用bget的话，其中一个可以获取bcache的锁并扫描buffer cache。</p>
+<p>此时，其他进程是没有办法修改buffer cache的（注，因为bacche的锁被占住了）。</p>
+<p>之后，进程会查找block number是否在cache中，如果在的话将block cache的引用计数加1，表明当前进程对block cache有引用，之后再释放bcache的锁。</p>
+<p>如果有第二个进程也想扫描buffer cache，那么这时它就可以获取bcache的锁。</p>
+<p>假设第二个进程也要获取block 33的cache，那么它也会对相应的block cache的引用计数加1。最后这两个进程都会尝试对block 33的block cache调用acquiresleep函数。</p>
+<p>acquiresleep是另一种锁，我们称之为sleep lock，本质上来说它获取block 33 cache的锁。</p>
+<p>其中一个进程获取锁之后函数返回。</p>
+<p>在ialloc函数中会扫描block 33中是否有一个空闲的inode。</p>
+<p>而另一个进程会在acquiresleep中等待第一个进程释放锁。</p>
+<blockquote>
+<p>学生提问：当一个block cache的refcnt不为0时，可以更新block cache吗？因为释放锁之后，可能会修改block cache。</p>
+<p>Frans教授：这里我想说几点；首先XV6中对bcache做任何修改的话，都必须持有bcache的锁；其次对block 33的cache做任何修改你需要持有block 33的sleep lock。所以在任何时候，release(&amp;bcache.lock)之后，b-&gt;refcnt都大于0。block的cache只会在refcnt为0的时候才会被驱逐，任何时候refcnt大于0都不会驱逐block cache。所以当b-&gt;refcnt大于0的时候，block cache本身不会被buffer cache修改。这里的第二个锁，也就是block cache的sleep lock，是用来保护block cache的内容的。它确保了任何时候只有一个进程可以读写block cache。</p>
+</blockquote>
+<p>如果buffer cache中有两份block 33的cache将会出现问题。假设一个进程要更新inode19，另一个进程要更新inode20。</p>
+<p>如果它们都在处理block 33的cache，并且cache有两份，那么第一个进程可能持有一份cache并先将inode19写回到磁盘中，而另一个进程持有另一份cache会将inode20写回到磁盘中，并将inode19的更新覆盖掉。</p>
+<p>所以一个block只能在buffer cache中出现一次。你们在完成File system lab时，必须要维持buffer cache的这个属性。</p>
+<blockquote>
+<p>学生提问：如果多个进程都在使用同一个block的cache，然后有一个进程在修改block，并通过强制向磁盘写数据修改了block的cache，那么其他进程会看到什么结果？</p>
+<p>Frans教授：如果第一个进程结束了对block 33的读写操作，它会对block的cache调用brelse（block cache release）函数。</p>
+<p>这个函数会对refcnt减1，并释放sleep lock。这意味着，如果有任何一个其他进程正在等待使用这个block cache，现在它就能获得这个block cache的sleep lock，并发现刚刚做的改动。</p>
+<p>假设两个进程都需要分配一个新的inode，且新的inode都位于block 33。如果第一个进程分配到了inode18并完成了更新，那么它对于inode18的更新是可见的。另一个进程就只能分配到inode19，因为inode18已经被标记为已使用，任何之后的进程都可以看到第一个进程对它的更新。</p>
+<p>这正是我们想看到的结果，如果一个进程创建了一个inode或者创建了一个文件，之后的进程执行读就应该看到那个文件。</p>
+</blockquote>
+<h5 id="sleep-lock">Sleep Lock
+</h5><p>block cache使用的是sleep lock。sleep lock区别于一个常规的spinlock。我们先看来一下sleep lock。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">void</span>
+</span></span><span class="line"><span class="cl"><span class="nf">acquiresleep</span><span class="p">(</span><span class="k">struct</span> <span class="n">sleeplock</span> <span class="o">*</span><span class="n">lk</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">acquire</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lk</span><span class="o">-&gt;</span><span class="n">lk</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">while</span> <span class="p">(</span><span class="n">lk</span><span class="o">-&gt;</span><span class="n">locked</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">sleep</span><span class="p">(</span><span class="n">lk</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lk</span><span class="o">-&gt;</span><span class="n">lk</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="n">lk</span><span class="o">-&gt;</span><span class="n">locked</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">lk</span><span class="o">-&gt;</span><span class="n">pid</span> <span class="o">=</span> <span class="nf">myproc</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">pid</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">release</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lk</span><span class="o">-&gt;</span><span class="n">lk</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>首先是acquiresleep函数，它用来获取sleep lock。</p>
+<p>函数里首先获取了一个普通的spinlock，这是与sleep lock关联在一起的一个锁。</p>
+<p>之后，如果sleep lock被持有，那么就进入sleep状态，并将自己从当前CPU调度开。</p>
+<p>既然sleep lock是基于spinlock实现的，为什么对于block cache，我们使用的是sleep lock而不是spinlock？</p>
+<p>这里其实有多种原因。对于spinlock有很多限制，其中之一是加锁时中断必须要关闭。</p>
+<p>所以如果使用spinlock的话，当我们对block cache做操作的时候需要持有锁，那么我们就永远也不能从磁盘收到数据。</p>
+<p>或许另一个CPU核可以收到中断并读到磁盘数据，但是如果我们只有一个CPU核的话，我们就永远也读不到数据了。</p>
+<p>出于同样的原因，也不能在持有spinlock的时候进入sleep状态（注，详见13.1）。</p>
+<p>所以这里我们使用sleep lock。</p>
+<p>sleep lock的优势就是，我们可以在持有锁的时候不关闭中断。</p>
+<p>我们可以在磁盘操作的过程中持有锁，我们也可以长时间持有锁。</p>
+<p>当我们在等待sleep lock的时候，我们并没有让CPU一直空转，我们通过sleep将CPU出让出去了。</p>
+<p>接下来让我们看一下brelease函数。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// Release a locked buffer.
+</span></span></span><span class="line"><span class="cl"><span class="c1">// Move to the head of the most-recently-used list.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span>
+</span></span><span class="line"><span class="cl"><span class="nf">brelse</span><span class="p">(</span><span class="k">struct</span> <span class="n">buf</span> <span class="o">*</span><span class="n">b</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nf">holdingsleep</span><span class="p">(</span><span class="o">&amp;</span><span class="n">b</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">panic</span><span class="p">(</span><span class="s">&#34;brelse&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nf">releasesleep</span><span class="p">(</span><span class="o">&amp;</span><span class="n">b</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nf">acquire</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bcache</span><span class="p">.</span><span class="n">lock</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">b</span><span class="o">-&gt;</span><span class="n">refcnt</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="n">b</span><span class="o">-&gt;</span><span class="n">refcnt</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// no one is waiting for it.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">b</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">-&gt;</span><span class="n">prev</span> <span class="o">=</span> <span class="n">b</span><span class="o">-&gt;</span><span class="n">prev</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">b</span><span class="o">-&gt;</span><span class="n">prev</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">b</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">b</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">bcache</span><span class="p">.</span><span class="n">head</span><span class="p">.</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">b</span><span class="o">-&gt;</span><span class="n">prev</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">bcache</span><span class="p">.</span><span class="n">head</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">bcache</span><span class="p">.</span><span class="n">head</span><span class="p">.</span><span class="n">next</span><span class="o">-&gt;</span><span class="n">prev</span> <span class="o">=</span> <span class="n">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">bcache</span><span class="p">.</span><span class="n">head</span><span class="p">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="nf">release</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bcache</span><span class="p">.</span><span class="n">lock</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>brelease函数中首先释放了sleep lock；之后获取了bcache的锁；之后减少了block cache的引用计数，表明一个进程不再对block cache感兴趣；最后如果引用计数为0，那么它会修改buffer cache的linked-list，将block cache移到linked-list的头部，这样表示这个block cache是最近使用过的block cache。</p>
+<p>这一点很重要，当我们在bget函数中不能找到block cache时，我们需要在buffer cache中腾出空间来存放新的block cache，这时会使用LRU（Least Recent Used）算法找出最不常使用的block cache，并撤回它（注，而将刚刚使用过的block cache放在linked-list的头部就可以直接更新linked-list的tail来完成LRU操作）。</p>
+<p>为什么这是一个好的策略呢？因为通常系统都遵循temporal locality策略，也就是说如果一个block cache最近被使用过，那么很有可能它很快会再被使用，所以最好不要撤回这样的block cache。</p>
+<p>以上就是对于block cache代码的介绍。这里有几件事情需要注意：</p>
+<ul>
+<li>首先在内存中，对于一个block只能有一份缓存。这是block cache必须维护的特性。</li>
+<li>其次，这里使用了与之前的spinlock略微不同的sleep lock。与spinlock不同的是，可以在I/O操作的过程中持有sleep lock。</li>
+<li>第三，它采用了LRU作为cache替换策略。</li>
+<li>第四，它有两层锁。第一层锁用来保护buffer cache的内部数据；第二层锁也就是sleep lock用来保护单个block的cache。</li>
+</ul>
+<p>最后让我们来总结一下，并把剩下的内容留到下节课。</p>
+<ul>
+<li>首先，文件系统是一个位于磁盘的数据结构。我们今天的主要时间都用来介绍这个位于磁盘的数据结构的内容。XV6的这个数据结构实现的很简单，但是你可以实现一个更加复杂的数据结构。</li>
+<li>其次，我们花了一些时间来看block cache的实现，这对于性能来说是至关重要的，因为读写磁盘是代价较高的操作，可能要消耗数百毫秒，而block cache确保了如果我们最近从磁盘读取了一个block，那么我们将不会再从磁盘读取相同的block。</li>
+</ul>
+<p>下节课我将会介绍crash safety，这是文件系统设计中非常棒的一部分。我们将会在crash safety讲两节课。下节课我们会看到基于log实现的crash safety机制，下下节课我们会看到Linux的ext3是如何实现的logging，这种方式要快得多。</p>
+<blockquote>
+<p>学生提问：我有个关于brelease函数的问题，看起来它先释放了block cache的锁，然后再对引用计数refcnt减一，为什么可以这样呢？</p>
+<p>Frans教授：这是个好问题。如果我们释放了sleep lock，这时另一个进程正在等待锁，那么refcnt必然大于1，而b-&gt;refcnt &ndash;只是表明当前执行brelease的进程不再关心block cache。如果还有其他进程正在等待锁，那么refcnt必然不等于0，我们也必然不会执行if(b-&gt;refcnt == 0)中的代码。</p>
+</blockquote>
+
 </section>
 
 
     <footer class="article-footer">
     
 
-    </footer>
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
 
 
+
+        <span>
+            最后更新于 Nov 12, 2024 12:44 &#43;0800
+        </span>
+    </section></footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
     
 </article>
 
     
 
     
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/mit6s081lec23/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">MIT6S081Lec23</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/mit6s081lec22/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">MIT6S081Lec22</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/mit6s081lec21/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">MIT6S081Lec21</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/mit6s081lec20/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">MIT6S081Lec20</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/mit6s081lec19/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">MIT6S081Lec19</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
 
      
     

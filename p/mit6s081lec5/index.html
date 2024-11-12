@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="">
-<title>Mit6s081Lec5</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Convention for RISC-V & ASM">
+<title>MIT6S081Lec5</title>
 
 <link rel='canonical' href='https://echudet.github.io/p/mit6s081lec5/'>
 
-<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="Mit6s081Lec5">
-<meta property='og:description' content="">
+<link rel="stylesheet" href="/scss/style.min.a7f637593c1d99350f36f270c9abc65cf39ec34b45847eb2fa40efef51b94c92.css"><meta property='og:title' content="MIT6S081Lec5">
+<meta property='og:description' content="Convention for RISC-V & ASM">
 <meta property='og:url' content='https://echudet.github.io/p/mit6s081lec5/'>
 <meta property='og:site_name' content='echudet'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-11-10T22:02:50&#43;08:00'/><meta property='article:modified_time' content='2024-11-10T22:02:50&#43;08:00'/>
-<meta name="twitter:title" content="Mit6s081Lec5">
-<meta name="twitter:description" content="">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-09-08T22:02:50&#43;08:00'/><meta property='article:modified_time' content='2024-11-12T12:44:05&#43;08:00'/>
+<meta name="twitter:title" content="MIT6S081Lec5">
+<meta name="twitter:description" content="Convention for RISC-V & ASM">
     <link rel="shortcut icon" href="/timer.ico" />
 
     </head>
@@ -193,7 +193,7 @@
 
 
                 
-                <span>Search</span>
+                <span>搜索</span>
             </a>
         </li>
         
@@ -253,12 +253,28 @@
 
     <div class="article-details">
     
+    <header class="article-category">
+        
+            <a href="/categories/mit6s081/" >
+                Mit6s081
+            </a>
+        
+            <a href="/categories/os/" >
+                Os
+            </a>
+        
+    </header>
+    
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/mit6s081lec5/">Mit6s081Lec5</a>
+            <a href="/p/mit6s081lec5/">MIT6S081Lec5</a>
         </h2>
     
+        
+        <h3 class="article-subtitle">
+            Convention for RISC-V &amp; ASM
+        </h3>
         
     </div>
 
@@ -278,7 +294,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2024-11-10</time>
+                <time class="article-time--published">2024-09-08</time>
             </div>
         
 
@@ -293,11 +309,22 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 0 分钟
+                    阅读时长: 3 分钟
                 </time>
             </div>
-        
-    </footer>
+        <div class="article-lastmod">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time>
+                    Nov 12, 2024 12:44 &#43;0800
+                </time>
+            </div></footer>
     
 
     
@@ -308,22 +335,188 @@
     <section class="article-content">
     
     
-    
+    <h1 id="lecture-5-convention-for-risc-v--asm">Lecture 5 Convention for RISC-V &amp; ASM
+</h1><ol>
+<li>
+<p>C-&gt;ASM</p>
+<ol>
+<li>处理器有一套指令集ISA</li>
+<li>C -&gt; ASM (.S files)-&gt; binary (obj/o files)</li>
+<li>
+<ol>
+<li>RISC-V(Reduced ISA, simple Instr)
+<ol>
+<li>open source</li>
+<li>Simple Instr</li>
+<li>Integrated Devices</li>
+</ol>
+</li>
+<li>x86-64(ISA-&gt;PC[Intel, AMP])
+<ol>
+<li>Complex ISA, 15k Instr</li>
+<li>backwards compatible &amp; cmd demand</li>
+<li>high efficient</li>
+</ol>
+</li>
+<li>ARM(RISC)
+<ol>
+<li>Andriod</li>
+<li>IOS(Apple)</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>
+<p>gdb</p>
+</li>
+<li>
+<p>RISC-V</p>
+<ol>
+<li>
+<p>寄存器是用来进行任何运算和数据读取的最快的方式，这就是为什么使用它们很重要，也是为什么我们更喜欢使用寄存器而不是内存。当我们调用函数时，你可以看到这里有a0 - a7寄存器。通常我们在谈到寄存器的时候，我们会用它们的ABI名字。不仅是因为这样描述更清晰和标准，同时也因为在写汇编代码的时候使用的也是ABI名字。第一列中的寄存器名字并不是超级重要，它唯一重要的场景是在RISC-V的Compressed Instruction中。基本上来说，RISC-V中通常的指令是64bit，但是在Compressed Instruction中指令是16bit。在Compressed Instruction中我们使用更少的寄存器，也就是x8 - x15寄存器。我猜你们可能会有疑问，为什么s1寄存器和其他的s寄存器是分开的，因为s1在Compressed Instruction是有效的，而s2-11却不是。除了Compressed Instruction，寄存器都是通过它们的ABI名字来引用。</p>
+</li>
+<li>
+<p>a0到a7寄存器是用来作为函数的参数。如果一个函数有超过8个参数，我们就需要用内存了。从这里也可以看出，当可以使用寄存器的时候，我们不会使用内存，我们只在不得不使用内存的场景才使用它。</p>
+</li>
+<li>
+<p>对于Stack来说，是从高地址开始向低地址使用。所以栈总是向下增长。当我们想要创建一个新的Stack Frame的时候，总是对当前的Stack Pointer做减法。一个函数的Stack Frame包含了保存的寄存器，本地变量，并且，如果函数的参数多于8个，额外的参数会出现在Stack中。所以Stack Frame大小并不总是一样，即使在这个图里面看起来是一样大的。不同的函数有不同数量的本地变量，不同的寄存器，所以Stack Frame的大小是不一样的。但是有关Stack Frame有两件事情是确定的：</p>
+<ul>
+<li>Return address总是会出现在Stack Frame的第一位</li>
+<li>指向前一个Stack Frame的指针也会出现在栈中的固定位置</li>
+</ul>
+<p>有关Stack Frame中有两个重要的寄存器，第一个是SP（Stack Pointer），它指向Stack的底部并代表了当前Stack Frame的位置。第二个是FP（Frame Pointer），它指向当前Stack Frame的顶部。因为Return address和指向前一个Stack Frame的的指针都在当前Stack Frame的固定位置，所以可以通过当前的FP寄存器寻址到这两个数据。</p>
+</li>
+</ol>
+</li>
+</ol>
+
 </section>
 
 
     <footer class="article-footer">
     
 
-    </footer>
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
 
 
+
+        <span>
+            最后更新于 Nov 12, 2024 12:44 &#43;0800
+        </span>
+    </section></footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
     
 </article>
 
     
 
     
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/mit6s081lec23/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">MIT6S081Lec23</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/mit6s081lec22/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">MIT6S081Lec22</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/mit6s081lec21/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">MIT6S081Lec21</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/mit6s081lec20/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">MIT6S081Lec20</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/mit6s081lec19/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">MIT6S081Lec19</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
 
      
     

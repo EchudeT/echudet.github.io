@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="">
-<title>Mit6s081Lec8</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Page Fault">
+<title>MIT6S081Lec8</title>
 
 <link rel='canonical' href='https://echudet.github.io/p/mit6s081lec8/'>
 
-<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="Mit6s081Lec8">
-<meta property='og:description' content="">
+<link rel="stylesheet" href="/scss/style.min.a7f637593c1d99350f36f270c9abc65cf39ec34b45847eb2fa40efef51b94c92.css"><meta property='og:title' content="MIT6S081Lec8">
+<meta property='og:description' content="Page Fault">
 <meta property='og:url' content='https://echudet.github.io/p/mit6s081lec8/'>
 <meta property='og:site_name' content='echudet'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-11-10T22:02:51&#43;08:00'/><meta property='article:modified_time' content='2024-11-10T22:02:51&#43;08:00'/>
-<meta name="twitter:title" content="Mit6s081Lec8">
-<meta name="twitter:description" content="">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-09-16T22:02:50&#43;08:00'/><meta property='article:modified_time' content='2024-11-12T12:44:05&#43;08:00'/>
+<meta name="twitter:title" content="MIT6S081Lec8">
+<meta name="twitter:description" content="Page Fault">
     <link rel="shortcut icon" href="/timer.ico" />
 
     </head>
@@ -193,7 +193,7 @@
 
 
                 
-                <span>Search</span>
+                <span>搜索</span>
             </a>
         </li>
         
@@ -245,7 +245,118 @@
     </ol>
 </aside>
 
-    
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#1-内存在真实操作系统中的使用">1. <strong>内存在真实操作系统中的使用</strong></a></li>
+        <li><a href="#2-中断与并发的关系">2. <strong>中断与并发的关系</strong></a></li>
+        <li><a href="#3-中断机制中的top-half与bottom-half">3. <strong>中断机制中的Top Half与Bottom Half</strong></a></li>
+        <li><a href="#4-例子uart串口通信中的中断机制与并发">4. <strong>例子：UART串口通信中的中断机制与并发</strong></a>
+          <ol>
+            <li><a href="#中断触发与top-half">中断触发与Top Half</a></li>
+            <li><a href="#bottom-half处理">Bottom Half处理</a></li>
+            <li><a href="#并发关系">并发关系</a></li>
+          </ol>
+        </li>
+        <li><a href="#5-中断相关的设备与cpu并发的挑战">5. <strong>中断相关的设备与CPU并发的挑战</strong></a></li>
+        <li><a href="#总结">总结</a></li>
+        <li><a href="#1-top-half上半部">1. <strong>Top Half（上半部）</strong></a></li>
+        <li><a href="#2-bottom-half下半部">2. <strong>Bottom Half（下半部）</strong></a></li>
+        <li><a href="#3-top-half与bottom-half的关系">3. <strong>Top Half与Bottom Half的关系</strong></a></li>
+        <li><a href="#4-例子uart串口通信中的top-half与bottom-half">4. <strong>例子：UART串口通信中的Top Half与Bottom Half</strong></a>
+          <ol>
+            <li><a href="#top-half"><strong>Top Half</strong>:</a></li>
+            <li><a href="#bottom-half"><strong>Bottom Half</strong>:</a></li>
+          </ol>
+        </li>
+        <li><a href="#总结-1">总结</a></li>
+        <li><a href="#1-键盘输入与uart触发中断">1. <strong>键盘输入与UART触发中断</strong></a></li>
+        <li><a href="#2-top-half处理">2. <strong>Top Half处理</strong></a></li>
+        <li><a href="#3-bottom-half处理">3. <strong>Bottom Half处理</strong></a></li>
+        <li><a href="#4-用户进程读取输入">4. <strong>用户进程读取输入</strong></a></li>
+        <li><a href="#5-总结">5. <strong>总结</strong></a></li>
+        <li><a href="#1-top-half的接口">1. <strong>Top Half的接口</strong></a></li>
+        <li><a href="#2-bottom-half的接口">2. <strong>Bottom Half的接口</strong></a>
+          <ol>
+            <li><a href="#bottom-half的使用方式"><strong>Bottom Half的使用方式</strong></a></li>
+          </ol>
+        </li>
+        <li><a href="#3-top-half和bottom-half的接口区别">3. <strong>Top Half和Bottom Half的接口区别</strong></a></li>
+        <li><a href="#4-如果bottom-half有接口如何使用">4. <strong>如果Bottom Half有接口，如何使用？</strong></a></li>
+        <li><a href="#5-总结-1">5. <strong>总结</strong></a></li>
+        <li><a href="#控制台输入过程详细分点说明">控制台输入过程（详细分点说明）</a></li>
+        <li><a href="#总结-2">总结</a></li>
+        <li><a href="#控制台输出过程函数作用与调用关系">控制台输出过程（函数作用与调用关系）</a>
+          <ol>
+            <li><a href="#1-write-系统调用">1. <strong><code>write</code> 系统调用</strong></a></li>
+            <li><a href="#2-uartputc-kerneluartc87">2. <strong><code>uartputc</code> (kernel/uart.c:87)</strong></a></li>
+            <li><a href="#3-uartstart-kerneluartc126">3. <strong><code>uartstart</code> (kernel/uart.c:126)</strong></a></li>
+            <li><a href="#4-uartintr-kerneluartc180">4. <strong><code>uartintr</code> (kernel/uart.c:180)</strong></a></li>
+          </ol>
+        </li>
+        <li><a href="#控制台输出的调用关系图">控制台输出的调用关系图：</a></li>
+        <li><a href="#控制台输出的完整流程">控制台输出的完整流程</a></li>
+        <li><a href="#总结-3">总结</a></li>
+        <li><a href="#uart的双向通信功能">UART的双向通信功能</a></li>
+        <li><a href="#为什么需要输出字符给uart">为什么需要输出字符给UART？</a></li>
+        <li><a href="#定时器中断的作用">定时器中断的作用</a>
+          <ol>
+            <li><a href="#1-维持系统时钟">1. <strong>维持系统时钟</strong></a></li>
+            <li><a href="#2-实现进程调度">2. <strong>实现进程调度</strong></a></li>
+            <li><a href="#3-打断无限循环或阻塞操作">3. <strong>打断无限循环或阻塞操作</strong></a></li>
+            <li><a href="#4-保证系统响应性">4. <strong>保证系统响应性</strong></a></li>
+            <li><a href="#5-定期触发系统任务">5. <strong>定期触发系统任务</strong></a></li>
+          </ol>
+        </li>
+        <li><a href="#定时器中断的典型过程">定时器中断的典型过程</a></li>
+        <li><a href="#总结-4">总结</a></li>
+        <li><a href="#clint-的详细解释">CLINT 的详细解释</a>
+          <ol>
+            <li><a href="#clint-的作用">CLINT 的作用</a></li>
+          </ol>
+        </li>
+        <li><a href="#clint-的具体作用和工作位置">CLINT 的具体作用和工作位置</a></li>
+        <li><a href="#编程-clint-的具体方法">编程 CLINT 的具体方法</a>
+          <ol>
+            <li><a href="#1-初始化定时器中断">1. <strong>初始化定时器中断</strong></a></li>
+            <li><a href="#2-clint-寄存器">2. <strong>CLINT 寄存器</strong></a></li>
+            <li><a href="#3-处理定时器中断">3. <strong>处理定时器中断</strong></a></li>
+            <li><a href="#4-在-devintr-中处理软件中断">4. <strong>在 <code>devintr</code> 中处理软件中断</strong></a></li>
+          </ol>
+        </li>
+        <li><a href="#总结-5">总结</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
 
             <main class="main full-width">
     <article class="main-article">
@@ -253,12 +364,28 @@
 
     <div class="article-details">
     
+    <header class="article-category">
+        
+            <a href="/categories/mit6s081/" >
+                Mit6s081
+            </a>
+        
+            <a href="/categories/os/" >
+                Os
+            </a>
+        
+    </header>
+    
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/mit6s081lec8/">Mit6s081Lec8</a>
+            <a href="/p/mit6s081lec8/">MIT6S081Lec8</a>
         </h2>
     
+        
+        <h3 class="article-subtitle">
+            Interrupts
+        </h3>
         
     </div>
 
@@ -278,7 +405,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2024-11-10</time>
+                <time class="article-time--published">2024-09-16</time>
             </div>
         
 
@@ -293,11 +420,22 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 0 分钟
+                    阅读时长: 46 分钟
                 </time>
             </div>
-        
-    </footer>
+        <div class="article-lastmod">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time>
+                    Nov 12, 2024 12:44 &#43;0800
+                </time>
+            </div></footer>
     
 
     
@@ -308,22 +446,1008 @@
     <section class="article-content">
     
     
-    
+    <h1 id="lecture-9-interrupts">Lecture 9 Interrupts
+</h1><ol>
+<li>内存是如何被真实的操作系统（而不是像XV6这样的教学操作系统）所使用</li>
+<li>首先是计算机中总共有多少内存（33048332），如果你再往后看的话，你会发现大部分内存都被使用了（4214604 + 26988148）。但是大部分内存并没有被应用程序所使用，而是被buff/cache用掉了。这在一个操作系统中还挺常见的，因为我们不想让物理内存就在那闲置着，我们想让物理内存被用起来，所以这里大块的内存被用作buff/cache。</li>
+<li>大部分操作系统运行时几乎没有任何空闲的内存。这意味着，如果应用程序或者内核需要使用新的内存，那么我们需要丢弃一些已有的内容。&mdash;&ndash;现在的空闲内存（free）或许足够几个page用，但是在某个时间点如果需要大量内存的话，要么是从应用程序，要么是从buffer/cache中，需要撤回已经使用的一部分内存。</li>
+<li>VIRT表示的是虚拟内存地址空间的大小，RES是实际使用的内存数量。实际使用的内存数量远小于地址空间的大小。所以，我们上节课讨论的基于虚拟内存和page fault提供的非常酷的功能在这都有使用。</li>
+</ol>
+<hr>
+<ol>
+<li>
+<p>中断对应的场景很简单，就是硬件想要得到操作系统的关注。（例如网卡收到了一个packet，网卡会生成一个中断；用户通过键盘按下了一个按键，键盘会产生一个中断。）</p>
+</li>
+<li>
+<p>操作系统需要做的是，保存当前的工作，处理中断，处理完成之后再恢复之前的工作。这里的保存和恢复工作，与我们之前看到的系统调用过程非常相似。（所以系统调用，page fault，中断，都使用相同的机制）</p>
+</li>
+<li>
+<p>但是中断又有一些不一样的地方</p>
+<ol>
+<li>
+<p>asynchronous。当硬件生成中断时，Interrupt handler与当前运行的进程在CPU上没有任何关联。但如果是系统调用的话，系统调用发生在运行进程的context下。</p>
+</li>
+<li>
+<p>concurrency。我们这节课会稍微介绍并发，在下一节课，我们会介绍更多并发相关的内容。对于中断来说，CPU和生成中断的设备是并行的在运行。网卡自己独立的处理来自网络的packet，然后在某个时间点产生中断，但是同时，CPU也在运行。所以我们在CPU和设备之间是真正的并行的，我们必须管理这里的并行。</p>
+</li>
+<li>
+<p>program device。我们这节课主要关注外部设备，例如网卡，UART，而这些设备需要被编程。每个设备都有一个编程手册，就像RISC-V有一个包含了指令和寄存器的手册一样。设备的编程手册包含了它有什么样的寄存器，它能执行什么样的操作，在读写控制寄存器的时候，设备会如何响应。不过通常来说，设备的手册不如RISC-V的手册清晰，这会使得对于设备的编程会更加复杂。</p>
+</li>
+<li>
+<p>中断是从哪里产生的？因为我们主要关心的是外部设备的中断，而不是定时器中断或者软件中断。外设中断来自于主板上的设备。</p>
+</li>
+</ol>
+</li>
+<li>
+<p>主板可以连接以太网卡，MicroUSB，MicroSD等，主板上的各种线路将外设和CPU连接在一起。</p>
+</li>
+<li>
+<p>我们在之前的课程已经知道UART0会映射到内核内存地址的某处，类似于读写内存，通过向相应的设备地址执行load/store指令，我们就可以对例如UART的设备进行编程。</p>
+</li>
+<li>
+<p>所有的设备都连接到处理器上，处理器上是通过Platform Level Interrupt Control，简称PLIC来处理设备中断。PLIC会管理来自于外设的中断。</p>
+</li>
+<li>
+<p>我们有53个不同的来自于设备的中断。这些中断到达PLIC之后，PLIC会路由这些中断。图的右下角是CPU的核，PLIC会将中断路由到某一个CPU的核。如果所有的CPU核都正在处理中断，PLIC会保留中断直到有一个CPU核可以用来处理中断。所以PLIC需要保存一些内部数据来跟踪中断的状态。</p>
+</li>
+<li>
+<p>具体流程是：</p>
+<ul>
+<li>PLIC会通知当前有一个待处理的中断</li>
+<li>其中一个CPU核会Claim接收中断，这样PLIC就不会把中断发给其他的CPU处理</li>
+<li>CPU核处理完中断之后，CPU会通知PLIC</li>
+<li>PLIC将不再保存中断的信息</li>
+</ul>
+</li>
+<li>
+<p>PLIC只是分发中断，而内核需要对PLIC进行编程来告诉它中断应该分发到哪。实际上，内核可以对中断优先级进行编程，这里非常的灵活。</p>
+</li>
+<li>
+<p>当UART触发中断的时候，所有的CPU核都能收到中断吗？取决于你如何对PLIC进行编程。对于XV6来说，所有的CPU都能收到中断，但是只有一个CPU会Claim相应的中断。</p>
+</li>
+</ol>
+<hr>
+<ol>
+<li>
+<p>通常来说，管理设备的代码称为驱动，所有的驱动都在内核中。</p>
+</li>
+<li>
+<p>xv6的示范是UART设备的驱动，代码在uart.c文件中。如果我们查看代码的结构，我们可以发现大部分驱动都分为两个部分，bottom/top。</p>
+<ol>
+<li>bottom部分通常是Interrupt handler。当一个中断送到了CPU，并且CPU设置接收这个中断，CPU会调用相应的Interrupt handler。Interrupt handler并不运行在任何特定进程的context中，它只是处理中断。</li>
+<li>top部分，是用户进程，或者内核的其他部分调用的接口。对于UART来说，这里有read/write接口，这些接口可以被更高层级的代码调用。</li>
+</ol>
+</li>
+<li>
+<p>通常情况下，驱动中会有一些队列（或者说buffer），top部分的代码会从队列中读写数据，而Interrupt handler（bottom部分）同时也会向队列中读写数据。这里的队列可以将并行运行的设备和CPU解耦开来。</p>
+</li>
+<li>
+<p>通常对于Interrupt handler来说存在一些限制，因为它并没有运行在任何进程的context中，所以进程的page table并不知道该从哪个地址读写数据，也就无法直接从Interrupt handler读写数据。驱动的top部分通常与用户的进程交互，并进行数据的读写。</p>
+</li>
+<li>
+<p>在很多操作系统中，驱动代码加起来可能会比内核还要大，主要是因为，对于每个设备，你都需要一个驱动，而设备又很多。</p>
+</li>
+<li>
+<p>通常来说，编程是通过memory mapped I/O完成的。</p>
+</li>
+<li>
+<p>在SiFive的手册中，设备地址出现在物理地址的特定区间内，这个区间由主板制造商决定。操作系统需要知道这些设备位于物理地址空间的具体/位置，然后再通过普通的load/store指令对这些地址进行编程。load/store指令实际上的工作就是读写设备的控制寄存器。</p>
+<p>例如，对网卡执行store指令时，CPU会修改网卡的某个控制寄存器，进而导致网卡发送一个packet。所以这里的load/store指令不会读写内存，而是会操作设备。并且你需要阅读设备的文档来弄清楚设备的寄存器和相应的行为，有的时候文档很清晰，有的时候文档不是那么清晰。</p>
+</li>
+<li>
+<p>例如，0x200_0000对应CLINT，0xC000000对应的是PLIC。在这个图中UART0对应的是0x1001*_*0000，但是在QEMU中，我们的UART0的地址略有不同，因为在QEMU中我们并不是完全的模拟SiFive主板，而是模拟与SiFive主板非常类似的东西。</p>
+<p>以上就是Memory-mapped IO。</p>
+</li>
+<li>
+<p>这是一个很简单的芯片，图中表明了芯片拥有的寄存器。例如对于控制寄存器000，如果写它会将数据写入到寄存器中并被传输到其他地方，如果读它可以读出存储在寄存器中的内容。UART可以让你能够通过串口发送数据bit，在线路的另一侧会有另一个UART芯片，能够将数据bit组合成一个个Byte。</p>
+<p>这里还有一些其他可以控制的地方，例如控制寄存器001，可以通过它来控制UART是否产生中断。实际上对于一个寄存器，其中的每个bit都有不同的作用。例如对于寄存器001，也就是IER寄存器，bit0-bit3分别控制了不同的中断。这个文档还有很多内容，但是对于我们这节课来说，上图就足够了。不过即使是这么简单的一个设备，它的文档也有很多页。</p>
+</li>
+</ol>
+<hr>
+<ol>
+<li>
+<p>当XV6启动时，Shell会输出提示符“$ ”</p>
+<p>对于“$ ”来说，实际上就是设备会将字符传输给UART的寄存器，UART之后会在发送完字符之后产生一个中断。在QEMU中，模拟的线路的另一端会有另一个UART芯片（模拟的），这个UART芯片连接到了虚拟的Console，它会进一步将“$ ”显示在console上。</p>
+</li>
+<li>
+<p>另一方面，对于“ls”，这是用户输入的字符。键盘连接到了UART的输入线路，当你在键盘上按下一个按键，UART芯片会将按键字符通过串口线发送到另一端的UART芯片。另一端的UART芯片先将数据bit合并成一个Byte，之后再产生一个中断，并告诉处理器说这里有一个来自于键盘的字符。之后Interrupt handler会处理来自于UART的字符。</p>
+</li>
+<li>
+<p>RISC-V有许多与中断相关的寄存器：</p>
+<ul>
+<li>SIE（Supervisor Interrupt Enable）寄存器。这个寄存器中有一个bit（E）专门针对例如UART的外部设备的中断；有一个bit（S）专门针对软件中断，软件中断可能由一个CPU核触发给另一个CPU核；还有一个bit（T）专门针对定时器中断。我们这节课只关注外部设备的中断。</li>
+<li>SSTATUS（Supervisor Status）寄存器。这个寄存器中有一个bit来打开或者关闭中断。每一个CPU核都有独立的SIE和SSTATUS寄存器，除了通过SIE寄存器来单独控制特定的中断，还可以通过SSTATUS寄存器中的一个bit来控制所有的中断。</li>
+<li>SIP（Supervisor Interrupt Pending）寄存器。当发生中断时，处理器可以通过查看这个寄存器知道当前是什么类型的中断。</li>
+<li>SCAUSE寄存器，这个寄存器我们之前看过很多次。它会表明当前状态的原因是中断。</li>
+<li>STVEC寄存器，它会保存当trap，page fault或者中断发生时，CPU运行的用户程序的程序计数器，这样才能在稍后恢复程序的运行。</li>
+</ul>
+</li>
+<li>
+<p>我们第一个外设是console，这是我们print的输出位置。查看位于console.c的consoleinit函数。这里首先初始化了锁，我们现在还不关心这个锁。然后调用了uartinit，uartinit函数位于uart.c文件。这个函数实际上就是配置好UART芯片使其可以被使用。这里的流程是先关闭中断，之后设置波特率，设置字符长度为8bit，重置FIFO，最后再重新打开中断。以上就是uartinit函数，运行完这个函数之后，原则上UART就可以生成中断了。但是因为我们还没有对PLIC编程，所以中断不能被CPU感知。最终，在main函数中，需要调用plicinit函数。下图是plicinit函数。</p>
+</li>
+<li>
+<p>PLIC与外设一样，也占用了一个I/O地址（0xC000_0000）。代码的第一行使能了UART的中断，这里实际上就是设置PLIC会接收哪些中断，进而将中断路由到CPU。类似的，代码的第二行设置PLIC接收来自IO磁盘的中断。</p>
+<p>main函数中，plicinit之后就是plicinithart函数。plicinit是由0号CPU运行，之后，每个CPU的核都需要调用plicinithart函数表明对于哪些外设中断感兴趣。</p>
+<p>所以在plicinithart函数中，每个CPU的核都表明自己对来自于UART和VIRTIO的中断感兴趣。因为我们忽略中断的优先级，所以我们将优先级设置为0。</p>
+</li>
+<li>
+<p>到目前为止，我们有了生成中断的外部设备，我们有了PLIC可以传递中断到单个的CPU。但是CPU自己还没有设置好接收中断，因为我们还没有设置好SSTATUS寄存器。在main函数的最后，程序调用了scheduler函数。scheduler函数主要是运行进程。但是在实际运行进程之前，会执行intr_on函数来使得CPU能接收中断。</p>
+<p>intr_on函数只完成一件事情，就是设置SSTATUS寄存器，打开中断标志位。</p>
+<p>在这个时间点，中断被完全打开了。如果PLIC正好有pending的中断，那么这个CPU核会收到中断。</p>
+<p>以上就是中断的基本设置。</p>
+</li>
+</ol>
+<hr>
+<ol>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">//init.c中的main函数，这是系统启动后运行的第一个进程。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span>
+</span></span><span class="line"><span class="cl"><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="err">）</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">pid</span><span class="p">,</span><span class="n">wpid</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span><span class="p">(</span><span class="nf">open</span><span class="p">(</span><span class="s">&#34;console&#34;</span><span class="p">,</span><span class="mi">0</span> <span class="n">RDWR</span><span class="p">)</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">mknod</span><span class="p">(</span><span class="s">&#34;console&#34;</span><span class="p">,</span><span class="n">CONSOLE</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">open</span><span class="p">(</span><span class="s">&#34;console&#34;</span><span class="p">,</span><span class="mi">0</span> <span class="n">RDWR</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">dup</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="o">/</span><span class="n">stdout</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">dup</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="o">/</span><span class="n">stderr</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span><span class="p">(;;){</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;init:starting sh</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="n">pid</span> <span class="nf">fork</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span><span class="p">(</span><span class="n">pid</span> <span class="mi">0</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;init:fork failed</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span><span class="p">(</span><span class="n">pid</span> <span class="o">==</span><span class="mi">0</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">exec</span><span class="p">(</span><span class="s">&#34;sh&#34;</span><span class="p">,</span><span class="n">argv</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;init:exec sh failed</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>首先这个进程的main函数创建了一个代表Console的设备。这里通过mknod操作创建了console设备。因为这是第一个打开的文件，所以这里的文件描述符0。之后通过dup创建stdout和stderr。这里实际上通过复制文件描述符0，得到了另外两个文件描述符1，2。最终文件描述符0，1，2都用来代表Console。</p>
+<p>Shell程序首先打开文件描述符0，1，2。之后Shell向文件描述符2打印提示符“$ ”。</p>
+</li>
+<li>
+<p>尽管Console背后是UART设备，但是从应用程序来看，它就像是一个普通的文件。Shell程序只是向文件描述符2写了数据，它并不知道文件描述符2对应的是什么。在Unix系统中，设备是由文件表示。</p>
+</li>
+</ol>
+<hr>
+<ol>
+<li>
+<p>假设键盘生成了一个中断并且发向了PLIC，PLIC会将中断路由给一个特定的CPU核，并且如果这个CPU核设置了SIE寄存器的E bit（注，针对外部中断的bit位），那么会发生以下事情：</p>
+<ul>
+<li>首先，会清除SIE寄存器相应的bit，这样可以阻止CPU核被其他中断打扰，该CPU核可以专心处理当前中断。处理完成之后，可以再次恢复SIE寄存器相应的bit。</li>
+<li>之后，会设置SEPC寄存器为当前的程序计数器。我们假设Shell正在用户空间运行，突然来了一个中断，那么当前Shell的程序计数器会被保存。</li>
+<li>之后，要保存当前的mode。在我们的例子里面，因为当前运行的是Shell程序，所以会记录user mode。</li>
+<li>再将mode设置为Supervisor mode。</li>
+<li>最后将程序计数器的值设置成STVEC的值。（注，STVEC用来保存trap处理程序的地址，详见lec06）在XV6中，STVEC保存的要么是uservec或者kernelvec函数的地址，具体取决于发生中断时程序运行是在用户空间还是内核空间。在我们的例子中，Shell运行在用户空间，所以STVEC保存的是uservec函数的地址。而从之前的课程我们可以知道uservec函数会调用usertrap函数。所以最终，我们在usertrap函数中。我们这节课不会介绍trap过程中的拷贝，恢复过程，因为在之前的课程中已经详细的介绍过了。</li>
+</ul>
+</li>
+<li>
+<p>在trap.c的devintr函数中，首先会通过SCAUSE寄存器判断当前中断是否是来自于外设的中断。如果是的话，再调用plic_claim函数来获取中断。plic_claim函数位于plic.c文件中。在这个函数中，当前CPU核会告知PLIC，自己要处理中断，PLIC_SCLAIM会将中断号返回，对于UART来说，返回的中断号是10。</p>
+</li>
+<li>
+<p>学生提问： UART对于键盘来说很重要，来自于键盘的字符通过UART走到CPU再到我们写的代码。但是我不太理解UART对于Shell输出字符究竟有什么作用？因为在这个场景中，并没有键盘的参与。</p>
+<p>Frans教授：显示设备与UART也是相连的。所以UART连接了两个设备，一个是键盘，另一个是显示设备，也就是Console。QEMU也是通过模拟的UART与Console进行交互，而Console的作用就是将字符在显示器上画出来。</p>
+</li>
+<li>
+<p>学生提问：uartinit只被调用了一次，所以才导致了所有的CPU核都共用一个buffer吗？</p>
+<p>Frans教授：因为只有一个UART设备，一个buffer只针对一个UART设备，而这个buffer会被所有的CPU核共享，这样运行在多个CPU核上的多个程序可以同时向Console打印输出，而驱动中是通过锁来确保多个CPU核上的程序串行的向Console打印输出。</p>
+<p>学生提问：我们之所以需要锁是因为有多个CPU核，但是却只有一个Console，对吧？</p>
+<p>Frans教授：是的，如我们之前说的驱动的top和bottom部分可以并行的运行。所以一个CPU核可以执行uartputc函数，而另个一CPU核可以执行uartintr函数，我们需要确保它们是串行执行的，而锁确保了这一点。</p>
+<p>学生提问：那是不是意味着，某个时间，其他所有的CPU核都需要等待某一个CPU核的处理？</p>
+<p>Frans教授：这里并不是死锁。其他的CPU核还是可以在等待的时候运行别的进程。</p>
+</li>
+</ol>
+<hr>
+<ol>
+<li>
+<p>与中断相关的并发，并发加大了中断编程的难度。</p>
+<ol>
+<li>设备与CPU是并行运行的。例如当UART向Console发送字符的时候，CPU会返回执行Shell，而Shell可能会再执行一次系统调用，向buffer中写入另一个字符，这些都是在并行的执行。这里的并行称为producer-consumer并行。</li>
+<li>中断会停止当前运行的程序。例如，Shell正在运行第212个指令，突然来了个中断，Shell的执行会立即停止。对于用户空间代码，这并不是一个大的问题，因为当我们从中断中返回时，我们会恢复用户空间代码，并继续执行执行停止的指令。我们已经在trap和page fault中看过了这部分内容。但是当内核被中断打断时，事情就不一样了。所以，代码运行在kernel mode也会被中断，这意味着即使是内核代码，也不是直接串行运行的。在两个内核指令之间，取决于中断是否打开，可能会被中断打断执行。对于一些代码来说，如果不能在执行期间被中断，这时内核需要临时关闭中断，来确保这段代码的原子性。</li>
+<li>驱动的top和bottom部分是并行运行的。例如，Shell会在传输完提示符“$”之后再调用write系统调用传输空格字符，代码会走到UART驱动的top部分（注，uartputc函数），将空格写入到buffer中。但是同时在另一个CPU核，可能会收到来自于UART的中断，进而执行UART驱动的bottom部分，查看相同的buffer。所以一个驱动的top和bottom部分可以并行的在不同的CPU上运行。这里我们通过lock来管理并行。因为这里有共享的数据，我们想要buffer在一个时间只被一个CPU核所操作。</li>
+</ol>
+</li>
+<li>
+<p>这里我将会关注在第一点，也就是producer/consumser并发。这是驱动中的非常常见的典型现象。如你们所见的，在驱动中会有一个buffer，在我们之前的例子中，buffer是32字节大小。并且有两个指针，分别是读指针和写指针。</p>
+</li>
+<li>
+<p>producer可以一直写入数据，直到写指针 + 1等于读指针，因为这时，buffer已经满了。当buffer满了的时候，producer必须停止运行。我们之前在uartputc函数中看过，如果buffer满了，代码会sleep，暂时搁置Shell并运行其他的进程。</p>
+<p>Interrupt handler，也就是uartintr函数，在这个场景下是consumer，每当有一个中断，并且读指针落后于写指针，uartintr函数就会从读指针中读取一个字符再通过UART设备发送，并且将读指针加1。当读指针追上写指针，也就是两个指针相等的时候，buffer为空，这时就不用做任何操作。</p>
+</li>
+<li>
+<p>学生提问：这里的buffer对于所有的CPU核都是共享的吗？</p>
+<p>Frans教授：这里的buffer存在于内存中，并且只有一份，所以，所有的CPU核都并行的与这一份数据交互。所以我们才需要lock。</p>
+<p>学生提问：对于uartputc中的sleep，它怎么知道应该让Shell去sleep？</p>
+<p>Frans教授： sleep会将当前在运行的进程存放于sleep数据中。它传入的参数是需要等待的信号，在这个例子中传入的是uart_tx_r的地址。在uartstart函数中，一旦buffer中有了空间，会调用与sleep对应的函数wakeup，传入的也是uart_tx_r的地址。任何等待在这个地址的进程都会被唤醒。有时候这种机制被称为conditional synchronization。</p>
+</li>
+</ol>
+<hr>
+<ol>
+<li>
+<p>在UART的另一侧，会有类似的事情发生，有时Shell会调用read从键盘中读取字符。 在read系统调用的底层，会调用fileread函数。在这个函数中，如果读取的文件类型是设备，会调用相应设备的read函数。</p>
+<p>在我们的例子中，read函数就是console.c文件中的consoleread函数。</p>
+<p>这里与UART类似，也有一个buffer，包含了128个字符。其他的基本一样，也有producer和consumser。但是在这个场景下Shell变成了consumser，因为Shell是从buffer中读取数据。而键盘是producer，它将数据写入到buffer中。</p>
+<p>从consoleread函数中可以看出，当读指针和写指针一样时，说明buffer为空，进程会sleep。所以Shell在打印完“$ ”之后，如果键盘没有输入，Shell进程会sleep，直到键盘有一个字符输入。所以在某个时间点，假设用户通过键盘输入了“l”，这会导致“l”被发送到主板上的UART芯片，产生中断之后再被PLIC路由到某个CPU核，之后会触发devintr函数，devintr可以发现这是一个UART中断，然后通过uartgetc函数获取到相应的字符，之后再将字符传递给consoleintr函数。</p>
+<p>默认情况下，字符会通过consputc，输出到console上给用户查看。之后，字符被存放在buffer中。在遇到换行符的时候，唤醒之前sleep的进程，也就是Shell，再从buffer中将数据读出。</p>
+<p>所以这里也是通过buffer将consumer和producer之间解耦，这样它们才能按照自己的速度，独立的并行运行。如果某一个运行的过快了，那么buffer要么是满的要么是空的，consumer和producer其中一个会sleep并等待另一个追上来。</p>
+</li>
+</ol>
+<hr>
+<p>当Unix刚被开发出来的时候，Interrupt处理还是很快的。这使得硬件可以很简单，当外设有数据需要处理时，硬件可以中断CPU的执行，并让CPU处理硬件的数据。</p>
+<p>而现在，中断相对处理器来说变慢了。从前面的介绍可以看出来这一点，需要很多步骤才能真正的处理中断数据。如果一个设备在高速的产生中断，处理器将会很难跟上。所以如果查看现在的设备，可以发现，现在的设备相比之前做了更多的工作。所以在产生中断之前，设备上会执行大量的操作，这样可以减轻CPU的处理负担。所以现在硬件变得更加复杂。</p>
+<p>如果你有一个高性能的设备，例如你有一个千兆网卡，这个网卡收到了大量的小包，网卡每秒可以生成1.5Mpps，这意味着每一个微秒，CPU都需要处理一个中断，这就超过了CPU的处理能力。那么当网卡收到大量包，并且处理器不能处理这么多中断的时候该怎么办呢？</p>
+<p>这里的解决方法就是使用polling。除了依赖Interrupt，CPU可以一直读取外设的控制寄存器，来检查是否有数据。对于UART来说，我们可以一直读取RHR寄存器，来检查是否有数据。现在，CPU不停的在轮询设备，直到设备有了数据。</p>
+<p>这种方法浪费了CPU cycles，当我们在使用CPU不停的检查寄存器的内容时，我们并没有用CPU来运行任何程序。在我们之前的例子中，如果没有数据，内核会让Shell进程sleep，这样可以运行另一个进程。</p>
+<p>所以，对于一个慢设备，你肯定不想一直轮询它来得到数据。我们想要在没有数据的时候切换出来运行一些其他程序。但是如果是一个快设备，那么Interrupt的overhead也会很高，那么我们在polling设备的时候，是经常能拿到数据的，这样可以节省进出中断的代价。</p>
+<p>所以对于一个高性能的网卡，如果有大量的包要传入，那么应该用polling。对于一些精心设计的驱动，它们会在polling和Interrupt之间动态切换（注，也就是网卡的NAPI）。</p>
+<hr>
+<h3 id="1-内存在真实操作系统中的使用">1. <strong>内存在真实操作系统中的使用</strong>
+</h3><p>在真实操作系统中，内存管理是一项复杂的任务。操作系统不仅要为应用程序分配内存，还需要管理内存的使用以确保系统高效运行。大部分内存并不只是简单地分配给应用程序，而是有很多部分被用作缓存或缓冲区（buff/cache）。这样可以确保物理内存不会闲置，而是被充分利用。</p>
+<p>现代操作系统采用了类似于虚拟内存和分页机制（Page Fault）的策略，虚拟内存为每个进程提供了一个独立的地址空间，即使物理内存并不足够。系统通过在需要时从buff/cache或者应用程序中回收内存来满足新的请求。这也是为什么当需要大块内存时，系统必须从已经使用的部分中回收一些内存。</p>
+<h3 id="2-中断与并发的关系">2. <strong>中断与并发的关系</strong>
+</h3><p>中断是一种机制，用于设备通知操作系统它们需要处理的情况。例如，网卡接收数据包时，会向操作系统发送中断，或者当用户按下键盘时，键盘产生中断。在并发环境下，中断使得系统能够同时处理多个事件，而不必等待一个进程的结束。</p>
+<p>中断与并发之间的关系体现在设备和CPU之间的<strong>真正并行性</strong>。设备（如网卡或键盘）与CPU是并行运行的。例如，网卡接收数据包的同时，CPU也在运行其他任务。在设备产生中断时，操作系统需要中断当前的工作，保存状态，处理中断，之后恢复之前的工作。中断处理的这种机制和系统调用、页面错误（Page Fault）等有很大的相似性，但中断具有异步性和并发性，CPU和设备独立地执行任务。</p>
+<h3 id="3-中断机制中的top-half与bottom-half">3. <strong>中断机制中的Top Half与Bottom Half</strong>
+</h3><p>中断的处理可以分为两部分：<strong>Top Half</strong>和<strong>Bottom Half</strong>。</p>
+<ul>
+<li><strong>Top Half</strong>：这是中断处理的第一阶段。Top Half负责快速响应中断，执行最紧急的任务，如确认中断来源、读取硬件寄存器等。Top Half的目标是尽可能快地完成，以减少对系统的干扰，因此它的执行时间要尽可能短。</li>
+<li><strong>Bottom Half</strong>：Bottom Half负责处理那些可以稍后执行的任务。由于Top Half不能处理复杂的任务，这些任务会被推迟到Bottom Half来完成。Bottom Half的处理时间相对较长，但它是在普通进程上下文中执行的，不会阻塞其他中断的处理。</li>
+</ul>
+<p><strong>关系</strong>：Top Half处理中断的紧急部分，而Bottom Half处理非紧急的部分。Top Half会通过某种机制（如标记位）通知Bottom Half继续处理剩余工作。通过这种分工，系统能迅速响应中断，同时保证复杂任务的处理不会影响系统的性能。</p>
+<h3 id="4-例子uart串口通信中的中断机制与并发">4. <strong>例子：UART串口通信中的中断机制与并发</strong>
+</h3><p>让我们通过UART的串口通信来具体说明中断机制中的并发关系：</p>
+<h4 id="中断触发与top-half">中断触发与Top Half
+</h4><ul>
+<li>当UART设备接收到一个字符时，它会生成一个中断。</li>
+<li>操作系统进入<strong>Top Half</strong>，从UART的寄存器中读取字符并将其存入内存的缓冲区中。这一步必须快速完成，避免阻塞系统。</li>
+</ul>
+<h4 id="bottom-half处理">Bottom Half处理
+</h4><ul>
+<li>当有空闲时间或者需要时，系统进入<strong>Bottom Half</strong>，从缓冲区中取出字符，进一步处理或将其传递给用户进程（如Shell）。</li>
+</ul>
+<h4 id="并发关系">并发关系
+</h4><p>在这个例子中并发体现在：</p>
+<ol>
+<li>系统正在执行某个任务（例如，运行一个用户进程），而此时UART设备接收到数据并触发中断，操作系统会暂停当前任务来处理中断。这是<strong>中断机制的并发性</strong>。</li>
+<li>Top Half和Bottom Half之间的协作也是一种并发：Top Half处理了中断的紧急部分，将复杂工作留给Bottom Half。两者通过共享的缓冲区进行数据传递。</li>
+</ol>
+<p>此外，<strong>Producer-Consumer</strong>模式也可以在这个例子中体现出来：</p>
+<ul>
+<li><strong>Producer</strong>：UART设备产生的数据被存入缓冲区。</li>
+<li><strong>Consumer</strong>：用户进程（如Shell）从缓冲区读取数据进行处理。</li>
+</ul>
+<p>缓冲区和锁机制可以使Producer和Consumer解耦，使它们能够按照各自的速度运行。这种并发处理通过缓冲区的读写操作来保证系统稳定、高效。</p>
+<h3 id="5-中断相关的设备与cpu并发的挑战">5. <strong>中断相关的设备与CPU并发的挑战</strong>
+</h3><p>如材料中提到的，中断处理增加了编程的复杂性，尤其是在并发环境下。设备和CPU是独立并行运行的。对于内核代码来说，中断可能会打断执行，这就要求在一些情况下，内核要临时关闭中断来确保代码执行的原子性。此外，驱动的Top Half和Bottom Half可以在不同的CPU上并行执行，这使得锁和同步机制变得非常重要，以确保不会出现竞态条件。</p>
+<h3 id="总结">总结
+</h3><ol>
+<li>真实操作系统会充分利用内存，使其大部分被用于缓存和缓冲区。</li>
+<li>中断机制通过异步处理实现了设备和CPU之间的并发性。</li>
+<li>Top Half和Bottom Half分工协作，共同处理中断事件。</li>
+<li>通过缓冲区和同步机制，操作系统能够有效地管理并发事件，例如在UART设备和用户进程之间的Producer-Consumer模式下运行。</li>
+</ol>
+<p>这种架构在复杂的现代操作系统中，通过更高效的中断处理和并发管理，确保了系统的稳定性和性能。</p>
+<h3 id="1-top-half上半部">1. <strong>Top Half（上半部）</strong>
+</h3><p><strong>Top Half</strong>是中断处理的第一阶段，主要特征是<strong>快速响应</strong>和<strong>处理紧急任务</strong>。它的核心任务是在中断发生时立即执行，以尽快恢复系统的正常运行。Top Half通常处理的工作包括：</p>
+<ul>
+<li><strong>识别中断来源</strong>：当一个中断发生时，操作系统首先要知道哪个设备触发了中断。例如，是键盘输入了字符，还是网卡接收到了数据包。</li>
+<li><strong>保存重要数据</strong>：例如，从设备的硬件寄存器中读取数据并保存到一个临时缓冲区。这一步骤非常重要，因为它确保了中断源数据不会丢失。</li>
+<li><strong>清除或屏蔽中断</strong>：为了避免重复中断，Top Half通常会执行必要的操作以清除当前的中断状态，或暂时屏蔽相同的中断。</li>
+</ul>
+<p><strong>执行上下文</strong>：Top Half是在中断上下文中执行的。这意味着它并不运行在任何特定进程的上下文中，而是独立于进程执行。因此，Top Half不允许进行阻塞操作，因为它不能切换到其他任务。</p>
+<p><strong>时间要求</strong>：由于中断的发生会打断系统的正常运行，Top Half的执行时间必须尽可能短，以便快速释放CPU资源，恢复系统的正常调度和任务执行。</p>
+<h3 id="2-bottom-half下半部">2. <strong>Bottom Half（下半部）</strong>
+</h3><p><strong>Bottom Half</strong>是中断处理的第二阶段，它主要负责处理那些可以<strong>延迟执行</strong>的任务。由于Top Half必须尽快执行，复杂或耗时的操作会被推迟到Bottom Half中进行。这些任务可能包括：</p>
+<ul>
+<li><strong>数据处理</strong>：例如，从Top Half中保存的缓冲区中读取数据并将其传递给用户进程或进行进一步处理。这个过程可能包括解析协议、与其他系统组件交互等复杂操作。</li>
+<li><strong>与用户进程交互</strong>：Bottom Half通常负责将处理后的数据传递给用户进程或内核的其他部分。比如，当一个文件系统接收到一个磁盘读请求时，Bottom Half可能会将数据从磁盘读取到内存，并准备好供用户进程访问。</li>
+</ul>
+<p><strong>执行上下文</strong>：与Top Half不同，Bottom Half在<strong>普通进程上下文</strong>中执行。这意味着它运行在系统的普通调度机制下，可以被中断，可以阻塞，可以与其他进程一起共享CPU时间。因为它在进程上下文中执行，所以Bottom Half可以访问系统的所有资源，并执行任何复杂的操作。</p>
+<p><strong>时间要求</strong>：Bottom Half没有严格的时间要求，因为它的任务可以延迟执行，只要在合理的时间内完成即可。</p>
+<h3 id="3-top-half与bottom-half的关系">3. <strong>Top Half与Bottom Half的关系</strong>
+</h3><p><strong>协作与分工</strong>：Top Half和Bottom Half是通过一种协作分工的机制来共同完成中断处理的任务。Top Half快速响应中断并执行紧急处理，而Bottom Half则处理非紧急任务，确保系统的高效运行。这种分工允许系统能够同时响应多个中断，并在不中断系统正常运行的情况下处理复杂的任务。</p>
+<p><strong>通信机制</strong>：在Top Half完成初步处理后，它会通过某种机制（如标志、队列、任务调度等）通知Bottom Half继续处理剩余的任务。Bottom Half通常在系统有空闲时间或需要时被调度执行。</p>
+<h3 id="4-例子uart串口通信中的top-half与bottom-half">4. <strong>例子：UART串口通信中的Top Half与Bottom Half</strong>
+</h3><p>以UART串口通信为例来具体说明Top Half和Bottom Half的运作：</p>
+<h4 id="top-half"><strong>Top Half</strong>:
+</h4><ul>
+<li>当UART设备接收到一个新的字符时，会触发一个中断。</li>
+<li>操作系统立即响应这个中断，进入Top Half的处理程序。</li>
+<li>Top Half会从UART的接收寄存器中读取字符，并将其保存到系统的一个缓冲区中（如环形缓冲区）。</li>
+<li>读取完数据后，Top Half可能会清除中断标志，以防止再次触发相同的中断。</li>
+<li>随后，Top Half结束，系统恢复执行被中断的任务。</li>
+</ul>
+<h4 id="bottom-half"><strong>Bottom Half</strong>:
+</h4><ul>
+<li>当系统空闲或特定条件满足时，Bottom Half被调度执行。</li>
+<li>Bottom Half从Top Half保存的缓冲区中读取字符，并执行进一步处理，如将数据传递给用户进程。</li>
+<li>如果是用户进程等待的数据（如Shell在等待用户输入），Bottom Half会将数据传递给进程，或者将处理结果显示在控制台上。</li>
+<li>Bottom Half处理完成后，系统继续调度其他任务。</li>
+</ul>
+<h3 id="总结-1">总结
+</h3><ul>
+<li><strong>Top Half</strong>是用于快速响应和处理中断的紧急部分，执行时间短，操作简单。</li>
+<li><strong>Bottom Half</strong>处理那些可以延迟的复杂任务，运行在普通进程上下文中，具有较长的执行时间。</li>
+</ul>
+<p>通过这种分工，系统能够有效地处理中断事件，同时保持高效的任务调度和资源利用。</p>
+<h3 id="1-键盘输入与uart触发中断">1. <strong>键盘输入与UART触发中断</strong>
+</h3><p>当用户按下键盘上的某个键时，键盘会将该按键对应的字符通过<strong>UART串口</strong>传输到计算机主板上的UART设备。UART设备接收到来自键盘的<strong>字节数据</strong>，并将其存储在UART的接收寄存器中（Receive Holding Register, RHR）。与此同时，UART设备会触发一个<strong>硬件中断</strong>，通知操作系统有新的数据需要处理。</p>
+<h3 id="2-top-half处理">2. <strong>Top Half处理</strong>
+</h3><p>当UART设备产生中断时，操作系统立即暂停当前正在执行的任务，进入中断处理程序的<strong>Top Half</strong>阶段。Top Half的主要任务是<strong>快速响应中断</strong>，将数据从UART设备中读取并保存到缓冲区中。详细过程如下：</p>
+<ol>
+<li><strong>进入中断处理程序</strong>：操作系统通过查看UART中断状态，确认是键盘输入引发的中断。</li>
+<li><strong>读取UART寄存器数据</strong>：Top Half从UART的接收寄存器中读取一个字节的数据（即用户按下的字符），并将其存放到操作系统内存中的一个缓冲区。这个缓冲区通常是<strong>环形缓冲区</strong>（circular buffer），用于临时保存键盘输入的数据。</li>
+<li><strong>屏蔽/清除中断</strong>：为了避免重复中断，Top Half会清除中断标志或暂时屏蔽UART中断，防止再度中断。</li>
+<li><strong>结束Top Half</strong>：完成数据读取后，Top Half立即返回，恢复系统对其他任务的执行，确保中断处理时间尽可能短。</li>
+</ol>
+<p><strong>注意</strong>：在这个阶段，Top Half并不会进行复杂的处理任务，如将数据交给用户进程或显示在屏幕上。它只是确保数据从UART寄存器中取出，并保存到缓冲区中。</p>
+<h3 id="3-bottom-half处理">3. <strong>Bottom Half处理</strong>
+</h3><p>Top Half完成后，操作系统会在合适的时机调用<strong>Bottom Half</strong>来处理剩下的任务。Bottom Half的主要职责是从缓冲区中读取数据，并将其传递给需要的进程（如Shell）。该阶段允许进行更复杂和耗时的操作，具体步骤如下：</p>
+<ol>
+<li><strong>调度Bottom Half</strong>：系统在某个空闲时刻或当缓冲区中有足够的数据时，调度Bottom Half执行。</li>
+<li><strong>读取缓冲区数据</strong>：Bottom Half从Top Half保存的环形缓冲区中提取字符。这个字符是用户通过键盘输入的。</li>
+<li><strong>处理字符数据</strong>：读取到的字符可能会被进一步处理，例如检查是否有特殊控制字符（如回车或退格）。如果是普通字符，数据通常会被直接传递给需要处理的进程或设备。</li>
+<li><strong>用户进程交互</strong>：Bottom Half将从缓冲区中读取的字符提供给用户进程。例如，当前正在运行的Shell进程可能正在等待用户输入的命令。当Bottom Half处理完这些字符后，Shell可以继续执行用户的命令。</li>
+</ol>
+<h3 id="4-用户进程读取输入">4. <strong>用户进程读取输入</strong>
+</h3><p>对于用户进程（如Shell）来说，键盘输入和UART设备的交互过程如下：</p>
+<ol>
+<li><strong>Shell等待输入</strong>：Shell进程通常会通过调用<code>read</code>系统调用，等待用户的输入。在这个过程中，Shell进程会进入休眠状态（sleep），直到有新的输入数据可用。</li>
+<li><strong>唤醒Shell进程</strong>：当用户输入字符并且Bottom Half完成了数据的处理后，Shell进程会被唤醒。具体来说，当环形缓冲区中有新的数据时，系统会通过<strong>wakeup</strong>机制唤醒之前休眠的Shell进程。</li>
+<li><strong>Shell读取数据</strong>：唤醒后的Shell进程通过<code>read</code>函数从缓冲区中读取用户输入的字符，并将其作为命令的一部分继续处理。</li>
+<li><strong>处理并显示</strong>：Shell读取并处理用户输入后，会在控制台上显示相应的反馈结果。例如，用户输入了命令“ls”，Shell读取该命令并将结果显示在屏幕上。</li>
+</ol>
+<h3 id="5-总结">5. <strong>总结</strong>
+</h3><p><strong>UART读取键盘输入的整个过程</strong>结合了中断机制和驱动程序的并发处理。操作系统通过中断管理器（如PLIC）响应外设的中断请求，并通过Top Half和Bottom Half机制高效地处理设备输入，同时保持系统的流畅运行。整个过程的并发管理依靠缓冲区和同步机制来解耦设备和用户进程的交互：</p>
+<ul>
+<li><strong>Top Half</strong>快速响应中断并将键盘输入数据保存到缓冲区中。</li>
+<li><strong>Bottom Half</strong>在适当时机处理缓冲区中的数据，并将其交付给用户进程。</li>
+<li>用户进程通过<code>read</code>函数获取输入数据，处理命令并显示结果。</li>
+</ul>
+<p>这套机制使得操作系统能够并行处理键盘输入和其他任务，实现高效的多任务操作。</p>
+<h3 id="1-top-half的接口">1. <strong>Top Half的接口</strong>
+</h3><p><strong>Top Half</strong>处理紧急的中断事件，如UART中断的情况。它的接口可以被内核或用户进程调用，典型的接口包括：</p>
+<ul>
+<li><strong>读写接口</strong>：如<code>read()</code> 和 <code>write()</code>系统调用，用户进程可以调用这些接口从设备（如UART）读取数据或写入数据。这些接口的调用最终会触发Top Half处理输入/输出事件。</li>
+<li><strong>设备接口</strong>：在驱动程序中，Top Half直接与设备的寄存器和中断进行交互，它通过接口与硬件通信。例如，在UART驱动中，Top Half会读取UART的接收寄存器（如<code>RHR</code>寄存器）以获取数据，并将这些数据传递到内存缓冲区。</li>
+</ul>
+<h3 id="2-bottom-half的接口">2. <strong>Bottom Half的接口</strong>
+</h3><p>通常情况下，<strong>Bottom Half</strong>不会直接暴露给用户进程，因为它的工作是在内核中完成的。它的主要职责是处理Top Half推迟的任务，比如数据的进一步处理、协议解析等。虽然Bottom Half不直接提供传统意义上的接口，但它与Top Half及内核的其他部分之间会有某种隐式接口或协作机制。</p>
+<h4 id="bottom-half的使用方式"><strong>Bottom Half的使用方式</strong>
+</h4><ol>
+<li><strong>延迟任务机制</strong>：Bottom Half通过某种延迟任务机制（如软中断<code>softirq</code>、任务队列<code>tasklet</code>、工作队列<code>workqueue</code>）被调度执行，这些机制不需要直接暴露给用户，而是在Top Half标记完成后，由操作系统自动安排执行。例如：
+<ul>
+<li><strong>软中断（Softirq）</strong>：一种轻量级的延迟任务处理方式，用于处理网络数据包等延迟任务。</li>
+<li><strong>工作队列（Workqueue）</strong>：工作队列可以安排更复杂的任务，通常用于处理需要长时间执行的非紧急操作。</li>
+</ul>
+</li>
+<li><strong>缓冲区的读写操作</strong>：Bottom Half主要通过访问共享的缓冲区进行操作。例如，Top Half将数据写入环形缓冲区，Bottom Half读取该缓冲区的数据并处理。虽然这些操作是通过内核函数调用完成的，但它们不直接作为接口提供给用户进程。</li>
+</ol>
+<h3 id="3-top-half和bottom-half的接口区别">3. <strong>Top Half和Bottom Half的接口区别</strong>
+</h3><ul>
+<li><strong>Top Half的接口</strong>：
+<ul>
+<li><strong>直接与用户进程交互</strong>：Top Half通常提供系统调用接口，如<code>read()</code> 和 <code>write()</code>，这些接口由用户进程调用，直接与外部设备（如UART）交互。</li>
+<li><strong>紧急处理</strong>：Top Half处理硬件中断的紧急部分，执行快速数据采集和传递任务，保证设备响应迅速。</li>
+</ul>
+</li>
+<li><strong>Bottom Half的“接口”</strong>：
+<ul>
+<li><strong>间接与内核交互</strong>：Bottom Half通过软中断、任务队列等机制被调度执行，不与用户进程直接交互。它主要处理延迟任务，如协议处理、数据打包等。</li>
+<li><strong>非紧急处理</strong>：Bottom Half处理不需要立即完成的任务，确保Top Half能够快速恢复正常工作，而不会因为复杂任务而延迟。</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-如果bottom-half有接口如何使用">4. <strong>如果Bottom Half有接口，如何使用？</strong>
+</h3><p>虽然Bottom Half不直接暴露给用户进程，开发者可以通过<strong>内核API</strong>间接与Bottom Half交互，例如：</p>
+<ul>
+<li><strong>延迟任务调度</strong>：如果需要让某个任务在Bottom Half中处理，可以使用**任务队列（Workqueue）*<em>或者*<em>软中断（Softirq）</em></em> API。例如，通过内核的<code>queue_work()</code>函数，将任务安排到工作队列中，等待系统空闲时执行。</li>
+<li><strong>数据传递</strong>：Bottom Half负责将处理后的数据传递给Top Half或内核的其他部分。举例来说，Bottom Half处理完某个网络数据包后，会通过某种内核回调机制将数据传递给网络协议栈，进一步传递到用户进程。</li>
+</ul>
+<h3 id="5-总结-1">5. <strong>总结</strong>
+</h3><ul>
+<li><strong>Top Half的接口</strong>：直接暴露给用户进程或内核的其他部分，通常包括读写设备的系统调用接口以及硬件寄存器的访问接口。它通过这些接口处理设备的紧急任务。</li>
+<li><strong>Bottom Half的接口</strong>：Bottom Half不直接暴露给用户进程，而是通过内核的延迟任务机制（如软中断、工作队列）来处理非紧急任务。这些机制由Top Half或内核自动安排，开发者可以通过内核API使用这些机制，但并不会直接与用户进程交互。</li>
+</ul>
+<p>Bottom Half的作用更多是通过内核机制间接使用，如果需要处理复杂的任务或与外部接口交互，通常是由Top Half处理好紧急任务后，Bottom Half通过缓冲区和延迟任务机制来完成实际的操作。</p>
+<hr>
+<h3 id="控制台输入过程详细分点说明">控制台输入过程（详细分点说明）
+</h3><ol>
+<li>
+<p><strong>初始化阶段</strong>：</p>
+<ul>
+<li>
+<p><code>main</code> 函数调用 <code>consoleinit</code></p>
+<p>:</p>
+<ul>
+<li>
+<p><code>main</code> 函数在系统启动时调用 <code>consoleinit</code>（kernel/console.c:184），该函数负责初始化UART硬件，使UART能够处理接收和发送字符的中断。</p>
+</li>
+<li>
+<p>在</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">consoleinit
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>中，UART硬件配置为：</p>
+<ul>
+<li>每当接收到一个字节时触发<strong>接收中断</strong>。</li>
+<li>每当一个字节被发送完毕时触发<strong>发送完成中断</strong>。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>UART等待输入</strong>：</p>
+<ul>
+<li>
+<p>UART硬件等待输入字符</p>
+<p>:</p>
+<ul>
+<li>UART的<strong>FIFO</strong>（First In, First Out）缓冲区存储从外部接收到的字符。UART会将接收到的每个字符存放到 <strong>RHR</strong>（Receiver Holding Register）寄存器中，供软件读取。</li>
+<li><strong>LSR</strong>（Line Status Register）会更新状态位，指示UART接收到新字符，准备供软件读取。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>用户输入触发中断</strong>：</p>
+<ul>
+<li>
+<p>用户按键输入传递到UART</p>
+<p>:</p>
+<ul>
+<li>当用户通过键盘输入字符时，输入会通过QEMU模拟的UART硬件发送到xv6中的UART设备。</li>
+<li>当UART接收到字符时，触发<strong>接收中断</strong>，并向RISC-V内核发出中断请求。</li>
+<li>RISC-V的<strong>陷阱处理程序</strong>接收到该中断后，调用 <code>devintr</code>（kernel/trap.c:177）处理。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>处理中断</strong>：</p>
+<ul>
+<li>
+<p><code>devintr</code> 确定中断源</p>
+<p>:</p>
+<ul>
+<li><code>devintr</code> 从RISC-V的 <strong>scause</strong> 寄存器中读取中断信息，发现中断来自外部设备。</li>
+<li><code>devintr</code> 通过与<strong>PLIC</strong>（Platform-Level Interrupt Controller）的交互，确定中断来源于UART设备。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>调用UART中断处理程序</strong>：</p>
+<ul>
+<li>
+<p><code>uartintr</code> 处理UART中断</p>
+<p>:</p>
+<ul>
+<li><code>devintr</code> 确定中断来自UART后，调用 <code>uartintr</code>（kernel/uart.c:180）。</li>
+<li><code>uartintr</code> 从UART的<strong>RHR</strong>读取所有等待处理的输入字符。</li>
+<li>这些输入字符被传递给 <code>consoleintr</code>（kernel/console.c:138）。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>字符处理与缓冲</strong>：</p>
+<ul>
+<li>
+<p><code>consoleintr</code> 处理用户输入字符</p>
+<p>:</p>
+<ul>
+<li><code>consoleintr</code> 将接收到的字符积累到缓冲区 <code>cons.buf</code> 中。</li>
+<li>该函数对特殊字符（如<strong>退格</strong>、<strong>Ctrl+U</strong>）进行处理。</li>
+<li>如果用户输入了<strong>换行符</strong>（代表一整行输入完成），<code>consoleintr</code> 会唤醒等待的 <code>consoleread</code> 函数。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>整行输入读取</strong>：</p>
+<ul>
+<li>
+<p><code>consoleread</code> 等待整行输入</p>
+<p>:</p>
+<ul>
+<li>当用户进程（如shell）调用 <code>read</code> 系统调用时，系统进入 <code>consoleread</code> 函数（kernel/console.c:82）。</li>
+<li><code>consoleread</code> 会检查 <code>cons.buf</code> 中的内容，如果未接收到整行输入，调用 <strong>sleep</strong> 使进程进入休眠状态，等待输入完成。</li>
+<li>当整行输入完成并且 <code>consoleintr</code> 唤醒 <code>consoleread</code> 时，<code>consoleread</code> 会将 <code>cons.buf</code> 中的整行内容复制到用户空间。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>返回输入结果</strong>：</p>
+<ul>
+<li>
+<p>返回用户输入数据</p>
+<p>:</p>
+<ul>
+<li><code>consoleread</code> 将缓冲区中的一整行数据复制到用户进程的缓冲区中，并通过 <code>read</code> 系统调用将该数据返回到用户进程。</li>
+<li>用户进程（如shell）会继续处理该输入行，执行相应操作。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="总结-2">总结
+</h3><ul>
+<li>输入流程开始于用户按键输入，字符通过QEMU的UART硬件传递到xv6的UART设备，触发中断。</li>
+<li>中断处理程序 <code>devintr</code> 和 <code>uartintr</code> 从UART硬件读取输入字符，<code>consoleintr</code> 将字符缓存在 <code>cons.buf</code> 中。</li>
+<li>当整行输入完成后，<code>consoleread</code> 负责将输入行复制到用户空间，并返回给用户进程。</li>
+</ul>
+<hr>
+<h3 id="控制台输出过程函数作用与调用关系">控制台输出过程（函数作用与调用关系）
+</h3><h4 id="1-write-系统调用">1. <strong><code>write</code> 系统调用</strong>
+</h4><ul>
+<li><strong>作用</strong>: 用户进程通过 <code>write</code> 系统调用向控制台输出数据。</li>
+<li><strong>调用关系</strong>: <code>write</code> 系统调用从用户空间接收数据，并将其交给内核，由内核负责将数据写入到控制台设备的文件描述符。</li>
+</ul>
+<h4 id="2-uartputc-kerneluartc87">2. <strong><code>uartputc</code> (kernel/uart.c:87)</strong>
+</h4><ul>
+<li>
+<dl>
+<dt>作用</dt>
+<dd>
+<p>这是控制台输出的核心函数，用于将每个字符输出到UART设备。</p>
+</dd>
+</dl>
+<ul>
+<li><strong>缓冲机制</strong>: 将输出字符添加到输出缓冲区 <code>uart_tx_buf</code>，这样写进程不需要等待UART硬件逐个字节传输数据。</li>
+<li><strong>调用 <code>uartstart</code></strong>: 在字符被放入缓冲区后，<code>uartputc</code> 会调用 <code>uartstart</code> 来启动UART的输出传输。</li>
+<li><strong>等待情况</strong>: 如果缓冲区已满，<code>uartputc</code> 将等待直到缓冲区有空余空间再继续。</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-uartstart-kerneluartc126">3. <strong><code>uartstart</code> (kernel/uart.c:126)</strong>
+</h4><ul>
+<li>
+<dl>
+<dt>作用</dt>
+<dd>
+<p>检查UART是否正在发送数据，如果没有则开始传输下一个字符。</p>
+</dd>
+</dl>
+<ul>
+<li>
+<p><strong>设备启动</strong>: <code>uartstart</code> 会从输出缓冲区中取出下一个要发送的字符，写入到 <code>THR</code>（Transmitter Holding Register） 中，启动UART的传输。</p>
+</li>
+<li>
+<p>调用关系</p>
+<p>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">uartstart
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>可以由两种方式调用：</p>
+<ol>
+<li>由 <code>uartputc</code> 调用，用于启动第一个字符的传输。</li>
+<li>由 <code>uartintr</code> 调用，用于继续传输剩余缓冲区中的字符。</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="4-uartintr-kerneluartc180">4. <strong><code>uartintr</code> (kernel/uart.c:180)</strong>
+</h4><ul>
+<li>
+<dl>
+<dt>作用</dt>
+<dd>
+<p>UART中断处理程序，用于在传输完成时处理下一个字符。</p>
+</dd>
+</dl>
+<ul>
+<li><strong>调用 <code>uartstart</code></strong>: 当UART完成了一个字节的传输，会触发中断，<code>uartintr</code> 会调用 <code>uartstart</code> 来继续发送缓冲区中的下一个字节。</li>
+<li><strong>中断机制</strong>: UART每次传输完成一个字节，都会触发中断，这使得 <code>uartintr</code> 能够继续从 <code>uart_tx_buf</code> 缓冲区中读取字符并发送。</li>
+</ul>
+</li>
+</ul>
+<h3 id="控制台输出的调用关系图">控制台输出的调用关系图：
+</h3><ol>
+<li><strong>用户进程调用 <code>write</code> 系统调用</strong>
+<ul>
+<li>用户进程通过 <code>write</code> 向控制台文件描述符写入多个字符。</li>
+</ul>
+</li>
+<li><strong><code>write</code> 调用 <code>uartputc</code></strong>
+<ul>
+<li><code>write</code> 系统调用内部将每个字符传递给 <code>uartputc</code>。</li>
+<li><code>uartputc</code> 将每个字符加入到 <code>uart_tx_buf</code> 缓冲区中，确保写进程不必等待字符传输完成。</li>
+</ul>
+</li>
+<li><strong><code>uartputc</code> 调用 <code>uartstart</code></strong>
+<ul>
+<li><code>uartputc</code> 启动传输第一个字符，将其交给UART硬件。</li>
+<li><code>uartstart</code> 检查UART是否空闲，如果空闲，则从 <code>uart_tx_buf</code> 中取出下一个字符，并写入 <code>THR</code> 寄存器，启动字符传输。</li>
+</ul>
+</li>
+<li><strong>UART硬件发送完成，触发中断</strong>
+<ul>
+<li>UART每次完成一个字符传输时，会触发中断，通知CPU传输完成。</li>
+</ul>
+</li>
+<li><strong>中断处理程序 <code>uartintr</code> 处理传输完成</strong>
+<ul>
+<li>中断触发后，RISC-V内核的陷阱处理程序调用 <code>devintr</code>，随后调用 <code>uartintr</code>。</li>
+<li><code>uartintr</code> 负责从 <code>uart_tx_buf</code> 中读取下一个字符，调用 <code>uartstart</code> 启动下一个字符的传输。</li>
+</ul>
+</li>
+<li><strong><code>uartstart</code> 启动下一字符传输</strong>
+<ul>
+<li><code>uartstart</code> 再次从 <code>uart_tx_buf</code> 中取出下一个字符，写入UART的 <code>THR</code> 寄存器中，继续传输。</li>
+</ul>
+</li>
+</ol>
+<h3 id="控制台输出的完整流程">控制台输出的完整流程
+</h3><ol>
+<li><strong>用户进程通过 <code>write</code> 系统调用</strong> 向控制台写入多个字符。</li>
+<li><strong><code>write</code> 调用 <code>uartputc</code></strong>，将字符逐个加入输出缓冲区 <code>uart_tx_buf</code>。</li>
+<li><strong><code>uartputc</code> 调用 <code>uartstart</code></strong>，启动UART传输第一个字符。</li>
+<li>UART硬件发送完一个字符后，触发中断。</li>
+<li><strong>中断处理程序 <code>uartintr</code> 调用 <code>uartstart</code></strong>，继续发送输出缓冲区中的下一个字符。</li>
+<li><strong>UART持续传输</strong>，直到所有缓冲字符都被发送完毕。</li>
+</ol>
+<h3 id="总结-3">总结
+</h3><p>控制台输出是通过将数据放入输出缓冲区并异步发送的过程。<code>write</code> 系统调用将数据交给 <code>uartputc</code>，它会立即返回，避免进程阻塞。通过 <code>uartstart</code> 和中断机制，UART硬件逐步发送缓冲区中的字符，最终完成数据传输。这种设计通过缓冲和中断解耦了设备的慢速I/O操作与进程的执行，从而提高了系统的效率和响应能力。</p>
+<hr>
+<p>这是个很好的问题！UART（通用异步收发传输器）确实具有<strong>双向通信功能</strong>，既能<strong>接收</strong>字符，也能<strong>发送</strong>字符。这是UART作为一个串行通信设备的核心功能，它不仅用于从外部设备接收输入，还能将系统内部的数据发送到外部设备。下面我详细解释一下这两者的关系，以及发送字符到UART的作用。</p>
+<h3 id="uart的双向通信功能">UART的双向通信功能
+</h3><ol>
+<li><strong>接收字符（输入）</strong>：
+<ul>
+<li>UART负责从外部设备接收数据，比如从键盘输入或从其他串行设备接收到数据。</li>
+<li>在你提到的控制台输入的过程中，UART通过硬件接收字符，触发中断，最终让xv6内核处理输入字符。</li>
+</ul>
+</li>
+<li><strong>发送字符（输出）</strong>：
+<ul>
+<li>UART也负责将系统内部的数据传输到外部设备。例如，操作系统需要把用户进程的输出（比如shell的输出）显示在控制台屏幕上，这时就需要通过UART发送数据。</li>
+<li>当系统向控制台写入输出数据时，它通过UART传输这些字符，最终显示在终端或其他外部设备上。</li>
+</ul>
+</li>
+</ol>
+<h3 id="为什么需要输出字符给uart">为什么需要输出字符给UART？
+</h3><p><strong>发送字符到UART</strong> 是为了将系统中的数据发送到外部设备，具体来说有以下几种常见应用场景：</p>
+<ol>
+<li>
+<p>控制台输出</p>
+<p>：</p>
+<ul>
+<li>当你在操作系统中运行命令时，shell会输出结果。这些结果需要显示到终端窗口上。UART负责将系统中的输出字符发送到QEMU模拟的终端或者真实的串行终端上，使得你可以看到这些字符。</li>
+</ul>
+<p>例如，当你运行一个命令，比如</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ls
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>，它会输出文件列表到控制台。这些字符需要通过UART发送到你看到</p>
+</li>
+</ol>
+<hr>
+<h3 id="定时器中断的作用">定时器中断的作用
+</h3><p>定时器中断在操作系统中起着至关重要的作用，它的主要功能是<strong>确保系统时钟的精确性</strong>，以及<strong>实现任务的调度</strong>。在xv6操作系统中，定时器中断同样是保持系统正常运行的关键机制，特别是在多任务处理和进程调度方面。下面我将详细说明定时器中断的具体作用。</p>
+<h4 id="1-维持系统时钟">1. <strong>维持系统时钟</strong>
+</h4><p>定时器中断的首要功能是<strong>维持操作系统的时钟</strong>，这是所有现代操作系统的基础。操作系统通过定时器中断来跟踪系统的当前时间，并执行与时间相关的操作，比如：</p>
+<ul>
+<li><strong>时间片（Time Slice）管理</strong>：在多任务系统中，每个进程或线程会分配一定的时间片进行执行。当时间片用完后，定时器中断会触发，从而通知操作系统进行任务切换。</li>
+<li><strong>系统时间维护</strong>：定时器中断以固定的间隔触发，操作系统利用这种固定周期的中断来更新系统的时间，使得系统可以精确地管理秒、分钟、小时等时间单位。</li>
+<li><strong>定时事件</strong>：定时器中断可以用于触发定时任务（比如操作系统内核中的心跳机制，定期检查系统健康状态），也可以用于实现用户进程中的定时功能，如<code>sleep</code>函数。</li>
+</ul>
+<h4 id="2-实现进程调度">2. <strong>实现进程调度</strong>
+</h4><p>在xv6操作系统中，定时器中断起到了<strong>触发进程调度</strong>的作用。通过定时器中断，操作系统可以定期检查当前运行的进程，并决定是否切换到另一个进程：</p>
+<ul>
+<li>
+<p><strong>时间片轮转调度（Round-Robin Scheduling）</strong>：在多任务操作系统中，定时器中断用于实现<strong>时间片轮转调度算法</strong>。操作系统会为每个进程分配一个时间片（比如几毫秒），当时间片用完时，定时器中断会触发操作系统的调度器（scheduler）运行，选择另一个进程执行。</p>
+<p>例如，在xv6中，当定时器中断发生时，系统会调用 <code>yield</code> 函数来触发任务切换。<code>yield</code> 将当前进程的状态保存，并调度其他进程运行。如果当前进程是一个<strong>计算密集型进程</strong>（即需要大量CPU时间的进程），定时器中断确保该进程不会长期占用CPU，而是让其他进程也有机会执行。</p>
+</li>
+<li>
+<p><strong>公平性</strong>：定时器中断通过时间片机制保证系统中每个进程能够公平地获取CPU资源。如果没有定时器中断，一个高优先级或耗时长的进程可能会长时间占用CPU，导致其他进程饥饿。</p>
+</li>
+</ul>
+<h4 id="3-打断无限循环或阻塞操作">3. <strong>打断无限循环或阻塞操作</strong>
+</h4><p>在一些情况下，进程可能会进入长时间的阻塞或无限循环。定时器中断的存在可以强制打断这些进程，从而避免系统陷入死锁或卡死状态：</p>
+<ul>
+<li><strong>防止单一进程长期占用CPU</strong>：如果一个进程陷入无限循环，定时器中断会周期性触发进程切换，确保系统可以继续运行其他任务。</li>
+<li><strong>进程间的并发处理</strong>：定时器中断帮助操作系统在进程间实现并发运行，防止某个进程因长时间执行而阻止其他进程获取CPU。</li>
+</ul>
+<h4 id="4-保证系统响应性">4. <strong>保证系统响应性</strong>
+</h4><p>定时器中断还确保系统能够及时响应外部事件，例如I/O操作、用户输入等。即使系统正处于一个计算密集型任务中，定时器中断可以强制让操作系统暂停当前任务，检查是否有需要优先处理的事件：</p>
+<ul>
+<li><strong>I/O并发</strong>：定时器中断可以在处理耗时的I/O操作时保证系统不会卡死。例如，当系统等待外部设备的输入时，定时器中断允许其他进程继续执行，而不是让整个系统停滞在I/O操作上。</li>
+</ul>
+<h4 id="5-定期触发系统任务">5. <strong>定期触发系统任务</strong>
+</h4><p>定时器中断不仅用于任务调度，还用于定期触发系统级任务。这些任务通常是在操作系统后台运行，用于维护系统的健康状态或执行周期性的操作。例如：</p>
+<ul>
+<li><strong>垃圾回收</strong>：操作系统可能会在定时器中断的帮助下，定期清理不再使用的资源或内存。</li>
+<li><strong>系统监控</strong>：操作系统会使用定时器中断定期执行监控任务，检查系统负载、资源使用情况，或者检查进程是否存在异常行为。</li>
+</ul>
+<h3 id="定时器中断的典型过程">定时器中断的典型过程
+</h3><ol>
+<li><strong>设置定时器</strong>：在xv6启动时，<code>start.c</code> 中的代码设置了定时器硬件，通过编程<strong>CLINT</strong>（Core-Local Interruptor）来生成定期的中断信号。</li>
+<li><strong>定时器中断触发</strong>：定时器达到设定的时间后，触发中断信号。这个中断会导致CPU暂停当前的任务，跳转到定时器中断处理程序。</li>
+<li><strong>处理定时器中断</strong>：
+<ul>
+<li>定时器中断触发后，处理程序 <code>timervec</code> 会保存CPU的寄存器状态，设置下一个定时器中断，并请求RISC-V发起一个<strong>软件中断</strong>。</li>
+<li>软件中断交给xv6的内核处理，执行内核的任务调度机制。</li>
+</ul>
+</li>
+<li><strong>任务调度</strong>：通过中断的方式，xv6可以决定是否需要切换到另一个进程，确保所有进程都能公平地获取CPU时间。</li>
+</ol>
+<h3 id="总结-4">总结
+</h3><p>定时器中断是xv6以及所有现代操作系统的关键组成部分。它不仅维持了系统的时间管理，还通过触发进程切换来实现多任务处理。定时器中断确保了系统的并发性、响应性和公平性，在用户进程之间高效调度资源，同时保持系统流畅运行。</p>
+<hr>
+<h3 id="clint-的详细解释">CLINT 的详细解释
+</h3><p><strong>CLINT（Core-Local Interruptor）</strong> 是 RISC-V 架构中的一个硬件模块，负责生成核局部中断（Local Interrupts），包括<strong>定时器中断</strong>和<strong>软件中断</strong>。它在每个 CPU 核上单独存在，用于处理与该核相关的中断，主要包括定时器中断和软件中断。</p>
+<h4 id="clint-的作用">CLINT 的作用
+</h4><p>CLINT 在 RISC-V 系统中的主要作用是提供一种机制，使每个 CPU 核能够：</p>
+<ol>
+<li><strong>生成定时器中断</strong>：CLINT 包含一个计时器寄存器，通过编程这些寄存器，操作系统可以设置一个定时器。定时器到达指定时间后，CLINT 会向相应的 CPU 核发出一个定时器中断信号。</li>
+<li><strong>触发软件中断</strong>：CLINT 可以通过写入寄存器，向本地 CPU 核发出一个软件中断。这种中断通常用于进程间通信（IPC），比如操作系统内核通知某个核执行特定的任务。</li>
+<li><strong>管理中断</strong>：CLINT 负责处理与核本地相关的中断，它允许每个 CPU 核独立处理自己的定时器中断和软件中断。</li>
+</ol>
+<h3 id="clint-的具体作用和工作位置">CLINT 的具体作用和工作位置
+</h3><p>CLINT 的工作范围在 CPU 核本地，特别是与定时器和软件中断相关的控制操作。在以下几个方面，CLINT 发挥了关键作用：</p>
+<ol>
+<li><strong>定时器中断管理</strong>：
+<ul>
+<li>CLINT 内部有一个定时器寄存器 <code>mtime</code>，用于存储当前的时间计数值，还有一个 <code>mtimecmp</code> 寄存器，表示下一个定时器中断的时间。</li>
+<li>当 <code>mtime</code> 增加到等于或超过 <code>mtimecmp</code> 的值时，CLINT 生成一个定时器中断，通知 CPU 核中断处理程序（如 <code>timervec</code>）。</li>
+</ul>
+</li>
+<li><strong>软件中断管理</strong>：
+<ul>
+<li>操作系统可以通过向 CLINT 的软件中断寄存器写入特定的值来触发一个软件中断。这个中断可以用于通知 CPU 执行特定的内核任务或进程间通信。</li>
+</ul>
+</li>
+<li><strong>核本地中断控制</strong>：
+<ul>
+<li>CLINT 在每个 CPU 核上独立运行，管理与该核相关的本地中断，而不影响其他 CPU 核。这样可以实现并行的中断处理，确保多核系统的高效运行。</li>
+</ul>
+</li>
+</ol>
+<h3 id="编程-clint-的具体方法">编程 CLINT 的具体方法
+</h3><p>要编程 CLINT，我们需要与其提供的寄存器进行交互。通常，这涉及对 <code>mtime</code> 和 <code>mtimecmp</code> 寄存器的读写操作。</p>
+<h4 id="1-初始化定时器中断">1. <strong>初始化定时器中断</strong>
+</h4><p>在 xV6 中，定时器中断的设置是在系统初始化阶段完成的，通常在 <code>start.c</code> 文件中实现。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ccodepreviewrunvoid start() {
+</span></span><span class="line"><span class="cl">    // ... 初始化代码 ...
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    // 设置定时器：编程 CLINT
+</span></span><span class="line"><span class="cl">    int interval = 1000000; // 定时器间隔，时间单位依赖于时钟频率
+</span></span><span class="line"><span class="cl">    *(uint64*)CLINT_MTIMECMP(hartid) = *(uint64*)CLINT_MTIME + interval;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    // 启用定时器中断
+</span></span><span class="line"><span class="cl">    w_mie(r_mie() | MIE_MTIE);  // 允许机器模式定时器中断
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    // 设置 mtvec 指向定时器中断处理程序 timervec
+</span></span><span class="line"><span class="cl">    w_mtvec((uint64)timervec);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    // 进入内核主程序
+</span></span><span class="line"><span class="cl">    main();
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="2-clint-寄存器">2. <strong>CLINT 寄存器</strong>
+</h4><ul>
+<li><strong><code>mtime</code> 寄存器</strong>：用于计时，它会不断递增，表示当前的时间。</li>
+<li><strong><code>mtimecmp</code> 寄存器</strong>：用于设定定时器中断的触发时间。操作系统将 <code>mtimecmp</code> 设为一个未来的时间值，当 <code>mtime</code> 达到该值时，CLINT 触发定时器中断。</li>
+</ul>
+<h4 id="3-处理定时器中断">3. <strong>处理定时器中断</strong>
+</h4><p>当 <code>mtime</code> 达到或超过 <code>mtimecmp</code> 的值时，CLINT 触发一个定时器中断。定时器中断会导致 CPU 跳转到中断处理向量（<code>timervec</code>），在此基础上进行以下步骤：</p>
+<ul>
+<li><strong>保存当前状态</strong>：<code>timervec</code> 保存当前寄存器状态，以免打断正在执行的任务。</li>
+<li><strong>重新编程定时器</strong>：将 <code>mtimecmp</code> 更新到一个新的未来时间，以便设置下一个定时器中断。</li>
+<li><strong>触发软件中断</strong>：<code>timervec</code> 请求生成一个软件中断，通过正常的陷阱机制交给内核进一步处理。</li>
+</ul>
+<h4 id="4-在-devintr-中处理软件中断">4. <strong>在 <code>devintr</code> 中处理软件中断</strong>
+</h4><p>软件中断是由定时器中断处理程序触发的。<code>devintr</code> 函数（kernel/trap.c:204）处理这种软件中断，具体工作如下：</p>
+<ul>
+<li><strong>识别中断类型</strong>：通过检查 RISC-V 的 <code>scause</code> 寄存器，<code>devintr</code> 确定中断是由定时器引发的。</li>
+<li><strong>执行调度程序</strong>：如果定时器中断触发了软件中断，<code>devintr</code> 会调用内核的调度函数 <code>yield</code>，从而可能将 CPU 切换到另一个进程。</li>
+</ul>
+<h3 id="总结-5">总结
+</h3><ol>
+<li><strong>CLINT</strong> 是 RISC-V 系统中的一个核心组件，负责处理核本地的中断，尤其是定时器中断和软件中断。</li>
+<li><strong>定时器中断的编程</strong> 通过设置 <code>mtime</code> 和 <code>mtimecmp</code> 寄存器来完成，定期生成中断信号，通知操作系统进行调度和其他周期性任务。</li>
+<li><strong>定时器中断的作用</strong> 是维持系统时钟、调度进程、打断无限循环或阻塞操作，确保系统响应性和公平性。</li>
+</ol>
+<p>CLINT 通过提供定时器和软件中断功能，在多核系统中帮助操作系统高效地管理和调度任务。</p>
+
 </section>
 
 
     <footer class="article-footer">
     
 
-    </footer>
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
 
 
+
+        <span>
+            最后更新于 Nov 12, 2024 12:44 &#43;0800
+        </span>
+    </section></footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
     
 </article>
 
     
 
     
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/mit6s081lec23/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">MIT6S081Lec23</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/mit6s081lec22/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">MIT6S081Lec22</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/mit6s081lec21/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">MIT6S081Lec21</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/mit6s081lec20/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">MIT6S081Lec20</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/mit6s081lec19/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">MIT6S081Lec19</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
 
      
     

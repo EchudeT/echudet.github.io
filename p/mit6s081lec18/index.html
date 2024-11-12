@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="">
-<title>Mit6s081Lec18</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="OS organization ">
+<title>MIT6S081Lec18</title>
 
 <link rel='canonical' href='https://echudet.github.io/p/mit6s081lec18/'>
 
-<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="Mit6s081Lec18">
-<meta property='og:description' content="">
+<link rel="stylesheet" href="/scss/style.min.a7f637593c1d99350f36f270c9abc65cf39ec34b45847eb2fa40efef51b94c92.css"><meta property='og:title' content="MIT6S081Lec18">
+<meta property='og:description' content="OS organization ">
 <meta property='og:url' content='https://echudet.github.io/p/mit6s081lec18/'>
 <meta property='og:site_name' content='echudet'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-11-10T22:02:55&#43;08:00'/><meta property='article:modified_time' content='2024-11-10T22:02:55&#43;08:00'/>
-<meta name="twitter:title" content="Mit6s081Lec18">
-<meta name="twitter:description" content="">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-10-03T22:02:50&#43;08:00'/><meta property='article:modified_time' content='2024-11-12T12:44:05&#43;08:00'/>
+<meta name="twitter:title" content="MIT6S081Lec18">
+<meta name="twitter:description" content="OS organization ">
     <link rel="shortcut icon" href="/timer.ico" />
 
     </head>
@@ -193,7 +193,7 @@
 
 
                 
-                <span>Search</span>
+                <span>搜索</span>
             </a>
         </li>
         
@@ -245,7 +245,78 @@
     </ol>
 </aside>
 
-    
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#课前预习">课前预习</a></li>
+    <li><a href="#论文速览">论文速览</a></li>
+    <li><a href="#基于线程和地址空间的核心设计思想">基于<strong>线程</strong>和<strong>地址空间</strong>的核心设计思想</a></li>
+    <li><a href="#l4的二级缓存">L4的二级缓存</a></li>
+    <li><a href="#lower-level-communication-primitive"><strong>Lower-level Communication Primitive</strong></a></li>
+    <li><a href="#l4中的异常exceptions与xv6中的陷阱trap的区别">L4中的异常（Exceptions）与xv6中的陷阱（Trap）的区别</a></li>
+    <li><a href="#l4中的small-address-space是如何通过模拟标签化tlb减少tlb刷新">L4中的Small Address Space是如何通过模拟标签化TLB减少TLB刷新？</a></li>
+    <li><a href="#标签化tlb的概念">标签化TLB的概念</a></li>
+    <li><a href="#palcode"><strong>PALcode</strong></a></li>
+    <li><a href="#l4linux中的三类系统调用接口">L4Linux中的三类系统调用接口</a></li>
+    <li><a href="#architecture">architecture</a></li>
+    <li><a href="#linux-as-server"><strong>Linux</strong> as server</a></li>
+    <li><a href="#top-half-和-bottom-half"><strong>top half</strong> 和 <strong>bottom half</strong></a></li>
+    <li><a href="#l4-的-copyin-和-copyout-机制">L4 的 <code>copyin</code> 和 <code>copyout</code> 机制</a></li>
+    <li><a href="#emulation-library"><strong>Emulation Library</strong></a></li>
+    <li><a href="#修改-signal-thread-和-emulation-library-只会影响自身线程">修改 Signal Thread 和 Emulation Library 只会影响自身线程</a></li>
+    <li><a href="#主线程进入-linux-server-线程">主线程进入 Linux Server 线程</a></li>
+    <li><a href="#两个执行路径">两个执行路径</a></li>
+    <li><a href="#coroutine协程"><strong>Coroutine（协程）</strong></a></li>
+    <li><a href="#l4linux-的调度策略">L4Linux 的调度策略</a></li>
+    <li><a href="#在所有地址空间中代码和数据的虚拟分配相同会最大化独立应用程序之间的-tlb-冲突">在所有地址空间中代码和数据的虚拟分配相同会最大化独立应用程序之间的 TLB 冲突</a></li>
+    <li><a href="#执行时间比较大的过程的排名">执行时间比较大的过程的排名</a></li>
+    <li><a href="#l4用户空间和内核空间">L4用户空间和内核空间</a></li>
+    <li><a href="#linux-内核和-l4-微内核的空间区别">Linux 内核和 L4 微内核的空间区别</a></li>
+    <li><a href="#l4中的共享库">L4中的共享库</a></li>
+    <li><a href="#共享库-libcso与trampoline机制的差异">共享库 libc.so与trampoline机制的差异</a></li>
+    <li><a href="#trampoline机制的二进制兼容性">trampoline机制的二进制兼容性</a></li>
+    <li><a href="#ipc和rpc">IPC和RPC</a></li>
+    <li><a href="#block-ipc和rpc">block IPC和RPC</a></li>
+    <li><a href="#l4的缓存">L4的缓存</a></li>
+    <li><a href="#co-location">co-location</a></li>
+    <li><a href="#扩展代码嵌接到操作系统内核">扩展代码嵌接到操作系统内核</a></li>
+    <li><a href="#protected-control-transfers-pct">Protected Control Transfers (PCT)</a></li>
+    <li><a href="#正课部分">正课部分</a></li>
+    <li><a href="#monolithic-kernel">Monolithic kernel</a></li>
+    <li><a href="#micro-kernel">Micro kernel</a></li>
+    <li><a href="#why-micro-kernel">Why micro kernel?</a></li>
+    <li><a href="#l4-micro-kernel">L4 micro kernel</a></li>
+    <li><a href="#improving-ipc-by-kernel-design">Improving IPC by Kernel Design</a></li>
+    <li><a href="#run-linux-on-top-of-l4-micro-kernel">Run Linux on top of L4 micro kernel</a></li>
+    <li><a href="#l4-linux性能分析">L4 Linux性能分析</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
 
             <main class="main full-width">
     <article class="main-article">
@@ -253,12 +324,28 @@
 
     <div class="article-details">
     
+    <header class="article-category">
+        
+            <a href="/categories/mit6s081/" >
+                Mit6s081
+            </a>
+        
+            <a href="/categories/os/" >
+                Os
+            </a>
+        
+    </header>
+    
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/mit6s081lec18/">Mit6s081Lec18</a>
+            <a href="/p/mit6s081lec18/">MIT6S081Lec18</a>
         </h2>
     
+        
+        <h3 class="article-subtitle">
+            OS organization 
+        </h3>
         
     </div>
 
@@ -278,7 +365,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2024-11-10</time>
+                <time class="article-time--published">2024-10-03</time>
             </div>
         
 
@@ -293,11 +380,22 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 0 分钟
+                    阅读时长: 117 分钟
                 </time>
             </div>
-        
-    </footer>
+        <div class="article-lastmod">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time>
+                    Nov 12, 2024 12:44 &#43;0800
+                </time>
+            </div></footer>
     
 
     
@@ -308,22 +406,2202 @@
     <section class="article-content">
     
     
-    
+    <h1 id="lecture-18-os-organization">Lecture 18 OS organization
+</h1><h2 id="课前预习">课前预习
+</h2><h2 id="论文速览">论文速览
+</h2><p>论文的架构大致分为以下几个部分，每个部分的内容总结如下：</p>
+<ol>
+<li>
+<p><strong>引言 (Introduction)</strong></p>
+<p>本节介绍了微内核（µ-kernel）的背景，特别是第一代微内核系统因其性能低下和灵活性不足而受到批评。随后引入了L4，这是一种第二代精简的微内核，旨在通过减少内核中的功能来提高效率。作者的目标是通过实验表明基于微内核的系统可以在实际中使用，并且具有良好的性能。文章对比了L4与Linux以及MkLinux（基于Mach微内核的Linux版本），通过基准测试来衡量性能差异。</p>
+</li>
+<li>
+<p><strong>相关工作 (Related Work)</strong></p>
+<p>本节介绍了与微内核系统相关的研究历史，并对已有的实验和实现进行总结，包括对Mach、Chorus等微内核的描述。作者指出，过去的大量评估工作集中在操作系统部分功能的加速上，而对完整Unix系统实现的全面评估较少。文章的贡献在于探讨如何在第二代微内核上移植现有的单体操作系统，并评估其性能。</p>
+</li>
+<li>
+<p><strong>L4基本概念 (L4 Essentials)</strong></p>
+<p>L4微内核的设计围绕线程和地址空间展开。它支持跨地址空间的通信（IPC），这是L4的核心机制之一。本节详细介绍了L4中的递归地址空间构建、页管理、I/O端口的映射以及硬件中断的处理方式。L4使用用户级的调页器来处理页错误，实现了灵活的内存管理策略。此外，还讨论了L4在不同硬件架构（如Pentium、Alpha、MIPS）上的移植情况，强调了L4的跨平台特性。</p>
+</li>
+<li>
+<p><strong>L4上的Linux (Linux on Top of L4)</strong></p>
+<p>本节描述了将Linux移植到L4上的过程。L4Linux是作为一个用户级单服务器运行在L4微内核之上，且保持与Linux的二进制兼容。作者详细解释了系统调用的实现、设备驱动程序的处理、进程的调度等。此外，文章讨论了L4Linux设计中的一个错误（dual-space），并解释了它如何影响性能。最终，通过更简化的设计（single-space），实现了更高效的L4Linux实现。</p>
+</li>
+<li>
+<p><strong>性能评估 (Performance Evaluation)</strong></p>
+<p>本节通过微基准测试（如<code>getpid</code>系统调用）、宏基准测试（如Linux内核编译）和AIM基准测试来评估L4Linux的性能。结果表明，L4Linux的性能仅比原生Linux差5%-10%，而且明显优于基于Mach的MkLinux。性能评估表明，底层微内核的效率对整个系统性能有显著影响。</p>
+</li>
+<li>
+<p><strong>扩展性评估 (Extensibility Evaluation)</strong></p>
+<p>本节探讨了通过µ-kernel扩展系统功能的可能性。通过几个实验（如管道通信、内存管理操作）展示了在µ-kernel上进行系统扩展的潜力，尤其是在不影响已有Unix功能的前提下引入新的功能，如实时内存管理系统。实验表明，通过µ-kernel实现的扩展性不仅能提升性能，还能支持多种不同应用场景的高效共存。</p>
+</li>
+<li>
+<p><strong>替代的基本概念 (Alternative Basic Concepts)</strong></p>
+<p>本节讨论了是否可以通过引入更底层的机制（如保护性控制传输PCT）来进一步提高µ-kernel的性能。作者分析了PCT与IPC的性能差异，并认为虽然PCT理论上应该更快，但经过优化的IPC在很多实际场景中表现得更好。此外，文章还探讨了其他改进µ-kernel性能的方法，如引入&quot;grafting&quot;模型。</p>
+</li>
+<li>
+<p><strong>结论 (Conclusion)</strong></p>
+<p>文章总结了L4微内核在性能和扩展性方面的优势，表明µ-kernel可以在性能接近原生操作系统的情况下，支持更灵活和高效的系统扩展。同时，文章指出未来的工作应继续探索µ-kernel在不同平台和应用场景中的适用性。</p>
+</li>
+</ol>
+<hr>
+<h2 id="基于线程和地址空间的核心设计思想">基于<strong>线程</strong>和<strong>地址空间</strong>的核心设计思想
+</h2><p>L4微内核的核心设计思想是基于<strong>线程</strong>和<strong>地址空间</strong>，并通过跨地址空间通信（IPC）机制实现线程间的高效消息传递。同时，L4微内核允许用户级的服务器递归地构建地址空间，并通过这种方式实现灵活的内存管理。让我具体说明这个过程的实现。</p>
+<ol>
+<li>
+<p><strong>跨地址空间通信（IPC）</strong></p>
+<p>IPC（Inter-Process Communication）是L4微内核中最基本、最核心的机制之一，用于支持线程间在不同地址空间中的通信。每个线程都在特定的地址空间中执行，而当需要进行线程间通信时，L4微内核提供了一种安全且高效的方式来进行同步消息传递。</p>
+<p><strong>IPC的基本步骤</strong></p>
+<ol>
+<li>发送方线程通过IPC将消息发送到接收方线程所在的地址空间中。这是同步的，即发送方会等待接收方的响应。</li>
+<li>IPC消息可以携带多种信息，除了普通的消息数据外，还可以包含地址空间中的页面映射信息，允许在不同地址空间之间共享内存页。</li>
+<li>通过这种方式，L4可以实现远程过程调用（RPC）以及受控的线程迁移。</li>
+</ol>
+</li>
+<li>
+<p><strong>递归地址空间构建</strong></p>
+<p>L4微内核通过支持递归地址空间构建来实现内存的灵活管理。最初的地址空间（即σ0<em>σ</em>0）代表了整个物理内存，其他地址空间都是在此基础上由用户级服务器逐步构建的。</p>
+<p><strong>地址空间构建的基本过程</strong></p>
+<ol>
+<li><strong>映射与解除映射</strong>：地址空间的构建是通过映射（mapping）、授予（granting）和解除映射（unmapping）三种操作来实现的。L4中使用了一种叫做“柔性页”（flexpages）的概念，这些页的大小可以从一个物理页（通常是4KB）扩展到整个地址空间（几GB）。
+<ul>
+<li><strong>映射（Mapping）</strong>：用户态的内存管理程序可以将自己的某些页面映射到另一个地址空间，从而使该页面可以在多个地址空间中访问。</li>
+<li><strong>授予（Granting）</strong>：拥有某个地址空间的线程可以将页面的完全控制权授予另一个地址空间，从而允许接收方也能够修改或进一步映射该页面。</li>
+<li><strong>解除映射（Unmapping）</strong>：拥有页面的地址空间可以随时解除该页面的映射，取消其他地址空间对该页面的访问权限。</li>
+</ul>
+</li>
+<li><strong>递归地址空间的安全性</strong>：这些操作是安全的，因为它们是基于虚拟页面的，而不是直接作用于物理内存。也就是说，线程只能映射或解除映射它已经拥有的页面。这样，L4确保了跨地址空间的操作不会破坏系统的安全性。</li>
+</ol>
+</li>
+<li>
+<p><strong>页面错误处理与用户级分页器</strong></p>
+<p>当线程访问了尚未映射的页面时，会发生页面错误。在L4微内核中，内核会通过IPC将该页面错误传递给与该线程相关联的<strong>分页器</strong>（Pager）。分页器通常是一个用户态的内存管理程序，负责处理页面错误并决定如何分配内存。</p>
+<ul>
+<li>
+<p>当页面错误发生时，L4微内核会向相应的分页器发送消息，通知其处理该页面错误。分页器可以通过映射新页面来解决错误，也可以选择拒绝该请求。</p>
+</li>
+<li>
+<p>由于分页器的实现是完全由用户定义的，L4支持灵活的内存管理策略。这意味着，系统可以根据需要实现不同的内存管理模型，如实时内存管理或分层缓存管理。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>输入/输出端口与硬件中断的处理</strong></p>
+<p>除了内存页面，L4还将I/O端口视为地址空间的一部分，使得它们可以像内存页一样进行映射和解除映射。L4通过将硬件中断转换为消息的形式，实现了中断处理的用户级实现。当硬件中断发生时，微内核会将中断转化为一条消息，发送给相应的线程，这为用户级设备驱动程序的实现提供了基础。</p>
+</li>
+</ol>
+<p>L4微内核通过跨地址空间通信（IPC）实现线程间的高效消息传递，而递归地址空间的构建则为灵活的内存管理提供了强大的支持。用户级分页器和灵活的映射/解除映射机制允许L4实现多种内存管理策略，同时确保系统的安全性和效率。</p>
+<hr>
+<h2 id="l4的二级缓存">L4的二级缓存
+</h2><p>在计算机系统中，<strong>缓存</strong>（Cache）是一种快速存取的存储器，用于存储频繁使用的数据，以提高系统性能。通常，缓存分为多级，例如<strong>一级缓存（L1 Cache）<strong>和</strong>二级缓存（L2 Cache）</strong>，它们的主要区别在于速度、容量以及与处理器的距离。</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th></th>
+          <th>一级缓存（L1 Cache）</th>
+          <th><strong>二级缓存（L2 Cache）</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>位置</td>
+          <td>一级缓存通常内置于处理器的核心内，每个核心都有自己的一级缓存。</td>
+          <td>二级缓存位于处理器与内存之间，可能是每个核心独立拥有，也可能是多个核心共享的。</td>
+      </tr>
+      <tr>
+          <td>速度</td>
+          <td>一级缓存是处理器最快的缓存，因为它最接近处理器核心，访问延迟非常低。</td>
+          <td>二级缓存比一级缓存稍慢，但仍比内存快得多。</td>
+      </tr>
+      <tr>
+          <td>容量</td>
+          <td>一级缓存容量较小，一般为几十KB。它主要用于存储最频繁使用的指令和数据。</td>
+          <td>二级缓存的容量通常比一级缓存大得多，一般为几百KB到几MB。它用于缓存一级缓存未命中的数据或指令。</td>
+      </tr>
+      <tr>
+          <td>分区</td>
+          <td>一级缓存通常分为两个部分：一个用于存储指令（指令缓存，L1I），一个用于存储数据（数据缓存，L1D）。</td>
+          <td>当处理器在一级缓存中找不到所需数据时，会去二级缓存中查找。如果二级缓存也没有命中，才会访问内存。</td>
+      </tr>
+  </tbody>
+</table></div>
+<p><strong>二级缓存的作用</strong></p>
+<p>二级缓存通过缓存较大数据块，减轻了处理器访问主存（RAM）的频率，因此可以显著提高处理器的执行效率。虽然二级缓存的访问速度不及一级缓存，但因为其容量较大，能够存储更多的数据，减少了缓存未命中的次数，从而进一步提高性能。</p>
+<p><strong>一级缓存与二级缓存的区别</strong></p>
+<ol>
+<li><strong>访问速度</strong>：一级缓存比二级缓存快，但二级缓存仍然远远快于主存。</li>
+<li><strong>容量</strong>：一级缓存容量较小，而二级缓存容量更大，能够存储更多的数据。</li>
+<li><strong>位置</strong>：一级缓存紧靠处理器核心，二级缓存则稍远，通常在核心外或是多核心共享。</li>
+</ol>
+<p><strong>结合 xv6 缓存实现</strong></p>
+<p>在 xv6 操作系统中，缓存的一个典型实现是<strong>缓冲区缓存（Buffer Cache）</strong>，它通过在内存中缓存磁盘块的数据，来减少磁盘 I/O 操作的开销。xv6 中的缓存机制与 L1 和 L2 缓存有一些相似之处：</p>
+<ol>
+<li><strong>缓存层级</strong>：虽然 xv6 中的缓冲区缓存不是严格意义上的 L1 或 L2 缓存，但它在存储体系中起到缓存的作用，用于临时存储从磁盘读取的数据。类似于 L1 和 L2 缓存，缓冲区缓存通过缓存经常访问的数据块，减少了对慢速磁盘的直接访问。</li>
+<li><strong>缓存命中与未命中</strong>：在缓冲区缓存中，当进程请求一个数据块时，系统首先检查该块是否已经在缓冲区缓存中。这类似于处理器首先在 L1 或 L2 缓存中查找数据。如果命中，则直接返回缓存中的数据，避免了磁盘 I/O；如果未命中，则需要从磁盘读取数据块并将其存入缓存，以备后续访问。</li>
+<li><strong>性能优化</strong>：缓冲区缓存的设计目标之一就是通过减少对磁盘的频繁访问来提高性能，这与硬件缓存设计中的目标相似。L1 和 L2 缓存的主要目的也是通过减少对主存的访问来提高处理器的执行效率。</li>
+</ol>
+<p><strong>在L4上的二级缓存管理</strong></p>
+<p>论文中的二级缓存管理指的是<strong>控制二级缓存的分配</strong>，以提高实时应用的最坏情况执行时间。具体而言，通过在L4的用户级实现中，分配和隔离部分二级缓存的页面，减少了任务之间的缓存干扰。这个机制类似于xv6中的缓冲区缓存系统，只不过在L4中，这种缓存隔离更为灵活，能够动态分配缓存资源给实时任务，确保它们不被其他任务干扰，最终提升系统的可预测性。</p>
+<p>总的来说，一级缓存与二级缓存的主要区别在于速度、容量和作用范围，而这与xv6中的缓冲区缓存在系统性能优化中起到的作用有相似之处。通过缓存热数据并减少慢速存储访问次数，缓存系统能够显著提升系统整体性能。</p>
+<hr>
+<h2 id="lower-level-communication-primitive"><strong>Lower-level Communication Primitive</strong>
+</h2><p>低级通信原语Lower-level Communication Primitive，顾名思义，是一种与操作系统或硬件紧密相关的基础通信机制。它比传统的高层抽象（如 L4 中的 IPC，进程间通信）更贴近硬件的运行方式。这些低级原语直接操作硬件或硬件相关的机制，理论上能够比高层抽象提供更高的性能和更少的延迟。一个例子是 Exokernel 中的 <strong>protected control transfer</strong>（PCT，保护性控制传输），它允许在不同地址空间之间进行快速的控制转移，类似于硬件级别的中断或函数调用。</p>
+<p>L4 中的 IPC 是一种高层抽象，用于在不同地址空间的线程之间进行通信。它是一种同步的消息传递机制，带有内核级别的安全保护，同时允许实现更复杂的通信模式，如远程过程调用（RPC）。虽然 IPC 是一种非常强大的通信方式，但由于它是一种高层抽象，可能在一些极端情况下性能不如更直接的低级通信原语。</p>
+<p>在论文中的实验中，研究人员想通过在 Alpha 处理器上实现一种类似于 Exokernel 的保护性控制传输（PCT）的低级通信原语，来测试这种更底层的机制是否能够在性能上超越 L4 的 IPC。虽然理论上低级通信原语应该更快，因为它省去了高层抽象的开销，但实验结果表明，通过优化，L4 的 IPC 仅比 PCT 慢了几个 CPU 周期。因此，在很多实际应用场景中，L4 IPC 的性能表现已经非常接近低级原语。</p>
+<p><strong>结论</strong>：L4 的 IPC 和低级通信原语不是同一层级的机制。L4 的 IPC 属于操作系统的高层抽象，提供了更丰富的功能和安全性，而低级通信原语则直接面向硬件，属于更基础的系统层级。L4 IPC 的优势在于它能够通过提供同步消息传递和安全的跨地址空间通信来实现复杂的操作系统功能，而低级通信原语则更适合于对性能要求极高且不需要高层抽象的特殊场景。</p>
+<hr>
+<h2 id="l4中的异常exceptions与xv6中的陷阱trap的区别">L4中的异常（Exceptions）与xv6中的陷阱（Trap）的区别
+</h2><p>在L4中，异常和陷阱与线程的执行是同步的，也就是说，异常会在引发它的线程的执行过程中同步触发。在Pentium处理器上，L4将处理器的异常处理机制分配给每个线程。当某个线程发生异常时，处理器会将指令指针和标志寄存器的值压入该线程的用户态栈，然后调用该线程的用户态异常或陷阱处理程序。L4的内核会简单地将这些异常镜像到用户态，允许用户态处理这些异常。</p>
+<p>与此相对，<strong>xv6中的trap机制</strong>是操作系统内核捕捉处理器异常、系统调用和中断的机制。不同于L4的同步异常处理，xv6中的陷阱是由内核来处理的。每当发生一个trap，处理器会跳转到内核的trap处理程序（通常是由硬件触发的中断或系统调用），内核会根据陷阱类型采取不同的动作（例如，系统调用会进入对应的系统调用处理函数，硬件中断会跳转到设备的中断处理程序等）。xv6不会把这些异常直接反射到用户空间，而是由内核直接管理这些异常。</p>
+<p><strong>主要区别</strong>在于，L4将异常处理推送给用户态线程，而xv6中，所有的trap（包括异常和系统调用）都由内核处理。L4的设计强调最小化内核功能，将更多的处理移交给用户态，这也是微内核设计的核心思想。</p>
+<p>在L4的Pentium实现中，“small address spaces”（小地址空间）是一种优化机制。它利用了Pentium处理器的段机制，通过共享所有页表物理上对齐的小地址空间（范围在4 MB到512 MB），模拟标签化的TLB，用于在小地址空间之间进行上下文切换时避免不必要的TLB刷新。这个机制能够在不影响系统功能的情况下提高性能，尤其是在频繁上下文切换时有效。</p>
+<p>当线程访问数据超出了当前小地址空间的范围时，内核会自动将其切换回正常的3 GB地址空间模型。每个任务中的线程可能会使用不同的地址空间模式，即一些线程使用正常的大地址空间，另一些则使用相应的小地址空间。这种机制仅用于优化，目标是减少TLB刷新和提升IPC性能。</p>
+<p>总结一下：</p>
+<ul>
+<li><strong>L4中的exception处理</strong>直接交由用户态线程处理，而xv6则由内核捕捉并处理异常和系统调用。</li>
+<li><strong>small address spaces</strong>是L4中的一种性能优化，通过在小地址空间中模拟TLB标签化来减少TLB刷新，提高系统效率，尤其是在频繁上下文切换场景下有显著作用。</li>
+</ul>
+<hr>
+<h2 id="l4中的small-address-space是如何通过模拟标签化tlb减少tlb刷新">L4中的Small Address Space是如何通过模拟标签化TLB减少TLB刷新？
+</h2><p>在L4的Pentium实现中，<strong>small address spaces</strong>（小地址空间）是一种专门的优化机制，旨在减少TLB（Translation Lookaside Buffer，翻译后援缓冲区）的刷新频率，进而提高性能。TLB的作用是缓存虚拟地址到物理地址的映射，以加速虚拟内存的访问。当发生上下文切换时，如果不同的进程使用不同的虚拟地址空间，TLB必须被刷新，以防止一个进程的虚拟地址被误用于另一个进程。这种TLB刷新的过程会引入性能开销。</p>
+<hr>
+<h2 id="标签化tlb的概念">标签化TLB的概念
+</h2><p><strong>标签化TLB</strong>（tagged TLB）是一种通过为不同的地址空间分配标签来避免频繁刷新TLB的机制。每个进程的地址空间都有一个唯一的标签，TLB可以根据这些标签区分不同的虚拟地址空间。当进程切换时，TLB不会被完全刷新，而是根据标签来区分哪些条目属于当前进程。因此，即使发生了上下文切换，只要进程的标签匹配，TLB中的条目依然有效，减少了重建TLB的开销。</p>
+<p>在Pentium架构上，L4使用段机制来模拟标签化TLB。当进程使用的地址空间较小时（比如4MB到512MB），L4能够通过共享所有页表并使用Pentium的段机制来保护这些地址空间，避免了频繁的TLB刷新。这一过程模拟了标签化TLB的效果：</p>
+<ol>
+<li><strong>共享页表</strong>：当一个线程的地址空间很小时，所有这些小地址空间可以共享同一个物理页表，这意味着在不同进程或线程之间切换时，页表保持不变，从而减少了对TLB的刷新需求。</li>
+<li><strong>使用段机制保护</strong>：Pentium的段机制允许L4通过段寄存器来限制线程对其内存的访问范围。当地址空间较小时，L4可以通过将这些小地址空间映射到特定段中，并使用段机制保护这些地址空间。这样，当线程在这些小地址空间之间切换时，不需要完全刷新TLB，因为段机制提供了额外的保护。</li>
+<li><strong>上下文切换中的优化</strong>：当上下文切换发生在使用小地址空间的线程之间时，由于页表是共享的且通过段机制进行保护，内核无需刷新TLB。这种模拟的标签化TLB机制显著减少了上下文切换中的TLB刷新开销，提高了系统性能。</li>
+</ol>
+<p>通过共享页表并使用段机制保护小地址空间，L4避免了每次上下文切换时的TLB刷新。通常情况下，上下文切换会导致TLB被清空，因为不同进程有不同的地址空间，而TLB中的虚拟地址到物理地址的映射可能会失效。通过使用段机制和共享页表，L4能够确保不同小地址空间的线程可以无缝切换而不刷新TLB，这就大大减少了上下文切换的开销，特别是在频繁发生上下文切换的环境中。</p>
+<p><strong>总结</strong>：小地址空间的优化在L4中通过共享页表和段机制来模拟标签化TLB，减少了上下文切换时的TLB刷新，提升了系统性能。</p>
+<hr>
+<h2 id="palcode"><strong>PALcode</strong>
+</h2><p>在L4的Alpha实现中，<strong>PALcode</strong>（Privileged Architecture Library Code）是Digital公司设计的一段特殊固件，它在Alpha处理器上运行，用于执行特权级别的操作。这段代码帮助操作系统与底层硬件进行交互，通常被用来执行一些与硬件直接相关的操作，如寄存器的设置、中断处理、上下文切换等。</p>
+<p>L4微内核在Alpha处理器上的实现是完全重写了Digital原有的PALcode，目的是优化L4在Alpha平台上的性能。<strong>PALcode</strong>负责处理一些时间紧迫的操作（例如：上下文切换、TLB操作等），这些操作会通过手动调优来减少时间消耗，并且直接在PALcode中执行。而对于那些需要较长时间且可以被中断的操作，这些操作会先进入PALcode，然后切换到内核模式，剩余部分使用标准的机器指令执行。</p>
+<p>PALcode是一种低级别的固件代码，通常用来处理与硬件相关的关键操作，确保这些操作能够在不干扰内核复杂性的情况下快速执行。L4选择将一些紧急的操作在PALcode中完成，是为了最大限度地减少操作开销，而对于复杂的、可以被中断的操作，则会交给内核进一步处理，这样可以在不牺牲灵活性的同时实现性能优化。</p>
+<p>紧急操作（如上下文切换等）通常与处理器的硬件机制紧密相关，PALcode可以直接控制这些硬件机制，从而快速完成操作，而不需要经过内核的复杂调度系统。因此，紧急操作在PALcode中执行，确保快速响应。</p>
+<p>而对于长期操作（例如可以被中断的操作），则在PALcode中启动后，切换到内核来处理剩余部分。这样做的好处是利用PALcode的高效处理硬件操作的能力，同时借助内核的丰富功能来处理复杂的操作逻辑。这样分层处理可以在确保系统灵活性的同时优化关键路径上的性能。</p>
+<p>PALcode是处理硬件相关操作的一个固件层，在L4/Alpha的实现中，它主要负责高效地完成紧急操作，减少时间开销。而对于可以被中断的长期操作，则由PALcode进入内核模式，利用内核的丰富功能完成操作。</p>
+<hr>
+<h2 id="l4linux中的三类系统调用接口">L4Linux中的三类系统调用接口
+</h2><p>在L4Linux中，用户进程无法直接访问Linux内核，而是通过L4微内核的IPC机制与Linux服务器（作为用户态任务运行的Linux内核）进行通信。这三类系统调用接口是为了让用户进程能够向Linux服务器发起系统调用请求的不同方式。</p>
+<p>下面详细说明这三种接口，并配合示例帮助理解。</p>
+<ol>
+<li>
+<p><strong>修改后的标准共享库，使用L4 IPC调用Linux服务器</strong></p>
+<p>这种方式修改了Linux标准的共享库函数，例如<code>libc</code>库中的系统调用函数。每当用户进程调用这些库函数时，这些函数不再直接执行传统的Linux系统调用，而是通过L4的IPC机制与运行在用户态的Linux服务器通信。</p>
+<p>例子：假设用户进程调用<code>write()</code>系统调用，将数据写入文件。在L4Linux中：</p>
+<ol>
+<li><code>write()</code>函数调用不再直接调用Linux内核的系统调用入口。</li>
+<li>相反，经过修改的<code>libc</code>库中的<code>write()</code>函数会打包该请求，然后通过L4 IPC将请求发送给Linux服务器。</li>
+<li>Linux服务器收到这个IPC请求后，模拟传统的Linux内核来执行相应的系统调用，处理写文件操作。</li>
+<li>最后，Linux服务器通过IPC将执行结果返回给用户进程。</li>
+</ol>
+<p>这一机制允许用户进程无缝地与Linux服务器通信，而不需要内核态的系统调用机制。</p>
+</li>
+<li>
+<p><strong>修改后的静态库版本</strong></p>
+<p>与共享库类似，静态库版本是为了那些不使用共享库的程序提供的。静态库直接链接到应用程序中，应用程序在编译时将这些修改过的系统调用代码包含在可执行文件中。</p>
+<p>这种方式特别适合那些在编译时就打包所有依赖库的程序，它的工作方式与共享库类似，但在性能上可能有稍微的优势，因为不需要运行时动态加载库。</p>
+<p>例子：假设用户进程调用<code>open()</code>系统调用打开一个文件：</p>
+<ol>
+<li>在编译时，用户进程链接的是一个修改过的静态库版本，该版本中的<code>open()</code>函数通过L4 IPC发送请求给Linux服务器。</li>
+<li>Linux服务器处理这个请求，模拟原始的Linux系统调用，执行文件打开操作。</li>
+<li>结果通过IPC返回给用户进程。</li>
+</ol>
+<p>与共享库不同的是，静态库在编译时已经确定，运行时不需要再加载外部库文件，减少了运行时的开销。</p>
+</li>
+<li>
+<p><strong>用户级异常处理程序模拟原生的系统调用陷阱指令</strong></p>
+<p>这是一种更底层的机制，允许通过模拟传统的系统调用陷阱（Trap）指令来实现系统调用。通常在传统的Linux中，系统调用是通过陷阱指令（如<code>int 0x80</code>或<code>syscall</code>）触发内核模式的系统调用入口的。L4Linux中，通过用户态异常处理程序来捕获这些系统调用陷阱，并将它们转换为L4 IPC请求发送给Linux服务器。</p>
+<p>例子：假设用户进程调用<code>fork()</code>，在传统的Linux中，这通常是通过一条系统调用陷阱指令进入内核的：</p>
+<ol>
+<li>用户进程发出一个陷阱指令，例如<code>int 0x80</code>，原本这会导致处理器切换到内核模式并调用内核中的<code>fork()</code>系统调用处理程序。</li>
+<li>在L4Linux中，L4的用户级异常处理程序捕获了这个陷阱指令，而不会直接进入内核模式。</li>
+<li>异常处理程序通过L4 IPC将这个系统调用请求发送给Linux服务器。</li>
+<li>Linux服务器接收该请求，执行<code>fork()</code>操作，并将结果通过IPC返回给用户进程。</li>
+</ol>
+<p>这种方式模拟了传统系统调用的行为，使得不需要修改应用程序本身，只需用户态的异常处理程序来捕获并转换陷阱指令。</p>
+</li>
+</ol>
+<p><strong>总结与对比</strong></p>
+<ol>
+<li><strong>修改后的标准共享库</strong>：通过修改<code>libc</code>等系统调用库，使用L4 IPC直接与Linux服务器通信。这种方法简单且高效，适合大多数应用场景。</li>
+<li><strong>修改后的静态库版本</strong>：与共享库方式相似，但在编译时链接到可执行文件中。它适合那些不依赖共享库的应用程序，能够在运行时减少一些开销。</li>
+<li><strong>用户级异常处理程序</strong>：更底层的方式，通过捕获用户态的系统调用陷阱，模拟内核行为。这种方法使得系统调用与传统Linux兼容性最好，但可能在性能上略低于其他两种方式，因为它需要捕获和处理异常。</li>
+</ol>
+<p>这三种方式各有其使用场景，结合使用能够满足不同的需求。</p>
+<hr>
+<h2 id="architecture">architecture
+</h2><p>在这段文字中，&ldquo;architecture-dependent&rdquo; 和 &ldquo;architecture-independent&rdquo; 中的 &ldquo;architecture&rdquo; 主要是指 <strong>硬件体系结构</strong>，特别是不同的 <strong>CPU 架构</strong>（如 x86、Alpha、SPARC 等）。换句话说，&ldquo;architecture&rdquo; 指的是不同的硬件平台，它不仅包括 CPU 结构，还可能涉及内存管理、I/O 设备等与特定硬件直接相关的功能。</p>
+<ul>
+<li><strong>Architecture-dependent</strong> 部分：是指那些与特定硬件（如 CPU、内存、I/O 等）密切相关的内核功能。这些部分需要根据不同硬件平台进行移植和调整，比如中断处理、设备驱动、地址空间管理等低级操作。这些功能完全封装了底层的硬件架构，确保 Linux 能够在不同的硬件平台上运行。这是 Linux 需要修改的地方，尤其当要移植到新平台时。</li>
+<li><strong>Architecture-independent</strong> 部分：是指那些与硬件架构无关的通用功能，比如进程管理、资源管理、文件系统、网络子系统等。无论是 x86 还是其他架构，这些部分都可以在不同平台之间保持不变，不需要特别修改。它们占据了 Linux 内核代码的大部分（约 98%），因此对于内核移植来说，绝大部分代码是通用的。</li>
+</ul>
+<p>所以，&ldquo;architecture&rdquo; 主要指的是 <strong>CPU 及相关硬件架构</strong>，而不是 Linux 内核本身。不同的硬件平台可能需要调整内核的 architecture-dependent 部分，但大多数通用功能都属于 architecture-independent 部分，不需要变动。</p>
+<hr>
+<h2 id="linux-as-server"><strong>Linux</strong> as server
+</h2><p>虽然 µ-kernel 和 Linux 都是内核，但它们的作用和架构是不同的。</p>
+<ul>
+<li><strong>µ-kernel（微内核）</strong>：是一种内核设计方法，旨在将操作系统的核心功能（如进程管理、内存管理、中断处理等）精简到最低限度，只保留一些基础服务，其他功能则放在用户态中实现。微内核的目标是模块化、灵活性和可移植性，它本身只负责一些基本任务（比如进程切换、消息传递等）。</li>
+<li><strong>Linux</strong>：是一个传统的宏内核（monolithic kernel），意味着它的内核包括了大量的功能（如文件系统、设备驱动、网络协议等），这些功能都是运行在内核态的。</li>
+</ul>
+<p>尽管 µ-kernel 和 Linux 都是内核，但它们并不是互相排斥的。Linux 可以被移植到 µ-kernel 上的原因在于<strong>将 Linux 作为一个用户态进程运行在 µ-kernel 上</strong>，而不是直接替换或拆解 Linux 的内核部分。</p>
+<p>具体来说，移植过程如下：</p>
+<ol>
+<li><strong>L4 µ-kernel 提供底层支持</strong>：L4 作为一个微内核，提供基本的内核功能（如进程调度、内存管理、消息传递等），这些功能足够支持上层应用的运行。</li>
+<li><strong>Linux 运行在用户态</strong>：Linux 本身被设计为一个用户态的服务，运行在 µ-kernel 提供的框架之上。它本身仍然提供文件系统、网络等高级功能，只是这些功能从传统的内核态移到了用户态。</li>
+<li><strong>单服务器模型</strong>：通过单一的 Linux 服务器进程，Linux 的所有用户进程在 µ-kernel 上得到服务。这种单服务器的模型意味着，所有 Linux 用户进程通过该服务器进程进行系统调用和操作。</li>
+</ol>
+<p>因此，<strong>Linux 并没有被拆解成各个小部分融入 µ-kernel</strong>，而是<strong>整体上作为一个用户态的服务来运行</strong>。这种方法不仅保持了二进制兼容性（即任何 Linux 软件仍然可以运行），还检验了在这种微内核架构下，能否不通过针对 µ-kernel 的深度优化就实现良好的性能。</p>
+<p>这种架构的好处在于，通过 µ-kernel 提供底层支持，Linux 可以保持其高层功能模块的一致性，而不需要针对每种硬件做太多的修改。</p>
+<p>可以这么理解：在移植到 µ-kernel 上时，<strong>Linux 原来内核中与底层硬件直接交互的部分会被替代或重新封装</strong>，因为这些功能（如进程调度、内存管理、消息传递等）已经由 L4 µ-kernel 提供了。也就是说，<strong>Linux 内核中与硬件紧密耦合的底层部分会被 µ-kernel 接管</strong>，从而让 Linux 可以运行在 µ-kernel 之上，成为一个用户态的服务。更具体地讲：</p>
+<ul>
+<li><strong>底层内核功能被 µ-kernel 接管</strong>：原本由 Linux 内核直接负责的功能，例如进程调度、内存管理、消息传递机制等，这些底层硬件交互的操作将由 µ-kernel 负责处理。所以在 µ-kernel 的架构下，Linux 内核中的这些部分被剥离掉或者不再直接发挥作用。</li>
+<li><strong>Linux 的上层功能保留</strong>：Linux 内核中仍然保留了很多操作系统需要的高层功能模块（如文件系统、网络协议栈、设备驱动接口等），这些功能继续提供服务，只是它们运行在用户态，而不是传统内核态。这个被移植后的 Linux 内核整体上看起来更像是一个“单服务器”，提供操作系统的一些高级功能。</li>
+<li><strong>ABI 和系统调用保持不变</strong>：虽然 Linux 在 µ-kernel 上运行，但是它的应用程序二进制接口（ABI）保持不变，用户态进程通过类似传统 Linux 的系统调用接口与该“单服务器”交互。这意味着，从用户的角度来看，程序依然像是在一个传统的 Linux 系统上运行。</li>
+</ul>
+<p>所以，Linux 原来内核中的部分确实被替换为 µ-kernel 提供的功能，但并不是全部被剔除。Linux 的核心功能模块被保留下来，并在用户态作为一个整体服务运行，而 µ-kernel 负责最底层的系统功能。这样，Linux 就从一个完整的操作系统内核变成了一个<strong>运行在 µ-kernel 上的用户态服务</strong>。</p>
+<p>可以把它想象成 <strong>Linux 成为一个服务器</strong>，我们通过与 µ-kernel 交互来间接获得 Linux 这台“服务器”提供的服务。更具体来说：</p>
+<ul>
+<li><strong>µ-kernel 是底层管理者</strong>：µ-kernel 负责最底层的硬件交互、进程调度、内存管理和消息传递等功能。这些功能是操作系统核心中的基础部分。</li>
+<li><strong>Linux 作为单服务器进程</strong>：在这种架构下，Linux 被看作是一个<strong>单一的服务器进程</strong>，它提供文件系统、网络、设备驱动等高层操作系统服务。所有的用户进程不再直接与硬件交互，而是通过 µ-kernel 进行中转。</li>
+<li><strong>交互方式</strong>：用户进程首先通过系统调用或消息传递与 µ-kernel 交互，µ-kernel 再将请求转发给运行在用户态的“Linux 服务器”进程。这台“服务器”处理高级功能的请求，如文件系统操作、网络通信等，并将结果返回给 µ-kernel，最终传递回用户进程。</li>
+</ul>
+<p>这种设计不仅保持了 Linux 高层服务的功能性，还允许 µ-kernel 作为底层的调度器和资源管理器，提供了模块化和更灵活的系统架构。</p>
+<p>总的来说，<strong>µ-kernel 是操作系统的核心支柱，Linux 作为其中的一个重要服务提供操作系统的大部分功能</strong>，类似于用户通过 µ-kernel 访问“Linux 服务器”来获取服务。</p>
+<hr>
+<h2 id="top-half-和-bottom-half"><strong>top half</strong> 和 <strong>bottom half</strong>
+</h2><p>在 Linux 中，中断处理分为 <strong>top half</strong> 和 <strong>bottom half</strong>，它们协同工作来处理硬件中断，保证系统高效运行。</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>Top Half（中断上半部）</th>
+          <th>Bottom Half（中断下半部）</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>快速处理高优先级任务</strong>：当硬件中断发生时，top half 立即响应。它的目的是<strong>快速处理与中断相关的最关键部分</strong>，确保硬件能够尽快恢复正常工作。</td>
+          <td><strong>延迟处理非关键任务</strong>：由于 top half 只负责处理最关键的部分，剩下的一些非实时性或耗时较长的任务会被推迟到 bottom half 来执行。</td>
+      </tr>
+      <tr>
+          <td><strong>典型任务</strong>：包括确认中断、读取硬件状态、清除中断标志，以及做一些非常简单且关键的工作。</td>
+          <td><strong>典型任务</strong>：可能包括数据包处理、调度更多任务、进行较复杂的硬件状态处理等。总之，任何不需要立即执行、但仍然需要对中断进行完整处理的工作都会放在 bottom half。</td>
+      </tr>
+      <tr>
+          <td><strong>优先执行，优先级最高</strong>：top half 是在中断发生时首先被调用的。它是以高优先级执行的，因为它直接由硬件中断触发，且需要快速完成以避免影响系统的实时性。</td>
+          <td><strong>在 top half 完成后执行</strong>：bottom half 会在所有相关的 top half 完成后被调用，确保硬件中断的快速处理。</td>
+      </tr>
+      <tr>
+          <td><strong>不可抢占</strong>：top half 不会被其他 top half 或 bottom half 中断。它以最高优先级执行，其他中断会被屏蔽（在 SMP 系统中，一般是局部屏蔽），直到该 top half 处理完成。</td>
+          <td><strong>低优先级</strong>：bottom half 的优先级通常低于 top half，但高于正常的用户态进程。它可以被其他 top half 中断，但不会被其他 bottom half 中断。</td>
+      </tr>
+  </tbody>
+</table></div>
+<p><strong>执行流程与关系</strong></p>
+<ol>
+<li><strong>硬件中断触发</strong>：硬件中断（如网络包到达、键盘输入等）会触发 µ-kernel 产生一个消息，该消息被映射到一个中断事件。</li>
+<li><strong>top half 执行</strong>：与该中断源相关联的 <strong>top half</strong> 处理程序（thread）会被触发。此时，top half 会以最高优先级运行，快速处理最关键的中断逻辑。</li>
+<li><strong>记录状态，推迟非关键任务</strong>：top half 在完成了对中断的快速处理后，会将剩余的任务（非关键任务）记录下来，通常是放入一个待处理队列。</li>
+<li><strong>bottom half 执行</strong>：当所有 top half 都完成后，专门的 <strong>bottom half 处理线程</strong> 会被触发，开始处理那些被推迟的非关键任务。此时，系统不再受硬件中断的影响，因此 bottom half 可以更从容地执行较为复杂的逻辑。</li>
+<li><strong>优先级关系</strong>：为了确保系统响应及时，<strong>top half 具有最高优先级</strong>，其次是 <strong>bottom half</strong>，最后才是普通的用户进程和 Linux 服务器进程。</li>
+</ol>
+<p><strong>总结</strong></p>
+<ul>
+<li><strong>top half 和 bottom half 的关系</strong>：top half 负责快速处理中断，确保最关键的工作能够立刻完成。而 bottom half 则延迟处理耗时或非关键的任务，确保系统高效运行。</li>
+<li><strong>执行顺序</strong>：硬件中断 → top half 执行 → bottom half 执行 → 继续用户进程或 Linux 服务器进程。</li>
+</ul>
+<p>这样划分的目的在于，<strong>最小化系统停滞的时间</strong>，即确保中断处理不会长时间阻塞其他系统操作，同时又能及时完成对硬件中断的响应。</p>
+<hr>
+<h2 id="l4-的-copyin-和-copyout-机制">L4 的 <code>copyin</code> 和 <code>copyout</code> 机制
+</h2><p>L4 的 <code>copyin</code> 和 <code>copyout</code> 机制看起来与传统 Linux 内核的做法相似，但实际上有一些关键区别，导致了性能差异。为什么 L4 的方法在这种情况下更有效率：</p>
+<p>在传统的 Linux/x86 中，用户态地址空间总是映射到内核态地址空间中。这样，<code>copyin</code> 和 <code>copyout</code> 操作只需要通过简单的内存拷贝来完成，地址转换是由硬件自动处理的。这种方法的优点是拷贝操作本身非常简单，<strong>不需要在软件层面进行额外的地址转换</strong>，因为硬件已经将用户地址映射到内核空间了。</p>
+<p>在 L4Linux 中，<code>copyin</code> 和 <code>copyout</code> 采用的是物理地址拷贝。这意味着在每次拷贝操作时，L4Linux 需要通过服务器内部的逻辑页表手动解析用户态的虚拟地址，并将其转换为“物理地址”（实际上是指在 L4Linux 服务器的地址空间中对应的地址）。完成地址转换后，再进行基于物理地址的内存拷贝。</p>
+<p>表面上看，这两种方法的区别似乎不大，都是在用户态和内核态之间进行数据拷贝，但实际的性能影响来源于 <strong>虚拟地址空间的管理方式</strong> 和 <strong>硬件开销</strong>：</p>
+<ol>
+<li><strong>硬件开销的不同</strong>：在传统的 Linux/x86 中，虽然地址映射是由硬件自动处理的，但<strong>每次进行内核态和用户态的切换时，硬件需要处理大量的上下文切换</strong>，这包括重新加载页表等操作。在 L4 这样高度模块化的系统中，这些上下文切换的开销更为显著，导致传统方法在 L4 环境下表现不佳。</li>
+<li><strong>L4 的页表管理方式更轻量</strong>：L4 采用了一种更加轻量级的虚拟内存管理机制，它避免了频繁的硬件上下文切换。通过<strong>在软件层面手动解析地址</strong>（即通过逻辑页表将虚拟地址映射为物理地址），L4Linux 可以减少硬件参与的地址转换操作。这种方式虽然看似增加了软件上的处理负担，但却避免了硬件在上下文切换上的高开销，从而在实际应用中提高了整体性能。</li>
+<li><strong>内核态和用户态的隔离</strong>：L4 微内核架构中的内核态和用户态有更加严格的隔离，这种隔离在提高安全性和模块化的同时，也使得传统的全局地址空间映射在性能上不再适用。L4Linux 的物理地址拷贝机制更加符合 µ-kernel 的架构特点，在模块化的设计下能够更有效地处理数据交换。</li>
+</ol>
+<p>L4 的 <code>copyin</code> 和 <code>copyout</code> 机制通过在软件中手动解析虚拟地址，从而减少了硬件上下文切换的开销。虽然传统 Linux/x86 的方法在硬件上显得更简单，但它在 L4 的 µ-kernel 架构下表现不佳，因为上下文切换的硬件开销过大。而 L4 通过物理地址拷贝的方式能够更好地适应这种高度模块化的微内核架构，因此效率更高。</p>
+<blockquote>
+<ol>
+<li>
+<p><strong>用户态和内核态的转换</strong></p>
+<ul>
+<li>
+<p><strong>L4 在 copyin 和 copyout 时</strong>：L4 的 copyin 和 copyout 操作<strong>不需要进行传统的用户态和内核态的转换</strong>，因为这些操作通常是在 <strong>L4Linux 服务器进程</strong>中完成的。L4 采用的是用户态服务（比如 L4Linux 作为一个单服务器进程运行在用户态），而 µ-kernel 本身并不直接参与大量的用户态和内核态转换。</p>
+</li>
+<li>
+<p><strong>什么时候 L4 需要用户态和内核态转换</strong>：</p>
+<ul>
+<li>在 L4 中，用户态和内核态的转换主要发生在 <strong>L4 微内核提供的基本系统服务</strong>中，例如进程调度、消息传递等。L4 作为一个微内核，其职责是提供最低限度的核心功能，而 Linux 服务器和其他用户态服务都运行在用户态。</li>
+<li>L4 仅在处理用户进程请求 µ-kernel 服务时，或者需要执行内核态任务时，才需要执行用户态和内核态的转换。相比传统 Linux 内核，L4 这种结构减少了内核态和用户态切换的次数，从而提升性能。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>页表和 TLB（Translation Lookaside Buffer）</strong></p>
+<ul>
+<li>
+<p><strong>L4 的页表</strong>：在 L4Linux 的环境下，L4 微内核依然依赖页表机制进行地址翻译，但它的设计更加轻量化，可能不会直接使用传统的硬件页表机制。对于 <code>copyin</code> 和 <code>copyout</code> 操作，L4Linux 使用了 <strong>逻辑页表</strong> 来手动管理虚拟地址到物理地址的映射，而不依赖硬件来进行地址转换。</p>
+</li>
+<li>
+<p><strong>TLB 和硬件地址转换</strong>：L4 微内核和 L4Linux 并没有完全放弃 TLB 和硬件地址转换功能，特别是在处理用户态进程的时候。页表和 TLB 仍然是操作系统的一部分，但由于 L4Linux 作为一个用户态服务运行在 µ-kernel 上，<strong>L4Linux 服务器在与 µ-kernel 交互时可能不需要频繁依赖硬件的 TLB 机制</strong>。在某些情况下，L4Linux 通过软件的逻辑页表完成了大部分的地址转换，这减少了对硬件 TLB 的依赖。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>L4Linux 是否完全不需要硬件页表和 TLB？</strong></p>
+<ul>
+<li>
+<p><strong>并不是完全不需要</strong>：L4Linux 仍然需要 TLB 和硬件页表转换来支持 <strong>用户态进程的地址空间管理</strong>，特别是涉及到进程的虚拟内存管理时。L4 的轻量级设计和 L4Linux 的逻辑页表只是减少了对硬件地址转换的依赖，并不是完全不使用这些功能。</p>
+</li>
+<li>
+<p>当 L4Linux 服务器需要处理大量的进程时，TLB 和硬件地址翻译依然是不可或缺的，特别是在提高多进程或多线程系统的性能方面。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>总结</strong></p>
+<ul>
+<li>
+<p><strong>L4 不依赖用户态和内核态切换进行 copyin 和 copyout</strong>，这些操作通常发生在用户态的 L4Linux 服务器中。</p>
+</li>
+<li>
+<p><strong>L4 仅在处理核心服务时需要用户态和内核态转换</strong>，而大部分操作在用户态下完成。</p>
+</li>
+<li>
+<p><strong>逻辑页表</strong>用于 L4Linux 服务器中的地址映射操作，这减少了对硬件 TLB 和页表机制的依赖，但 L4 及其用户态进程仍然需要硬件支持的页表和 TLB 进行地址翻译。</p>
+</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>TLB（Translation Lookaside Buffer）是一个缓存，专门用来加速虚拟地址到物理地址的转换。它并不是直接存储整个页表，而是存储一部分最近使用的虚拟地址到物理地址的映射。现在来详细解释为什么更换页表的时候需要<strong>flush TLB</strong>。</p>
+<ol>
+<li><strong>TLB 与页表的关系</strong></li>
+</ol>
+<p>TLB 并不包含完整的页表，它只是对一部分页表内容的缓存。每次 CPU 需要进行地址转换（将虚拟地址转换为物理地址）时，首先会在 TLB 中查找。如果找到了虚拟地址的映射，这就是“<strong>TLB 命中</strong>”，CPU 直接使用 TLB 中的映射来访问物理内存，速度很快。如果没有命中，则会发生“<strong>TLB 未命中</strong>”，这时 CPU 就需要去页表中查找相应的虚拟地址映射并加载到 TLB 中，这个过程相对较慢。</p>
+<ol start="2">
+<li><strong>为什么更换页表需要 flush TLB</strong></li>
+</ol>
+<p>当操作系统切换进程或者更改页表时，意味着<strong>虚拟地址到物理地址的映射发生了改变</strong>。此时，TLB 里面缓存的映射可能已经过时或不再有效。如果我们继续使用这些过期的映射，CPU 可能会把错误的物理地址当作有效的进行访问，导致数据访问错误甚至系统崩溃。</p>
+<p>因此，每当页表发生变化时，需要将 TLB 中旧的条目清除掉，这个操作称为“<strong>flush TLB</strong>”。这确保了后续的地址转换操作不会使用到已经无效的虚拟地址到物理地址的映射。</p>
+<ol start="3">
+<li><strong>flush TLB 的具体作用</strong></li>
+</ol>
+<p>flush TLB 的目的并不是把页表的内容“装载”进 TLB，相反，它是为了<strong>清除 TLB 中的无效条目</strong>。更换页表之后，TLB 重新开始缓存新的页表条目。在新的地址映射被频繁访问时，它们会逐渐被加载进 TLB，但 TLB 并不会一下子缓存整个页表。</p>
+<ol start="4">
+<li><strong>总结</strong></li>
+</ol>
+<ul>
+<li><strong>TLB 是页表的一种缓存</strong>，它只保存一部分页表条目。</li>
+<li><strong>当页表发生变化时，TLB 中的缓存可能会失效</strong>，继续使用这些失效的映射会导致错误的地址转换。</li>
+<li><strong>flush TLB 是为了清除旧的映射</strong>，保证 CPU 在新的映射生效时不会使用错误的地址映射。</li>
+</ul>
+<p>所以，更换页表的时候，flush TLB 不是把页表条目装载进 TLB，而是<strong>为了防止使用无效的映射</strong>，确保地址转换的正确性。</p>
+</blockquote>
+</blockquote>
+<hr>
+<h2 id="emulation-library"><strong>Emulation Library</strong>
+</h2><p>在 L4Linux 的上下文中，<strong>“emulation library”</strong> 通常指的是一个用于支持系统调用或信号处理的库。它模拟了传统 Linux 系统调用或行为，以便在 L4 这种不同内核架构下运行标准的 Linux 应用程序。它可以让 Linux 应用程序以为它们在一个完整的 Linux 环境中运行，虽然底层实际上是 L4 微内核。</p>
+<hr>
+<h2 id="修改-signal-thread-和-emulation-library-只会影响自身线程">修改 Signal Thread 和 Emulation Library 只会影响自身线程
+</h2><p>在 L4Linux 中，每个 Linux 用户进程都会拥有一个单独的 <strong>Signal Thread</strong>（信号处理线程）和相关的 <strong>Emulation Library</strong>。这些组件只与该用户进程共享同一个地址空间，因此它们彼此间的修改不会对其他进程造成影响。具体原因如下：</p>
+<ul>
+<li><strong>地址空间隔离</strong>：在 L4 中，信号线程和 emulation library 仅在与主线程共享的地址空间中运行。任何对这些线程或库的修改都不会超出这个特定的地址空间。因此，修改它们可能会影响这个进程的正常运行，但不会影响其他进程或系统的整体稳定性。</li>
+<li><strong>进程的自我损害</strong>：由于这些组件都在用户进程自己的地址空间内，只有该进程本身能够访问并修改它们。这样，即使进程修改了这些组件，只会影响到它自己，不会对其他进程造成干扰。</li>
+</ul>
+<hr>
+<h2 id="主线程进入-linux-server-线程">主线程进入 Linux Server 线程
+</h2><p>这里的“<strong>主线程进入 Linux Server 线程</strong>”的意思并不是指主线程被暂停，然后由 Linux Server 线程取代它的执行。实际上，它指的是 <strong>主线程进入了 Linux 的处理模式</strong>，即从用户态切换到内核态，准备响应信号并进入 L4Linux 系统服务的处理流程。具体过程如下：</p>
+<ol>
+<li><strong>信号到达</strong>：Linux Server 发送信号给信号处理线程（Signal Thread）。</li>
+<li><strong>信号处理线程修改主线程的状态</strong>：信号线程通过调整主线程的堆栈指针和指令指针，使其进入 Linux 内核态。这一动作相当于让主线程<strong>进入内核的信号处理逻辑</strong>。</li>
+<li><strong>主线程执行信号处理</strong>：主线程从修改后的堆栈和指令指针开始，进入 Linux 的信号处理流程，这个过程被称为“进入 Linux”，是从用户态到内核态的一个过渡，而不是完全暂停或切换成其他线程。</li>
+<li><strong>完成信号处理后恢复执行</strong>：主线程在完成信号处理后恢复正常执行（即用户态执行）。</li>
+</ol>
+<p>因此，<strong>“进入”</strong> 指的是主线程进入了一个内核态的上下文处理过程，而不是实际进入 Linux Server 线程。Linux Server 本身还是在独立的线程中运行的，主线程只是通过被信号通知进入了一个特定的信号处理状态。</p>
+<blockquote>
+<p>“进入 Linux”是否指的是单个线程对应的 Linux server 状态的改变，实际上 L4 内核并没有真正改变用户态和内核态的概念。你的理解基本是对的。以下是对这种机制的进一步解释：</p>
+<ol>
+<li>
+<p><strong>L4 微内核的用户态和内核态</strong></p>
+<p>在传统的 Linux 系统中，用户态（user mode）和内核态（kernel mode）是操作系统的两个运行模式。在用户态，程序的权限有限，不能直接访问硬件或内核资源；而在内核态，操作系统具有完全的控制权，可以执行特权指令和访问所有系统资源。</p>
+<p>但在 <strong>L4 微内核</strong> 架构中，内核（µ-kernel）的角色非常小，它只处理非常底层的任务，如进程调度、消息传递和内存管理等。L4 的设计减少了用户态与内核态之间的频繁切换，因为大多数操作系统的功能（例如文件系统、驱动程序等）是在用户态的服务中完成的（例如 L4Linux 作为用户态服务运行）。因此，L4 系统中内核态和用户态的区分相对弱化了很多，只有在极少数情况下才需要用户态和内核态的切换。</p>
+</li>
+<li>
+<p><strong>&ldquo;进入 Linux&rdquo; 的过程</strong></p>
+<p>在 L4Linux 中，当一个用户进程需要进入内核态来执行特权操作（例如处理信号），它实际上是从 L4Linux 服务器接收处理指令。在这个过程中：</p>
+<ul>
+<li><strong>L4 内核本身不会进行用户态和内核态的切换</strong>。L4 内核保持运行在自己的模式中，只负责处理消息传递和基本的调度等操作。</li>
+<li><strong>&ldquo;进入 Linux&rdquo;</strong> 意味着用户进程（比如主线程）开始进入 <strong>L4Linux 服务器进程</strong>内部的信号处理逻辑（或者其他内核态相关的操作），这个操作由 L4Linux 服务器来管理，而不是 L4 微内核本身。</li>
+</ul>
+<p>简而言之：</p>
+<ul>
+<li>在传统 Linux 中，&ldquo;进入内核态&rdquo; 是一个涉及特权级别变化的硬件操作。</li>
+<li>而在 L4Linux 上，这更多是一个用户态服务逻辑的转换，意味着主线程开始处理本应该在传统 Linux 内核态执行的功能，但 <strong>L4 内核本身并不会进行实际的用户态到内核态的切换</strong>。</li>
+</ul>
+</li>
+</ol>
+<p>结论：“进程进入 Linux”确实主要是指 <strong>L4Linux 服务器进程内部状态的改变</strong>，而 <strong>L4 微内核本身并不改变用户态和内核态的划分</strong>。L4 系统的设计本质上就是通过减少这种切换来提升性能和简化操作系统的架构。</p>
+</blockquote>
+<hr>
+<h2 id="两个执行路径">两个执行路径
+</h2><p>在L4Linux环境中，<strong>主线程会有一张页表</strong>，这张页表主要用于管理用户进程的地址空间，并映射该进程可以访问的虚拟地址到实际的物理地址。这意味着：</p>
+<ul>
+<li>主线程可以在自己的地址空间中执行它有权限访问的用户态代码。这个用户态代码是直接通过页表进行映射的，主线程可以直接在它的上下文中运行这些代码。</li>
+<li>但是，<strong>这不包括Linux内核级别的代码</strong>，因为在L4Linux架构下，Linux本身被封装为一个用户态进程运行在L4微内核之上。也就是说，<strong>L4Linux服务器</strong>（即Linux内核）不会直接通过页表暴露给每个用户进程。主线程仅可以访问其自身的用户态代码，而非Linux内核的代码。</li>
+</ul>
+<p>因此，主线程的页表不会直接映射到Linux服务器的代码空间中，它主要用于运行用户态代码，而无法直接执行与内核态相关的代码。</p>
+<p>在L4Linux架构中，<strong>主线程要执行需要Linux内核权限的代码</strong>（例如系统调用、信号处理等）时，通常会通过 <strong>IPC（进程间通信）</strong> 与 <strong>L4Linux服务器</strong> 进行交互。这是L4系统中非常重要的机制：</p>
+<ul>
+<li>当主线程需要进行系统调用或处理信号时，它会将这些请求封装成 <strong>IPC消息</strong>，并发送给L4Linux服务器（Linux内核进程）。</li>
+<li><strong>L4Linux服务器</strong> 接收到这些消息后，会在它自己的上下文中处理这些请求（即执行Linux内核中的相应代码）。</li>
+<li>处理完成后，L4Linux服务器会通过IPC回复主线程，从而让主线程继续执行。</li>
+</ul>
+<p>这意味着，<strong>主线程并不会直接执行Linux服务器的代码</strong>，而是通过IPC来请求Linux服务器的服务。L4微内核通过这种方式实现了用户态与L4Linux服务器（内核态）之间的隔离，减少了用户态与内核态之间的频繁切换，提升了系统的性能和安全性。</p>
+<p>总结：</p>
+<ul>
+<li><strong>主线程通过页表直接执行的代码</strong> 仅限于用户态代码，无法直接执行L4Linux服务器的内核态代码。</li>
+<li><strong>主线程与L4Linux服务器的交互主要依赖IPC</strong>，当主线程需要系统级操作时，它通过发送消息给L4Linux服务器，由服务器代为执行内核级的代码。</li>
+</ul>
+<p>这种架构设计使得L4Linux能够高效地在L4微内核上运行，同时确保了系统的模块化和隔离性。</p>
+<hr>
+<h2 id="coroutine协程"><strong>Coroutine（协程）</strong>
+</h2><p>协程（Coroutine）是一种更轻量的并发执行单元，它与线程类似，但有一些关键的不同。协程通常运行在用户空间，由程序手动调度，而线程则通常由操作系统调度。</p>
+<ol>
+<li>
+<p><strong>协程的特点</strong>：</p>
+<ul>
+<li>
+<p><strong>手动切换</strong>：协程是通过程序中的某些机制显式切换的，而不是像线程那样由操作系统隐式调度。当一个协程执行到一定位置时，它可以主动让出控制权，并且保存执行状态，以便稍后恢复执行。</p>
+</li>
+<li>
+<p><strong>非抢占式调度</strong>：协程不像线程或进程那样抢占系统资源，它们可以在任务之间主动切换，而不会**作系统强制中断。这减少了上下文切换的开销。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>协程 vs 线程 vs 进程</strong></p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>进程</th>
+          <th>线程</th>
+          <th>协程</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>进程是操作系统分配资源和独立运行的最基本单元。每个进程拥有独立的内存空间，并且进程之间不能直接共享内存。</td>
+          <td>线程是进程内部的执行单元，一个进程可以包含多个线程。线程共享进程的内存空间，但每个线程都有自己独立的执行栈。</td>
+          <td>协程比线程更轻量。它们在同一线程的上下文中运行，并且由程序来调度而不是操作系统。它们共享同一个线程的栈帧，切换时只需保存和恢复少量的状态。</td>
+      </tr>
+      <tr>
+          <td>进程的上下文切换通常比较昂贵，因为涉及到虚拟内存空间的切换。</td>
+          <td>线程的上下文切换比进程轻量一些，但仍然涉及到保存和恢复CPU寄存器、堆栈等信息。</td>
+          <td>协程的上下文切换开销非常低，因为它不涉及操作系统的调度机制。</td>
+      </tr>
+  </tbody>
+</table></div>
+</li>
+<li>
+<p><strong>协程的例子</strong></p>
+</li>
+</ol>
+<ul>
+<li>
+<p><strong>异步编程</strong>：现代编程语言（如 Python 中的 <code>async/await</code>）常常使用协程来实现异步编程。协程允许程序在等待 I/O 操作（如网络请求、文件读写）时不阻塞线程，而是切换到其他任务继续执行。例子:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">async</span> <span class="k">def</span> <span class="nf">fetch_data</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="k">await</span> <span class="n">some_io_operation</span><span class="p">()</span>  <span class="c1"># 模拟 I/O 操作，协程让出控制权，等待操作完成</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Data fetched&#34;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p><strong>游戏开发中的协程</strong>：在游戏开发中，协程常常用于处理时间敏感的任务。例如，Unity 引擎中的协程可以用于控制动画的播放或延迟事件的执行。例子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="n">IEnumerator</span> <span class="n">WaitAndPrint</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">yield</span> <span class="k">return</span> <span class="k">new</span> <span class="n">WaitForSeconds</span><span class="p">(</span><span class="m">2</span><span class="p">);</span>  <span class="c1">// 延迟2秒</span>
+</span></span><span class="line"><span class="cl">    <span class="n">print</span><span class="p">(</span><span class="s">&#34;2 seconds later&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<p>总结：协程是一种轻量级的并发机制，允许程序在不依赖操作系统的调度的情况下管理多任务执行，减少了上下文切换的开销。相比线程和进程，协程更加高效，尤其在I/O密集型和异步任务处理中表现良好。</p>
+<hr>
+<h2 id="l4linux-的调度策略">L4Linux 的调度策略
+</h2><p>支持“将 <code>schedule()</code> 函数的调用延迟到进程的时间片耗尽”的机制，主要在于 L4Linux 的调度策略，以及 µ-kernel 的轻量级结构和协程机制。以下是原因和实现方式：</p>
+<ol>
+<li>
+<p><strong>延迟 <code>schedule()</code> 调用的机制</strong></p>
+<ul>
+<li>
+<p><strong>减少协程切换</strong>：L4Linux 中每个系统调用完成后，如果没有需要立即处理的内核任务或其他协程的切换请求，系统并不会立即调用 <code>schedule()</code> 来切换到另一个任务，而是让当前用户线程继续执行。这种做法的好处是减少了不必要的调度器调用，从而最小化了协程的上下文切换，减少了开销。</p>
+</li>
+<li>
+<p><strong>基于时间片调度</strong>：系统设置了一个固定的时间片，每个线程在时间片到期之前可以连续执行任务。L4Linux 延迟调用 <code>schedule()</code>，意味着只在当前用户线程的时间片耗尽后，才会强制进行调度。这种调度策略与传统 Linux 类似，减少了不必要的调度器调用，提升了性能。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>支持用户进程在时间片内进行多次系统调用</strong></p>
+<ul>
+<li>
+<p><strong>系统调用的执行不导致阻塞</strong>：L4Linux 的设计允许用户进程在其时间片内可以进行多个系统调用，而不必等待内核中的其他任务或协程切换。这是因为在时间片内系统不会立即调用 <code>schedule()</code> 切换到其他任务，而是尽可能让当前进程继续运行。除非有更高优先级的任务请求处理，比如中断，否则会尽量避免打断当前进程的执行。</p>
+</li>
+<li>
+<p><strong>避免频繁上下文切换</strong>：系统调用完成后，L4Linux 并不会立即切换到其他任务，而是恢复用户进程的执行状态。这种方式避免了传统系统中每次系统调用可能触发上下文切换的情况，用户进程可以连续执行多个系统调用，直到时间片用尽才进行调度切换。这个特性减少了切换带来的性能损耗，提高了系统调用密集型任务的执行效率。</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>具体执行方式：</p>
+<ul>
+<li>在系统调用完成后，如果没有内核中断或其他需要立即处理的任务，L4Linux 服务器会检查 <code>reschedule</code> 标志。若该标志没有被设置，系统不会立即调用 <code>schedule()</code>，而是恢复用户线程的执行。这种行为让用户进程在当前时间片内尽可能长地持续执行，且允许多个系统调用连续完成。</li>
+<li>这种方式允许系统在一个时间片内完成多个系统调用，而不会在每次调用后立即进入调度切换。这提高了系统的整体吞吐量，因为多个系统调用可以在单个时间片内无缝地执行而不被中断。</li>
+</ul>
+<p>总结：通过延迟 <code>schedule()</code> 调用至时间片耗尽，L4Linux 可以<strong>减少协程切换的频率</strong>，从而<strong>提高系统调用密集型任务的执行效率</strong>。这种方法在用户进程时间片内<strong>允许多个系统调用连续执行而不被调度器打断</strong>，从而避免了频繁的上下文切换，达到了提升性能的效果。</p>
+<blockquote>
+<p>系统调用完成后延迟 <code>schedule()</code> 的这种方法在现代操作系统中看似是一种常见的优化，但实际上，它的<strong>出色之处在于减少不必要的调度器调用</strong>，特别是在处理多任务并发时可以有效提升性能。让我们仔细看一下这个方法的背景以及为什么它能够带来改进。</p>
+<ol>
+<li>
+<p><strong>传统系统中的调度行为</strong></p>
+<p>在传统的操作系统（如早期版本的 Linux）中，系统调用完成后，<strong>调度器可能会立即进行上下文切换</strong>，这取决于当时的系统状态和调度策略。例如：</p>
+<ul>
+<li>每次系统调用完成后，内核会评估是否有其他任务需要更高优先级的处理。如果有，调度器会立即切换到另一个进程或线程。</li>
+<li>这种方式可能会导致频繁的上下文切换，尤其是在系统调用密集的场景下。上下文切换虽然使系统可以多任务运行，但过于频繁的切换会带来较高的开销（如保存和恢复寄存器状态、页表等），降低整体性能。</li>
+</ul>
+</li>
+<li>
+<p><strong>现代操作系统的优化策略</strong></p>
+<p>现代操作系统中，特别是在高性能系统设计中，通过延迟 <code>schedule()</code> 调用，<strong>只在时间片用尽时进行调度</strong>，这是为了避免每次系统调用后立即进行上下文切换的开销。这个优化之处包括：</p>
+<ul>
+<li><strong>减少上下文切换</strong>：传统方法可能会在每个系统调用后立即触发调度，而现代系统通过延迟 <code>schedule()</code> 调用，允许用户进程在其时间片内连续执行多个系统调用，而不会被过早中断。这减少了每个系统调用之后的上下文切换次数，进而减少了开销。</li>
+<li><strong>提高系统吞吐量</strong>：在 I/O 密集型任务或需要频繁系统调用的场景下，延迟调度能够使用户进程在单个时间片内完成更多工作（如多个系统调用）。这提高了系统的整体吞吐量，因为 CPU 花费在上下文切换上的时间被最小化，更多时间被用于实际工作。</li>
+</ul>
+</li>
+<li>
+<p><strong>L4Linux 的创新</strong></p>
+<p>L4Linux 的这种方式虽然与现代操作系统相似，但它的设计针对微内核环境进行了优化：</p>
+<ul>
+<li><strong>协程和调度结合</strong>：L4Linux 将系统调用后的调度延迟到时间片耗尽，结合了协程的轻量级特性，减少了频繁的上下文切换。由于协程相比传统线程切换开销更小，整个系统的调度开销进一步降低。</li>
+<li><strong>微内核架构的需求</strong>：在 L4 微内核上，许多操作（如系统调用）通过 IPC 完成，L4Linux 通过延迟调度器调用可以减少跨用户空间和内核空间的频繁切换，适合 µ-kernel 的高性能需求。</li>
+</ul>
+</li>
+<li>
+<p><strong>早期操作系统的情况</strong></p>
+<p>在一些早期的操作系统或某些特定调度策略下，<strong>系统调用后立即触发调度</strong>确实可能发生，这在多任务环境下会引发频繁的上下文切换，导致性能瓶颈。例如：</p>
+<ul>
+<li>如果有大量进程同时发出系统调用，每个系统调用完成后，操作系统可能会认为需要重新调度来确保公平性，导致频繁的切换。</li>
+<li>尤其在早期的 Linux 版本中，调度器的调度策略没有进行足够的优化，会导致这种问题。</li>
+</ul>
+</li>
+</ol>
+<p>总结：L4Linux 中延迟 <code>schedule()</code> 调用的策略虽然看起来像是现代操作系统的一种标准优化，但它的<strong>出色之处</strong>在于适应了 L4 微内核的架构，特别是减少了协程切换和上下文切换的频率，提高了系统的整体效率。在某些早期的操作系统中，<strong>系统调用后立即调度</strong>的方式曾是常见的，但这种方式的高开销在现代系统中逐渐被优化设计所取代。</p>
+</blockquote>
+<hr>
+<h2 id="在所有地址空间中代码和数据的虚拟分配相同会最大化独立应用程序之间的-tlb-冲突">在所有地址空间中代码和数据的虚拟分配相同会最大化独立应用程序之间的 TLB 冲突
+</h2><p>TLB 是一种高速缓存，用来加速虚拟地址到物理地址的转换。每次内存访问时，处理器首先查找 TLB，如果找到匹配的虚拟地址条目，就可以快速获取对应的物理地址，避免慢速的页表查找。</p>
+<p>在操作系统中，不同应用程序通常有各自的虚拟地址空间。但是，如果<strong>所有应用程序的代码和数据在虚拟地址空间中的分配位置相同</strong>（也就是说，所有程序的代码和数据都映射到相同的虚拟地址区间），会导致这些独立应用程序在 TLB 中的条目彼此冲突。</p>
+<p>假设我们有两个独立的应用程序 A 和 B：</p>
+<ul>
+<li><strong>应用 A</strong> 的代码和数据被映射到虚拟地址 0x1000-0x2000。</li>
+<li><strong>应用 B</strong> 的代码和数据也被映射到相同的虚拟地址 0x1000-0x2000。</li>
+</ul>
+<p>这时，两个应用程序在运行时，虽然它们的物理地址是不同的，但因为它们的虚拟地址相同，<strong>TLB 在缓存这些地址映射时只会保留最后一次的映射</strong>。当应用 A 在运行时，TLB 缓存了 A 的虚拟地址到物理地址的映射。然而，当应用 B 开始运行时，它的虚拟地址 0x1000 也会被写入 TLB，覆盖了 A 的映射。随后，当 A 再次运行时，发现 TLB 中的映射已经被 B 覆盖，就会导致<strong>TLB 未命中</strong>，系统不得不重新查找页表来更新 TLB。</p>
+<p>这种频繁的 TLB 未命中会导致<strong>性能下降</strong>，因为每次发生这种情况时，处理器都要执行耗时的页表查找。</p>
+<p>当所有应用程序的代码和数据在虚拟地址空间中的分配完全相同时，每个应用程序在 TLB 中的映射都会覆盖前一个应用程序的映射。由于 TLB 条目有限，不同应用程序之间频繁切换时，会频繁刷新和重新加载 TLB，从而最大化冲突。这种现象在同时运行多个进程或频繁上下文切换的场景中尤为显著，特别是在时间片较短或上下文切换频繁的情况下。</p>
+<p>为了解决这个问题，可以通过为不同应用程序构建不同的虚拟地址布局，避免所有应用程序使用相同的虚拟地址。例如，L4Linux 允许仿真库和信号线程被映射到应用程序附近的低地址空间，而不是总是使用高地址空间。通过这样的方法，可以减少不同进程之间的 TLB 冲突，提升性能。</p>
+<hr>
+<h2 id="执行时间比较大的过程的排名">执行时间比较大的过程的排名
+</h2><p>在描述的过程中，涉及多个系统操作的开销。根据常见情况和上述分析，以下是这些操作按通常的时间花费从大到小的大致排名：</p>
+<ol>
+<li>
+<p><strong>TLB 未命中导致的页表查找</strong></p>
+<ul>
+<li>
+<p><strong>花费原因</strong>：每次 TLB 未命中（TLB miss），处理器都必须进行页表查找，这涉及内存访问，并且需要多级页表的遍历。这一过程相对耗时，特别是在频繁上下文切换或不同应用程序共享虚拟地址布局时，频繁发生未命中会带来显著开销。</p>
+</li>
+<li>
+<p><strong>相对开销</strong>：时间消耗较高。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>频繁的上下文切换</strong></p>
+<ul>
+<li>
+<p><strong>花费原因</strong>：每次上下文切换，系统都需要保存当前进程的寄存器状态，并恢复目标进程的状态。这一过程涉及 CPU 寄存器状态和内存管理数据的操作。当上下文切换频繁且时间片较短时，累积的时间开销较大。</p>
+</li>
+<li>
+<p><strong>相对开销</strong>：高，但略低于 TLB 未命中。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>TLB 刷新（TLB Flush）</strong></p>
+<ul>
+<li>
+<p><strong>花费原因</strong>：TLB 刷新会清除当前 TLB 的所有条目，导致后续访问都可能需要重新建立 TLB 工作集，带来额外的页表查找和 TLB 加载。与 TLB 未命中相似，这种操作的开销取决于 TLB 的大小和具体的页表配置。</p>
+</li>
+<li>
+<p><strong>相对开销</strong>：通常低于频繁的 TLB 未命中，但在切换回原地址空间时依然显著。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>协程切换</strong></p>
+<ul>
+<li>
+<p><strong>花费原因</strong>：协程切换涉及的状态信息较少，因为它们通常是在用户空间操作，且不涉及到系统级寄存器和内存管理数据的切换。协程切换一般较轻量，但如果切换过于频繁，仍会带来一定开销。</p>
+</li>
+<li>
+<p><strong>相对开销</strong>：中等偏低。比线程切换低，但如果协程频繁上下文切换，开销会增加。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>系统调用开销</strong></p>
+<ul>
+<li>
+<p><strong>花费原因</strong>：系统调用从用户态切换到内核态，会有一定的开销。系统调用的开销通常与其具体操作内容相关。例如 I/O 操作比普通的内存操作要耗时。</p>
+</li>
+<li>
+<p><strong>相对开销</strong>：一般较小，但系统调用密集时，累计的开销会显著。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>与 Linux 服务器的 IPC 消息传递</strong></p>
+<ul>
+<li>
+<p><strong>花费原因</strong>：在 L4Linux 中，许多内核操作是通过 IPC 传递给 L4Linux 服务器。虽然 IPC 是轻量级的，尤其是在 µ-kernel 系统中被优化，但如果过于频繁，仍然会增加时间开销。</p>
+</li>
+<li>
+<p><strong>相对开销</strong>：低，但高频调用情况下也可能累积显著时间。</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>综上，<strong>TLB 未命中和频繁的上下文切换</strong>通常是系统开销较大的过程，特别是在多任务环境下。相对而言，协程切换和系统调用在 µ-kernel 系统下的开销较低，但仍需视具体情况和调用频率而定。</p>
+<hr>
+<h2 id="l4用户空间和内核空间">L4用户空间和内核空间
+</h2><ol>
+<li>
+<p><strong>用户空间</strong>（User Space）：</p>
+<ul>
+<li><strong>包含内容</strong>：
+<ul>
+<li>用户空间主要用于用户态程序的执行和数据存储。每个进程都在用户空间中运行，并且它们相互隔离。</li>
+<li>包含应用程序代码、用户程序的数据、堆（heap）、栈（stack）、共享库等。</li>
+<li>用户空间的大小取决于操作系统设计和硬件架构。通常在 x86 系统上，用户空间分配 2GB 或 3GB。</li>
+</ul>
+</li>
+<li><strong>访问权限</strong>：
+<ul>
+<li>用户空间的进程只能访问自己所属的内存地址，不能直接访问内核空间的数据或代码。这是为了安全性和稳定性，防止用户进程意外或恶意修改系统关键数据。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>内核空间</strong>（Kernel Space）：</p>
+<ul>
+<li><strong>包含内容</strong>：
+<ul>
+<li>内核空间是操作系统内核运行的区域，负责系统级的操作，比如硬件管理、进程调度、内存管理、网络通信等。</li>
+<li>包含内核代码、内核数据结构（比如页表）、设备驱动、系统调用接口、内核栈等。</li>
+<li>在 x86 架构下，通常为内核空间分配 1GB 或 2GB 的地址空间。</li>
+</ul>
+</li>
+<li><strong>访问权限</strong>：
+<ul>
+<li>只有运行在内核态（例如内核或驱动程序）的代码才能访问内核空间。用户态的进程如果想要与内核交互，必须通过系统调用接口，而不能直接操作内核空间。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>用户空间与内核空间的关系</strong>：</p>
+<ul>
+<li>用户空间和内核空间是通过虚拟内存管理体系联系在一起的。每个进程都有自己的虚拟地址空间，并且通过内核管理的页表将这些虚拟地址转换为物理地址。</li>
+<li>页表是一个重要的数据结构，它为每个进程维护虚拟地址到物理地址的映射表。内核管理这些页表，通过它们实现用户态进程与内核态之间的内存隔离，同时允许在适当的时候（如系统调用时）进行安全的内存共享或数据交换。</li>
+<li><strong>页表的作用</strong>：
+<ul>
+<li>页表不仅帮助用户进程管理自己的虚拟内存，还帮助系统在需要时切换到内核空间。例如，用户进程发起系统调用时，系统通过页表和内存管理单元（MMU）在用户空间和内核空间之间进行地址转换，使得进程可以通过内核接口访问硬件资源或系统服务。</li>
+<li>页表的存在确保了用户空间和内核空间在物理上是分离的，但在逻辑上它们通过页表联合起来，使得进程在需要时可以受控地与内核交互。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="linux-内核和-l4-微内核的空间区别">Linux 内核和 L4 微内核的空间区别
+</h2><ol>
+<li>
+<p><strong>原生 Linux 内核的地址空间管理</strong></p>
+<ul>
+<li>
+<p><strong>单一内核空间和用户空间</strong>：在原生 Linux 中，内核直接运行在系统的最高权限级别上（通常叫做 ring 0）。它能够直接管理整个 4GB 的虚拟地址空间（对于 32 位系统），并在地址空间中分配了 <strong>用户空间（通常为 3GB）</strong> 和 <strong>内核空间（通常为 1GB）</strong>。</p>
+</li>
+<li>
+<p><strong>内核访问用户空间的便利性</strong>：Linux 的这种结构使得内核能够直接访问用户空间，因为这两个部分共享一个统一的地址空间。在同一个地址空间中，Linux 内核可以通过硬件支持的地址转换机制直接访问用户数据，像是直接在用户空间和内核空间之间拷贝数据。</p>
+</li>
+<li>
+<p><strong>MMU 和 TLB 的作用</strong>：Linux 利用内存管理单元（MMU）和转换后备缓冲区（TLB）来进行地址翻译和管理，允许内核在访问用户空间时借助硬件来处理大部分的内存管理，减少了开发人员在内存管理方面的复杂性。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>L4 微内核的设计特点</strong></p>
+<ul>
+<li>
+<p><strong>L4 微内核架构</strong>：L4 是一个微内核，设计理念是将操作系统中许多复杂的功能从内核中移除，转而将这些功能放在用户态进程中处理。因此，L4 微内核只处理一些非常基础的功能，比如进程调度、地址空间管理、消息传递等，而像 Linux 这样的操作系统内核（即 L4Linux）则运行在用户态之上。</p>
+</li>
+<li>
+<p>L4Linux 的限制：L4Linux 并不直接运行在最高权限级别上，而是作为 L4 微内核的一个用户态服务器。因此：</p>
+<ul>
+<li><strong>地址空间隔离</strong>：在 L4 中，每个进程有自己的独立地址空间，L4Linux 作为一个用户态服务器，也有自己的地址空间。这使得它与 Linux 用户进程之间的内存并不共享，无法像原生 Linux 那样轻松地访问用户空间。</li>
+</ul>
+</li>
+<li>
+<p><strong>无法直接访问用户空间</strong>：由于 L4Linux 运行在用户态，它无法直接访问其他用户进程的内存。因此，L4Linux 试图模仿原生 Linux 的内存管理方式，即将用户空间映射到自己的地址空间中，这样的设计在 L4 上会因为地址空间限制和切换开销过大而变得不现实。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>技术限制和性能问题</strong></p>
+<ul>
+<li>
+<p><strong>内存映射的限制</strong>：在原生 Linux 中，内核和用户空间共享一个地址空间，这使得内核能够轻松访问每个用户进程的内存。然而，在 L4 的设计中，由于每个用户进程和 L4Linux 服务器都有独立的地址空间，这样导致无法将多个用户进程的内存同时映射到 L4Linux 的地址空间中。L4Linux 服务器的地址空间只有 3GB，而多个用户进程的内存加起来显然会超出这个范围。</p>
+</li>
+<li>
+<p><strong>TLB 刷新和性能开销</strong>：L4 中的每个地址空间都是独立的，L4Linux 服务器与用户进程的切换会涉及到 TLB（转换后备缓冲区）的刷新。这意味着每次上下文切换（如系统调用）时，整个 TLB 工作集都需要重新加载，导致性能损失严重。而原生 Linux 内核不需要频繁进行这种刷新，因此访问用户空间更加高效。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>为什么原生 Linux 能做到，而 L4Linux 做不到</strong></p>
+<ul>
+<li>
+<p><strong>特权级和内存访问权限</strong>：原生 Linux 内核运行在 ring 0（最高权限级别），可以控制整个虚拟地址空间，因此可以访问用户进程的内存。而 L4Linux 是一个运行在用户态（较低权限级别）的服务器，不能直接操控系统的内存管理单元（MMU），所以无法像原生 Linux 那样自由访问用户进程的地址空间。</p>
+</li>
+<li>
+<p>架构设计目标不同</p>
+<ul>
+<li><strong>原生 Linux</strong> 强调的是性能和集成，它将用户空间和内核空间放在一个统一的地址空间中，从而允许快速的数据交换。</li>
+<li><strong>L4 微内核</strong> 强调的是模块化和隔离性，设计目的是将复杂性降低到内核之外，实现更小的信任计算基础（TCB），这也导致了 L4Linux 在地址空间管理上受到了一定的限制。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>举例来描述原生 Linux 和 L4 微内核在虚拟地址空间管理方面的区别，并解释为什么 L4Linux 的地址空间管理会遇到困难。</p>
+<ol>
+<li>
+<p><strong>原生 Linux 内核中的虚拟地址空间管理</strong></p>
+<p>假设我们有一个应用程序（比如 <code>myapp</code>），它正在运行在 Linux 操作系统上。Linux 会给 <code>myapp</code> 分配一个 <strong>虚拟地址空间</strong>。在 32 位系统上，这个虚拟地址空间通常是 <strong>4GB</strong>。</p>
+<ul>
+<li><strong>地址空间分布</strong>：</li>
+<li><strong>3GB</strong> 给用户空间（通常为地址 <code>0x00000000</code> 到 <code>0xbfffffff</code>）。</li>
+<li><strong>1GB</strong> 给内核空间（通常为地址 <code>0xc0000000</code> 到 <code>0xffffffff</code>）。</li>
+<li><strong>共享地址空间</strong>：
+<ul>
+<li>在原生 Linux 中，每个进程都有它自己的用户空间部分，但所有进程的内核空间部分是相同的。也就是说，当某个进程运行系统调用进入内核时，它可以访问内核部分的地址空间，而内核可以看到该进程的用户地址空间。</li>
+<li><strong>例如</strong>：如果 <code>myapp</code> 调用了一个系统调用（比如 <code>read()</code>），内核可以直接访问 <code>myapp</code> 的用户空间中数据，通过内存拷贝或者硬件支持的地址翻译，将数据从用户空间直接传输到内核空间，反之亦然。因为它们共享同一个统一的 4GB 地址空间，内核可以直接通过指针引用访问这些数据。</li>
+</ul>
+</li>
+<li><strong>TLB 与地址空间切换</strong>：
+<ul>
+<li>在 Linux 中，虚拟地址到物理地址的转换由 <strong>TLB（Translation Lookaside Buffer）</strong> 缓存来加速。</li>
+<li><strong>TLB</strong> 缓存虚拟地址到物理地址的映射，因此每次访问相同的内存地址时不必重复查找页表。</li>
+<li>内核和用户空间共享 TLB，因此当系统在用户空间和内核空间之间切换时，不需要大规模刷新 TLB，保证了访问速度。</li>
+</ul>
+</li>
+</ul>
+<p><strong>关键点：为什么这样有效</strong></p>
+<ul>
+<li><strong>内核直接访问用户空间数据</strong>：由于用户空间和内核空间共享一个虚拟地址空间，Linux 内核在进行用户数据的操作时，可以直接使用硬件进行地址转换。</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li><strong>TLB 刷新减少</strong>：切换用户空间和内核空间时不需要频繁刷新 TLB，从而减少了性能开销。</li>
+</ul>
+<ol start="2">
+<li>
+<p><strong>L4 微内核中的虚拟地址空间管理</strong></p>
+<p>L4 微内核采取了一种 <strong>模块化与隔离</strong> 的架构，目的是为了提高安全性和稳定性。</p>
+<p>假设我们有同样的应用程序 <code>myapp</code>，但这次它运行在 L4 微内核上的 L4Linux 中。</p>
+<ul>
+<li><strong>L4 微内核的架构</strong>：</li>
+<li>L4 微内核本身只处理基础功能，如进程调度和通信。Linux 运行于 L4Linux 服务器中，而 L4Linux 服务器本身是一个 <strong>用户态进程</strong>，受到和普通应用程序类似的权限限制。</li>
+<li>L4 微内核中的每个用户进程（包括 L4Linux 和应用程序）都有自己独立的地址空间。这意味着，<code>myapp</code> 和 L4Linux 服务器并不共享同一个地址空间。</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li><strong>地址空间的隔离</strong>：
+<ul>
+<li>在 L4 微内核上，每个进程，包括 L4Linux 服务器，都有自己的独立地址空间，例如：
+<ul>
+<li><strong>L4Linux 服务器</strong>：有自己的 3GB 用户态地址空间。</li>
+<li><strong>应用程序 <code>myapp</code></strong>：也有自己的独立 3GB 用户态地址空间。</li>
+</ul>
+</li>
+<li>因为 L4Linux 运行在用户态中，它的权限不允许它直接访问其他应用程序的地址空间（例如 <code>myapp</code> 的空间）。</li>
+</ul>
+</li>
+<li><strong>用户空间和内核空间的访问</strong>：
+<ul>
+<li>L4Linux 的目标是模拟原生 Linux 的功能，但它没有内核态的权限。因此，<code>myapp</code> 和 L4Linux 必须通过 <strong>IPC（进程间通信）</strong> 来传递数据。这与原生 Linux 内核中内核直接访问用户空间的数据方式不同，增加了数据拷贝和通信的开销。</li>
+<li>L4Linux 试图实现类似原生 Linux 的共享用户空间和内核空间的方法，但由于每个地址空间是独立的，它无法直接访问应用程序的数据，必须通过复杂的映射或者复制方式，这就引发了管理上的问题。</li>
+</ul>
+</li>
+</ul>
+<p><strong>TLB 切换与性能问题</strong>：</p>
+<ul>
+<li>
+<p>TLB 的问题：在 L4 微内核上，由于 L4Linux 和应用程序地址空间是独立的，每次 L4Linux 服务器调用（例如在处理系统调用时），系统都需要切换地址空间，这会导致TLB 必须完全刷新</p>
+<ul>
+<li>每次地址空间切换后，原先缓存的虚拟地址到物理地址的映射就无效了，因此必须重新建立，这显著降低了性能。</li>
+</ul>
+</li>
+<li>
+<p>例如，当 <code>myapp</code> 发起一个系统调用进入 L4Linux 时，由于它们不共享地址空间，TLB 中的映射无效，需要重新加载，增加了大量的性能开销。</p>
+</li>
+</ul>
+<p><strong>关键点：为什么不如原生 Linux 高效</strong></p>
+<ul>
+<li><strong>独立地址空间的隔离性</strong>：L4 微内核的设计初衷是提高安全性和模块化，保持进程间的强隔离性，但这导致 L4Linux 服务器不能像原生 Linux 那样自由地直接访问用户进程的数据。</li>
+<li><strong>TLB 刷新频繁</strong>：L4Linux 和用户进程之间的频繁切换导致 TLB 被频繁刷新，系统不得不在每次系统调用或进程切换时重新加载 TLB，性能因此严重受损。</li>
+</ul>
+<ol start="3">
+<li>
+<p><strong>总结与对比</strong></p>
+<ul>
+<li><strong>原生 Linux</strong>：</li>
+<li><strong>共享地址空间</strong>：内核和用户空间共享同一个虚拟地址空间，内核直接访问用户空间的内存。</li>
+<li><strong>TLB 切换少</strong>：因为内核和用户空间共享，切换时无需刷新 TLB，访问非常高效。</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li><strong>L4 微内核</strong>：
+<ul>
+<li><strong>地址空间隔离</strong>：L4Linux 和用户应用程序处于独立的地址空间中，为了安全和稳定，但导致内存管理复杂。</li>
+<li><strong>TLB 刷新频繁</strong>：每次 L4Linux 和用户进程切换时需要刷新 TLB，影响性能。</li>
+<li><strong>IPC 增加开销</strong>：因为 L4Linux 没有内核态权限，数据传递需要通过 IPC，进一步增加了数据拷贝的开销。</li>
+</ul>
+</li>
+</ul>
+<p>因此，在原生 Linux 中，由于内核和用户空间共享同一个地址空间，访问更快且管理简单。而在 L4 微内核架构下，L4Linux 运行于用户态、进程间隔离严格，导致无法像原生 Linux 那样自由高效地管理和共享地址空间，这就是为什么在 L4 上无法简单复用 Linux 的虚拟地址管理方式的原因。</p>
+</blockquote>
+<hr>
+<h2 id="l4中的共享库">L4中的共享库
+</h2><p>L4中的共享库主要通过动态链接的方式，将共享的代码库（如标准C库 <code>libc.so</code>）与应用程序进程关联在一起，促进跨进程调用的优化和性能提升。以下是L4环境下共享库的工作流程和每个环节所需的时间：</p>
+<ol>
+<li><strong>库的初始化与加载</strong>
+<ul>
+<li>每个应用进程都会从Linux服务器请求将共享库加载到高地址区域。这样，应用进程能够共享这些库的实例，减少内存占用。</li>
+<li>初始化通常通过一个页错误（page fault）请求向Linux服务器进行，服务器会映射适当的库页到应用程序的地址空间。</li>
+</ul>
+</li>
+<li><strong>系统调用的重定向</strong>
+<ul>
+<li>为实现系统调用，L4使用了远程过程调用（Remote Procedure Calls，RPC）机制，即通过L4的进程间通信（IPC）来完成用户进程与Linux服务器之间的系统调用。</li>
+<li>共有三种系统调用接口可用：
+<ul>
+<li>修改版的共享库（如 <code>libc.so</code>），直接调用L4的IPC原语与Linux服务器通信。这种方式速度较快。</li>
+<li>修改后的静态库（如 <code>libc.a</code>），通常用于少量非动态链接的程序。</li>
+<li>用户级异常处理机制（&ldquo;trampoline&rdquo;），模拟本地系统调用。这种方式提供了较好的二进制兼容性，但性能较低。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>信号处理</strong>
+<ul>
+<li>信号的传递在L4中通过一个额外的信号线程实现。这个线程接收来自Linux服务器的消息，通知应用进程进入信号处理流程。</li>
+<li>为保障系统的隔离性，L4限制了不同地址空间线程间的直接操作，因此信号处理只能在同一地址空间中实现。</li>
+</ul>
+</li>
+<li><strong>数据交换与地址映射</strong>
+<ul>
+<li>服务器内部管理虚拟地址与物理地址的映射，每当有数据交换需求时（如 <code>copyin/copyout</code> 操作），服务器解析逻辑页表，将虚拟地址转换为实际的物理地址，并执行数据复制操作。</li>
+</ul>
+</li>
+</ol>
+<p><strong>各部分所需时间</strong></p>
+<ul>
+<li><strong>系统调用延迟</strong>：与共享库 <code>libc.so</code> 相关的系统调用大约需要3.95微秒，使用trampoline机制的调用则需要5.66微秒的调用则需要5.66微秒。</li>
+<li><strong>信号传递延迟</strong>：通常依赖L4 IPC机制完成，虽然具体时间未明确指出，但其效率受限于系统的优先级调度策略和信号线程的调度频率。</li>
+<li><strong>数据复制延迟</strong>：使用物理地址解析的 <code>copyin/copyout</code> 操作在L4环境下因减少了TLB刷新，效率约为原本的两倍B刷新，效率约为原本的两倍。</li>
+</ul>
+<hr>
+<h2 id="共享库-libcso与trampoline机制的差异">共享库 libc.so与trampoline机制的差异
+</h2><p>共享库 <code>libc.so</code> 与 trampoline 机制的调用存在时间差异，尽管它们都使用了 IPC 通信，这是因为两者在实现上的差别主要体现在调用路径的复杂性和处理系统调用的方式上。</p>
+<ol>
+<li>
+<p><strong>共享库 <code>libc.so</code> 的调用路径</strong></p>
+<p>在 L4 系统中，使用 <code>libc.so</code> 的共享库可以更直接地通过修改后的系统调用接口与 Linux 服务器进行通信。这个方式的调用路径较短，因为共享库中的系统调用直接使用 L4 的 IPC 原语，与服务器进行高效的进程间通信。整个过程基本是直接发起 IPC 请求，然后由服务器处理请求并返回结果。因此，这种机制可以更好地利用 L4 IPC 的高效性，减少了不必要的上下文切换和额外的指令处理，导致更快的调用时间。</p>
+<p>共享库调用所需的时间（如 <code>getpid</code> 系统调用大约需要 3.95 微秒）得益于这种更简化的通信路径和直接调用 IPC 原语的机制。</p>
+</li>
+<li>
+<p><strong>Trampoline 机制的调用路径</strong></p>
+<p>相比之下，trampoline 机制更复杂，它主要是为了提供二进制兼容性。trampoline 的实现方式是在用户空间模拟系统调用陷阱（trap），通过异常处理机制（exception handler）捕获系统调用，并在捕获到之后再将系统调用转发给 Linux 服务器。这意味着系统调用的处理需要先触发一次用户空间的异常处理，再进行 IPC 通信，然后再返回结果。这增加了一个额外的步骤（捕获和处理异常），也使得路径更长。</p>
+<p>正是由于多了异常捕获和处理这一步，trampoline 机制的调用比直接使用 <code>libc.so</code> 调用要慢。<code>getpid</code> 使用 trampoline 机制时大约需要 5.66 微秒，这比共享库调用多出约 43% 的时间。</p>
+</li>
+<li>
+<p><strong>结论</strong></p>
+<p>尽管两者都基于 IPC 通信，trampoline 机制由于引入了额外的异常处理步骤，导致其调用时间较长。而共享库 <code>libc.so</code> 的直接 IPC 调用路径较短，因此性能更高。在需要二进制兼容性时，trampoline 是必要的，但在性能上则不如直接修改后的共享库调用高效。</p>
+</li>
+</ol>
+<hr>
+<h2 id="trampoline机制的二进制兼容性">trampoline机制的二进制兼容性
+</h2><p>二进制兼容性（binary compatibility）指的是一个操作系统或软件能够运行为其他环境编译的程序或二进制文件，而不需要重新编译。在L4系统中的 <strong>trampoline</strong> 机制，旨在提供与传统Linux系统调用的二进制兼容性。这意味着，即使程序是为普通Linux编译的二进制文件，也可以在L4上执行，而无需对这些程序进行修改或重新编译。</p>
+<p>虽然共享库 <code>libc.so</code> 和 trampoline 机制都涉及系统调用，并且都依赖于L4的IPC（进程间通信）机制，但二者之间的实现方式不同，导致共享库调用时不需要进行与trampoline机制相同的上下文切换。</p>
+<ul>
+<li><strong><code>libc.so</code> 调用</strong>：在使用 <code>libc.so</code> 的情况下，系统调用是通过经过修改的库来直接与Linux服务器通信。共享库调用的过程中，尽管也需要进行从用户空间到内核空间的切换（因为系统调用本质上都是如此），但是，L4的IPC机制使得这类上下文切换更加高效。此外，由于共享库调用使用了较为直接的IPC原语，减少了不必要的额外步骤，从而减少了切换和处理时间。</li>
+<li><strong>trampoline机制</strong>：trampoline机制为了提供二进制兼容性，使用了一种模拟的系统调用陷阱。首先，它通过用户空间的异常处理机制捕捉系统调用，再将该系统调用转发到Linux服务器。这种方式增加了上下文切换的复杂性，除了从用户空间到内核空间的切换，还包括捕获和处理异常的额外步骤，这些都使得性能不如直接使用 <code>libc.so</code> 调用。</li>
+</ul>
+<p>在简化的调用路径下，<code>libc.so</code> 调用的性能相对更好，因为它可以避免一些复杂的上下文切换和额外的处理步骤【5†source】。</p>
+<p>因此，虽然两者都涉及IPC通信，但共享库的调用更加高效，不需要像trampoline机制那样频繁的上下文切换和额外的异常处理步骤。</p>
+<hr>
+<h2 id="ipc和rpc">IPC和RPC
+</h2><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th></th>
+          <th>IPC</th>
+          <th>RPC</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>作用</td>
+          <td>IPC用于在同一计算机上不同进程之间共享数据或发送消息。其主要目的是协调进程之间的操作，确保数据一致性和完整性。</td>
+          <td>RPC允许程序调用位于不同机器上的函数，就像调用本地函数一样。其主要目的是简化分布式系统中的通信，使程序员无需关心底层网络通信细节。</td>
+      </tr>
+      <tr>
+          <td>例子</td>
+          <td>在操作系统中，一个音频播放器（进程A）需要和音频解码器（进程B）通信。进程A可以使用共享内存（IPC的一种）来将数据传送给进程B，进而完成音频解码。</td>
+          <td>一个客户端应用需要从远程服务器获取用户信息。客户端使用RPC调用服务器上的函数，从而获取数据，而不必直接处理网络传输。</td>
+      </tr>
+      <tr>
+          <td>范围</td>
+          <td>IPC通常用于同一台计算机上的进程之间。</td>
+          <td>RPC用于不同计算机上的进程之间。</td>
+      </tr>
+      <tr>
+          <td>实现复杂性</td>
+          <td>IPC相对简单，只需在一个系统内管理。</td>
+          <td>RPC需要处理网络协议、数据序列化和反序列化等问题。</td>
+      </tr>
+      <tr>
+          <td>性能</td>
+          <td>IPC因数据传输距离短，通常具有较低的延迟。</td>
+          <td>RPC需要通过网络，可能有较高的延迟。</td>
+      </tr>
+      <tr>
+          <td>故障处理</td>
+          <td>IPC主要处理进程间的同步和数据一致性。</td>
+          <td>RPC还需考虑网络故障、节点不可用等问题。</td>
+      </tr>
+      <tr>
+          <td>相同点</td>
+          <td><strong>通信目的</strong>：两者都用于进程之间的信息交换。</td>
+          <td><strong>抽象层次</strong>：提供了一种更高层次的抽象，使得程序员无需直接操作底层通信机制。</td>
+      </tr>
+  </tbody>
+</table></div>
+<p><strong>总结</strong>：IPC和RPC帮助程序在进程间或跨网络协同工作，分别适用于本地和分布式系统环境，都提供了显著提高开发效率的抽象能力。</p>
+<hr>
+<h2 id="block-ipc和rpc">block IPC和RPC
+</h2><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>阻塞IPC</th>
+          <th>阻塞RPC</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>进程挂起</strong>：当一个进程进行阻塞IPC调用时，该进程会挂起，直到通信完成。这会导致该进程在等待响应期间无法执行其他任务。</td>
+          <td><strong>网络通信延迟</strong>：阻塞RPC涉及网络通信，任何网络延迟或故障都会使调用挂起的时间更长，影响系统响应速度。</td>
+      </tr>
+      <tr>
+          <td><strong>系统资源利用率下降</strong>：如果多个进程处于阻塞状态而等待IPC完成，系统资源（如CPU、内存）利用率会下降，因为这些进程无法继续处理其他任务。</td>
+          <td><strong>进程挂起</strong>：发起RPC调用的进程会挂起直到收到远程服务器的响应，导致本地进程无法继续进行其他操作。</td>
+      </tr>
+      <tr>
+          <td><strong>延迟增加</strong>：阻塞通信会导致系统整体延迟增加，尤其是在需要快速响应的实时系统中，这可能会影响系统性能。</td>
+          <td><strong>分布式系统复杂度增加</strong>：在分布式系统中，网络问题、服务器负载问题等都可能导致RPC调用的阻塞，从而影响整个系统的性能和稳定性。</td>
+      </tr>
+      <tr>
+          <td><strong>优先级逆转问题</strong>：当高优先级进程被阻塞等待低优先级进程的响应时，可能会导致优先级逆转，从而影响系统的响应时间。</td>
+          <td><strong>资源等待</strong>：像阻塞IPC一样，阻塞RPC可能导致多个进程或线程在等待资源时挂起，从而降低系统的并行处理能力。</td>
+      </tr>
+  </tbody>
+</table></div>
+<p><strong>总结</strong>：在微内核L4上，阻塞IPC和阻塞RPC都会导致进程挂起，影响系统响应时间和资源利用率。虽然阻塞机制可以简化编程模型，但需要在高性能和实时系统中谨慎使用，可以考虑异步通信方式来减少阻塞的影响，例如：</p>
+<ol>
+<li>使用异步IPC/RPC，实现非阻塞调用，让进程继续执行其他任务。</li>
+<li>利用多线程或多进程架构，将通信和计算分离，减轻阻塞对系统的影响。</li>
+<li>通过超时机制避免长时间的阻塞等待，从而提高系统的鲁棒性。</li>
+</ol>
+<p>了解这些影响后，设计和优化系统时，可以根据需求选择合适的同步或异步通信模型，以平衡性能和编程的复杂度。</p>
+<hr>
+<h2 id="l4的缓存">L4的缓存
+</h2><ol>
+<li><strong>实时系统的缓存分区</strong>：
+<ul>
+<li>缓存分区可以显著减少实时任务受其他任务干扰的影响，从而优化最坏情况下的执行时间。</li>
+<li>实验中，通过分配专用的缓存页面，最坏情况下的执行时间从96.1毫秒减少到24.9毫秒，显示了缓存分区对提高实时性能的有效性。</li>
+<li>尽管这种方法会影响分时系统的性能，但它使得系统资源在实时和分时任务之间进行动态分配成为可能。</li>
+</ul>
+</li>
+<li><strong>μ-kernel的优势</strong>：
+<ul>
+<li>μ-kernel通过RPC和用户级分页器提供了改进Unix兼容性功能的机制，还可以实现非Unix兼容功能，且性能优越。</li>
+<li>实时内存管理案例表明，μ-kernel架构可以有效支持不同范式的系统共存，并且能够提供高性能。</li>
+</ul>
+</li>
+</ol>
+<p>总体而言，这部分强调了μ-kernel体系结构在内存管理和任务调度方面的优势，尤其是在需要严格时序保证的实时系统中。通过将资源进行精细化控制和分配，μ-kernel能够显著提升系统的实时性能，同时保证在分时任务中的合理表现。</p>
+<blockquote>
+<p>在一个实验中，一个64×64矩阵乘法被周期性地中断，以产生最大化缓存冲突的合成负载。在不受干扰的情况下，矩阵乘法需要10.9毫秒。每100微秒（μs）中断一次，最坏情况下的执行时间为96.1毫秒，减慢了8.85倍。</p>
+<p>在缓存分区的情况下，分页器从总共64个二级缓存页面中专门为矩阵乘法分配了3个页面。这既不能避免主缓存的干扰，也不能避免矩阵乘法的数据工作集（64 KB）的二级缓存未命中。然而，通过避免与其他任务的二级缓存干扰，最坏情况下的执行时间减少到24.9毫秒，减慢了仅2.29倍。从实时角度来看，分区后的矩阵乘法比未分区的快近4倍。</p>
+<p>为实时系统分配资源会降低分时性能。然而，描述的技术使系统资源在实时和分时系统之间进行定制的动态分区成为可能。</p>
+</blockquote>
+<hr>
+<h2 id="co-location">co-location
+</h2><p>在计算机体系结构和操作系统领域，&ldquo;co-location&rdquo;（共置或同址）通常指的是将相关的或彼此需要频繁交互的代码或资源放置在相同的物理位置（如相同的内存或存储单元）或运行在相同的上下文或地址空间内，以减少上下文切换和通信开销。其目标是提高系统性能和效率。</p>
+<p>在操作系统设计中，co-location 指的是将某些代码模块、服务或资源放在一起，以减少它们之间的通信延迟和开销。例如：</p>
+<ol>
+<li><strong>内核与用户态代码</strong>：
+<ul>
+<li>在某些设计中，用户态的操作系统服务可能被“共置”到内核态中，以避免频繁的用户态和内核态之间的切换。例如，某些系统扩展（如驱动程序或高频操作）可以直接被放置在内核中执行，减少了内核态和用户态之间的上下文切换。</li>
+</ul>
+</li>
+<li><strong>进程和线程</strong>：
+<ul>
+<li>在多核系统上，频繁交互的线程可以被分配到相同的处理器核心，以减少它们之间的通信延迟，这也是一种共置策略。</li>
+</ul>
+</li>
+</ol>
+<p>在论文中提到的 &ldquo;co-location&rdquo; 技术，指的是将扩展或服务代码直接共置在内核中，以减少用户态和内核态之间的切换，并减少地址空间切换。这些技术的目标是提高系统性能，但也带来了新的挑战，例如需要完全信任这些共置的代码或者需要对其进行沙箱隔离。</p>
+<p>以下是文中的具体描述：</p>
+<ul>
+<li>简单共置技术：将共置代码直接信任，避免了复杂的安全检查。</li>
+<li>更复杂的技术：使用隔离技术，限制内核扩展可能造成的潜在损害。</li>
+</ul>
+<p>举例系统包括：</p>
+<ul>
+<li><strong>Vino</strong> 使用了复杂但昂贵的事务机制。</li>
+<li><strong>Exokernel</strong> 提供了从可解释的中间代码到运行时检查的多种机制，支持应用程序特定的处理程序。</li>
+<li><strong>SPIN</strong> 是一种高效且复杂的共置技术，它通过尽可能多地使用编译时的沙箱技术，而避免了额外的运行时沙箱开销（除了下标检查）。</li>
+</ul>
+<p>文中还提到，共置技术如果过于简单，可能无法显著提高性能，例如“共置”的 MkLinux 相较于用户态的 L4Linux 表现更差。</p>
+<p><strong>总结</strong>：<strong>co-location</strong> 在操作系统设计中通过将相互依赖的代码或资源放置在相同位置或地址空间，减少了通信和切换开销，提高了系统性能。然而，这需要在安全和信任之间找到平衡，以避免潜在的安全风险。</p>
+<hr>
+<h2 id="扩展代码嵌接到操作系统内核">扩展代码嵌接到操作系统内核
+</h2><ol>
+<li><strong>嵌接的优势</strong>：
+<ul>
+<li>将嵌接代码下载到内核模式运行，可以减少用户态和内核态的切换及地址空间的切换，潜在提高性能。</li>
+</ul>
+</li>
+<li><strong>安全性和信任</strong>：
+<ul>
+<li>内核模式下的嵌接代码要么需要完全信任，要么需要进行沙箱隔离，以防范潜在的安全风险。</li>
+</ul>
+</li>
+<li><strong>现有技术</strong>：
+<ul>
+<li>简单的共址技术仅是信任共置代码，但效果并不一定好，如共置的MkLinux表现比用户模式的L4Linux差。</li>
+<li>Vino和Exokernel引入了更加复杂的处理机制，从事务机制到应用程序特定的处理程序。</li>
+<li>SPIN是一种利用编译时沙箱技术的高效嵌接方法，避免了额外的运行时沙箱开销。</li>
+</ul>
+</li>
+<li><strong>性能比较</strong>：
+<ul>
+<li>虽然L4在用户模式下的基准测试时间比SPIN快了2到4.7倍，但由于硬件平台的不一致性，这种比较需要谨慎。</li>
+<li>性能接近显示了两者的实现大致相当。</li>
+</ul>
+</li>
+<li><strong>尚未解决的问题</strong>：
+<ul>
+<li>嵌接代码下载到内核中是否在性能上优于微内核方法，仍然是一个开放的问题。</li>
+</ul>
+</li>
+</ol>
+<p>总结而言，虽然将扩展代码嵌接到内核中可能提高性能，但需要解决信任和安全问题。不同方法各有优劣，尚不完全明确哪一种方法能在所有情况下表现最佳。</p>
+<hr>
+<h2 id="protected-control-transfers-pct">Protected Control Transfers (PCT)
+</h2><p><strong>定义</strong>：PCT是一种类似于硬件中断的机制，在微内核系统中用于实现跨地址空间的过程调用。使用PCT，不带参数的过程可以通过被调用者定义的调用门实现。</p>
+<p><strong>作用</strong>：</p>
+<ul>
+<li>实现跨地址空间的快速调用。</li>
+<li>比IPC更基础，提供快捷的控制转移。</li>
+</ul>
+<p><strong>PCT与IPC的区别</strong></p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th></th>
+          <th>PCT</th>
+          <th>IPC</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>抽象层次</td>
+          <td>低级，类似硬件的操作，主要用于跨地址空间的直接控制转移。</td>
+          <td>较高级的机制，用于进程间发送和接收消息。</td>
+      </tr>
+      <tr>
+          <td>性能</td>
+          <td>通常更快，因为它不涉及消息传递和同步，仅进行控制转移。</td>
+          <td>稍慢，因为会进行消息传递、同步、和堆栈分配等额外操作。</td>
+      </tr>
+      <tr>
+          <td>功能</td>
+          <td>不涉及数据传输，主要是过程调用和控制转移。</td>
+          <td>支持数据传输和线程间的复杂通信。</td>
+      </tr>
+      <tr>
+          <td>资源需求</td>
+          <td>没有额外的内核资源需求，每个调用只需要用户级堆栈。</td>
+          <td>需要分配目标线程的系统资源，支持更复杂的通信场景。</td>
+      </tr>
+  </tbody>
+</table></div>
+<p><strong>总结</strong>：PCT是一种简化的、快速的控制转移方式，适用于需要低开销、快速切换的场景。而IPC作为更高级的通信机制，提供了丰富的功能用于线程间的数据交换和同步。选择使用哪种机制，通常取决于具体应用场景的需求。</p>
+<p>下图是一个通信过程中消耗的操作时间</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>操作</th>
+          <th>PCT</th>
+          <th>IPC</th>
+          <th>备注</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>进入PAL模式</td>
+          <td>5</td>
+          <td>5</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>打开帧</td>
+          <td>7</td>
+          <td>7</td>
+          <td>设置堆栈帧以允许多个中断、TLB未命中和简化线程切换</td>
+      </tr>
+      <tr>
+          <td>发送/接收</td>
+          <td>-</td>
+          <td>0.5</td>
+          <td>确定操作</td>
+      </tr>
+      <tr>
+          <td>检查接收者有效性</td>
+          <td>2</td>
+          <td>2</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>检查无主要传输</td>
+          <td>-</td>
+          <td>0.5</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>接收者接受？</td>
+          <td>-</td>
+          <td>1</td>
+          <td>我们可以进行传输吗</td>
+      </tr>
+      <tr>
+          <td>设置我的接收超时</td>
+          <td>-</td>
+          <td>1</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>保存接收参数</td>
+          <td>-</td>
+          <td>2</td>
+          <td>执行接收</td>
+      </tr>
+      <tr>
+          <td>验证排队状态</td>
+          <td>-</td>
+          <td>1</td>
+          <td>设置唤醒排队无效，如果超时NEVER</td>
+      </tr>
+      <tr>
+          <td>上下文切换</td>
+          <td>10</td>
+          <td>10</td>
+          <td>切换地址空间编号</td>
+      </tr>
+      <tr>
+          <td>内核线程切换</td>
+          <td>-</td>
+          <td>6</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>设置调用者ID</td>
+          <td>2</td>
+          <td>-</td>
+          <td>保存调用者ID到PCT返回</td>
+      </tr>
+      <tr>
+          <td>查找被调用者条目</td>
+          <td>2</td>
+          <td>-</td>
+          <td>被调用者的PCT条目地址</td>
+      </tr>
+      <tr>
+          <td>关闭帧</td>
+          <td>7</td>
+          <td>7</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>退出PAL模式</td>
+          <td>2</td>
+          <td>2</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>总计</td>
+          <td>38</td>
+          <td>45</td>
+          <td></td>
+      </tr>
+  </tbody>
+</table></div>
+<blockquote>
+<p><strong>二者的例子说明↓</strong></p>
+<p><strong>PCT 示例</strong></p>
+<p><strong>场景</strong>：操作系统中断处理。在操作系统中，中断处理程序需要快速响应硬件信号，例如键盘输入或网络数据包。这种处理需要快速切换到一个特定的代码段执行，然后迅速返回。</p>
+<p><strong>PCT作用</strong>：</p>
+<ul>
+<li><strong>快速切换</strong>：通过PCT，可以直接跳转到中断处理程序，而无需携带参数或进行额外的数据传输。</li>
+<li><strong>高效执行</strong>：减少上下文切换开销，快速响应硬件事件。</li>
+</ul>
+<p><strong>区别</strong>：</p>
+<ul>
+<li>PCT在这里用于快速控制流切换，而无需数据传递。</li>
+</ul>
+<p><strong>IPC 示例</strong></p>
+<p><strong>场景</strong>：客户端与服务器通信。假设有一个图像处理服务器，客户端应用程序需要将图像数据发送给服务器进行处理，并接收结果。</p>
+<p><strong>IPC作用</strong>：</p>
+<ul>
+<li><strong>数据传输</strong>：客户端通过IPC将图像数据发送给服务器。</li>
+<li><strong>结果接收</strong>：服务器处理完后，通过IPC将处理结果返回给客户端。</li>
+</ul>
+<p><strong>区别</strong>：</p>
+<ul>
+<li>IPC在这里用于数据传输和消息交换，实现复杂的客户-服务器模型。</li>
+</ul>
+<p><strong>总结</strong></p>
+<ul>
+<li><strong>PCT</strong>适用于需要快速控制流切换的场景，无需参数传递。</li>
+<li><strong>IPC</strong>用于进程之间的数据和消息传递，支持更复杂的通信和同步需求。</li>
+</ul>
+</blockquote>
+<h2 id="正课部分">正课部分
+</h2><h2 id="monolithic-kernel">Monolithic kernel
+</h2><p>今天主要会讨论微内核（Mircro kernel）。</p>
+<p>为什么人们会研究微内核？微内核是人们在思考操作系统内核应该做什么事情的过程中设计出来的。</p>
+<p>比如说XV6是一个Unix系统，它按照Unix风格提供了各种功能，并提供了Unix系统调用。</p>
+<p>实现一个Unix系统就是我们设计XV6的目标。</p>
+<p>但是一个完全值得思考的问题是，一个操作系统内核本身应该具备什么功能？或许XV6和Linux具备的功能并不是一个完美操作系统应该有的功能，又或许是呢。</p>
+<p>我们现在正在讨论一个变化莫测的问题，内核可以看做是一种程序员的开发平台，而我们知道不同的程序员对于他们喜欢的开发平台有着非常不同的主观喜好，所以我们不能期望这个问题有一个完美的答案。</p>
+<p>但是我们可以仍然可以期望从思考这个问题的过程中学到一些东西，并且尝试想一下答案可能是什么。</p>
+<p>传统实现方式</p>
+<p>首先，让我说明一下操作系统的传统实现方式以及应该具备的功能。我个人将Linux，Unix，XV6称为用传统方式实现的操作系统。</p>
+<p>另一个形容这些操作系统的词是monolithic。</p>
+<p>monolithic的意思是指操作系统内核是一个完成了各种事情的大的程序。</p>
+<p>实际上，这也反应了人们觉得内核应该具备什么样的功能。类似于Linux的典型操作系统内核提供了功能强大的抽象。</p>
+<p>它们选择提供例如文件系统这样一个极其复杂的组件，并且将文件，目录，文件描述符作为文件系统的接口，而不是直接将磁盘硬件作为接口暴露给应用程序。</p>
+<p>monolithic kernel通常拥有例如文件系统这样强大的抽象概念，这比提供一些简单的抽象有着巨大的优势。</p>
+<ul>
+<li>
+<p>其中一个好处是，这些高度抽象的接口通常是可移植的，你可以在各种各样的存储上实现文件和目录，你可以使用文件和目录而不用担心它们是运行在什么牌子的磁盘，什么类型的存储之上，或许是SSD，或许是HDD，或许是NFS，但是因为文件系统接口是高度抽象的，所以它们都拥有相同的接口。</p>
+<p>所以这里的一个好处是可以获取可移植性。你可以在不修改应用程序的前提下，将其运行在各种各样的硬件之上。</p>
+</li>
+<li>
+<p>另一个例子是，Linux/Unix提供地址空间的抽象而不是直接访问MMU硬件的权限。</p>
+<p>这不仅可以提供可移植性，并且也可以向应用程序隐藏复杂性。所以操作系统具备强大抽象的另一个好处是，它们可以向应用程序隐藏复杂性。</p>
+<p>举个例子，XV6提供的文件描述符非常简单，你只需要对文件描述符调用read/write就可以，但是在XV6内核中是非常复杂的代码来实现读写磁盘上的文件系统。这对于程序员是极好的，但是内核却因此变得又大又复杂。</p>
+</li>
+<li>
+<p>这里的强大的抽象还可以帮助管理共享资源。</p>
+<p>例如我们将内存管理委托给了内核，内核会跟踪哪些内存是空闲的。</p>
+<p>类似的，内核还会跟踪磁盘的哪个部分是空闲的，磁盘的哪个部分正在被使用，这样应用程序就不用考虑这些问题，所以这可以帮助简化应用程序。</p>
+<p>同时也可以提供健壮性和安全性，因为如果允许应用程序决定磁盘的某个位置是否是空闲的，那么应用程序或许可以使用一个已经被其他应用程序使用的磁盘位置。</p>
+<p>所以，内核管理硬件资源可以提供资源共享能力和安全性。</p>
+<p>但是同样的，这也使得内核变得更大。内核提供的这些诱人的抽象能力，使得内核包含了很多的复杂性，进而导致内核很大且复杂。</p>
+</li>
+<li>
+<p>有关monolithic kernel的另一个好处是，因为所有这些功能都在一个程序里面，所有的内核子系统，例如文件系统，内存分配，调度器，虚拟内存系统都是集成在一个巨大的程序中的一个部分，这意味着它们可以访问彼此的数据结构，进而使得依赖多个子系统的工具更容易实现。</p>
+<p>举个例子，exec系统调用依赖文件系统，因为它要从磁盘中读取二进制文件并加载到内存中，同时它也依赖内存分配和虚拟内存系统，因为它需要设置好新的进程的地址空间，但是它的实现是相对简单的。</p>
+<p>在XV6或者Linux中做到这些完全没问题，因为这些操作系统已经在内核程序中包含了文件系统和虚拟内存系统。</p>
+<p>但是如果严格分隔了文件系统和虚拟内存系统，那么实现类似exec的系统调用将会难得多。</p>
+<p>在一个monolithic操作系统中，因为本身就是一个大的程序，实现起来会容易的多。</p>
+</li>
+<li>
+<p>另一个使得类似于XV6或者Linux的操作系统中可以更简单实现软件的原因是，内核的所有代码都以完整的硬件权限在运行。</p>
+<p>举个例子，整个XV6都运行在Supervisor mode，这意味着你可以读写任意内存地址，并且所有的内核代码都以最大的权限在运行。Linux操作系统也是这样。</p>
+</li>
+</ul>
+<p>所以，monolithic kernel这种设计策略对于内核开发人员来说非常方便，并且也更容易构建更强大的抽象，进而对于应用程序开发人员来说也更容易。</p>
+<p>然而，对于传统的monolithic kernel，也有一些缺点。这也是之所以会出现其他内核架构，比如说微内核的原因。</p>
+<p>所以这里的问题是，为什么不在所有的场合使用monolithic kernel呢？</p>
+<ul>
+<li>
+<p>第一个原因是它们大且复杂。</p>
+<p>取决于你怎么计算，Linux总是有数十万到数百万行代码。Linux的一部分可以查看Linux的另一个部分的数据，的确使得编程更加容易，但是同样也使得内部代码有大量的交互和依赖。</p>
+<p>有的时候查看并弄明白Linux代码会有点挑战。任何时候你有了一个大的程序，尤其它们还具有复杂的结构，你都会有Bug，操作系统内核也不例外。</p>
+<p>在这些年，内核有过各种各样的Bug，包括了安全性相关的Bug。所以这是一个令人烦恼的关系图，如果你使用了大的内核，你不可避免的会遇到Bug和安全漏洞。</p>
+</li>
+<li>
+<p>另一个人们不喜欢monolithic kernel的原因是，随着时间的推移，它们倾向于发展成拥有所有的功能。</p>
+<p>Linux应用在各种场合中，从移动电话到桌面工作站，从笔记本电脑到平板电脑，从服务器到路由器。</p>
+<p>Linux可以支持这么多设备是极好的，但是这也使得Linux非常的通用，所以Linux支持了很多很多不同的东西。</p>
+<p>而任何一个应用程序，例如我的web server程序不太会需要用到Linux中非常复杂的声卡支持。</p>
+<p>所以，Linux中包含了大量的内容使得它很通用，这很好，但是另一方面，通用就意味着慢。</p>
+<p>对于各种不同的场景都能支持，或许就不能对某些特定场景进行优化。</p>
+<p>当你尝试快速运行一些程序时，如果程序只做一两件事情是极好的，因为这样你就可以专注在优化一两个代码路径上。</p>
+<p>但是如果你的程序想要做上千件事情，优化会更加难。</p>
+<p>Linux并不一定慢，但是你或许会想，它真的在所有场景下都达到了最快速度吗？如果你去看Linux或者XV6中的任何模块，你或许会想它们真的有必要去做所有的事情吗？</p>
+<p>例如，你从一个进程向一个Pipe写一个字节传输到另一个进程，即使在XV6这样一个简单的内核中，都有大量的指令需要被执行。</p>
+<p>这里有buffering，locking，或许在Pipe的读写中有sleep/wakeup，或许有线程调度导致context switching，对于从一个进程移动一个字节到另一个进程来说，这里有大量的内容或许并不是必须的。</p>
+</li>
+<li>
+<p>对于monolithic kernel来说，另一个潜在的问题是，因为它们是如此之大，它们会削弱一些复杂的抽象能力。</p>
+<p>在内核中会有大量的设计考虑，应用程序需要遵守这些设计并与之共存。</p>
+<p>反之，在一个理想世界中，应用程序或许可以做更多的决定。</p>
+<p>举个例子，在Unix中，你可以wait子进程，比如说你fork出来的子进程，但是你不能wait其他进程（注，详见13.7），或许你会想要wait孙子进程或者一个不相关的进程，但是这是不可能的。</p>
+<p>或许你会想要更改其他进程的地址空间，比如说替其它受你控制的进程调用mmap，但是这也不可能。mmap只能修改你自己的地址空间，但是不能修改其他进程的地址空间。</p>
+<p>或许你是个数据库，你在磁盘上有B树索引，你或许知道很多快速展开B树的方法，但是当你读写文件系统中的文件时，文件系统并不知道你正在读写一个B树，以及如何更快的在磁盘上展开B树。</p>
+<p>所以如果你是个数据库的话，你或许很高兴文件系统可以任你摆布，但是文件系统并不会按照你想要的方式工作。以上就是内核中需要考虑的设计。</p>
+</li>
+<li>
+<p>monolithic kernel的最后一个问题是，可扩展性（Extensibility）。</p>
+<p>应用程序或许想要实时更改内核，比如说向内核下载代码并更改内核的工作方式，这样数据库或许就可以更改数据在磁盘上的分布方式。</p>
+<p>至少在10年前，monolithic kernel没有任何功能可以支持这里的Extensibility，你只能使用内核提供的能力。</p>
+</li>
+</ul>
+<p>以上就是人们认为的monolithic kernel的问题。</p>
+<p>这些问题使得人们去思考操作系统的其他架构。这里有很多不同的想法，其中一些想法非常的激进，我们今天只会讨论其中的一种，也是现在非常流行的一种，这就是微内核，Micro kernel。</p>
+<h2 id="micro-kernel">Micro kernel
+</h2><p>有关微内核的很多思想可以回溯到计算机的发展历史中。</p>
+<p>微内核从1980年代中后期开始就是一个非常热门的研究课题，它是指一种通用的方法或者概念，它并不特指任何特定的产品。</p>
+<p>有很多人遵循微内核的设计思想并构建了操作系统，但是这些项目中的每一个具体的操作系统都与另一个非常不一样。</p>
+<p>微内核的核心就是实现了IPC（Inter-Process Communication）以及线程和任务的tiny kernel。</p>
+<p>所以微内核只提供了进程抽象和通过IPC进程间通信的方式，除此之外别无他物。</p>
+<p>任何你想要做的事情，例如文件系统，你都会通过一个用户空间进程来实现，完全不会在内核中实现。</p>
+<p>画个图来展示一下，整个计算机还是分为两层，下面是kernel，上面是用户空间。</p>
+<p>在用户空间或许还是会有各种各样常见的程序，例如VI，CC，桌面系统。</p>
+<p>除此之外，在用户空间还会有文件系统以及知道如何与磁盘交互的磁盘驱动，或许我们还会有一个知道如何进行TCP通信的网络协议栈，或许还有一个可以实现酷炫虚拟内存技巧的虚拟内存系统。</p>
+<p>当文本编辑器VI需要读取一个文件时，它需要与文件系统进行交互，所以它通过IPC会发送一条消息到文件系统进程。</p>
+<p><img src="/p/mit6s081lec18/p39.png"
+	width="1056"
+	height="656"
+	srcset="/p/mit6s081lec18/p39_hu6658799401540249001.png 480w, /p/mit6s081lec18/p39_hu10502053663651355684.png 1024w"
+	loading="lazy"
+	
+		alt="p39"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="160"
+		data-flex-basis="386px"
+	
+></p>
+<p>文件系统进程中包含了所有的文件系统代码，它知道文件，目录的信息。</p>
+<p>文件系统进程需要与磁盘交互，所以它会发送另一个IPC到磁盘驱动程序。</p>
+<p>磁盘驱动程序再与磁盘硬件进行交互，之后磁盘驱动会返回一个磁盘块给文件系统。之后文件系统再将VI请求的数据通过IPC返回给VI。</p>
+<p>这里需要注意的关键信息是，在内核中唯一需要做的是支持进程/任务/线程，以及支持IPC来作为消息的传递途径，除此之外，内核不用做任何事情。</p>
+<p>内核中没有任何文件系统，没有任何设备驱动，没有网络协议栈，所有这些东西以普通用户进程在运行。</p>
+<p>所以这提供给你一种非常小的内核，以及相对少的代码去优化，你可以优化IPC，除此之外也没有别的东西了。</p>
+<p>上图就是我们在这节课剩下的时间要讨论的内容。</p>
+<p>在今天仍然有使用微内核的场景。实际上，今天<a class="link" href="https://pdos.csail.mit.edu/6.828/2020/readings/microkernel.pdf"  target="_blank" rel="noopener"
+    >论文</a>要讨论的L4微内核就有很多很多的运行实例，它用在很多手机中用来控制手机的射频，在最近的iphone中的一个旁路处理器中，也使用了L4微内核来隐藏加密密钥。</p>
+<p>所以在一些微型嵌入式系统中，微内核能够胜出，比如说在一些专门为某种功能设计的计算机中，你需要使用某种操作系统，而你又不需要Linux带来的复杂性。</p>
+<p>微内核中的用户进程通过IPC通信，这在很多操作系统都存在。</p>
+<p>例如我现在运行的macOS，它就是一个普通的monolithic kernel，它也很好的支持用户进程通过IPC进行通信。</p>
+<p>所以用户进程通过内核内的IPC相互通信，这是一个成功的思想并且被广泛采用。</p>
+<p>以上就是微内核的基本架构，我接下来会讨论一下这个架构的优势。</p>
+<h2 id="why-micro-kernel">Why micro kernel?
+</h2><p>人们构建微内核的动机是什么？</p>
+<p>其中一个动机你可能不常看到，这就是审美（注，原话是sense of aesthetic）。</p>
+<p>我认为很多人都觉得像Linux内核这样大的复杂的程序并不十分优雅。我们肯定可以构建一些小得多且专注得多的设计，而不是这样一个巨大的拥有各种随机特性的集合体。</p>
+<p>所以从审美角度来说，我们必然可以做的比大的内核更好。</p>
+<p>其他还有一些更具体且可量化的动机。</p>
+<ul>
+<li>
+<p>更小的内核或许会更加的安全。只有几行代码的话，Bug也不会太多，其他人利用Bug来破坏安全性的可能也就更小。</p>
+</li>
+<li>
+<p>在特殊场景下，你需要证明一个操作系统是正确的，没有Bug，并且只做了它应该做的事情。</p>
+<p>现实中至少有一种经过验证是安全的微内核系统：seL4。这是L4微内核的多个衍生项目之一。</p>
+<p>人们知道怎么去验证中小型程序，但是不知道怎么验证巨大的程序。微内核通常都很小，这是它能够被证明是安全的一个关键因素。</p>
+</li>
+<li>
+<p>小内核的另一个优势是，少量代码的程序比巨大的程序更容易被优化。</p>
+</li>
+<li>
+<p>小内核可能会运行的更快，你不用为很多用不上的功能付出代价。</p>
+<p>相比monolithic kernel，微内核几乎不会做任何事情，所以你不用为你不使用的很多功能付出代价。</p>
+</li>
+<li>
+<p>使用小内核的另一个原因是，小内核或许自带了少得多的设计限制，进而使得应用程序的设计限制也更少。</p>
+<p>这样给应用程序提供了更多的灵活性，使得应用程序可以自己做出设计决定。</p>
+</li>
+</ul>
+<p>以上都不是微内核必须要支持的特性，只是说人们期望通过使用微内核可以得到的特性。</p>
+<ul>
+<li>
+<p>另一个微内核吸引人的原因是，有很多我们习惯了位于内核的功能和函数，现在都运行在用户空间。</p>
+<p>这种将内核拆分，并在用户空间的不同部分运行，比如说在用户空间运行文件系统服务，可以使得代码更模块化。</p>
+</li>
+<li>
+<p>用户空间代码通常会比内核更容易被修改，调整和替换，所以它更容易被定制化。</p>
+</li>
+<li>
+<p>将操作系统放在用户空间，或许可以使得它更加的健壮。</p>
+<p>如果内核出错了，通常你需要panic并重启，因为如果内核有Bug，并且会随机更改数据，那就不能信任内核了。</p>
+<p>然而，如果你将内核运行成一些用户空间的服务，其中一个出现故障，比如说除以0，索引了一个野指针，或许只有这一个服务会崩溃，操作系统的剩余部分还是完好的，这样你可以只重启那一个服务。</p>
+<p>所以，将操作系统的功能移到用户进程可以使得系统更加健壮。</p>
+<p>这对于驱动来说尤其明显，内核中大部分Bug都在硬件驱动中，如果我们能将设备驱动从内核中移出的话，那么内核中可能会有少的多的Bug和Crash。</p>
+</li>
+<li>
+<p>最后一个优势是，你可以在微内核上模拟或者运行多个操作系统。</p>
+<p>所以尽管微内核几乎不做任何事情，你还是可以在它之上运行一个Unix系统之类的，或许还可以在同一个机器上运行超过一个操作系统。</p>
+<p>今天的论文主要就是描述如何在微内核之上将Linux作为服务来运行。</p>
+</li>
+</ul>
+<p>以上就是人们在微内核这条道路上期望得到的一些好处。</p>
+<p>当然，这里也有一些挑战。</p>
+<ul>
+<li>
+<p>如果你想要设计属于你自己的微内核，其中一个挑战是你会想要你的微内核的系统调用接口尽可能的简单，因为使用微内核的出发点就是内核很小。</p>
+<p>那么什么才是有用的系统调用的最小集？这一点并不十分明确。</p>
+<p>所以这里我们要确定最少的系统调用API，你需要这些系统调用API尽可能的少，但是你又需要基于这些API构建一些非常复杂的功能，因为即使内核没有做太多工作，你最终还是要运行程序。</p>
+<p>或许你想要在微内核之上运行Unix，你需要能执行类似fork，mmap的工作。</p>
+<p>所以底层的系统调用在简单的同时，需要能够足够强大以支持人们需要做的各种事情，比如说exec，fork，copy-on-write fork，mmap file。</p>
+</li>
+<li>
+<p>但是内核又完全不知道文件和文件系统。</p>
+<p>所以现在系统调用需要支持exec，而内核又不知道文件。</p>
+<p>微内核或许会非常简单，但是我们仍然需要开发一些用户空间服务来实现操作系统的其他部分。</p>
+</li>
+<li>
+<p>最后，微内核的设计需要进程间通过IPC有大量的通信。</p>
+<p>所以有很大的需求使得IPC能够足够的快。我们会好奇，IPC可以足够的快来使得微内核足够有竞争力吗？</p>
+</li>
+<li>
+<p>有关性能，不仅与IPC的速度相关。</p>
+<p>通常来说，monolithic kernel可以获得更好的性能，是因为它里面的文件系统代码和与虚拟内存代码可以直接交互，它们开心的位于一个巨大的程序中。</p>
+<p>但是如果你需要将这些模块都拆分开成为不同的服务，那么在集成的时候就有更少的机会可以优化，这或许会影响性能。</p>
+</li>
+</ul>
+<p>以上就是许多微内核项目要面对的用户期望和潜在的挑战。</p>
+<h2 id="l4-micro-kernel">L4 micro kernel
+</h2><p>今天要讨论的<a class="link" href="https://pdos.csail.mit.edu/6.828/2020/readings/microkernel.pdf"  target="_blank" rel="noopener"
+    >论文</a>，有许多有关L4微内核的内容。这是今天论文作者开发和使用的一种微内核。</p>
+<p>L4必然不是最早的微内核，但是从1980年代开始，它是最早一批可以工作的微内核之一，并且它非常能展现微内核是如何工作的。</p>
+<p>在许多年里面它一直都有活跃的开发和演进。如果你查看Wikipedia，L4有15-20个变种，有一些从1980年代开始开发的项目现在还存在。</p>
+<p>接下来我将从我的理解向你们解释L4在今天的论文发表的时候是如何工作的。</p>
+<p>首先，L4是微内核，它只有7个系统调用，虽然其中有一些稍微有点复杂，但是它还是只有7个系统调用。</p>
+<p>然而现在的Linux，我上次数了下有大概350个系统调用。甚至XV6这个极其简单的内核，也有21个系统调用。</p>
+<p>从这个指标来看，L4更加简单。</p>
+<p>其次，L4并不大，论文发表的时候，它只有13000行代码，这并不多。</p>
+<p>XV6的代码更少，我认为XV6内核只有6000-7000行代码，所以作为内核XV6非常的简单。</p>
+<p>L4也没有复杂太多，它只有Linux代码的几十分之一，所以它非常的小。</p>
+<p>第三，它只包含几个非常基础的抽象。</p>
+<p>它在内部有一个叫做Task或者地址空间的概念，这或多或少的对应了Uinx内的进程概念。</p>
+<p>Task包含了一些内存，地址从0开始，并且可以像进程一样执行指令。</p>
+<p>区别于XV6的是，每个Task可以有多个线程，L4会调度每个Task内的多个线程的执行。这样设计的原因是，可以非常方便地用线程来作为组织程序结构的工具。</p>
+<p>我不知道在论文发表的时候，L4是否支持了多处理器，或许它包含了在多个处理器上运行同一个程序的能力。</p>
+<p>所以L4内核知道Task，知道线程，也知道地址空间，这样你就可以告诉L4如何映射地址空间内的内存Page。</p>
+<p>另一个L4知道的事情是IPC。</p>
+<p>每一个线程都有一个标识符，其中一个线程可以说，我想要向拥有这个标识符的另一个线程发送几个字节。</p>
+<p>这里的<strong>Task，线程，地址空间，IPC</strong>是L4唯一有的抽象。</p>
+<p><img src="/p/mit6s081lec18/p40.png"
+	width="1143"
+	height="621"
+	srcset="/p/mit6s081lec18/p40_hu17850228718370172535.png 480w, /p/mit6s081lec18/p40_hu11563947334937770497.png 1024w"
+	loading="lazy"
+	
+		alt="p40"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="184"
+		data-flex-basis="441px"
+	
+></p>
+<p>我不确定是否能列出所有的系统调用，这里涉及到的系统调用有：</p>
+<ul>
+<li>
+<p>Threadcreate系统调用，你提供一个地址空间ID并要求创建一个新的线程。</p>
+<p>如果地址空间或者Task不存在，系统调用会创建一个新的Task。所以这个系统调用即可以创建线程，又可以创建Task。</p>
+</li>
+<li>
+<p>Send/Recv IPC系统调用。</p>
+</li>
+<li>
+<p>Mapping系统调动可以映射内存Page到当前Task或者其他Task的地址空间中。</p>
+<p>你可以要求L4来改变当前Task的地址空间和Page Table，如果你有足够的权限，你也可以要求L4改变其他Task的地址空间。这实际上是通过IPC完成的，你会发送一个特殊的IPC消息到目标线程，内核可以识别这个IPC消息，并会修改目标线程的地址空间。</p>
+<p>如果你创建一个先的线程，新线程最开始没有任何内存。所以如果你想创建一个线程，你先调用Threadcreate系统调用来创建新的线程，新的Task和地址空间。</p>
+<p>然后你创建一个特殊 IPC，将你自己内存中的一部分，其中包含了指令和数据，映射到新的Task的地址空间中。</p>
+<p>之后你再发送一个特殊的Start IPC消息到这个新的Task，其中包含了你期望新的Task开始执行程序的程序计数器和Stack Pointer。</p>
+<p>之后新的Task会在你设置好的内存中，从你要求的程序计数器位置开始执行。</p>
+</li>
+<li>
+<p>虽然我不知道具体是怎么实现的，但是Privileged Task可以将硬件控制寄存器映射到自己的地址空间中。</p>
+<p>所以L4并不知道例如磁盘或者网卡的设备信息，但是实现了设备驱动的用户空间软件可以直接访问设备硬件。</p>
+</li>
+<li>
+<p>你可以设置L4将任何一个设备的中断转换成IPC消息。</p>
+<p>这样，运行设备驱动的Task不仅可以读写了设备，并且也可以设置L4将特定设备的中断通过IPC消息发送给自己。</p>
+</li>
+<li>
+<p>最后，一个Task可以设置L4内核通知自己有关另一个Task的Page Fault。</p>
+<p>所以如果一个Task发生了Page Fault，L4会将Page Fault转换成一个IPC消息，并发送给另一个指定的Pager Task。</p>
+<p>每一个Task都有个与之关联的Pager Task用来处理自己相关的Page Fault。这就是关联到Page Fault的方法，通过它可以实现类似copy-on-write fork或者lazy allocation。</p>
+</li>
+</ul>
+<p>以上就是内核的内容，L4里面不包含其他的功能，没有文件系统，没有fork/exec系统调用，除了这里非常简单的IPC之外，没有其他例如pipe的通信机制，没有设备驱动，没有网络的支持等等。</p>
+<p>任何其他你想要的功能，你需要以用户空间进程的方式提供。</p>
+<p>L4能提供的一件事情是完成线程间切换。</p>
+<p>L4会完成线程调度和context switch，来让多个线程共用一个CPU。</p>
+<p>它实现的方式你会觉得非常熟悉，L4会为每个Task保存寄存器，当它执行一个线程时，它会跳到用户空间，切换到那个线程对应Task的Page Table，之后那个线程会在用户空间执行一会。之后或许会有一个定时器中断，定时器是L4知道的一个设备，定时器中断会使代码执行返回到L4内核，L4会保存线程的用户寄存器，然后在一个类似于XV6的线程调度循环中，选择一个Task来运行。</p>
+<p>通过将这个Task之前保存的寄存器恢复出来，切换Page Table，就可以跳转到Task中再运行一会，直到再发生另一个定时中断，或者当前Task出让了CPU。</p>
+<p>所以我认为L4或许还有一个yield系统调用。</p>
+<p>在这种情况下Task可以等待接收一个IPC消息，这时代码会跳转回L4内核，L4内核会保存寄存器，并切换到一个新的Task。所以L4中有关线程切换的部分你们会非常熟悉。</p>
+<p>我之前提到过这个概念，Pager。</p>
+<p>如果一个进程触发了Page Fault，通过trap走到了内核，内核会将Page Fault转换成IPC消息并发送到指定的Pager Task，并告诉Pager Task是哪个线程的哪个地址触发了Page Fault。</p>
+<p>在Pager Task中，如果它实现了lazy allocation，那么它会负责从L4分配一些内存，向触发Page Fault的Task发送一个特殊的IPC，来恢复程序的运行。</p>
+<p>所以Pager Task实现了XV6或者Linux在Page Fault Handler中实现的所有功能。</p>
+<p>如果你想的话，你可以在Pager Task中实现copy-on-write fork或者memory mapped files，Pager Task可以实现基于Page Fault的各种技巧。</p>
+<p>这是类似L4的微内核相比传统的内核，对于用户程序要灵活的多的众多例子之一。</p>
+<p>如果Linux并没有copy-on-write fork，并且你想要有这个功能，你不可能在不修改内核的前提下完成这个功能。</p>
+<p>Linux中没有办法写一些可移植的用户空间代码来实现copy-on-write fork。这样描述可能并不完全正确，但是一定要这么做的话会很复杂。</p>
+<p>然而，在L4里面，这就相对简单了。</p>
+<p>L4就好像是完全设计成让你去写用户空间代码来获取Page Fault，并实现copy-on-write fork。所有这些都可以在用户空间完成，而不用弄乱内核。</p>
+<blockquote>
+<p>学生提问：能说明一下Task和线程之间的区别吗？</p>
+<p>Robert教授：可以。一个Task就像XV6的一个进程一样，它有一些内存，一个地址空间，你可以在其中运行用户代码。</p>
+<p>如果你在XV6中有一个进程，它只能包含一个线程。</p>
+<p>但是在现代的操作系统和L4中，在一个进程，一个地址空间中，可以有多个线程。</p>
+<p>如果你有多个CPU核，那么多个CPU核可以同时运行一个Task。</p>
+<p>每个线程在Task的地址空间中都有一个设置好的Stack，这意味着你可以写一个程序，并通过并行运行在多个CPU核上得到性能的提升，其中的每个线程都运行在不同的CPU核上。</p>
+</blockquote>
+<p>所以你们可以看到，这里的设计非常依赖IPC，因为如果你想与你的文件系统交互，文件系统想要与设备驱动交互，你都需要来回发送IPC消息。</p>
+<p>对于每个系统调用，每个Page Fault，每个设备中断，都会有反复的IPC消息。所以IPC系统需要非常快。</p>
+<h2 id="improving-ipc-by-kernel-design">Improving IPC by Kernel Design
+</h2><p>接下来我们讨论微内核里面一个非常重要的问题：IPC的速度。</p>
+<p>首先让我展示一个非常简单，但是也非常慢的设计。这个设计基于Unix Pipe。</p>
+<p>我之所以介绍这种方法，是因为一些早期的微内核以一种类似的方式实现的IPC，而这种方式实际上很慢。</p>
+<p>假设我们有两个进程，P1和P2，P1想要给P2发送消息。</p>
+<p>这里该怎么工作呢？一种可能是使用send系统调用，传入你想将消息发送到的线程的ID，以及你想发送消息的指针。</p>
+<p>这个系统调用会跳到内核中，假设我们是基于XV6的pipe来实现，那么这里会有一个缓存。</p>
+<p>或许P2正在做一些其他的事情，并没有准备好处理P1的消息，所以消息会被先送到内核的缓存中。</p>
+<p>所以当你调用send系统调用，它会将你的消息追加到一个缓存中等待P2来接收它。</p>
+<p>在实际中，几乎很少情况你会只想要发送一个消息，你几乎总是想要能再得到一个回复。</p>
+<p>所以P1在调用完send系统调用之后，会立即调用recv来获取回复。</p>
+<p>但是现在让我们先假设我们发送的就是单向的IPC消息，send会将你的消息追加到位于内核的缓存中，我们需要从用户空间将消息逐字节地拷贝到内核的缓存中。</p>
+<p>之后再返回，这样P1可以做一些其他的事情，或许是做好准备去接受回复消息。</p>
+<p>过了一会，P2可以接收消息了，它会调用recv系统调用，这个系统调用会返回发送消息线程的ID，并将消息从内核拷贝到P2的内存中。</p>
+<p>所以这里会从内核缓存中取出最前的消息，并拷贝到P2的内存中，之后再返回。</p>
+<p><img src="/p/mit6s081lec18/p41.png"
+	width="1136"
+	height="721"
+	srcset="/p/mit6s081lec18/p41_hu8207171067209621151.png 480w, /p/mit6s081lec18/p41_hu10599598374377215597.png 1024w"
+	loading="lazy"
+	
+		alt="p41"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="157"
+		data-flex-basis="378px"
+	
+></p>
+<p>这种方式被称为异步传输，因为P1发完消息之后，只是向缓存队列中追加了一条消息，并没有做任何等待就返回了。</p>
+<p>同时这样的系统这也被称作是buffered system，因为在发送消息时，内核将每条消息都拷贝到了内部的缓存中，之后当接收消息时，又从buffer中将消息拷贝到了目标线程。</p>
+<p>所以这种方法是异步buffered。</p>
+<p>如果P1要完成一次完整的消息发送和接收，那么可以假设有两个buffer，一个用来发送消息，一个用来接收消息。</p>
+<p>P1会先调用send，send返回之后。之后P1会立即调用recv，recv会等待接收消息的buffer出现数据，所以P1会出让CPU。</p>
+<p>在一个单CPU的系统中，只有当P1出让了CPU，P2才可以运行。</p>
+<p>论文中的讨论是基于单CPU系统，所以P1先执行，之后P1不再执行，出让CPU并等待回复消息。</p>
+<p>这时，P2才会被调度，之后P2调用recv，拷贝消息。</p>
+<p>之后P2自己再调用send将回复消息追加到buffer，之后P2的send系统调用返回。</p>
+<p>假设在某个时间，或许因为定时器中断触发导致P2出让CPU，这时P1可以恢复运行，内核发现在接收消息buffer有了一条消息，会返回到用户空间的P1进程。</p>
+<p><img src="/p/mit6s081lec18/p42.png"
+	width="1141"
+	height="621"
+	srcset="/p/mit6s081lec18/p42_hu12529051525904153896.png 480w, /p/mit6s081lec18/p42_hu15209856886907029850.png 1024w"
+	loading="lazy"
+	
+		alt="p42"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="183"
+		data-flex-basis="440px"
+	
+></p>
+<p>这意味着在这个慢的设计中，为了让消息能够发送和回复，将要包含：</p>
+<ul>
+<li>4个系统调用，两个send，两个recv</li>
+<li>对应8次用户空间内核空间之间的切换，而每一次切换明显都会很慢</li>
+<li>在recv的时候，需要通过sleep来等待数据出现</li>
+<li>并且需要至少一次线程调度和context switching来从P1切换到P2</li>
+</ul>
+<p>每一次用户空间和内核空间之间的切换和context switching都很费时，因为每次切换，都需要切换Page Table，进而清空TLB，也就是虚拟内存的查找缓存，这些操作很费时。</p>
+<p>所以这是一种非常慢的实现方式，它包含了大量的用户空间和内核空间之间的切换、消息的拷贝、缓存的分配等等。</p>
+<blockquote>
+<p>在微内核架构中，<strong>进程间通信（IPC）</strong> 的实现通常依赖内核的支持，因此当一个线程执行发送操作时，它确实会进入内核态。这涉及多个操作，包括上下文切换、内存访问和消息的传输。</p>
+<ol>
+<li>
+<p><strong>线程进入内核会导致上下文切换吗？</strong></p>
+<p><strong>是的，进入内核通常会导致上下文切换。</strong></p>
+<p>在微内核的 IPC 实现中，线程在发送消息时需要从用户态进入内核态，至少有以下两个层面的上下文切换：</p>
+<ul>
+<li><strong>用户态到内核态的切换</strong>：当用户线程执行系统调用（例如 <code>send</code>）时，CPU 会切换到内核态。这种切换虽然涉及一些保存和恢复寄存器的操作，但不一定是完整的进程上下文切换。它主要是用户态到内核态的权限转换。</li>
+<li><strong>进程间上下文切换</strong>：如果 IPC 涉及多个线程或者进程间通信，当发送消息的线程完成操作后，CPU 可能会切换到接收消息的线程或进程，这种情况下是完整的上下文切换。这时，需要保存和恢复所有的寄存器、页表信息、堆栈指针等。这是一个相对昂贵的操作。</li>
+</ul>
+</li>
+<li>
+<p><strong>进入内核会改变页表吗？</strong></p>
+<p><strong>不一定需要切换页表，但可能会发生。</strong></p>
+<ul>
+<li><strong>同一进程的线程间切换</strong>：如果线程属于同一个进程，页表通常不会发生变化。内核只需要完成权限转换（从用户态切换到内核态）而不改变虚拟内存的布局。</li>
+<li><strong>跨进程切换</strong>：如果线程属于不同的进程，那么切换到内核态可能会导致页表的改变。每个进程拥有自己独立的虚拟地址空间，因此当内核从一个进程切换到另一个进程时，内核必须加载接收方进程的页表，以确保接收方进程能正确访问自己的内存。</li>
+</ul>
+</li>
+<li>
+<p><strong>放入 buffer 的消息从哪里来？</strong></p>
+<ul>
+<li><strong>消息的来源</strong>是发送方线程的用户空间。一般情况下，发送方进程的线程在调用 IPC 时，会将消息从自己的用户空间缓冲区复制到内核提供的 buffer 中。</li>
+</ul>
+<p>例如：</p>
+<ul>
+<li>线程 A 通过 <code>send</code> 调用向线程 B 发送一条消息。</li>
+<li>线程 A 的消息存储在用户态的内存区域（如用户的堆内存）。</li>
+<li>当执行系统调用时，内核将这条消息从线程 A 的用户空间复制到内核的 buffer 中。</li>
+<li>之后，内核会将消息传递给线程 B，可能通过共享内存、消息队列等方式。</li>
+</ul>
+</li>
+<li>
+<p><strong>举例说明微内核 IPC 的操作流程</strong></p>
+<p>假设有两个线程 A 和 B，分别属于不同的进程。A 想要发送一条消息给 B，流程可能如下：</p>
+<ol>
+<li><strong>线程 A 调用 <code>send</code> 函数</strong>：
+<ul>
+<li>A 从用户态进入内核态，执行 <code>send</code> 系统调用。</li>
+<li>此时发生了用户态到内核态的上下文切换。</li>
+</ul>
+</li>
+<li><strong>内核处理消息传递</strong>：
+<ul>
+<li>内核从线程 A 的用户空间中读取消息数据，将其复制到内核 buffer 中。</li>
+<li>如果线程 B 当前正在等待这条消息，内核可能会准备唤醒 B，发生线程调度。</li>
+</ul>
+</li>
+<li><strong>上下文切换</strong>：
+<ul>
+<li>如果线程 B 属于另一个进程，则需要加载线程 B 所在进程的页表，保证线程 B 可以正确访问自己的虚拟内存空间。</li>
+<li>进行完整的上下文切换，保存 A 的上下文（寄存器、堆栈指针、页表等）并恢复线程 B 的上下文。</li>
+</ul>
+</li>
+<li><strong>线程 B 处理消息</strong>：
+<ul>
+<li>线程 B 被唤醒，从内核 buffer 中读取消息，并复制到自己的用户空间。</li>
+<li>线程 B 处理完消息后，可能返回用户态继续执行。</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>
+<p><strong>总结</strong></p>
+<ul>
+<li>
+<p>线程进入内核时，通常会发生上下文切换，至少会有<strong>用户态到内核态的切换</strong>，可能还会有完整的<strong>进程上下文切换</strong>。</p>
+</li>
+<li>
+<p>页表的切换取决于是否发生进程切换。同一进程的线程切换不需要更换页表，但不同进程之间的切换则需要更换页表。</p>
+</li>
+<li>
+<p>消息通常是从发送方进程的用户空间复制到内核 buffer，再传递给接收方。</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>这种机制带来了 IPC 中的性能开销，特别是<strong>上下文切换和数据拷贝</strong>，这是早期微内核性能瓶颈的原因之一。</p>
+<blockquote>
+<p>尤其在系统设计中，安全性和性能经常需要权衡。在只有一个 CPU 的情况下，线程从用户态进入内核态，确实意味着线程的<strong>权限发生了变化</strong>，从较低的用户权限提升到较高的内核权限。这种权限切换使得线程可以访问更多的系统资源，比如硬件设备、内核内存等。这当然带来了潜在的安全风险，但操作系统设计中有多种机制来应对这些安全问题。</p>
+<ol>
+<li><strong>进入内核态：权限切换</strong></li>
+</ol>
+<p>当线程在用户态运行时，操作系统的硬件保护机制会限制它只能访问<strong>用户空间内存</strong>和执行特定的非特权指令。如果线程需要执行特权操作（比如与硬件交互或访问内核资源），它必须通过<strong>系统调用</strong>来请求内核完成这些操作。</p>
+<p>在系统调用中，CPU 会切换到内核态，线程的权限位（通常是 CPU 的控制寄存器或状态寄存器中的标志位）也会相应地改变。这时，线程能够执行特权指令，访问内核内存和设备。但<strong>这个切换过程不是随意的</strong>，操作系统会通过以下几种方式来防止线程滥用这种高权限：</p>
+<ol start="2">
+<li><strong>防止安全问题的机制</strong></li>
+</ol>
+<p>（1）<strong>受限的系统调用接口</strong></p>
+<p>用户态线程不能直接访问内核态资源，它只能通过特定的<strong>系统调用接口</strong>来请求内核执行操作。这些系统调用是经过严格定义的，并受到内核的权限控制。例如：</p>
+<ul>
+<li>用户态线程不能直接读写内核内存。</li>
+<li>系统调用会进行<strong>参数校验</strong>，确保用户态线程传递的参数合法、合理。比如，如果用户传递了无效的地址或者非法的文件描述符，内核会返回错误。</li>
+</ul>
+<p>这意味着，即使用户线程进入了内核态，它只能在内核规定的范围内行动，无法随意执行其他有害操作。</p>
+<p>（2）<strong>进程隔离与页表保护</strong></p>
+<p>每个用户进程都有自己独立的虚拟内存空间，页表的设置确保了用户进程无法直接访问其他进程的内存或内核的内存。在进入内核态时，虽然权限提升了，但内核会严格管理线程能够访问的内存区域。这一保护措施确保即使线程进入了内核态，它也不能随意访问或修改系统内核的数据。</p>
+<p>（3）<strong>中断处理与内核模式的控制流</strong></p>
+<p>当线程从用户态进入内核态时，系统会有一整套严格的控制流来保证安全：</p>
+<ul>
+<li><strong>系统调用入口</strong>：系统调用是通过中断（或陷阱指令）进入内核的，内核中有专门的系统调用处理程序，它会接管线程的执行，并确保线程只能在安全的范围内运行。</li>
+<li><strong>中断处理器</strong>：系统调用或者硬件中断会触发硬件控制流，跳转到内核指定的安全位置，并保存当前用户态的执行上下文，防止恶意线程篡改这些数据。</li>
+</ul>
+<p>（4）<strong>内核空间与用户空间分离</strong></p>
+<p>操作系统将<strong>内核空间</strong>和<strong>用户空间</strong>进行隔离。用户空间的代码和数据处于较低的内存区域，而内核空间则处于较高的内存区域。内核态执行的代码是经过严格审查和保护的，用户态代码不能直接修改内核空间的数据。</p>
+<p>通过硬件和软件的结合，线程即使在进入内核态后也无法访问用户态之外的资源，除非通过安全的系统调用接口，这样防止了线程“乘机运行有害代码”。</p>
+<ol start="3">
+<li><strong>特权切换的安全性保障</strong></li>
+</ol>
+<p>虽然线程进入内核意味着获得了更高的权限，但这并不意味着用户态的恶意线程能够自由破坏系统。这是因为：</p>
+<ul>
+<li><strong>CPU硬件支持的分级权限</strong>：现代 CPU 使用分级权限环（privilege rings），通常操作系统使用<strong>Ring 0（内核态）**和**Ring 3（用户态）</strong>。进入内核态的切换是通过特定的硬件中断或者陷阱指令实现的，并且内核会在处理结束后立即返回用户态。</li>
+<li><strong>系统调用检查</strong>：内核会对每个系统调用进行严格的参数验证和安全检查，防止用户进程通过恶意传递参数来破坏系统。错误或非法的调用会被拒绝，通常内核会返回错误码或者终止进程。</li>
+<li><strong>内存管理单元（MMU）的保护</strong>：CPU 中的内存管理单元（MMU）和页表机制确保用户态无法访问内核态内存，防止恶意用户进程修改或读取内核数据。</li>
+</ul>
+<ol start="4">
+<li><strong>安全性示例：系统调用如何保护内核</strong></li>
+</ol>
+<p>举个简单的例子，假设一个用户态线程要进行文件写操作，它会调用 <code>write</code> 系统调用：</p>
+<ol>
+<li>用户态线程调用 <code>write(fd, buffer, size)</code>，通过陷阱指令进入内核态。</li>
+<li>内核会接管控制，首先检查文件描述符 <code>fd</code> 是否有效，是否可以写操作。</li>
+<li>然后，内核检查 <code>buffer</code> 是否是合法的用户空间地址，并确保该地址处的内存区域可以被读取。</li>
+<li>如果所有检查都通过，内核才会进行实际的写操作。</li>
+<li>操作完成后，内核返回用户态，并将控制交还给用户线程。</li>
+</ol>
+<p>在这个过程中，内核确保了线程无法通过不合法的 <code>fd</code> 或 <code>buffer</code> 来执行有害操作，整个操作在严格受控的范围内进行。</p>
+<ol start="5">
+<li><strong>总结</strong></li>
+</ol>
+<ul>
+<li>在单个 CPU 系统中，线程进入内核态确实意味着权限提升，但操作系统通过硬件支持和系统调用接口的设计来保证安全性。</li>
+<li>权限切换的过程并不直接暴露内核，内核会对系统调用进行严格的校验和控制。</li>
+<li>即使权限提升了，恶意线程仍然无法绕过操作系统的保护机制，内核态的执行是受控制的，不会随意执行用户态提供的有害代码。</li>
+</ul>
+</blockquote>
+</blockquote>
+<p>实际中，对于这里的场景：发送一个消息并期待收到回复，你可以抛开这种方法并获得简单的多的设计，L4就是采用了后者。</p>
+<p>有关简单的设计在一篇著名的论文中有提到，论文是<a class="link" href="https://www.cse.unsw.edu.au/~cs9242/19/papers/Liedtke_93.pdf"  target="_blank" rel="noopener"
+    >Improving IPC by Kernel Design</a>，这篇论文在今天要讨论的论文前几年发布。相比上面的慢设计，它有几点不同：</p>
+<ul>
+<li>
+<p>其中一点是，它是同步的（Synchronized）。</p>
+<p>所以这里不会丢下消息并等待另一个进程去获取消息，这里的send会等待消息被接收，并且recv会等待回复消息被发送。</p>
+<p>如果我是进程P1，我想要发送消息，我会调用send。send并不会拷贝我的消息到内核的缓存中，P1的send会等待P2调用recv。</p>
+<p>P2要么已经在内核中等待接收消息，要么P1的send就要等P2下一次调用recv。</p>
+<p>当P1和P2都到达了内核中，也就是P1因为调用send进入内核，P2因为调用recv进入内核，这时才会发生一些事情。</p>
+<p>这种方式快的一个原因是，如果P2已经在recv中，P1在内核中执行send可以直接跳回到P2的用户空间，从P2的角度来看，就像是从recv中返回一样，这样就不需要context switching或者线程调度。</p>
+<p>相比保存寄存器，出让CPU，通过线程调度找到一个新的进程来运行，这是一种快得多的方式。</p>
+<p>P1的send知道有一个正在等待的recv，它会立即跳转到P2，就像P2从自己的recv系统调用返回一样。</p>
+<p>这种方式也被称为unbuffered。它不需要buffer一部分原因是因为它是同步的。</p>
+</li>
+<li>
+<p>当send和recv都在内核中时，内核可以直接将消息从用户空间P1拷贝到用户空间P2，而不用先拷贝到内核中，再从内核中拷出来。</p>
+<p>因为现在消息收发的两端都在等待另一端系统调用，这意味着它们消息收发两端的指针都是确定的。</p>
+<p>recv会指定它想要消息被投递的位置，所以在这个时间点，我们知道两端的数据内存地址，内核可以直接拷贝消息，而不是需要先拷贝到内核。</p>
+</li>
+<li>
+<p>如果消息超级小，比如说只有几十个字节，它可以在寄存器中传递，而不需要拷贝，你可以称之为Zero Copy。</p>
+<p>前面说过，发送方只会在P2进入到recv时继续执行，之后发送方P1会直接跳转到P2进程中。</p>
+<p>从P1进入到内核的过程中保存P1的用户寄存器，这意味着，如果P1要发送的消息很短，它可以将消息存放到特定的寄存器中。</p>
+<p>当内核返回到P2进程的用户空间时，会恢复保存了的寄存器，这意味着当内核从recv系统调用返回时，特定寄存器的内容就是消息的内容，因此完全不需要从内存拷贝到内存，也不需要移动数据，消息就存放在寄存器中，可以非常快的访问到。当然，这只对短的消息生效。</p>
+</li>
+<li>
+<p>对于非常长的消息，L4可以在一个IPC消息中携带一个Page映射，所以对于巨大的消息，比如说从一个文件读取数据，你可以发送一个物理内存Page，这个Page会被再次映射到目标Task地址空间，这里也没有拷贝。</p>
+<p>这里提供的是共享Page的权限。所以短的消息很快，非常长的消息也非常快。对于长的消息，你需要调整目的Task的Page Table，但是这仍然比拷贝快的多。</p>
+</li>
+<li>
+<p>最后一个L4使用的技巧是，如果它发现这是个RPC，有request和response，并且有非常标准的系统调用包括了send和recv，你或许会结合这两个系统调用，以减少用户态和内核态的切换。</p>
+<p>所以对于RPC这种特别的场景，同时也是人们使用IPC的一个常见场景，有一个call系统调用，它基本上结合了send和recv，区别是这里不会像两个独立的系统调用一样，先返回到用户空间，再次进入到内核空间。</p>
+<p>在消息的接收端，会有一个sendrecv系统调用将回复发出，之后等待来自任何人的request消息。这里基本是发送一个回复再加上等待接收下一个request，这样可以减少一半的内核态和用户态切换。</p>
+</li>
+</ul>
+<p>实际中，所有的这些优化，对于短的RPC请求这样一个典型的场景，可以导致20倍速度的提升。这是论文中给出的对比之前慢设计提升的性能倍数。这个数字很了不起。Improving IPC by Kernel Design这篇论文是由今天这篇论文的同一个作者在前几年发表的，因为现在IPC可以变得非常的快，它使得人们可以更加认同微内核。</p>
+<blockquote>
+<p>学生提问：当使用这些系统调用时，进程是什么时候发送和接收消息的？</p>
+<p>Robert教授：对于包含request和response的RPC，进程使用call和sendrecv这一对系统调用，而不是send和recv。</p>
+<p>对于call，你会传入两个参数，你想要发送的消息，以及你要存放回复消息的位置，这个系统调用在内核中会结合发送和接收两个功能。</p>
+<p>你可以认为这是一种hack，因为IPC使用的是如此频繁，它值得一些hack来使得它变得更快。</p>
+<p>学生提问：在上面的图中，P2会调用recv系统调用，P2怎么知道应该去调用这个系统调用？</p>
+<p>Robert教授：在RPC的世界中，我们有client会发送request到server，server会做一些事情并返回。</p>
+<p>因为P2是一个server，我们会假设P2会一直在一个while循环中，它随时准备从任何client接收消息，做一些数据处理工作，比如在数据库中查找数据，之后再发送回复，然后再回到循环的最开始再等待接收消息。</p>
+<p>所以我们期望P2将所有时间都花费在等待从任何一个客户端接收消息上。</p>
+<p>前面讨论的设计需要依赖P2进程在暂停运行时，一直位于内核的recv系统调用中，并等待下一个request。</p>
+<p>这样，下一个request才可以直接从这个系统调用返回，这种快速路径在这里的设计中超级有效率。</p>
+<p>学生提问：这里提到从P1返回到P2，为了能返回到P1，需要P2发送response吗？</p>
+<p>Robert教授：是的，我们期望P2发送一个response，发送response与发送request是同一个代码路径，只是方向相反（之前是P1到P2现在是P2到P1），所以当P2发送一个response，这会导致返回到P1。</p>
+<p>P1实际调用的是call系统调用，通过从call系统调用返回到P1，会将P2的response送到P1。</p>
+<p>这里与你们以为的通常的设置略有不同，通常情况下，你从P1通过系统调用进入到内核，在内核中执行系统调用然后再返回，所有的工作都在P1这边，这也是pipe的read/write的工作方式。</p>
+<p>在这里，P1进入到内核，但是却返回到了P2。所以这里有点奇怪，但是却非常的快。</p>
+<blockquote>
+<p><strong>远程过程调用（RPC）</strong> 和 <strong>进程间通信（IPC）</strong> 是两个相关但不同的概念，它们之间的关系以及其他 IPC 机制可以通过如下方式理解：</p>
+<ol>
+<li><strong>RPC 和 IPC 的关系</strong></li>
+</ol>
+<ul>
+<li>
+<p><strong>进程间通信（IPC，Inter-Process Communication）</strong> 是指两个或多个进程之间交换数据或信号的机制。由于现代操作系统中每个进程都有自己独立的内存空间，进程间通信是必要的，因为进程无法直接访问彼此的内存。</p>
+</li>
+<li>
+<p><strong>远程过程调用（RPC，Remote Procedure Call）</strong> 是一种特定的 IPC 方法。它允许一个进程通过调用某个“远程”的函数或过程，来请求另一个进程执行某个任务，就像调用本地函数一样。RPC 的背后可能隐藏了复杂的网络或本地通信操作，但对于用户而言，调用是透明的。</p>
+</li>
+</ul>
+<p><strong>RPC 是 IPC 的一种实现方式</strong></p>
+<p>RPC 是一种封装良好的 IPC，常用于进程间的远程通信（进程可能在同一台机器上，也可能跨网络）。它将进程间的消息传递抽象为“过程调用”的形式，从而让开发者不必关心底层的消息传递细节。</p>
+<ol start="2">
+<li><strong>常见的 IPC 机制</strong></li>
+</ol>
+<p>除了 RPC 之外，还有许多其他的 IPC 机制，具体包括：</p>
+<p>（1）<strong>管道（Pipe）</strong></p>
+<ul>
+<li><strong>无名管道</strong>：提供单向的字节流通信，通常用于父子进程间的数据传递。一个进程写入数据，另一个进程从管道的另一端读取。</li>
+<li><strong>命名管道（FIFO）</strong>：允许不相关的进程之间进行双向通信，类似于无名管道，但可以由多个进程使用。</li>
+</ul>
+<p>（2）<strong>消息队列（Message Queue）</strong>：消息队列是一种**先进先出（FIFO）**的消息传递方式，允许进程以消息的形式发送和接收数据。它可以在内核中存储一系列的消息，并提供同步和异步消息传递的能力。</p>
+<p>（3）<strong>共享内存（Shared Memory）</strong>：共享内存允许多个进程直接访问同一段内存，这是一种非常高效的 IPC 方式，因为数据不需要在进程之间复制。但是，共享内存本身不提供同步机制，所以通常需要结合其他同步原语（如信号量）使用，以避免数据竞争。</p>
+<p>（4）<strong>信号量（Semaphore）</strong>：信号量是一种同步机制，用于控制进程对共享资源的访问。它并不用于传递数据，而是用于解决多个进程访问同一资源时的竞争问题。</p>
+<p>（5）<strong>信号（Signals）</strong>：信号是一种异步的消息传递机制，主要用于通知进程某个事件的发生。例如，操作系统可以通过信号通知某个进程时间片用完，或者出现了需要处理的事件（如终止进程）。</p>
+<p>（6）<strong>套接字（Sockets）</strong>：套接字是一种强大的 IPC 机制，允许进程通过网络协议（如 TCP/IP）进行通信。它可以用于本地进程间通信（Unix 域套接字），也可以用于跨网络的远程通信。</p>
+<p>（7）<strong>内存映射文件（Memory-Mapped Files）</strong>：内存映射文件将文件内容直接映射到进程的虚拟地址空间中，允许多个进程通过映射相同的文件进行通信和数据共享。</p>
+<ol start="3">
+<li><strong>RPC 与其他 IPC 的对比</strong></li>
+</ol>
+<ul>
+<li>
+<p><strong>抽象层次</strong>：RPC 将进程间的通信抽象为远程函数调用，隐藏了底层的通信细节。其他 IPC 机制（如共享内存、消息队列）则更接近底层的实现，开发者需要处理细节。</p>
+</li>
+<li>
+<p><strong>透明性</strong>：RPC 的一个特点是它使得进程间通信看起来像是本地函数调用，隐藏了通信的复杂性。其他 IPC 机制如管道、消息队列等则不提供这样的抽象，开发者需要明确处理消息的发送、接收和同步。</p>
+</li>
+<li>
+<p><strong>效率</strong>：共享内存通常是最快的 IPC 方式，因为数据无需复制。然而，RPC 的透明性和易用性往往带来一些额外的性能开销，尤其是在涉及跨网络通信时。</p>
+</li>
+</ul>
+<ol start="4">
+<li><strong>其他 IPC 示例和场景</strong></li>
+</ol>
+<ul>
+<li>
+<p><strong>文件锁（File Locking）</strong>：多个进程可以通过文件锁机制协调对文件的访问，避免数据竞争。这不是直接传递数据的 IPC，但是一种协调多进程访问共享资源的方式。</p>
+</li>
+<li>
+<p><strong>DBus</strong>：这是 Linux 系统中常用的一种消息总线机制，提供了一个高层次的消息传递平台，允许系统中的应用程序和服务进行通信。</p>
+</li>
+</ul>
+<p><strong>总结：</strong></p>
+<ul>
+<li><strong>RPC 是一种特殊的 IPC 实现方式</strong>，通过封装函数调用的形式，简化了进程间的通信。</li>
+<li><strong>IPC 包含多种方式</strong>，包括管道、消息队列、共享内存、信号等，每种方式都有自己的使用场景和性能特点。</li>
+<li><strong>L4 微内核中的优化</strong>，如 <code>call</code> 和 <code>sendrecv</code>，是为提高 RPC 性能而设计的，减少了频繁的用户态和内核态切换。</li>
+</ul>
+</blockquote>
+</blockquote>
+<h2 id="run-linux-on-top-of-l4-micro-kernel">Run Linux on top of L4 micro kernel
+</h2><p>前一节对于IPC的优化使得人们开始认真考虑使用微内核替代monolithic kernel。</p>
+<p>然而，这里仍然有个问题，即使IPC很快了，操作系统的剩余部分从哪里去获取？现在的微内核大概只有一个完整操作系统的百分之几，我们该怎么处理操作系统剩下的部分？</p>
+<p>这个问题通常会在一些有着相对较少资源的学校研究项目中被问到，我们需要从某个地方获取到所有这些用户空间服务。</p>
+<p>实际上在一些特殊的应用场合，以上的问题并不是问题，比如说我们运行的一些设备的控制器，例如车里的点火控制器，只运行了几千行代码，它并且不需要一个文件系统，这样我们就只需要很少的用户空间内容，微内核也特别适合这种应用程序。</p>
+<p>但是微内核项目发起时，人们非常有雄心壮志，人们想的是完全替换操作系统，人们希望可以构建一些运行在工作站，服务器等各种地方的微内核操作系统，并取代大的monolithic kernel。</p>
+<p>对于这种场景，你需要一个传统操作系统所需要的所有内容。</p>
+<p>一种可能是，重新以微内核的方式，以大量的进程实现所有的内容。实际上有项目在这么做，但是这涉及到大量的工作。</p>
+<p>具体的说，比如我想要使用笔记本电脑，我的电脑必须要有emacs和我最喜欢的C编译器，否则我肯定不会用你的操作系统。</p>
+<p>这意味着，微内核要想获得使用，它必须支持现有的应用程序，它必须兼容或者提供相同的系统调用或者更高层的服务接口，它必须能够完全兼容一些现有的操作系统，例如Unix，Linux，这样人们才愿意切换到微内核。</p>
+<p>所以这些微内核项目都面临一个具体的问题，它们怎么兼容一些为Linux，Windows写的应用程序？对于论文中提到的项目，也就是L4，对标的是Linux。</p>
+<p>与其写一些完全属于自己的新的用户空间服务，并模仿Linux，论文中决定采用一种容易的多的方法，其实许多项目也都采用了这种方法，也就是简单的将一个现有的monolithic kernel运行在微内核之上，而不是重新实现一些新的东西。</p>
+<p>这就是今天论文要介绍的内容。</p>
+<p>在今天<a class="link" href="https://pdos.csail.mit.edu/6.828/2020/readings/microkernel.pdf"  target="_blank" rel="noopener"
+    >论文</a>的讨论中，L4微内核位于底部，但是同时，一个完整的Linux作为一个巨大的服务运行在用户空间进程中。听起来有点奇怪，一般的kernel都是运行在硬件之上，而现在Linux kernel是一个用户空间进程。</p>
+<p>实际上，如你在QEMU上运行XV6时所见，内核也是运行在用户空间。Linux kernel不过就是一个程序，对其做一些修改它就可以运行在用户空间，所以现在Linux需要被修改。论文中提到需要对Linux的底层做一些修改，例如Linux中期望能直接修改Page Table的内容，读写CPU寄存器。Linux中一部分需要被修改以将它们改成调用L4微内核的系统调用，或者发送IPC，而不是直接访问硬件。</p>
+<p>但是Linux的大部分内容都可以不做修改而直接运行。所以按照这种方式，作为Linux的一部分，现在得到了文件系统，网络支持，各种设备驱动等等，而不需要自己实现这些。这里的实现方式是将Linux内核作为一个L4 Task运行，每一个Linux进程又作为一个独立的L4 Task运行。所以当你登录到Linux中时，你要它运行一个Shell或者terminal，它会在用户空间创建一个L4 Task来运行这个Linux程序。所以现在有一个Task运行Linux，以及N个Task来运行每一个你在Linux中启动的进程。Linux不会直接修改进程的Page Table，而是会向L4发送正确的IPC让L4来修改进程的Page Table。</p>
+<p>这里有很多小的改动，其中一个有意思的地方是，当VI想要执行一个系统调用时，VI并不知道它运行在L4之上，在上面的方案中，所有的程序都以为它们运行在Linux中。当VI要执行系统调用时，L4并不支持，因为VI要执行的是Linux系统调用而不是L4系统调用。所以对于Linux进程，会有一个小的库与之关联，这个库会将类似于fork，exec，pipe，read，write的系统调用，转换成发送到Linux kernel Task的IPC消息，并等待Linux kernel Task的返回，然后再返回到进程中。</p>
+<p>从VI的角度看起来好像就是从系统调用返回了。所以这些小的库会将系统调用转成发送到Linux kernel Task的IPC消息。这意味着，如果Linux kernel Task没有做其他事情的话，它会在一个recv系统调用中等待接收从任何一个进程发来的下一个系统调用请求IPC。</p>
+<p>这导致了这里的Linux和普通的Linux明显不同的工作方式。在普通的Linux中，就像XV6一样，会有一个内核线程对应每一个用户空间进程。当用户空间进程调用系统调用时，内核会为这个系统调用运行一个内核线程。并且，在普通的Linux中，如果内核在内核线程之间切换，这基本上意味着从一个用户进程切换到另一个用户进程。</p>
+<p>所以这里Linux kernel的内核线程以及当Linux完成工作之后要运行的用户进程之间有一对一的关系。在这里架构中，这种一对一的关系断了，这里的Linux kernel运行在一个L4线程中。</p>
+<p>然而，就像XV6一样，这个线程会使用与XV6中的context switching非常相似的技术，在与每个用户进程对应的内核线程之间切换。</p>
+<p>不过这些内核线程完全是在Linux中实现的，与L4线程毫无关系，唯一的L4线程就是运行了Linux kernel的控制线程。但是哪个用户进程可以运行，是由L4决定的。</p>
+<p>所以在这里的设置中，Linux kernel或许在内核线程中执行来自VI的系统调用，同时，L4又使得Shell在用户空间运行了。</p>
+<p>这在XV6或者Linux极不可能发生，在这两个系统中，活跃的内核线程和用户进程有直接的对应关系，而L4会运行它喜欢的任何Task。</p>
+<p>因为Linux kernel中的内核线程都是私有的实现，Linux可以同时执行不同阶段的多个系统调用，或许一个进程在它的内核线程中在等待磁盘，这时Linux可以运行另一个进程的内核线程来处理另一个进程的系统调用。</p>
+<p>你或许会想知道为什么不直接使用L4线程来实现Linux内的内核线程，或者说Linux为什么要实现自己内部的内核线程，而不是使用L4线程，答案是，</p>
+<ul>
+<li>
+<p>在论文发表时，还没有用到多核CPU硬件，他们使用的是单核CPU硬件。所以在内核中同时运行多个内核线程并没有性能优势，因为只有一个CPU核，所以第二个线程不能执行，由于硬件的限制，一次只能执行一个线程。</p>
+</li>
+<li>
+<p>另一个或许是更强大的原因是，在论文发表时，他们使用的Linux版本并不支持将Linux kernel运行在多个CPU核上。</p>
+<p>所以他们使用的是旧版本的单核Linux，一次只能期望在内核中使用一个CPU，它并没有类似于XV6的spinlock，可以使得它能正确的在内核中使用多核。</p>
+<p>所以在Linux内核中使用多个L4线程并没有性能优势。如果一定要使用的话，在没有性能优势的前提下，又需要加入spinlock和其他的内容来支持并发。所以论文中没有在Linux内核使用L4线程。</p>
+</li>
+</ul>
+<p>这种架构的一个缺点是，在普通原生的Linux中，存在大量复杂的线程调度机制，例如在不同进程上增加优先级，确保调度公平性等等。</p>
+<p>Linux可以在你的笔记本上运行这些机制，因为Linux控制了哪些进程可以运行在哪些CPU核上。</p>
+<p>但是在这里的架构中，Linux完全控制不了哪些进程可以运行，因为现在是L4而不是Linux在完成调度，这些进程都是被L4所调度。</p>
+<p>所以这里的架构失去了Linux的调度能力，这是这种架构的缺点，我相信L4的后续版本有一些方法能够让Linux通知L4调度器，来给某个进程更高优先级等等。</p>
+<h2 id="l4-linux性能分析">L4 Linux性能分析
+</h2><p>你应该问自己：通过<a class="link" href="https://pdos.csail.mit.edu/6.828/2020/readings/microkernel.pdf"  target="_blank" rel="noopener"
+    >论文</a>可以学到有关微内核的什么内容呢？</p>
+<p>对于我们来说，论文中有很多有趣的有关微内核是如何运行，有关Linux是如何运行的小的知识点，以及你该如何设计这么一个系统。</p>
+<p>但是论文并没有回答这个问题：微内核是不是一个好的设计？论文只是讨论了微内核是否有足够的性能以值得使用。</p>
+<p>论文之所以讨论这个内容的原因是，在论文发表的前5-10年，有一场著名的测试针对一种更早的叫做MACH的微内核。</p>
+<p>它也运行了与L4类似的结构，但是内部的设计完全不一样。通过测试发现，当按照前一节的架构运行时，MACH明显慢于普通的Unix。</p>
+<p>这里有很多原因，比如IPC系统并没有如你期望的一样被优化，这样会有更多的用户空间和内核空间的转换，cache-miss等等。</p>
+<p>有很多原因使得MACH很慢。但是很多人并不关心原因，只是看到了这个测试结果，发现MACH慢于原生的操作系统，并坚信微内核是无可救药的低效，几乎不可能足够快且足够有竞争力。很多人相信应该都使用monolithic kernel。</p>
+<p>今天的论文像是对于这种观点的一个反驳，论文中的观点是，你可以构建类似上一节的架构，如果你花费足够的精力去优化性能，你可以获取与原生操作系统相比差不多的性能。</p>
+<p>因此，你不能只是因为性能就忽视微内核。今天的论文要说明的是，你可以因为其他原因不喜欢微内核，但是你不能使用性能作为拒绝微内核的原因。</p>
+<p>达成这一点的一个重要部分是，IPC被优化的快得多了，相应的技术在18.5中提到过。</p>
+<p><img src="/p/mit6s081lec18/p43.png"
+	width="658"
+	height="314"
+	srcset="/p/mit6s081lec18/p43_hu4035896660346132633.png 480w, /p/mit6s081lec18/p43_hu2829955989179922020.png 1024w"
+	loading="lazy"
+	
+		alt="p43"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="209"
+		data-flex-basis="502px"
+	
+></p>
+<p>论文的表二做了性能对比，运行在硬件上的原生Linux执行一个简单的系统调用getpid花费1.7us，对于上一节的实现，需要发送一个IPC request，并获取一个IPC response，以实现getpid系统调用，这需要花费接近4us，这是原生Linux的两倍多。</p>
+<p>主要是因为这里有两倍的工作，这里涉及到两次用户空间到内核空间的切换，而不是一个简单的系统调用。</p>
+<p>这也说明L4已经将这种基于IPC的系统调用的代价降到了最低，也就是2倍于一个原生Linux的系统调用。因此，它可以做的大概与你期望的一样好。</p>
+<p>当然这里的系统调用仍然只有原生Linux一半的速度。现在还不清楚这是否是一个灾难，还是说并没有问题。</p>
+<p>如果你执行大量的系统调用或许就是个问题；如果你执行了相对较少的系统调用，或者系统调用本身就有很多工作，或者你的系统调用比getpid要复杂的多，这又或许不是个问题。</p>
+<p>论文中通过使用AIM做的测试结果，给出了答案。测试结果在论文的图8。</p>
+<p><img src="/p/mit6s081lec18/p44.png"
+	width="674"
+	height="550"
+	srcset="/p/mit6s081lec18/p44_hu7831927391743725802.png 480w, /p/mit6s081lec18/p44_hu14572023392865601572.png 1024w"
+	loading="lazy"
+	
+		alt="p44"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="122"
+		data-flex-basis="294px"
+	
+></p>
+<p>AIM会执行各种系统调用，例如read/write文件，创建进程等等。</p>
+<p>从图8可以看出，在AIM设置的一个更完整的应用中，基于L4的Linux之比原生Linux慢几个百分点。</p>
+<p>因此，理想情况下你可以期望你想要运行在计算机上行的应用，如果在L4+Linux上运行可以与运行在原生操作系统上一样快。</p>
+<p>因为可以以近似原生Linux的速度运行，所以你们现在应该认真对待微内核。图8是一个非常不错的结果，有点超出预期。</p>
+<p>让时间快进20年，如果之前所说，现在人们实际上在一些嵌入式系统中使用L4，尤其在智能手机里有很多L4实例在运行，它们与Unix并没有兼容性。</p>
+<p>在一些更通用的场景下，像是工作站和服务器， 微内核从来没有真正的流行过，并不是因为这里的设计有什么问题，只是为了能够吸引一些软件，微内核需要做的更好，这样人们才会有动力切换到微内核。</p>
+<p>对于人们来说很难决定微内核是否足够好，这样才值得让他们经历从现在正在运行的Linux或者其他系统迁移到微内核的所需要的各种麻烦事。</p>
+<p>所以，微内核从来没有真正流行过，因为它们并没有明显的更好。</p>
+<p>另一方面来看，微内核的很多思想都有持久的影响。</p>
+<ul>
+<li>人们实现了更加灵活和有趣的方法来在微内核上使用虚拟内存。这些复杂的多的接口导致了mmap这样的系统调用合并到了例如Linux的主流操作系统中。</li>
+<li>论文中将一个操作系统作为一个用户程序运行另一个操作系统之上，今天以另一种方式非常流行的存在：在Virtual Machine Monitor上运行虚拟机。这种方式在各种场景，例如云主机上，都有使用。</li>
+<li>为了让内核能够具有一个用户空间服务一样的可扩展性，在Linux中演进成了可加载的内核模块，这使得你可以在线修改Linux的工作方式。</li>
+<li>当然，这里基于IPC的Client-Server支持，也在macOS有所体现，macOS中也有好用的IPC。</li>
+</ul>
+<p>以上就是这节课的所有内容，有什么问题吗？</p>
+<blockquote>
+<p>学生提问：论文4.3 Dual-Space Mistake能介绍一下吗？</p>
+<p>Robert教授：这里稍微有点复杂。</p>
+<p>这里的一部分背景是，论文发表时的Linux，甚至直到最近，当你运行在x86上，且运行在用户空间时，使用的Page Table同时会有用户空间的内存Page，以及所有的内核内存Page。</p>
+<p>所以当你执行系统调用，并跳转到内核中，内核已经映射到了Page Table中，因此不需要切换Page Table。</p>
+<p>所以当你执行一个系统调用时，代价要小得多，因为这里没有切换Page Table。</p>
+<p>如果你回想我们之前介绍的内容，trampoline代码会切换Page Table（注，也就是更新SATP寄存器，详见6.5）。</p>
+<p>这是个代价很高的操 作，因为这会涉及到清除TLB。所以出于性能的考虑，Linux将内核和用户进程映射到同一个Page Table，进而导致更快的系统调用。</p>
+<p>论文中期望的是，当用户空间进程向Linux发送一个系统调用，并且Linux的内核线程在处理系统调用，Page Table也包含发送系统调用的进程的所有虚拟内存映射，这会使得作为系统调用参数传入的虚拟内存地址查找更加的简单。但是为什么这里不能很好工作？</p>
+<p>首先，L4并不知道这里的任何具体实现，在L4的眼里这就是两个进程。</p>
+<p>当你从一个进程发送IPC到另一个进程，L4只是会切换Page Table。</p>
+<p>由于现在Linux的系统调用是基于L4实现的，没有办法在系统调用的过程中保持Page Table，因为L4在两个进程间切换时总是会切换Page Table。</p>
+<p>所以这里不能得到系统调用时不切换Page Table带来的性能优势。</p>
+<p>我认为这里希望得到可以在内核中直接使用用户空间的虚拟内存地址的便利，但是这意味着在Linux内核中需要知道是在执行哪个进程的系统调用，并使用那个进程的Page Table。</p>
+<p>当然L4并不知道这里的细节，它只是给每个进程关联了一个Page Table。</p>
+<p>所以L4只会给Linux关联一个Page Table，Linux并没有办法在处理不同进程的系统调用时使用不同的Page Table。</p>
+<p>为了解决这个问题，论文中为每个进程都做了共享内存拷贝，每一个共享内存拷贝都有内核的所有内存，所以都有相同的数据结构。</p>
+<p>因为每个进程都有一个kernel task与之关联，因此可以使得L4切换到合适的Page Table同时包含了进程和内核的内存。</p>
+<p>我认为这里可以工作，但是忘记了这里是否会很慢之类的，因为这里有大量的任务。</p>
+<p>这是个复杂的故事，我不知道解释清楚了没有。</p>
+<p>学生提问：看起来一些任务更适合在内核中，但是内核的方案中，要么所有东西都在内核要么都不在。所以要么你有一个monolithic kernel可以完成所有的事情，要么有个micro kernel什么也不做。我认为虚拟内存、文件系统和一些其他的事情在内核中做会非常的有效。不能有些系统具备有一些功能，然后你又可以选择用不用这些功能吗？</p>
+<p>Robert教授：所有你说的都有非常有道理。</p>
+<p>实际上有很多微内核相关的项目都构建了各种hybrid内核，MACH有一些不同的版本，其中一些就是hybrid内核，这些内核的核心是包括了IPC的微内核，同时在内核中又是一个完整的Unix系统，比如MACH 2.5就是这样一个hybrid内核，其中一些东西是按照微内核的方式构建，一些东西又是按照Unix方式构建。</p>
+<p>现代的macOS也以与你描述类似的方式构建，macOS本身是个完整的操作系统，包含了文件系统，同时也很好的支持了IPC和其他用来构建微内核的东西。Google Fuchsia也实现了一些这里的想法。</p>
+</blockquote>
+
 </section>
 
 
     <footer class="article-footer">
     
 
-    </footer>
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
 
 
+
+        <span>
+            最后更新于 Nov 12, 2024 12:44 &#43;0800
+        </span>
+    </section></footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
     
 </article>
 
     
 
     
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/mit6s081lec23/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">MIT6S081Lec23</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/mit6s081lec22/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">MIT6S081Lec22</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/mit6s081lec21/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">MIT6S081Lec21</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/mit6s081lec20/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">MIT6S081Lec20</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/mit6s081lec19/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">MIT6S081Lec19</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
 
      
     
