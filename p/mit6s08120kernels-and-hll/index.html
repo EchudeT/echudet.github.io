@@ -1,0 +1,3241 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="课程讨论使用高级编程语言实现操作系统的优点和代价。而论文探讨了在高性能操作系统内核中使用高级语言的可行性，特别是与传统C语言的对比。内核Biscuit得以构建，该内核使用Go语言编写，支持POSIX系统调用子集，并通过实验评估其性能与安全性。主要目标是研究高级语言在编写内核时带来的性能开销、实现挑战、以及编程效率和安全性。">
+<title>MIT6S081：20Kernels and HLL</title>
+
+<link rel='canonical' href='https://echudet.github.io/p/mit6s08120kernels-and-hll/'>
+
+<link rel="stylesheet" href="/scss/style.min.a7f637593c1d99350f36f270c9abc65cf39ec34b45847eb2fa40efef51b94c92.css"><meta property='og:title' content="MIT6S081：20Kernels and HLL">
+<meta property='og:description' content="课程讨论使用高级编程语言实现操作系统的优点和代价。而论文探讨了在高性能操作系统内核中使用高级语言的可行性，特别是与传统C语言的对比。内核Biscuit得以构建，该内核使用Go语言编写，支持POSIX系统调用子集，并通过实验评估其性能与安全性。主要目标是研究高级语言在编写内核时带来的性能开销、实现挑战、以及编程效率和安全性。">
+<meta property='og:url' content='https://echudet.github.io/p/mit6s08120kernels-and-hll/'>
+<meta property='og:site_name' content='echudet'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-10-05T22:02:50&#43;08:00'/><meta property='article:modified_time' content='2024-11-12T23:05:03&#43;08:00'/><meta property='og:image' content='https://echudet.github.io/p/mit6s08120kernels-and-hll/bg.jpg' />
+<meta name="twitter:title" content="MIT6S081：20Kernels and HLL">
+<meta name="twitter:description" content="课程讨论使用高级编程语言实现操作系统的优点和代价。而论文探讨了在高性能操作系统内核中使用高级语言的可行性，特别是与传统C语言的对比。内核Biscuit得以构建，该内核使用Go语言编写，支持POSIX系统调用子集，并通过实验评估其性能与安全性。主要目标是研究高级语言在编写内核时带来的性能开销、实现挑战、以及编程效率和安全性。"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://echudet.github.io/p/mit6s08120kernels-and-hll/bg.jpg' />
+    <link rel="shortcut icon" href="/timer.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu11199958555974308744.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">⌨️</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">echudet</a></h1>
+            <h2 class="site-description">探索编程的学生一枚</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/EchudeT'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://twitter.com'
+                        target="_blank"
+                        title="Twitter"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>档案</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#课前预习">课前预习</a></li>
+    <li><a href="#论文速览">论文速览</a></li>
+    <li><a href="#处理器架构"><strong>处理器架构</strong></a></li>
+    <li><a href="#go-语言简介">Go 语言简介</a></li>
+    <li><a href="#biscuit-heap-issue">Biscuit Heap Issue</a></li>
+    <li><a href="#静态分析">静态分析</a></li>
+    <li><a href="#biscuit-的静态分析">Biscuit 的<strong>静态分析</strong></a></li>
+    <li><a href="#type-safe语言">Type-safe语言</a></li>
+    <li><a href="#用户空间的内核"><strong>用户空间的内核</strong></a></li>
+    <li><a href="#死锁风险"><strong>死锁风险</strong></a></li>
+    <li><a href="#runtime">runtime</a></li>
+    <li><a href="#futex">Futex</a></li>
+    <li><a href="#futexfast-userspace-mutex和普通互斥锁mutex"><strong>Futex</strong>（Fast Userspace Mutex）和<strong>普通互斥锁</strong>（Mutex）</a></li>
+    <li><a href="#futex-和-xv6-中的睡眠锁sleeping-locks"><strong>Futex</strong> 和 <strong>xv6 中的睡眠锁</strong>（sleeping locks）</a></li>
+    <li><a href="#针对schedule的复习">针对schedule的复习</a></li>
+    <li><a href="#针对schedule的复习2">针对schedule的复习（2）</a></li>
+    <li><a href="#针对schedule的复习3">针对schedule的复习（3）</a></li>
+    <li><a href="#针对schedule的复习4">针对schedule的复习（4）</a></li>
+    <li><a href="#schedule的死锁">schedule的死锁</a></li>
+    <li><a href="#schedule的中断">schedule的中断</a></li>
+    <li><a href="#biscuit-操作系统中断处理"><strong>Biscuit</strong> 操作系统中断处理</a></li>
+    <li><a href="#biscuit速记">Biscuit速记</a></li>
+    <li><a href="#静态分析工具-maxlive">静态分析工具 <strong>MAXLIVE</strong></a></li>
+    <li><a href="#maxlive-的基本操作原理"><strong>MAXLIVE</strong> 的基本操作原理</a></li>
+    <li><a href="#biscuit-系统在应对-内存耗尽-问题时的局限性"><strong>Biscuit</strong> 系统在应对 <strong>内存耗尽</strong> 问题时的局限性</a></li>
+    <li><a href="#biscuit-内核-的实现细节"><strong>Biscuit 内核</strong> 的实现细节</a></li>
+    <li><a href="#内存屏障-memory-fence"><strong>内存屏障 (Memory Fence)</strong></a></li>
+    <li><a href="#dma直接内存访问direct-memory-access"><strong>DMA（直接内存访问，Direct Memory Access）</strong></a></li>
+    <li><a href="#biscuit-与-go-运行时环境-的协同工作"><strong>Biscuit</strong> 与 <strong>Go 运行时环境</strong> 的协同工作</a></li>
+    <li><a href="#biscuit-内核与-go-运行时-的集成方式"><strong>Biscuit</strong> 内核与 <strong>Go 运行时</strong> 的集成方式</a></li>
+    <li><a href="#无读锁结构lock-free-read-structure"><strong>无读锁结构</strong>（lock-free read structure）</a></li>
+    <li><a href="#什么是poll">什么是poll</a></li>
+    <li><a href="#go-语言的高级语言特性hll对-biscuit-内核性能的影响">Go 语言的高级语言特性（HLL）对 Biscuit 内核性能的影响</a></li>
+    <li><a href="#正课部分">正课部分</a></li>
+    <li><a href="#c语言实现操作系统的优劣势">C语言实现操作系统的优劣势</a></li>
+    <li><a href="#高级编程语言实现操作系统的优劣势">高级编程语言实现操作系统的优劣势</a></li>
+    <li><a href="#高级编程语言选择-----golang">高级编程语言选择 &mdash; Golang</a></li>
+    <li><a href="#biscuit">Biscuit</a></li>
+    <li><a href="#heap-exhaustion">Heap exhaustion</a></li>
+    <li><a href="#heap-exhaustion-solution">Heap exhaustion solution</a></li>
+    <li><a href="#evaluation-hll-benefits">Evaluation: HLL benefits</a></li>
+    <li><a href="#evaluation-hll-performance-cost1">Evaluation: HLL performance cost(1)</a></li>
+    <li><a href="#evaluation-hll-performance-cost2">Evaluation: HLL performance cost(2)</a></li>
+    <li><a href="#should-one-use-hll-for-a-new-kernel">Should one use HLL for a new kernel?</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/mit6s08120kernels-and-hll/">
+                <img src="/p/mit6s08120kernels-and-hll/bg_hu7183797156165768649.jpg"
+                        srcset="/p/mit6s08120kernels-and-hll/bg_hu7183797156165768649.jpg 800w, /p/mit6s08120kernels-and-hll/bg_hu17950551623983395484.jpg 1600w"
+                        width="800" 
+                        height="350" 
+                        loading="lazy"
+                        alt="Featured image of post MIT6S081：20Kernels and HLL" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/mit6s081/" >
+                Mit6s081
+            </a>
+        
+            <a href="/categories/os/" >
+                Os
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/mit6s08120kernels-and-hll/">MIT6S081：20Kernels and HLL</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            课程讨论使用高级编程语言实现操作系统的优点和代价。而论文探讨了在高性能操作系统内核中使用高级语言的可行性，特别是与传统C语言的对比。内核Biscuit得以构建，该内核使用Go语言编写，支持POSIX系统调用子集，并通过实验评估其性能与安全性。主要目标是研究高级语言在编写内核时带来的性能开销、实现挑战、以及编程效率和安全性。
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2024-10-05</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 131 分钟
+                </time>
+            </div>
+        <div class="article-lastmod">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time>
+                    Nov 12, 2024 23:05 &#43;0800
+                </time>
+            </div></footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="lecture-20-kernels-and-hll">Lecture 20 Kernels and HLL
+</h1><h2 id="课前预习">课前预习
+</h2><h2 id="论文速览">论文速览
+</h2><p>这篇论文的标题是《The Benefits and Costs of Writing a POSIX Kernel in a High-Level Language》，通过梳理论文的结构和内容，以下是根据各部分标题总结的主要内容：</p>
+<p>在引言 (Introduction)部分，作者探讨了在高性能操作系统内核中使用高级语言（如Go）的可行性，特别是与传统C语言的对比。他们构建了一个名为<strong>Biscuit</strong>的内核，该内核使用Go语言编写，支持POSIX系统调用子集，并通过实验评估其性能与安全性。主要目标是研究高级语言在编写内核时带来的性能开销、实现挑战、以及编程效率和安全性。</p>
+<p>在相关工作 (Related Work)部分，本节回顾了与高级语言编写操作系统内核相关的先前研究，包括早期基于高级语言的内核如Pilot和Lisp machine，以及现代的高级系统编程语言如Rust和Go。还探讨了内核中自动内存管理（垃圾回收）和其他内存分配方案的研究。</p>
+<p>在 动机 (Motivation)部分，这里讨论了选择C语言和高级语言的利弊。C语言在内核编写中被广泛使用，主要因为它的低级内存管理能力能够实现高性能。而高级语言（如Go）的优势则在于减少了编程复杂度和内存管理相关的错误，如缓冲区溢出和内存释放错误。</p>
+<p>在概述 (Overview)部分，这一部分详细介绍了<strong>Biscuit</strong>内核的结构和设计，包括Go运行时的修改、进程调度、虚拟内存、文件系统和网络栈的实现。Biscuit使用了Go语言的多核支持、并发机制（如Go的goroutines和channels）来处理系统调用和设备驱动。</p>
+<p>在垃圾回收 (Garbage Collection)部分，高级语言的垃圾回收机制是本研究的关键挑战之一。本节描述了Go语言的并行标记-清除垃圾回收器以及Biscuit如何配置垃圾回收来最小化对系统性能的影响。研究表明，在内核中使用垃圾回收虽然增加了一定的CPU开销，但通过合理的设计可以将其控制在可接受范围内。</p>
+<p>在避免堆耗尽 (Avoiding Heap Exhaustion)部分，Biscuit通过使用静态分析工具<strong>MAXLIVE</strong>来计算系统调用可能使用的最大内存量，以避免内核堆耗尽。每个系统调用在启动时会预留内存，如果没有足够的内存预留则会进入等待状态，直到释放出足够的内存。此机制使得Biscuit在处理内存分配时比传统的C语言内核更具鲁棒性。</p>
+<p>在 实现 (Implementation)部分，这里列举了Biscuit内核的具体实现细节，包括Go代码行数统计、系统调用支持情况（58个POSIX系统调用）、设备驱动的实现、内核启动过程以及内核的多核并发处理机制。还讨论了对Go运行时的修改，以及如何通过unsafe操作与硬件交互。</p>
+<p>在评估 (Evaluation)部分，本节通过实验数据展示了使用Go语言编写内核的性能代价（HLL tax）。评估了Biscuit在垃圾回收、堆内存大小、系统调用处理上的性能表现，并与Linux内核进行了直接比较。实验结果表明，虽然Biscuit在性能上不及Linux，但依然具有良好的性能表现，尤其是在多核并发处理上，Biscuit得益于Go语言的高效并发模型。</p>
+<p>在讨论与未来工作 (Discussion and Future Work)部分，作者对Biscuit和Go语言在内核开发中的优势和不足进行了总结。虽然Go语言降低了编程复杂度和内存管理的错误风险，但在性能上仍不如C语言。最后，作者指出，Go语言适用于那些强调安全性和快速原型开发的新内核项目，但对于现有的大型C语言内核，切换到Go的成本可能超过其收益。</p>
+<p>这篇论文通过<strong>Biscuit</strong>内核的案例，深入探讨了高级语言在操作系统内核开发中的可行性和局限性，并提供了定量的实验评估数据。</p>
+<hr>
+<h2 id="处理器架构"><strong>处理器架构</strong>
+</h2><p>x86-64 和 ARM 是两种主要的<strong>处理器架构（Instruction Set Architecture, ISA）</strong>，它们决定了计算机硬件如何与软件进行交互。ISA 定义了处理器能执行的指令集，也就是说，软件和硬件如何沟通、数据如何被处理和存储。</p>
+<p>为了帮助你理解，我会给你列出几种常见的处理器架构，并简单解释它们的特点。这样你就可以看到 x86-64 和 ARM 是如何与其他架构相似或不同的。</p>
+<ol>
+<li>
+<p><strong>x86-64 (或 x64)</strong></p>
+<ul>
+<li>
+<p><strong>主要特点</strong>：这是 x86 架构的 64 位扩展版本，由 Intel 和 AMD 开发。它广泛应用于桌面电脑、笔记本电脑和服务器。</p>
+</li>
+<li>
+<p><strong>应用场景</strong>：Windows、Linux 和 macOS 系统广泛支持。大多数个人电脑和企业级服务器使用的就是 x86-64 处理器。</p>
+</li>
+<li>
+<p><strong>厂商</strong>：Intel 和 AMD。</p>
+</li>
+<li>
+<p><strong>优点</strong>：向后兼容 32 位 x86 程序，有强大的性能和广泛的软件兼容性。</p>
+</li>
+<li>
+<p><strong>缺点</strong>：功耗较大，因此在移动设备中应用较少。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>ARM (Advanced RISC Machines)</strong></p>
+<ul>
+<li>
+<p><strong>主要特点</strong>：ARM 是一种基于 RISC（精简指令集计算，Reduced Instruction Set Computing）的架构，设计更加注重低功耗和高效能。ARM 处理器的指令集更小、更简单。</p>
+</li>
+<li>
+<p><strong>应用场景</strong>：广泛应用于智能手机、平板电脑、嵌入式设备以及最近的 Apple M1/M2 处理器系列（用于 MacBook）。</p>
+</li>
+<li>
+<p><strong>厂商</strong>：苹果（Apple）、高通（Qualcomm）、三星、NVIDIA 等使用 ARM 架构设计自己的处理器。</p>
+</li>
+<li>
+<p><strong>优点</strong>：低功耗，非常适合电池驱动的设备，架构灵活，授权模式使得多家厂商可以开发自己的实现版本。</p>
+</li>
+<li>
+<p><strong>缺点</strong>：历史上软件兼容性较弱，尤其是在桌面电脑上，但这一点正在逐渐改进。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>RISC-V</strong></p>
+<ul>
+<li>
+<p><strong>主要特点</strong>：一个开源的 RISC 架构，它的设计简单且可扩展，任何公司或个人都可以免费使用并进行修改。</p>
+</li>
+<li>
+<p><strong>应用场景</strong>：目前多用于学术界、研究项目、嵌入式系统以及一些创新应用中。</p>
+</li>
+<li>
+<p><strong>厂商</strong>：SiFive、Microchip 等。</p>
+</li>
+<li>
+<p><strong>优点</strong>：完全开放，便于创新和定制化，同时也更容易推动硬件开发的标准化。</p>
+</li>
+<li>
+<p><strong>缺点</strong>：目前的软件生态系统不如 x86 和 ARM 成熟。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>PowerPC (Performance Optimization With Enhanced RISC – Performance Computing)</strong></p>
+<ul>
+<li>
+<p><strong>主要特点</strong>：由 IBM、苹果和摩托罗拉联合开发，基于 RISC 架构。PowerPC 曾广泛应用于 Apple 早期的 Macintosh 电脑，后来逐渐淡出消费市场。</p>
+</li>
+<li>
+<p><strong>应用场景</strong>：目前多应用于高性能计算和嵌入式设备，例如游戏机（如早期的 Xbox 和 PlayStation 3）、汽车电子系统等。</p>
+</li>
+<li>
+<p><strong>厂商</strong>：IBM、Freescale 等。</p>
+</li>
+<li>
+<p><strong>优点</strong>：适合高性能计算，具有较强的并行处理能力。</p>
+</li>
+<li>
+<p><strong>缺点</strong>：已逐渐被 ARM 和 x86-64 超越，尤其是在消费市场中。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>MIPS (Microprocessor without Interlocked Pipeline Stages)</strong></p>
+<ul>
+<li>
+<p><strong>主要特点</strong>：MIPS 是一种经典的 RISC 架构，历史悠久，简单易用，广泛应用于嵌入式系统中。</p>
+</li>
+<li>
+<p><strong>应用场景</strong>：路由器、电视机顶盒、网络设备等。</p>
+</li>
+<li>
+<p><strong>厂商</strong>：早期由 MIPS Technologies 开发，现在由 Wave Computing 维护。</p>
+</li>
+<li>
+<p><strong>优点</strong>：设计简单，功耗低，非常适合嵌入式系统。</p>
+</li>
+<li>
+<p><strong>缺点</strong>：在高性能市场中逐渐被其他架构取代。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>SPARC (Scalable Processor Architecture)</strong></p>
+<ul>
+<li><strong>主要特点</strong>：一种由 Sun Microsystems 开发的 RISC 架构，专为高性能服务器和工作站设计。</li>
+<li><strong>应用场景</strong>：多用于服务器和高性能计算环境。</li>
+<li><strong>厂商</strong>：最著名的厂商是 Oracle（曾经的 Sun Microsystems）。</li>
+<li><strong>优点</strong>：在其时代，适合并行处理和高负载环境。</li>
+<li><strong>缺点</strong>：随着 x86 和 ARM 的崛起，SPARC 逐渐被淘汰，市场份额越来越小。</li>
+</ul>
+</li>
+<li>
+<p><strong>Itanium (IA-64)</strong></p>
+<ul>
+<li>
+<p><strong>主要特点</strong>：由 Intel 开发的 64 位架构，最初是为了取代 x86，但未能成功。</p>
+</li>
+<li>
+<p><strong>应用场景</strong>：主要应用于高端服务器和一些专用的计算环境。</p>
+</li>
+<li>
+<p><strong>厂商</strong>：Intel。</p>
+</li>
+<li>
+<p><strong>优点</strong>：在特定高性能服务器应用中有一定优势。</p>
+</li>
+<li>
+<p><strong>缺点</strong>：市场接受度较低，最终被 x86-64 和 ARM 架构压制。</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>总的来说，这些架构可以分为两大类：</p>
+<ul>
+<li><strong>CISC（复杂指令集计算）</strong>：如 x86-64，指令集复杂，但单指令功能强大。</li>
+<li><strong>RISC（精简指令集计算）</strong>：如 ARM、RISC-V、PowerPC，指令集较简单，但执行效率高。</li>
+</ul>
+<p><strong>x86-64</strong> 强调性能和向后兼容性，适合高性能设备；而 <strong>ARM</strong> 注重功耗和效率，成为移动设备和嵌入式设备的首选。每种架构都有其特定的应用场景，取决于性能需求、功耗要求和开发生态。</p>
+<hr>
+<h2 id="go-语言简介">Go 语言简介
+</h2><p>Go 语言（通常称为 <strong>Golang</strong>）与 C 语言相比，具有一些显著的不同和优势。Go 是由 Google 开发的，设计目标是解决在现代多核计算和并发编程中的一些问题，并且它非常注重简洁、快速开发和高效执行。以下是对比 Go 和 C 语言的几个重要方面：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th></th>
+          <th style="text-align: center">C 语言</th>
+          <th style="text-align: center">Go 语言</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>设计目标</strong></td>
+          <td style="text-align: center">C 诞生于 1970 年代，主要用于系统编程，特别是操作系统开发（如 UNIX 系统）。它是一种底层语言，直接操控硬件资源，具有很高的执行效率和灵活性。C 的设计强调简洁和可移植性，但编程时需要手动管理内存（如指针、malloc/free）。</td>
+          <td style="text-align: center">Go 于 2009 年发布，设计目标是提高编程效率，特别是对于现代互联网时代的服务器和并发程序。Go 的核心设计理念是简化开发流程，提供更好的并发支持，并减少程序员因复杂性（如内存管理）带来的错误。</td>
+      </tr>
+      <tr>
+          <td><strong>并发支持</strong></td>
+          <td style="text-align: center">虽然 C 能够通过多线程和库（如 pthreads）实现并发，但这些实现相对低级，需要程序员手动管理线程、锁和同步机制。这增加了编程复杂性和出错的可能性。</td>
+          <td style="text-align: center">Go 具有内建的并发模型，使用所谓的 <strong>goroutine</strong> 和 <strong>channel</strong> 来实现高效的并发处理。Goroutine 是比线程更轻量的实体，Go 运行时负责调度和管理，开发者只需要专注于逻辑。使用 Go 编写并发程序比 C 要简单得多。</td>
+      </tr>
+      <tr>
+          <td><strong>内存管理</strong></td>
+          <td style="text-align: center">C 要求程序员手动分配和释放内存（<code>malloc</code> 和 <code>free</code>），虽然这种直接控制提供了很高的灵活性和性能，但也容易引发错误，例如内存泄漏、空指针引用等问题。</td>
+          <td style="text-align: center">Go 有自动的 <strong>垃圾回收（Garbage Collection）</strong> 机制，它会自动管理内存的分配和释放。这减少了开发者手动管理内存的负担，同时减少了内存相关的错误，虽然代价是稍微降低了一些性能。</td>
+      </tr>
+      <tr>
+          <td><strong>编程复杂性</strong></td>
+          <td style="text-align: center">C 作为一种底层语言，接近于汇编语言，提供了极高的灵活性。你可以直接操作内存、硬件寄存器等，但这也带来了较高的复杂性。C 代码通常较为繁琐，调试和维护成本高。</td>
+          <td style="text-align: center">Go 强调 <strong>简洁性和可读性</strong>，语言本身设计得非常简洁，提供了现代编程所需的内置工具，比如内置的并发支持、标准化的包管理和文档生成工具。与 C 相比，Go 代码往往更简洁，开发速度更快。</td>
+      </tr>
+      <tr>
+          <td><strong>类型系统</strong></td>
+          <td style="text-align: center">C 是一种静态类型语言，但类型系统相对简单。C 支持结构体（structs）、枚举（enums）等，但没有内置的面向对象编程支持。</td>
+          <td style="text-align: center">Go 也是静态类型语言，支持基本的数据类型、结构体、接口等。Go 并不直接支持面向对象编程，但通过结构体和接口，可以实现类似 OOP 的风格，避免了一些传统 OOP 语言（如 Java、C++）的复杂性。</td>
+      </tr>
+      <tr>
+          <td><strong>生态系统和应用场景</strong></td>
+          <td style="text-align: center">C 是一种通用语言，几乎可以用于任何场景，特别是在系统编程、驱动程序、嵌入式系统和高性能计算等领域应用广泛。C 语言的生态系统非常成熟，有丰富的库和工具支持。</td>
+          <td style="text-align: center">Go 的设计初衷是用于构建高并发、高性能的网络服务器和分布式系统。其生态系统非常适合现代 Web 开发、云计算和微服务架构。许多著名的项目和企业，如 Docker、Kubernetes、Uber、Dropbox 等，都是用 Go 开发的。</td>
+      </tr>
+      <tr>
+          <td><strong>编译与性能</strong></td>
+          <td style="text-align: center">C 代码经过编译器优化后，可以生成非常高效的机器代码，因此 C 程序通常具有极高的性能。这使得 C 适用于性能要求极高的应用（如嵌入式系统、操作系统内核等）。</td>
+          <td style="text-align: center">Go 也属于编译型语言，尽管在极端性能上不如 C，但在大多数应用场景中，其性能表现足够优越。Go 的编译器能够进行较多优化，编译速度也非常快。同时，Go 提供了跨平台编译工具，非常适合开发分布式系统和服务器。</td>
+      </tr>
+      <tr>
+          <td><strong>错误处理</strong></td>
+          <td style="text-align: center">C 的错误处理依赖于返回值和全局变量（如 <code>errno</code>），这有时可能导致代码难以阅读和维护。</td>
+          <td style="text-align: center">Go 的错误处理通过显式的错误返回值（error type）来实现，虽然这种方式有时显得繁琐，但它使得错误处理更加明确和可靠。Go 强调<strong>显式错误处理</strong>，这减少了程序中的潜在隐患。</td>
+      </tr>
+  </tbody>
+</table></div>
+<p><strong>总结</strong></p>
+<ul>
+<li><strong>C 语言</strong>：是一种底层、高性能、灵活的系统编程语言，非常适合需要对硬件进行精确控制的场景。</li>
+<li><strong>Go 语言</strong>：是一种面向现代网络开发、并发处理和分布式系统的高效语言。它简化了许多复杂的系统编程任务，同时保持了较高的执行性能。</li>
+</ul>
+<p>如果正在开发需要直接控制硬件、实时性要求高的系统（如嵌入式开发、内核开发），C 是一个理想的选择。但如果在开发现代的 Web 服务、云计算平台或分布式系统，Go 会带来更高的开发效率和更轻松的并发处理。</p>
+<blockquote>
+<p>代码示例：使用 Go 创建一个简单的 Web 服务器</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl"> <span class="s">&#34;encoding/json&#34;</span>
+</span></span><span class="line"><span class="cl"> <span class="s">&#34;log&#34;</span>
+</span></span><span class="line"><span class="cl"> <span class="s">&#34;net/http&#34;</span>
+</span></span><span class="line"><span class="cl"> <span class="s">&#34;time&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 定义一个结构体来表示 JSON 响应的格式
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">type</span> <span class="nx">Response</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"> <span class="nx">Message</span>   <span class="kt">string</span>    <span class="s">`json:&#34;message&#34;`</span>
+</span></span><span class="line"><span class="cl"> <span class="nx">Timestamp</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Time</span> <span class="s">`json:&#34;timestamp&#34;`</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 处理根路径请求的处理函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="nf">helloHandler</span><span class="p">(</span><span class="nx">w</span> <span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span> <span class="nx">r</span> <span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"> <span class="nx">response</span> <span class="o">:=</span> <span class="nx">Response</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">     <span class="nx">Message</span><span class="p">:</span>   <span class="s">&#34;Welcome to the Go Web Server!&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">     <span class="nx">Timestamp</span><span class="p">:</span> <span class="nx">time</span><span class="p">.</span><span class="nf">Now</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl"> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> <span class="c1">// 设置响应的 Content-Type 为 application/json
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span> <span class="nx">w</span><span class="p">.</span><span class="nf">Header</span><span class="p">().</span><span class="nf">Set</span><span class="p">(</span><span class="s">&#34;Content-Type&#34;</span><span class="p">,</span> <span class="s">&#34;application/json&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> <span class="c1">// 将结构体编码为 JSON 并返回给客户端
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span> <span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">json</span><span class="p">.</span><span class="nf">NewEncoder</span><span class="p">(</span><span class="nx">w</span><span class="p">).</span><span class="nf">Encode</span><span class="p">(</span><span class="nx">response</span><span class="p">);</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">     <span class="nx">http</span><span class="p">.</span><span class="nf">Error</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span> <span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">(),</span> <span class="nx">http</span><span class="p">.</span><span class="nx">StatusInternalServerError</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">     <span class="k">return</span>
+</span></span><span class="line"><span class="cl"> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"> <span class="c1">// 将 / 路由绑定到 helloHandler 函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span> <span class="nx">http</span><span class="p">.</span><span class="nf">HandleFunc</span><span class="p">(</span><span class="s">&#34;/&#34;</span><span class="p">,</span> <span class="nx">helloHandler</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> <span class="c1">// 启动 Web 服务器，监听 8080 端口
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span> <span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Starting server on :8080&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"> <span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">http</span><span class="p">.</span><span class="nf">ListenAndServe</span><span class="p">(</span><span class="s">&#34;:8080&#34;</span><span class="p">,</span> <span class="kc">nil</span><span class="p">);</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">     <span class="nx">log</span><span class="p">.</span><span class="nf">Fatalf</span><span class="p">(</span><span class="s">&#34;Could not start server: %s\n&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl"> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>代码说明：</p>
+<ol>
+<li><strong><code>Response</code> 结构体</strong>：这是用于生成 JSON 响应的数据结构，包含一个 <code>Message</code> 字符串和 <code>Timestamp</code> 时间戳。</li>
+<li><strong><code>helloHandler</code> 函数</strong>：这是处理根路径 <code>/</code> 的请求处理器。它创建一个响应结构体，并使用 Go 的 <code>json.NewEncoder()</code> 函数将其编码为 JSON 格式，然后发送给客户端。</li>
+<li><strong><code>http.HandleFunc(&quot;/&quot;, helloHandler)</code></strong>：将根路径 <code>/</code> 绑定到 <code>helloHandler</code>，当客户端访问根路径时，调用此函数。</li>
+<li><strong><code>http.ListenAndServe(&quot;:8080&quot;, nil)</code></strong>：启动 Web 服务器，监听 <code>8080</code> 端口。</li>
+</ol>
+<p>如何运行：</p>
+<ol>
+<li>
+<p>将上述代码保存为一个 <code>.go</code> 文件，例如 <code>main.go</code>。</p>
+</li>
+<li>
+<p>在命令行中导航到文件目录，并运行以下命令来编译和运行 Go 服务器：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">go run main.go
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>打开浏览器，访问http://localhost:8080，你会看到如下 JSON 响应：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;message&#34;</span><span class="p">:</span> <span class="s2">&#34;Welcome to the Go Web Server!&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;timestamp&#34;</span><span class="p">:</span> <span class="s2">&#34;2024-10-06T12:34:56.789123456Z&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+<p>扩展思路：</p>
+<ul>
+<li>可以进一步扩展这个服务器，添加更多的路由（如 <code>/about</code>, <code>/users</code>），并处理不同的 HTTP 方法（如 <code>GET</code>, <code>POST</code>）。</li>
+<li>也可以引入 Go 的 web 框架如 <strong>Gin</strong> 或 <strong>Echo</strong>，以简化路由处理和中间件的使用。</li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="biscuit-heap-issue">Biscuit Heap Issue
+</h2><p>Biscuit 的方法，虽然看似没有引入全新的技术，但它的确提供了一种相对简单且有效的解决内核堆内存分配问题的方法。它并不是传统方法的革命性替代，但在特定上下文中有其优势，尤其是通过静态分析预估系统调用所需的内存并进行提前分配，从而避免了许多传统内存管理问题，比如复杂的分配失败恢复和内存死锁。以下是对 Biscuit 方法的更深入分析，并与传统方法对比：</p>
+<ol>
+<li>
+<p><strong>静态分析与提前预留内存</strong>，Biscuit 的创新点在于它使用静态分析来预测每个系统调用可能需要的内存，并在系统调用执行之前预留足够的内存。这样，当系统调用开始时，它可以确保所有需要的内存已经就绪，从而避免了在执行过程中动态分配失败的风险。<strong>传统方法的对比</strong>：</p>
+<ul>
+<li>
+<p><strong>动态分配</strong>：许多操作系统采用动态分配策略，在内存不够时，可能导致分配失败、等待或触发 OOM Killer 之类的机制。Biscuit 的提前预留内存策略通过分析避免了这些复杂的分配失败处理逻辑。</p>
+</li>
+<li>
+<p><strong>内存池</strong>：预分配内存池虽然可以提高分配效率，但并不能保证每次分配的内存量足够满足所有调用需求，仍然可能出现内存不足的情况。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>避免分配失败和恢复机制</strong>，传统的内存管理系统往往需要应对内存分配失败，这可能涉及到复杂的错误恢复机制。例如，如果系统调用在执行过程中遇到内存分配失败，可能需要回滚操作或进行繁琐的资源释放。Biscuit 的设计则通过预先分配内存避免了这一问题，简化了错误处理。<strong>传统方法的对比</strong>：</p>
+<ul>
+<li>
+<p><strong>恢复和回滚</strong>：处理内存分配失败通常涉及复杂的恢复机制，特别是在并发环境下，可能会遇到死锁或竞态条件的问题。Biscuit 通过在执行之前保证分配，避免了这种复杂性。</p>
+</li>
+<li>
+<p><strong>等待内存释放</strong>：传统系统中，当内存不足时，进程可能会阻塞并等待内存释放，这可能会导致性能瓶颈或死锁风险。Biscuit 通过预先确定内存需求，减少了这些问题的发生。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>实现的简洁性</strong>，Biscuit 的方法虽然不复杂，但它依赖于一个关键前提：内核中每个系统调用的内存需求可以通过静态分析确定。这种设计思路虽然并不算高明或者复杂，但它的确很实用，尤其是在现代内核中，减少了内存分配失败的风险，并简化了内存管理代码。<strong>传统方法的对比</strong>：</p>
+<ul>
+<li>传统方法可能会依赖复杂的内存分配器和恢复机制，开发和维护成本较高。Biscuit 的设计则更加直接和简洁，减少了处理分配失败和恢复的需要。</li>
+</ul>
+</li>
+<li>
+<p><strong>局限性</strong>，尽管 Biscuit 通过静态分析来预先分配内存，这种方法并非适用于所有场景。某些复杂的系统调用可能无法准确预测内存需求，特别是在涉及到大量动态数据的情况下。此外，Biscuit 的设计需要在内存紧张的情况下小心处理，否则预分配的策略可能导致系统调用等待较长时间，影响性能。<strong>传统方法的优势</strong>：</p>
+<ul>
+<li>
+<p><strong>灵活性</strong>：传统的动态分配方法更灵活，能够适应不确定的内存需求。这对于复杂的系统调用或者高度动态的应用环境尤为重要。</p>
+</li>
+<li>
+<p><strong>性能</strong>：Biscuit 的方法依赖于静态分析和预分配，这在某些情况下可能导致系统调用延迟，特别是当多个系统调用竞争有限的内存资源时。</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>总的来说，从技术角度看，Biscuit 的方法并不是高度复杂或特别创新的，但它确实在内核设计中引入了一种相对简单、直接的方式来解决内存分配失败问题。它的优势在于<strong>简化了内存管理</strong>，避免了复杂的恢复逻辑和潜在的死锁问题。通过提前分析内存需求并进行预分配，它可以有效避免动态分配中常见的瓶颈和风险。</p>
+<p>尽管如此，它的局限性也很明显，尤其是在<strong>动态性较高或内存需求不可预测的场景</strong>中，这种方法可能会显得不够灵活。因此，Biscuit 的方法是一种针对特定问题的<strong>实用而非高明的解决方案</strong>。</p>
+<hr>
+<h2 id="静态分析">静态分析
+</h2><p>“<strong>静态分析</strong>”是一个专业术语，广泛用于软件工程和编译器设计中。它指的是在<strong>不运行程序</strong>的情况下，通过分析源代码来检查程序的正确性、性能、潜在错误以及代码结构等。静态分析与<strong>动态分析</strong>（在程序运行时进行的分析）相对。静态分析可以应用在多个层面，以下是它通常会分析的几个方面：</p>
+<ol>
+<li>
+<p><strong>语法检查（Syntax Checking）</strong></p>
+<ul>
+<li>
+<p><strong>分析内容</strong>：检查源代码是否符合编程语言的语法规则。例如，确保没有语法错误、未闭合的括号或语句等。</p>
+</li>
+<li>
+<p><strong>工具</strong>：编译器的前端部分通常负责语法检查，如 <code>gcc</code> 在编译 C 代码时会做基础的语法检查。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>类型检查（Type Checking）</strong></p>
+<ul>
+<li>
+<p><strong>分析内容</strong>：确保程序中的类型匹配正确，变量和函数的使用符合其声明的类型。例如，在静态类型语言（如 C、Go、Java）中，确保函数接收和返回的参数类型正确，避免类型转换错误。</p>
+</li>
+<li>
+<p><strong>工具</strong>：大部分编译器都进行类型检查，像 Go 和 Rust 等现代编程语言有非常严格的类型检查机制。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>数据流分析（Data Flow Analysis）</strong></p>
+<ul>
+<li>
+<p><strong>分析内容</strong>：追踪程序中的变量从定义到使用的路径，分析数据如何在程序中流动。这有助于发现未初始化变量、死代码、常量传播（优化机会）等问题。</p>
+</li>
+<li>
+<p><strong>工具</strong>：一些优化编译器或代码静态分析工具如 <code>Clang Static Analyzer</code>、<code>SonarQube</code> 等可以执行这种分析。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>控制流分析（Control Flow Analysis）</strong></p>
+<ul>
+<li>
+<p><strong>分析内容</strong>：检查程序中的控制结构（如条件分支、循环、函数调用）的执行路径，确保每个可能的路径都是有效的。它有助于发现潜在的无限循环、死锁或不安全的代码路径。</p>
+</li>
+<li>
+<p><strong>工具</strong>：编译器和静态分析工具都可以执行控制流分析，用于优化和安全分析。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>内存分析（Memory Analysis）</strong></p>
+<ul>
+<li>
+<p><strong>分析内容</strong>：分析代码中的内存分配、使用和释放，帮助检测内存泄漏、指针错误、越界访问等问题。内存分析也包括堆栈分配的正确性，检测未释放内存或者无效的内存访问。</p>
+</li>
+<li>
+<p><strong>工具</strong>：<code>Coverity</code>、<code>Cppcheck</code> 等工具可以进行静态内存分析。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>程序依赖分析（Dependency Analysis）</strong></p>
+<ul>
+<li>
+<p><strong>分析内容</strong>：检查函数、变量和模块之间的依赖关系，分析程序模块的耦合程度。这有助于识别出耦合过高的模块，优化代码的可维护性和解耦程度。</p>
+</li>
+<li>
+<p><strong>工具</strong>：软件开发工具如 <code>SonarQube</code> 和 <code>Understand</code> 可以帮助进行程序依赖的分析。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>并发分析（Concurrency Analysis）</strong></p>
+<ul>
+<li>
+<p><strong>分析内容</strong>：在有并发的程序中，静态分析可以帮助检测潜在的竞态条件、死锁和线程安全问题。通过分析不同线程对共享资源的访问方式，可以发现同步问题。</p>
+</li>
+<li>
+<p><strong>工具</strong>：像 <code>ThreadSanitizer</code> 等静态分析工具专门用于检测并发相关问题。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>安全漏洞分析（Security Vulnerability Analysis）</strong></p>
+<ul>
+<li>
+<p><strong>分析内容</strong>：静态分析可以用于发现安全漏洞，例如 SQL 注入、缓冲区溢出、未验证的输入、权限提升等。它通过扫描代码，寻找已知的安全模式或问题。</p>
+</li>
+<li>
+<p><strong>工具</strong>：<code>Fortify</code>、<code>Veracode</code>、<code>OWASP ZAP</code> 等工具用于静态代码安全分析。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>资源使用分析（Resource Usage Analysis）</strong></p>
+<ul>
+<li>
+<p><strong>分析内容</strong>：静态分析可以检测程序在运行过程中可能使用的资源，例如内存、CPU 时间、文件句柄等。在实时系统或嵌入式系统中，这类分析有助于确保程序不会耗尽资源。</p>
+</li>
+<li>
+<p><strong>工具</strong>：实时系统开发中的专用静态分析工具如 <code>Polyspace</code> 可以用于这类分析。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>循环不变性与优化（Loop Invariants and Optimization）</strong></p>
+<ul>
+<li>
+<p><strong>分析内容</strong>：在代码优化中，静态分析可以帮助发现循环中的不变条件，优化代码性能。例如，通过分析循环不变表达式，将其移出循环，以减少不必要的计算。</p>
+</li>
+<li>
+<p><strong>工具</strong>：优化编译器（如 LLVM）会执行这种分析。</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>论C 语言与 Go 在静态分析中的区别，虽然静态分析在多种编程语言中都可以执行，但 C 语言和 Go 语言由于各自的设计特点，分析的难度和效果有很大的差别：</p>
+<p><strong>C 语言</strong></p>
+<ul>
+<li><strong>指针操作和内存管理</strong>：C 语言允许直接的指针操作和手动内存管理，导致内存分析的难度增加。分析工具很难准确追踪指针的生命周期或内存的动态分配。</li>
+<li><strong>灵活性</strong>：C 语言的灵活性让静态分析更难，因为它允许低级别的操作（如汇编嵌入、直接操作内存、动态类型转换等），这些特性让编译器和分析工具很难精确理解代码的意图。</li>
+<li><strong>较少的类型信息</strong>：C 语言的类型系统相对简单且宽松，类型检查也不如 Go 严格，增加了分析的复杂性。</li>
+</ul>
+<p><strong>Go 语言</strong></p>
+<ul>
+<li><strong>垃圾回收</strong>：Go 的自动垃圾回收系统减少了手动内存管理的复杂性，简化了静态内存分析。程序员不需要显式管理内存，分析工具可以更容易跟踪对象的分配和释放。</li>
+<li><strong>更强的类型系统</strong>：Go 语言的类型系统比 C 更严格，变量的类型和分配更容易被分析工具理解，从而提供更准确的静态分析。</li>
+<li><strong>并发模型</strong>：Go 的 <code>goroutine</code> 和 <code>channel</code> 使得并发的分析更加简单和明确，分析工具能够更好地理解并发程序的行为。</li>
+</ul>
+<p>静态分析是一个强大的工具，广泛应用于软件开发的各个阶段。它可以帮助程序员发现潜在问题，优化代码，提升安全性。在 C 语言中，静态分析受到语言复杂性的限制，但在 Go 等现代语言中，由于其内存管理的简化和更严格的类型系统，静态分析变得更可行和有效。</p>
+<hr>
+<h2 id="biscuit-的静态分析">Biscuit 的<strong>静态分析</strong>
+</h2><p>Biscuit 能够使用<strong>静态分析</strong>来预测每个系统调用所需的堆内存，这是因为它采用了<strong>Go 语言</strong>，而 Go 语言的一些特性使得这种静态分析更为可行和有效。相比之下，<strong>C 语言</strong>由于语言本身的特性和复杂性，静态分析的难度要大得多。</p>
+<p>静态分析是指在<strong>编译时</strong>对程序代码进行分析，而不是在运行时进行。它可以通过检查源代码中的函数、变量、内存分配等，来推断程序的行为、性能或者资源需求。对于 Biscuit 来说，静态分析的目标是推断出每个系统调用的<strong>最大堆内存使用量</strong>，从而在系统调用开始之前预留足够的内存，确保不会在运行时遇到分配失败的问题。</p>
+<p>Go 语言在设计上有一些特性使得静态分析比 C 语言更容易实现：</p>
+<p>Go 语言有内置的垃圾回收机制，开发者不需要手动管理内存分配和释放。这种自动内存管理简化了内存分配的逻辑，减少了复杂的内存管理模式（如手动释放、双重指针、内存池等），使得静态分析工具可以更容易地跟踪和预测内存的使用情况。</p>
+<p>在 C 语言中，手动管理内存意味着程序员可以随时随地调用 <code>malloc()</code> 或 <code>free()</code>，而且可能通过复杂的方式（如指针运算）操作内存。这种灵活性大大增加了静态分析的难度，因为分析工具很难准确判断内存的分配和释放行为。</p>
+<p>Go 的内存模型相对简单。它的堆内存分配通常是通过标准的内存分配器进行，且由于 Go 的类型系统是静态类型的，内存分配的大小在大多数情况下是可以确定的。这使得静态分析工具可以更容易地推断出每个函数的内存需求。</p>
+<p>相比之下，C 语言允许更复杂的内存操作，比如通过指针动态分配、操作和释放内存。这些操作的灵活性和复杂性，使得 C 程序的内存模型变得不可预测，尤其是在使用 <code>malloc()</code> 或 <code>realloc()</code> 等函数时，很难通过静态分析准确预估内存需求。</p>
+<p>Go 语言没有 C 语言那样广泛的指针操作。虽然 Go 也支持指针，但它在设计上限制了对裸指针的直接操作。指针的滥用是 C 语言中一个常见的静态分析障碍，因为指针可以指向任意内存位置，并且程序员可以随时通过指针修改内存。这使得 C 语言的静态分析工具很难跟踪内存的生命周期和使用情况。而 Go 的内存引用机制更加受控，这有助于静态分析工具做出更准确的推断。</p>
+<p>Go 有自己的轻量级并发模型（<strong>goroutine</strong> 和 <strong>channel</strong>），它相较于 C 语言中的多线程模型更为简洁和可控。虽然 C 可以通过 <code>pthread</code> 或其他库来实现多线程并发，但这些操作涉及锁、信号量等复杂的同步机制，这会进一步增加静态分析的复杂性。而 Go 语言通过自己的并发原语大大简化了并发操作，使得静态分析工具可以更容易推断 goroutine 的行为和内存使用情况。</p>
+<p><strong>C 语言为什么难以实现静态分析</strong></p>
+<p>C 语言中的手动内存管理（<code>malloc()</code> 和 <code>free()</code>）大大增加了静态分析的复杂性。C 程序员可以在任意位置、任意时间进行动态内存分配，并且释放的时间和方式也完全由程序员控制。这种灵活性使得分析工具很难判断每个系统调用或函数可能会分配多少内存，尤其是在多个模块或库函数之间复杂交互的情况下。</p>
+<p>指针是 C 语言的一个核心特性，允许开发者直接操作内存地址。尽管这种能力非常强大，但它给静态分析带来了极大的困难。通过指针操作，程序可以将内存分配、释放、传递给不同的函数，甚至可以修改完全不可预测的内存区域。因此，C 程序中的指针使得静态分析无法精确追踪内存的使用情况。</p>
+<p>C 的类型系统相对宽松，允许许多类型转换和操作。尤其是指针类型可以自由地转换为不同类型，进一步增加了内存分析的难度。分析工具很难判断内存对象的确切大小和类型，因此难以精确预测内存需求。</p>
+<p>C 语言中广泛使用的宏（<code>#define</code>）和内联函数也给静态分析增加了难度。宏可以改变代码的结构，并且由于它们在预处理阶段展开，静态分析工具在某些情况下难以处理宏的行为。这使得分析工具难以准确理解代码的实际执行路径和行为。</p>
+<p>C 程序员不仅可以使用 <code>malloc()</code> 进行堆分配，还可以使用 <code>alloca()</code> 在栈上动态分配内存，或通过静态分配全局变量。这些不同的分配方式大大增加了内存管理的复杂性，使得静态分析难以统一处理所有的内存分配场景。</p>
+<p>总的来说，Biscuit 能够使用静态分析来解决内核堆内存分配问题，主要得益于 Go 语言的<strong>简洁内存模型</strong>、<strong>自动垃圾回收</strong>、<strong>类型安全性</strong>以及<strong>受控的并发模型</strong>。这些特性使得 Go 的程序行为在编译时更加可预测，静态分析工具可以较容易地推断出每个系统调用的内存需求。</p>
+<p>相比之下，C 语言的<strong>手动内存管理</strong>、<strong>复杂指针操作</strong>和<strong>宽松的类型系统</strong>，使得静态分析要困难得多。C 语言的灵活性和低级控制带来了更多的自由度，但也增加了代码行为的不确定性，特别是在处理内存分配和管理方面，因此很难实现类似于 Biscuit 的静态分析内存分配策略。</p>
+<hr>
+<h2 id="type-safe语言">Type-safe语言
+</h2><p><strong>Type-safe</strong>（类型安全）是一种编程语言特性，它确保<strong>数据类型的使用</strong>在程序中始终保持一致和正确。换句话说，<strong>类型安全的语言</strong>能够防止开发者在代码中进行不合法的类型操作，例如将字符串误用为整数、将浮点数错误地当作布尔值等。Go 语言被称为 <strong>Type-safe</strong> 语言，因为它在编译时严格检查类型，并且不允许不安全的类型转换。</p>
+<p><strong>Type-safe</strong> 简单来说，就是在编写程序时，不允许混淆不同数据类型的操作，确保代码中<strong>每一个变量的类型都在其生命周期内保持一致</strong>。比如：</p>
+<ul>
+<li>在 Type-safe 语言中，你不能将整数赋值给一个预期存储字符串的变量。</li>
+<li>不能进行不安全的类型转换，比如将指针类型强制转换为整数类型（除非有显式的、明确的机制）。</li>
+</ul>
+<p><strong>Go 语言的类型安全性</strong>意味着：</p>
+<ul>
+<li><strong>静态类型检查</strong>：在编译阶段，Go 会检查每个变量的类型是否正确使用。如果类型不匹配，程序将无法通过编译。例如，不能将 <code>string</code> 类型的值赋给 <code>int</code> 类型的变量。</li>
+<li><strong>强制类型转换</strong>：如果确实需要进行不同类型之间的转换，必须通过显式的类型转换。例如，<code>int</code> 和 <code>float64</code> 不能直接相互赋值，必须使用类型转换操作。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">i</span> <span class="kt">int</span> <span class="p">=</span> <span class="mi">10</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">s</span> <span class="kt">string</span> <span class="p">=</span> <span class="s">&#34;hello&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 编译时会报错，因为 i 是整数，而 s 是字符串
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">s</span> <span class="p">=</span> <span class="nx">i</span>  <span class="c1">// 错误：cannot use i (type int) as type string in assignment
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 必须使用显式的转换
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">s</span> <span class="p">=</span> <span class="nx">strconv</span><span class="p">.</span><span class="nf">Itoa</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span> <span class="c1">// 正确：将 int 转为 string
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Type-safe 的作用</p>
+<ol>
+<li><strong>减少错误</strong>：
+类型安全机制能有效避免许多运行时错误。例如，在动态类型语言（如 Python）中，变量的类型检查发生在运行时，可能会因为类型不匹配导致程序崩溃。而在静态类型安全语言（如 Go、Rust、Java）中，类型错误会在编译时被发现，程序在运行之前就能被修正。</li>
+<li><strong>增强代码可读性与可维护性</strong>：
+类型安全的代码有助于让开发者更明确地理解每个变量的意图和用法。类型明确定义，使得代码在维护和重构时减少了因类型不匹配而引发的潜在问题。</li>
+<li><strong>提高编译器优化的可能性</strong>：
+类型安全的代码可以让编译器更容易优化，因为编译器能够提前了解每个变量的确切类型，从而进行更深入的性能优化。例如，编译器可以针对特定类型生成更高效的机器代码。</li>
+<li><strong>安全性</strong>：
+类型安全性不仅防止程序崩溃，还能防止某些安全漏洞。例如，类型不安全的代码可能会引发缓冲区溢出、内存泄漏等问题，这些问题常常成为系统安全漏洞的来源。</li>
+</ol>
+<p>随着软件系统的规模和复杂性不断增长，类型安全在现代软件开发中变得越来越重要，原因如下：</p>
+<ol>
+<li><strong>复杂性增加</strong>：
+现代软件系统往往非常复杂，涉及大量的模块、库、服务和并发操作。类型安全的语言可以帮助开发者管理复杂的代码结构，减少因数据类型错误带来的潜在错误。</li>
+<li><strong>并发和分布式系统</strong>：
+在现代应用中，并发编程和分布式系统已成为常态。类型安全在这些场景下尤为重要，因为并发操作下的类型错误更难调试和排查。Go 等语言的类型安全机制使得并发编程更为安全和可靠。</li>
+<li><strong>大型团队协作</strong>：
+大型团队中开发人员之间经常共享代码库。类型安全语言可以确保每个开发者按照一致的规则编写代码，减少因为类型误用导致的跨模块错误。这对于持续集成和快速迭代的开发模式来说至关重要。</li>
+<li><strong>防止运行时错误</strong>：
+动态类型语言的一个缺点是，许多错误在运行时才会暴露出来，而这些错误可能导致系统崩溃、数据损坏或者严重的安全漏洞。类型安全语言通过在编译时检查这些错误，减少了系统在生产环境中出现问题的几率。</li>
+<li><strong>内存安全与安全漏洞防范</strong>：
+类型安全与内存安全密切相关。在类型不安全的语言中，错误的类型转换可能导致访问非法内存地址，产生严重的安全漏洞（如缓冲区溢出）。现代软件开发对安全性要求极高，因此类型安全的语言更适合用于构建安全的系统。</li>
+</ol>
+<p>许多现代编程语言都非常注重类型安全，例如：</p>
+<ul>
+<li><strong>Go</strong>：通过静态类型和强类型系统，Go 确保类型错误在编译时被发现，并提供了简单但强大的类型转换机制。</li>
+<li><strong>Rust</strong>：Rust 不仅类型安全，还通过借用检查器（borrow checker）确保内存安全，防止常见的指针错误和数据竞争。</li>
+<li><strong>TypeScript</strong>：作为 JavaScript 的超集，TypeScript 引入了静态类型检查，弥补了 JavaScript 类型安全不足的问题。</li>
+<li><strong>Java</strong>：长期以来，Java 一直强调静态类型和类型安全，这使得 Java 在大型企业级应用中被广泛使用。</li>
+</ul>
+<p><strong>Type-safe</strong> 是一种编程语言的关键特性，确保了类型使用的一致性与安全性，减少了潜在错误。它的重要性在现代软件开发中日益提升，尤其是在处理复杂系统、并发操作和大规模协作时。Go 等现代编程语言通过类型安全机制提供了更高的可靠性和可维护性，帮助开发者在代码开发过程中减少错误，提升生产力和系统稳定性。</p>
+<hr>
+<h2 id="用户空间的内核"><strong>用户空间的内核</strong>
+</h2><p><strong>&ldquo;用户空间的内核&rdquo;</strong> 和 <strong>&ldquo;虚拟机上的内核&rdquo;</strong> 虽然有一些相似的功能，但它们本质上是不同的概念。</p>
+<ol>
+<li><strong>用户空间的内核（User-space Kernel）</strong></li>
+</ol>
+<p>在传统的操作系统架构中，内核（Kernel）运行在<strong>内核空间</strong>，它有访问系统硬件的最高权限，并管理进程调度、内存管理、设备驱动等功能。与此相对，用户应用程序则运行在<strong>用户空间</strong>，没有直接操作硬件的权限，必须通过系统调用与内核通信。</p>
+<p><strong>用户空间的内核</strong>指的是一种特殊的设计，在这种设计中，内核的一部分或者类似于内核的功能在<strong>用户空间</strong>中运行，而不是在内核空间。这种用户空间的内核主要目的是<strong>隔离</strong>和<strong>安全</strong>，减少对主机操作系统内核的直接依赖，从而提高系统的安全性。例如：</p>
+<ul>
+<li><strong>gVisor</strong>：gVisor 是一个用户空间内核，它模拟了大量的 Linux 系统 API，让容器可以像在标准 Linux 内核上运行一样运作，但它实际上并没有直接使用主机的 Linux 内核来运行这些容器。这种设计让容器运行时更加安全，因为它限制了容器对主机系统的访问。</li>
+</ul>
+<p><strong>关键区别</strong>：用户空间的内核运行在宿主操作系统的用户空间，它与宿主系统的内核隔离，通常使用系统调用与宿主内核通信。它的主要功能是提供一种额外的安全层，以限制和管理用户空间进程对系统资源的访问。</p>
+<ol start="2">
+<li><strong>虚拟机上的内核</strong></li>
+</ol>
+<p>虚拟机的内核则是另一个概念。在虚拟化环境中，虚拟机模拟了一个完整的物理计算机，这意味着虚拟机有<strong>自己的操作系统</strong>，这个操作系统有一个标准的内核，通常是 Linux 或 Windows 内核。</p>
+<ul>
+<li>在虚拟机上，<strong>虚拟机内核</strong>是运行在虚拟机操作系统中的内核。这个内核是完整的，管理虚拟机内部的所有系统资源和进程，就像它在真实硬件上运行一样。</li>
+<li><strong>虚拟化层</strong>（如 Hypervisor 或 KVM）在底层提供资源的抽象，它将物理硬件的资源分配给多个虚拟机。因此，虚拟机上的内核运行在虚拟化层上，而不是直接运行在真实的硬件上。</li>
+</ul>
+<p><strong>关键区别</strong>：虚拟机内核是模拟了一个完整的硬件环境，它运行在虚拟机的操作系统中，就像在实际硬件上运行一样；而用户空间的内核（如 gVisor）则是在宿主操作系统的用户空间中运行，它不是独立的操作系统内核，而是通过模拟部分系统功能为应用提供隔离和安全环境。</p>
+<ol start="3">
+<li>
+<p><strong>相似性与差异</strong></p>
+<ul>
+<li>
+<p>相似性</p>
+<ul>
+<li>两者都提供了一种隔离机制，目的是增强安全性。</li>
+<li>两者都与宿主操作系统隔离，不直接接触宿主内核。</li>
+</ul>
+</li>
+<li>
+<p>差异</p>
+<ul>
+<li><strong>用户空间内核</strong>是运行在用户空间的轻量级内核，它通常不是一个完整的操作系统，而是部分内核功能的实现，用于提供安全隔离（如 gVisor）。</li>
+<li><strong>虚拟机内核</strong>是运行在虚拟化环境中的完整操作系统内核，它模拟了整个硬件系统，因此是一个完整的操作系统。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>虽然用户空间内核和虚拟机内核都有相似的隔离和安全目标，但它们的实现方式不同。<strong>用户空间内核</strong>（如 gVisor）通过在宿主操作系统上提供内核功能的模拟来隔离应用，而<strong>虚拟机内核</strong>则是虚拟化技术的一部分，它运行在模拟的硬件环境中，并管理整个虚拟机内部的操作系统和资源。</p>
+<hr>
+<h2 id="死锁风险"><strong>死锁风险</strong>
+</h2><p>在 Linux 内核中，系统调用（system calls）会分配内存给内核来处理各种任务（如创建进程、管理文件系统等）。当内核堆内存耗尽时，系统调用可能无法完成分配所需的内存。Linux 的策略是<strong>乐观分配</strong>，让系统调用继续进行，直到实际的内存分配失败为止。</p>
+<p>如果分配失败，系统可能会进入等待状态，给 <strong>OOM Killer（Out-Of-Memory Killer）</strong> 线程一个机会来寻找并终止某个消耗大量内存的进程，从而释放出一些内存供其他进程使用。</p>
+<p>问题在于，当一个线程<strong>正在分配内存时，它可能持有某些资源的锁</strong>（例如文件系统的锁、进程表的锁等）。如果该线程因内存分配失败而进入等待状态，而此时 <strong>OOM Killer</strong> 线程杀死了另一个持有锁的进程，可能会导致死锁情况的出现。以下是几个场景：</p>
+<p>情况 1：分配线程持有锁，等待内存</p>
+<ol>
+<li><strong>线程 A</strong> 需要分配内存来完成某个系统调用，它已经持有某个锁（例如一个文件系统锁），但是由于内存不足，它进入等待状态。</li>
+<li><strong>OOM Killer</strong> 开始寻找消耗大量内存的进程，准备杀掉其中一个进程以释放内存。</li>
+<li><strong>线程 B</strong> 是 OOM Killer 选择的目标，但线程 B 也持有了另一个重要的内核锁（例如进程表锁），并且它正等待线程 A 释放锁。</li>
+<li>此时就出现了经典的<strong>死锁</strong>：线程 A 等待内存释放，而线程 B 等待线程 A 释放锁，而线程 B 可能正被 OOM Killer 杀死。在这种情况下，由于线程 B 持有的锁没有释放，整个系统可能陷入死锁状态。</li>
+</ol>
+<p>情况 2：OOM Killer 杀死持有锁的进程</p>
+<ol>
+<li><strong>线程 C</strong> 正在执行某个操作，持有某个内核锁，并尝试分配内存。</li>
+<li>内存不足，OOM Killer 选择线程 C 作为目标，并强制终止线程 C。</li>
+<li>如果线程 C 在被杀死时<strong>没有机会释放它持有的锁</strong>，那么其他依赖于该锁的线程将永远无法获得该锁，可能导致整个系统的一部分冻结或陷入死锁。</li>
+</ol>
+<p>Linux 内核采取了一些措施来减少死锁的风险，但并不能完全消除它。以下是几种常见的策略：</p>
+<ol>
+<li><strong>OOM Killer 的谨慎选择</strong></li>
+</ol>
+<p>OOM Killer 通常会<strong>避免杀死关键系统进程</strong>或<strong>持有重要锁的进程</strong>。它通过一些启发式规则来选择那些可以安全终止的进程。例如，OOM Killer 会优先选择消耗大量内存但相对不重要的用户进程，而不是那些核心系统进程。</p>
+<ol start="2">
+<li><strong>无等待内存分配策略</strong></li>
+</ol>
+<p>在某些情况下，内核代码会被设计成<strong>不等待内存分配</strong>。如果分配失败，系统调用会立即返回错误，而不是进入无限制的等待状态。这减少了进程在持有锁时因内存不足而进入等待状态的机会，从而减少死锁风险。</p>
+<ol start="3">
+<li><strong>锁的分层与优先级顺序</strong></li>
+</ol>
+<p>为了避免锁的相互依赖导致的死锁，Linux 内核通常会设计<strong>锁的层级顺序</strong>。通过确保不同的锁以一致的顺序被获取，可以避免交叉锁定（即两个线程分别持有彼此需要的锁）的情况。</p>
+<ol start="4">
+<li><strong>分配超时和中断机制</strong></li>
+</ol>
+<p>在某些情况下，内核可能会设置一个<strong>超时</strong>，让内存分配的等待时间有限。如果超过这个时间限制，线程会被强制中断或返回错误，而不是无限期等待内存的释放。这也可以降低持锁线程进入死锁的可能性。</p>
+<p><strong>示例 1：文件系统死锁</strong>。假设一个进程（线程 A）正在执行一个文件写入操作，它持有了文件系统的锁（fs_lock）。在这个操作过程中，它需要为某个数据结构分配内存，但此时系统内存不足，于是线程 A 进入等待状态。与此同时，OOM Killer 开始尝试释放内存，并选择了另一个进程（线程 B）作为目标进行杀死。但是线程 B 此时持有了进程表的锁（proc_lock），并且正等待 fs_lock 被释放。此时，fs_lock 被线程 A 持有，线程 A 又在等待内存释放，形成了死锁。</p>
+<p><strong>示例 2：内存分配导致的死锁</strong>。假设有一个多线程应用程序，其中一个线程正在尝试分配内存，并持有内存管理相关的锁（如 <code>memory_lock</code>）。当它无法分配内存并进入等待状态时，OOM Killer 选择杀死另一个持有 <code>memory_lock</code> 的线程（因为这个线程消耗了大量的内存）。然而，当该线程被杀死后，由于它在被杀死时持有的 <code>memory_lock</code> 没有释放，导致其他线程无法再获得该锁，系统可能陷入死锁。</p>
+<p>总而言之，死锁的风险主要来自于<strong>进程在内存分配失败时持有锁进入等待状态</strong>，以及 <strong>OOM Killer</strong> 杀死持锁进程时导致的资源未释放问题。Linux 内核通过启发式选择进程、锁定顺序、无等待分配等机制来减少死锁发生的概率，但在极端情况下，死锁仍可能发生。</p>
+<p>这些问题表明，在内存管理和多线程编程中，<strong>并发、锁管理、内存分配</strong>相互交织，导致了一些复杂的挑战。</p>
+<hr>
+<h2 id="runtime">runtime
+</h2><p><strong>&ldquo;runtime&rdquo;</strong> 指的是一个程序执行时所依赖的<strong>运行时环境</strong>，它为程序提供了执行过程中所需的功能和支持。<strong>C 语言</strong>通常被认为没有复杂的运行时环境，因为它的设计非常接近硬件，程序运行时不需要依赖复杂的框架或机制来管理内存、线程、异常等。</p>
+<p>在编程语言中，<strong>运行时环境（runtime environment）</strong> 是指在程序执行过程中提供支持的一组库、工具和服务。这些服务可以包括：</p>
+<ul>
+<li><strong>内存管理</strong>：如垃圾回收（GC）。</li>
+<li><strong>线程管理和调度</strong>：处理多线程并发的机制。</li>
+<li><strong>异常处理</strong>：如处理错误和异常的机制。</li>
+<li><strong>类型检查</strong>：某些语言可能在运行时进行类型检查或转换。</li>
+<li><strong>系统调用接口</strong>：为程序提供与操作系统交互的接口。</li>
+</ul>
+<p>在一些编程语言中，<strong>运行时环境</strong>是相对复杂的，因为它不仅要管理内存，还要处理并发、线程同步、异常处理等问题。运行时环境通常伴随着一个虚拟机（如 Java 的 JVM）或某些底层库（如 Python 的解释器）来确保程序在不同环境下都能一致运行。</p>
+<p><strong>C 语言</strong>的设计非常简洁，接近硬件层，它的程序不依赖复杂的运行时环境。C 语言提供了直接的内存管理（通过 <code>malloc()</code> 和 <code>free()</code>），而且程序员需要手动管理堆栈、内存分配和释放。它不像其他语言那样依赖自动垃圾回收器或虚拟机。C 语言的运行时环境非常轻量化，主要包括一些标准库函数的支持，但它不提供自动内存管理或复杂的系统抽象。</p>
+<p>相比之下，<strong>其他一些现代编程语言</strong>通常带有复杂的运行时。例如：</p>
+<ul>
+<li><strong>Java</strong>：Java 依赖 <strong>Java 虚拟机（JVM）</strong> 作为其运行时环境。JVM 提供了垃圾回收、自动内存管理、线程调度、异常处理等功能。因此，Java 程序运行时依赖一个复杂的运行时环境来执行，这也是为什么它具有较好的跨平台能力。</li>
+<li><strong>Go</strong>：Go 语言虽然编译成机器代码，但它有一个复杂的运行时系统，主要用于管理**并发（goroutine）*<em>和*<em>垃圾回收</em></em>。Go 的垃圾回收器负责自动管理内存的分配和回收，这使得 Go 程序员不需要手动释放内存，但也带来了一定的性能开销。</li>
+<li><strong>Python</strong>：Python 是解释型语言，依赖于 <strong>Python 解释器</strong> 来执行代码。解释器不仅处理代码的解释执行，还管理内存（如垃圾回收）、处理异常，并提供动态类型系统的支持。Python 的运行时环境非常复杂，包含了大量的高层机制。</li>
+</ul>
+<p>某些现代编程语言通过复杂的运行时提供了很多高级特性，如：</p>
+<ol>
+<li><strong>自动内存管理</strong>：例如 Java、Go、Python 等语言都有垃圾回收器（GC），自动回收不再使用的对象。这种功能可以让开发者不用担心内存泄漏问题，但同时它也增加了运行时的复杂性。</li>
+<li><strong>类型安全</strong>：一些语言（如 Java 和 Go）有严格的类型检查机制，运行时可能会进行类型检查，确保类型安全，这也需要额外的运行时支持。</li>
+<li><strong>并发管理</strong>：像 Go 和 Java 有内置的并发机制，Go 的 <code>goroutine</code> 和 Java 的线程管理都依赖于复杂的运行时来调度和管理并发任务。</li>
+<li><strong>异常处理</strong>：C 语言没有内建的异常处理机制，但像 Java、Python 等语言有复杂的异常处理系统，它们需要运行时来捕捉和处理异常，确保程序的健壮性。</li>
+</ol>
+<p>在这段话中，&ldquo;runtime&rdquo; 指的是一个编程语言在程序执行时所依赖的环境支持。C 语言的运行时非常简单，因为它不依赖垃圾回收、虚拟机或复杂的系统抽象，程序员必须手动管理内存和系统资源。而其他语言，如 Java、Go、Python 等，往往依赖复杂的运行时来提供内存管理、并发支持、类型安全和异常处理等高级功能。现代社会中，这种复杂运行时让程序员开发时更加高效、安全，但也增加了一些运行时的开销和复杂性。</p>
+<hr>
+<h2 id="futex">Futex
+</h2><p><strong>Futexes</strong>（<strong>fast userspace mutexes</strong>，快速用户空间互斥锁）是一种用于<strong>高效实现用户空间线程同步</strong>的机制，它允许线程在用户空间中完成大部分的互斥锁操作，只有在需要操作内核资源时才会进入内核。这种设计使得线程同步更加高效，因为它避免了频繁的系统调用开销。</p>
+<p>Futex 是一种结合了用户空间和内核空间的锁机制，用于解决多线程环境中的同步问题。它的核心思想是：<strong>大部分时间，线程同步操作可以在用户空间中完成，只有当发生竞争或资源不足时，才会通过 futex 机制进入内核进行处理</strong>。这种机制帮助减少不必要的上下文切换，提升了性能。<strong>主要作用</strong>包括：</p>
+<ol>
+<li><strong>用户空间中的锁管理</strong>：Futex 允许多个线程在用户空间中通过简单的内存操作来实现锁的获取和释放。这意味着，当锁可用时，线程之间的锁竞争可以不进入内核，直接在用户空间解决，大大降低了系统调用的频率。</li>
+<li><strong>内核中的等待机制</strong>：当多个线程竞争一个资源时，可能会出现资源不可用的情况。在这种情况下，线程可以调用 <code>futex</code> 系统调用，将自己挂起到内核中的等待队列中，直到资源可用时被唤醒。这样，线程只会在<strong>锁被争抢时</strong>进入内核，减少了不必要的内核参与。</li>
+<li><strong>避免繁重的上下文切换</strong>：传统的锁机制（如互斥锁、条件变量等）可能会频繁调用内核进行线程调度，而 futex 在用户空间处理大部分锁竞争时，避免了频繁的内核调度，提升了性能。</li>
+</ol>
+<p>Futex 和线程的关联主要体现在<strong>线程同步和锁竞争</strong>上。在多线程程序中，多个线程常常需要共享资源，而同步机制（如互斥锁、信号量）则是保证多个线程安全访问共享资源的手段。Futex 是一种<strong>更高效的线程同步原语</strong>，专门为优化线程同步性能而设计。具体关联如下：</p>
+<ol>
+<li><strong>线程间的锁竞争</strong>：当多个线程尝试同时访问同一个资源时，它们会竞争获取锁。Futex 允许这种竞争在用户空间中解决，当锁不可用时，线程会进入内核的等待队列等待被唤醒。</li>
+<li><strong>线程的挂起和唤醒</strong>：当线程无法立即获得锁时，它可以通过 <code>futex</code> 系统调用主动进入内核，并将自己挂起，等待锁被释放。这种机制避免了线程在用户空间中自旋等待（一直忙等），节省了 CPU 资源。</li>
+<li><strong>内核支持的同步</strong>：Futex 作为用户空间和内核之间的桥梁，当用户空间的锁争抢进入复杂状态时，才会依赖内核进行线程的管理和调度。这种设计结合了用户空间的高效性和内核的强大调度能力。</li>
+</ol>
+<p>Futex的典型使用场景有：</p>
+<ul>
+<li><strong>Pthread 实现中的基础</strong>：许多操作系统（如 Linux）中基于 POSIX 线程（Pthread）的实现都使用 futex 作为底层的同步原语。通过 futex，可以高效实现锁、条件变量等机制。</li>
+<li><strong>高性能多线程应用</strong>：在高性能多线程应用中，futex 允许程序减少进入内核的系统调用次数，从而提高并发性能，特别是在资源竞争较少的情况下。</li>
+</ul>
+<p>总的来说，<strong>Futex</strong> 是一种设计用于<strong>高效线程同步</strong>的机制，它允许在用户空间处理大部分的锁操作，只有在锁被争抢或资源不足时才进入内核。这种机制减少了系统调用开销，提升了多线程程序的性能。与线程的关系在于，futex 提供了线程之间的锁竞争、挂起与唤醒机制，是实现高效线程同步的重要工具。在像 <strong>Biscuit</strong> 这样的系统中，futex 为<strong>内核支持的线程同步</strong>提供了基础，确保了高效的线程管理。</p>
+<hr>
+<h2 id="futexfast-userspace-mutex和普通互斥锁mutex"><strong>Futex</strong>（Fast Userspace Mutex）和<strong>普通互斥锁</strong>（Mutex）
+</h2><p><strong>Futex</strong>（Fast Userspace Mutex）和<strong>普通互斥锁</strong>（Mutex）都用于实现线程之间的同步和互斥，确保多个线程安全地访问共享资源。然而，它们的实现方式和效率存在差异。接下来，我将分别介绍 futex 和普通 mutex，并通过举例说明它们的使用场景及区别。</p>
+<ol>
+<li>
+<p><strong>普通互斥锁（Mutex）</strong></p>
+<p><strong>普通互斥锁</strong> 是一种最常见的线程同步原语，常用于保护共享资源，确保只有一个线程在特定时间内访问共享资源。它通常依赖内核进行线程调度和管理。其特点为：</p>
+<ul>
+<li>
+<p><strong>完全内核实现</strong>：每次加锁和解锁都会涉及系统调用，进入内核空间进行处理。</p>
+</li>
+<li>
+<p><strong>开销较大</strong>：由于每次加锁和解锁都需要上下文切换到内核，因此当竞争不激烈时，性能较低。</p>
+</li>
+<li>
+<p><strong>简单直接</strong>：开发者不需要关注底层实现细节，只需调用相应的加锁和解锁函数。</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">//代码举例
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#include</span> <span class="cpf">&lt;pthread.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">pthread_mutex_t</span> <span class="n">lock</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span><span class="o">*</span> <span class="nf">thread_function</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span> <span class="n">arg</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">pthread_mutex_lock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lock</span><span class="p">);</span>  <span class="c1">// 加锁，进入临界区
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Thread %d is accessing the critical section</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span><span class="n">arg</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">pthread_mutex_unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lock</span><span class="p">);</span>  <span class="c1">// 解锁，离开临界区
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">pthread_mutex_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lock</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>  <span class="c1">// 初始化互斥锁
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">pthread_t</span> <span class="n">thread1</span><span class="p">,</span> <span class="n">thread2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">thread1_id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">thread2_id</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nf">pthread_create</span><span class="p">(</span><span class="o">&amp;</span><span class="n">thread1</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">thread_function</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">thread1_id</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">pthread_create</span><span class="p">(</span><span class="o">&amp;</span><span class="n">thread2</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">thread_function</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">thread2_id</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nf">pthread_join</span><span class="p">(</span><span class="n">thread1</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">pthread_join</span><span class="p">(</span><span class="n">thread2</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nf">pthread_mutex_destroy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lock</span><span class="p">);</span>  <span class="c1">// 销毁互斥锁
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>代码解释：</p>
+<ul>
+<li>
+<p>上面的代码使用 <code>pthread_mutex_lock()</code> 和 <code>pthread_mutex_unlock()</code> 来对共享资源进行加锁和解锁。</p>
+</li>
+<li>
+<p>每次加锁和解锁都会涉及<strong>系统调用</strong>，即进入内核来确保线程之间的互斥。这在资源竞争不激烈时，可能会造成不必要的性能开销。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Futex（Fast Userspace Mutex）</strong></p>
+<p><strong>Futex</strong> 是一种更加高效的线程同步机制，结合了用户空间和内核空间的优势。大部分情况下，futex 操作只在用户空间中进行，当且仅当锁被争抢时，才需要进入内核。其特点为：</p>
+<ul>
+<li>
+<p><strong>大部分操作在用户空间完成</strong>：如果没有锁竞争，futex 的加锁和解锁操作可以完全在用户空间中完成，避免了系统调用。</p>
+</li>
+<li>
+<p><strong>进入内核的条件</strong>：只有当锁被争抢时，才会进入内核来挂起等待中的线程，从而减少系统调用的频率。</p>
+</li>
+<li>
+<p><strong>性能更高</strong>：由于减少了系统调用的次数，futex 在锁竞争较少时能够显著提高性能。</p>
+</li>
+</ul>
+<p>假设我们在 Linux 上实现了一个 futex 锁机制，可以通过 <code>futex()</code> 系统调用来挂起和唤醒等待中的线程。下面是一个简化版的伪代码示例，展示 futex 的工作原理：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;linux/futex.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;syscall.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">futex_word</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">futex_wait</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="n">futex_addr</span><span class="p">,</span> <span class="kt">int</span> <span class="n">expected</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">syscall</span><span class="p">(</span><span class="n">SYS_futex</span><span class="p">,</span> <span class="n">futex_addr</span><span class="p">,</span> <span class="n">FUTEX_WAIT</span><span class="p">,</span> <span class="n">expected</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">futex_wake</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="n">futex_addr</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">syscall</span><span class="p">(</span><span class="n">SYS_futex</span><span class="p">,</span> <span class="n">futex_addr</span><span class="p">,</span> <span class="n">FUTEX_WAKE</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">lock</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="p">(</span><span class="nf">__sync_lock_test_and_set</span><span class="p">(</span><span class="o">&amp;</span><span class="n">futex_word</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 进入内核等待 futex 被唤醒
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nf">futex_wait</span><span class="p">(</span><span class="o">&amp;</span><span class="n">futex_word</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">unlock</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">__sync_lock_release</span><span class="p">(</span><span class="o">&amp;</span><span class="n">futex_word</span><span class="p">);</span>  <span class="c1">// 释放锁
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">futex_wake</span><span class="p">(</span><span class="o">&amp;</span><span class="n">futex_word</span><span class="p">);</span>  <span class="c1">// 唤醒等待中的线程
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span><span class="o">*</span> <span class="nf">thread_function</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span> <span class="n">arg</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">lock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Thread %d is accessing the critical section</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span><span class="n">arg</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">unlock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">pthread_t</span> <span class="n">thread1</span><span class="p">,</span> <span class="n">thread2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">thread1_id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">thread2_id</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nf">pthread_create</span><span class="p">(</span><span class="o">&amp;</span><span class="n">thread1</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">thread_function</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">thread1_id</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">pthread_create</span><span class="p">(</span><span class="o">&amp;</span><span class="n">thread2</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">thread_function</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">thread2_id</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nf">pthread_join</span><span class="p">(</span><span class="n">thread1</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">pthread_join</span><span class="p">(</span><span class="n">thread2</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>代码解释：</p>
+<ul>
+<li>
+<p>这里使用 <code>futex_wait()</code> 和 <code>futex_wake()</code> 来模拟基于 futex 的线程同步。</p>
+</li>
+<li>
+<p><code>futex_wait()</code> 用于将线程挂起到内核的等待队列中，直到某个条件被满足（例如锁被释放），<code>futex_wake()</code> 用于唤醒等待中的线程。</p>
+</li>
+<li>
+<p><strong>当锁没有被争抢时</strong>，<code>lock()</code> 函数通过原子操作（<code>__sync_lock_test_and_set</code>）直接在用户空间处理锁的获取，<strong>无需系统调用</strong>。</p>
+</li>
+<li>
+<p>只有当锁被争抢时，才会进入内核进行等待和唤醒操作。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Futex 和 Mutex 的区别</strong></p>
+</li>
+</ol>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th></th>
+          <th>Futex</th>
+          <th>普通 mutex</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>实现机制</td>
+          <td>大部分操作发生在用户空间，只有在竞争发生时才进入内核，这显著降低了系统调用的次数，减少了开销。</td>
+          <td>所有加锁、解锁操作都依赖内核，需要频繁进行系统调用，这增加了上下文切换和开销。</td>
+      </tr>
+      <tr>
+          <td>性能</td>
+          <td><strong>futex</strong> 在竞争少时性能更高，因为大部分锁操作都可以在用户空间完成。</td>
+          <td><strong>普通 mutex</strong> 在竞争少时效率较低，因为每次锁操作都需要进入内核，带来额外的性能开销。</td>
+      </tr>
+      <tr>
+          <td>复杂性</td>
+          <td><strong>普通 mutex</strong> 的使用相对简单，程序员不需要关心底层实现细节。</td>
+          <td><strong>futex</strong> 的实现更复杂，因为它结合了用户空间和内核空间的操作，需要考虑在用户空间完成大部分操作的同时，在需要时进入内核。</td>
+      </tr>
+      <tr>
+          <td>应用场景对比</td>
+          <td>适用于高性能的多线程场景，特别是竞争不激烈时。比如在 Web 服务器、数据库系统中，futex 的高效锁管理可以大大提高并发性能。</td>
+          <td>适用于竞争较多或锁机制相对简单的场景。比如小规模的并发程序，在锁的竞争比较频繁时，普通 mutex 的开销与 futex 差异不大。</td>
+      </tr>
+  </tbody>
+</table></div>
+<p><strong>总结</strong></p>
+<ul>
+<li><strong>普通 mutex</strong> 是内核实现的锁机制，所有操作都通过系统调用，较为稳定但性能略低。</li>
+<li><strong>futex</strong> 是一种结合用户空间和内核的同步机制，减少了系统调用的次数，提高了性能，尤其适用于多线程高并发应用中。</li>
+</ul>
+<hr>
+<h2 id="futex-和-xv6-中的睡眠锁sleeping-locks"><strong>Futex</strong> 和 <strong>xv6 中的睡眠锁</strong>（sleeping locks）
+</h2><p><strong>Futex</strong> 和 <strong>xv6 中的睡眠锁</strong>（sleeping locks）确实有一些相似之处，特别是在它们如何处理线程等待和唤醒的机制上。但两者的实现细节、使用场景以及设计目标有所不同。接下来我会详细对比 futex 和 xv6 的睡眠锁，并解释它们的区别和相似之处。</p>
+<ol>
+<li>
+<p><strong>Futex（Fast Userspace Mutex）</strong></p>
+<p>Futex 是 Linux 中的一种高效锁机制，允许线程在用户空间完成大部分的锁操作，只有在必要时才进入内核进行等待和唤醒。它的核心机制是将锁竞争和锁的实际管理分为两个阶段：</p>
+<ul>
+<li>
+<p><strong>用户空间操作</strong>：当线程尝试获取锁时，它在用户空间执行操作。如果锁是空闲的，直接获取锁，线程继续执行，无需进入内核。</p>
+</li>
+<li>
+<p><strong>进入内核</strong>：如果锁被占用，线程进入内核，通过 <code>futex()</code> 系统调用将自己挂起，等待锁释放。当锁释放时，内核通过 <code>futex_wake()</code> 唤醒等待的线程，重新竞争锁。</p>
+</li>
+</ul>
+<p>这种机制的设计主要为了<strong>提高锁竞争较少时的性能</strong>，减少频繁的系统调用。由于大部分锁操作在用户空间完成，它在无竞争情况下比完全依赖内核的锁（如传统的互斥锁）效率更高。</p>
+</li>
+<li>
+<p><strong>xv6 中的睡眠锁（sleeping locks）</strong></p>
+<p>在 <strong>xv6</strong> 中，睡眠锁是一种用于确保线程安全访问共享资源的机制，特别适用于长时间持有锁的场景。在 xv6 中，睡眠锁的机制如下：</p>
+<ul>
+<li>
+<p><strong>获取锁</strong>：当线程尝试获取睡眠锁时，如果锁已经被其他线程持有，那么该线程将进入<strong>睡眠</strong>，并被移出运行队列。这种睡眠通常是通过操作系统内核的调度器来实现的，调度器会挂起该线程，直到锁变为可用。</p>
+</li>
+<li>
+<p><strong>唤醒</strong>：当持有锁的线程释放锁时，系统会唤醒等待该锁的线程，让它们重新进入调度队列，并在锁空闲时竞争获取。</p>
+</li>
+</ul>
+<p>睡眠锁的设计理念是，<strong>避免忙等待（busy waiting）</strong>。在某些情况下，锁可能需要持有较长时间（例如，执行 I/O 操作），因此让线程进入睡眠状态可以节省 CPU 资源，而不是让它们一直自旋等待锁的释放。</p>
+</li>
+<li>
+<p><strong>Futex 与 xv6 睡眠锁的相似之处</strong></p>
+<ul>
+<li>
+<p><strong>等待时挂起线程</strong>：两者的核心相似之处在于，当锁不可用时，线程会被<strong>挂起</strong>，直到锁被释放。这样做的目的是避免忙等待，节省 CPU 资源。</p>
+</li>
+<li>
+<p><strong>唤醒机制</strong>：当锁空闲时，两者都会唤醒等待的线程，让它们重新参与锁的竞争。</p>
+</li>
+<li>
+<p><strong>避免忙等待</strong>：两者都旨在避免 CPU 资源浪费，使线程在无法获取锁时有效地让出 CPU。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Futex 与 xv6 睡眠锁的区别</strong></p>
+</li>
+</ol>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th></th>
+          <th>Futex</th>
+          <th>xv6 睡眠锁</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>实现细节</td>
+          <td>Futex 是基于用户空间和内核的混合机制。锁的获取和释放大部分是在用户空间完成的，只有在竞争激烈或资源不足时才会通过系统调用进入内核。这使得 futex 更加高效，尤其是在低竞争环境中，减少了频繁的内核调用。</td>
+          <td>xv6 中的睡眠锁则完全依赖内核调度。每当线程无法获取锁时，线程直接进入内核，被挂起到等待队列中，并依赖内核调度器唤醒。这是一种传统的、完全依赖内核的锁机制，没有 futex 那样的用户空间优化。</td>
+      </tr>
+      <tr>
+          <td>性能与使用场景</td>
+          <td>Futex 设计上更为高效，特别适合于多线程高并发场景，因为它避免了每次锁操作都进入内核。如果锁竞争较少，futex 的性能优势明显，因为它大部分时间在用户空间处理。</td>
+          <td>xv6 的睡眠锁则更加适合于较简单的多线程环境，尤其是长时间持有锁的场景。由于它完全依赖内核进行线程调度，在某些低并发场景下，这种机制是足够的，但在高并发或频繁的锁竞争情况下，性能可能不如 futex。</td>
+      </tr>
+      <tr>
+          <td>设计复杂度</td>
+          <td>Futex 的实现较复杂，因为它需要在用户空间和内核之间协同工作。需要处理用户空间锁竞争的同步，还要处理进入内核时的等待队列管理等操作。</td>
+          <td>xv6 的睡眠锁设计相对简单，完全依赖内核来进行调度。内核负责管理锁的获取、释放以及线程的睡眠和唤醒操作。</td>
+      </tr>
+  </tbody>
+</table></div>
+<ol start="5">
+<li>
+<p><strong>举例说明</strong></p>
+<p>**Futex 示例：**当多个线程尝试获取同一个 futex 锁时，假设锁是空闲的，线程 A 可以直接在用户空间获取锁并执行。线程 B 尝试获取锁时发现锁已经被占用，于是它调用 <code>futex_wait()</code> 进入内核，等待线程 A 释放锁。当线程 A 释放锁时，它通过 <code>futex_wake()</code> 唤醒线程 B，线程 B 重新获得执行机会。</p>
+<p>**xv6 睡眠锁示例：**在 xv6 系统中，假设线程 A 持有了某个共享资源的睡眠锁，正在进行 I/O 操作。线程 B 想要访问同一个资源，但发现锁已被线程 A 占用，于是线程 B 被内核调度器挂起，进入睡眠状态。等到线程 A 完成操作并释放锁时，调度器会唤醒线程 B，线程 B 才能继续执行。</p>
+</li>
+<li>
+<p><strong>总结</strong></p>
+<ul>
+<li>
+<p><strong>Futex</strong> 是一种更复杂、更高效的锁机制，主要通过在用户空间解决大部分锁操作来减少系统调用，适用于高性能的多线程并发环境。</p>
+</li>
+<li>
+<p><strong>xv6 的睡眠锁</strong> 则是一种相对简单的锁机制，完全依赖内核进行线程调度和唤醒，适用于较低并发或长时间持有锁的场景。</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>尽管它们在<strong>挂起和唤醒线程</strong>的机制上有相似之处，但在性能优化、设计复杂度以及使用场景上有显著差异。</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th></th>
+          <th>Futex</th>
+          <th>xv6 睡眠锁</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>用户态与内核态的配合</td>
+          <td>首先在用户态尝试获取锁，只有当用户态无法获取锁时才进入内核。这种设计大幅减少了用户线程与内核间的切换开销，从而提高了性能。</td>
+          <td>锁的获取和释放完全在内核中进行。所有与锁相关的操作都依赖于内核，无法在用户态直接操作。</td>
+      </tr>
+      <tr>
+          <td>锁状态和线程状态管理</td>
+          <td>锁的状态管理主要由用户态的锁变量（通常是一个整数）维护，内核只在必要时介入。线程在用户态时不需要依赖内核调度。</td>
+          <td>锁的状态和线程的状态管理都依赖内核，由内核调度器直接负责线程的挂起和唤醒。</td>
+      </tr>
+      <tr>
+          <td>性能与复杂度</td>
+          <td><strong>Futex</strong> 设计上更加复杂，它的混合设计保证了在大多数情况下无需频繁进入内核，从而具有更好的性能表现。</td>
+          <td><strong>xv6 睡眠锁</strong> 设计简单，适合教学与理解，但是每次锁竞争时都需要内核介入，性能上不如 futex 高效。</td>
+      </tr>
+  </tbody>
+</table></div>
+<hr>
+<h2 id="针对schedule的复习">针对schedule的复习
+</h2><p>在 <strong>xv6</strong> 操作系统中，系统中多个进程如何在多个 CPU 上运行、切换，并在内核态和用户态之间切换的机制。</p>
+<p>假设的场景：</p>
+<ul>
+<li><strong>4 个 CPU</strong>：你有一个四核的系统。</li>
+<li><strong>3 个进程</strong>：系统当前有 3 个用户进程正在运行或准备运行。</li>
+</ul>
+<p>在这种情况下，是否存在额外的进程在运行 &ldquo;内核监管的内容&rdquo;，或者这些进程是如何在用户态和内核态之间切换的。</p>
+<ol>
+<li>
+<p><strong>多进程与 CPU 调度</strong></p>
+<p>在 <strong>xv6</strong> 中，CPU 的调度由操作系统的内核控制。假设有 3 个进程和 4 个 CPU 时，操作系统将决定这些进程如何分配到不同的 CPU 上运行。如果系统中只有 3 个进程，而有 4 个 CPU，那么其中一个 CPU 会空闲，因为没有足够的进程去占用每个 CPU。每个 CPU 在某个时刻只能运行一个进程。</p>
+<p>在多核环境下，<strong>xv6 的内核调度器</strong>会根据进程的状态（例如：就绪、运行、阻塞等）决定哪些进程在哪些 CPU 上运行。</p>
+</li>
+<li>
+<p><strong>进程的用户态和内核态切换</strong></p>
+<p>每个进程都会在需要时在 <strong>用户态</strong> 和 <strong>内核态</strong> 之间切换。这个切换发生在以下几种典型场景下：</p>
+<ul>
+<li>
+<p><strong>系统调用</strong>：当进程调用某些系统资源（如文件系统、网络、内存管理等），需要通过系统调用进入内核态。</p>
+</li>
+<li>
+<p><strong>中断</strong>：如定时器中断、硬件中断等，进程会暂时进入内核态，处理完中断后再切换回用户态。</p>
+</li>
+<li>
+<p><strong>进程调度</strong>：当操作系统决定切换运行进程时，当前进程会切换到内核态进行上下文切换，然后另一个进程会被调度并切换到用户态继续运行。</p>
+</li>
+</ul>
+<p>在这些场景下，虽然<strong>同一个进程</strong>可以在用户态和内核态之间切换，但这些进程的执行仍然是在这 <strong>3 个用户进程</strong>中，没有额外的进程在运行专门的内核任务。</p>
+</li>
+<li>
+<p><strong>内核与用户态的关系</strong></p>
+<ul>
+<li>
+<p><strong>用户态进程</strong>：用户态的进程是我们平时所运行的应用程序，它们通过系统调用与内核交互。</p>
+</li>
+<li>
+<p><strong>内核态</strong>：当进程需要访问系统资源或处理中断时，进程会从用户态切换到内核态。此时，虽然执行的是内核的代码，但它仍然是当前的进程在执行，只不过执行的是与内核相关的代码，而不是用户应用代码。</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>因此，<strong>没有一个单独的进程在运行内核监管的内容</strong>。而是每个进程在需要时会进入内核态，执行系统调用或处理中断等任务，然后返回用户态。</p>
+<p><strong>总的来说</strong></p>
+<ul>
+<li>在 4 个 CPU 和 3 个进程的场景下，3 个进程会被内核调度到 CPU 上运行，其中一个 CPU 会空闲。</li>
+<li>这些进程在执行时，会在用户态和内核态之间切换（例如通过系统调用或中断），但没有额外的进程专门负责运行内核任务。</li>
+<li>每个进程的用户态和内核态的切换是由具体的事件触发的（系统调用、中断等），这些切换不会创建新进程，只是在现有进程中执行内核代码。</li>
+</ul>
+<hr>
+<h2 id="针对schedule的复习2">针对schedule的复习（2）
+</h2><p>在 <strong>xv6</strong> 中，当 <strong>CPU 数量少于进程数</strong>时，确实会涉及到进程的调度，这由操作系统内核的**调度器（scheduler）**负责管理和执行。然而，这个调度过程并不会创建一个额外的&quot;调度进程&quot;来控制进程运行，而是由操作系统中的调度逻辑直接在内核态中执行。</p>
+<p>在 <strong>xv6</strong> 和大多数操作系统中，<strong>调度器（scheduler）</strong> 是内核中的一部分代码，它并不是一个单独的进程。<strong>调度器函数是内核态执行的代码</strong>，它负责选择下一个要运行的进程。每个 CPU 会有自己的调度器逻辑，它会检查当前有哪些进程可以运行，选择一个进程，然后将它调度到 CPU 上。</p>
+<p>当进程主动放弃 CPU（例如调用 <code>sleep()</code> 函数）或时间片用尽时，系统会进入内核态，调用调度器。调度器会在所有可以运行的进程中选择下一个要运行的进程。这个过程并不会创建一个新的调度进程，而是当前的进程（或者说当前 CPU）进入内核态，调用内核中的调度代码来进行调度。</p>
+<p>当 <strong>CPU 数量少于进程数</strong>时，调度器就会负责让每个进程“轮流”占用 CPU。这通常通过以下方式实现：</p>
+<ul>
+<li><strong>时间片（time slice）</strong>：每个进程在 CPU 上运行一段时间（称为时间片），当时间片耗尽时，调度器会选择另一个就绪的进程来运行。</li>
+<li><strong>主动让出 CPU</strong>：进程可能在需要等待某些资源（如 I/O、信号等）时主动进入睡眠状态，调度器会选择另一个可运行的进程接替。</li>
+</ul>
+<p>当时间片耗尽或进程需要进入睡眠时，CPU 进入内核态，由当前进程的上下文切换到调度器的上下文，<strong>调度器函数在内核态中执行</strong>，负责选择下一个进程运行。因此，在这个过程中，没有一个专门的调度进程，调度器逻辑是作为操作系统内核的一部分直接运行的。</p>
+<p>调度器通常在以下情况下被调用：</p>
+<ul>
+<li><strong>时间片用尽</strong>：当一个进程在 CPU 上的时间片耗尽时，会发生时钟中断，当前进程进入内核态，调用调度器函数来选择下一个要运行的进程。</li>
+<li><strong>进程阻塞</strong>：当进程主动调用 <code>sleep()</code>、<code>wait()</code> 等函数时，它进入睡眠状态，并通过调度器选择其他可运行的进程。</li>
+<li><strong>进程退出</strong>：当进程完成并调用 <code>exit()</code> 时，调度器会选择下一个进程运行。</li>
+<li><strong>中断处理</strong>：在中断（例如 I/O 完成）期间，进程可能会从睡眠状态唤醒，这时调度器也可能被调用，选择唤醒的进程继续运行。</li>
+</ul>
+<p>虽然调度器代码在内核态中执行，但它并不是由用户进程直接控制的。当用户进程运行时，它并不知道调度器的存在。调度过程完全由内核管理，是在操作系统内核态中运行的。换句话说，调度器逻辑是内核的一部分，而不是用户进程的一部分。具体来说：</p>
+<ul>
+<li><strong>当前进程不控制调度</strong>：当一个进程的时间片耗尽时，时钟中断发生，进程会被强制切换到内核态，执行调度器逻辑。这个过程由内核自动控制，进程本身并不会主动去调用调度器。</li>
+<li><strong>调度是内核的行为</strong>：调度器在内核态中运行，切换不同的进程，不依赖任何一个用户进程去执行调度逻辑。</li>
+</ul>
+<p>总而言之</p>
+<ul>
+<li><strong>没有额外的调度进程</strong>：在 CPU 少于进程数时，不会有一个额外的进程专门执行调度任务。调度过程由操作系统的内核负责，调度器逻辑直接在内核态中执行。</li>
+<li><strong>调度逻辑由内核管理</strong>：每当需要切换进程时，当前进程会进入内核态，由调度器选择下一个要运行的进程。</li>
+<li><strong>CPU 轮换执行进程</strong>：调度器确保每个进程轮流占用 CPU，根据时间片或进程状态（如进程阻塞或退出）来决定何时切换进程。</li>
+</ul>
+<p>因此，<strong>调度器函数是在内核中运行的，不是原来的进程自己运行的</strong>。每当系统需要调度时，当前进程会进入内核态，调度器逻辑会在内核中执行，并决定下一个要运行的进程。</p>
+<blockquote>
+<p>Q:什么叫做在内核中运行的，函数不是只有在运行在CPU上的进程时才能执行么</p>
+<p>A:你的问题涉及到<strong>内核态</strong>与<strong>用户态</strong>的概念，以及如何理解 &ldquo;在内核中运行&rdquo; 这一说法。让我详细解释一下。</p>
+<p>在操作系统中，进程的执行可以分为<strong>用户态</strong>（user mode）和<strong>内核态</strong>（kernel mode）。这是为了安全性和隔离，防止普通用户程序直接访问硬件或操作系统的核心资源。</p>
+<ul>
+<li><strong>用户态</strong>：大部分应用程序在用户态运行，拥有受限的权限，不能直接访问硬件或者操作系统内核的资源。如果需要访问这些资源（比如进行文件读写、网络操作等），需要通过<strong>系统调用</strong>（system call）请求内核来完成。</li>
+<li><strong>内核态</strong>：当系统调用或中断发生时，进程进入内核态，执行操作系统的代码，直接与硬件交互。内核态拥有最高权限，可以执行任何操作。<strong>调度器（scheduler）</strong> 也是在内核态中运行的。</li>
+</ul>
+<p>进程确实是运行在 <strong>CPU</strong> 上的。无论进程是在<strong>用户态</strong>还是<strong>内核态</strong>，最终都是由 <strong>CPU</strong> 执行代码。只不过，<strong>用户态的代码</strong>和<strong>内核态的代码</strong>是有所区别的。操作系统通过<strong>上下文切换</strong>来在不同进程之间切换，而 &ldquo;内核中运行&rdquo; 是指在内核态执行操作系统的代码，而不是运行用户的应用代码。举个例子：</p>
+<ul>
+<li>一个进程在用户态执行一个应用程序的代码，例如访问文件。此时它调用了 <code>read()</code> 系统调用。</li>
+<li>这个 <code>read()</code> 系统调用触发进程进入<strong>内核态</strong>，进程现在开始执行内核代码（例如文件系统的操作）。</li>
+<li>当文件读取操作完成后，进程会返回用户态，继续执行它的应用代码。</li>
+</ul>
+<p>所以，<strong>在内核中运行</strong>，并不是指有一个独立的&quot;内核进程&quot;，而是指<strong>当前进程切换到了内核态</strong>，此时进程执行的是操作系统内核的代码，而不是用户态的代码。</p>
+<p>操作系统的<strong>调度器</strong>也是在内核态中运行的。当某个进程的时间片耗尽，或者它调用了阻塞操作（如等待 I/O），CPU 会触发一个中断（通常是时钟中断），使当前进程切换到内核态。此时，调度器代码会运行，它会：</p>
+<ul>
+<li>保存当前进程的状态（上下文）。</li>
+<li>选择一个新的进程来运行（通过调度算法）。</li>
+<li>切换 CPU 的上下文到新进程的上下文。</li>
+<li>让 CPU 开始执行新进程的代码。</li>
+</ul>
+<p>这个整个过程都是在内核态中发生的，执行的也是内核代码，但依然是通过当前 CPU 的资源运行的。</p>
+<p>当我们说某个函数 &ldquo;在内核中运行&rdquo; 时，实际意思是：</p>
+<ul>
+<li>当前的进程（或 CPU 上正在执行的任务）处于 <strong>内核态</strong>，执行的是操作系统内核提供的功能（例如文件系统、调度器等），而不是用户程序的代码。</li>
+<li>在某个时刻，一个进程可能处于用户态执行用户代码，也可能处于内核态执行内核代码。这都是由同一个进程完成的，只不过切换了执行的权限和代码。</li>
+</ul>
+<p><strong>关键点</strong>是：<strong>内核态和用户态</strong>不是两种不同的进程或任务，而是同一个进程在不同的执行状态下执行不同的代码。</p>
+<ul>
+<li><strong>在内核中运行</strong>是指<strong>进程切换到内核态</strong>，执行操作系统的代码，比如系统调用、调度器逻辑等。</li>
+<li><strong>调度器</strong>在内核态中执行，它负责在进程间进行上下文切换，让不同的进程共享 CPU 资源。调度器运行时，实际也是某个进程在 CPU 上执行内核态的调度逻辑。</li>
+<li>没有独立的 &ldquo;内核进程&rdquo; 在执行这些操作，而是当前 CPU 或进程在必要时进入内核态执行系统级的代码。</li>
+</ul>
+<p>所以，当你问 &ldquo;函数不是只有在运行在 CPU 上的进程时才能执行么&rdquo;，答案是<strong>是的</strong>，无论是内核态还是用户态，都是在进程执行时通过 CPU 来运行代码，只不过在内核态下，进程执行的是操作系统内核的功能，而不是用户代码。</p>
+</blockquote>
+<hr>
+<h2 id="针对schedule的复习3">针对schedule的复习（3）
+</h2><p>我们可以进一步解释一下<strong>进程切换</strong>和<strong>多核系统中的调度</strong>，特别是如何在内核态执行 <code>schedule</code> 以及如何确保不会重复调度已经在其他 CPU 上运行的进程。</p>
+<ol>
+<li>
+<p><strong>进程切换（上下文切换）</strong></p>
+<p>当一个进程进入<strong>内核态</strong>并执行调度（<code>schedule()</code> 函数）时，操作系统会选择下一个要运行的进程，并进行<strong>上下文切换</strong>。上下文切换是将当前进程的状态（如寄存器、程序计数器、栈指针等）保存下来，然后加载下一个进程的状态，使得 CPU 可以继续执行新进程的任务。具体过程如下：</p>
+<ol>
+<li><strong>当前进程的状态保存</strong>：当一个进程进入内核态并被调度器决定切换出去时，系统会保存当前进程的<strong>上下文</strong>，包括寄存器的值、程序计数器、栈指针等信息。这些信息会被保存在内核的数据结构中，以便稍后能够恢复这个进程的执行。</li>
+<li><strong>选择下一个进程</strong>：<code>schedule()</code> 函数会从<strong>就绪队列</strong>中选择下一个可以运行的进程。就绪队列（run queue）包含所有等待被调度执行的进程。调度器根据调度策略（如轮转、优先级等）选择下一个进程。</li>
+<li><strong>恢复下一个进程的上下文</strong>：调度器选定下一个进程后，会<strong>加载该进程的上下文</strong>，即恢复该进程的寄存器、程序计数器、栈指针等信息。然后，CPU 开始执行这个进程的代码。</li>
+<li><strong>退出内核态，回到用户态</strong>：完成上下文切换后，新的进程从内核态退出，重新进入用户态，继续它的执行，直到再次被调度器选中或需要进入内核态。</li>
+</ol>
+</li>
+<li>
+<p><strong>进程调度和多核系统</strong></p>
+<p>在多核系统中，多个 CPU 可以同时运行不同的进程。为了避免同一个进程被分配到多个 CPU 上运行，调度器需要确保在一个 CPU 上选择的进程没有在其他 CPU 上执行。<strong>如何避免进程在多个 CPU 上运行？</strong></p>
+<ol>
+<li><strong>CPU 绑定和调度器协调</strong>：在多核系统中，调度器使用一个全局的数据结构来管理所有的就绪进程（通常称为<strong>全局就绪队列</strong>），或者每个 CPU 维护自己的就绪队列。无论采用哪种方式，调度器需要在进程状态中记录该进程当前是否已经在某个 CPU 上运行，防止同一个进程同时被调度到多个 CPU 上。</li>
+<li><strong>进程状态</strong>：每个进程都有状态，如<strong>运行中</strong>（running）、<strong>就绪</strong>（ready）、<strong>阻塞</strong>（blocked）等。当一个进程正在某个 CPU 上运行时，它的状态会被标记为“运行中”，这意味着其他 CPU 不会再次调度这个进程。</li>
+<li><strong>CPU 和进程的关系管理</strong>：调度器在分配进程时，会查询每个进程的状态。如果进程正在其他 CPU 上运行，它会跳过该进程并选择其他就绪的进程。这样可以确保每个进程只在一个 CPU 上执行。</li>
+</ol>
+<p>调度器使用进程的状态和 CPU 数据结构来管理哪些进程正在运行、哪些进程可以被调度：</p>
+<ul>
+<li>
+<p><strong>运行队列（runqueue）</strong>：每个 CPU 通常有一个自己的<strong>运行队列</strong>，存放所有可以在该 CPU 上执行的进程。这个队列中可能会有一些进程等待执行。如果进程正在另一个 CPU 上运行，它不会被加入该 CPU 的运行队列。</p>
+</li>
+<li>
+<p><strong>进程控制块（PCB）</strong>：每个进程都有一个数据结构，称为<strong>进程控制块</strong>（Process Control Block, PCB），其中包含进程的各种状态信息。每个 CPU 的调度器会检查进程的 PCB，判断该进程是否正在运行，是否可以调度。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>进程的状态与调度流程</strong></p>
+<p>为了确保同一个进程不会在多个 CPU 上运行，操作系统通过以下几个步骤进行协调：</p>
+<ol>
+<li><strong>检查进程状态</strong>：调度器在调用 <code>schedule()</code> 时，会检查进程的状态。只有那些处于<strong>就绪</strong>（ready）状态的进程会被考虑调度。如果进程已经处于<strong>运行中</strong>状态，则表示它正在其他 CPU 上运行，当前 CPU 不会选择它。</li>
+<li><strong>状态标记</strong>：一旦调度器决定将某个进程分配给 CPU，它会将该进程的状态标记为<strong>运行中</strong>，同时更新该进程的 PCB，记录该进程当前在哪个 CPU 上运行。这样，其他 CPU 的调度器在检查时，就会知道这个进程正在执行，不会重复调度。</li>
+<li><strong>CPU 核心的独立调度</strong>：每个 CPU 都有自己的调度器，负责决定该 CPU 上运行哪些进程。在某些多核系统中，调度器会有全局协调机制，确保多个 CPU 不会重复调度同一个进程。在其他系统中，调度器可以依赖每个 CPU 的独立运行队列来确保进程不会重复分配。</li>
+</ol>
+</li>
+</ol>
+<p>总而言之</p>
+<ul>
+<li><strong>调度器在内核态运行</strong>：当一个进程进入内核态并调用 <code>schedule()</code> 函数时，调度器会选择下一个要运行的进程，并执行上下文切换。上下文切换是保存当前进程状态并加载下一个进程状态的过程。</li>
+<li><strong>多核调度中的协调</strong>：在多核系统中，调度器需要确保一个进程不会同时在多个 CPU 上运行。它通过进程的状态标记（如运行中、就绪）和全局或局部的运行队列来管理多个进程，并避免重复调度。</li>
+<li><strong>进程的状态和管理</strong>：每个进程有一个控制块（PCB）来记录它的状态和所运行的 CPU。调度器使用这些信息来选择哪些进程可以运行，并避免调度那些已经在其他 CPU 上运行的进程。</li>
+</ul>
+<p>通过这些机制，操作系统确保在多核环境中，调度是协调一致的，避免同一个进程在多个 CPU 上同时运行。</p>
+<hr>
+<h2 id="针对schedule的复习4">针对schedule的复习（4）
+</h2><p>在多核系统中，<strong>某些数据结构是所有 CPU 共享的</strong>，这些数据使得各个 CPU 能够了解到其他 CPU 上的进程状态，从而避免重复调度同一个进程。</p>
+<ol>
+<li>
+<p><strong>共享的数据结构</strong></p>
+<p>在操作系统中，<strong>进程的状态和调度信息</strong>通常存储在一些全局或者共享的数据结构中，以便所有 CPU 可以访问。以下是几个常见的共享数据结构：</p>
+<ol>
+<li>
+<p><strong>进程控制块（PCB，Process Control Block）</strong></p>
+<ul>
+<li>
+<p>每个进程都会有一个唯一的进程控制块（PCB），其中存储了该进程的状态信息，例如：</p>
+<ul>
+<li>进程当前的状态（如<strong>就绪</strong>、<strong>运行中</strong>、<strong>阻塞</strong>）。</li>
+<li>当前进程在哪个 CPU 上运行。</li>
+<li>寄存器值、程序计数器、栈指针等用于上下文切换的信息。</li>
+</ul>
+</li>
+</ul>
+<p>这些 PCB 是系统中的共享数据结构，各个 CPU 的调度器可以查看每个进程的 PCB 来判断它的状态。通过这些信息，CPU 能够了解当前进程是否已经在其他 CPU 上运行，从而避免重复调度。</p>
+</li>
+<li>
+<p><strong>运行队列（Run Queue）</strong>：每个 CPU 可能会有自己的<strong>就绪队列</strong>，但在某些系统中，也可以有<strong>全局的运行队列</strong>（runqueue），该队列存储了所有处于<strong>就绪状态</strong>、等待被调度的进程。每当一个 CPU 需要调度进程时，它会查看这个共享的运行队列或它自己的局部运行队列，选择一个处于“就绪”状态且尚未运行的进程来执行。</p>
+</li>
+<li>
+<p><strong>全局调度器信息</strong>：在某些操作系统中，存在一个<strong>全局调度器</strong>，它能够协调所有 CPU 的进程调度。在这种情况下，全局调度器可以直接管理各个 CPU 的负载，平衡进程在多个 CPU 上的分布。这种全局信息也可以让系统知道每个进程在哪个 CPU 上运行，并避免重复调度。</p>
+</li>
+</ol>
+</li>
+<li>
+<p><strong>进程状态的共享与同步</strong>：为了确保多个 CPU 能够正确地共享这些信息，并避免出现竞争条件（例如两个 CPU 同时调度同一个进程），系统通常采用<strong>锁机制</strong>或者<strong>原子操作</strong>来保护对这些共享数据的访问。</p>
+<ul>
+<li>
+<p><strong>原子操作</strong>：当需要改变进程的状态（例如从“就绪”变为“运行中”）时，系统会使用原子操作来更新进程的状态，确保状态更新是不可分割的，避免多个 CPU 同时修改状态导致冲突。</p>
+</li>
+<li>
+<p><strong>锁机制</strong>：如果多个 CPU 需要同时访问共享数据（如全局运行队列），系统会使用锁来确保一次只有一个 CPU 能够修改共享数据。这可以防止竞争条件，但同时也会带来一些额外的性能开销。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>如何避免重复调度</strong>：通过共享的 PCB 和进程状态信息，每个 CPU 的调度器能够了解到当前有哪些进程正在运行，以及它们在哪些 CPU 上运行。这是如何避免重复调度的关键：</p>
+<ul>
+<li>在每次调度时，调度器会检查进程的状态。如果进程处于“运行中”状态，且已经在某个 CPU 上运行，则该调度器会跳过这个进程，选择其他处于“就绪”状态的进程。</li>
+</ul>
+<ul>
+<li>通过这种方式，各个 CPU 能够同步了解进程的状态变化，确保同一个进程不会同时在多个 CPU 上运行。</li>
+</ul>
+</li>
+<li>
+<p><strong>总结</strong></p>
+</li>
+</ol>
+<ul>
+<li>
+<p><strong>进程的状态信息</strong>（如 PCB）和<strong>运行队列</strong>是所有 CPU 可以访问的共享数据结构。每个 CPU 的调度器通过访问这些共享数据来决定哪些进程可以运行，避免重复调度。</p>
+</li>
+<li>
+<p>操作系统使用<strong>原子操作</strong>和<strong>锁机制</strong>来保护对这些共享数据的访问，确保多个 CPU 在并行运行时能够正确更新和读取进程的状态。</p>
+</li>
+<li>
+<p>这种共享的数据结构确保了在多核系统中，调度器可以协调多个 CPU 之间的进程执行，避免同一个进程同时在多个 CPU 上运行。</p>
+</li>
+</ul>
+<p>因此，<strong>进程状态的数据是可以被所有 CPU 共享的</strong>，这也是如何在多核系统中进行有效调度的核心机制。</p>
+<hr>
+<h2 id="schedule的死锁">schedule的死锁
+</h2><p>在操作系统的调度器（<code>scheduler</code>）实现中，锁机制是非常重要的，它用于保护共享资源的访问，防止多个 CPU 或多个线程同时修改共享数据，导致数据不一致。然而，锁的使用不当可能引发一系列问题，如<strong>死锁</strong>、<strong>优先级反转</strong>、<strong>锁竞争</strong>等。下面是调度器中使用锁时常见的一些易产生错误的地方，以及对应的解决办法：</p>
+<ol>
+<li>
+<p><strong>死锁（Deadlock）</strong></p>
+<p><strong>死锁</strong>发生在两个或多个进程相互等待对方持有的锁，导致所有相关进程都无法继续执行。调度器中可能需要对多个资源进行加锁，例如对进程控制块（PCB）、就绪队列、进程状态等进行加锁。在获取多个锁时，可能会出现锁的顺序不一致，进而引发死锁。解决办法有：</p>
+<ul>
+<li>
+<p><strong>锁定顺序一致性</strong>：确保所有锁的获取顺序是一致的。这意味着在不同的代码路径中，如果多个锁需要同时持有，锁的获取顺序必须始终保持一致。</p>
+</li>
+<li>
+<p><strong>避免嵌套锁</strong>：尽量减少嵌套锁的使用。如果确实需要多个锁，使用分层的锁机制来确保不会形成循环等待。</p>
+</li>
+<li>
+<p><strong>死锁检测和恢复</strong>：某些操作系统实现了死锁检测机制，通过检测锁的依赖关系，发现可能的死锁情况并强制中断相关进程。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>优先级反转（Priority Inversion）</strong></p>
+<p><strong>优先级反转</strong>发生在一个低优先级的进程持有了一个锁，而一个高优先级的进程需要等待这个锁释放。如果有一个中优先级的进程占据了 CPU，低优先级的进程无法运行并释放锁，那么高优先级的进程将被中优先级的进程“饿死”，导致系统性能下降。解决办法有：</p>
+<ul>
+<li>
+<p><strong>优先级继承（Priority Inheritance）</strong>：当高优先级的进程等待一个由低优先级进程持有的锁时，低优先级进程会临时继承高优先级，以加速锁的释放，避免优先级反转问题。这是一个常见的调度器优化技术。</p>
+</li>
+<li>
+<p><strong>避免不必要的锁</strong>：确保只在必要时使用锁，尽可能缩短锁的持有时间，减少优先级反转的可能性。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>锁竞争和性能瓶颈</strong></p>
+<p>在多核系统中，当多个 CPU 频繁访问同一个共享数据结构时，可能会导致大量的锁竞争。比如在调度器中，所有 CPU 都需要访问共享的运行队列或进程控制块，这会造成频繁的锁获取和释放，进而影响系统性能。解决办法有：</p>
+<ul>
+<li>
+<p><strong>锁分离和局部队列</strong>：通过将全局锁分离为多个锁，减少竞争。例如，每个 CPU 可以有自己的运行队列（local runqueue），避免所有 CPU 竞争访问同一个全局队列。</p>
+</li>
+<li>
+<p><strong>读写锁（Read-Write Locks）</strong>：对于读多写少的共享数据结构，使用读写锁可以提升并发性能。多个 CPU 可以同时读取数据，而写操作则需要独占锁。</p>
+</li>
+<li>
+<p><strong>减少锁的粒度</strong>：尽量减少锁的粒度，避免对大范围的操作进行锁定，只对真正需要保护的部分加锁。可以通过锁分割来减少锁的范围，例如针对不同的数据结构使用不同的锁。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>持锁时间过长</strong></p>
+<p>如果进程在持有锁的情况下进行耗时较长的操作，其他等待锁的进程可能会被长时间阻塞，影响系统的并发性和响应能力。在调度器中，这个问题可能出现在当进程持有锁并且执行复杂的调度算法或处理其他任务时。解决办法有：</p>
+<ul>
+<li>
+<p><strong>短期持锁策略</strong>：确保锁的持有时间尽可能短。锁应仅用于保护关键的、最小粒度的代码区域。</p>
+</li>
+<li>
+<p><strong>使用自旋锁或休眠锁的结合</strong>：在持锁时间较短的情况下可以使用自旋锁（spinlock），这样等待的进程不会进入睡眠状态，而是自旋等待锁释放。对于持锁时间较长的情况，使用休眠锁（sleeping lock）更为合适。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>抢占中断和锁</strong></p>
+<p>如果进程在持有锁时被抢占或发生中断，且中断处理程序或新的被调度的进程也需要获取同一个锁，可能会造成系统的不可预测行为。解决办法有：</p>
+<ul>
+<li>
+<p><strong>禁用抢占</strong>：在某些关键区域（持有锁期间），可以短暂禁用抢占，确保进程不会在持有锁时被打断。</p>
+</li>
+<li>
+<p><strong>中断安全的锁机制</strong>：确保使用的锁机制在中断上下文中是安全的，例如在自旋锁中禁用中断，防止锁被不安全地抢占。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>双重释放锁或未释放锁</strong></p>
+<p>错误地释放同一个锁两次（双重释放锁）或者未释放锁（锁泄漏）是常见的编程错误。这在调度器的代码中尤其可能发生，尤其是在上下文切换、调度新进程时忘记释放锁。解决办法有：</p>
+<ul>
+<li>
+<p><strong>使用调试工具</strong>：可以使用一些调试工具（如 <code>lockdep</code>，用于 Linux 内核），它能动态检测锁的使用不当，提前发现问题。</p>
+</li>
+<li>
+<p><strong>代码审计与测试</strong>：在锁操作的代码中进行严密的审查和测试，确保所有加锁的地方都能够正常释放锁，避免逻辑漏洞。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>饥饿问题（Starvation）</strong></p>
+<p>如果调度器中某个低优先级的进程长时间无法获取锁（尤其是当锁被高优先级的进程频繁获取时），该进程可能会遭遇<strong>饥饿</strong>，即它的执行总是被推迟。解决办法有：</p>
+<ul>
+<li>
+<p><strong>公平锁（Fair Locking）</strong>：通过公平锁机制，确保锁的获取是公平的，按顺序来决定谁能获取锁，防止某些进程总是被饿死。例如使用队列锁或基于优先级的公平调度机制。</p>
+</li>
+<li>
+<p><strong>限时锁等待</strong>：对等待锁的时间设置一个限制时间，如果超过这个时间还没有获取到锁，则可能选择放弃当前操作或采取其他补救措施。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>递归锁导致的逻辑混乱</strong></p>
+<p>递归锁允许同一个线程多次获得同一把锁，但在调度器中，递归锁的使用如果不加以控制，会导致逻辑混乱或不可预测的行为，特别是在调度复杂的多线程环境中。解决办法有：</p>
+<ul>
+<li><strong>避免使用递归锁</strong>：尽量避免在调度器中使用递归锁。如果确实需要嵌套锁，尽量使用普通锁，并对锁的获取和释放顺序进行严格控制。</li>
+</ul>
+</li>
+</ol>
+<p>总而言之，在操作系统的调度器中，使用锁来保护共享资源和数据结构是必不可少的，但错误的锁使用会导致死锁、性能下降、优先级反转等问题。为了解决这些问题，操作系统通常采取以下措施：</p>
+<ul>
+<li>确保锁的获取顺序一致，避免死锁。</li>
+<li>使用优先级继承等机制解决优先级反转问题。</li>
+<li>使用局部队列、读写锁等机制减少锁竞争。</li>
+<li>确保锁的持有时间短，避免影响系统的并发性。</li>
+</ul>
+<p>通过这些措施，可以有效地提高调度器的性能和可靠性。</p>
+<hr>
+<h2 id="schedule的中断">schedule的中断
+</h2><p>在调度（<code>schedule</code>）和上下文切换（<code>context switch</code>）的关键时刻，如果发生中断，确实可能会造成系统状态的不一致或混乱。为此，操作系统（如 xv6 和 Linux）都有相应的机制来处理这种情况，确保调度和上下文切换时的中断不会导致问题。接下来，我们分别看看 <strong>xv6</strong> 和 <strong>Linux</strong> 是如何解决这一问题的。</p>
+<ol>
+<li>
+<p><strong>xv6 中的中断处理</strong></p>
+<p>在 <strong>xv6</strong> 中，调度和上下文切换是非常重要且关键的操作。为了避免在这些关键时刻被中断打断，xv6 采用了一些简化但有效的机制来处理中断问题。</p>
+<p>在 <code>schedule</code> 和 <code>context switch</code> 等关键的调度场合，xv6 通过禁用中断来保证这些操作的原子性。具体来说，在调度器运行期间，系统会暂时禁用中断，确保不会有外部中断（如时钟中断、设备中断）在关键时刻打断调度过程。</p>
+<p>以下是 xv6 的具体做法：</p>
+<ol>
+<li><strong>在进入调度器前禁用中断</strong>：当调度器决定切换进程时，会禁用当前 CPU 上的中断。这意味着在上下文切换完成之前，不会有任何中断能够发生。这确保了上下文切换的安全性。</li>
+<li><strong>完成上下文切换后重新启用中断</strong>：当上下文切换完成并且新的进程开始执行后，调度器会重新启用中断。这样，系统在调度完成后能够处理外部中断，但不会在关键时刻被打断。</li>
+</ol>
+<p><strong>xv6 上下文切换的步骤</strong>：</p>
+<ul>
+<li><strong>禁用中断</strong>：调度器在切换进程时会禁用中断，确保切换过程不会被打断。</li>
+<li><strong>保存当前进程状态</strong>：保存当前正在运行进程的 CPU 状态到进程控制块（PCB）。</li>
+<li><strong>选择新的进程</strong>：从就绪队列中选出下一个要运行的进程。</li>
+<li><strong>加载新进程状态</strong>：将新进程的状态从 PCB 中恢复到 CPU。</li>
+<li><strong>重新启用中断</strong>：上下文切换完成后，恢复 CPU 上的中断。</li>
+</ul>
+<p>通过在关键操作时禁用中断，xv6 避免了在调度和上下文切换中发生的潜在冲突和数据不一致问题。</p>
+</li>
+<li>
+<p><strong>Linux 中的中断处理</strong></p>
+<p>Linux 是一个复杂的多任务操作系统，相比 xv6，它处理调度和中断的机制更加复杂和优化。Linux 需要保证在调度和上下文切换时，能够正确处理中断，同时尽量减少性能开销。Linux 的解决方案主要依赖于更复杂的锁机制、抢占控制和中断屏蔽。</p>
+<p>Linux 使用<strong>抢占（preemption）机制</strong>来确保高优先级任务能够及时执行，但在某些关键区域，Linux 通过<strong>禁用抢占</strong>来确保安全的调度和上下文切换：</p>
+<ol>
+<li><strong>禁用抢占</strong>：在进入调度器和执行上下文切换时，Linux 内核会临时禁用抢占（preemption）。这意味着当前 CPU 不会被更高优先级的任务打断，直到调度和上下文切换完成。</li>
+<li><strong>中断屏蔽</strong>：类似于 xv6，Linux 也可以在调度器运行和上下文切换期间临时屏蔽中断。通过屏蔽中断，Linux 确保不会在关键时刻打断调度和切换进程。</li>
+<li><strong>局部中断禁用</strong>：为了提高系统的实时响应能力，Linux 只禁用当前 CPU 的中断（局部中断），而不是禁用全局中断。这种设计保证了其他 CPU 在调度过程中可以继续处理中断和任务，而不会因为一个 CPU 的上下文切换而影响整个系统。</li>
+</ol>
+<p>Linux 还依赖**各种锁（如自旋锁、互斥锁）**来保护关键的共享数据结构。调度器和上下文切换期间，操作系统必须访问和修改一些关键的数据结构，如进程控制块（PCB）、调度队列等。这些访问通常通过锁来保护，防止多个 CPU 同时访问同一个数据结构。</p>
+<ul>
+<li><strong>自旋锁</strong>：在某些短暂的、快速完成的操作中，Linux 使用自旋锁。在持有自旋锁期间，CPU 不会进入睡眠状态，而是自旋等待锁的释放。对于上下文切换等需要快速完成的任务，自旋锁是一个合适的选择。</li>
+<li><strong>互斥锁</strong>：对于较长的操作，Linux 使用互斥锁来避免多个进程同时修改相同的数据结构。</li>
+</ul>
+<p><strong>Linux 上下文切换的步骤</strong>：</p>
+<ul>
+<li><strong>禁用抢占</strong>：Linux 在上下文切换期间禁用抢占，防止其他进程在此过程中抢占 CPU。</li>
+<li><strong>保存当前进程状态</strong>：保存当前进程的状态，包括 CPU 寄存器、栈指针等到进程控制块（PCB）。</li>
+<li><strong>选择下一个进程</strong>：通过调度器算法（如 CFS，完全公平调度器），从就绪队列中选择下一个要运行的进程。</li>
+<li><strong>加载下一个进程状态</strong>：将下一个进程的上下文信息从 PCB 中恢复到 CPU。</li>
+<li><strong>重新启用抢占</strong>：上下文切换完成后，重新启用抢占和中断处理。</li>
+</ul>
+</li>
+<li>
+<p><strong>关键差异总结：xv6 vs Linux</strong></p>
+</li>
+</ol>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>特性</th>
+          <th>xv6</th>
+          <th>Linux</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>中断处理</strong></td>
+          <td>在调度和上下文切换期间<strong>禁用中断</strong></td>
+          <td>在调度和上下文切换期间<strong>禁用局部中断</strong>和<strong>抢占</strong>，避免冲突</td>
+      </tr>
+      <tr>
+          <td><strong>抢占机制</strong></td>
+          <td>没有复杂的抢占机制</td>
+          <td>使用<strong>抢占控制</strong>，在必要时禁用抢占，允许实时调度</td>
+      </tr>
+      <tr>
+          <td><strong>锁机制</strong></td>
+          <td>锁机制简单，主要用于保护关键数据</td>
+          <td>复杂的锁机制，如自旋锁和互斥锁，用于保护内核数据</td>
+      </tr>
+      <tr>
+          <td><strong>上下文切换</strong></td>
+          <td>通过简单的状态保存和恢复进行切换</td>
+          <td>使用调度器算法和复杂的状态管理，支持多核和高并发</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>在调度（<code>schedule</code>）和上下文切换过程中，避免中断打断关键操作是非常重要的。<strong>xv6</strong> 通过简单地禁用中断来确保上下文切换的安全性，适合简单的单 CPU 或较少核心的系统。<strong>Linux</strong> 则更复杂，它通过禁用抢占、局部中断以及使用锁机制来处理多核系统中的复杂并发和中断问题，同时确保高效的系统响应能力。</p>
+<hr>
+<h2 id="biscuit-操作系统中断处理"><strong>Biscuit</strong> 操作系统中断处理
+</h2><ol>
+<li><strong>Device Interrupt Handlers in Biscuit</strong></li>
+</ol>
+<p>“<strong>A Biscuit device interrupt handler marks an associated device-driver goroutine as runnable and then returns</strong>”</p>
+<ul>
+<li>
+<p>当设备（例如硬件设备）发出中断时，操作系统的**中断处理程序（interrupt handler）**会被触发。</p>
+</li>
+<li>
+<p>在 Biscuit 中，中断处理程序的主要作用是</p>
+<p>标记与该设备相关的设备驱动程序的 goroutine 为“可运行”（runnable）</p>
+<ul>
+<li><strong>Goroutine</strong> 是 Go 语言中的轻量级线程。</li>
+<li><strong>Marking as runnable</strong> 意味着操作系统不会在中断处理程序中做大量工作，而是通知相关的 goroutine 可以运行，然后返回。中断处理程序不会长时间运行，也不会在中断处理过程中直接处理复杂的设备逻辑。</li>
+</ul>
+</li>
+<li>
+<p>中断处理程序执行完这个标记操作后，立即返回，不会进行更多操作。这是一种常见的设计，可以提高中断响应效率，并减少由于中断处理程序长时间运行可能带来的问题（如性能降低或资源死锁）。</p>
+</li>
+</ul>
+<ol start="2">
+<li><strong>Why Do Interrupt Handlers Return Quickly?</strong></li>
+</ol>
+<p>“<strong>Interrupt handlers cannot do much more without risk of deadlock, because the Go runtime does not turn off interrupts during sensitive operations such as goroutine context switch</strong>”</p>
+<ul>
+<li>这里提到，中断处理程序不能做太多事情，否则可能导致死锁问题。这是因为：
+<ul>
+<li>Go 运行时不会在某些敏感操作期间关闭中断，例如在 <strong>goroutine 上下文切换</strong> 的时候。</li>
+<li>如果中断处理程序在这些敏感时期执行复杂操作，可能会干扰 Go 运行时对 goroutine 的调度，从而引发死锁（即程序无法继续执行的状态）。</li>
+</ul>
+</li>
+<li>为了避免死锁，Biscuit 采用了一种保守的设计——中断处理程序只做简单的标记操作，然后快速返回，让真正的工作交给相应的 goroutine 来完成。</li>
+</ul>
+<ol start="3">
+<li><strong>Handlers for System Calls and Faults</strong></li>
+</ol>
+<p>“<strong>Handlers for system calls and faults from user space can execute any Go code</strong>”</p>
+<ul>
+<li>
+<p>相较于设备中断处理程序，</p>
+<p>系统调用和用户态故障（faults）<strong>的处理程序可以执行</strong>任意的 Go 代码</p>
+<ul>
+<li><strong>系统调用（system call）</strong>：指用户程序请求操作系统服务的调用（如读写文件、分配内存等）。Biscuit 中，系统调用处理程序是在与用户线程相关联的 goroutine 上执行的，因此它们不受设备中断处理那种约束。</li>
+<li><strong>Faults from user space</strong>：这些故障（如页面错误或非法内存访问）也会由相应的 handler 来处理，这些 handler 同样可以执行复杂的 Go 代码。</li>
+</ul>
+</li>
+</ul>
+<ol start="4">
+<li><strong>Execution Context for System Calls and Faults</strong></li>
+</ol>
+<p>“<strong>Biscuit executes this code in the context of the goroutine that is associated with the current user thread</strong>”</p>
+<ul>
+<li>当处理系统调用或用户态故障时，Biscuit 在与当前用户线程（user thread）相关联的 goroutine 中执行处理代码。这意味着：
+<ul>
+<li><strong>执行上下文</strong>是当前的 goroutine（这 goroutine 是与发起系统调用或触发故障的用户线程相关联的）。</li>
+<li>由于 Go 运行时对 goroutine 的管理，Biscuit 可以在这些情况下执行任意的 Go 代码，而不必担心中断相关的死锁问题。</li>
+</ul>
+</li>
+</ul>
+<p>这段话解释了 <strong>Biscuit</strong> 操作系统如何处理中断和系统调用。具体来说：</p>
+<ul>
+<li>设备中断处理程序只标记相关设备驱动的 goroutine 为“可运行”，并迅速返回，以避免与 Go 运行时的敏感操作（如上下文切换）发生冲突，从而避免死锁。</li>
+<li>与此相反，系统调用和用户态故障处理程序可以执行任意的 Go 代码，因为它们是在用户线程相关联的 goroutine 上执行的，不受设备中断处理程序那样的限制。</li>
+</ul>
+<blockquote>
+<p>在 Biscuit 系统中，中断处理程序不能直接处理复杂的逻辑，尤其是涉及到 goroutine 的操作。主要原因在于 <strong>Go 运行时的敏感操作和死锁风险</strong>，具体解释如下：</p>
+<ul>
+<li><strong>Go 运行时的特性</strong>：
+Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文切换和状态管理。而上下文切换是一种敏感操作，这意味着它不能被中断打扰，因为打断这种操作可能导致调度状态的不一致，进而导致整个调度系统陷入混乱。</li>
+<li><strong>死锁的来源</strong>：
+如果中断处理程序（interrupt handler）在这些敏感时期执行了复杂的操作，例如尝试操作一个资源或者等待某个锁的释放，很有可能与 Go 运行时本身的锁定机制发生冲突，产生 <strong>死锁</strong>。比如，假设某个中断在 Go 运行时正忙于调度 goroutine 时发生，如果中断处理程序尝试与调度器共享资源，就可能出现双方相互等待的情况——调度器等待中断处理完成，中断处理等待调度器释放锁，这就形成了死锁。</li>
+</ul>
+<p>因此，Biscuit 系统选择了一种保守的设计方式，即中断处理程序 <strong>尽可能少地做事情</strong>，它只是标记一个与设备相关联的 goroutine 为“可运行”，然后迅速返回。这样一来，中断处理程序不会与 Go 运行时的调度逻辑产生直接冲突，避免了在上下文切换时可能的死锁。</p>
+<p><strong>这里的中断不包括 trap</strong>。</p>
+<ul>
+<li><strong>中断 (Interrupt)</strong>：通常由硬件设备触发，用来通知 CPU 需要执行某个设备的服务。这种中断通常是异步的（随时可能发生），比如网卡有新数据到达、硬盘请求完成等等。</li>
+<li><strong>Trap</strong>：一种特殊的中断，通常是由软件触发的，例如系统调用（system call）或程序发生异常（如非法指令或内存访问错误）。trap 由 CPU 执行指令时检测到条件后发出，可以看作是 <strong>同步中断</strong>。</li>
+</ul>
+<p>Biscuit 中提到的设备中断处理程序是特指硬件中断，而 trap 处理（例如系统调用和用户态故障）被赋予了更多的自由，因为它们发生在 <strong>系统调用上下文中</strong>，可以在与用户线程相关联的 goroutine 上执行任意的 Go 代码，不涉及中断期间的敏感情况。因此，trap 并不受同样的限制，且其处理程序可以执行更复杂的逻辑。</p>
+<p><strong>中断处理程序只做标记的方式非常类似于经典的 top-half 和 bottom-half 机制</strong>。</p>
+<p>在传统操作系统中，<strong>top-half 和 bottom-half</strong> 的设计是为了提高中断处理的效率，同时保证系统的稳定性和响应性。简单介绍它们：</p>
+<ul>
+<li><strong>Top-Half</strong>：</li>
+<li>是中断发生后由中断控制器立即触发的部分。</li>
+<li>主要目的是快速处理紧急的任务，例如确认接收到的数据或者告诉设备继续传输。</li>
+<li>保持尽可能短的执行时间，以便快速让出 CPU，避免阻塞其他中断。</li>
+<li><strong>Bottom-Half</strong>：</li>
+<li>由 top-half 触发或标记，稍后由系统调度进行执行。</li>
+<li>主要用于处理一些相对复杂且时间消耗大的任务，因为这些任务不需要立即响应。</li>
+<li>这样可以减少中断关闭时间，提高系统整体的中断响应性能。</li>
+</ul>
+<p>在 Biscuit 中，中断处理程序只做一个简单的标记操作，类似于 <strong>top-half</strong> 的行为，它不会在中断期间做大量工作。标记设备驱动程序的 goroutine 为“可运行”后，这部分工作会在系统调度后由这个 goroutine 来完成，这类似于 <strong>bottom-half</strong> 的工作方式——即，复杂的设备处理逻辑被推迟到一个更合适的时机进行处理。</p>
+<p><strong>总结来说</strong>：</p>
+<ul>
+<li><strong>Biscuit 系统的中断处理程序做标记并迅速返回</strong>，是为了避免在中断期间与 Go 运行时的调度机制产生冲突，从而防止死锁。</li>
+<li><strong>设备中断和 trap 不同</strong>，trap 的处理可以执行复杂的 Go 代码，因为它们是在安全的上下文中处理的。</li>
+<li><strong>这种设计非常类似 top-half 和 bottom-half 机制</strong>，将紧急、短暂的操作放在 top-half，复杂、耗时的工作放在 bottom-half，由底层调度来完成，从而提高系统响应效率和稳定性。</li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="biscuit速记">Biscuit速记
+</h2><ol>
+<li>Biscuit 使用页表硬件实现<strong>按需分配内存</strong>、<strong>写时复制</strong>和<strong>按需文件映射</strong>。这些机制通过页面缺失处理来填充页表，提升内存使用效率。</li>
+<li>Biscuit 通过<strong>紧凑记录连续的内存映射</strong>，减少管理开销，提高性能。</li>
+<li>Biscuit 使用<strong>引用计数</strong>来跟踪物理页面的共享情况，确保物理内存的正确管理和回收。</li>
+<li>Biscuit 操作系统设备中断处理程序只标记相关设备驱动的 goroutine 为“可运行”，并迅速返回，以避免与 Go 运行时的敏感操作（如上下文切换）发生冲突，从而避免死锁。</li>
+<li>Biscuit操作系统与此相反，系统调用和用户态故障处理程序可以执行任意的 Go 代码，因为它们是在用户线程相关联的 goroutine 上执行的，不受设备中断处理程序那样的限制。</li>
+<li>Biscuit 实现了从硬件到软件的完整网络通信堆栈：
+<ol>
+<li><strong>TCP/IP 协议栈</strong>：用 Go 语言实现了支持 TCP 和 IP 协议的网络协议栈，负责处理网络中的数据传输、连接管理和错误处理等功能。</li>
+<li><strong>网络硬件驱动</strong>：实现了支持 Intel PCI-Express 以太网网卡的驱动，使用 DMA 来加速数据传输，使用 MSI 中断来提高网络事件处理的效率。</li>
+<li><strong>POSIX 套接字接口</strong>：提供了标准化的系统调用接口，使得应用程序可以方便地通过熟悉的 POSIX 套接字 API 进行网络编程。</li>
+</ol>
+</li>
+<li><strong>Biscuit 不支持交换或页出</strong>，这意味着它的内存管理相对简单，所有数据必须保留在物理内存中，无法使用磁盘来扩展内存空间。</li>
+<li><strong>Biscuit 不支持反向映射</strong>，因此它无法有效地回收映射的页面，在内存管理上有所限制。</li>
+<li><strong>Biscuit 缺乏许多现代操作系统的安全功能</strong>，包括用户管理、访问控制列表和地址空间随机化，这使得它在安全性方面不如其他操作系统健全。</li>
+<li><strong>Biscuit 的物理内存分配</strong>是通过一个独立的分配器进行的，不依赖于 Go 堆内存管理。</li>
+<li>由于物理内存资源有限，<strong>页面分配可能会失败</strong>，因此内核代码需要检查分配结果，并在分配失败时采取措施（如返回错误）。</li>
+<li><strong>Biscuit 内核堆</strong>有固定大小，称为 <code>M</code>，用于管理系统调用的内存。</li>
+<li>在每次系统调用执行前，内核必须为系统调用保留足够的内存（<code>s</code>），以保证调用能够成功运行。</li>
+<li>即使堆内存紧张，Biscuit 会调用垃圾回收器回收超出部分的内存，确保系统调用可以继续执行。</li>
+<li><strong>保守估算</strong>：由于堆中存活数据的精确大小无法实时获取，Biscuit 使用三个计数器（<code>g</code>、<code>c</code>、<code>n</code>）来保守估算内存使用量，并通过 <code>L = g + c + n</code> 进行判断。</li>
+<li><strong>内存不足时的行为</strong>：如果内存不足，Biscuit 会唤醒 <code>killer 线程</code>，执行垃圾回收或杀死进程以释放内存，确保系统调用有足够的资源继续执行。</li>
+<li>Biscuit 的预留内存机制通过确保每个系统调用在执行前已经预留了足够的内存，避免了系统调用在运行过程中遇到内存不足的问题。这消除了内存资源不足引发的阻塞或循环等待情况，因此系统调用在该机制下无需担心<strong>死锁</strong>。如果内存不足以启动系统调用，Biscuit 会通过垃圾回收或进程终止来释放资源，从而保证系统的正常运行。</li>
+</ol>
+<hr>
+<h2 id="静态分析工具-maxlive">静态分析工具 <strong>MAXLIVE</strong>
+</h2><p><strong>Biscuit 操作系统</strong>如何通过静态分析工具 <strong>MAXLIVE</strong> 来确定每个系统调用所需的最大内存保留量（即 <code>s</code>）。这个过程涉及分析 Biscuit 内核代码和所使用的 Go 包，以识别系统调用在执行过程中可能需要的最大活动内存量。让我们详细解释其工作原理。</p>
+<p>MAXLIVE 工具的目标是通过静态分析，计算出每个系统调用需要保留的内存大小 <code>s</code>。这对于确保系统调用能够成功执行，并防止内存不足导致的错误至关重要。</p>
+<p><strong>静态分析的核心挑战</strong></p>
+<p>“<strong>The core challenge is detecting statically when allocated memory can no longer be live</strong>”</p>
+<ul>
+<li><strong>核心挑战</strong>：主要难点在于静态分析中检测出已分配的内存何时不再存活（即不再被使用），这是确定 <code>s</code> 的关键。许多系统调用会为<strong>短暂的用途</strong>分配内存（如临时变量或数据缓冲区），在某些时候这些内存不再需要，因此可以释放。但静态分析需要精确判断这些时机，确保计算出的 <code>s</code> 是足够保守但不过度的。</li>
+<li><strong>其他挑战</strong>：
+<ul>
+<li><strong>循环</strong>：系统调用中的循环可能具有非固定的边界，导致内存分配量难以确定。静态分析必须能够处理这种不确定性，确保保守估计 <code>s</code>。</li>
+<li><strong>后台活动</strong>：有些内核活动与特定的系统调用无关（如后台任务），但它们仍然可能消耗内存。静态分析工具需要考虑这些活动对内存的影响。</li>
+</ul>
+</li>
+</ul>
+<p><strong>通过事件驱动结构简化分析</strong></p>
+<p>“<strong>We address these challenges by exploiting the characteristic event-handler-style structure of most kernel code</strong>”</p>
+<ul>
+<li>Biscuit 内核代码大多是事件驱动的，系统调用和内核任务通常只进行少量的工作，然后返回或进入空闲状态。这种结构化的、分阶段的工作模式使得内存的生命周期更加清晰，从而简化了静态分析的复杂度。</li>
+<li><strong>系统调用的结构化实现</strong>：大多数系统调用都是按照特定的顺序执行，分配内存、使用内存，然后释放内存。由于系统调用在执行过程中通常不涉及复杂的递归或长时间的内存保留，静态分析可以利用这些规律更准确地计算 <code>s</code>。</li>
+</ul>
+<p><strong>修改内核代码以适应静态分析</strong></p>
+<p>“<strong>We are willing to change the kernel code to make it amenable to the reservation approach</strong>”</p>
+<ul>
+<li>为了适应内存保留方法并简化静态分析，开发者对内核代码进行了调整。特别是，他们避免了递归等复杂的内存管理模式，改写了一些函数，使代码结构更加适合分析工具的静态检测。</li>
+<li><strong>修改 Go 标准库</strong>：为了使静态分析工具更准确，Biscuit 还对 Go 的一些标准包进行了修改（如 <code>time</code> 和 <code>fmt</code> 包）。这些包可能涉及到复杂的内存分配模式或内存保留，修改它们可以让静态分析工具更容易理解这些包的内存行为，并正确估计内存使用量。</li>
+</ul>
+<p><strong>如何进行静态分析</strong></p>
+<p>MAXLIVE 的静态分析流程大致如下：</p>
+<ol>
+<li><strong>分析内存分配点</strong>：工具会扫描代码中的内存分配点（如变量声明、动态分配等），并跟踪这些内存分配的生命周期。</li>
+<li><strong>检测内存释放点</strong>：工具需要确定何时分配的内存不再使用，找到内存的释放点。</li>
+<li><strong>估算最大活跃内存</strong>：基于事件驱动的代码结构，工具能够估算每个系统调用在执行过程中同时活跃的最大内存量 <code>s</code>。</li>
+<li><strong>处理循环和递归</strong>：对于循环和递归，工具使用保守估计的方法，确保即使在复杂情况下，也能计算出一个安全的 <code>s</code>。</li>
+</ol>
+<p>总的来说，MAXLIVE 是一种静态分析工具，用于计算每个系统调用执行过程中所需的最大内存保留量 <code>s</code>。它通过分析 Biscuit 内核代码和 Go 包，利用内核代码的事件驱动结构来简化分析过程。遇到循环、递归和后台任务等复杂情况时，工具采用保守估计。为了确保工具能够准确分析内存行为，开发者还修改了部分内核代码和 Go 标准包。这种分析方法确保了在系统调用执行时有足够的内存可用，避免了内存不足导致的系统调用失败。</p>
+<hr>
+<h2 id="maxlive-的基本操作原理"><strong>MAXLIVE</strong> 的基本操作原理
+</h2><p><strong>分析调用图（Call Graph）</strong></p>
+<p>“<strong>MAXLIVE examines the call graph (using Go’s ssa and callgraph packages) to detect all allocations a system call may perform</strong>”</p>
+<ul>
+<li><strong>调用图</strong>：调用图是一个描述程序中函数调用关系的图形结构。通过分析调用图，MAXLIVE 能够了解系统调用在执行过程中可能触发的所有函数调用，并在这些函数中检测内存分配行为。</li>
+<li><strong>Go 的 SSA 和 callgraph 包</strong>：MAXLIVE 使用 Go 的 <strong>SSA（静态单赋值，Static Single Assignment）</strong> 和 <strong>callgraph 包</strong> 来构建和分析系统调用的调用图。这帮助它检测出系统调用期间的所有潜在内存分配点。</li>
+</ul>
+<p><strong>逃逸和指针分析</strong></p>
+<p>“<strong>It uses escape and pointer analysis (Go’s pointer package) to detect when an allocation does not “escape” above a certain point in the call graph</strong>”</p>
+<ul>
+<li><strong>逃逸分析</strong>（escape analysis）和<strong>指针分析</strong>（pointer analysis）是静态分析的重要技术，MAXLIVE 使用 Go 的 <strong>pointer 包</strong> 来实现这些功能：
+<ul>
+<li><strong>逃逸分析</strong>：用于确定内存分配是否会在调用图中的某个函数之外继续存在。如果分配的内存不会逃逸（即仅在局部函数中使用并在该函数返回时失效），那么可以认为内存在函数返回时已经死亡。</li>
+<li><strong>指针分析</strong>：用于追踪指针引用，确保分析可以精确地确定内存的使用情况。</li>
+</ul>
+</li>
+<li><strong>逃逸的意义</strong>：如果某段内存分配不会逃逸出当前函数或调用点，MAXLIVE 就能够判断这块内存在函数返回时已经死亡，并不需要计入最大内存保留量 <code>s</code>。</li>
+</ul>
+<p><strong>特殊处理的内存分配类型</strong></p>
+<p>MAXLIVE 对一些特定类型的内存分配进行了特殊处理：</p>
+<p>a. <strong><code>go</code> 关键字（创建 goroutine）</strong></p>
+<p>“<strong>go (which creates a goroutine) is treated as an escaping allocation of the maximum kernel stack size</strong>”</p>
+<ul>
+<li><strong>goroutine 创建</strong>：在 Go 语言中，<code>go</code> 关键字用于启动一个新的 goroutine，这会创建一个独立的内核栈。MAXLIVE 将这种分配视为<strong>逃逸分配</strong>，因为新的 goroutine 会在不同的执行上下文中运行。</li>
+<li><strong>内核栈保留</strong>：当一个 goroutine 创建时，必须为其保留足够的内存，就像它是一个新的系统调用一样。因此，MAXLIVE 在分析 <code>go</code> 关键字时，会考虑它的最大栈空间大小并将其计入内存保留。</li>
+</ul>
+<p>b. <strong><code>defer</code> 关键字</strong></p>
+<p>“<strong>defer is a non-escaping allocation, but is not represented by an object in the SSA so MAXLIVE specifically considers it an allocation</strong>”</p>
+<ul>
+<li><strong><code>defer</code></strong>：Go 中的 <code>defer</code> 关键字用于推迟执行某些操作，通常是在函数返回之前执行的清理操作。虽然 <code>defer</code> 不涉及逃逸分配（它的生命周期限定在函数内部），但它并不会在 SSA 中明确表示为对象。因此，MAXLIVE 需要特殊处理 <code>defer</code>，并将其视为一种分配行为。</li>
+</ul>
+<p>c. <strong><code>maps</code> 和 <code>slices</code></strong></p>
+<p>“<strong>Every insertion into a map or slice could double its allocated size; MAXLIVE generally doesn’t know the old size, so it cannot predict how much memory would be allocated</strong>”</p>
+<ul>
+<li><strong><code>maps</code> 和 <code>slices</code></strong>：在 Go 语言中，<code>maps</code> 和 <code>slices</code> 是动态数据结构，它们在需要扩展时可能会分配更多的内存。每次插入到 <code>map</code> 或 <code>slice</code> 时，分配的内存可能会翻倍。</li>
+<li><strong>问题</strong>：MAXLIVE 无法准确预测 <code>map</code> 和 <code>slice</code> 的初始大小或当前已分配的内存大小，因此它无法直接估计每次插入或扩展会消耗多少内存。</li>
+<li><strong>解决方案</strong>：为了解决这个问题，Biscuit 的代码中手动添加了 70 个注解，明确声明 <code>maps</code> 和 <code>slices</code> 的最大可能大小。通过这些注解，MAXLIVE 能够在静态分析时更精确地估算这些数据结构的内存消耗。</li>
+</ul>
+<p>总的来说</p>
+<ul>
+<li><strong>MAXLIVE 静态分析工具</strong> 通过分析调用图来检测系统调用期间的所有内存分配，并使用逃逸分析和指针分析来判断哪些分配在函数返回时会失效（不再存活）。</li>
+<li><strong>特殊处理</strong>：MAXLIVE 对某些内存分配行为进行了特殊处理，如 <code>go</code> 关键字启动的 goroutine、<code>defer</code> 操作，以及动态数据结构 <code>maps</code> 和 <code>slices</code>。对于后者，由于无法准确估算内存增长，Biscuit 的代码中添加了注解，帮助 MAXLIVE 估计最大可能的内存分配量。</li>
+<li>这一静态分析工具的目的是为了准确计算系统调用需要保留的内存 <code>s</code>，从而确保系统调用能够在有限的内存中成功执行。</li>
+</ul>
+<hr>
+<h2 id="biscuit-系统在应对-内存耗尽-问题时的局限性"><strong>Biscuit</strong> 系统在应对 <strong>内存耗尽</strong> 问题时的局限性
+</h2><ol>
+<li><strong>内存耗尽与垃圾回收</strong>：Biscuit的设计要求垃圾收集器在<strong>内存几乎耗尽</strong>的情况下也能成功运行。然而，Go的垃圾收集器在运行时，可能需要额外分配内存，尤其是用于追踪未处理指针的工作栈（work stack）。这是垃圾回收的一个潜在问题：即使内存紧张，垃圾收集器仍可能需要分配内存来继续进行扫描。</li>
+<li><strong>解决方案的潜在改进</strong>：虽然目前Biscuit还没有实现解决这一问题的机制，但理论上它可以通过检测工作栈是否已满来应对这个问题。当工作栈满了时，可以回退到使用“标记位图”（mark bitmap）作为工作栈，通过扫描已经被标记的对象，并寻找那些包含未标记指针的对象。这种策略虽然可以确保垃圾收集完成，但效率会较低。好在这种情况预计比较少见，因为工作栈缓冲区可以事先以较低的成本进行预分配。在实验中，垃圾收集器最多只会为工作栈分配 <strong>0.8% 的堆内存</strong>。</li>
+<li><strong>内存碎片问题</strong>：Go的垃圾收集器不会移动对象（即不进行内存压缩），这意味着它不能减少内存碎片。因此，即便系统有足够的空闲内存，如果这些内存被分割成了太小的片段，仍然无法满足较大块的内存分配需求。</li>
+<li><strong>解决碎片问题的潜在方法</strong>：为了解决碎片问题，系统应该在每个系统调用期间为不同大小类别的对象计算其最大存活量（MAXLIVE），以确保在调用时能预留足够的内存。但目前的实现还没有做到这一点。</li>
+</ol>
+<hr>
+<h2 id="biscuit-内核-的实现细节"><strong>Biscuit 内核</strong> 的实现细节
+</h2><ol>
+<li><strong>内核的编程语言</strong>：
+<ul>
+<li><strong>Biscuit 内核几乎全部使用 Go 语言编写</strong>，有 27,583 行 Go 代码，1,546 行汇编代码，没有使用 C 语言。这个点强调了 Biscuit 的与众不同之处：大部分内核是用 Go 这种高级语言实现的，而不是通常的 C。</li>
+</ul>
+</li>
+<li><strong>系统调用的支持</strong>：
+<ul>
+<li>Biscuit 提供了 <strong>58 个系统调用</strong>（如图 4 所示），这些系统调用是操作系统与应用程序交互的重要接口。</li>
+<li>它还具备一定的 <strong>POSIX 兼容性</strong>，这意味着它可以运行一些现有的服务器程序，比如 NGINX 和 Redis，这表明它有能力支持主流的网络服务应用程序。</li>
+</ul>
+</li>
+<li><strong>设备驱动的实现</strong>：
+<ul>
+<li>Biscuit 包含了针对 <strong>AHCI SATA 磁盘控制器</strong> 和 <strong>Intel 82599 系列的以太网控制器</strong>（比如 X540 10G 网卡）的驱动程序。</li>
+<li>这两个驱动程序使用 <strong>DMA（直接内存访问）</strong> 来加速数据传输。驱动程序使用 Go 语言的 <code>unsafe.Pointer</code> 来访问设备寄存器和硬件定义的内存结构（如 DMA 描述符）。Go 的 <code>atomic</code> 包则用来控制访问顺序，以确保多线程环境下的内存一致性。</li>
+<li>如果 Go 支持某种 <strong>内存屏障（memory fence）</strong>，代码会更加简洁。内存屏障是一种用于保证内存访问顺序的机制，对于硬件寄存器的安全访问非常重要。</li>
+</ul>
+</li>
+<li><strong>Go 中的 &ldquo;unsafe&rdquo; 使用</strong>：
+<ul>
+<li>Biscuit 使用了 <strong>90 处 Go 中的 &ldquo;unsafe&rdquo; 例程</strong>（不包括 Go 运行时本身的使用）。这些 &ldquo;unsafe&rdquo; 操作通常是为了直接访问底层硬件，而这些操作无法通过 Go 的安全内存模型来完成。</li>
+<li>这些不安全操作包括：解析和格式化网络数据包、在物理页号与指针之间进行转换、读写用户内存以及访问硬件寄存器等。这类操作在操作系统中是必须的，因为内核需要直接与硬件交互，而这些操作无法完全通过 Go 语言的安全机制来实现。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="内存屏障-memory-fence"><strong>内存屏障 (Memory Fence)</strong>
+</h2><p><strong>内存屏障</strong>是一种用于在多核或多线程环境中保证内存访问顺序的机制。它确保某些特定的内存操作在内存屏障之前或之后的顺序是被严格遵守的。通常，在现代处理器中，出于性能优化的考虑，内存读写操作可以被乱序执行。但在某些场景下，乱序可能导致数据一致性问题，尤其是在多线程或多核程序中。因此，需要使用<strong>内存屏障</strong>来确保对内存的访问按照预期顺序发生。</p>
+<p>假设有两个线程 <code>Thread A</code> 和 <code>Thread B</code>，它们共享一个变量 <code>x</code> 和一个标志位 <code>flag</code>。<code>Thread A</code> 会先写入变量 <code>x</code>，然后设置标志位 <code>flag</code>，而 <code>Thread B</code> 会根据 <code>flag</code> 的值来判断是否读取 <code>x</code>。</p>
+<ul>
+<li>
+<p><code>Thread A</code>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">x</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>    <span class="c1">// 写入数据
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">memory_fence</span><span class="p">();</span> <span class="c1">// 内存屏障
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">flag</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>  <span class="c1">// 设置标志位
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p><code>Thread B</code>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">flag</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 确保读取的是最新的 x 值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<p>在 <code>Thread A</code> 中，如果没有内存屏障，处理器可能会为了优化性能，<strong>先设置 <code>flag</code> 然后再写入 <code>x</code></strong>，这就会导致 <code>Thread B</code> 在读取 <code>x</code> 时得不到最新的值。通过插入内存屏障，可以确保写入 <code>x</code> 的操作在设置 <code>flag</code> 之前执行，从而保证数据的一致性。</p>
+<hr>
+<h2 id="dma直接内存访问direct-memory-access"><strong>DMA（直接内存访问，Direct Memory Access）</strong>
+</h2><p><strong>DMA（Direct Memory Access）</strong> 是一种让设备直接与内存交互而无需经过 CPU 的技术。通常情况下，设备与内存之间的数据传输需要通过 CPU 进行调度，这样会占用大量 CPU 的时间。而使用 DMA，设备可以自己控制数据传输，CPU 只需启动传输，然后继续处理其他任务，等数据传输完成后再处理通知。</p>
+<p>假设有一个计算机系统，连接了一个硬盘驱动器和一个内存模块。如果使用传统方式，数据从硬盘读入内存需要经过 CPU，CPU 需要把每个字节的数据从硬盘拷贝到内存，这样 CPU 的资源会被大量占用。</p>
+<p>而如果采用 <strong>DMA</strong>，硬盘驱动器可以直接与内存通信，数据从硬盘被直接传输到内存，而不需要 CPU 逐字节进行拷贝。CPU 只需要在传输开始时配置 DMA 控制器，并在传输结束后收到通知。这样可以大大提高系统性能，因为 CPU 可以在传输数据时继续执行其他任务。</p>
+<ul>
+<li>
+<p>例子中的流程：</p>
+<ul>
+<li>CPU 初始化 DMA 控制器，告诉它将硬盘上的数据块直接传输到内存的某个区域。</li>
+<li>DMA 控制器直接从硬盘读取数据，并写入内存，CPU 不再干预。</li>
+<li>传输完成后，DMA 控制器向 CPU 发送中断信号，通知 CPU 数据已写入内存。</li>
+</ul>
+</li>
+</ul>
+<p>这种方式极大提高了数据传输效率，特别适合<strong>大规模数据传输</strong>，比如磁盘到内存的拷贝，网络数据包的处理等。</p>
+<hr>
+<h2 id="biscuit-与-go-运行时环境-的协同工作"><strong>Biscuit</strong> 与 <strong>Go 运行时环境</strong> 的协同工作
+</h2><ol>
+<li><strong>对 Go 运行时的修改</strong>：
+<ul>
+<li><strong>记录 goroutine 的内存分配</strong>：Biscuit 修改了 Go 运行时来记录每个 goroutine 的堆内存分配量（heap reservations）。这是为了监控各个 goroutine 在内核中的内存使用情况。</li>
+<li><strong>检测设备处理器 goroutine</strong>：Biscuit 的改动还允许检查是否有等待运行的设备处理 goroutine，以便及时处理设备请求。</li>
+<li><strong>增加默认栈大小</strong>：Biscuit 将 Go 运行时的默认栈大小从 2KB 增加到了 8KB，以避免在处理一些常见的系统调用时频繁触发栈扩展操作。这样可以提高系统调用的效率。</li>
+</ul>
+</li>
+<li><strong>与 Go 运行时保持兼容的部分</strong>：
+<ul>
+<li><strong>Go 运行时在持有锁时不关闭中断</strong>：Go 运行时在持有锁或操作 goroutine 私有状态时不会关闭中断。这意味着内核中断不能直接与持有锁的代码同时操作，以避免潜在的死锁问题。</li>
+<li><strong>Biscuit 的解决方案</strong>：Biscuit 采取了一个较简单的策略：当处理设备中断时，中断处理器并不直接操作设备，而只是设置一个标志，表示应该唤醒对应的设备处理 goroutine。这样，实际的设备处理会由 goroutine 完成，避免了死锁的风险。</li>
+</ul>
+</li>
+<li><strong>处理定时器中断和上下文切换</strong>：
+<ul>
+<li><strong>定时器中断与 goroutine 上下文切换</strong>：Biscuit 的定时器中断处理器无法直接强制 goroutine 进行上下文切换（context switch），因为 Go 运行时可能正处于切换上下文的中间状态。这种情况下，如果强制切换可能会导致不一致或错误的状态。</li>
+<li><strong>使用 Go 的抢占机制</strong>：Biscuit 依赖 Go 编译器插入的<strong>抢占检查</strong>（pre-emption checks）来完成对内核 goroutine 的上下文切换。Go 编译器会在生成的代码中插入这些检查点，以确保 goroutine 可以被适时抢占。</li>
+<li><strong>用户态的上下文切换</strong>：对于从用户态发出的定时器中断，Biscuit 可以强制上下文切换，因为用户态与内核态的上下文切换是可以安全进行的。</li>
+</ul>
+</li>
+</ol>
+<p>Biscuit 通过修改 Go 运行时以跟踪内存分配和调整栈大小，确保内核 goroutine 的高效运行。为了避免中断与锁竞争导致的死锁，Biscuit 采用了一种间接的方式处理设备中断。对于上下文切换，它依赖 Go 的抢占机制来确保 goroutine 的正常调度。</p>
+<hr>
+<h2 id="biscuit-内核与-go-运行时-的集成方式"><strong>Biscuit</strong> 内核与 <strong>Go 运行时</strong> 的集成方式
+</h2><ol>
+<li>
+<p><strong>Goroutine 调度和上下文切换</strong>：</p>
+<ul>
+<li>
+<p><strong>调度决策在运行时环境中</strong>：Biscuit 不直接控制 goroutine 的调度决策，因为这些决策是由 Go 运行时管理的。这意味着 Biscuit 继承了 Go 运行时的调度策略，而无法对其进行修改或优化。</p>
+</li>
+<li>
+<p><strong>没有切换进程页表</strong>：由于 goroutine 调度和上下文切换是由 Go 运行时处理的，Biscuit 并不会在 goroutine 切换时切换每个进程的页表。因此，Biscuit 的系统调用代码不能直接使用用户空间地址。相反，Biscuit 需要显式地将用户的虚拟地址转换为物理地址，并检查相应的页权限。</p>
+</li>
+<li>
+<p><strong>必要时切换页表</strong>：在从内核态切换到用户态之前，Biscuit 会在必要时切换页表，以确保内核和用户态之间的内存隔离。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>垃圾回收相关的改动</strong>：</p>
+<ul>
+<li>
+<p><strong>关闭垃圾收集器专用线程</strong>：为了减少由于垃圾回收导致的延迟，Biscuit 关闭了专用的垃圾收集器线程。这样做的目的是让应用线程与垃圾收集线程不再竞争 CPU 资源，避免性能下降。</p>
+</li>
+<li>
+<p><strong>根标记提供分配信用</strong>：在垃圾回收的标记阶段，Biscuit 改进了根标记（root marking）操作，给予内存分配线程一定的“分配信用”，以免某个线程在执行标记时遇到过多的根标记工作，导致延迟。</p>
+</li>
+<li>
+<p><strong>减少标记阶段大对象的分块大小</strong>：Biscuit 将大对象在标记过程中分割的块大小从 128kB 减小到 10kB。这可以让标记工作更平滑地进行，减少大对象标记时的开销。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>内核性能优化</strong>：</p>
+<ul>
+<li>
+<p><strong>使用大页映射内核代码</strong>：Biscuit 内核的文本段（代码部分）使用了**大页（large pages）**映射，这样可以减少 iTLB（指令翻译后备缓冲器）的缺失次数，从而提高指令读取的效率。</p>
+</li>
+<li>
+<p><strong>使用每个 CPU 独立的网卡传输队列</strong>：Biscuit 对每个 CPU 使用独立的网卡（NIC）传输队列，从而提高网络传输的效率，避免多个 CPU 共享传输队列带来的竞争。</p>
+</li>
+<li>
+<p><strong>无读锁的数据结构</strong>：在一些性能关键的代码中（例如目录缓存和 TCP 轮询），Biscuit 使用了<strong>无读锁</strong>的数据结构。无读锁的结构在并发读操作时性能更好，因为多个线程可以同时读取而不需要锁的开销。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Go 对优化的影响</strong>：</p>
+<ul>
+<li><strong>Go 并未妨碍优化</strong>：总体上，Biscuit 的开发者发现，虽然 Go 是一种高级语言，但它并没有显著妨碍内核性能优化的实现。通过合理的设计和技巧，Biscuit 仍然能够实现许多标准的内核优化。</li>
+</ul>
+</li>
+</ol>
+<p>Biscuit 内核在处理调度、垃圾回收以及性能优化时的策略依赖 Go 运行时管理调度和上下文切换，并在某些方面进行了调整以适应内核需求，如手动进行地址转换和页表切换。在垃圾回收方面，Biscuit 通过关闭专用线程和优化根标记来减少回收延迟。性能优化方面，Biscuit 实现了大页映射、无锁数据结构等标准优化措施，并且 Go 语言并未阻碍这些优化的实现。</p>
+<hr>
+<h2 id="无读锁结构lock-free-read-structure"><strong>无读锁结构</strong>（lock-free read structure）
+</h2><p><strong>无读锁结构</strong>（lock-free read structure）是一种在并发编程中使用的数据结构，它允许多个线程或进程同时进行读取操作而<strong>不需要加锁</strong>。这种设计可以显著提高读取操作的并发性能，因为读操作之间不会互相阻塞或等待，从而减少了锁的开销。无读锁结构通常通过使用某种形式的原子操作或版本控制来确保数据一致性。</p>
+<p>在传统的读写锁设计中，<strong>读操作</strong>和<strong>写操作</strong>都会使用锁来保护共享数据的访问。一旦一个线程获取了读锁，其他线程可以同时获取读锁进行读取，但写操作则需要等待所有读操作完成。而无读锁结构通过设计，允许读操作在不加锁的情况下执行，通常通过以下几种机制来实现：</p>
+<ul>
+<li><strong>原子操作</strong>：通过原子操作（如 <code>compare-and-swap</code>）来确保写操作不会影响读操作的一致性。</li>
+<li><strong>版本控制</strong>：读操作在读取数据时会检查一个版本号，如果写操作修改了数据，它会更新版本号。读操作在完成后检查是否版本号一致，从而判断数据是否被修改。</li>
+</ul>
+<p>例子 1：<strong>无锁哈希表</strong>（Lock-free Hash Table）。在无锁哈希表中，多个线程可以同时读取数据，而不需要锁住整个哈希表。写操作（插入或删除键值对）可以通过原子操作完成，比如使用 <code>CAS</code>（Compare-And-Swap） 来更新哈希表中的指针。例如，当一个线程想要从无锁哈希表中读取数据时，它只需要找到哈希槽并读取其中的数据。如果在读的过程中有其他线程在写数据，写线程会通过原子操作来更新哈希表指针。读线程可以在读取后检查版本号，确保数据一致。</p>
+<p>例子 2：<strong>RCU (Read-Copy-Update)</strong>。RCU 是一种常见的无读锁技术，用于提高读操作的效率。它的工作方式是这样的：</p>
+<ul>
+<li>当进行写操作时，RCU 会创建数据的一个副本。修改不会直接应用到现有数据，而是应用到副本上。</li>
+<li>读操作仍然读取原来的数据，不受写操作的影响。</li>
+<li>写操作完成后，将新的副本替换为旧的数据，所有后续的读操作会看到新的数据。</li>
+</ul>
+<p><strong>RCU 的一个典型应用</strong>是 Linux 内核中的 <strong>目录缓存（dentry cache）</strong>。多个线程可以同时读取文件系统的目录信息，而不需要锁定整个缓存，写操作则通过版本控制机制来进行同步。</p>
+<p>例子 3：<strong>无锁队列</strong>（Lock-free Queue）。无锁队列是一种队列数据结构，它允许多个线程在无锁的情况下并发进行入队和出队操作。无锁队列通常通过原子操作来确保并发安全。最经典的例子是 <strong>Michael &amp; Scott 无锁队列</strong>：</p>
+<ul>
+<li><strong>入队操作</strong>：入队线程会通过 <code>CAS</code> 原子操作来更新队列的尾部指针，将新节点插入队列的末尾。</li>
+<li><strong>出队操作</strong>：出队线程也通过 <code>CAS</code> 操作更新队列的头部指针，从队列头部取出数据。</li>
+</ul>
+<p>由于入队和出队是独立的、无锁的，多个线程可以同时执行这些操作，而不会相互阻塞。</p>
+<p>总而言之，无读锁结构允许多个线程在不需要加锁的情况下并发进行读取操作，从而提高了读取性能和系统的整体并发性。常见的实现方式有基于原子操作的无锁队列、无锁哈希表，以及使用版本控制机制的 RCU。通过这些机制，可以减少锁的争用，提高系统在高并发场景下的性能。</p>
+<hr>
+<h2 id="什么是poll">什么是poll
+</h2><p>在操作系统中，<strong><code>poll</code></strong> 是一种用于<strong>监控文件描述符（file descriptors）状态</strong>的系统调用，通常用于网络编程和 I/O 操作。它允许程序<strong>同时等待多个文件描述符的事件</strong>，如可读、可写或发生错误。</p>
+<p><code>poll</code> 系统调用的主要作用是让程序可以<strong>同时监视多个 I/O 通道</strong>，而不需要为每个 I/O 通道分别等待。这在<strong>多路复用</strong>（multiplexing）I/O 中非常重要，特别是在处理<strong>并发网络连接</strong>时。程序员可以用 <code>poll</code> 来检查哪些文件描述符已经准备好进行读、写操作或是否有错误发生，然后对那些准备好的文件描述符进行处理。</p>
+<p><code>poll</code> 通常用于网络服务器，特别是那些需要同时处理多个连接的服务器程序。例如，服务器会监听多个客户端的网络套接字，通过 <code>poll</code> 确定哪个套接字有数据可读，哪个套接字可以发送数据，或者哪个套接字发生了错误。其工作原理为：</p>
+<ul>
+<li>程序向操作系统传递一个<strong>文件描述符列表</strong>，每个文件描述符都关联了需要监听的事件（如可读、可写、错误等）。</li>
+<li><code>poll</code> 将阻塞进程，直到其中至少有一个文件描述符准备好处理（或指定的超时时间到达）。</li>
+<li>一旦返回，程序可以根据 <code>poll</code> 返回的结果，处理对应的文件描述符。</li>
+</ul>
+<p>假设你有多个客户端连接到服务器，服务器可以使用 <code>poll</code> 来检查哪些客户端有新的数据要读取：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">struct</span> <span class="n">pollfd</span> <span class="n">fds</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>  <span class="c1">// 创建两个文件描述符的数组
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">fds</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">fd</span> <span class="o">=</span> <span class="n">socket_fd</span><span class="p">;</span>  <span class="c1">// 监听的套接字文件描述符
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">fds</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">events</span> <span class="o">=</span> <span class="n">POLLIN</span><span class="p">;</span> <span class="c1">// 监听可读事件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="n">fds</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">fd</span> <span class="o">=</span> <span class="n">another_fd</span><span class="p">;</span>  <span class="c1">// 另一个文件描述符
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">fds</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">events</span> <span class="o">=</span> <span class="n">POLLOUT</span><span class="p">;</span> <span class="c1">// 监听可写事件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="nf">poll</span><span class="p">(</span><span class="n">fds</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">timeout</span><span class="p">);</span>  <span class="c1">// 调用 poll，等待事件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">if</span> <span class="p">(</span><span class="n">fds</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">revents</span> <span class="o">&amp;</span> <span class="n">POLLIN</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 如果 fds[0] 的文件描述符准备好读取数据
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">read</span><span class="p">(</span><span class="n">socket_fd</span><span class="p">,</span> <span class="n">buffer</span><span class="p">,</span> <span class="n">length</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>poll</code> 通过提供一种机制，让程序可以同时监视多个 I/O 通道的状态，而不会被阻塞在单个通道上。这对于处理<strong>高并发</strong>的网络应用程序至关重要。</p>
+<hr>
+<h2 id="go-语言的高级语言特性hll对-biscuit-内核性能的影响">Go 语言的高级语言特性（HLL）对 Biscuit 内核性能的影响
+</h2><ol>
+<li><strong>性能成本分析</strong>：
+<ul>
+<li>这部分分析了 Go 的高级语言特性在 Biscuit 内核中的性能成本，并展示了三个应用的基准测试结果（见图 7）。</li>
+<li><strong>Tput（吞吐量）列</strong>：显示应用每秒处理的请求数量，表示系统处理任务的速度。</li>
+<li><strong>Kernel time（内核时间）列</strong>：显示应用在内核中执行的时间比例（而不是在用户空间）。结果表明，这些基准测试主要由内核活动主导，并且在测试中所有四个 CPU 核心都被 100% 占用。</li>
+</ul>
+</li>
+<li><strong>内核堆内存和垃圾回收</strong>：
+<ul>
+<li>应用程序在运行时会在 Biscuit 内核堆中产生<strong>18 到 48 MB 的活动数据</strong>。</li>
+<li>它们快速分配了大量的临时对象，导致每次基准测试运行中触发了<strong>数十次垃圾回收</strong>（GC）。</li>
+<li>这些垃圾回收占用了系统<strong>1% 到 3%</strong> 的总 CPU 时间。</li>
+</ul>
+</li>
+<li><strong>编译器生成的代码分析</strong>：
+<ul>
+<li><strong>Prologue cycles（函数前置代码）</strong>：这一项衡量由编译器生成的代码在每个函数开始时消耗的时间，用于检查栈是否需要扩展，以及垃圾收集器是否需要暂停整个系统。这部分代码是所有高级语言特性中最耗时的。</li>
+<li><strong>WB cycles（写屏障周期）</strong>：用于处理对象在并发垃圾回收期间被修改时，编译器生成的写屏障代码的执行时间。</li>
+</ul>
+</li>
+<li><strong>运行时安全检查成本</strong>：
+<ul>
+<li><strong>Safety cycles（安全周期）</strong>：报告了用于运行时检查的成本，如 <code>nil</code> 指针检查、数组和切片边界检查、除零检查、以及动态类型转换检查。这些检查是由编译器自动生成的，贯穿整个代码。</li>
+<li>通过一个工具分析这些检查在 Biscuit 二进制文件中的位置，并与 CPU 时间消耗交叉引用，以确定它们的成本。</li>
+</ul>
+</li>
+<li><strong>内存分配时间</strong>：
+<ul>
+<li><strong>Alloc cycles（分配周期）</strong>：衡量 Go 内存分配器花费的时间，这包括检查自由列表以满足分配请求，但不包括并发垃圾回收的工作。虽然内存分配并不是高级语言独有的任务，但一些 C 语言编写的内核使用定制的分配器来优化分配过程。</li>
+</ul>
+</li>
+<li><strong>结果总结</strong>：
+<ul>
+<li>基于图 7 的数据显示，<strong>函数前置代码（Prologue cycles）</strong> 是使用高级语言特性时最昂贵的部分。垃圾回收成本虽然明显，但并不是最大的性能瓶颈。</li>
+<li>另一方面，随着活动数据量的增加，垃圾回收的成本会增长，这在 <strong>§8.6</strong> 进行了进一步讨论。同时，函数前置代码的开销似乎有可能通过优化进一步减少。</li>
+</ul>
+</li>
+</ol>
+<p>虽然Go 语言高级特性对 Biscuit 内核性能的影响，尤其是函数前置代码、垃圾回收、写屏障和安全检查的性能开销带来了一定的性能损耗，但其中大部分问题可以通过进一步优化来减轻。</p>
+<hr>
+<h2 id="正课部分">正课部分
+</h2><h2 id="c语言实现操作系统的优劣势">C语言实现操作系统的优劣势
+</h2><p>今天我们要讨论使用高级编程语言实现操作系统的优点和代价。今天课程的内容主要是我们之前写的一篇<a class="link" href="https://pdos.csail.mit.edu/6.828/2020/readings/biscuit.pdf"  target="_blank" rel="noopener"
+    >论文</a>，论文作者包括了Robert和我，以及一个主要作者Cody Cutler，他是这门课程的一个TA。</p>
+<p>我通常不会讨论我们自己写的论文，但是因为这篇论文与课程内容相关，所以它在这。今天我们会用一些PPT，而不是在白板上讲解这节课。</p>
+<p>这篇论文的起因是这样一个问题：你应该用什么样的编程语言来实现操作系统内核？</p>
+<p>这个问题很多同学都问过，可能是因为你发现了在操作系统中有Bug，然后你会想，如果我使用一种其他的编程语言，或许我就不会有这些Bug了，所以这是一个经常出现的问题。</p>
+<p>虽然这也是操作系统社区里的一个热烈争论的问题，但是并没有很多事实来支撑这里的讨论。在课程结束的时候，我们其实也不能对这个问题有个干脆的回答。</p>
+<p>但是至少这篇论文贡献了一些数据使得你可以对应该使用什么样的编程语言来实现内核这个话题，有一些更深入的讨论。这是这篇论文的出发点。</p>
+<p>为了能回答上面的问题，我们使用了一个带自动内存管理的编程语言写了一个新的内核，所以现在内核带了Garbage Collector，你不用调用free来释放内存，这样就可以避免一类Bug。</p>
+<p>GC是高级编程语言通常都带有的属性，我们选择了一种带GC的编程语言，并且实现过程中我们遵循了传统的monolithic UNIX风格，这样我们才能做出公平的对比。</p>
+<p>实际上，从某些角度你可以认为我们创建的是类似于XV6的内核，但是拥有了更多的特性和更高的性能。你知道的，XV6中里存在各种O(n^2)算法和O(n)的查找，如果你想要写一个高性能的操作系统，你不能有这样的实现。</p>
+<p>以上就是论文的起因，以及我们创建Biscuit（也就是上面提到的操作系统）的原因，我们想要回答上面的问题，或者至少给出一些启发。</p>
+<p>今天这节课首先我要讨论一些通用的背景，之后我们会深入到Biscuit的细节中。</p>
+<p>现在很多操作系统都是用C实现的，你知道的，XV6是用C写的，一些更流行的运行在你的电脑、手机的操作系统，例如Windows，Linux，以及各种形式的BSD都是用C写的。</p>
+<p>为什么它们都是用C实现的呢？</p>
+<ul>
+<li>首先C提供了大量的控制能力，从我们的实验中你可以看到，C可以完全控制内存分配和释放</li>
+<li>C语言几乎没有隐藏的代码，你几乎可以在阅读C代码的时候想象到对应的RISC-V机器指令是什么</li>
+<li>通过C可以有直接内存访问能力，你可以读写PTE的bit位或者是设备的寄存器</li>
+<li>使用C会有极少的依赖，因为你不需要一个大的程序运行时。你几乎可以直接在硬件上运行C程序。你们可以在XV6启动过程中看到这一点， 只通过几行汇编代码，你就可以运行C代码</li>
+</ul>
+<p>以上就是C代码的优点，也是我们喜欢C语言的原因。但是C语言也有一些缺点。</p>
+<p>在过去几十年已经证明了，很难写出安全的C代码。</p>
+<p>这里存在各种各样的Bug，首先是最著名的buffer overrun，比如说数组越界，撑爆了Stack等等。其次是use-after-free bugs，你可能会释放一些仍然在使用的内存，之后其他人又修改了这部分内存。第三，当线程共享内存时，很难决定内存是否可以被释放。</p>
+<p>其中一些Bug在XV6中已经出现，其他的一些不太常见。因为XV6很少有动态内存分配，几乎所有的东西都是预分配的，所以共享内存Bug很少出现，但是buffer overrun和use-after-free bugs的确出现过。</p>
+<p>CVEs一个跟踪所有的安全漏洞的组织，如果你查看他们的网站，你可以发现，在2017年有40个Linux Bugs可以让攻击者完全接管机器。</p>
+<p>很明显，这些都是非常严重的Bugs，这些Bug是由buffer overrun和一些其他memory-safety bug引起。这就太糟糕了，如果你用C写代码，就很难能够完全正确运行。</p>
+<p>当然，我可以肯定你们在之前的实验中都见过了这些Bug，之前在课程论坛上的一些问题涉及了use-after-free Bug。特别是在copy-on-write lab中，这些问题出现了好几次。</p>
+<hr>
+<h2 id="高级编程语言实现操作系统的优劣势">高级编程语言实现操作系统的优劣势
+</h2><p>高级编程语言吸引人的一个原因是它提供了memory-safety，所以上一节中CVEs提到的所有Bugs，都将不再存在。</p>
+<p>要么当它们发生时程序运行时会检查数组是否越界，如果越界了就panic；要么高级编程语言不允许你写出引起Bug的代码，所以这些问题完全不可能出现。</p>
+<p>当然，高级编程语言还有一些其他的优点：</p>
+<ul>
+<li>首先是Type safety，类型安全</li>
+<li>通过GC实现了自动的内存管理，所以free更容易了，你都不用去考虑它，GC会为你完成所有的内存释放工作</li>
+<li>对并发更友好</li>
+<li>有更好的抽象，接口和类等面向对象的语法使得你可以写出更加模块化的代码</li>
+</ul>
+<p>高级编程语言有这么多优势，你不禁会想它有哪些缺点呢？为什么XV6或者Linux没有用Java，Golang，Python来写？</p>
+<p>这里的原因是高级编程语言通常有更差的性能。高级编程语言通常都有一些额外的代价，这被称为High Level Language Tax。</p>
+<ul>
+<li>比如说在索引一个数组元素时检查数据边界，比如说检查空指针，比如说类型转换。</li>
+<li>除此之外，GC也不是没有代价的，需要花费一些时间来跟踪哪些对象可以被释放。</li>
+</ul>
+<p>除了性能之外，高级编程语言与内核编程本身不兼容。</p>
+<ul>
+<li>比如说高级编程语言没有直接访问内存的能力，因为这从原则上违反了Type safety。</li>
+<li>高级编程语言不能集成汇编语言，而在内核中的一些场景你总是需要一些汇编程序，比如说两个线程的context switching，或者系统启动</li>
+<li>编程语言本身支持的并发与内核需要的并发并不一致，比如我们在调度线程的时候，一个线程会将锁传递给另一个线程。一些并发管理模式在用户程序中不太常见，但是在内核中会出现。</li>
+</ul>
+<p>今天论文的目标是能够测量出高级编程语言的优劣势，并从safety，programmability和性能损失角度，探索使用高级编程语言而不是C语言实现内核的效果。</p>
+<p>当然，为了做到这一点，你需要在一个产品级的内核上做实验，而不是在XV6上。</p>
+<p>XV6现在是由C语言写的很慢的内核，如果你用Golang也写了个很慢的内核，这不能说明C还是Golang更快，这只能说明XV6很慢。所以，你会想要在一个为高性能而设计的内核中完成这里的测量。</p>
+<p>很奇怪之前并没有一个论文完成了这里的测量。有很多论文研究了在用户程序中高级编程语言的优劣势，但是你知道的，内核与用户程序还是很不一样的，比如内核中需要有更小心的内存管理，内核中的并发或许会略有不同。</p>
+<p>所以，现在我们想要在内核中而不是用户程序中完成分析，而我们并没有找到之前的任何论文真正做了这个工作。</p>
+<p>之前的确有很多内核是用高级编程语言写的，这里有很长的历史，甚至可以回溯到最早的计算机中。</p>
+<p>但是最近的一些基于高级编程语言的内核并不是为了评估High Level Language Tax，而是为了探索新的内核设计和新的内核架构，所以这些内核并没有在保持结构相同的同时，直接对比C语言内核。只有保持系统结构相同，你才可以真正的关注语言本身，而不是一些其他的问题。</p>
+<p>为什么没有很多论文做这样的对比测试？一个原因可能是这里的工作有点棘手。</p>
+<p>如果你想得到正确的结果，你需要与产品级别的C内核进行对比，例如Linux，Windows等等。同时，你也需要构建一个产品级别的内核。</p>
+<p>很明显，这对于一个小的团队来说很难，因为有许多许多的Linux开发人员日复一日做了许多许多的更新才创造了Linux，所以很难用高级编程语言实现同样的功能并构建同样的内核，所以我们这里会构建一个功能稍微少的系统内核。</p>
+<p>所以我们能做到的最好情况是：</p>
+<ul>
+<li>用高级编程语言构建内核</li>
+<li>保留与Linux中最重要的部分对等的功能</li>
+<li>优化性能使得其与Linux基本接近，即使这里的功能与Linux并不完全一致，但是我们至少可以将它们拉到一个范围内</li>
+<li>最后我们就可以测量高级编程语言的优劣</li>
+</ul>
+<p>当然，这种方法的风险在于我们构建的内核与Linux还是略有不同，它不会与Linux完全一样，所以在得出结论时需要非常小心。</p>
+<p>这就是为什么不能对论文提出的问题（注，也就是应该使用什么样的编程语言实现操作系统）给出一个十分清晰的答案的原因。尽管如此，我们还是可以期望更深入的了解这个问题，而不是完全不知道它的内容。</p>
+<p>以上就是论文的背景，以及为什么很少有人会做同样的工作的原因。</p>
+<hr>
+<h2 id="高级编程语言选择-----golang">高级编程语言选择 &mdash; Golang
+</h2><p>接下来我们看一下对比方法，图中左边是Biscuit，这是一个我们为了<a class="link" href="https://pdos.csail.mit.edu/6.828/2020/readings/biscuit.pdf"  target="_blank" rel="noopener"
+    >论文</a>专门用Golang写的内核，它以大概类似的方式提供了Linux中系统调用的子集。Biscuit和Linux的系统调用有相同的参数和相同的调用方式。</p>
+<p>并且我们在内核之上运行的是相同的应用程序，这里的应用程序是NGINX，这是一个web server，这里我们将相同的应用程序分别运行在Biscuit和Linux之上，应用程序会执行相同的系统调用，并传入完全相同的参数，Biscuit和Linux都会完成涉及系统调用的相同操作。</p>
+<p>之后，我们就可以研究高级编程语言内核和Linux之间的区别，并讨论优劣势是什么。以上就是对比方法的核心。</p>
+<p>因为Linux和Biscuit并不完全一样，它们会有一些差异，所以我们花费了大量的时间来使得这里的对比尽可能得公平。</p>
+<p>有很多同学可能会问，这里会使用什么样的高级编程语言呢？基于以下原因，我们选用了Golang。</p>
+<ul>
+<li>这是一个静态编译的编程语言，和Python不同，这里没有解释器。我们喜欢静态编译的语言的原因是编译语言性能通常更好，实际上Go编译器就非常好，所以基本上来说这是一种高性能编程语言。</li>
+<li>另外，Golang被设计成适合系统编程，而内核就是一种系统编程所以Golang也符合这里的场景。例如：
+<ul>
+<li>Golang非常容易调用汇编代码，或者其他的外部代码</li>
+<li>Golang能很好地支持并发</li>
+<li>Golang非常的灵活</li>
+</ul>
+</li>
+<li>另一个原因是Golang带有Garbage Collector。使用高级编程语言的一个优点就是你不需要管理内存，而GC是内存管理的核心。</li>
+</ul>
+<p>在我们开始写论文的时候，Rust并不十分流行，并且也不是十分成熟和稳定。</p>
+<p>但是如果你现在再做相同的事情，你或许会想要用Rust来实现。因为Rust也是为系统编程而设计，它有一个小的运行时，它能生成好的代码。不过Rust相比Golang还有一个缺点，Rust认为高性能程序不能有GC，所以Rust不带GC。</p>
+<p>实际上Rust的类型系统以一种非常聪明且有趣的方式实现，所以GC对于Rust并不是必须的。</p>
+<p>这里涉及到一个有趣的问题：通过高级编程语言实现内核时，GC的代价到底有多少？而Rust通过不使用GC而跳过了这个问题。</p>
+<blockquote>
+<p>学生提问：如果我们这里使用Rust而不是Golang来实现高级编程语言内核，通过一定的优化有没有可能达到比C内核更高的性能？</p>
+<p>Frans教授：因为我们没有做过这样的实验，所以我就猜一下。我觉得不会有比C内核更高的性能，但是基本在同一个范围内。因为C是如此的底层，你可以假设你在Rust做的工作，都可以在C中完成。</p>
+</blockquote>
+<p>这里有一个问题，并且在这节课最后我们会再次回顾这个问题。</p>
+<p>我们想要使用高级编程语言内核的部分原因是为了避免一类特定的Bug，那么你可以问自己的一个问题的是，你们在实验中遇到的Bug，是否可以通过使用高级编程语言来避免？</p>
+<p>我肯定你可以回想起一些Bug，它们耗费了你很多的时间，很多精力，现在你可以问自己，如果实验中的XV6是使用某种高级编程语言实现的，你的生活会不会更轻松一些？你是否能有更多时间做一些其他的事情。</p>
+<p>让我们记住这个问题，并在这节课结束的时候再看这个问题。</p>
+<hr>
+<h2 id="biscuit">Biscuit
+</h2><p>接下来我将对Biscuit稍作介绍，包括了Biscuit是如何工作的，以及在实现中遇到的问题。其中有些问题是预期内的，有些问题不在预期之内。</p>
+<p>就像Linux和XV6一样，Biscuit是经典的monolithic kernel。</p>
+<p>所以它也有用户空间和内核空间，用户空间程序可能是你的编译器gcc，或者论文中主要用到的webserver。</p>
+<p>这里用户空间程序主要用C实现，尽管原则上它可以是任何编程语言实现的，但是因为这里只是性能测试，我们这里统一选用的是C版本的应用程序。</p>
+<p>大部分用户程序都是多线程的，所以不像在XV6中每个用户程序只有一个线程，在Biscuit中支持用户空间的多线程。</p>
+<p>基本上，对于每个用户空间线程，都有一个对应的位于内核的内核线程，这些内核线程是用Golang实现的，在Golang里面被称为goroutine。你可以认为goroutine就是普通的线程，就像XV6内核里的线程一样。</p>
+<p>区别在于，XV6中线程是由内核实现的，而这里的goroutine是由Go runtime提供。</p>
+<p>所以Go runtime调度了goroutine，Go runtime支持sleep/wakeup/conditional variable和同步机制以及许多其他特性，所以这些特性可以直接使用而不需要Biscuit再实现一遍。</p>
+<p>Biscuit中的Go runtime直接运行在硬件上，稍后我将介绍更多这部分内容，但是你现在可以认为当机器启动之后，就会启动Go runtime。这里会稍微复杂，因为Go runtime通常是作为用户空间程序运行在用户空间，并且依赖内核提供服务，比如说为自己的heap向内核申请内存。</p>
+<p>所以Biscuit提供了一个中间层，使得即使Go runtime运行在裸机之上，它也认为自己运行在操作系统之上，这样才能让Go runtime启动起来。</p>
+<p>Biscuit内核本身与XV6非常相似，除了它更加的复杂，性能更高。它有虚拟内存系统可以实现mmap，有更高性能的文件系统，有一些设备驱动，比如磁盘驱动，以及网络协议栈。</p>
+<p>所以Biscuit比XV6更加完整，它有58个系统调用，而XV6只有大概18-19个系统调用；它有28000行代码，而XV6我认为只有少于10000行代码。所以Biscuit有更多的功能。</p>
+<blockquote>
+<p>学生提问：这里的接口与XV6类似对吧，所以进程需要存数据在寄存器中，进程也会调用ECALL。</p>
+<p>Frans教授：我稍后会再做介绍，但是这里完全相同。</p>
+</blockquote>
+<p>以上是Biscuit的特性，有些我已经提到过了。</p>
+<ul>
+<li>首先它支持<strong>多核CPU</strong>。Golang对于并发有很好的支持，所以Biscuit也支持多核CPU。类似的，XV6却只对多核CPU有有限的支持。所以在这里，我们相比XV6有更好的同步协调机制。</li>
+<li>它支持用户空间<strong>多线程</strong>，而XV6并没有。</li>
+<li>它有一个相比XV6更高性能的<strong>Journaled File System</strong>（注，Journaled就是指log，可以实现Crash Recovery）。如果你还记得EXT3论文，它与EXT3的Journaled File System有点类似。</li>
+<li>它有在合理范围内较为复杂的<strong>虚拟内存</strong>系统，使用了VMAs并且可以支持mmap和各种功能。</li>
+<li>它有一个完整的<strong>TCP/IP栈</strong>，可以与其他的服务器通过互联网连接在一起。</li>
+<li>它还有两个<strong>高性能的驱动</strong>，一个是Intel的10Gb网卡，以及一个非常复杂的磁盘驱动AHCI，这比virtIO磁盘驱动要复杂的多。</li>
+</ul>
+<p>Biscuit支持的用户程序中：</p>
+<ul>
+<li>每个用户程序都有属于自己的Page Table。</li>
+<li>用户空间和内核空间的内存是由硬件隔离的，也就是通过PTE的User/Kernel bit来区分。</li>
+<li>每个用户线程都有一个对应的内核线程，这样当用户线程执行系统调用时，程序会在对应的内核线程上运行。如果系统调用阻塞了，那么同一个用户地址空间的另一个线程会被内核调度起来。</li>
+<li>如之前提到的，内核线程是由Go runtime提供的goroutine实现的。如果你曾经用Golang写过用户空间程序，其中你使用go关键字创建了一个goroutine，这个goroutine就是Biscuit内核用来实现内核线程的goroutine。</li>
+</ul>
+<p>来看一下系统调用。就像刚刚的问题一样，这里的系统调用工作方式与XV6基本一致：</p>
+<ul>
+<li>用户线程将参数保存在寄存器中，通过一些小的库函数来使用系统调用接口。</li>
+<li>之后用户线程执行SYSENTER。现在Biscuit运行在x86而不是RISC处理器上，所以进入到系统内核的指令与RISC-V上略有不同。</li>
+<li>但是基本与RISC-V类似，控制权现在传给了内核线程。</li>
+<li>最后内核线程执行系统调用，并通过SYSEXIT返回到用户空间。</li>
+</ul>
+<p>所以这里基本与XV6一致，这里也会构建trapframe和其他所有的内容。</p>
+<blockquote>
+<p>学生提问：我认为Golang更希望你使用channel而不是锁，所以这里在实现的时候会通过channel取代之前需要锁的场景吗？</p>
+<p>Frans教授：这是个好问题，我会稍后看这个问题，接下来我们有几页PPT会介绍我们在Biscuit中使用了Golang的什么特性，但是我们并没有使用太多的channel，大部分时候我们用的就是锁和conditional variable。</p>
+<p>所以某种程度上来说Biscuit与XV6的代码很像，而并没有使用channel。我们在文件系统中尝试过使用channel，但是结果并不好，相应的性能很差，所以我们切换回与XV6或者Linux类似的同步机制。</p>
+</blockquote>
+<p>在实现Biscuit的时候有一些挑战：</p>
+<ul>
+<li>
+<p>首先，我们需要让Go runtime运行在裸机之上。</p>
+<p>我们希望对于runtime不做任何修改或者尽可能少的修改，这样当Go发布了新的runtime，我们就可以直接使用。在我们开发Biscuit这几年，我们升级了Go runtime好几次，所以Go runtime直接运行在裸机之上是件好事。</p>
+<p>并且实际上也没有非常困难。Golang的设计都非常小心的不去依赖操作系统，因为Golang想要运行在多个操作系统之上，所以它并没有依赖太多的操作系统特性，我们只需要仿真所需要的特性。</p>
+<p>大部分这里的特性是为了让Go runtime能够运行起来，一旦启动之后，就不太需要这些特性了。</p>
+</li>
+<li>
+<p>我们需要安排goroutine去运行不同的应用程序。</p>
+<p>通常在Go程序中，只有一个应用程序，而这里我们要用goroutine去运行不同的用户应用程序，这些不同的用户应用程序需要使用不同的Page Table。</p>
+<p>这里困难的点在于，Biscuit并不控制调度器，因为我们使用的是未经修改过的Go runtime，我们使用的是Go runtime调度器，所以在调度器中我们没法切换Page Table。</p>
+<p>Biscuit采用与XV6类似的方式，它会在内核空间和用户空间之间切换时更新Page Table。所以当进入和退出内核时，我们会切换Page Table。</p>
+<p>这意味着像XV6一样，当你需要在用户空间和内核空间之间拷贝数据时，你需要使用copy-in和copy-out函数，这个函数在XV6中也有，它们基本上就是通过软件完成Page Table的翻译工作。</p>
+</li>
+<li>
+<p>另一个挑战就是设备驱动，Golang通常运行在用户空间，所以它并不能从硬件收到中断。</p>
+<p>但是现在我们在裸机上使用它，所以它现在会收到中断，比如说定时器中断，网卡中断，磁盘驱动中断等等，我们需要处理这些中断。然而在Golang里面并没有一个概念说是在持有锁的时候关闭中断，因为中断并不会出现在应用程序中，所以我们在实现设备驱动的时候要稍微小心。</p>
+<p>我们采取的措施是在设备驱动中不做任何事情，我们不会考虑锁，我们不会分配任何内存，我们唯一做的事情是向一个非中断程序发送一个标志，之后唤醒一个goroutine来处理中断。</p>
+<p>在那个goroutine中，你可以使用各种各样想要的Golang特性，因为它并没有运行在中断的context中，它只是运行在一个普通goroutine的context中。</p>
+</li>
+<li>
+<p>前三个挑战我们完全预料到了，我们知道在创造Biscuit的时候需要处理它们，而最难的一个挑战却不在我们的预料之中。这就是heap耗尽的问题。所以接下来我将讨论一下heap耗尽问题，它是什么，它怎么发生的，以及我们怎么解决的？</p>
+</li>
+</ul>
+<hr>
+<h2 id="heap-exhaustion">Heap exhaustion
+</h2><p>让我们讨论一下Heap耗尽问题，我不会像<a class="link" href="https://pdos.csail.mit.edu/6.828/2020/readings/biscuit.pdf"  target="_blank" rel="noopener"
+    >论文</a>一样深入讨论，但是至少会演示问题是什么。</p>
+<p>假设蓝色的矩形是内核，内核会有一个heap，它会从其中申请动态内存。</p>
+<p>在XV6中，我们并没有这样一个heap，我们在内核中没有内存分配器，所有内存都是静态分配的。但是任何其他的内核中，都会有heap，所以你在内核中可以调用malloc和free。可能通过heap分配的对象有socket对象，文件描述符对象和进程对象。</p>
+<p>所以，我们在XV6中静态分配的所有结构体，例如struct proc，struct fd，在正常的内核中都是动态分配的。所以当你打开一个新的文件描述符时，内核会通过heap分配一个文件描述符对象。</p>
+<p>这里的问题是，你可以运行很多个应用程序，它们会打开很多个文件描述符，拥有很多个socket，它们会逐渐填满heap。</p>
+<p><img src="/p/mit6s08120kernels-and-hll/p47.png"
+	width="1145"
+	height="733"
+	srcset="/p/mit6s08120kernels-and-hll/p47_hu7288560551218251938.png 480w, /p/mit6s08120kernels-and-hll/p47_hu7806804087688768358.png 1024w"
+	loading="lazy"
+	
+		alt="p47"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="156"
+		data-flex-basis="374px"
+	
+></p>
+<p>在某个时间点，heap会被填满，这时没有额外的空间可以用来分配一个新的对象。</p>
+<p>如果这时应用程序需要打开一个新的文件描述符，或者调用了fork使得内核想要在heap中分配一个新的proc结构体，heap中没有了空间。这时你该怎么办呢？</p>
+<p>这是一个不太常见的常见问题，但是如果你使劲用你的电脑，你或许会遇到所有内存都被使用了的情况，你的heap满了，并且没有进程调用free，因为它们都还在运行且想分配到更多的内存。</p>
+<p>所有的内核都会遇到这个问题，不管是C内核也好，Biscuit也好，任何内核都需要解决这个问题。</p>
+<p>之所以这个问题对于我们来说是个严重的问题，是因为在很多内核中，你可以对malloc返回错误，实际上，XV6就是这么做的。</p>
+<p>但是在Go runtime中，当你调用new来分配一个Go对象，并没有error condition，new总是可以成功。让我们来讨论一些可以解决这里问题的方法。</p>
+<ul>
+<li>
+<p>第一种方法我们在XV6中见过。如果XV6不能找到一个空闲的block cache来保存disk block，它会直接panic。这明显不是一个理想的解决方案。这并不是一个实际的解决方案，所以我们称之为strawman。</p>
+</li>
+<li>
+<p>另一个strawman方法是，当你在申请一块新的内存时，你会调用alloc或者new来分配内存，你实际上可以在内存分配器中进行等待。这实际上也不是一个好的方案，原因是你可能会有死锁。</p>
+<p>假设内核有把大锁，当你调用malloc，因为没有空闲内存你会在内存分配器中等待，那么这时其他进程都不能运行了。因为当下一个进程想要释放一些内存时，但是因为死锁也不能释放。</p>
+<p>对于内核中有大锁的情况，这里明显有问题，但是即使你的锁很小，也很容易陷入到这种情况：在内存分配器中等待的进程持有了其他进程需要释放内存的锁，这就会导致死锁的问题。</p>
+</li>
+<li>
+<p>下一个strawman方法是，如果没有内存了就返回空指针，你检查如果是空指针就直接失败，这被称为bail out。</p>
+<p>但是bail out并不是那么直观，进程或许已经申请了一些内存，那么你需要删除它们，你或许做了一部分磁盘操作，比如说你在一个多步的文件系统操作中间，你只做了其中的一部分，你需要回退。所以实际中非常难做对。</p>
+</li>
+</ul>
+<p>当研究这部分，并尝试解决这个问题，Linux使用了前面两种方法，但是两种方法都有问题。实际中，内核开发人员很难将这里弄清楚。</p>
+<p>如果你对这个问题和相关的讨论感兴趣，可以Google搜索“<a class="link" href="https://lwn.net/Articles/627419/"  target="_blank" rel="noopener"
+    >too small to fail</a>”，会有一篇小的文章讨论释放内存，在内存分配器中等待的复杂性。</p>
+<p>对于Biscuit来说，strawman 2解决方案不可能实施，因为new不会fail，它总是能成功。除此之外，这里的方案都不理想，所以我们需要有一种更好的方法。</p>
+<hr>
+<h2 id="heap-exhaustion-solution">Heap exhaustion solution
+</h2><p>Biscuit的解决方案非常直观，当应用程序执行系统调用，例如read，fork时，在系统调用的最开始，跳转到内核之前，它会先调用reserve函数，reserve函数会保留足够的内存以运行系统调用。</p>
+<p>所以reserve会保留足够这个系统调用使用的空闲内存，以使得系统调用总是能成功。所以一旦系统调用被执行，且保留了足够的内存，那么它就可以一直运行而不会有内存耗尽和heap exhaustion的问题。</p>
+<p>如果reserve函数执行时没有足够的内存，那么程序会在这里等待。</p>
+<p>因为现在在系统调用的最开始，系统调用现在还没有持有任何的锁，也没有持有任何的资源，所以在这里等待完全没有问题，也不会有死锁的风险。当程序在等待的时候，内核可以撤回cache并尝试在heap增加空闲空间，比如说kill一个进程来迫使释放一些内存。</p>
+<p>一旦内存够用了，并且内核决定说是可以满足需要保留的内存，之后内核会让系统调用继续运行，然后执行系统调用需要的操作。在最后，当系统调用完成的时候，所有之前保留的内存都返回到池子中，这样后续的系统调用可以继续使用。</p>
+<p>这个方案中有一些很好的特性：</p>
+<ul>
+<li>在内核中没有检查。你不需要检查内存分配是否会失败，在我们的例子中这尤其得好，因为在Golang中内存分配不可能会失败。</li>
+<li>这里没有error handling代码。</li>
+<li>这里没有死锁的可能，因为你在最开始还没有持有锁的时候，就避免了程序继续执行。</li>
+</ul>
+<p>当然，现在的问题是如何实现reserve函数，你如何计算运行一个系统调用会需要多少内存？</p>
+<p>你保留的内存数量是重要的，你可以为每个系统调用保留一半的内存或者一些其他夸张的内存数量。但是这意味着你限制了可以并发执行的系统调用的个数，所以你这里尽量精确地计算一个系统调用的内存边界。</p>
+<p>这里的解决方法是使用了高级编程语言的特性。Golang实际上非常容易做静态分析，Go runtime和Go生态里面有很多包可以用来分析代码，我们使用这些包来计算系统调用所需要的内存。</p>
+<p>所以你可以想象，如果你有一个read系统调用，我们可以通过系统调用的函数调用图查看比如函数f调用函数g调用函数h等等等等。我们可以做的是弄清楚这里调用的最大深度，对于最大的深度，计算这里每个函数需要的内存是多少。</p>
+<p>比如说函数f调用了new，因为这是一个高级编程语言，我们知道new的对象类型，所以我们可以计算对象的大小。我们将所有的new所需要的内存加起来，得到了一个总和S，这就是这个调用图（或者说系统调用）任何时间可能需要的最大内存。</p>
+<p>实际中并没有这么简单，会有点棘手。因为函数h可能会申请了一些内存，然后再回传给函数g。所以当h返回时，g会得到h申请的一些内存。这被称为escaping，内存从h函数escape到了函数g。</p>
+<p>存在一些标准算法来完成这里的escape分析，以决定哪些变量escape到了函数调用者。当发生escape时，任何由函数h申请的内存并且还在函数g中存活，我们需要将它加到函数g的内存计数中，最后加到S中。</p>
+<blockquote>
+<p>学生提问：某些函数会根据不同的工作负载申请不同量的内存，那么在计算函数消耗的内存时，会计算最差的情况吗？</p>
+<p>Frans教授：是的。这里的工具会计算最深函数调用时最大可能使用的内存量。所以它会计算出每个系统调用可能使用的最多内存，虽然实际中系统调用可能只会使用少的多的内存。</p>
+<p>但是保险起见，我们会为最坏情况做准备。一些系统调用内的for循环依赖于传给系统调用的参数，所以你不能静态地分析出内存边界是什么。所以在一些场景下，我们会标注代码并规定好这是这个循环最大循环次数，并根据这个数字计算内存总量S。</p>
+<p>类似的，如果有你有递归调用的函数，谁知道会递归多少次呢？或许也取决于一个动态变量或者系统调用的参数。实际中，我们在Biscuit中做了特殊处理以避免递归函数调用。所以最后，我们才可能完成这里的内存分析。</p>
+</blockquote>
+<p>所以，这里的内存分析不是没有代价的，也不是完全自动的。</p>
+<p>这花费了Cody（论文一作）好几天检查代码，检查所有的循环并标注代码。还有一些其他的Golang特有的问题需要处理，例如，向Slice添加元素可能会使内存使用量扩大一倍，所以我们也给Slice标注了最大的容量。</p>
+<p>但是所有这些工作都是可完成的，在花费了几天时间之后，使用这里的内存分析工具，你可以得到对于系统调用使用的最大内存量的合理评估。以上基本就是Biscuit如何解决heap exhaustion问题。</p>
+<blockquote>
+<p>学生提问：这里的静态内存分析工具，如果不是用来构建内核，它们通常会用来干嘛？</p>
+<p>Frans教授：Go编译器内部使用它来完成各种各样的优化，并分析得出最优的编译方式。这里正好编译器使用了一个包，我们也可以使用同样的包。在后面你还可以看到，我们还将它用于一些其他特性，有这么一个包非常的方便。</p>
+</blockquote>
+<hr>
+<h2 id="evaluation-hll-benefits">Evaluation: HLL benefits
+</h2><p>Biscuit的实现与其他内核，例如XV6，非常相似，除了Biscuit比XV6性能要高的多。Biscuit采用了很多Linux内核的优化和聪明的设计：</p>
+<ul>
+<li>我们对于内核文本采用了大页，以避免TLB的代价。</li>
+<li>我们有针对每个CPU的网卡队列，这样可以避免CPU核之间同步。</li>
+<li>我们有RCU实现了不需要读锁的Directory Cache。</li>
+<li>&hellip;&hellip;</li>
+</ul>
+<p>通常为了高性能而做的优化，编程语言并不会成为阻碍。Golang并没有成为阻碍这些优化实现的因素。这些优化之前是在C和Linux中实现，我们现在只是在Golang中又实现它们。在实现这些优化时有很多的工作，但是这些工作与编程语言本身无关。</p>
+<p>今天<a class="link" href="https://pdos.csail.mit.edu/6.828/2020/readings/biscuit.pdf"  target="_blank" rel="noopener"
+    >论文</a>的出发点就是了解用高级编程语言实现操作系统的收益和代价。所以我们将分两部分来评估，首先是收益，其次是代价。</p>
+<p>有关高级编程语言，我们要回答三个问题：</p>
+<ul>
+<li>首先，我们有没有作弊？或许我们避免使用了所有Golang提供的高级编程语言中代价较高的功能。</li>
+<li>其次，高级编程语言是否有简化Biscuit代码？</li>
+<li>最后，高级编程语言是否能阻止前面提到的内核漏洞？</li>
+</ul>
+<p>首先，我们有没有使用高级编程语言的特性？我们会对比一下Biscuit与其他两个大的Golang项目在使用语言特性上是否类似，这样我们才可以说我们的内核以类似的方式利用了相同的语言特性。</p>
+<p>这里我们使用了相同的静态分析工具来分析两个大的Golang项目，它们都有超过100万行代码，其中一个项目是Go runtime以及包含的所有包，另一个是一个叫做Moby的系统。</p>
+<p><img src="/p/mit6s08120kernels-and-hll/p48.png"
+	width="1006"
+	height="766"
+	srcset="/p/mit6s08120kernels-and-hll/p48_hu10738859412535175576.png 480w, /p/mit6s08120kernels-and-hll/p48_hu9094950217176711344.png 1024w"
+	loading="lazy"
+	
+		alt="p48"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="131"
+		data-flex-basis="315px"
+	
+></p>
+<p>之后我们画出了一些高级语言特性在每1000行代码中的使用量。图中X轴是语言特性：</p>
+<ul>
+<li>allocation对应于new</li>
+<li>maps就是hashtable</li>
+<li>slice是动态数组</li>
+<li>channel是同步的工具，如你所见我们用的很少，Go runtine和Moby也用的很少</li>
+<li>很明显我们最喜欢的特性就是函数返回多个值</li>
+<li>我们使用了Closure（闭包）</li>
+<li>我们稍微使用了defer</li>
+<li>我们使用了Interface</li>
+<li>使用了Type assertion来以一种类型安全的方式将一个类型转换成另一个类型</li>
+<li>同时我们也import了很多包，Biscuit内核是由很多个包构建出来的，而不是一个大的单一的程序</li>
+</ul>
+<p>如你所见，有些特性Biscuit用的比Go runtime和moby更少，有些特性Biscuit用的更多，这里没有很明显的区别。所以从这张图中可以得出的主要结论是：Biscuit使用了Golang提供的高级编程语言特性，而不是为了得到好的性能而避开使用它们。</p>
+<blockquote>
+<p>学生提问：你这里是怎么统计的？是不是使用了静态分析工具？</p>
+<p>Frans教授：是的，这里使用的就是静态分析工具。通过写一个小程序利用静态分析工具来查看这些项目的每一行代码，并记录对应的特性是什么，这样就能统计这些特性的使用数量。</p>
+</blockquote>
+<p>第二个问题有点主观，高级编程语言有没有简化Biscuit代码？笼统的说我认为有的，我这里会讨论一两个例子。</p>
+<p>使用Garbage allocation是极好的，你可以回想XV6，当你调用exit时，有大量的结构化数据需要被释放回给内核，这样后面的进程才能使用。</p>
+<p>如果使用Garbage Collector这里的工作着实容易，Garbage Collector会完成这里的所有工作，你基本不用做任何事情。如果你从地址空间申请了一段内存，对应这段内存的VMA会自动被GC释放，所以这里可以简化代码。</p>
+<p>如之前所说的，函数返回多个值对于代码风格很好。闭包很好，map也很好。XV6中很多地方通过线性扫描查找数据，但是如果你有map和hashtable作为可以直接使用的对象，那么你就不用线性扫描了。</p>
+<p>你可以直接使用map，runtime会高效地为你实现相应的功能。所以直观上的感受是，你可以得到更简单的代码。</p>
+<p>但是前面只是定性的评估，下面会介绍一些更具体的例子。当有大量的并发线程，且线程有共享的数据时，GC如何起作用的。</p>
+<p>这里有个最简单的例子。假设你申请了一些动态的对象，比如说buffer，你fork一个线程来处理这个buffer，原线程也会处理同一个buffer。</p>
+<p>当两个线程都完成了工作，buffer需要被释放，这样内存才可以被后面的内核代码使用。这在C语言里面有点难协调，因为你需要有某种方式来决定buffer不再被使用。</p>
+<p>如果你使用GC，那么就没什么好决定的，因为当两个线程都处理完buffer之后，没有线程会指向那个buffer。</p>
+<p>GC会从线程栈开始追踪，并且在任何线程栈中都找不到buffer，因此GC会在稍后某个时间释放内存。所以在一个带GC的编程语言中，你完全不必考虑这个问题。</p>
+<p>在C中你可以这样解决这个问题，为对象增加引用计数，引用计数需要被锁或者一些原子性操作保护，当引用计数到达0时，你可以释放内存。</p>
+<p>实际中锁加上引用计数代价稍微有点高。如果你想要高性能，并且并发可以扩展到CPU核数，这可能会是个瓶颈，我们在后面介绍RCU的时候会看这部分。</p>
+<p>所以，如果你想要高性能，好的并发能力，人们倾向于不给读数据加锁。</p>
+<p>在实际中，我们会使得读数据至少是不需要锁的，这样你就不需要付出额外的代价。</p>
+<p>上面是我们在Golang中的实现，我们有个get函数，它会读取并返回链表的头结点。这里就没有使用锁，而是使用了atomic_load，它会读取头结点，但是又不需要锁。</p>
+<p>后面的pop函数使用了锁。这种风格在Linux内核中非常常见，写数据需要加锁，读数据不用加锁。这里pop函数会从链表中弹出头结点，这样你就可以重用头结点对应的内存。</p>
+<p>在C中实现这种风格会有点困难，因为有可能当你释放头结点内存时，其他并发的线程正好读取到了头结点的指针。这样当你做完atomic_store，你不能释放指针内容，因为有可能有另一个线程的指针指向了这部分内容。如果你在这里释放了指针内容，你有可能会有use-after-free Bug。</p>
+<p>我们在这门课程的最后一节课会看到，Linux内核对这个问题有一种非常聪明的解决办法，被称为Read-Copy-Update或者是RCU。它的工作就是推迟释放内存，直到确定指针不再被使用，并且它有一种非常聪明的方案来决定什么时候可以安全释放内存。</p>
+<p>但是这个方案有各种各样的限制，程序员需要在RCU关键区域内遵守各种规则。比如说你不能在RCU关键区域sleep，也不能切换线程。</p>
+<p>所以尽管实际中Linux内核非常成功的使用了RCU，但是RCU还是有点容易出错，并且需要小心编程来使得它能正确工作。在带有GC的编程语言，例如Golang，这就不是问题了，因为GC会决定某个对象不再被使用，只有这时才释放它。</p>
+<p>所以现在对于编程人员来说没有限制了，所有的限制都被GC考虑了。这是一种带有GC的编程语言的明显优势。</p>
+<p>接下来看看CVEs Bugs，这在前面提到过（注，20.1）。</p>
+<p><img src="/p/mit6s08120kernels-and-hll/p49.png"
+	width="1149"
+	height="683"
+	srcset="/p/mit6s08120kernels-and-hll/p49_hu8900748687767420232.png 480w, /p/mit6s08120kernels-and-hll/p49_hu6032594428648176963.png 1024w"
+	loading="lazy"
+	
+		alt="p49"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="168"
+		data-flex-basis="403px"
+	
+></p>
+<p>我们手动的检查了所有的CVEs Bug，并尝试确定Golang是否修复了问题。</p>
+<ul>
+<li>第一行代表我们不能弄清楚这些Bug的结果是什么，它会怎么展现，我们知道如何修复这些问题，但是我们不能确定Golang是否能避免这些问题。</li>
+<li>有很多逻辑Bug，可以认为Golang会有与C相同的Bug，所以结果是相同的</li>
+<li>接下来是40个memory-safety Bugs，包括了use-after-free，double-free，out-of-bound。其中8个直接消失了，因为GC考虑了内存释放，32个会产生panic，比如说数组越界。当然panic并不好，因为内核会崩溃，但是或许要比直接的安全漏洞更好。所以在这40个Bug中，高级编程语言有帮到我们。</li>
+</ul>
+<p>以上就是使用高级编程语言实现内核的优势，接下来讨论一些代价，也就是High Level Language Tax。</p>
+<hr>
+<h2 id="evaluation-hll-performance-cost1">Evaluation: HLL performance cost(1)
+</h2><p><img src="/p/mit6s08120kernels-and-hll/p50.png"
+	width="1141"
+	height="609"
+	srcset="/p/mit6s08120kernels-and-hll/p50_hu10946428304967497961.png 480w, /p/mit6s08120kernels-and-hll/p50_hu16952492634631476126.png 1024w"
+	loading="lazy"
+	
+		alt="p50"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="187"
+		data-flex-basis="449px"
+	
+></p>
+<p>以上是6个问题，我应该不会全部介绍，因为我想在课程的最后留些时间来回顾我们在本节课开始时提出的问题。</p>
+<p><img src="/p/mit6s08120kernels-and-hll/p51.png"
+	width="1135"
+	height="1034"
+	srcset="/p/mit6s08120kernels-and-hll/p51_hu18241543822846190995.png 480w, /p/mit6s08120kernels-and-hll/p51_hu8323672986732688372.png 1024w"
+	loading="lazy"
+	
+		alt="p51"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="109"
+		data-flex-basis="263px"
+	
+></p>
+<p>以上就是测试环境，Biscuit运行在裸机之上，所以我们的测试是在物理服务器而不是QEMU之上。我们使用了三个应用程序来做性能测试，它们分别是，Webserver，K/V store，Mail server benchmark。</p>
+<p>这三个应用程序都会给内核一定的压力，它们会执行系统调用，内核会做大量的工作。你可以看到，大部分CPU时间都在内核中。</p>
+<p>首先的问题是，Biscuit是否是一个工业质量的内核？我们将前面的三个应用程序分别运行在Linux和Biscuit上，并进行对比。</p>
+<p>在Linux中，我们会关闭所有Biscuit不提供的功能，比如Page Table隔离，repoline等等很多功能，这样的对比才会尽可能的公平。有些特性会比较难关闭，但是我们会尽量将它们关闭。</p>
+<p>之后我们会测试吞吐量，如你所见Biscuit总是会比Linux更慢，mailbench可能差10%，nginx和redis差10%到15%。这里的数字并不是绝对的，因为两个系统并不完全一样。但是可以看出两个系统基本在同一个范围内，而不是差个2倍或者10倍。</p>
+<p>接下来我们会分析代码，并找到高级编程语言额外的CPU cycle消耗。我们会找到：</p>
+<ul>
+<li>哪些CPU cycle是GC使用的，</li>
+<li>哪些是函数调用的Prologue使用的。Golang会为函数调用做一些额外的工作来确保Stack足够大，这样就不会遇到Out-of-Stack的问题</li>
+<li>Write barrier是GC用来跟踪不同空间的指针的方法</li>
+<li>Safety cycles是用在数组边界检查，空指针检查上的CPU cycles</li>
+</ul>
+<p><img src="/p/mit6s08120kernels-and-hll/p52.png"
+	width="1137"
+	height="538"
+	srcset="/p/mit6s08120kernels-and-hll/p52_hu1895094889201711505.png 480w, /p/mit6s08120kernels-and-hll/p52_hu15874215975049906889.png 1024w"
+	loading="lazy"
+	
+		alt="p52"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="211"
+		data-flex-basis="507px"
+	
+></p>
+<p>通过测试上面的应用程序，可以得到测量结果。</p>
+<ul>
+<li>3%的执行时间用在了GC cycles中，这里我稍后会介绍为什么这很少。同时这也可以说明GC是在运行的，我们并不是用了一大块内存而没有使用GC</li>
+<li>令人奇怪的是，Prologue占有的CPU时间最多，这基本上跟我们用来检查kernel Stack或者goroutine Stack是否需要增加的方案有关，这里或许更容易降低一些</li>
+<li>Write barrier使用的时间很少</li>
+<li>2%-3%的CPU时间用在了Safety cycles中</li>
+</ul>
+<p>这些数据都很好，High Level Language Tax并不是那么的大。</p>
+<p>当然GC的占比可能会更高，因为它完全取决于heap大小和存活对象的数量，GC会跟踪所有的存活对象，并决定哪些对象已经不被使用。</p>
+<p>如果有大量的存活对象，GC也需要跟踪更多的对象。所以这里的CPU时间完全与存活对象的数量相关。</p>
+<p>所以我们做了一些其他的实验。我们创建了大量的存活对象，大概有200万个vnode，可以认为这是200万个inode。然后修改heap的headroom，也就是GC可以使用的空闲内存数量，最后再测量GC的代价。</p>
+<p>上图就是测量结果，存活对象占了640MB内存，我们在不同内存大小下运行测试。第一次测试时，有320MB空闲内存，是存活对象内存的一半，这时Golang有非常严重的overhead，大概是34%，GC因为没有足够的headroom需要运行很多额外的程序。</p>
+<p>如果空闲内存是存活对象的2倍，那么GC的overhead就没有那么疯狂，只有9%。所以，为了保持GC的overhead在10%以内，物理内存大小需要是heap大小的三倍。</p>
+<blockquote>
+<p>学生提问：什么是write barrier？是设置权限吗？</p>
+<p>Frans教授：你还记得Lec17的内容吗？当GC在运行的时候，需要检查指针是否在from空间，如果在from空间你需要拷贝它到to空间。write barrier是非常类似的功能，它的想法是一样的，你需要检查指针看它是否在你需要运行GC的区域内。</p>
+<p>学生提问：当存活对象的内存大于空闲内存的时候，GC该怎么工作呢？</p>
+<p>Frans教授：你买一些内存，vnode会使用一些内存，然后还剩下320MB空闲内存。当应用程序申请更多内存时，首先会从空闲内存中申请，直到空闲内存也用光了。</p>
+<p>与此同时，GC也在运行。所以我们刚刚的测试中是在3个不同配置下运行，在最后一个配置中，空闲内存是存活对象占用内存的两倍。这意味着GC有大量的headroom来与应用程序并行的运行，如果有大量的headroom，GC的overhead就没那么高了，只有10%左右，而不是34%。在第一个配置中，总共是640+320MB内存，而不是只有320MB内存。</p>
+</blockquote>
+<hr>
+<h2 id="evaluation-hll-performance-cost2">Evaluation: HLL performance cost(2)
+</h2><p>接下来稍微介绍GC pause。</p>
+<p>Go的GC是一个带有短暂pause的并发GC，它在一段非常短的时间内停止程序运行来执行write barrier，之后再恢复应用程序的运行，同时GC也会完成自己的工作。</p>
+<p>Go的GC也是递增的，就像我们在Lec17中介绍过的一样，每次调用new都会做一些GC的工作。所以每次GC做一些工作的时候，应用程序都会有一些延时，这就是代价。</p>
+<p>所以我们做了一些测试，我们找了个应用程序并测试了最大的pause时间。也就是由于GC可能导致应用程序最大的停止时间。</p>
+<p>最大的单个pause时间是115微秒，也就是在web server中，因为使用了TCP stack，TCP Connection table中很大一部分需要被标记（注，GC的一部分工作是标记对象），这花费了115微秒。</p>
+<p>一个HTTP请求最大的pause时间是582微秒，所以当一个请求走到一个机器，最多会有总共582微秒延时来执行这个请求。而超过100微秒的pause发生的非常非常少，只有少于0.3%。</p>
+<p>如果你尝试达成某种SLA，其中要求的最长请求处理时间很短，那么582微秒就很严重。</p>
+<p>但是如果你查看Google论文，<a class="link" href="https://research.google/pubs/pub40801/"  target="_blank" rel="noopener"
+    >The Tail at Scale</a>，其中介绍有关一个请求最长可以有多长处理时间，他们讨论的都是几毫秒或者几十毫秒这个量级。所以Biscuit拥有最大pause时间是582微秒还在预算之内，虽然不理想，但是也不会很夸张。</p>
+<p>这表明了，Golang的设计人员把GC实现的太好了。并且我们在做Biscuit项目的时候发现，每次我们升级Go runtime，新的runtime都会带一个更好的GC，相应的GC pause时间也会变得更小。</p>
+<p>之前在Linux和Biscuit之间的对比并不真正的公平，因为Biscuit和Linux实现的是不同的功能。</p>
+<p>所以我们做了一个额外的测试，我们写了两个完全相同的内核，一个用C实现，另一个用Golang实现。这两个内核实现了完全相同的东西，并且我们会查看汇编代码以检查区别在哪。可能会有一些区别，因为Golang会做一些安全检查，但是对于基本功能来说，汇编代码是一样的。</p>
+<p>以上是有关测试的一部分，通过pipe来回传输一个字节。我们查看内核中有关将一个字节从pipe的一端传到另一端的代码。Go里面是1.2K行代码，C里面是1.8K行代码。</p>
+<p>这里没有内存分配和GC，所以这里只有语言上的差异。我们还查看了两种实现语言中花费最多时间的10个地方，这样我们才能确保两种语言实现的代码尽可能的接近。</p>
+<p>之后我们查看了每秒可以完成的操作数，如你可见Golang要慢15%。如果你查看Golang的Prologue和safety-check，这些指令是C代码所没有的，这些指令占了16%，这与更慢的处理速度匹配的上。</p>
+<p>所以这里的主要结论是Golang是更慢，但并不是非常夸张的慢，Golang还是非常有竞争力的。并且这与我们早些时候做的Biscuit和Linux对比结果一致。</p>
+<p>第6个问题跳过。</p>
+<hr>
+<h2 id="should-one-use-hll-for-a-new-kernel">Should one use HLL for a new kernel?
+</h2><p>最后我想讨论我们在最开始问过的一个问题，你应该在一个新内核中使用高级编程语言吗?</p>
+<p>与其直接回答这个问题，我在这页有一些我们的结论和一些考虑。或许你们该回退一步，并问自己，你们更喜欢哪种方式？</p>
+<p>你们是喜欢像在实验中用C写XV6，还是喜欢使用类似Golang的高级编程语言。更具体的说，你们更想避免哪类Bug？或许在这节课的过程中想想你们遇到过什么Bug？我想听听你们的体验，你们是怎么想的？切换到高级编程语言会不会改变你们的体验？</p>
+<blockquote>
+<p>一些学生介绍自己的体验，有说C好的，有说C不好的</p>
+</blockquote>
+<p>当然，我们不会将XV6改成Golang或者任何高级编程语言。具体原因刚刚一些同学已经提到了，Golang还是隐藏了太多细节，这门课的意义在于理解系统调用接口到CPU之间的所有内容。</p>
+<p>举个例子，Golang隐藏了线程，我们并不想隐藏线程，我们想要向你解释线程是如何实现的。所以接下几年，这门课程还是会使用C语言。</p>
+<p>但是如果你要实现一个新的内核，并且目标不是教育你的学生有关内核的知识，目标是写一个安全的高性能内核。你可以从我们的研究中得出一些结论：</p>
+<ul>
+<li>如果性能真的至关重要，比如说你不能牺牲15%的性能，那么你应该使用C。</li>
+<li>如果你想最小化内存使用，你也应该使用C。</li>
+<li>如果安全更加重要，那么应该选择高级编程语言。</li>
+<li>或许在很多场景下，性能不是那么重要，那么使用高级编程语言实现内核是非常合理的选择。</li>
+</ul>
+<p>Cody、Robert和我在实现这个项目的过程中学到的一件事情是，任何一种编程语言就是编程语言，你可以用它来实现内核，实现应用程序，它并不会阻止你做什么事情。</p>
+<blockquote>
+<p>学生提问：我很好奇你们是怎么实现的Biscuit，你们直接在硬件上运行的Go runtime，具体是怎么启动的？</p>
+<p>Frans教授：这里有一层中间层设置好了足够的硬件资源，这样当Go runtime为heap请求内存时，我们就可以响应。这是Go runtime依赖的一个主要内容。</p>
+<p>学生提问：我知道你们实现了一些Go runtime会调用的接口，因为你们现在自己在实现内核，所以没有现成的接口可以使用。你们是全用汇编实现的这些接口吗？还是说有些还是用Golang实现，然后只在必要的时候用汇编？</p>
+<p>Frans教授：这就是Biscuit中1500行汇编代码的原因，它会准备好一切并运行Go runtime。有一些我们可以用C来实现，但是我们不想这么做，我们不想使用任何C代码，所以我们用汇编来实现。并且很多场景也要求用汇编，因为这些场景位于启动程序。</p>
+<p>我们的确写了一些Go代码运行在程序启动的最开始，这些Go代码要非常小心，并且不做内存分配。我们尽可能的用Golang实现了，我需要查看代码才能具体回答你的问题，你也可以查看git repo。</p>
+<p>学生提问：我有个不相关的问题，Golang是怎么实现的goroutine，使得它可以运行成百上千个goroutine，因为你不可能运行成百上千个线程，对吧？</p>
+<p>Frans教授：运行线程的主要问题是需要分配Stack，而Go runtime会递增的申请Stack，并在goroutine运行时动态的增加Stack。</p>
+<p>这就是Prologue代码的作用。当你执行函数调用时，如果没有足够的Stack空间，Go runtime会动态的增加Stack。而在线程实现中，申请线程空间会是一种更重的方法，举个例子在Linux中，对应的内核线程也会被创建。</p>
+<p>学生提问：goroutine的调度是完全在用户空间完成的吗？</p>
+<p>Frans教授：大部分都在用户空间完成。Go runtime会申请m个内核线程，在这之上才实现的的Go routine。所有的Go routine会共享这些内核线程。人们也通过C/C++实现了类似的东西。</p>
+<p>学生提问：C是一个编译型语言，所以它可以直接变成汇编或者机器语言，它可以直接运行在CPU上，所以对于XV6来说就不用加中间层代码。但是我理解Golang也是一种编译型语言，所以它也会变成汇编语言，那么为什么还要中间层（位于机器和Go runtime之间）？XV6有这样的中间层吗？为什么有一些事情不能直接编译后运行在CPU上？</p>
+<p>Frans教授：好问题。Go runtime提供了各种你在XV6中运行C时所没有的功能。</p>
+<p>Go runtime提供了线程，提供了调度器，提供了hashtable，提供了GC。举个例子，为了支持GC，需要一个heap来申请内存，通常是向底层的操作系统来申请内存作为heap。这里说的中间层Go runtime需要用来完成工作的相应功能（比如说响应内存申请）。</p>
+<p>学生提问：我们不能直接将runtime编译到机器代码吗？</p>
+<p>Frans教授：Runtime会被编译到机器码，但是当你运行Go代码时，有一部分程序是要提前运行的，这部分程序需要在那。</p>
+<p>即使C也有一个小的runtime，比如printf就是C runtime的中间层的一部分，或者字符串处理也是C runtime的一部分，它们也会被编译。C runtime有一些函数，但是这个runtime是如此之小，不像Go runtime需要支持许多Go程序所依赖的功能。</p>
+<p>学生提问：看起来这里的中间层像是一个mini的系统层，它执行了一些底层的系统功能。</p>
+<p>Frans教授：是的，或许一种理解中间层的方法是，XV6也有一个非常非常小的中间层。当它启动的时候，它做的第一件事情是分配一些Stack这样你才能调用C的main函数。</p>
+<p>你可以认为这一小段代码是针对XV6的中间层。一旦你执行了这些指令，你就在C代码中了，然后一切都能愉快的运行。Go runtime的中间层稍微要大一些，因为有一些功能需要被设置好，之后Go runtime才能愉快的运行。</p>
+</blockquote>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <span>
+            最后更新于 Nov 12, 2024 23:05 &#43;0800
+        </span>
+    </section></footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/mit6s08123rcu/">
+        
+        
+            <div class="article-image">
+                <img src="/p/mit6s08123rcu/29.44fd9b24e5932cf6ae1346291ec85e1b_hu13173094512423318615.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post MIT6S081：23RCU"
+                        
+                        data-hash="md5-RP2bJOWTLPauE0YpHsheGw==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">MIT6S081：23RCU</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/mit6s08122meltdown/">
+        
+        
+            <div class="article-image">
+                <img src="/p/mit6s08122meltdown/19.8d880549dccba2f0c1613b3e41a721e5_hu3753156070077914420.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post MIT6S081：22Meltdown"
+                        
+                        data-hash="md5-jYgFSdzLovDBYTs&#43;Qach5Q==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">MIT6S081：22Meltdown</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/mit6s08121networking/">
+        
+        
+            <div class="article-image">
+                <img src="/p/mit6s08121networking/bg.68c4376fd87b0b35da07319dd155c90d_hu10351534106733688476.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post MIT6S081：21Networking"
+                        
+                        data-hash="md5-aMQ3b9h7CzXaBzGd0VXJDQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">MIT6S081：21Networking</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/mit6s08119virtual-machines/">
+        
+        
+            <div class="article-image">
+                <img src="/p/mit6s08119virtual-machines/bg.b02a7ba1d946705c0cf2809bcf960db8_hu14546491865979434532.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post MIT6S081：19Virtual Machines  "
+                        
+                        data-hash="md5-sCp7odlGcFwM8oCbz5YNuA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">MIT6S081：19Virtual Machines  </h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/mit6s08118os-organization/">
+        
+        
+            <div class="article-image">
+                <img src="/p/mit6s08118os-organization/bg.6254618fb3eb08f3bf5d7cd89d4cd672_hu15449325963333300792.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post MIT6S081：18OS organization"
+                        
+                        data-hash="md5-YlRhj7PrCPO/XXzYnUzWcg==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">MIT6S081：18OS organization</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2024 echudet
+    </section>
+    
+    <section class="powerby">
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

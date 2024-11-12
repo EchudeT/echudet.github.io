@@ -7,12 +7,12 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>echudet</copyright><atom:link href="https://echudet.github.io/categories/os/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>MIT6S081Lec23</title>
-        <link>https://echudet.github.io/p/mit6s081lec23/</link>
+        <title>MIT6S081：23RCU</title>
+        <link>https://echudet.github.io/p/mit6s08123rcu/</link>
         <pubDate>Tue, 08 Oct 2024 22:02:50 +0800</pubDate>
         
-        <guid>https://echudet.github.io/p/mit6s081lec23/</guid>
-        <description>&lt;h1 id=&#34;lecture-23-rcu&#34;&gt;Lecture 23 RCU
+        <guid>https://echudet.github.io/p/mit6s08123rcu/</guid>
+        <description>&lt;img src="https://echudet.github.io/p/mit6s08123rcu/29.png" alt="Featured image of post MIT6S081：23RCU" /&gt;&lt;h1 id=&#34;lecture-23-rcu&#34;&gt;Lecture 23 RCU
 &lt;/h1&gt;&lt;h2 id=&#34;课前预习&#34;&gt;课前预习
 &lt;/h2&gt;&lt;h2 id=&#34;论文速览&#34;&gt;论文速览
 &lt;/h2&gt;&lt;p&gt;在Introduction (简介)部分，介绍了&lt;code&gt;Read-Copy Update (RCU)&lt;/code&gt;作为Linux内核中一种高性能的同步机制。它支持并发的读写操作，且自引入以来，RCU的使用不断扩大，成为Linux内核中的关键组件。文章回顾了RCU的发展背景，并说明了其高效性能在内核中带来的巨大优势。&lt;/p&gt;
@@ -1002,10 +1002,10 @@
 &lt;p&gt;除了锁以外它还需要遵循一些额外的规则，但是带来的好处是数据读取者因为可以不使用锁、不需要写内存而明显的变快。&lt;/p&gt;
 &lt;p&gt;在之前讨论的第一个场景中，数据写入者会更新链表元素的内容。RCU将禁止这样的行为，也就是说数据写入者不允许修改链表元素的内容。假设我们有一个链表，数据写入者想要更新链表元素E2。&lt;/p&gt;
 &lt;p&gt;现在不能直接修改E2的内容，RCU会创建并初始化一个新的链表元素。所以新的内容会写到新的链表元素中，之后数据写入者会将新链表元素的next指针指向E3，之后在单个的写操作中将E1的next指针指向新的链表元素。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec23/p68.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08123rcu/p68.png&#34;
 	width=&#34;1536&#34;
 	height=&#34;734&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec23/p68_hu4598649849026198163.png 480w, https://echudet.github.io/p/mit6s081lec23/p68_hu4727774238858778511.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08123rcu/p68_hu4598649849026198163.png 480w, https://echudet.github.io/p/mit6s08123rcu/p68_hu4727774238858778511.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p68&#34;
@@ -1034,10 +1034,10 @@
 &lt;p&gt;相反的，树是一个好的数据结构。&lt;/p&gt;
 &lt;p&gt;如果我们要更新图中的节点，我们可以构造树的虚线部分，然后再通过单个committing write更新树的根节点指针，切换到树的新版本。&lt;/p&gt;
 &lt;p&gt;数据写入者会创建树中更新了的那部分，同时再重用树中未被修改的部分，最后再通过单个committing write，将树的根节点更新到新版本的树的根节点。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec23/p69.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08123rcu/p69.png&#34;
 	width=&#34;1130&#34;
 	height=&#34;622&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec23/p69_hu12919972555610845742.png 480w, https://echudet.github.io/p/mit6s081lec23/p69_hu4206817635173802955.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08123rcu/p69_hu12919972555610845742.png 480w, https://echudet.github.io/p/mit6s08123rcu/p69_hu4206817635173802955.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p69&#34;
@@ -1290,12 +1290,12 @@
 </description>
         </item>
         <item>
-        <title>MIT6S081Lec22</title>
-        <link>https://echudet.github.io/p/mit6s081lec22/</link>
+        <title>MIT6S081：22Meltdown</title>
+        <link>https://echudet.github.io/p/mit6s08122meltdown/</link>
         <pubDate>Mon, 07 Oct 2024 22:02:50 +0800</pubDate>
         
-        <guid>https://echudet.github.io/p/mit6s081lec22/</guid>
-        <description>&lt;h1 id=&#34;lecture-22-meltdown&#34;&gt;Lecture 22 Meltdown
+        <guid>https://echudet.github.io/p/mit6s08122meltdown/</guid>
+        <description>&lt;img src="https://echudet.github.io/p/mit6s08122meltdown/19.jpg" alt="Featured image of post MIT6S081：22Meltdown" /&gt;&lt;h1 id=&#34;lecture-22-meltdown&#34;&gt;Lecture 22 Meltdown
 &lt;/h1&gt;&lt;h2 id=&#34;课前预习&#34;&gt;课前预习
 &lt;/h2&gt;&lt;h2 id=&#34;论文速览&#34;&gt;论文速览
 &lt;/h2&gt;&lt;p&gt;&lt;strong&gt;摘要部分&lt;/strong&gt;概述了Meltdown漏洞的关键概念。Meltdown利用现代处理器的乱序执行特性来从用户空间读取内核内存数据。它不依赖于任何软件漏洞，而是利用硬件层面的设计缺陷。这一漏洞广泛影响了个人计算机、云服务器中的虚拟机等设备。文章还特别提到KAISER防御机制在阻止Meltdown方面的意外效果。漏洞的严重性在于，它打破了内存隔离的安全保证，使攻击者能够读取其他进程或虚拟机的内存。&lt;/p&gt;
@@ -2285,10 +2285,10 @@
 &lt;p&gt;让我们假设TLB中包含了虚拟内存地址对应的物理内存Page地址，我们就可以获取到所需要的物理内存地址。通常来说会有一个更大的cache（L2 cache），它是由物理内存地址索引。&lt;/p&gt;
 &lt;p&gt;现在通过TLB我们找到了物理内存地址，再通过L2 cache，我们有可能可以获取到数据。&lt;/p&gt;
 &lt;p&gt;如果我们没有在L2 cache中找到物理内存地址对应的数据。我们需要将物理内存地址发送给RAM系统。这会花费很长的时间，当我们最终获得了数据时，我们可以将从RAM读取到的数据加入到L1和L2 cache中，最终将数据返回给CPU核。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec22/p67.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08122meltdown/p67.png&#34;
 	width=&#34;970&#34;
 	height=&#34;832&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec22/p67_hu15096785322749632349.png 480w, https://echudet.github.io/p/mit6s081lec22/p67_hu17676357426059994493.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08122meltdown/p67_hu15096785322749632349.png 480w, https://echudet.github.io/p/mit6s08122meltdown/p67_hu17676357426059994493.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p67&#34;
@@ -2535,12 +2535,12 @@
 </description>
         </item>
         <item>
-        <title>MIT6S081Lec21</title>
-        <link>https://echudet.github.io/p/mit6s081lec21/</link>
+        <title>MIT6S081：21Networking</title>
+        <link>https://echudet.github.io/p/mit6s08121networking/</link>
         <pubDate>Sun, 06 Oct 2024 22:02:50 +0800</pubDate>
         
-        <guid>https://echudet.github.io/p/mit6s081lec21/</guid>
-        <description>&lt;h1 id=&#34;lecture-21-networking&#34;&gt;Lecture 21 Networking
+        <guid>https://echudet.github.io/p/mit6s08121networking/</guid>
+        <description>&lt;img src="https://echudet.github.io/p/mit6s08121networking/bg.jpg" alt="Featured image of post MIT6S081：21Networking" /&gt;&lt;h1 id=&#34;lecture-21-networking&#34;&gt;Lecture 21 Networking
 &lt;/h1&gt;&lt;h2 id=&#34;课前预习&#34;&gt;课前预习
 &lt;/h2&gt;&lt;h2 id=&#34;论文速览&#34;&gt;论文速览
 &lt;/h2&gt;&lt;p&gt;论文《Eliminating Receive Livelock in an Interrupt-driven Kernel》分为多个部分，每部分都有其核心内容，以下是各部分的详细总结：&lt;/p&gt;
@@ -2878,10 +2878,10 @@
 &lt;p&gt;当局域网中的两个主机彼此间要通信时，最底层的协议是以太网协议。你可以认为Host1通过以太网将Frame发送给Host2。&lt;/p&gt;
 &lt;p&gt;Frame是以太网中用来描述packet的单词，本质上这就是两个主机在以太网上传输的一个个的数据Byte。以太网协议会在Frame中放入足够的信息让主机能够识别彼此，并且识别这是不是发送给自己的Frame。&lt;/p&gt;
 &lt;p&gt;每个以太网packet在最开始都有一个Header，其中包含了3个数据。Header之后才是payload数据。Header中的3个数据是：目的以太网地址，源以太网地址，以及packet的类型。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec21/p53.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08121networking/p53.png&#34;
 	width=&#34;1116&#34;
 	height=&#34;630&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec21/p53_hu5082461355547701875.png 480w, https://echudet.github.io/p/mit6s081lec21/p53_hu12450737063758896380.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08121networking/p53_hu5082461355547701875.png 480w, https://echudet.github.io/p/mit6s08121networking/p53_hu12450737063758896380.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p53&#34;
@@ -2908,10 +2908,10 @@
 &lt;p&gt;虽然以太网地址是唯一的，但是出了局域网，它们对于定位目的主机的位置是没有帮助的。如果网络通信的目的主机在同一个局域网，那么目的主机会监听发给自己的地址的packet。&lt;/p&gt;
 &lt;p&gt;但是如果网络通信发生在两个国家的主机之间，你需要使用一个不同的寻址方法，这就是IP地址的作用。&lt;/p&gt;
 &lt;p&gt;在实际中，你可以使用tcpdump来查看以太网packet。这将会是lab的一部分。下图是tcpdump的一个输出：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec21/p54.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08121networking/p54.png&#34;
 	width=&#34;916&#34;
 	height=&#34;190&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec21/p54_hu15204464692332807933.png 480w, https://echudet.github.io/p/mit6s081lec21/p54_hu16450299451388196205.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08121networking/p54_hu15204464692332807933.png 480w, https://echudet.github.io/p/mit6s08121networking/p54_hu16450299451388196205.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p54&#34;
@@ -2946,10 +2946,10 @@
 &lt;p&gt;当一个packet到达路由器并且需要转发给同一个以太网中的另一个主机，或者一个主机将packet发送给同一个以太网中的另一个主机时，发送方首先会在局域网中广播一个ARP packet，来表示任何拥有了这个32bit的IP地址的主机，请将你的48bit以太网地址返回过来。&lt;/p&gt;
 &lt;p&gt;如果相应的主机存在并且开机了，它会向发送方发送一个ARP response packet。&lt;/p&gt;
 &lt;p&gt;下图是一个ARP packet的格式：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec21/p55.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08121networking/p55.png&#34;
 	width=&#34;1094&#34;
 	height=&#34;771&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec21/p55_hu9525627550765042194.png 480w, https://echudet.github.io/p/mit6s081lec21/p55_hu16089440296069243885.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08121networking/p55_hu9525627550765042194.png 480w, https://echudet.github.io/p/mit6s08121networking/p55_hu16089440296069243885.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p55&#34;
@@ -2966,10 +2966,10 @@
 &lt;p&gt;同样的，我们也可以通过tcpdump来查看这些packet。&lt;/p&gt;
 &lt;p&gt;在网络的lab中，XV6会在QEMU模拟的环境下发送IP packet。所以你们可以看到在XV6和其他主机之间有ARP的交互。&lt;/p&gt;
 &lt;p&gt;下图中第一个packet是我的主机想要知道XV6主机的以太网地址，第二个packet是XV6在收到了第一个packet之后，并意识到自己是IP地址的拥有者，然后返回response。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec21/p56.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08121networking/p56.png&#34;
 	width=&#34;898&#34;
 	height=&#34;282&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec21/p56_hu9561999928152077835.png 480w, https://echudet.github.io/p/mit6s081lec21/p56_hu15905466988636034815.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08121networking/p56_hu9561999928152077835.png 480w, https://echudet.github.io/p/mit6s08121networking/p56_hu15905466988636034815.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p56&#34;
@@ -3025,10 +3025,10 @@
 &lt;h2 id=&#34;三层网络-----internet&#34;&gt;三层网络 &amp;mdash; Internet
 &lt;/h2&gt;&lt;p&gt;Ethernet header足够在一个局域网中将packet发送到一个host。&lt;/p&gt;
 &lt;p&gt;如果你想在局域网发送一个IP packet，那么你可以使用ARP获得以太网地址。但是IP协议更加的通用，IP协议能帮助你向互联网上任意位置发送packet。下图是一个IP packet的header，你们可以在lab配套的代码中的net.h文件找到。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec21/p57.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08121networking/p57.png&#34;
 	width=&#34;1119&#34;
 	height=&#34;651&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec21/p57_hu17859731178445837582.png 480w, https://echudet.github.io/p/mit6s081lec21/p57_hu1316911422419639037.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08121networking/p57_hu17859731178445837582.png 480w, https://echudet.github.io/p/mit6s08121networking/p57_hu1316911422419639037.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p57&#34;
@@ -3060,10 +3060,10 @@
 &lt;p&gt;目的IP地址是我们想要将packet送到的目的主机的IP地址。地址中的高bit位是网络号，它会帮助路由器完成路由。IP header中的协议字段会告诉目的主机如何处理IP payload。&lt;/p&gt;
 &lt;p&gt;如果你们看到过MIT的IP地址，你们可以看到IP地址是18.x.x.x，虽然最近有些变化，但是在很长一段时间18是MIT的网络号。所以MIT的大部分主机的IP地址最高字节就是18。全世界的路由器在看到网络号18的时候，就知道应该将packet路由到离MIT更近的地方。&lt;/p&gt;
 &lt;p&gt;接下来我们看一下包含了IP packet的tcpdump输出。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec21/p58.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08121networking/p58.png&#34;
 	width=&#34;888&#34;
 	height=&#34;210&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec21/p58_hu15771808828671337644.png 480w, https://echudet.github.io/p/mit6s081lec21/p58_hu17173033069996894068.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08121networking/p58_hu15771808828671337644.png 480w, https://echudet.github.io/p/mit6s08121networking/p58_hu17173033069996894068.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p58&#34;
@@ -3077,10 +3077,10 @@
 &lt;p&gt;因为这个IP packet是在以太网上传输，所以它包含了以太网header。呃……，实际上这个packet里面有点问题，我不太确定具体的原因是什么，但是Ethernet header中目的以太网地址不应该是全f，因为全f是广播地址，它会导致packet被发送到所有的主机上。&lt;/p&gt;
 &lt;p&gt;一个真实网络中两个主机之间的packet，不可能出现这样的以太网地址。所以我提供的针对network lab的方案，在QEMU上运行有点问题。不管怎么样，我们可以看到以太网目的地址，以太网源地址，以及以太网类型0x0800。0x0800表明了Ethernet payload是一个IP packet。&lt;/p&gt;
 &lt;p&gt;IP header的长度是20个字节，所以中括号内的是IP header，&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec21/p59.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08121networking/p59.png&#34;
 	width=&#34;886&#34;
 	height=&#34;210&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec21/p59_hu12392152258668777607.png 480w, https://echudet.github.io/p/mit6s081lec21/p59_hu17072750087407752085.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08121networking/p59_hu12392152258668777607.png 480w, https://echudet.github.io/p/mit6s08121networking/p59_hu17072750087407752085.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p59&#34;
@@ -3106,10 +3106,10 @@
 &lt;p&gt;有一些其他的协议完成了这里的区分工作，其中一个是TCP，它比较复杂，而另一个是UDP。TCP不仅帮助你将packet发送到了正确的应用程序，同时也包含了序列号等用来检测丢包并重传的功能，这样即使网络出现问题，数据也能完整有序的传输。&lt;/p&gt;
 &lt;p&gt;相比之下，UDP就要简单的多，它以一种“尽力而为”的方式将packet发送到目的主机，除此之外不提供任何其他功能。&lt;/p&gt;
 &lt;p&gt;UDP header中最关键的两个字段是sport源端口和dport目的端口。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec21/p60.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08121networking/p60.png&#34;
 	width=&#34;878&#34;
 	height=&#34;254&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec21/p60_hu8906819964981415306.png 480w, https://echudet.github.io/p/mit6s081lec21/p60_hu13094916978274572726.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08121networking/p60_hu8906819964981415306.png 480w, https://echudet.github.io/p/mit6s08121networking/p60_hu13094916978274572726.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p60&#34;
@@ -3128,10 +3128,10 @@
 &lt;p&gt;所以当DNS server向本地服务器发送一个回复packet，它会将请求中的源端口拷贝到回复packet的目的端口，再将回复packet发送回本地的服务器。本地服务器会使用这个端口来确定应该将packet发送给哪个应用程序。&lt;/p&gt;
 &lt;p&gt;接下来我们看一下UDP packet的tcpdump输出。&lt;/p&gt;
 &lt;p&gt;首先，我们同样会有一个以太网Header，以及20字节的IP header。IP header中的0x11表明这个packet的IP协议号是17，这样packet的接收主机就知道应该使用UDP软件来处理这个packet。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec21/p61.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08121networking/p61.png&#34;
 	width=&#34;898&#34;
 	height=&#34;186&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec21/p61_hu6283478261879311494.png 480w, https://echudet.github.io/p/mit6s081lec21/p61_hu9410369400483495854.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08121networking/p61_hu6283478261879311494.png 480w, https://echudet.github.io/p/mit6s08121networking/p61_hu9410369400483495854.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p61&#34;
@@ -3188,10 +3188,10 @@
 &lt;p&gt;这里实际上我忘了一件重要的事情，在整个处理流程中都会有packet buffer。所以当收到了一个packet之后，它会被拷贝到一个packet buffer中，这个packet buffer会在网络协议栈中传递。&lt;/p&gt;
 &lt;p&gt;通常在不同的协议层之间会有队列，比如在socket layer就有一个等待被应用程序处理的packet队列，这里的队列是一个linked-list。通常整个网络协议栈都会使用buffer分配器，buffer结构。&lt;/p&gt;
 &lt;p&gt;在我们提供的networking lab代码中，buffer接口名叫MBUF。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec21/p62.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08121networking/p62.png&#34;
 	width=&#34;1143&#34;
 	height=&#34;832&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec21/p62_hu9115695183415614613.png 480w, https://echudet.github.io/p/mit6s081lec21/p62_hu6654765213617764363.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08121networking/p62_hu9115695183415614613.png 480w, https://echudet.github.io/p/mit6s08121networking/p62_hu6654765213617764363.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p62&#34;
@@ -3221,10 +3221,10 @@
 &lt;p&gt;在这个结构中，有一点非常重要，这里存在一些并发的组件，它们以不同的方式调度。中断处理程序由网卡的发送或者接受中断触发。&lt;/p&gt;
 &lt;p&gt;IP processing thread就是一个内核线程。在一个处理器上，IP processing thread不能与中断处理程序同时运行，因为中断处理程序的优先级最高，不过在多核处理器上，并发度可能会更高。&lt;/p&gt;
 &lt;p&gt;最后，应用程序要能够读取socket layer中的packet，应用程序又是另一个独立调度的组件。所有这些组件都会参与到CPU的调度中。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec21/p63.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08121networking/p63.png&#34;
 	width=&#34;1137&#34;
 	height=&#34;877&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec21/p63_hu12319267345925577640.png 480w, https://echudet.github.io/p/mit6s081lec21/p63_hu17433909986223079428.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08121networking/p63_hu12319267345925577640.png 480w, https://echudet.github.io/p/mit6s08121networking/p63_hu17433909986223079428.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p63&#34;
@@ -3274,10 +3274,10 @@
 &lt;p&gt;传输完成之后，网卡会将内部的记录的指针指向DMA ring的下一个位置，这样就可以拷贝下一个packet。&lt;/p&gt;
 &lt;p&gt;刚才说的都是接收packet，对应的是RX ring。类似的，驱动还会设置好发送buffer，也就是TX ring。驱动会将需要网卡传输的packet存储在 TX ring中，网卡也需要知道TX ring的地址。&lt;/p&gt;
 &lt;p&gt;你们在networking lab中的主要工作就是写驱动来处理这些ring。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec21/p64.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08121networking/p64.png&#34;
 	width=&#34;1137&#34;
 	height=&#34;830&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec21/p64_hu7398524907513007903.png 480w, https://echudet.github.io/p/mit6s081lec21/p64_hu8914899112137562952.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08121networking/p64_hu7398524907513007903.png 480w, https://echudet.github.io/p/mit6s08121networking/p64_hu8914899112137562952.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p64&#34;
@@ -3322,10 +3322,10 @@
 &lt;p&gt;这张图是一个路由器的性能图。这是一个有两张网卡的路由器，它的工作是从一个网卡接收packet，再从另一个网卡送出 。&lt;/p&gt;
 &lt;p&gt;X轴是接收速率，也就是接收端网卡的收到packet的速率。Y轴是发送速率，也就是观察到的发送端网卡发送packet的速率。&lt;/p&gt;
 &lt;p&gt;我们关心的是实心圆对应的曲线，它先上升，再下降。所以即使还不知道任何上下文，看到这个图之后我们会问自己，为什么这个曲线先上升，再下降？曲线的转折点有什么特殊之处？是什么决定了曲线的上升斜率和下降斜率？即使不知道任何背景知识，我们还是可以问出这么多问题。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec21/p65.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08121networking/p65.png&#34;
 	width=&#34;1121&#34;
 	height=&#34;553&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec21/p65_hu13332214379261348172.png 480w, https://echudet.github.io/p/mit6s081lec21/p65_hu2982014947979558389.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08121networking/p65_hu13332214379261348172.png 480w, https://echudet.github.io/p/mit6s08121networking/p65_hu2982014947979558389.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p65&#34;
@@ -3367,10 +3367,10 @@
 &lt;h2 id=&#34;如何解决livelock&#34;&gt;如何解决Livelock
 &lt;/h2&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://pdos.csail.mit.edu/6.828/2020/readings/mogul96usenix.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;论文&lt;/a&gt;作者对于Livelock提出了一种解决方法。这种解决方法的最直接结果就是，当packet的输入速率达到了5000pps，随着输入速率的增加，转发性能维持在5000pps。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec21/p66.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08121networking/p66.png&#34;
 	width=&#34;1136&#34;
 	height=&#34;554&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec21/p66_hu12478504949961648075.png 480w, https://echudet.github.io/p/mit6s081lec21/p66_hu14289068479660716522.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08121networking/p66_hu12478504949961648075.png 480w, https://echudet.github.io/p/mit6s08121networking/p66_hu14289068479660716522.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p66&#34;
@@ -3417,12 +3417,12 @@
 </description>
         </item>
         <item>
-        <title>MIT6S081Lec20</title>
-        <link>https://echudet.github.io/p/mit6s081lec20/</link>
+        <title>MIT6S081：20Kernels and HLL</title>
+        <link>https://echudet.github.io/p/mit6s08120kernels-and-hll/</link>
         <pubDate>Sat, 05 Oct 2024 22:02:50 +0800</pubDate>
         
-        <guid>https://echudet.github.io/p/mit6s081lec20/</guid>
-        <description>&lt;h1 id=&#34;lecture-20-kernels-and-hll&#34;&gt;Lecture 20 Kernels and HLL
+        <guid>https://echudet.github.io/p/mit6s08120kernels-and-hll/</guid>
+        <description>&lt;img src="https://echudet.github.io/p/mit6s08120kernels-and-hll/bg.jpg" alt="Featured image of post MIT6S081：20Kernels and HLL" /&gt;&lt;h1 id=&#34;lecture-20-kernels-and-hll&#34;&gt;Lecture 20 Kernels and HLL
 &lt;/h1&gt;&lt;h2 id=&#34;课前预习&#34;&gt;课前预习
 &lt;/h2&gt;&lt;h2 id=&#34;论文速览&#34;&gt;论文速览
 &lt;/h2&gt;&lt;p&gt;这篇论文的标题是《The Benefits and Costs of Writing a POSIX Kernel in a High-Level Language》，通过梳理论文的结构和内容，以下是根据各部分标题总结的主要内容：&lt;/p&gt;
@@ -5638,10 +5638,10 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 &lt;p&gt;在XV6中，我们并没有这样一个heap，我们在内核中没有内存分配器，所有内存都是静态分配的。但是任何其他的内核中，都会有heap，所以你在内核中可以调用malloc和free。可能通过heap分配的对象有socket对象，文件描述符对象和进程对象。&lt;/p&gt;
 &lt;p&gt;所以，我们在XV6中静态分配的所有结构体，例如struct proc，struct fd，在正常的内核中都是动态分配的。所以当你打开一个新的文件描述符时，内核会通过heap分配一个文件描述符对象。&lt;/p&gt;
 &lt;p&gt;这里的问题是，你可以运行很多个应用程序，它们会打开很多个文件描述符，拥有很多个socket，它们会逐渐填满heap。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec20/p47.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08120kernels-and-hll/p47.png&#34;
 	width=&#34;1145&#34;
 	height=&#34;733&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec20/p47_hu7288560551218251938.png 480w, https://echudet.github.io/p/mit6s081lec20/p47_hu7806804087688768358.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08120kernels-and-hll/p47_hu7288560551218251938.png 480w, https://echudet.github.io/p/mit6s08120kernels-and-hll/p47_hu7806804087688768358.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p47&#34;
@@ -5729,10 +5729,10 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 &lt;/ul&gt;
 &lt;p&gt;首先，我们有没有使用高级编程语言的特性？我们会对比一下Biscuit与其他两个大的Golang项目在使用语言特性上是否类似，这样我们才可以说我们的内核以类似的方式利用了相同的语言特性。&lt;/p&gt;
 &lt;p&gt;这里我们使用了相同的静态分析工具来分析两个大的Golang项目，它们都有超过100万行代码，其中一个项目是Go runtime以及包含的所有包，另一个是一个叫做Moby的系统。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec20/p48.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08120kernels-and-hll/p48.png&#34;
 	width=&#34;1006&#34;
 	height=&#34;766&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec20/p48_hu10738859412535175576.png 480w, https://echudet.github.io/p/mit6s081lec20/p48_hu9094950217176711344.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08120kernels-and-hll/p48_hu10738859412535175576.png 480w, https://echudet.github.io/p/mit6s08120kernels-and-hll/p48_hu9094950217176711344.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p48&#34;
@@ -5783,10 +5783,10 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 &lt;p&gt;所以尽管实际中Linux内核非常成功的使用了RCU，但是RCU还是有点容易出错，并且需要小心编程来使得它能正确工作。在带有GC的编程语言，例如Golang，这就不是问题了，因为GC会决定某个对象不再被使用，只有这时才释放它。&lt;/p&gt;
 &lt;p&gt;所以现在对于编程人员来说没有限制了，所有的限制都被GC考虑了。这是一种带有GC的编程语言的明显优势。&lt;/p&gt;
 &lt;p&gt;接下来看看CVEs Bugs，这在前面提到过（注，20.1）。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec20/p49.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08120kernels-and-hll/p49.png&#34;
 	width=&#34;1149&#34;
 	height=&#34;683&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec20/p49_hu8900748687767420232.png 480w, https://echudet.github.io/p/mit6s081lec20/p49_hu6032594428648176963.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08120kernels-and-hll/p49_hu8900748687767420232.png 480w, https://echudet.github.io/p/mit6s08120kernels-and-hll/p49_hu6032594428648176963.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p49&#34;
@@ -5806,10 +5806,10 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 &lt;p&gt;以上就是使用高级编程语言实现内核的优势，接下来讨论一些代价，也就是High Level Language Tax。&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;evaluation-hll-performance-cost1&#34;&gt;Evaluation: HLL performance cost(1)
-&lt;/h2&gt;&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec20/p50.png&#34;
+&lt;/h2&gt;&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08120kernels-and-hll/p50.png&#34;
 	width=&#34;1141&#34;
 	height=&#34;609&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec20/p50_hu10946428304967497961.png 480w, https://echudet.github.io/p/mit6s081lec20/p50_hu16952492634631476126.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08120kernels-and-hll/p50_hu10946428304967497961.png 480w, https://echudet.github.io/p/mit6s08120kernels-and-hll/p50_hu16952492634631476126.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p50&#34;
@@ -5821,10 +5821,10 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;以上是6个问题，我应该不会全部介绍，因为我想在课程的最后留些时间来回顾我们在本节课开始时提出的问题。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec20/p51.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08120kernels-and-hll/p51.png&#34;
 	width=&#34;1135&#34;
 	height=&#34;1034&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec20/p51_hu18241543822846190995.png 480w, https://echudet.github.io/p/mit6s081lec20/p51_hu8323672986732688372.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08120kernels-and-hll/p51_hu18241543822846190995.png 480w, https://echudet.github.io/p/mit6s08120kernels-and-hll/p51_hu8323672986732688372.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p51&#34;
@@ -5847,10 +5847,10 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 &lt;li&gt;Write barrier是GC用来跟踪不同空间的指针的方法&lt;/li&gt;
 &lt;li&gt;Safety cycles是用在数组边界检查，空指针检查上的CPU cycles&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec20/p52.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08120kernels-and-hll/p52.png&#34;
 	width=&#34;1137&#34;
 	height=&#34;538&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec20/p52_hu1895094889201711505.png 480w, https://echudet.github.io/p/mit6s081lec20/p52_hu15874215975049906889.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08120kernels-and-hll/p52_hu1895094889201711505.png 480w, https://echudet.github.io/p/mit6s08120kernels-and-hll/p52_hu15874215975049906889.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p52&#34;
@@ -5942,12 +5942,12 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 </description>
         </item>
         <item>
-        <title>MIT6S081Lec19</title>
-        <link>https://echudet.github.io/p/mit6s081lec19/</link>
+        <title>MIT6S081：19Virtual Machines  </title>
+        <link>https://echudet.github.io/p/mit6s08119virtual-machines/</link>
         <pubDate>Fri, 04 Oct 2024 22:02:50 +0800</pubDate>
         
-        <guid>https://echudet.github.io/p/mit6s081lec19/</guid>
-        <description>&lt;h1 id=&#34;lecture-19-virtual-machines&#34;&gt;Lecture 19 Virtual Machines
+        <guid>https://echudet.github.io/p/mit6s08119virtual-machines/</guid>
+        <description>&lt;img src="https://echudet.github.io/p/mit6s08119virtual-machines/bg.jpg" alt="Featured image of post MIT6S081：19Virtual Machines  " /&gt;&lt;h1 id=&#34;lecture-19-virtual-machines&#34;&gt;Lecture 19 Virtual Machines
 &lt;/h1&gt;&lt;h2 id=&#34;课前预习&#34;&gt;课前预习
 &lt;/h2&gt;&lt;h2 id=&#34;论文速览&#34;&gt;论文速览
 &lt;/h2&gt;&lt;p&gt;这篇论文《Dune: Safe User-level Access to Privileged CPU Features》通过以下几个部分展开。&lt;/p&gt;
@@ -7624,10 +7624,10 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;我们或许还有另一个Guest运行了Windows操作系统，同时也包含了Windows用户进程。&lt;/p&gt;
 &lt;p&gt;所以，在Host空间运行的是VMM，在Guest空间运行的是普通的操作系统。&lt;/p&gt;
 &lt;p&gt;除此之外，在Guest空间又可以分为Guest Supervisor Mode，也就是Guest操作系统内核运行的模式，和Guest User Mode。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec19/p45.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08119virtual-machines/p45.png&#34;
 	width=&#34;1146&#34;
 	height=&#34;725&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec19/p45_hu17269911656025490841.png 480w, https://echudet.github.io/p/mit6s081lec19/p45_hu12136153197092206098.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08119virtual-machines/p45_hu17269911656025490841.png 480w, https://echudet.github.io/p/mit6s08119virtual-machines/p45_hu12136153197092206098.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p45&#34;
@@ -7777,10 +7777,10 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;此外，当Guest上的软件运行了load或者store指令时，或者获取程序指令来执行时，我们需要数据或者指令来自于内存的正确位置，也就是Guest操作系统认为其PTE指向的内存位置。&lt;/p&gt;
 &lt;p&gt;所以当Guest设置SATP寄存器时，真实的过程是，我们不能直接使用Guest操作系统的Page Table，VMM会生成一个新的Page Table来模拟Guest操作系统想要的Page Table。&lt;/p&gt;
 &lt;p&gt;所以现在的Page Table翻译过程略微有点不一样，首先是Guest kernel包含了Page Table，但是这里是将Guest中的虚拟内存地址（注，下图中gva）映射到了Guest的物理内存地址（注，下图中gpa）。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec19/p46.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08119virtual-machines/p46.png&#34;
 	width=&#34;1115&#34;
 	height=&#34;728&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec19/p46_hu5540572329762936997.png 480w, https://echudet.github.io/p/mit6s081lec19/p46_hu13058415282507184088.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08119virtual-machines/p46_hu5540572329762936997.png 480w, https://echudet.github.io/p/mit6s08119virtual-machines/p46_hu13058415282507184088.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p46&#34;
@@ -8154,12 +8154,12 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 </description>
         </item>
         <item>
-        <title>MIT6S081Lec18</title>
-        <link>https://echudet.github.io/p/mit6s081lec18/</link>
+        <title>MIT6S081：18OS organization</title>
+        <link>https://echudet.github.io/p/mit6s08118os-organization/</link>
         <pubDate>Thu, 03 Oct 2024 22:02:50 +0800</pubDate>
         
-        <guid>https://echudet.github.io/p/mit6s081lec18/</guid>
-        <description>&lt;h1 id=&#34;lecture-18-os-organization&#34;&gt;Lecture 18 OS organization
+        <guid>https://echudet.github.io/p/mit6s08118os-organization/</guid>
+        <description>&lt;img src="https://echudet.github.io/p/mit6s08118os-organization/bg.jpg" alt="Featured image of post MIT6S081：18OS organization" /&gt;&lt;h1 id=&#34;lecture-18-os-organization&#34;&gt;Lecture 18 OS organization
 &lt;/h1&gt;&lt;h2 id=&#34;课前预习&#34;&gt;课前预习
 &lt;/h2&gt;&lt;h2 id=&#34;论文速览&#34;&gt;论文速览
 &lt;/h2&gt;&lt;p&gt;论文的架构大致分为以下几个部分，每个部分的内容总结如下：&lt;/p&gt;
@@ -9588,10 +9588,10 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;在用户空间或许还是会有各种各样常见的程序，例如VI，CC，桌面系统。&lt;/p&gt;
 &lt;p&gt;除此之外，在用户空间还会有文件系统以及知道如何与磁盘交互的磁盘驱动，或许我们还会有一个知道如何进行TCP通信的网络协议栈，或许还有一个可以实现酷炫虚拟内存技巧的虚拟内存系统。&lt;/p&gt;
 &lt;p&gt;当文本编辑器VI需要读取一个文件时，它需要与文件系统进行交互，所以它通过IPC会发送一条消息到文件系统进程。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec18/p39.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08118os-organization/p39.png&#34;
 	width=&#34;1056&#34;
 	height=&#34;656&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec18/p39_hu6658799401540249001.png 480w, https://echudet.github.io/p/mit6s081lec18/p39_hu10502053663651355684.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08118os-organization/p39_hu6658799401540249001.png 480w, https://echudet.github.io/p/mit6s08118os-organization/p39_hu10502053663651355684.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p39&#34;
@@ -9712,10 +9712,10 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;另一个L4知道的事情是IPC。&lt;/p&gt;
 &lt;p&gt;每一个线程都有一个标识符，其中一个线程可以说，我想要向拥有这个标识符的另一个线程发送几个字节。&lt;/p&gt;
 &lt;p&gt;这里的&lt;strong&gt;Task，线程，地址空间，IPC&lt;/strong&gt;是L4唯一有的抽象。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec18/p40.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08118os-organization/p40.png&#34;
 	width=&#34;1143&#34;
 	height=&#34;621&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec18/p40_hu17850228718370172535.png 480w, https://echudet.github.io/p/mit6s081lec18/p40_hu11563947334937770497.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08118os-organization/p40_hu17850228718370172535.png 480w, https://echudet.github.io/p/mit6s08118os-organization/p40_hu11563947334937770497.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p40&#34;
@@ -9800,10 +9800,10 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;之后再返回，这样P1可以做一些其他的事情，或许是做好准备去接受回复消息。&lt;/p&gt;
 &lt;p&gt;过了一会，P2可以接收消息了，它会调用recv系统调用，这个系统调用会返回发送消息线程的ID，并将消息从内核拷贝到P2的内存中。&lt;/p&gt;
 &lt;p&gt;所以这里会从内核缓存中取出最前的消息，并拷贝到P2的内存中，之后再返回。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec18/p41.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08118os-organization/p41.png&#34;
 	width=&#34;1136&#34;
 	height=&#34;721&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec18/p41_hu8207171067209621151.png 480w, https://echudet.github.io/p/mit6s081lec18/p41_hu10599598374377215597.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08118os-organization/p41_hu8207171067209621151.png 480w, https://echudet.github.io/p/mit6s08118os-organization/p41_hu10599598374377215597.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p41&#34;
@@ -9824,10 +9824,10 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;这时，P2才会被调度，之后P2调用recv，拷贝消息。&lt;/p&gt;
 &lt;p&gt;之后P2自己再调用send将回复消息追加到buffer，之后P2的send系统调用返回。&lt;/p&gt;
 &lt;p&gt;假设在某个时间，或许因为定时器中断触发导致P2出让CPU，这时P1可以恢复运行，内核发现在接收消息buffer有了一条消息，会返回到用户空间的P1进程。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec18/p42.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08118os-organization/p42.png&#34;
 	width=&#34;1141&#34;
 	height=&#34;621&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec18/p42_hu12529051525904153896.png 480w, https://echudet.github.io/p/mit6s081lec18/p42_hu15209856886907029850.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08118os-organization/p42_hu12529051525904153896.png 480w, https://echudet.github.io/p/mit6s08118os-organization/p42_hu15209856886907029850.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p42&#34;
@@ -10154,10 +10154,10 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;今天的论文像是对于这种观点的一个反驳，论文中的观点是，你可以构建类似上一节的架构，如果你花费足够的精力去优化性能，你可以获取与原生操作系统相比差不多的性能。&lt;/p&gt;
 &lt;p&gt;因此，你不能只是因为性能就忽视微内核。今天的论文要说明的是，你可以因为其他原因不喜欢微内核，但是你不能使用性能作为拒绝微内核的原因。&lt;/p&gt;
 &lt;p&gt;达成这一点的一个重要部分是，IPC被优化的快得多了，相应的技术在18.5中提到过。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec18/p43.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08118os-organization/p43.png&#34;
 	width=&#34;658&#34;
 	height=&#34;314&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec18/p43_hu4035896660346132633.png 480w, https://echudet.github.io/p/mit6s081lec18/p43_hu2829955989179922020.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08118os-organization/p43_hu4035896660346132633.png 480w, https://echudet.github.io/p/mit6s08118os-organization/p43_hu2829955989179922020.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p43&#34;
@@ -10174,10 +10174,10 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;当然这里的系统调用仍然只有原生Linux一半的速度。现在还不清楚这是否是一个灾难，还是说并没有问题。&lt;/p&gt;
 &lt;p&gt;如果你执行大量的系统调用或许就是个问题；如果你执行了相对较少的系统调用，或者系统调用本身就有很多工作，或者你的系统调用比getpid要复杂的多，这又或许不是个问题。&lt;/p&gt;
 &lt;p&gt;论文中通过使用AIM做的测试结果，给出了答案。测试结果在论文的图8。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s081lec18/p44.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08118os-organization/p44.png&#34;
 	width=&#34;674&#34;
 	height=&#34;550&#34;
-	srcset=&#34;https://echudet.github.io/p/mit6s081lec18/p44_hu7831927391743725802.png 480w, https://echudet.github.io/p/mit6s081lec18/p44_hu14572023392865601572.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s08118os-organization/p44_hu7831927391743725802.png 480w, https://echudet.github.io/p/mit6s08118os-organization/p44_hu14572023392865601572.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;p44&#34;
@@ -10237,7 +10237,7 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
         <pubDate>Wed, 02 Oct 2024 22:02:50 +0800</pubDate>
         
         <guid>https://echudet.github.io/p/mit6s081lec17/</guid>
-        <description>&lt;h1 id=&#34;lecture-17-virtual-memory-for-applications&#34;&gt;Lecture 17 Virtual memory for applications
+        <description>&lt;img src="https://echudet.github.io/p/mit6s081lec17/bg.jpg" alt="Featured image of post MIT6S081Lec17" /&gt;&lt;h1 id=&#34;lecture-17-virtual-memory-for-applications&#34;&gt;Lecture 17 Virtual memory for applications
 &lt;/h1&gt;&lt;h2 id=&#34;课前预习&#34;&gt;课前预习
 &lt;/h2&gt;&lt;h2 id=&#34;论文速览&#34;&gt;论文速览
 &lt;/h2&gt;&lt;p&gt;在&lt;strong&gt;简介&lt;/strong&gt;部分提到，论文的核心讨论点是：虚拟内存（Virtual Memory）不仅仅可以用来扩展操作系统的地址空间，还能用于很多其他的目的，例如内存共享、写时复制（copy-on-write）以及处理保护违规。作者探讨了操作系统应提供给用户程序的虚拟内存基本原语，特别是这些原语如何支持不同的用户级应用。&lt;/p&gt;
@@ -11347,7 +11347,7 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
         <pubDate>Tue, 01 Oct 2024 22:02:50 +0800</pubDate>
         
         <guid>https://echudet.github.io/p/mit6s081lec16/</guid>
-        <description>&lt;h1 id=&#34;lecture-16-file-system-performance-and-fast-crash-recovery&#34;&gt;Lecture 16 File system performance and fast crash recovery
+        <description>&lt;img src="https://echudet.github.io/p/mit6s081lec16/bg.jpg" alt="Featured image of post MIT6S081Lec16" /&gt;&lt;h1 id=&#34;lecture-16-file-system-performance-and-fast-crash-recovery&#34;&gt;Lecture 16 File system performance and fast crash recovery
 &lt;/h1&gt;&lt;h2 id=&#34;课前预习&#34;&gt;课前预习
 &lt;/h2&gt;&lt;h2 id=&#34;什么是文件系统&#34;&gt;什么是文件系统
 &lt;/h2&gt;&lt;p&gt;对于任何文件系统，我们都需要什么功能？文件系统所服务的操作系统有明确的要求。文件系统对应用程序的表现方式是：一个操作系统通常需要遵守某些约定的文件名，并且文件具有某些以特定方式解释的属性。&lt;/p&gt;
@@ -12113,7 +12113,7 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
         <pubDate>Sun, 29 Sep 2024 22:02:50 +0800</pubDate>
         
         <guid>https://echudet.github.io/p/mit6s081lec15/</guid>
-        <description>&lt;h1 id=&#34;lec15-crash-recovery&#34;&gt;Lec15 Crash recovery
+        <description>&lt;img src="https://echudet.github.io/p/mit6s081lec15/bg.jpg" alt="Featured image of post MIT6S081Lec15" /&gt;&lt;h1 id=&#34;lec15-crash-recovery&#34;&gt;Lec15 Crash recovery
 &lt;/h1&gt;&lt;h2 id=&#34;课前预习&#34;&gt;课前预习
 &lt;/h2&gt;&lt;h2 id=&#34;日志层&#34;&gt;日志层
 &lt;/h2&gt;&lt;p&gt;文件系统设计中最有趣的问题之一是崩溃恢复。&lt;/p&gt;
@@ -13387,7 +13387,7 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
         <pubDate>Sat, 28 Sep 2024 22:02:50 +0800</pubDate>
         
         <guid>https://echudet.github.io/p/mit6s081lec14/</guid>
-        <description>&lt;h1 id=&#34;lecture-14-file-systems&#34;&gt;Lecture 14 File Systems
+        <description>&lt;img src="https://echudet.github.io/p/mit6s081lec14/bg.jpg" alt="Featured image of post MIT6S081Lec14" /&gt;&lt;h1 id=&#34;lecture-14-file-systems&#34;&gt;Lecture 14 File Systems
 &lt;/h1&gt;&lt;h2 id=&#34;预习&#34;&gt;预习
 &lt;/h2&gt;&lt;h2 id=&#34;概述&#34;&gt;概述
 &lt;/h2&gt;&lt;p&gt;xv6文件系统实现分为七层，如图8.1所示。&lt;/p&gt;
@@ -15279,7 +15279,7 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
         <pubDate>Sun, 22 Sep 2024 22:02:50 +0800</pubDate>
         
         <guid>https://echudet.github.io/p/mit6s081lec13/</guid>
-        <description>&lt;h1 id=&#34;lecture-13-sleep--wake-up&#34;&gt;Lecture 13 Sleep &amp;amp; Wake up
+        <description>&lt;img src="https://echudet.github.io/p/mit6s081lec13/bg.jpg" alt="Featured image of post MIT6S081Lec13" /&gt;&lt;h1 id=&#34;lecture-13-sleep--wake-up&#34;&gt;Lecture 13 Sleep &amp;amp; Wake up
 &lt;/h1&gt;&lt;h2 id=&#34;预习&#34;&gt;预习
 &lt;/h2&gt;&lt;h2 id=&#34;sleep与wakeup&#34;&gt;sleep与wakeup
 &lt;/h2&gt;&lt;p&gt;调度和锁有助于隐藏一个进程对另一个进程的存在，但到目前为止，我们还没有帮助进程进行有意交互的抽象。&lt;/p&gt;
@@ -17112,7 +17112,7 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
         <pubDate>Sat, 21 Sep 2024 22:02:50 +0800</pubDate>
         
         <guid>https://echudet.github.io/p/mit6s081lec11/</guid>
-        <description>&lt;h1 id=&#34;lecture-11-thread-switching&#34;&gt;Lecture 11 Thread switching
+        <description>&lt;img src="https://echudet.github.io/p/mit6s081lec11/bg.jpg" alt="Featured image of post MIT6S081Lec11" /&gt;&lt;h1 id=&#34;lecture-11-thread-switching&#34;&gt;Lecture 11 Thread switching
 &lt;/h1&gt;&lt;h2 id=&#34;预习&#34;&gt;预习
 &lt;/h2&gt;&lt;h2 id=&#34;多路复用&#34;&gt;多路复用
 &lt;/h2&gt;&lt;p&gt;Xv6通过在两种情况下将每个CPU从一个进程切换到另一个进程来实现多路复用（Multiplexing）。&lt;/p&gt;
@@ -18606,7 +18606,7 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
         <pubDate>Tue, 17 Sep 2024 22:02:50 +0800</pubDate>
         
         <guid>https://echudet.github.io/p/mit6s081lec10/</guid>
-        <description>&lt;h1 id=&#34;lecture-10-multiprocessors-and-locking&#34;&gt;Lecture 10 Multiprocessors and locking
+        <description>&lt;img src="https://echudet.github.io/p/mit6s081lec10/bg.png" alt="Featured image of post MIT6S081Lec10" /&gt;&lt;h1 id=&#34;lecture-10-multiprocessors-and-locking&#34;&gt;Lecture 10 Multiprocessors and locking
 &lt;/h1&gt;&lt;h2 id=&#34;预习&#34;&gt;预习
 &lt;/h2&gt;&lt;h2 id=&#34;为什么要用锁&#34;&gt;&lt;strong&gt;为什么要用锁&lt;/strong&gt;
 &lt;/h2&gt;&lt;p&gt;大多数内核，包括xv6，交错执行多个活动。交错的一个来源是多处理器硬件：计算机的多个CPU之间独立执行，如xv6的RISC-V。多个处理器共享物理内存，xv6利用共享（sharing）来维护所有CPU进行读写的数据结构。&lt;/p&gt;
@@ -19526,7 +19526,7 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
         <pubDate>Mon, 16 Sep 2024 22:02:50 +0800</pubDate>
         
         <guid>https://echudet.github.io/p/mit6s081lec9/</guid>
-        <description>&lt;h1 id=&#34;lecture-9-interrupts&#34;&gt;Lecture 9 Interrupts
+        <description>&lt;img src="https://echudet.github.io/p/mit6s081lec9/bg.jpg" alt="Featured image of post MIT6S081Lec9" /&gt;&lt;h1 id=&#34;lecture-9-interrupts&#34;&gt;Lecture 9 Interrupts
 &lt;/h1&gt;&lt;h2 id=&#34;课程杂记&#34;&gt;课程杂记
 &lt;/h2&gt;&lt;ol&gt;
 &lt;li&gt;内存是如何被真实的操作系统（而不是像XV6这样的教学操作系统）所使用&lt;/li&gt;
@@ -20377,7 +20377,7 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
         <pubDate>Sun, 15 Sep 2024 22:02:50 +0800</pubDate>
         
         <guid>https://echudet.github.io/p/mit6s081lec8/</guid>
-        <description>&lt;h1 id=&#34;lecture-8-page-fault&#34;&gt;Lecture 8 Page Fault
+        <description>&lt;img src="https://echudet.github.io/p/mit6s081lec8/bg.jpg" alt="Featured image of post MIT6S081Lec8" /&gt;&lt;h1 id=&#34;lecture-8-page-fault&#34;&gt;Lecture 8 Page Fault
 &lt;/h1&gt;&lt;h2 id=&#34;课程杂记&#34;&gt;课程杂记
 &lt;/h2&gt;&lt;ol&gt;
 &lt;li&gt;在XV6中，一旦用户空间进程触发了page fault，会导致进程被杀掉。目前为止，内存地址映射相对来说比较静态。不管是user page table还是kernel page table，都是在最开始的时候设置好，之后就不会再做任何变动。&lt;/li&gt;
@@ -20473,7 +20473,7 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
         <pubDate>Sat, 14 Sep 2024 22:02:50 +0800</pubDate>
         
         <guid>https://echudet.github.io/p/mit6s081lec6/</guid>
-        <description>&lt;h1 id=&#34;lecture-6-isolation--system-call-entryexit&#34;&gt;Lecture 6 Isolation &amp;amp; system call entry/exit
+        <description>&lt;img src="https://echudet.github.io/p/mit6s081lec6/bg.jpg" alt="Featured image of post MIT6S081Lec6" /&gt;&lt;h1 id=&#34;lecture-6-isolation--system-call-entryexit&#34;&gt;Lecture 6 Isolation &amp;amp; system call entry/exit
 &lt;/h1&gt;&lt;h2 id=&#34;课程杂记&#34;&gt;课程杂记
 &lt;/h2&gt;&lt;ol&gt;
 &lt;li&gt;
@@ -20679,7 +20679,7 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
         <pubDate>Sun, 08 Sep 2024 22:02:50 +0800</pubDate>
         
         <guid>https://echudet.github.io/p/mit6s081lec5/</guid>
-        <description>&lt;h1 id=&#34;lecture-5-convention-for-risc-v--asm&#34;&gt;Lecture 5 Convention for RISC-V &amp;amp; ASM
+        <description>&lt;img src="https://echudet.github.io/p/mit6s081lec5/bg.jpg" alt="Featured image of post MIT6S081Lec5" /&gt;&lt;h1 id=&#34;lecture-5-convention-for-risc-v--asm&#34;&gt;Lecture 5 Convention for RISC-V &amp;amp; ASM
 &lt;/h1&gt;&lt;h2 id=&#34;课程杂记&#34;&gt;课程杂记
 &lt;/h2&gt;&lt;ol&gt;
 &lt;li&gt;
