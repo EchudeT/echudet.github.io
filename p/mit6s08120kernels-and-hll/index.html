@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://echudet.github.io/p/mit6s08120kernels-and-hll/'>
 
-<link rel="stylesheet" href="/scss/style.min.a7f637593c1d99350f36f270c9abc65cf39ec34b45847eb2fa40efef51b94c92.css"><meta property='og:title' content="MIT6S081：20Kernels and HLL">
+<link rel="stylesheet" href="/scss/style.min.29ff19fc2531e24760c39aa8f14411e447a1182c20df7099a0cbbd158bf2f2ac.css"><meta property='og:title' content="MIT6S081：20Kernels and HLL">
 <meta property='og:description' content="课程讨论使用高级编程语言实现操作系统的优点和代价。而论文探讨了在高性能操作系统内核中使用高级语言的可行性，特别是与传统C语言的对比。内核Biscuit得以构建，该内核使用Go语言编写，支持POSIX系统调用子集，并通过实验评估其性能与安全性。主要目标是研究高级语言在编写内核时带来的性能开销、实现挑战、以及编程效率和安全性。">
 <meta property='og:url' content='https://echudet.github.io/p/mit6s08120kernels-and-hll/'>
 <meta property='og:site_name' content='echudet'>
@@ -2458,7 +2458,9 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 <h2 id="正课部分">正课部分
 </h2><h2 id="c语言实现操作系统的优劣势">C语言实现操作系统的优劣势
 </h2><p>今天我们要讨论使用高级编程语言实现操作系统的优点和代价。今天课程的内容主要是我们之前写的一篇<a class="link" href="https://pdos.csail.mit.edu/6.828/2020/readings/biscuit.pdf"  target="_blank" rel="noopener"
-    >论文</a>，论文作者包括了Robert和我，以及一个主要作者Cody Cutler，他是这门课程的一个TA。</p>
+    >论文</a>
+
+，论文作者包括了Robert和我，以及一个主要作者Cody Cutler，他是这门课程的一个TA。</p>
 <p>我通常不会讨论我们自己写的论文，但是因为这篇论文与课程内容相关，所以它在这。今天我们会用一些PPT，而不是在白板上讲解这节课。</p>
 <p>这篇论文的起因是这样一个问题：你应该用什么样的编程语言来实现操作系统内核？</p>
 <p>这个问题很多同学都问过，可能是因为你发现了在操作系统中有Bug，然后你会想，如果我使用一种其他的编程语言，或许我就不会有这些Bug了，所以这是一个经常出现的问题。</p>
@@ -2530,7 +2532,9 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 <hr>
 <h2 id="高级编程语言选择-----golang">高级编程语言选择 &mdash; Golang
 </h2><p>接下来我们看一下对比方法，图中左边是Biscuit，这是一个我们为了<a class="link" href="https://pdos.csail.mit.edu/6.828/2020/readings/biscuit.pdf"  target="_blank" rel="noopener"
-    >论文</a>专门用Golang写的内核，它以大概类似的方式提供了Linux中系统调用的子集。Biscuit和Linux的系统调用有相同的参数和相同的调用方式。</p>
+    >论文</a>
+
+专门用Golang写的内核，它以大概类似的方式提供了Linux中系统调用的子集。Biscuit和Linux的系统调用有相同的参数和相同的调用方式。</p>
 <p>并且我们在内核之上运行的是相同的应用程序，这里的应用程序是NGINX，这是一个web server，这里我们将相同的应用程序分别运行在Biscuit和Linux之上，应用程序会执行相同的系统调用，并传入完全相同的参数，Biscuit和Linux都会完成涉及系统调用的相同操作。</p>
 <p>之后，我们就可以研究高级编程语言内核和Linux之间的区别，并讨论优劣势是什么。以上就是对比方法的核心。</p>
 <p>因为Linux和Biscuit并不完全一样，它们会有一些差异，所以我们花费了大量的时间来使得这里的对比尽可能得公平。</p>
@@ -2633,7 +2637,9 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 <hr>
 <h2 id="heap-exhaustion">Heap exhaustion
 </h2><p>让我们讨论一下Heap耗尽问题，我不会像<a class="link" href="https://pdos.csail.mit.edu/6.828/2020/readings/biscuit.pdf"  target="_blank" rel="noopener"
-    >论文</a>一样深入讨论，但是至少会演示问题是什么。</p>
+    >论文</a>
+
+一样深入讨论，但是至少会演示问题是什么。</p>
 <p>假设蓝色的矩形是内核，内核会有一个heap，它会从其中申请动态内存。</p>
 <p>在XV6中，我们并没有这样一个heap，我们在内核中没有内存分配器，所有内存都是静态分配的。但是任何其他的内核中，都会有heap，所以你在内核中可以调用malloc和free。可能通过heap分配的对象有socket对象，文件描述符对象和进程对象。</p>
 <p>所以，我们在XV6中静态分配的所有结构体，例如struct proc，struct fd，在正常的内核中都是动态分配的。所以当你打开一个新的文件描述符时，内核会通过heap分配一个文件描述符对象。</p>
@@ -2674,7 +2680,9 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 </ul>
 <p>当研究这部分，并尝试解决这个问题，Linux使用了前面两种方法，但是两种方法都有问题。实际中，内核开发人员很难将这里弄清楚。</p>
 <p>如果你对这个问题和相关的讨论感兴趣，可以Google搜索“<a class="link" href="https://lwn.net/Articles/627419/"  target="_blank" rel="noopener"
-    >too small to fail</a>”，会有一篇小的文章讨论释放内存，在内存分配器中等待的复杂性。</p>
+    >too small to fail</a>
+
+”，会有一篇小的文章讨论释放内存，在内存分配器中等待的复杂性。</p>
 <p>对于Biscuit来说，strawman 2解决方案不可能实施，因为new不会fail，它总是能成功。除此之外，这里的方案都不理想，所以我们需要有一种更好的方法。</p>
 <hr>
 <h2 id="heap-exhaustion-solution">Heap exhaustion solution
@@ -2720,7 +2728,9 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 </ul>
 <p>通常为了高性能而做的优化，编程语言并不会成为阻碍。Golang并没有成为阻碍这些优化实现的因素。这些优化之前是在C和Linux中实现，我们现在只是在Golang中又实现它们。在实现这些优化时有很多的工作，但是这些工作与编程语言本身无关。</p>
 <p>今天<a class="link" href="https://pdos.csail.mit.edu/6.828/2020/readings/biscuit.pdf"  target="_blank" rel="noopener"
-    >论文</a>的出发点就是了解用高级编程语言实现操作系统的收益和代价。所以我们将分两部分来评估，首先是收益，其次是代价。</p>
+    >论文</a>
+
+的出发点就是了解用高级编程语言实现操作系统的收益和代价。所以我们将分两部分来评估，首先是收益，其次是代价。</p>
 <p>有关高级编程语言，我们要回答三个问题：</p>
 <ul>
 <li>首先，我们有没有作弊？或许我们避免使用了所有Golang提供的高级编程语言中代价较高的功能。</li>
@@ -2891,7 +2901,9 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 <p>一个HTTP请求最大的pause时间是582微秒，所以当一个请求走到一个机器，最多会有总共582微秒延时来执行这个请求。而超过100微秒的pause发生的非常非常少，只有少于0.3%。</p>
 <p>如果你尝试达成某种SLA，其中要求的最长请求处理时间很短，那么582微秒就很严重。</p>
 <p>但是如果你查看Google论文，<a class="link" href="https://research.google/pubs/pub40801/"  target="_blank" rel="noopener"
-    >The Tail at Scale</a>，其中介绍有关一个请求最长可以有多长处理时间，他们讨论的都是几毫秒或者几十毫秒这个量级。所以Biscuit拥有最大pause时间是582微秒还在预算之内，虽然不理想，但是也不会很夸张。</p>
+    >The Tail at Scale</a>
+
+，其中介绍有关一个请求最长可以有多长处理时间，他们讨论的都是几毫秒或者几十毫秒这个量级。所以Biscuit拥有最大pause时间是582微秒还在预算之内，虽然不理想，但是也不会很夸张。</p>
 <p>这表明了，Golang的设计人员把GC实现的太好了。并且我们在做Biscuit项目的时候发现，每次我们升级Go runtime，新的runtime都会带一个更好的GC，相应的GC pause时间也会变得更小。</p>
 <p>之前在Linux和Biscuit之间的对比并不真正的公平，因为Biscuit和Linux实现的是不同的功能。</p>
 <p>所以我们做了一个额外的测试，我们写了两个完全相同的内核，一个用C实现，另一个用Golang实现。这两个内核实现了完全相同的东西，并且我们会查看汇编代码以检查区别在哪。可能会有一些区别，因为Golang会做一些安全检查，但是对于基本功能来说，汇编代码是一样的。</p>
@@ -3003,13 +3015,13 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
         
         
             <div class="article-image">
-                <img src="/p/mit6s08123rcu/29.44fd9b24e5932cf6ae1346291ec85e1b_hu13173094512423318615.png" 
+                <img src="/p/mit6s08123rcu/bg.91a08bf3fe0a8ca435e8fbc902291fd5_hu4589796922609635382.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
                         alt="Featured image of post MIT6S081：23RCU"
                         
-                        data-hash="md5-RP2bJOWTLPauE0YpHsheGw==">
+                        data-hash="md5-kaCL8/4KjKQ16PvJAikf1Q==">
                 
             </div>
         

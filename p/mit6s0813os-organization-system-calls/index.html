@@ -6,11 +6,11 @@
 
 <link rel='canonical' href='https://echudet.github.io/p/mit6s0813os-organization-system-calls/'>
 
-<link rel="stylesheet" href="/scss/style.min.a7f637593c1d99350f36f270c9abc65cf39ec34b45847eb2fa40efef51b94c92.css"><meta property='og:title' content="MIT6S081：3OS Organization & System Calls">
+<link rel="stylesheet" href="/scss/style.min.29ff19fc2531e24760c39aa8f14411e447a1182c20df7099a0cbbd158bf2f2ac.css"><meta property='og:title' content="MIT6S081：3OS Organization & System Calls">
 <meta property='og:description' content="操作系统的组织结构和系统调用机制是其功能实现和服务提供的基础。操作系统通常采用分层设计，包括内核层、系统调用接口层和用户层。内核负责底层硬件管理和资源分配，提供内存管理、进程调度等核心功能；系统调用是应用程序与内核进行交互的接口，允许用户程序请求内核服务，如文件操作、进程控制等。系统调用通过特定的调用约定和上下文切换，在用户态与内核态之间安全、有序地传递请求和响应。此体系结构确保操作系统资源的有效管理和用户程序的安全执行，是计算机系统稳定、高效运行的关键保障。">
 <meta property='og:url' content='https://echudet.github.io/p/mit6s0813os-organization-system-calls/'>
 <meta property='og:site_name' content='echudet'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-09-01T22:02:50&#43;08:00'/><meta property='article:modified_time' content='2024-11-12T23:44:05&#43;08:00'/><meta property='og:image' content='https://echudet.github.io/p/mit6s0813os-organization-system-calls/2ed7cfb8882411ebb6edd017c2d2eca2.png' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-09-01T22:02:50&#43;08:00'/><meta property='article:modified_time' content='2024-11-13T17:04:51&#43;08:00'/><meta property='og:image' content='https://echudet.github.io/p/mit6s0813os-organization-system-calls/2ed7cfb8882411ebb6edd017c2d2eca2.png' />
 <meta name="twitter:title" content="MIT6S081：3OS Organization & System Calls">
 <meta name="twitter:description" content="操作系统的组织结构和系统调用机制是其功能实现和服务提供的基础。操作系统通常采用分层设计，包括内核层、系统调用接口层和用户层。内核负责底层硬件管理和资源分配，提供内存管理、进程调度等核心功能；系统调用是应用程序与内核进行交互的接口，允许用户程序请求内核服务，如文件操作、进程控制等。系统调用通过特定的调用约定和上下文切换，在用户态与内核态之间安全、有序地传递请求和响应。此体系结构确保操作系统资源的有效管理和用户程序的安全执行，是计算机系统稳定、高效运行的关键保障。"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://echudet.github.io/p/mit6s0813os-organization-system-calls/2ed7cfb8882411ebb6edd017c2d2eca2.png' />
@@ -368,7 +368,7 @@
 
 
                 <time>
-                    Nov 12, 2024 23:44 &#43;0800
+                    Nov 13, 2024 17:04 &#43;0800
                 </time>
             </div></footer>
     
@@ -392,9 +392,13 @@
 <li>实际上RISC-V还有第三种模式称为machine mode。在大多数场景下，我们会忽略这种模式，所以我也不太会介绍这种模式。</li>
 <li>在处理器的一个bit，当它为1的时候是user mode，当它为0时是kernel mode。当处理器在解析指令时，如果指令是特殊权限指令，并且该bit被设置为1，处理器会拒绝执行这条指令，就像在运算时不能除以0一样。</li>
 <li>让整个操作系统代码都运行在kernel mode。大多数的Unix操作系统实现都运行在kernel mode。比如，XV6中，所有的操作系统服务都在kernel mode中，这种形式被称为Monolithic Kernel Design（<a class="link" href="https://en.wikipedia.org/wiki/Monolithic_kernel"  target="_blank" rel="noopener"
-    >宏内核</a>）。</li>
+    >宏内核</a>
+
+）。</li>
 <li>另一种设计主要关注点是减少内核中的代码，它被称为Micro Kernel Design（<a class="link" href="https://en.wikipedia.org/wiki/Microkernel"  target="_blank" rel="noopener"
-    >微内核</a>）。在这种模式下，希望在kernel mode中运行尽可能少的代码。所以这种设计下还是有内核，但是内核只有非常少的几个模块，例如，内核通常会有一些IPC的实现或者是Message passing；非常少的虚拟内存的支持，可能只支持了page table；以及分时复用CPU的一些支持。微内核的目的在于将大部分的操作系统运行在内核之外。因为在内核中的代码的数量较小，更少的代码意味着更少的Bug。</li>
+    >微内核</a>
+
+）。在这种模式下，希望在kernel mode中运行尽可能少的代码。所以这种设计下还是有内核，但是内核只有非常少的几个模块，例如，内核通常会有一些IPC的实现或者是Message passing；非常少的虚拟内存的支持，可能只支持了page table；以及分时复用CPU的一些支持。微内核的目的在于将大部分的操作系统运行在内核之外。因为在内核中的代码的数量较小，更少的代码意味着更少的Bug。</li>
 <li>在实际中，两种内核设计都会出现，出于历史原因大部分的桌面操作系统是宏内核，如果你运行需要大量内核计算的应用程序，例如在数据中心服务器上的操作系统，通常也是使用的宏内核，主要的原因是Linux提供了很好的性能。但是很多嵌入式系统，例如Minix，Cell，这些都是微内核设计。这两种设计都很流行，如果你从头开始写一个操作系统，你可能会从一个微内核设计开始。</li>
 </ol>
 <h2 id="system-calls">System Calls
@@ -412,14 +416,18 @@
 <p>内核有时候也被称为可被信任的计算空间（Trusted Computing Base），在一些安全的术语中也被称为TCB。</p>
 </li>
 <li>
-<p><img src="/.%5cimage3.png"
-	
-	
-	
+<p><img src="/p/mit6s0813os-organization-system-calls/image3.png"
+	width="790"
+	height="430"
+	srcset="/p/mit6s0813os-organization-system-calls/image3_hu1151391464123350295.png 480w, /p/mit6s0813os-organization-system-calls/image3_hu8760441921124810311.png 1024w"
 	loading="lazy"
 	
 		alt="image3"
 	
+	
+		class="gallery-image" 
+		data-flex-grow="183"
+		data-flex-basis="440px"
 	
 ></p>
 <ol>
@@ -520,7 +528,7 @@
 
 
         <span>
-            最后更新于 Nov 12, 2024 23:44 &#43;0800
+            最后更新于 Nov 13, 2024 17:04 &#43;0800
         </span>
     </section></footer>
 
@@ -567,13 +575,13 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08123rcu/29.44fd9b24e5932cf6ae1346291ec85e1b_hu13173094512423318615.png" 
+                <img src="/p/mit6s08123rcu/bg.91a08bf3fe0a8ca435e8fbc902291fd5_hu4589796922609635382.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
                         alt="Featured image of post MIT6S081：23RCU"
                         
-                        data-hash="md5-RP2bJOWTLPauE0YpHsheGw==">
+                        data-hash="md5-kaCL8/4KjKQ16PvJAikf1Q==">
                 
             </div>
         

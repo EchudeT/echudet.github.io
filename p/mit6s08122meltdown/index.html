@@ -6,11 +6,11 @@
 
 <link rel='canonical' href='https://echudet.github.io/p/mit6s08122meltdown/'>
 
-<link rel="stylesheet" href="/scss/style.min.a7f637593c1d99350f36f270c9abc65cf39ec34b45847eb2fa40efef51b94c92.css"><meta property='og:title' content="MIT6S081：22Meltdown">
+<link rel="stylesheet" href="/scss/style.min.29ff19fc2531e24760c39aa8f14411e447a1182c20df7099a0cbbd158bf2f2ac.css"><meta property='og:title' content="MIT6S081：22Meltdown">
 <meta property='og:description' content="Meltdown漏洞破坏了这种隔离机制，使攻击者能够访问内核内存。这一漏洞不依赖操作系统或软件漏洞，而是通过利用处理器硬件特性来实施攻击。这一漏洞广泛影响了个人计算机、云服务器中的虚拟机等设备。">
 <meta property='og:url' content='https://echudet.github.io/p/mit6s08122meltdown/'>
 <meta property='og:site_name' content='echudet'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-10-07T22:02:50&#43;08:00'/><meta property='article:modified_time' content='2024-11-12T23:05:03&#43;08:00'/><meta property='og:image' content='https://echudet.github.io/p/mit6s08122meltdown/19.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-10-07T22:02:50&#43;08:00'/><meta property='article:modified_time' content='2024-11-13T17:04:51&#43;08:00'/><meta property='og:image' content='https://echudet.github.io/p/mit6s08122meltdown/19.jpg' />
 <meta name="twitter:title" content="MIT6S081：22Meltdown">
 <meta name="twitter:description" content="Meltdown漏洞破坏了这种隔离机制，使攻击者能够访问内核内存。这一漏洞不依赖操作系统或软件漏洞，而是通过利用处理器硬件特性来实施攻击。这一漏洞广泛影响了个人计算机、云服务器中的虚拟机等设备。"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://echudet.github.io/p/mit6s08122meltdown/19.jpg' />
@@ -270,19 +270,19 @@
   <ol>
     <li><a href="#课前预习">课前预习</a></li>
     <li><a href="#论文速览">论文速览</a></li>
-    <li><a href="#侧信道攻击side-channel-attack"><strong>侧信道攻击</strong>（Side-Channel Attack）</a></li>
-    <li><a href="#meltdown--侧信道攻击-的完整过程"><strong>Meltdown + 侧信道攻击</strong> 的完整过程</a></li>
+    <li><a href="#侧信道攻击side-channel-attack">侧信道攻击（Side-Channel Attack）</a></li>
+    <li><a href="#meltdown--侧信道攻击-的完整过程">Meltdown + 侧信道攻击 的完整过程</a></li>
     <li><a href="#数据读取过程微架构状态如何转换为架构状态">数据读取过程（微架构状态如何转换为架构状态）</a></li>
-    <li><a href="#预测执行"><strong>预测执行</strong></a></li>
-    <li><a href="#flushreload"><strong>Flush+Reload</strong></a></li>
-    <li><a href="#flushreload-查询对象"><strong>Flush+Reload</strong> 查询对象</a></li>
+    <li><a href="#预测执行">预测执行</a></li>
+    <li><a href="#flushreload">Flush+Reload</a></li>
+    <li><a href="#flushreload-查询对象">Flush+Reload 查询对象</a></li>
     <li><a href="#缓存未命中复习">缓存未命中复习</a></li>
     <li><a href="#meltdown-的-异常-0-值">Meltdown 的 异常 0 值</a></li>
     <li><a href="#区分内核值-0-与异常-0">区分内核值 <code>0</code> 与异常 <code>0</code></a></li>
     <li><a href="#meltdown调整内存值大小">Meltdown调整内存值大小</a></li>
     <li><a href="#kaiser">KAISER</a></li>
     <li><a href="#memory-type-range-registers-mtrrs">Memory-Type Range Registers (MTRRs)</a></li>
-    <li><a href="#microarchitectural-state-和-architectural-state"><strong>Microarchitectural state</strong> 和 architectural state</a></li>
+    <li><a href="#microarchitectural-state-和-architectural-state">Microarchitectural state 和 architectural state</a></li>
     <li><a href="#正课部分">正课部分</a></li>
     <li><a href="#meltdown发生的背景">Meltdown发生的背景</a></li>
     <li><a href="#speculative-execution1">Speculative execution(1)</a></li>
@@ -388,7 +388,7 @@
 
 
                 <time>
-                    Nov 12, 2024 23:05 &#43;0800
+                    Nov 13, 2024 17:04 &#43;0800
                 </time>
             </div></footer>
     
@@ -416,7 +416,7 @@
 <p><strong>相关工作部分</strong>回顾了与Meltdown相关的研究，包括之前的缓存侧信道攻击和推测执行攻击。文中强调了Meltdown与这些攻击的区别，并说明了Meltdown在攻击范围和成功率上的独特之处。</p>
 <p><strong>结论部分</strong>总结了Meltdown漏洞对现代计算系统的严重威胁，并呼吁立即采取防御措施，特别是部署KAISER补丁。文章还指出，长期的解决方案可能需要从硬件设计的角度进行修复，以防止未来类似漏洞的产生。</p>
 <hr>
-<h2 id="侧信道攻击side-channel-attack"><strong>侧信道攻击</strong>（Side-Channel Attack）
+<h2 id="侧信道攻击side-channel-attack">侧信道攻击（Side-Channel Attack）
 </h2><p><strong>侧信道攻击</strong>（Side-Channel Attack）是一类通过分析计算机系统中硬件、软件执行时产生的<strong>物理信息或微观行为特征</strong>来获取敏感信息的攻击手段，而不是通过传统的软件漏洞或直接的破解加密算法等方式进行攻击。侧信道攻击通常利用处理器执行时的<strong>时序、功耗、电磁辐射、缓存访问行为</strong>等外部特征来推测出某些敏感数据。</p>
 <p>在论文中，讨论的是<strong>乱序处理器（out-of-order processor）<strong>的</strong>缓存侧信道攻击</strong>，并且是与<strong>Meltdown</strong>漏洞相关。这涉及到现代处理器中复杂的<strong>执行优化技术</strong>，以及这些技术在某些极端情况下可能暴露的信息安全隐患。</p>
 <p><strong>Meltdown 漏洞</strong>是什么？<strong>Meltdown</strong> 是在 2018 年公开的一类严重的硬件漏洞，主要影响英特尔的处理器（也有部分 AMD 和 ARM 处理器）。该漏洞利用了现代处理器的<strong>乱序执行</strong>机制，允许攻击者在未授权的情况下读取内核空间或其他进程中的敏感数据。</p>
@@ -438,7 +438,7 @@
 </ol>
 <p>这种类型的攻击利用了硬件的特性（如乱序执行、缓存行为）以及微架构中的信息泄漏漏洞，超越了传统的安全模型，因此在公开时引发了广泛的关注和讨论。</p>
 <hr>
-<h2 id="meltdown--侧信道攻击-的完整过程"><strong>Meltdown + 侧信道攻击</strong> 的完整过程
+<h2 id="meltdown--侧信道攻击-的完整过程">Meltdown + 侧信道攻击 的完整过程
 </h2><p>从攻击的准备开始，逐步展示攻击者是如何利用处理器的<strong>乱序执行</strong>特性、缓存行为以及侧信道分析来泄露内核或其他敏感数据的。</p>
 <ol>
 <li>
@@ -588,7 +588,7 @@
 </ol>
 <p>通过这种缓存时延分析，Meltdown 能够从无法直接读取的内存区域中逐字节地提取出数据。</p>
 <hr>
-<h2 id="预测执行"><strong>预测执行</strong>
+<h2 id="预测执行">预测执行
 </h2><p>为了确保 <strong>预测执行</strong>（或称为<strong>乱序执行</strong>）一定发生，特别是在你提到的<strong>循环中</strong>，可以采取一些策略，这些策略能够诱导处理器执行<strong>提前加载（prefetching）<strong>或</strong>预测性执行</strong>，以提高成功的概率。在详细解释之前，我们先定义一些相关概念：</p>
 <ol>
 <li>
@@ -676,7 +676,7 @@
 <li><strong>Prefetch</strong> 是提前将数据加载到缓存的手段，可以手动指定特定的内存地址进行预取，从而在攻击中加快对缓存状态的推测。</li>
 </ul>
 <hr>
-<h2 id="flushreload"><strong>Flush+Reload</strong>
+<h2 id="flushreload">Flush+Reload
 </h2><p><strong>Flush+Reload</strong> 是一种典型的缓存侧信道攻击方法，广泛应用于如 Meltdown、Spectre 等漏洞的利用中。它主要利用了共享内存（如共享库或页面）中的缓存行为，结合缓存命中与失效的时延差异，来推测内存中的数据内容。Flush+Reload 的核心在于通过<strong>清除缓存</strong>和<strong>测量缓存命中时的时延</strong>，获取受害者程序对特定内存区域的访问情况。</p>
 <p><strong>Flush+Reload</strong> 攻击依赖于现代处理器的多级缓存体系和内存共享机制。其基本工作流程如下：</p>
 <ol>
@@ -763,7 +763,7 @@
 </table></div>
 <p>总的来说，Flush+Reload 是一种强大的缓存侧信道攻击方法，利用缓存时延分析推测内存访问行为。它通过 <code>clflush</code> 指令清空缓存、受害者程序访问内存、攻击者重新加载数据并测量时延，来判断受害者程序是否访问了特定的内存区域。这种方法在加密算法泄露和 Meltdown、Spectre 等漏洞的利用中具有广泛的应用，但它也需要依赖共享内存和较高精度的时延测量技术。</p>
 <hr>
-<h2 id="flushreload-查询对象"><strong>Flush+Reload</strong> 查询对象
+<h2 id="flushreload-查询对象">Flush+Reload 查询对象
 </h2><p>在 <strong>Flush+Reload</strong> 攻击中，查询的是<strong>缓存中的数据</strong>，而不是直接查询<strong>页表</strong>或<strong>页表中的缓存行</strong>。Flush+Reload 的核心是基于缓存行的<strong>状态</strong>（命中或未命中），而不涉及具体的页表结构。</p>
 <p>为了更清楚地解释这一点，让我们深入了解 <strong>Flush+Reload</strong> 的运作机制：</p>
 <ol>
@@ -1199,7 +1199,7 @@
 <h2 id="memory-type-range-registers-mtrrs">Memory-Type Range Registers (MTRRs)
 </h2><p>MTRRs 是一个特性，允许系统定义内存区域的缓存特性。通过这些寄存器，系统可以指定某些内存区域是可缓存的、不可缓存的、写合并等。这对于优化系统性能和特定硬件行为很重要。</p>
 <hr>
-<h2 id="microarchitectural-state-和-architectural-state"><strong>Microarchitectural state</strong> 和 architectural state
+<h2 id="microarchitectural-state-和-architectural-state">Microarchitectural state 和 architectural state
 </h2><p>&ldquo;<strong>Microarchitectural state</strong>&rdquo; 和 &ldquo;<strong>architectural state</strong>&rdquo; 是计算机体系结构中两个不同的概念，涉及处理器如何管理和表现数据。</p>
 <ol>
 <li><strong>微架构状态（Microarchitectural state）</strong>：这是处理器内部的细节层次，它包括缓存、分支预测器、管道、加载/存储队列等部件的状态。这些状态反映了处理器如何在硬件层面优化执行指令，但这些信息通常对软件程序不可见，也不会直接影响程序执行的逻辑结果。</li>
@@ -1219,7 +1219,9 @@
 <p>我们在操作系统中用来实现隔离的具体技术是硬件中的User/Supervisor mode，硬件中的Page Table，以及精心设计的内核软件，例如系统调用在使用用户提供的指针具备防御性。</p>
 <p>但是同时也值得思考，如何可以破坏安全性？实际上，内核非常积极的提供隔离性安全性，但总是会有问题出现。</p>
 <p>今天的<a class="link" href="https://pdos.csail.mit.edu/6.828/2020/readings/meltdown.pdf"  target="_blank" rel="noopener"
-    >论文</a>讨论的就是最近在操作系统安全领域出现的最有趣的问题之一，它发表于2018年。包括我在内的很多人发现对于用户和内核之间的隔离进行攻击是非常令人烦恼的，因为它破坏了人们对于硬件上的Page Table能够提供隔离性的设想。这里的攻击完全不支持这样的设想。</p>
+    >论文</a>
+
+讨论的就是最近在操作系统安全领域出现的最有趣的问题之一，它发表于2018年。包括我在内的很多人发现对于用户和内核之间的隔离进行攻击是非常令人烦恼的，因为它破坏了人们对于硬件上的Page Table能够提供隔离性的设想。这里的攻击完全不支持这样的设想。</p>
 <p>同时，Meltdown也是被称为Micro-Architectural Attack的例子之一，这一类攻击涉及利用CPU内隐藏的实现细节。通常来说CPU如何工作是不公开的，但是人们会去猜，一旦猜对了CPU隐藏的实现细节，就可以成功的发起攻击。</p>
 <p>Meltdown是可被修复的，并且看起来已经被完全修复了。然后它使得人们担心还存在类似的Micro-Architectural Attack。所以这是最近发生的非常值得学习的一个事件。</p>
 <p>让我从展示攻击的核心开始，之后我们再讨论具体发生了什么。</p>
@@ -1453,7 +1455,9 @@
 <hr>
 <h2 id="flush-and-reload">Flush and Reload
 </h2><p>为什么Cache与Meltdown相关呢？接下来我将讨论一下<a class="link" href="https://pdos.csail.mit.edu/6.828/2020/readings/meltdown.pdf"  target="_blank" rel="noopener"
-    >论文</a>中使用Cache的主要方法。</p>
+    >论文</a>
+
+中使用Cache的主要方法。</p>
 <p>论文中讨论了这种叫做Flush and Reload的技术，这个技术回答了一个问题：一段特定的代码是否使用了特定内存地址的数据？这个技术本身并不是一个直接的安全漏洞，因为它只能基于你有权限的内存地址工作。</p>
 <p>所以如果你是用户代码，你可以使用属于你的用户空间内存，并且你现在要调用一个你自己的函数，你可以使用Flush and Reload来知道你刚刚执行的函数是否使用了某个属于你自己的内存。</p>
 <p>你不能直接使用这种技术来获取其他进程的私有内存。进程之间有时候会共享内存，你还是可以访问这部分共享的内存。所以Flush and Reload回答了这个问题，特定的函数是否使用了特定内存地址？</p>
@@ -1591,7 +1595,9 @@
 <hr>
 <h2 id="meltdown-fix">Meltdown Fix
 </h2><p>我最后想讨论的是Meltdown的修复，你们实际已经接触了一些了。当<a class="link" href="https://pdos.csail.mit.edu/6.828/2020/readings/meltdown.pdf"  target="_blank" rel="noopener"
-    >论文</a>发表的时候，它获取了很多的关注。实际中还有另一篇论文，也是由这篇论文的部分作者参与完成，另一篇论文讨论了一种使用了CPU内一种叫做Spectre的不同的预测执行的不同攻击方法。这一对论文的同时出现让人非常兴奋。</p>
+    >论文</a>
+
+发表的时候，它获取了很多的关注。实际中还有另一篇论文，也是由这篇论文的部分作者参与完成，另一篇论文讨论了一种使用了CPU内一种叫做Spectre的不同的预测执行的不同攻击方法。这一对论文的同时出现让人非常兴奋。</p>
 <p>所以人们现在发现危害太大了，因为现在我们讨论的是操作系统的隔离性被破坏了。这里的技术破坏了Page Table的保护，这是我们用来实现用户和内核间隔离的技术，所以这是一个非常基础的攻击，或者至少以一种非常通用的方式破坏了安全性非常重要的一个部分。所以人们非常非常迫切的想要修复Meltdown。</p>
 <p>很多操作系统在这篇论文发表之后数周内就推出的一个快速修复，这是一个叫做KAISER，现在在Linux中被称为KPTI的技术（Kernel page-table isolation）。</p>
 <p>这里的想法很简单，也就是不将内核内存映射到用户的Page Table中，相应的就像XV6一样，在系统调用时切换Page Table。所以在用户空间时，Page Table只有用户内存地址的映射，如果执行了系统调用，会有类似于XV6中trampoline的机制，切换到拥有内核内存映射的另一个Page Table中，这样才能执行内核代码。</p>
@@ -1655,7 +1661,7 @@
 
 
         <span>
-            最后更新于 Nov 12, 2024 23:05 &#43;0800
+            最后更新于 Nov 13, 2024 17:04 &#43;0800
         </span>
     </section></footer>
 
@@ -1702,13 +1708,13 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08123rcu/29.44fd9b24e5932cf6ae1346291ec85e1b_hu13173094512423318615.png" 
+                <img src="/p/mit6s08123rcu/bg.91a08bf3fe0a8ca435e8fbc902291fd5_hu4589796922609635382.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
                         alt="Featured image of post MIT6S081：23RCU"
                         
-                        data-hash="md5-RP2bJOWTLPauE0YpHsheGw==">
+                        data-hash="md5-kaCL8/4KjKQ16PvJAikf1Q==">
                 
             </div>
         

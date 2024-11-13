@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://echudet.github.io/p/mit6s08119virtual-machines/'>
 
-<link rel="stylesheet" href="/scss/style.min.a7f637593c1d99350f36f270c9abc65cf39ec34b45847eb2fa40efef51b94c92.css"><meta property='og:title' content="MIT6S081：19Virtual Machines  ">
+<link rel="stylesheet" href="/scss/style.min.29ff19fc2531e24760c39aa8f14411e447a1182c20df7099a0cbbd158bf2f2ac.css"><meta property='og:title' content="MIT6S081：19Virtual Machines  ">
 <meta property='og:description' content="VMM提供了对于操作系统的一种不同视角。在操作系统的架构中，内核之上提供的封装单元是我们熟悉的进程，内核管理的是多个用户进程。而在VMM的架构中，VMM之上提供的封装单元是对计算机的模拟。VMM的架构使得我们可以从另一个角度重新审视我们讨论过的内容，例如内存分配，线程调度等等，这或许可以给我们一些新的思路并带回到传统的操作系统内核中。">
 <meta property='og:url' content='https://echudet.github.io/p/mit6s08119virtual-machines/'>
 <meta property='og:site_name' content='echudet'>
@@ -2075,7 +2075,9 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 <li>第一个部分是Trap and Emulate，这部分会介绍如何在RISC-V或者QEMU上构建属于自己的Virtual Machine Monitor（注，有些场合也称为Hypervisor）。</li>
 <li>第二部分会描述最近在硬件上对于虚拟化的支持。</li>
 <li>最后是讨论一下今天的<a class="link" href="https://pdos.csail.mit.edu/6.828/2020/readings/belay-dune.pdf"  target="_blank" rel="noopener"
-    >论文</a>，它使用了第二部分中硬件上的支持。</li>
+    >论文</a>
+
+，它使用了第二部分中硬件上的支持。</li>
 </ul>
 <p>首先<strong>什么</strong>是虚拟机？你可以认为这是对于计算机的一种模拟，这种模拟足够能运行一个操作系统。</p>
 <p>QEMU可以认为是虚拟机的一个例子（注，QEMU应该是属于VMM/Hypervisor）。</p>
@@ -2518,7 +2520,9 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 <hr>
 <h2 id="dune-safe-user-level-access-to-privileged-cpu-features">Dune: Safe User-level Access to Privileged CPU Features
 </h2><p>今天要讨论的<a class="link" href="https://pdos.csail.mit.edu/6.828/2020/readings/belay-dune.pdf"  target="_blank" rel="noopener"
-    >论文</a>利用了上一节介绍的硬件对于虚拟机的支持，但是却将其用作其他的用途，这是这篇论文的有趣之处，它利用了这种完全是为了虚拟机而设计的硬件，但是却用来做一些与虚拟机完全无关的事情。</p>
+    >论文</a>
+
+利用了上一节介绍的硬件对于虚拟机的支持，但是却将其用作其他的用途，这是这篇论文的有趣之处，它利用了这种完全是为了虚拟机而设计的硬件，但是却用来做一些与虚拟机完全无关的事情。</p>
 <p>从一个全局的视角来看这篇论文的内容，它想要实现的是普通的进程。</p>
 <p>所以现在我们的场景是在一个Linux而不是VMM中，但是我们又用到了硬件中的VT-x。</p>
 <p>我们将会在Linux中加载Dune可加载模块，所以Dune作为kernel的一部分运行在Supervisor mode（注，又或者叫做kernel mode），除此之外，内核的大部分还是原本的Linux。</p>
@@ -2679,13 +2683,13 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
         
         
             <div class="article-image">
-                <img src="/p/mit6s08123rcu/29.44fd9b24e5932cf6ae1346291ec85e1b_hu13173094512423318615.png" 
+                <img src="/p/mit6s08123rcu/bg.91a08bf3fe0a8ca435e8fbc902291fd5_hu4589796922609635382.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
                         alt="Featured image of post MIT6S081：23RCU"
                         
-                        data-hash="md5-RP2bJOWTLPauE0YpHsheGw==">
+                        data-hash="md5-kaCL8/4KjKQ16PvJAikf1Q==">
                 
             </div>
         

@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://echudet.github.io/p/mit6s08116file-system-performance-and-fast-crash-recovery/'>
 
-<link rel="stylesheet" href="/scss/style.min.a7f637593c1d99350f36f270c9abc65cf39ec34b45847eb2fa40efef51b94c92.css"><meta property='og:title' content="MIT6S081：16File system performance and fast crash recovery">
+<link rel="stylesheet" href="/scss/style.min.29ff19fc2531e24760c39aa8f14411e447a1182c20df7099a0cbbd158bf2f2ac.css"><meta property='og:title' content="MIT6S081：16File system performance and fast crash recovery">
 <meta property='og:description' content="文件系统性能和日志系统是提升数据存取效率和系统可靠性的关键因素。高性能文件系统通过优化读写操作、减少延迟和提高吞吐量，以增强用户体验和应用程序的效率。日志系统则通过记录操作日志确保数据在意外故障后仍能保持一致性，保证数据不会丢失，系统能够迅速恢复。这两者结合，不仅提高了系统的稳健性，还加强了用户对数据准确性和可用性的信任。">
 <meta property='og:url' content='https://echudet.github.io/p/mit6s08116file-system-performance-and-fast-crash-recovery/'>
 <meta property='og:site_name' content='echudet'>
@@ -456,7 +456,9 @@
 </li>
 </ul>
 <p>这里有一个术语，当我们谈到log时，与今天阅读的<a class="link" href="https://pdos.csail.mit.edu/6.828/2020/readings/journal-design.pdf"  target="_blank" rel="noopener"
-    >论文</a>所用到的journal是同一件事情，它们是同义词。</p>
+    >论文</a>
+
+所用到的journal是同一件事情，它们是同义词。</p>
 <p>除此之外，今天的论文是有关向ext2增加journal，并得到ext3文件系统（注，所以可以认为ext3文件系统就是ext2加上了logging系统）。</p>
 <p>接下来我将从这几个方面来讨论ext3文件系统：某种程度上将其与XV6进行对比；解释ext3是如何修复XV6的logging存在的性能问题；解释ext3在故障恢复时语义上的一些变化。</p>
 <h2 id="xv6-file-system-logging回顾">XV6 File system logging回顾
@@ -532,7 +534,9 @@
 <p>虽然这么做有它的原因，但是ext3可以一定程度上修复这个问题。</p>
 <h2 id="ext3-file-system-log-format">ext3 file system log format
 </h2><p>ext3文件系统就是基于今天要阅读的<a class="link" href="https://pdos.csail.mit.edu/6.828/2020/readings/journal-design.pdf"  target="_blank" rel="noopener"
-    >论文</a>，再加上几年的开发得到的，并且ext3也曾经广泛的应用过。</p>
+    >论文</a>
+
+，再加上几年的开发得到的，并且ext3也曾经广泛的应用过。</p>
 <p>ext3是针对之前一种的文件系统（ext2）logging方案的修改，所以ext3就是在几乎不改变之前的ext2文件系统的前提下，在其上增加一层logging系统。</p>
 <p>所以某种程度来说，logging是一个容易升级的模块。</p>
 <p>ext3的数据结构与XV6是类似的。</p>
@@ -1220,13 +1224,13 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08123rcu/29.44fd9b24e5932cf6ae1346291ec85e1b_hu13173094512423318615.png" 
+                <img src="/p/mit6s08123rcu/bg.91a08bf3fe0a8ca435e8fbc902291fd5_hu4589796922609635382.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
                         alt="Featured image of post MIT6S081：23RCU"
                         
-                        data-hash="md5-RP2bJOWTLPauE0YpHsheGw==">
+                        data-hash="md5-kaCL8/4KjKQ16PvJAikf1Q==">
                 
             </div>
         

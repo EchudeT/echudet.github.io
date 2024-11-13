@@ -6,11 +6,11 @@
 
 <link rel='canonical' href='https://echudet.github.io/p/mit6s08121networking/'>
 
-<link rel="stylesheet" href="/scss/style.min.a7f637593c1d99350f36f270c9abc65cf39ec34b45847eb2fa40efef51b94c92.css"><meta property='og:title' content="MIT6S081：21Networking">
+<link rel="stylesheet" href="/scss/style.min.29ff19fc2531e24760c39aa8f14411e447a1182c20df7099a0cbbd158bf2f2ac.css"><meta property='og:title' content="MIT6S081：21Networking">
 <meta property='og:description' content="在网络协议栈中，接收活锁（Receive Livelock）是一个重要的问题，这是在高流量条件下系统因频繁处理中断而陷入的性能瓶颈现象。为了解决这一问题，采用轮询机制代替传统中断驱动，以减少高负载下的中断频率，能够提高系统性能的稳定性。此外，网卡的Ring Buffer 结构和 DMA 传输机制有助于数据包在网卡与系统内存之间高效传输。">
 <meta property='og:url' content='https://echudet.github.io/p/mit6s08121networking/'>
 <meta property='og:site_name' content='echudet'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-10-06T22:02:50&#43;08:00'/><meta property='article:modified_time' content='2024-11-12T23:05:03&#43;08:00'/><meta property='og:image' content='https://echudet.github.io/p/mit6s08121networking/bg.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-10-06T22:02:50&#43;08:00'/><meta property='article:modified_time' content='2024-11-13T17:04:51&#43;08:00'/><meta property='og:image' content='https://echudet.github.io/p/mit6s08121networking/bg.jpg' />
 <meta name="twitter:title" content="MIT6S081：21Networking">
 <meta name="twitter:description" content="在网络协议栈中，接收活锁（Receive Livelock）是一个重要的问题，这是在高流量条件下系统因频繁处理中断而陷入的性能瓶颈现象。为了解决这一问题，采用轮询机制代替传统中断驱动，以减少高负载下的中断频率，能够提高系统性能的稳定性。此外，网卡的Ring Buffer 结构和 DMA 传输机制有助于数据包在网卡与系统内存之间高效传输。"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://echudet.github.io/p/mit6s08121networking/bg.jpg' />
@@ -272,8 +272,8 @@
     <li><a href="#论文速览">论文速览</a></li>
     <li><a href="#feedback">feedback</a></li>
     <li><a href="#操作系统的网络功能">操作系统的网络功能</a></li>
-    <li><a href="#livelock"><strong>Livelock</strong></a></li>
-    <li><a href="#receive-livelock"><strong>Receive Livelock</strong></a></li>
+    <li><a href="#livelock">Livelock</a></li>
+    <li><a href="#receive-livelock">Receive Livelock</a></li>
     <li><a href="#正课部分">正课部分</a></li>
     <li><a href="#计算机网络概述">计算机网络概述</a></li>
     <li><a href="#二层网络-----ethernet">二层网络 &mdash; Ethernet</a></li>
@@ -381,7 +381,7 @@
 
 
                 <time>
-                    Nov 12, 2024 23:05 &#43;0800
+                    Nov 13, 2024 17:04 &#43;0800
                 </time>
             </div></footer>
     
@@ -641,7 +641,7 @@
 </ol>
 <p>总的来说，操作系统通过各种网络接口向用户提供网络功能，从底层的套接字系统调用到更高级的网络管理工具和库。应用程序通过这些接口可以实现网络通信、数据传输、网络设备配置等功能。</p>
 <hr>
-<h2 id="livelock"><strong>Livelock</strong>
+<h2 id="livelock">Livelock
 </h2><p><strong>Livelock</strong> 是一种计算机系统中常见的同步问题，类似于死锁（Deadlock），但有所区别。在 livelock 情况下，多个进程或线程<strong>虽然没有完全停止运行</strong>（也就是说它们仍然在“活动”中），但<strong>无法继续执行有意义的操作</strong>，因为它们彼此不断地改变状态或采取相互回避的行为，导致始终无法达到目标状态。二者区别如下：</p>
 <div class="table-wrapper"><table>
   <thead>
@@ -679,7 +679,7 @@
 </ul>
 <p>Livelock 是一种由于资源协调不当而导致的“忙碌等待”现象，其表现为系统中某些进程或线程虽然在活动，但因重复的避让行为而无法完成有效的任务。与死锁不同，活锁需要更复杂的策略来处理，如引入随机化、调整优先级等。</p>
 <hr>
-<h2 id="receive-livelock"><strong>Receive Livelock</strong>
+<h2 id="receive-livelock">Receive Livelock
 </h2><p><strong>Receive Livelock</strong> 是网络系统中的一种活锁现象，通常发生在高流量环境下，当系统过度忙于处理接收的数据包，但<strong>无法有效传递数据到更高层的应用或协议栈</strong>时。它本质上是网络设备或操作系统在网络包接收过程中被不断打断，导致没有足够时间处理或传递这些数据包，使得传输效率极低。</p>
 <p>在网络中，尤其是高流量下，网络接口会迅速收到大量数据包。由于每个接收的包都可能触发一个中断，CPU会频繁响应这些中断，导致以下问题：</p>
 <ul>
@@ -712,7 +712,9 @@
 </h2><h2 id="计算机网络概述">计算机网络概述
 </h2><p>今天我想讨论一下Networking以及它与操作系统的关联。今天这节课的很多内容都与最后一个lab，也就是构建一个网卡驱动相关。</p>
 <p>在这节课，我们首先会大概看一下操作系统中网络相关的软件会有什么样的结构，之后我们会讨论今天的论文<a class="link" href="https://pdos.csail.mit.edu/6.828/2020/readings/mogul96usenix.pdf"  target="_blank" rel="noopener"
-    >Livelock</a>。Livelock展示了在设计网络协议栈时可能会出现的有趣的陷阱。</p>
+    >Livelock</a>
+
+。Livelock展示了在设计网络协议栈时可能会出现的有趣的陷阱。</p>
 <p>首先，让我通过画图来描述一下基本的网络场景。网络连接了不同的主机，这里的连接有两种方式：</p>
 <p>相近的主机连接在同一个网络中。例如有一个以太网设备，可能是交换机或者单纯的线缆，然后有一些主机连接到了这个以太网设备。这里的主机可能是笔记本电脑，服务器或者路由器。在设计网络相关软件的时候，通常会忽略直接连接了主机的网络设备。</p>
 <p>这里的网络设备可能只是一根线缆（几十年前就是通过线缆连接主机）；也可能是一个以太网交换机；也可能是wifi无线局域网设备（主机通过射频链路与网络设备相连），但是不管是哪种设备，这种直接连接的设备会在网络协议栈的底层被屏蔽掉。</p>
@@ -1172,7 +1174,9 @@
 <hr>
 <h2 id="receive-livelock-1">Receive Livelock
 </h2><p>接下来我们看一下今天的<a class="link" href="https://pdos.csail.mit.edu/6.828/2020/readings/mogul96usenix.pdf"  target="_blank" rel="noopener"
-    >论文</a>。因为我们已经介绍了很多论文相关的背景知识，我们直接来看一下论文的图1。我们之后根据论文中的图来开展讨论。</p>
+    >论文</a>
+
+。因为我们已经介绍了很多论文相关的背景知识，我们直接来看一下论文的图1。我们之后根据论文中的图来开展讨论。</p>
 <p>这张图是一个路由器的性能图。这是一个有两张网卡的路由器，它的工作是从一个网卡接收packet，再从另一个网卡送出 。</p>
 <p>X轴是接收速率，也就是接收端网卡的收到packet的速率。Y轴是发送速率，也就是观察到的发送端网卡发送packet的速率。</p>
 <p>我们关心的是实心圆对应的曲线，它先上升，再下降。所以即使还不知道任何上下文，看到这个图之后我们会问自己，为什么这个曲线先上升，再下降？曲线的转折点有什么特殊之处？是什么决定了曲线的上升斜率和下降斜率？即使不知道任何背景知识，我们还是可以问出这么多问题。</p>
@@ -1220,7 +1224,9 @@
 <hr>
 <h2 id="如何解决livelock">如何解决Livelock
 </h2><p><a class="link" href="https://pdos.csail.mit.edu/6.828/2020/readings/mogul96usenix.pdf"  target="_blank" rel="noopener"
-    >论文</a>作者对于Livelock提出了一种解决方法。这种解决方法的最直接结果就是，当packet的输入速率达到了5000pps，随着输入速率的增加，转发性能维持在5000pps。</p>
+    >论文</a>
+
+作者对于Livelock提出了一种解决方法。这种解决方法的最直接结果就是，当packet的输入速率达到了5000pps，随着输入速率的增加，转发性能维持在5000pps。</p>
 <p><img src="/p/mit6s08121networking/p66.png"
 	width="1136"
 	height="554"
@@ -1285,7 +1291,7 @@
 
 
         <span>
-            最后更新于 Nov 12, 2024 23:05 &#43;0800
+            最后更新于 Nov 13, 2024 17:04 &#43;0800
         </span>
     </section></footer>
 
@@ -1332,13 +1338,13 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08123rcu/29.44fd9b24e5932cf6ae1346291ec85e1b_hu13173094512423318615.png" 
+                <img src="/p/mit6s08123rcu/bg.91a08bf3fe0a8ca435e8fbc902291fd5_hu4589796922609635382.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
                         alt="Featured image of post MIT6S081：23RCU"
                         
-                        data-hash="md5-RP2bJOWTLPauE0YpHsheGw==">
+                        data-hash="md5-kaCL8/4KjKQ16PvJAikf1Q==">
                 
             </div>
         

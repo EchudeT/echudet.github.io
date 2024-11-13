@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://echudet.github.io/p/mit6s08118os-organization/'>
 
-<link rel="stylesheet" href="/scss/style.min.a7f637593c1d99350f36f270c9abc65cf39ec34b45847eb2fa40efef51b94c92.css"><meta property='og:title' content="MIT6S081：18OS organization">
+<link rel="stylesheet" href="/scss/style.min.29ff19fc2531e24760c39aa8f14411e447a1182c20df7099a0cbbd158bf2f2ac.css"><meta property='og:title' content="MIT6S081：18OS organization">
 <meta property='og:description' content="微内核的核心实现了IPC（Inter-Process Communication）以及线程和任务的tiny kernel。所以微内核只提供了进程抽象和通过IPC进程间通信的方式，除此之外别无他物。任何你想要做的事情，例如文件系统，都会通过一个用户空间进程来实现，完全不会在内核中实现。">
 <meta property='og:url' content='https://echudet.github.io/p/mit6s08118os-organization/'>
 <meta property='og:site_name' content='echudet'>
@@ -1870,7 +1870,9 @@
 <p>所以这提供给你一种非常小的内核，以及相对少的代码去优化，你可以优化IPC，除此之外也没有别的东西了。</p>
 <p>上图就是我们在这节课剩下的时间要讨论的内容。</p>
 <p>在今天仍然有使用微内核的场景。实际上，今天<a class="link" href="https://pdos.csail.mit.edu/6.828/2020/readings/microkernel.pdf"  target="_blank" rel="noopener"
-    >论文</a>要讨论的L4微内核就有很多很多的运行实例，它用在很多手机中用来控制手机的射频，在最近的iphone中的一个旁路处理器中，也使用了L4微内核来隐藏加密密钥。</p>
+    >论文</a>
+
+要讨论的L4微内核就有很多很多的运行实例，它用在很多手机中用来控制手机的射频，在最近的iphone中的一个旁路处理器中，也使用了L4微内核来隐藏加密密钥。</p>
 <p>所以在一些微型嵌入式系统中，微内核能够胜出，比如说在一些专门为某种功能设计的计算机中，你需要使用某种操作系统，而你又不需要Linux带来的复杂性。</p>
 <p>微内核中的用户进程通过IPC通信，这在很多操作系统都存在。</p>
 <p>例如我现在运行的macOS，它就是一个普通的monolithic kernel，它也很好的支持用户进程通过IPC进行通信。</p>
@@ -1953,7 +1955,9 @@
 <p>以上就是许多微内核项目要面对的用户期望和潜在的挑战。</p>
 <h2 id="l4-micro-kernel">L4 micro kernel
 </h2><p>今天要讨论的<a class="link" href="https://pdos.csail.mit.edu/6.828/2020/readings/microkernel.pdf"  target="_blank" rel="noopener"
-    >论文</a>，有许多有关L4微内核的内容。这是今天论文作者开发和使用的一种微内核。</p>
+    >论文</a>
+
+，有许多有关L4微内核的内容。这是今天论文作者开发和使用的一种微内核。</p>
 <p>L4必然不是最早的微内核，但是从1980年代开始，它是最早一批可以工作的微内核之一，并且它非常能展现微内核是如何工作的。</p>
 <p>在许多年里面它一直都有活跃的开发和演进。如果你查看Wikipedia，L4有15-20个变种，有一些从1980年代开始开发的项目现在还存在。</p>
 <p>接下来我将从我的理解向你们解释L4在今天的论文发表的时候是如何工作的。</p>
@@ -2247,7 +2251,9 @@
 </blockquote>
 <p>实际中，对于这里的场景：发送一个消息并期待收到回复，你可以抛开这种方法并获得简单的多的设计，L4就是采用了后者。</p>
 <p>有关简单的设计在一篇著名的论文中有提到，论文是<a class="link" href="https://www.cse.unsw.edu.au/~cs9242/19/papers/Liedtke_93.pdf"  target="_blank" rel="noopener"
-    >Improving IPC by Kernel Design</a>，这篇论文在今天要讨论的论文前几年发布。相比上面的慢设计，它有几点不同：</p>
+    >Improving IPC by Kernel Design</a>
+
+，这篇论文在今天要讨论的论文前几年发布。相比上面的慢设计，它有几点不同：</p>
 <ul>
 <li>
 <p>其中一点是，它是同步的（Synchronized）。</p>
@@ -2375,7 +2381,9 @@
 <p>与其写一些完全属于自己的新的用户空间服务，并模仿Linux，论文中决定采用一种容易的多的方法，其实许多项目也都采用了这种方法，也就是简单的将一个现有的monolithic kernel运行在微内核之上，而不是重新实现一些新的东西。</p>
 <p>这就是今天论文要介绍的内容。</p>
 <p>在今天<a class="link" href="https://pdos.csail.mit.edu/6.828/2020/readings/microkernel.pdf"  target="_blank" rel="noopener"
-    >论文</a>的讨论中，L4微内核位于底部，但是同时，一个完整的Linux作为一个巨大的服务运行在用户空间进程中。听起来有点奇怪，一般的kernel都是运行在硬件之上，而现在Linux kernel是一个用户空间进程。</p>
+    >论文</a>
+
+的讨论中，L4微内核位于底部，但是同时，一个完整的Linux作为一个巨大的服务运行在用户空间进程中。听起来有点奇怪，一般的kernel都是运行在硬件之上，而现在Linux kernel是一个用户空间进程。</p>
 <p>实际上，如你在QEMU上运行XV6时所见，内核也是运行在用户空间。Linux kernel不过就是一个程序，对其做一些修改它就可以运行在用户空间，所以现在Linux需要被修改。论文中提到需要对Linux的底层做一些修改，例如Linux中期望能直接修改Page Table的内容，读写CPU寄存器。Linux中一部分需要被修改以将它们改成调用L4微内核的系统调用，或者发送IPC，而不是直接访问硬件。</p>
 <p>但是Linux的大部分内容都可以不做修改而直接运行。所以按照这种方式，作为Linux的一部分，现在得到了文件系统，网络支持，各种设备驱动等等，而不需要自己实现这些。这里的实现方式是将Linux内核作为一个L4 Task运行，每一个Linux进程又作为一个独立的L4 Task运行。所以当你登录到Linux中时，你要它运行一个Shell或者terminal，它会在用户空间创建一个L4 Task来运行这个Linux程序。所以现在有一个Task运行Linux，以及N个Task来运行每一个你在Linux中启动的进程。Linux不会直接修改进程的Page Table，而是会向L4发送正确的IPC让L4来修改进程的Page Table。</p>
 <p>这里有很多小的改动，其中一个有意思的地方是，当VI想要执行一个系统调用时，VI并不知道它运行在L4之上，在上面的方案中，所有的程序都以为它们运行在Linux中。当VI要执行系统调用时，L4并不支持，因为VI要执行的是Linux系统调用而不是L4系统调用。所以对于Linux进程，会有一个小的库与之关联，这个库会将类似于fork，exec，pipe，read，write的系统调用，转换成发送到Linux kernel Task的IPC消息，并等待Linux kernel Task的返回，然后再返回到进程中。</p>
@@ -2404,7 +2412,9 @@
 <p>所以这里的架构失去了Linux的调度能力，这是这种架构的缺点，我相信L4的后续版本有一些方法能够让Linux通知L4调度器，来给某个进程更高优先级等等。</p>
 <h2 id="l4-linux性能分析">L4 Linux性能分析
 </h2><p>你应该问自己：通过<a class="link" href="https://pdos.csail.mit.edu/6.828/2020/readings/microkernel.pdf"  target="_blank" rel="noopener"
-    >论文</a>可以学到有关微内核的什么内容呢？</p>
+    >论文</a>
+
+可以学到有关微内核的什么内容呢？</p>
 <p>对于我们来说，论文中有很多有趣的有关微内核是如何运行，有关Linux是如何运行的小的知识点，以及你该如何设计这么一个系统。</p>
 <p>但是论文并没有回答这个问题：微内核是不是一个好的设计？论文只是讨论了微内核是否有足够的性能以值得使用。</p>
 <p>论文之所以讨论这个内容的原因是，在论文发表的前5-10年，有一场著名的测试针对一种更早的叫做MACH的微内核。</p>
@@ -2553,13 +2563,13 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08123rcu/29.44fd9b24e5932cf6ae1346291ec85e1b_hu13173094512423318615.png" 
+                <img src="/p/mit6s08123rcu/bg.91a08bf3fe0a8ca435e8fbc902291fd5_hu4589796922609635382.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
                         alt="Featured image of post MIT6S081：23RCU"
                         
-                        data-hash="md5-RP2bJOWTLPauE0YpHsheGw==">
+                        data-hash="md5-kaCL8/4KjKQ16PvJAikf1Q==">
                 
             </div>
         

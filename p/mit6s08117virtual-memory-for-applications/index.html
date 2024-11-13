@@ -6,14 +6,14 @@
 
 <link rel='canonical' href='https://echudet.github.io/p/mit6s08117virtual-memory-for-applications/'>
 
-<link rel="stylesheet" href="/scss/style.min.a7f637593c1d99350f36f270c9abc65cf39ec34b45847eb2fa40efef51b94c92.css"><meta property='og:title' content="MIT6S081：17Virtual memory for applications">
+<link rel="stylesheet" href="/scss/style.min.29ff19fc2531e24760c39aa8f14411e447a1182c20df7099a0cbbd158bf2f2ac.css"><meta property='og:title' content="MIT6S081：17Virtual memory for applications">
 <meta property='og:description' content="虚拟内存在操作系统中扮演着重要角色，通过抽象物理内存的复杂性为每个进程提供一个统一、隔离的地址空间。这一机制允许程序运行时拥有自己的内存视图，确保不会相互干扰，提升了系统的稳定性与安全性。虚拟内存将物理内存和磁盘空间结合，允许系统运行比实际物理内存更大的程序。通过分页或分段等技术，操作系统能够在后台进行内存和存储之间的智能管理，使用页面置换算法来优化性能，保证多任务处理的高效性。这个机制不仅提高了内存利用率，还使得程序开发更为高效，因为开发者无需处理内存分配的复杂细节。">
 <meta property='og:url' content='https://echudet.github.io/p/mit6s08117virtual-memory-for-applications/'>
 <meta property='og:site_name' content='echudet'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-10-02T22:02:50&#43;08:00'/><meta property='article:modified_time' content='2024-11-12T23:44:05&#43;08:00'/><meta property='og:image' content='https://echudet.github.io/p/mit6s08117virtual-memory-for-applications/bg.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-10-02T22:02:50&#43;08:00'/><meta property='article:modified_time' content='2024-11-13T17:04:51&#43;08:00'/><meta property='og:image' content='https://echudet.github.io/p/mit6s08117virtual-memory-for-applications/bg.png' />
 <meta name="twitter:title" content="MIT6S081：17Virtual memory for applications">
 <meta name="twitter:description" content="虚拟内存在操作系统中扮演着重要角色，通过抽象物理内存的复杂性为每个进程提供一个统一、隔离的地址空间。这一机制允许程序运行时拥有自己的内存视图，确保不会相互干扰，提升了系统的稳定性与安全性。虚拟内存将物理内存和磁盘空间结合，允许系统运行比实际物理内存更大的程序。通过分页或分段等技术，操作系统能够在后台进行内存和存储之间的智能管理，使用页面置换算法来优化性能，保证多任务处理的高效性。这个机制不仅提高了内存利用率，还使得程序开发更为高效，因为开发者无需处理内存分配的复杂细节。"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='https://echudet.github.io/p/mit6s08117virtual-memory-for-applications/bg.jpg' />
+    <meta name="twitter:image" content='https://echudet.github.io/p/mit6s08117virtual-memory-for-applications/bg.png' />
     <link rel="shortcut icon" href="/timer.ico" />
 
     </head>
@@ -314,10 +314,10 @@
     <header class="article-header">
         <div class="article-image">
             <a href="/p/mit6s08117virtual-memory-for-applications/">
-                <img src="/p/mit6s08117virtual-memory-for-applications/bg_hu5588127264095518809.jpg"
-                        srcset="/p/mit6s08117virtual-memory-for-applications/bg_hu5588127264095518809.jpg 800w, /p/mit6s08117virtual-memory-for-applications/bg_hu4311978051039720966.jpg 1600w"
+                <img src="/p/mit6s08117virtual-memory-for-applications/bg_hu13659540609009056379.png"
+                        srcset="/p/mit6s08117virtual-memory-for-applications/bg_hu13659540609009056379.png 800w, /p/mit6s08117virtual-memory-for-applications/bg_hu16658861918845069526.png 1600w"
                         width="800" 
-                        height="496" 
+                        height="500" 
                         loading="lazy"
                         alt="Featured image of post MIT6S081：17Virtual memory for applications" />
                 
@@ -396,7 +396,7 @@
 
 
                 <time>
-                    Nov 12, 2024 23:44 &#43;0800
+                    Nov 13, 2024 17:04 &#43;0800
                 </time>
             </div></footer>
     
@@ -716,7 +716,9 @@
 <h2 id="正课">正课
 </h2><h2 id="应用程序使用虚拟内存所需要的特性">应用程序使用虚拟内存所需要的特性
 </h2><p>今天的话题是用户应用程序使用的虚拟内存，它主要是受这篇1991年的<a class="link" href="https://pdos.csail.mit.edu/6.828/2020/readings/appel-li.pdf"  target="_blank" rel="noopener"
-    >论文</a>的启发。</p>
+    >论文</a>
+
+的启发。</p>
 <p>首先，你们已经知道了，操作系统内核以非常灵活的方式使用了虚拟内存Page Table。</p>
 <p>你们已经通过Lazy Allocation Lab，Copy on Write Lab，以及XV6中的各种内存实现了解到了这一点。</p>
 <p>而今天论文中的核心观点是，用户应用程序也应该从灵活的虚拟内存中获得收益，也就是说用户应用程序也可以使用虚拟内存。</p>
@@ -777,7 +779,9 @@
 <p>它接收某个对象，并将其映射到调用者的地址空间中。</p>
 <p>举个例子，如果你想映射一个文件，那么你需要将文件描述符传递给mmap系统调用。</p>
 <p>mmap系统调用有许多令人眼花缭乱的参数（注，mmap的具体说明可以参考<a class="link" href="https://man7.org/linux/man-pages/man2/mmap.2.html"  target="_blank" rel="noopener"
-    >man page</a>）：</p>
+    >man page</a>
+
+）：</p>
 <ul>
 <li>
 <p>第一个参数是一个你想映射到的特定地址，如果传入null表示不指定特定地址，这样的话内核会选择一个地址来完成映射，并从系统调用返回。</p>
@@ -792,7 +796,9 @@
 <p>第四个参数我们会跳过不做讨论，它的值可以是MAP_PRIVATE。它指定了如果你更新了传入的对象，会发生什么。</p>
 <blockquote>
 <p>（注，第四个参数是flags，MAP_PRIVATE是其中一个值，在mmap文件的场景下，MAP_PRIVATE表明更新文件不会写入磁盘，只会更新在内存中的拷贝，详见<a class="link" href="https://man7.org/linux/man-pages/man2/mmap.2.html"  target="_blank" rel="noopener"
-    >man page</a>）。</p>
+    >man page</a>
+
+）。</p>
 </blockquote>
 </li>
 <li>
@@ -814,7 +820,9 @@
 <h3 id="mprotect系统调用">mprotect系统调用
 </h3><blockquote>
 <p>（注，详见<a class="link" href="https://man7.org/linux/man-pages/man2/mprotect.2.html"  target="_blank" rel="noopener"
-    >man page</a>）。</p>
+    >man page</a>
+
+）。</p>
 </blockquote>
 <p>当你将某个对象映射到了虚拟内存地址空间，你可以修改对应虚拟内存的权限，这样你就可以以特定的权限保护对象的一部分，或者整个对象。</p>
 <p>举个例子，通过上图对于mprotect的调用将权限设置成只读（R），这时，对于addr到addr+len这段地址，load指令还能执行，但是store指令将会变成Page Fault。</p>
@@ -831,7 +839,9 @@
 <p>当内核发现Page Fault时，或许会通过修复Page Table来使得应用程序还能继续执行。</p>
 <p>与内核响应Page Fault的方式类似，在这里的handler中或许会调用mprotect来修改内存的权限来避免segfault，这样应用程序的指令就可以恢复运行。</p>
 <p>与sigaction类似的有sigalarm（译注：sigalarm 是<a class="link" href="https://pdos.csail.mit.edu/6.S081/2020/labs/traps.html"  target="_blank" rel="noopener"
-    >traps lab</a> 中实现的一个系统调用，不属于标准Unix 接口），在sigalarm中可以设置每隔一段时间就调用handler。</p>
+    >traps lab</a>
+
+ 中实现的一个系统调用，不属于标准Unix 接口），在sigalarm中可以设置每隔一段时间就调用handler。</p>
 <p>sigaction也可以实现这个功能，只是它更加的通用，因为它可以响应不同类型的signal。</p>
 <blockquote>
 <p>学生提问：看起来mprotect暗示了你可以为单独的地址添加不同的权限，然而在XV6中，我们只能为整个Page设置相同的权限，这里是有区别吗？</p>
@@ -1430,7 +1440,9 @@
 	
 ></p>
 <p>首先是设置内存，通过<a class="link" href="https://man7.org/linux/man-pages/man3/shm_open.3.html"  target="_blank" rel="noopener"
-    >shm_open</a>创建一个Share-memory object，shm_open是一个Linux/Uinx系统调用。Share-memory object表现的像是一个文件，但是它并不是一个文件，它位于内存，并没有磁盘文件与之对应，如果你愿意的话，可以认为它是一个位于内存的文件系统。</p>
+    >shm_open</a>
+
+创建一个Share-memory object，shm_open是一个Linux/Uinx系统调用。Share-memory object表现的像是一个文件，但是它并不是一个文件，它位于内存，并没有磁盘文件与之对应，如果你愿意的话，可以认为它是一个位于内存的文件系统。</p>
 <p>之后我们裁剪这个Shared-memory object到from和to空间的大小。</p>
 <p>之后我们通过mmap先将其映射一次，以供mutator也就是实际的应用程序使用。然后再映射一次，以供GC使用。这里shm_open，ftruncate，和两次mmap，等效于map2。</p>
 <p>回过去看之前的代码，</p>
@@ -1528,7 +1540,7 @@
 
 
         <span>
-            最后更新于 Nov 12, 2024 23:44 &#43;0800
+            最后更新于 Nov 13, 2024 17:04 &#43;0800
         </span>
     </section></footer>
 
@@ -1575,13 +1587,13 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08123rcu/29.44fd9b24e5932cf6ae1346291ec85e1b_hu13173094512423318615.png" 
+                <img src="/p/mit6s08123rcu/bg.91a08bf3fe0a8ca435e8fbc902291fd5_hu4589796922609635382.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
                         alt="Featured image of post MIT6S081：23RCU"
                         
-                        data-hash="md5-RP2bJOWTLPauE0YpHsheGw==">
+                        data-hash="md5-kaCL8/4KjKQ16PvJAikf1Q==">
                 
             </div>
         

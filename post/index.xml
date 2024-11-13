@@ -7,23 +7,23 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>echudet</copyright>
-        <lastBuildDate>Tue, 12 Nov 2024 23:44:05 +0800</lastBuildDate><atom:link href="https://echudet.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 13 Nov 2024 17:04:51 +0800</lastBuildDate><atom:link href="https://echudet.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>MIT6S081：23RCU</title>
         <link>https://echudet.github.io/p/mit6s08123rcu/</link>
         <pubDate>Tue, 08 Oct 2024 22:02:50 +0800</pubDate>
         
         <guid>https://echudet.github.io/p/mit6s08123rcu/</guid>
-        <description>&lt;img src="https://echudet.github.io/p/mit6s08123rcu/29.png" alt="Featured image of post MIT6S081：23RCU" /&gt;&lt;h1 id=&#34;lecture-23-rcu&#34;&gt;Lecture 23 RCU
+        <description>&lt;img src="https://echudet.github.io/p/mit6s08123rcu/bg.jpg" alt="Featured image of post MIT6S081：23RCU" /&gt;&lt;h1 id=&#34;lecture-23-rcu&#34;&gt;Lecture 23 RCU
 &lt;/h1&gt;&lt;h2 id=&#34;课前预习&#34;&gt;课前预习
 &lt;/h2&gt;&lt;h2 id=&#34;论文速览&#34;&gt;论文速览
-&lt;/h2&gt;&lt;p&gt;在Introduction (简介)部分，介绍了&lt;code&gt;Read-Copy Update (RCU)&lt;/code&gt;作为Linux内核中一种高性能的同步机制。它支持并发的读写操作，且自引入以来，RCU的使用不断扩大，成为Linux内核中的关键组件。文章回顾了RCU的发展背景，并说明了其高效性能在内核中带来的巨大优势。&lt;/p&gt;
-&lt;p&gt;在RCU Requirements (RCU要求)部分提到，RCU在Linux内核中的实现需要满足三个关键要求：支持更新时的并发读取；低计算和存储开销；确定的操作完成时间，尤其是在实时响应和系统工程方面具有重要意义。&lt;/p&gt;
-&lt;p&gt;在RCU Design (RCU设计)部分，详细介绍了RCU的设计，包括核心的两个基本操作：&lt;/p&gt;
+&lt;/h2&gt;&lt;p&gt;在&lt;span class=&#34;red&#34;&gt;Introduction (简介)部分&lt;/span&gt;，介绍了&lt;code&gt;Read-Copy Update (RCU)&lt;/code&gt;作为Linux内核中一种高性能的同步机制。它支持并发的读写操作，且自引入以来，RCU的使用不断扩大，成为Linux内核中的关键组件。文章回顾了RCU的发展背景，并说明了其高效性能在内核中带来的巨大优势。&lt;/p&gt;
+&lt;p&gt;在&lt;span class=&#34;red&#34;&gt;RCU Requirements (RCU要求)部分&lt;/span&gt;提到，RCU在Linux内核中的实现需要满足三个关键要求：支持更新时的并发读取；低计算和存储开销；确定的操作完成时间，尤其是在实时响应和系统工程方面具有重要意义。&lt;/p&gt;
+&lt;p&gt;在&lt;span class=&#34;red&#34;&gt;RCU Design (RCU设计)部分&lt;/span&gt;，详细介绍了RCU的设计，包括核心的两个基本操作：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;RCU读侧临界区&lt;/strong&gt;：用来保证线程可以安全读取数据结构。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;RCU同步&lt;/strong&gt;：用来确保所有并发的读操作完成后再进行更新操作。通过这些机制，RCU允许多线程并发读取数据，同时其他线程可以更新数据。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;在Using RCU (RCU的使用)部分，详细阐述了RCU在Linux内核中的多种使用模式：&lt;/p&gt;
+&lt;p&gt;在&lt;span class=&#34;red&#34;&gt;Using RCU (RCU的使用)部分&lt;/span&gt;，详细阐述了RCU在Linux内核中的多种使用模式：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;4.1 Wait for Completion (等待操作完成)&lt;/strong&gt;：RCU用于等待预先存在的操作完成，以确保安全地移除数据。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;4.2 Reference Counting (引用计数)&lt;/strong&gt;：RCU作为引用计数的替代方案，提供了更高效的内存释放机制。&lt;/li&gt;
@@ -31,17 +31,17 @@
 &lt;li&gt;&lt;strong&gt;4.4 Publish-Subscribe (发布-订阅模式)&lt;/strong&gt;：提供一种安全发布数据的方式，确保并发读取操作安全。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;4.5 Read-Write Lock Alternative (读写锁的替代方案)&lt;/strong&gt;：RCU作为读写锁的高效替代方案，在并发读取场景下提供了更好的性能。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;在Algorithmic Transformations (算法转换)部分，讨论了为了适应RCU而需要进行的几种常见算法转换：&lt;/p&gt;
+&lt;p&gt;在&lt;span class=&#34;red&#34;&gt;Algorithmic Transformations (算法转换)部分&lt;/span&gt;，讨论了为了适应RCU而需要进行的几种常见算法转换：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;5.1 Impose Level of Indirection (引入间接层次)&lt;/strong&gt;：通过间接访问数据结构来保证数据的一致性。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;5.2 Mark Obsolete Objects (标记过时对象)&lt;/strong&gt;：对数据对象进行标记，防止读取到已过时的数据。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;5.3 Retry Readers (读者重试)&lt;/strong&gt;：当检测到数据已被更新时，读线程可以选择重试操作。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;在RCU Usage Statistics (RCU使用统计)部分，提供了RCU在不同Linux子系统中的使用统计数据，展示了自RCU引入以来的使用增长趋势，尤其是在网络栈、System V IPC以及其他内核子系统中的广泛应用。&lt;/p&gt;
-&lt;p&gt;在Related Work (相关工作)部分，作者回顾了与RCU相关的其他并发控制机制，包括类似RCU的机制和不同的内存回收技术。这些机制在不同操作系统中被广泛使用。&lt;/p&gt;
-&lt;p&gt;在Conclusions (结论)部分，总结了RCU在Linux内核中作为一种关键同步机制的成功，讨论了RCU的多种应用模式和转换方法，并展望了未来在内核中更多RCU应用的可能性。&lt;/p&gt;
+&lt;p&gt;在&lt;span class=&#34;red&#34;&gt;RCU Usage Statistics (RCU使用统计)部分&lt;/span&gt;，提供了RCU在不同Linux子系统中的使用统计数据，展示了自RCU引入以来的使用增长趋势，尤其是在网络栈、System V IPC以及其他内核子系统中的广泛应用。&lt;/p&gt;
+&lt;p&gt;在&lt;span class=&#34;red&#34;&gt;Related Work (相关工作)部分&lt;/span&gt;，作者回顾了与RCU相关的其他并发控制机制，包括类似RCU的机制和不同的内存回收技术。这些机制在不同操作系统中被广泛使用。&lt;/p&gt;
+&lt;p&gt;在&lt;span class=&#34;red&#34;&gt;Conclusions (结论)部分&lt;/span&gt;，总结了RCU在Linux内核中作为一种关键同步机制的成功，讨论了RCU的多种应用模式和转换方法，并展望了未来在内核中更多RCU应用的可能性。&lt;/p&gt;
 &lt;hr&gt;
-&lt;h2 id=&#34;rcu的工作原理&#34;&gt;&lt;strong&gt;RCU的工作原理&lt;/strong&gt;
+&lt;h2 id=&#34;rcu的工作原理&#34;&gt;RCU的工作原理
 &lt;/h2&gt;&lt;p&gt;&lt;strong&gt;RCU在Linux内核中的设计与工作原理&lt;/strong&gt;，核心在于两个基本操作：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;strong&gt;RCU读侧临界区&lt;/strong&gt;：使用&lt;code&gt;rcu_read_lock&lt;/code&gt;和&lt;code&gt;rcu_read_unlock&lt;/code&gt;实现。进入读侧临界区时，线程调用&lt;code&gt;rcu_read_lock&lt;/code&gt;以防止被抢占，确保其对共享数据的读取不会与其他更新操作冲突。当线程退出临界区时调用&lt;code&gt;rcu_read_unlock&lt;/code&gt;。&lt;/li&gt;
@@ -855,7 +855,9 @@
 &lt;/blockquote&gt;
 &lt;p&gt;如果我们有一个大部分都是读取操作的数据结构，我们会希望能有多个用户能同时使用这个数据结构，这样我们就可以通过多核CPU获得真正的性能提升。&lt;/p&gt;
 &lt;p&gt;如果没有其他问题的话，那么读写锁就可以解决今天的问题，我们也没有必要读&lt;a class=&#34;link&#34; href=&#34;https://pdos.csail.mit.edu/6.828/2020/readings/rcu-decade-later.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;RCU这篇论文&lt;/a&gt;。但实际上如果你深入细节，你会发现当你使用读写锁时，尤其对于大部分都是读取操作的数据结构，会有一些问题。为了了解实际发生了什么，我们必须看一下读写锁的代码实现。&lt;/p&gt;
+    &gt;RCU这篇论文&lt;/a&gt;
+
+。但实际上如果你深入细节，你会发现当你使用读写锁时，尤其对于大部分都是读取操作的数据结构，会有一些问题。为了了解实际发生了什么，我们必须看一下读写锁的代码实现。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -1127,7 +1129,9 @@
 &lt;p&gt;第二条规则更加复杂点，但是相对来说也更清晰，因为每个CPU核都知道自己有没有发生context switch，所以第二条规则是数据写入者需要等待的一个明确条件。&lt;/p&gt;
 &lt;p&gt;数据写入者或许要在第二条规则上等待几个毫秒的时间才能确保没有数据读取者还在使用链表元素，进而释放链表元素。&lt;/p&gt;
 &lt;p&gt;人们创造了多种技术来实现上面第二条规则中的等待，&lt;a class=&#34;link&#34; href=&#34;https://pdos.csail.mit.edu/6.828/2020/readings/rcu-decade-later.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;论文&lt;/a&gt;里面讨论的最简单的一种方法是通过调整线程调度器，使得写入线程简短的在操作系统的每个CPU核上都运行一下，这个过程中每个CPU核必然完成了一次context switching。&lt;/p&gt;
+    &gt;论文&lt;/a&gt;
+
+里面讨论的最简单的一种方法是通过调整线程调度器，使得写入线程简短的在操作系统的每个CPU核上都运行一下，这个过程中每个CPU核必然完成了一次context switching。&lt;/p&gt;
 &lt;p&gt;因为数据读取者不能在context switch的时候持有数据的引用，所以经过这个过程，数据写入者可以确保没有数据读取者还在持有数据。&lt;/p&gt;
 &lt;p&gt;所以数据写入者的代码实际上看起来是这样的：&lt;/p&gt;
 &lt;ul&gt;
@@ -1246,7 +1250,9 @@
 &lt;p&gt;另一方面可以直接应用RCU的数据结构在更新时，需要能支持单个操作的committing write。&lt;/p&gt;
 &lt;p&gt;你不能在原地更新数据，而是必须创建一个新的链表元素对象来替代之前的元素对象。所以单链表，树是可以应用RCU的数据结构，但是一些复杂的数据结构不能直接使用RCU。&lt;/p&gt;
 &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://pdos.csail.mit.edu/6.828/2020/readings/rcu-decade-later.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;论文&lt;/a&gt;里面提到了一些更复杂的方法，例如sequence lock，可以在允许原地更新数据的同时，又不用数据读取者使用锁。但是这些方法要复杂一些，并且能够提升性能的场景也是受限的。&lt;/p&gt;
+    &gt;论文&lt;/a&gt;
+
+里面提到了一些更复杂的方法，例如sequence lock，可以在允许原地更新数据的同时，又不用数据读取者使用锁。但是这些方法要复杂一些，并且能够提升性能的场景也是受限的。&lt;/p&gt;
 &lt;p&gt;另一个小问题是，RCU并没有一种机制能保证数据读取者一定看到的是新的数据。&lt;/p&gt;
 &lt;p&gt;因为如果某些数据读取者在数据写入者替换链表元素之前，获取了一个指针指向被RCU保护的旧数据，数据读取者可能会在较长的时间内持有这个旧数据。大部分时候这都无所谓，但是论文提到了在一些场景中，人们可能会因为读到旧数据而感到意外。&lt;/p&gt;
 &lt;p&gt;作为一个独立的话题，你们或许会想知道对于一个写操作频繁的数据该如何提升性能。&lt;/p&gt;
@@ -1311,7 +1317,7 @@
 &lt;p&gt;&lt;strong&gt;相关工作部分&lt;/strong&gt;回顾了与Meltdown相关的研究，包括之前的缓存侧信道攻击和推测执行攻击。文中强调了Meltdown与这些攻击的区别，并说明了Meltdown在攻击范围和成功率上的独特之处。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;结论部分&lt;/strong&gt;总结了Meltdown漏洞对现代计算系统的严重威胁，并呼吁立即采取防御措施，特别是部署KAISER补丁。文章还指出，长期的解决方案可能需要从硬件设计的角度进行修复，以防止未来类似漏洞的产生。&lt;/p&gt;
 &lt;hr&gt;
-&lt;h2 id=&#34;侧信道攻击side-channel-attack&#34;&gt;&lt;strong&gt;侧信道攻击&lt;/strong&gt;（Side-Channel Attack）
+&lt;h2 id=&#34;侧信道攻击side-channel-attack&#34;&gt;侧信道攻击（Side-Channel Attack）
 &lt;/h2&gt;&lt;p&gt;&lt;strong&gt;侧信道攻击&lt;/strong&gt;（Side-Channel Attack）是一类通过分析计算机系统中硬件、软件执行时产生的&lt;strong&gt;物理信息或微观行为特征&lt;/strong&gt;来获取敏感信息的攻击手段，而不是通过传统的软件漏洞或直接的破解加密算法等方式进行攻击。侧信道攻击通常利用处理器执行时的&lt;strong&gt;时序、功耗、电磁辐射、缓存访问行为&lt;/strong&gt;等外部特征来推测出某些敏感数据。&lt;/p&gt;
 &lt;p&gt;在论文中，讨论的是&lt;strong&gt;乱序处理器（out-of-order processor）&lt;strong&gt;的&lt;/strong&gt;缓存侧信道攻击&lt;/strong&gt;，并且是与&lt;strong&gt;Meltdown&lt;/strong&gt;漏洞相关。这涉及到现代处理器中复杂的&lt;strong&gt;执行优化技术&lt;/strong&gt;，以及这些技术在某些极端情况下可能暴露的信息安全隐患。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Meltdown 漏洞&lt;/strong&gt;是什么？&lt;strong&gt;Meltdown&lt;/strong&gt; 是在 2018 年公开的一类严重的硬件漏洞，主要影响英特尔的处理器（也有部分 AMD 和 ARM 处理器）。该漏洞利用了现代处理器的&lt;strong&gt;乱序执行&lt;/strong&gt;机制，允许攻击者在未授权的情况下读取内核空间或其他进程中的敏感数据。&lt;/p&gt;
@@ -1333,7 +1339,7 @@
 &lt;/ol&gt;
 &lt;p&gt;这种类型的攻击利用了硬件的特性（如乱序执行、缓存行为）以及微架构中的信息泄漏漏洞，超越了传统的安全模型，因此在公开时引发了广泛的关注和讨论。&lt;/p&gt;
 &lt;hr&gt;
-&lt;h2 id=&#34;meltdown--侧信道攻击-的完整过程&#34;&gt;&lt;strong&gt;Meltdown + 侧信道攻击&lt;/strong&gt; 的完整过程
+&lt;h2 id=&#34;meltdown--侧信道攻击-的完整过程&#34;&gt;Meltdown + 侧信道攻击 的完整过程
 &lt;/h2&gt;&lt;p&gt;从攻击的准备开始，逐步展示攻击者是如何利用处理器的&lt;strong&gt;乱序执行&lt;/strong&gt;特性、缓存行为以及侧信道分析来泄露内核或其他敏感数据的。&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
@@ -1483,7 +1489,7 @@
 &lt;/ol&gt;
 &lt;p&gt;通过这种缓存时延分析，Meltdown 能够从无法直接读取的内存区域中逐字节地提取出数据。&lt;/p&gt;
 &lt;hr&gt;
-&lt;h2 id=&#34;预测执行&#34;&gt;&lt;strong&gt;预测执行&lt;/strong&gt;
+&lt;h2 id=&#34;预测执行&#34;&gt;预测执行
 &lt;/h2&gt;&lt;p&gt;为了确保 &lt;strong&gt;预测执行&lt;/strong&gt;（或称为&lt;strong&gt;乱序执行&lt;/strong&gt;）一定发生，特别是在你提到的&lt;strong&gt;循环中&lt;/strong&gt;，可以采取一些策略，这些策略能够诱导处理器执行&lt;strong&gt;提前加载（prefetching）&lt;strong&gt;或&lt;/strong&gt;预测性执行&lt;/strong&gt;，以提高成功的概率。在详细解释之前，我们先定义一些相关概念：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
@@ -1571,7 +1577,7 @@
 &lt;li&gt;&lt;strong&gt;Prefetch&lt;/strong&gt; 是提前将数据加载到缓存的手段，可以手动指定特定的内存地址进行预取，从而在攻击中加快对缓存状态的推测。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
-&lt;h2 id=&#34;flushreload&#34;&gt;&lt;strong&gt;Flush+Reload&lt;/strong&gt;
+&lt;h2 id=&#34;flushreload&#34;&gt;Flush+Reload
 &lt;/h2&gt;&lt;p&gt;&lt;strong&gt;Flush+Reload&lt;/strong&gt; 是一种典型的缓存侧信道攻击方法，广泛应用于如 Meltdown、Spectre 等漏洞的利用中。它主要利用了共享内存（如共享库或页面）中的缓存行为，结合缓存命中与失效的时延差异，来推测内存中的数据内容。Flush+Reload 的核心在于通过&lt;strong&gt;清除缓存&lt;/strong&gt;和&lt;strong&gt;测量缓存命中时的时延&lt;/strong&gt;，获取受害者程序对特定内存区域的访问情况。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Flush+Reload&lt;/strong&gt; 攻击依赖于现代处理器的多级缓存体系和内存共享机制。其基本工作流程如下：&lt;/p&gt;
 &lt;ol&gt;
@@ -1658,7 +1664,7 @@
 &lt;/table&gt;
 &lt;p&gt;总的来说，Flush+Reload 是一种强大的缓存侧信道攻击方法，利用缓存时延分析推测内存访问行为。它通过 &lt;code&gt;clflush&lt;/code&gt; 指令清空缓存、受害者程序访问内存、攻击者重新加载数据并测量时延，来判断受害者程序是否访问了特定的内存区域。这种方法在加密算法泄露和 Meltdown、Spectre 等漏洞的利用中具有广泛的应用，但它也需要依赖共享内存和较高精度的时延测量技术。&lt;/p&gt;
 &lt;hr&gt;
-&lt;h2 id=&#34;flushreload-查询对象&#34;&gt;&lt;strong&gt;Flush+Reload&lt;/strong&gt; 查询对象
+&lt;h2 id=&#34;flushreload-查询对象&#34;&gt;Flush+Reload 查询对象
 &lt;/h2&gt;&lt;p&gt;在 &lt;strong&gt;Flush+Reload&lt;/strong&gt; 攻击中，查询的是&lt;strong&gt;缓存中的数据&lt;/strong&gt;，而不是直接查询&lt;strong&gt;页表&lt;/strong&gt;或&lt;strong&gt;页表中的缓存行&lt;/strong&gt;。Flush+Reload 的核心是基于缓存行的&lt;strong&gt;状态&lt;/strong&gt;（命中或未命中），而不涉及具体的页表结构。&lt;/p&gt;
 &lt;p&gt;为了更清楚地解释这一点，让我们深入了解 &lt;strong&gt;Flush+Reload&lt;/strong&gt; 的运作机制：&lt;/p&gt;
 &lt;ol&gt;
@@ -2094,7 +2100,7 @@
 &lt;h2 id=&#34;memory-type-range-registers-mtrrs&#34;&gt;Memory-Type Range Registers (MTRRs)
 &lt;/h2&gt;&lt;p&gt;MTRRs 是一个特性，允许系统定义内存区域的缓存特性。通过这些寄存器，系统可以指定某些内存区域是可缓存的、不可缓存的、写合并等。这对于优化系统性能和特定硬件行为很重要。&lt;/p&gt;
 &lt;hr&gt;
-&lt;h2 id=&#34;microarchitectural-state-和-architectural-state&#34;&gt;&lt;strong&gt;Microarchitectural state&lt;/strong&gt; 和 architectural state
+&lt;h2 id=&#34;microarchitectural-state-和-architectural-state&#34;&gt;Microarchitectural state 和 architectural state
 &lt;/h2&gt;&lt;p&gt;&amp;ldquo;&lt;strong&gt;Microarchitectural state&lt;/strong&gt;&amp;rdquo; 和 &amp;ldquo;&lt;strong&gt;architectural state&lt;/strong&gt;&amp;rdquo; 是计算机体系结构中两个不同的概念，涉及处理器如何管理和表现数据。&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;strong&gt;微架构状态（Microarchitectural state）&lt;/strong&gt;：这是处理器内部的细节层次，它包括缓存、分支预测器、管道、加载/存储队列等部件的状态。这些状态反映了处理器如何在硬件层面优化执行指令，但这些信息通常对软件程序不可见，也不会直接影响程序执行的逻辑结果。&lt;/li&gt;
@@ -2114,7 +2120,9 @@
 &lt;p&gt;我们在操作系统中用来实现隔离的具体技术是硬件中的User/Supervisor mode，硬件中的Page Table，以及精心设计的内核软件，例如系统调用在使用用户提供的指针具备防御性。&lt;/p&gt;
 &lt;p&gt;但是同时也值得思考，如何可以破坏安全性？实际上，内核非常积极的提供隔离性安全性，但总是会有问题出现。&lt;/p&gt;
 &lt;p&gt;今天的&lt;a class=&#34;link&#34; href=&#34;https://pdos.csail.mit.edu/6.828/2020/readings/meltdown.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;论文&lt;/a&gt;讨论的就是最近在操作系统安全领域出现的最有趣的问题之一，它发表于2018年。包括我在内的很多人发现对于用户和内核之间的隔离进行攻击是非常令人烦恼的，因为它破坏了人们对于硬件上的Page Table能够提供隔离性的设想。这里的攻击完全不支持这样的设想。&lt;/p&gt;
+    &gt;论文&lt;/a&gt;
+
+讨论的就是最近在操作系统安全领域出现的最有趣的问题之一，它发表于2018年。包括我在内的很多人发现对于用户和内核之间的隔离进行攻击是非常令人烦恼的，因为它破坏了人们对于硬件上的Page Table能够提供隔离性的设想。这里的攻击完全不支持这样的设想。&lt;/p&gt;
 &lt;p&gt;同时，Meltdown也是被称为Micro-Architectural Attack的例子之一，这一类攻击涉及利用CPU内隐藏的实现细节。通常来说CPU如何工作是不公开的，但是人们会去猜，一旦猜对了CPU隐藏的实现细节，就可以成功的发起攻击。&lt;/p&gt;
 &lt;p&gt;Meltdown是可被修复的，并且看起来已经被完全修复了。然后它使得人们担心还存在类似的Micro-Architectural Attack。所以这是最近发生的非常值得学习的一个事件。&lt;/p&gt;
 &lt;p&gt;让我从展示攻击的核心开始，之后我们再讨论具体发生了什么。&lt;/p&gt;
@@ -2348,7 +2356,9 @@
 &lt;hr&gt;
 &lt;h2 id=&#34;flush-and-reload&#34;&gt;Flush and Reload
 &lt;/h2&gt;&lt;p&gt;为什么Cache与Meltdown相关呢？接下来我将讨论一下&lt;a class=&#34;link&#34; href=&#34;https://pdos.csail.mit.edu/6.828/2020/readings/meltdown.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;论文&lt;/a&gt;中使用Cache的主要方法。&lt;/p&gt;
+    &gt;论文&lt;/a&gt;
+
+中使用Cache的主要方法。&lt;/p&gt;
 &lt;p&gt;论文中讨论了这种叫做Flush and Reload的技术，这个技术回答了一个问题：一段特定的代码是否使用了特定内存地址的数据？这个技术本身并不是一个直接的安全漏洞，因为它只能基于你有权限的内存地址工作。&lt;/p&gt;
 &lt;p&gt;所以如果你是用户代码，你可以使用属于你的用户空间内存，并且你现在要调用一个你自己的函数，你可以使用Flush and Reload来知道你刚刚执行的函数是否使用了某个属于你自己的内存。&lt;/p&gt;
 &lt;p&gt;你不能直接使用这种技术来获取其他进程的私有内存。进程之间有时候会共享内存，你还是可以访问这部分共享的内存。所以Flush and Reload回答了这个问题，特定的函数是否使用了特定内存地址？&lt;/p&gt;
@@ -2486,7 +2496,9 @@
 &lt;hr&gt;
 &lt;h2 id=&#34;meltdown-fix&#34;&gt;Meltdown Fix
 &lt;/h2&gt;&lt;p&gt;我最后想讨论的是Meltdown的修复，你们实际已经接触了一些了。当&lt;a class=&#34;link&#34; href=&#34;https://pdos.csail.mit.edu/6.828/2020/readings/meltdown.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;论文&lt;/a&gt;发表的时候，它获取了很多的关注。实际中还有另一篇论文，也是由这篇论文的部分作者参与完成，另一篇论文讨论了一种使用了CPU内一种叫做Spectre的不同的预测执行的不同攻击方法。这一对论文的同时出现让人非常兴奋。&lt;/p&gt;
+    &gt;论文&lt;/a&gt;
+
+发表的时候，它获取了很多的关注。实际中还有另一篇论文，也是由这篇论文的部分作者参与完成，另一篇论文讨论了一种使用了CPU内一种叫做Spectre的不同的预测执行的不同攻击方法。这一对论文的同时出现让人非常兴奋。&lt;/p&gt;
 &lt;p&gt;所以人们现在发现危害太大了，因为现在我们讨论的是操作系统的隔离性被破坏了。这里的技术破坏了Page Table的保护，这是我们用来实现用户和内核间隔离的技术，所以这是一个非常基础的攻击，或者至少以一种非常通用的方式破坏了安全性非常重要的一个部分。所以人们非常非常迫切的想要修复Meltdown。&lt;/p&gt;
 &lt;p&gt;很多操作系统在这篇论文发表之后数周内就推出的一个快速修复，这是一个叫做KAISER，现在在Linux中被称为KPTI的技术（Kernel page-table isolation）。&lt;/p&gt;
 &lt;p&gt;这里的想法很简单，也就是不将内核内存映射到用户的Page Table中，相应的就像XV6一样，在系统调用时切换Page Table。所以在用户空间时，Page Table只有用户内存地址的映射，如果执行了系统调用，会有类似于XV6中trampoline的机制，切换到拥有内核内存映射的另一个Page Table中，这样才能执行内核代码。&lt;/p&gt;
@@ -2788,7 +2800,7 @@
 &lt;/ol&gt;
 &lt;p&gt;总的来说，操作系统通过各种网络接口向用户提供网络功能，从底层的套接字系统调用到更高级的网络管理工具和库。应用程序通过这些接口可以实现网络通信、数据传输、网络设备配置等功能。&lt;/p&gt;
 &lt;hr&gt;
-&lt;h2 id=&#34;livelock&#34;&gt;&lt;strong&gt;Livelock&lt;/strong&gt;
+&lt;h2 id=&#34;livelock&#34;&gt;Livelock
 &lt;/h2&gt;&lt;p&gt;&lt;strong&gt;Livelock&lt;/strong&gt; 是一种计算机系统中常见的同步问题，类似于死锁（Deadlock），但有所区别。在 livelock 情况下，多个进程或线程&lt;strong&gt;虽然没有完全停止运行&lt;/strong&gt;（也就是说它们仍然在“活动”中），但&lt;strong&gt;无法继续执行有意义的操作&lt;/strong&gt;，因为它们彼此不断地改变状态或采取相互回避的行为，导致始终无法达到目标状态。二者区别如下：&lt;/p&gt;
 &lt;table&gt;
   &lt;thead&gt;
@@ -2826,7 +2838,7 @@
 &lt;/ul&gt;
 &lt;p&gt;Livelock 是一种由于资源协调不当而导致的“忙碌等待”现象，其表现为系统中某些进程或线程虽然在活动，但因重复的避让行为而无法完成有效的任务。与死锁不同，活锁需要更复杂的策略来处理，如引入随机化、调整优先级等。&lt;/p&gt;
 &lt;hr&gt;
-&lt;h2 id=&#34;receive-livelock&#34;&gt;&lt;strong&gt;Receive Livelock&lt;/strong&gt;
+&lt;h2 id=&#34;receive-livelock&#34;&gt;Receive Livelock
 &lt;/h2&gt;&lt;p&gt;&lt;strong&gt;Receive Livelock&lt;/strong&gt; 是网络系统中的一种活锁现象，通常发生在高流量环境下，当系统过度忙于处理接收的数据包，但&lt;strong&gt;无法有效传递数据到更高层的应用或协议栈&lt;/strong&gt;时。它本质上是网络设备或操作系统在网络包接收过程中被不断打断，导致没有足够时间处理或传递这些数据包，使得传输效率极低。&lt;/p&gt;
 &lt;p&gt;在网络中，尤其是高流量下，网络接口会迅速收到大量数据包。由于每个接收的包都可能触发一个中断，CPU会频繁响应这些中断，导致以下问题：&lt;/p&gt;
 &lt;ul&gt;
@@ -2859,7 +2871,9 @@
 &lt;/h2&gt;&lt;h2 id=&#34;计算机网络概述&#34;&gt;计算机网络概述
 &lt;/h2&gt;&lt;p&gt;今天我想讨论一下Networking以及它与操作系统的关联。今天这节课的很多内容都与最后一个lab，也就是构建一个网卡驱动相关。&lt;/p&gt;
 &lt;p&gt;在这节课，我们首先会大概看一下操作系统中网络相关的软件会有什么样的结构，之后我们会讨论今天的论文&lt;a class=&#34;link&#34; href=&#34;https://pdos.csail.mit.edu/6.828/2020/readings/mogul96usenix.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;Livelock&lt;/a&gt;。Livelock展示了在设计网络协议栈时可能会出现的有趣的陷阱。&lt;/p&gt;
+    &gt;Livelock&lt;/a&gt;
+
+。Livelock展示了在设计网络协议栈时可能会出现的有趣的陷阱。&lt;/p&gt;
 &lt;p&gt;首先，让我通过画图来描述一下基本的网络场景。网络连接了不同的主机，这里的连接有两种方式：&lt;/p&gt;
 &lt;p&gt;相近的主机连接在同一个网络中。例如有一个以太网设备，可能是交换机或者单纯的线缆，然后有一些主机连接到了这个以太网设备。这里的主机可能是笔记本电脑，服务器或者路由器。在设计网络相关软件的时候，通常会忽略直接连接了主机的网络设备。&lt;/p&gt;
 &lt;p&gt;这里的网络设备可能只是一根线缆（几十年前就是通过线缆连接主机）；也可能是一个以太网交换机；也可能是wifi无线局域网设备（主机通过射频链路与网络设备相连），但是不管是哪种设备，这种直接连接的设备会在网络协议栈的底层被屏蔽掉。&lt;/p&gt;
@@ -3319,7 +3333,9 @@
 &lt;hr&gt;
 &lt;h2 id=&#34;receive-livelock-1&#34;&gt;Receive Livelock
 &lt;/h2&gt;&lt;p&gt;接下来我们看一下今天的&lt;a class=&#34;link&#34; href=&#34;https://pdos.csail.mit.edu/6.828/2020/readings/mogul96usenix.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;论文&lt;/a&gt;。因为我们已经介绍了很多论文相关的背景知识，我们直接来看一下论文的图1。我们之后根据论文中的图来开展讨论。&lt;/p&gt;
+    &gt;论文&lt;/a&gt;
+
+。因为我们已经介绍了很多论文相关的背景知识，我们直接来看一下论文的图1。我们之后根据论文中的图来开展讨论。&lt;/p&gt;
 &lt;p&gt;这张图是一个路由器的性能图。这是一个有两张网卡的路由器，它的工作是从一个网卡接收packet，再从另一个网卡送出 。&lt;/p&gt;
 &lt;p&gt;X轴是接收速率，也就是接收端网卡的收到packet的速率。Y轴是发送速率，也就是观察到的发送端网卡发送packet的速率。&lt;/p&gt;
 &lt;p&gt;我们关心的是实心圆对应的曲线，它先上升，再下降。所以即使还不知道任何上下文，看到这个图之后我们会问自己，为什么这个曲线先上升，再下降？曲线的转折点有什么特殊之处？是什么决定了曲线的上升斜率和下降斜率？即使不知道任何背景知识，我们还是可以问出这么多问题。&lt;/p&gt;
@@ -3367,7 +3383,9 @@
 &lt;hr&gt;
 &lt;h2 id=&#34;如何解决livelock&#34;&gt;如何解决Livelock
 &lt;/h2&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://pdos.csail.mit.edu/6.828/2020/readings/mogul96usenix.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;论文&lt;/a&gt;作者对于Livelock提出了一种解决方法。这种解决方法的最直接结果就是，当packet的输入速率达到了5000pps，随着输入速率的增加，转发性能维持在5000pps。&lt;/p&gt;
+    &gt;论文&lt;/a&gt;
+
+作者对于Livelock提出了一种解决方法。这种解决方法的最直接结果就是，当packet的输入速率达到了5000pps，随着输入速率的增加，转发性能维持在5000pps。&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08121networking/p66.png&#34;
 	width=&#34;1136&#34;
 	height=&#34;554&#34;
@@ -5459,7 +5477,9 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 &lt;h2 id=&#34;正课部分&#34;&gt;正课部分
 &lt;/h2&gt;&lt;h2 id=&#34;c语言实现操作系统的优劣势&#34;&gt;C语言实现操作系统的优劣势
 &lt;/h2&gt;&lt;p&gt;今天我们要讨论使用高级编程语言实现操作系统的优点和代价。今天课程的内容主要是我们之前写的一篇&lt;a class=&#34;link&#34; href=&#34;https://pdos.csail.mit.edu/6.828/2020/readings/biscuit.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;论文&lt;/a&gt;，论文作者包括了Robert和我，以及一个主要作者Cody Cutler，他是这门课程的一个TA。&lt;/p&gt;
+    &gt;论文&lt;/a&gt;
+
+，论文作者包括了Robert和我，以及一个主要作者Cody Cutler，他是这门课程的一个TA。&lt;/p&gt;
 &lt;p&gt;我通常不会讨论我们自己写的论文，但是因为这篇论文与课程内容相关，所以它在这。今天我们会用一些PPT，而不是在白板上讲解这节课。&lt;/p&gt;
 &lt;p&gt;这篇论文的起因是这样一个问题：你应该用什么样的编程语言来实现操作系统内核？&lt;/p&gt;
 &lt;p&gt;这个问题很多同学都问过，可能是因为你发现了在操作系统中有Bug，然后你会想，如果我使用一种其他的编程语言，或许我就不会有这些Bug了，所以这是一个经常出现的问题。&lt;/p&gt;
@@ -5531,7 +5551,9 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 &lt;hr&gt;
 &lt;h2 id=&#34;高级编程语言选择-----golang&#34;&gt;高级编程语言选择 &amp;mdash; Golang
 &lt;/h2&gt;&lt;p&gt;接下来我们看一下对比方法，图中左边是Biscuit，这是一个我们为了&lt;a class=&#34;link&#34; href=&#34;https://pdos.csail.mit.edu/6.828/2020/readings/biscuit.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;论文&lt;/a&gt;专门用Golang写的内核，它以大概类似的方式提供了Linux中系统调用的子集。Biscuit和Linux的系统调用有相同的参数和相同的调用方式。&lt;/p&gt;
+    &gt;论文&lt;/a&gt;
+
+专门用Golang写的内核，它以大概类似的方式提供了Linux中系统调用的子集。Biscuit和Linux的系统调用有相同的参数和相同的调用方式。&lt;/p&gt;
 &lt;p&gt;并且我们在内核之上运行的是相同的应用程序，这里的应用程序是NGINX，这是一个web server，这里我们将相同的应用程序分别运行在Biscuit和Linux之上，应用程序会执行相同的系统调用，并传入完全相同的参数，Biscuit和Linux都会完成涉及系统调用的相同操作。&lt;/p&gt;
 &lt;p&gt;之后，我们就可以研究高级编程语言内核和Linux之间的区别，并讨论优劣势是什么。以上就是对比方法的核心。&lt;/p&gt;
 &lt;p&gt;因为Linux和Biscuit并不完全一样，它们会有一些差异，所以我们花费了大量的时间来使得这里的对比尽可能得公平。&lt;/p&gt;
@@ -5634,7 +5656,9 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 &lt;hr&gt;
 &lt;h2 id=&#34;heap-exhaustion&#34;&gt;Heap exhaustion
 &lt;/h2&gt;&lt;p&gt;让我们讨论一下Heap耗尽问题，我不会像&lt;a class=&#34;link&#34; href=&#34;https://pdos.csail.mit.edu/6.828/2020/readings/biscuit.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;论文&lt;/a&gt;一样深入讨论，但是至少会演示问题是什么。&lt;/p&gt;
+    &gt;论文&lt;/a&gt;
+
+一样深入讨论，但是至少会演示问题是什么。&lt;/p&gt;
 &lt;p&gt;假设蓝色的矩形是内核，内核会有一个heap，它会从其中申请动态内存。&lt;/p&gt;
 &lt;p&gt;在XV6中，我们并没有这样一个heap，我们在内核中没有内存分配器，所有内存都是静态分配的。但是任何其他的内核中，都会有heap，所以你在内核中可以调用malloc和free。可能通过heap分配的对象有socket对象，文件描述符对象和进程对象。&lt;/p&gt;
 &lt;p&gt;所以，我们在XV6中静态分配的所有结构体，例如struct proc，struct fd，在正常的内核中都是动态分配的。所以当你打开一个新的文件描述符时，内核会通过heap分配一个文件描述符对象。&lt;/p&gt;
@@ -5675,7 +5699,9 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 &lt;/ul&gt;
 &lt;p&gt;当研究这部分，并尝试解决这个问题，Linux使用了前面两种方法，但是两种方法都有问题。实际中，内核开发人员很难将这里弄清楚。&lt;/p&gt;
 &lt;p&gt;如果你对这个问题和相关的讨论感兴趣，可以Google搜索“&lt;a class=&#34;link&#34; href=&#34;https://lwn.net/Articles/627419/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;too small to fail&lt;/a&gt;”，会有一篇小的文章讨论释放内存，在内存分配器中等待的复杂性。&lt;/p&gt;
+    &gt;too small to fail&lt;/a&gt;
+
+”，会有一篇小的文章讨论释放内存，在内存分配器中等待的复杂性。&lt;/p&gt;
 &lt;p&gt;对于Biscuit来说，strawman 2解决方案不可能实施，因为new不会fail，它总是能成功。除此之外，这里的方案都不理想，所以我们需要有一种更好的方法。&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;heap-exhaustion-solution&#34;&gt;Heap exhaustion solution
@@ -5721,7 +5747,9 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 &lt;/ul&gt;
 &lt;p&gt;通常为了高性能而做的优化，编程语言并不会成为阻碍。Golang并没有成为阻碍这些优化实现的因素。这些优化之前是在C和Linux中实现，我们现在只是在Golang中又实现它们。在实现这些优化时有很多的工作，但是这些工作与编程语言本身无关。&lt;/p&gt;
 &lt;p&gt;今天&lt;a class=&#34;link&#34; href=&#34;https://pdos.csail.mit.edu/6.828/2020/readings/biscuit.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;论文&lt;/a&gt;的出发点就是了解用高级编程语言实现操作系统的收益和代价。所以我们将分两部分来评估，首先是收益，其次是代价。&lt;/p&gt;
+    &gt;论文&lt;/a&gt;
+
+的出发点就是了解用高级编程语言实现操作系统的收益和代价。所以我们将分两部分来评估，首先是收益，其次是代价。&lt;/p&gt;
 &lt;p&gt;有关高级编程语言，我们要回答三个问题：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;首先，我们有没有作弊？或许我们避免使用了所有Golang提供的高级编程语言中代价较高的功能。&lt;/li&gt;
@@ -5892,7 +5920,9 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 &lt;p&gt;一个HTTP请求最大的pause时间是582微秒，所以当一个请求走到一个机器，最多会有总共582微秒延时来执行这个请求。而超过100微秒的pause发生的非常非常少，只有少于0.3%。&lt;/p&gt;
 &lt;p&gt;如果你尝试达成某种SLA，其中要求的最长请求处理时间很短，那么582微秒就很严重。&lt;/p&gt;
 &lt;p&gt;但是如果你查看Google论文，&lt;a class=&#34;link&#34; href=&#34;https://research.google/pubs/pub40801/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;The Tail at Scale&lt;/a&gt;，其中介绍有关一个请求最长可以有多长处理时间，他们讨论的都是几毫秒或者几十毫秒这个量级。所以Biscuit拥有最大pause时间是582微秒还在预算之内，虽然不理想，但是也不会很夸张。&lt;/p&gt;
+    &gt;The Tail at Scale&lt;/a&gt;
+
+，其中介绍有关一个请求最长可以有多长处理时间，他们讨论的都是几毫秒或者几十毫秒这个量级。所以Biscuit拥有最大pause时间是582微秒还在预算之内，虽然不理想，但是也不会很夸张。&lt;/p&gt;
 &lt;p&gt;这表明了，Golang的设计人员把GC实现的太好了。并且我们在做Biscuit项目的时候发现，每次我们升级Go runtime，新的runtime都会带一个更好的GC，相应的GC pause时间也会变得更小。&lt;/p&gt;
 &lt;p&gt;之前在Linux和Biscuit之间的对比并不真正的公平，因为Biscuit和Linux实现的是不同的功能。&lt;/p&gt;
 &lt;p&gt;所以我们做了一个额外的测试，我们写了两个完全相同的内核，一个用C实现，另一个用Golang实现。这两个内核实现了完全相同的东西，并且我们会查看汇编代码以检查区别在哪。可能会有一些区别，因为Golang会做一些安全检查，但是对于基本功能来说，汇编代码是一样的。&lt;/p&gt;
@@ -7612,7 +7642,9 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;li&gt;第一个部分是Trap and Emulate，这部分会介绍如何在RISC-V或者QEMU上构建属于自己的Virtual Machine Monitor（注，有些场合也称为Hypervisor）。&lt;/li&gt;
 &lt;li&gt;第二部分会描述最近在硬件上对于虚拟化的支持。&lt;/li&gt;
 &lt;li&gt;最后是讨论一下今天的&lt;a class=&#34;link&#34; href=&#34;https://pdos.csail.mit.edu/6.828/2020/readings/belay-dune.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;论文&lt;/a&gt;，它使用了第二部分中硬件上的支持。&lt;/li&gt;
+    &gt;论文&lt;/a&gt;
+
+，它使用了第二部分中硬件上的支持。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;首先&lt;strong&gt;什么&lt;/strong&gt;是虚拟机？你可以认为这是对于计算机的一种模拟，这种模拟足够能运行一个操作系统。&lt;/p&gt;
 &lt;p&gt;QEMU可以认为是虚拟机的一个例子（注，QEMU应该是属于VMM/Hypervisor）。&lt;/p&gt;
@@ -8055,7 +8087,9 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;hr&gt;
 &lt;h2 id=&#34;dune-safe-user-level-access-to-privileged-cpu-features&#34;&gt;Dune: Safe User-level Access to Privileged CPU Features
 &lt;/h2&gt;&lt;p&gt;今天要讨论的&lt;a class=&#34;link&#34; href=&#34;https://pdos.csail.mit.edu/6.828/2020/readings/belay-dune.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;论文&lt;/a&gt;利用了上一节介绍的硬件对于虚拟机的支持，但是却将其用作其他的用途，这是这篇论文的有趣之处，它利用了这种完全是为了虚拟机而设计的硬件，但是却用来做一些与虚拟机完全无关的事情。&lt;/p&gt;
+    &gt;论文&lt;/a&gt;
+
+利用了上一节介绍的硬件对于虚拟机的支持，但是却将其用作其他的用途，这是这篇论文的有趣之处，它利用了这种完全是为了虚拟机而设计的硬件，但是却用来做一些与虚拟机完全无关的事情。&lt;/p&gt;
 &lt;p&gt;从一个全局的视角来看这篇论文的内容，它想要实现的是普通的进程。&lt;/p&gt;
 &lt;p&gt;所以现在我们的场景是在一个Linux而不是VMM中，但是我们又用到了硬件中的VT-x。&lt;/p&gt;
 &lt;p&gt;我们将会在Linux中加载Dune可加载模块，所以Dune作为kernel的一部分运行在Supervisor mode（注，又或者叫做kernel mode），除此之外，内核的大部分还是原本的Linux。&lt;/p&gt;
@@ -9611,7 +9645,9 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;所以这提供给你一种非常小的内核，以及相对少的代码去优化，你可以优化IPC，除此之外也没有别的东西了。&lt;/p&gt;
 &lt;p&gt;上图就是我们在这节课剩下的时间要讨论的内容。&lt;/p&gt;
 &lt;p&gt;在今天仍然有使用微内核的场景。实际上，今天&lt;a class=&#34;link&#34; href=&#34;https://pdos.csail.mit.edu/6.828/2020/readings/microkernel.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;论文&lt;/a&gt;要讨论的L4微内核就有很多很多的运行实例，它用在很多手机中用来控制手机的射频，在最近的iphone中的一个旁路处理器中，也使用了L4微内核来隐藏加密密钥。&lt;/p&gt;
+    &gt;论文&lt;/a&gt;
+
+要讨论的L4微内核就有很多很多的运行实例，它用在很多手机中用来控制手机的射频，在最近的iphone中的一个旁路处理器中，也使用了L4微内核来隐藏加密密钥。&lt;/p&gt;
 &lt;p&gt;所以在一些微型嵌入式系统中，微内核能够胜出，比如说在一些专门为某种功能设计的计算机中，你需要使用某种操作系统，而你又不需要Linux带来的复杂性。&lt;/p&gt;
 &lt;p&gt;微内核中的用户进程通过IPC通信，这在很多操作系统都存在。&lt;/p&gt;
 &lt;p&gt;例如我现在运行的macOS，它就是一个普通的monolithic kernel，它也很好的支持用户进程通过IPC进行通信。&lt;/p&gt;
@@ -9694,7 +9730,9 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;以上就是许多微内核项目要面对的用户期望和潜在的挑战。&lt;/p&gt;
 &lt;h2 id=&#34;l4-micro-kernel&#34;&gt;L4 micro kernel
 &lt;/h2&gt;&lt;p&gt;今天要讨论的&lt;a class=&#34;link&#34; href=&#34;https://pdos.csail.mit.edu/6.828/2020/readings/microkernel.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;论文&lt;/a&gt;，有许多有关L4微内核的内容。这是今天论文作者开发和使用的一种微内核。&lt;/p&gt;
+    &gt;论文&lt;/a&gt;
+
+，有许多有关L4微内核的内容。这是今天论文作者开发和使用的一种微内核。&lt;/p&gt;
 &lt;p&gt;L4必然不是最早的微内核，但是从1980年代开始，它是最早一批可以工作的微内核之一，并且它非常能展现微内核是如何工作的。&lt;/p&gt;
 &lt;p&gt;在许多年里面它一直都有活跃的开发和演进。如果你查看Wikipedia，L4有15-20个变种，有一些从1980年代开始开发的项目现在还存在。&lt;/p&gt;
 &lt;p&gt;接下来我将从我的理解向你们解释L4在今天的论文发表的时候是如何工作的。&lt;/p&gt;
@@ -9988,7 +10026,9 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;/blockquote&gt;
 &lt;p&gt;实际中，对于这里的场景：发送一个消息并期待收到回复，你可以抛开这种方法并获得简单的多的设计，L4就是采用了后者。&lt;/p&gt;
 &lt;p&gt;有关简单的设计在一篇著名的论文中有提到，论文是&lt;a class=&#34;link&#34; href=&#34;https://www.cse.unsw.edu.au/~cs9242/19/papers/Liedtke_93.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;Improving IPC by Kernel Design&lt;/a&gt;，这篇论文在今天要讨论的论文前几年发布。相比上面的慢设计，它有几点不同：&lt;/p&gt;
+    &gt;Improving IPC by Kernel Design&lt;/a&gt;
+
+，这篇论文在今天要讨论的论文前几年发布。相比上面的慢设计，它有几点不同：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;其中一点是，它是同步的（Synchronized）。&lt;/p&gt;
@@ -10116,7 +10156,9 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;与其写一些完全属于自己的新的用户空间服务，并模仿Linux，论文中决定采用一种容易的多的方法，其实许多项目也都采用了这种方法，也就是简单的将一个现有的monolithic kernel运行在微内核之上，而不是重新实现一些新的东西。&lt;/p&gt;
 &lt;p&gt;这就是今天论文要介绍的内容。&lt;/p&gt;
 &lt;p&gt;在今天&lt;a class=&#34;link&#34; href=&#34;https://pdos.csail.mit.edu/6.828/2020/readings/microkernel.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;论文&lt;/a&gt;的讨论中，L4微内核位于底部，但是同时，一个完整的Linux作为一个巨大的服务运行在用户空间进程中。听起来有点奇怪，一般的kernel都是运行在硬件之上，而现在Linux kernel是一个用户空间进程。&lt;/p&gt;
+    &gt;论文&lt;/a&gt;
+
+的讨论中，L4微内核位于底部，但是同时，一个完整的Linux作为一个巨大的服务运行在用户空间进程中。听起来有点奇怪，一般的kernel都是运行在硬件之上，而现在Linux kernel是一个用户空间进程。&lt;/p&gt;
 &lt;p&gt;实际上，如你在QEMU上运行XV6时所见，内核也是运行在用户空间。Linux kernel不过就是一个程序，对其做一些修改它就可以运行在用户空间，所以现在Linux需要被修改。论文中提到需要对Linux的底层做一些修改，例如Linux中期望能直接修改Page Table的内容，读写CPU寄存器。Linux中一部分需要被修改以将它们改成调用L4微内核的系统调用，或者发送IPC，而不是直接访问硬件。&lt;/p&gt;
 &lt;p&gt;但是Linux的大部分内容都可以不做修改而直接运行。所以按照这种方式，作为Linux的一部分，现在得到了文件系统，网络支持，各种设备驱动等等，而不需要自己实现这些。这里的实现方式是将Linux内核作为一个L4 Task运行，每一个Linux进程又作为一个独立的L4 Task运行。所以当你登录到Linux中时，你要它运行一个Shell或者terminal，它会在用户空间创建一个L4 Task来运行这个Linux程序。所以现在有一个Task运行Linux，以及N个Task来运行每一个你在Linux中启动的进程。Linux不会直接修改进程的Page Table，而是会向L4发送正确的IPC让L4来修改进程的Page Table。&lt;/p&gt;
 &lt;p&gt;这里有很多小的改动，其中一个有意思的地方是，当VI想要执行一个系统调用时，VI并不知道它运行在L4之上，在上面的方案中，所有的程序都以为它们运行在Linux中。当VI要执行系统调用时，L4并不支持，因为VI要执行的是Linux系统调用而不是L4系统调用。所以对于Linux进程，会有一个小的库与之关联，这个库会将类似于fork，exec，pipe，read，write的系统调用，转换成发送到Linux kernel Task的IPC消息，并等待Linux kernel Task的返回，然后再返回到进程中。&lt;/p&gt;
@@ -10145,7 +10187,9 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;所以这里的架构失去了Linux的调度能力，这是这种架构的缺点，我相信L4的后续版本有一些方法能够让Linux通知L4调度器，来给某个进程更高优先级等等。&lt;/p&gt;
 &lt;h2 id=&#34;l4-linux性能分析&#34;&gt;L4 Linux性能分析
 &lt;/h2&gt;&lt;p&gt;你应该问自己：通过&lt;a class=&#34;link&#34; href=&#34;https://pdos.csail.mit.edu/6.828/2020/readings/microkernel.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;论文&lt;/a&gt;可以学到有关微内核的什么内容呢？&lt;/p&gt;
+    &gt;论文&lt;/a&gt;
+
+可以学到有关微内核的什么内容呢？&lt;/p&gt;
 &lt;p&gt;对于我们来说，论文中有很多有趣的有关微内核是如何运行，有关Linux是如何运行的小的知识点，以及你该如何设计这么一个系统。&lt;/p&gt;
 &lt;p&gt;但是论文并没有回答这个问题：微内核是不是一个好的设计？论文只是讨论了微内核是否有足够的性能以值得使用。&lt;/p&gt;
 &lt;p&gt;论文之所以讨论这个内容的原因是，在论文发表的前5-10年，有一场著名的测试针对一种更早的叫做MACH的微内核。&lt;/p&gt;
@@ -10238,7 +10282,7 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
         <pubDate>Wed, 02 Oct 2024 22:02:50 +0800</pubDate>
         
         <guid>https://echudet.github.io/p/mit6s08117virtual-memory-for-applications/</guid>
-        <description>&lt;img src="https://echudet.github.io/p/mit6s08117virtual-memory-for-applications/bg.jpg" alt="Featured image of post MIT6S081：17Virtual memory for applications" /&gt;&lt;h1 id=&#34;lecture-17-virtual-memory-for-applications&#34;&gt;Lecture 17 Virtual memory for applications
+        <description>&lt;img src="https://echudet.github.io/p/mit6s08117virtual-memory-for-applications/bg.png" alt="Featured image of post MIT6S081：17Virtual memory for applications" /&gt;&lt;h1 id=&#34;lecture-17-virtual-memory-for-applications&#34;&gt;Lecture 17 Virtual memory for applications
 &lt;/h1&gt;&lt;h2 id=&#34;课前预习&#34;&gt;课前预习
 &lt;/h2&gt;&lt;h2 id=&#34;论文速览&#34;&gt;论文速览
 &lt;/h2&gt;&lt;p&gt;在&lt;strong&gt;简介&lt;/strong&gt;部分提到，论文的核心讨论点是：虚拟内存（Virtual Memory）不仅仅可以用来扩展操作系统的地址空间，还能用于很多其他的目的，例如内存共享、写时复制（copy-on-write）以及处理保护违规。作者探讨了操作系统应提供给用户程序的虚拟内存基本原语，特别是这些原语如何支持不同的用户级应用。&lt;/p&gt;
@@ -10545,7 +10589,9 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;h2 id=&#34;正课&#34;&gt;正课
 &lt;/h2&gt;&lt;h2 id=&#34;应用程序使用虚拟内存所需要的特性&#34;&gt;应用程序使用虚拟内存所需要的特性
 &lt;/h2&gt;&lt;p&gt;今天的话题是用户应用程序使用的虚拟内存，它主要是受这篇1991年的&lt;a class=&#34;link&#34; href=&#34;https://pdos.csail.mit.edu/6.828/2020/readings/appel-li.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;论文&lt;/a&gt;的启发。&lt;/p&gt;
+    &gt;论文&lt;/a&gt;
+
+的启发。&lt;/p&gt;
 &lt;p&gt;首先，你们已经知道了，操作系统内核以非常灵活的方式使用了虚拟内存Page Table。&lt;/p&gt;
 &lt;p&gt;你们已经通过Lazy Allocation Lab，Copy on Write Lab，以及XV6中的各种内存实现了解到了这一点。&lt;/p&gt;
 &lt;p&gt;而今天论文中的核心观点是，用户应用程序也应该从灵活的虚拟内存中获得收益，也就是说用户应用程序也可以使用虚拟内存。&lt;/p&gt;
@@ -10606,7 +10652,9 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;它接收某个对象，并将其映射到调用者的地址空间中。&lt;/p&gt;
 &lt;p&gt;举个例子，如果你想映射一个文件，那么你需要将文件描述符传递给mmap系统调用。&lt;/p&gt;
 &lt;p&gt;mmap系统调用有许多令人眼花缭乱的参数（注，mmap的具体说明可以参考&lt;a class=&#34;link&#34; href=&#34;https://man7.org/linux/man-pages/man2/mmap.2.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;man page&lt;/a&gt;）：&lt;/p&gt;
+    &gt;man page&lt;/a&gt;
+
+）：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;第一个参数是一个你想映射到的特定地址，如果传入null表示不指定特定地址，这样的话内核会选择一个地址来完成映射，并从系统调用返回。&lt;/p&gt;
@@ -10621,7 +10669,9 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;第四个参数我们会跳过不做讨论，它的值可以是MAP_PRIVATE。它指定了如果你更新了传入的对象，会发生什么。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;（注，第四个参数是flags，MAP_PRIVATE是其中一个值，在mmap文件的场景下，MAP_PRIVATE表明更新文件不会写入磁盘，只会更新在内存中的拷贝，详见&lt;a class=&#34;link&#34; href=&#34;https://man7.org/linux/man-pages/man2/mmap.2.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;man page&lt;/a&gt;）。&lt;/p&gt;
+    &gt;man page&lt;/a&gt;
+
+）。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;/li&gt;
 &lt;li&gt;
@@ -10643,7 +10693,9 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;h3 id=&#34;mprotect系统调用&#34;&gt;mprotect系统调用
 &lt;/h3&gt;&lt;blockquote&gt;
 &lt;p&gt;（注，详见&lt;a class=&#34;link&#34; href=&#34;https://man7.org/linux/man-pages/man2/mprotect.2.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;man page&lt;/a&gt;）。&lt;/p&gt;
+    &gt;man page&lt;/a&gt;
+
+）。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;当你将某个对象映射到了虚拟内存地址空间，你可以修改对应虚拟内存的权限，这样你就可以以特定的权限保护对象的一部分，或者整个对象。&lt;/p&gt;
 &lt;p&gt;举个例子，通过上图对于mprotect的调用将权限设置成只读（R），这时，对于addr到addr+len这段地址，load指令还能执行，但是store指令将会变成Page Fault。&lt;/p&gt;
@@ -10660,7 +10712,9 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;当内核发现Page Fault时，或许会通过修复Page Table来使得应用程序还能继续执行。&lt;/p&gt;
 &lt;p&gt;与内核响应Page Fault的方式类似，在这里的handler中或许会调用mprotect来修改内存的权限来避免segfault，这样应用程序的指令就可以恢复运行。&lt;/p&gt;
 &lt;p&gt;与sigaction类似的有sigalarm（译注：sigalarm 是&lt;a class=&#34;link&#34; href=&#34;https://pdos.csail.mit.edu/6.S081/2020/labs/traps.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;traps lab&lt;/a&gt; 中实现的一个系统调用，不属于标准Unix 接口），在sigalarm中可以设置每隔一段时间就调用handler。&lt;/p&gt;
+    &gt;traps lab&lt;/a&gt;
+
+ 中实现的一个系统调用，不属于标准Unix 接口），在sigalarm中可以设置每隔一段时间就调用handler。&lt;/p&gt;
 &lt;p&gt;sigaction也可以实现这个功能，只是它更加的通用，因为它可以响应不同类型的signal。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;学生提问：看起来mprotect暗示了你可以为单独的地址添加不同的权限，然而在XV6中，我们只能为整个Page设置相同的权限，这里是有区别吗？&lt;/p&gt;
@@ -11259,7 +11313,9 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;首先是设置内存，通过&lt;a class=&#34;link&#34; href=&#34;https://man7.org/linux/man-pages/man3/shm_open.3.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;shm_open&lt;/a&gt;创建一个Share-memory object，shm_open是一个Linux/Uinx系统调用。Share-memory object表现的像是一个文件，但是它并不是一个文件，它位于内存，并没有磁盘文件与之对应，如果你愿意的话，可以认为它是一个位于内存的文件系统。&lt;/p&gt;
+    &gt;shm_open&lt;/a&gt;
+
+创建一个Share-memory object，shm_open是一个Linux/Uinx系统调用。Share-memory object表现的像是一个文件，但是它并不是一个文件，它位于内存，并没有磁盘文件与之对应，如果你愿意的话，可以认为它是一个位于内存的文件系统。&lt;/p&gt;
 &lt;p&gt;之后我们裁剪这个Shared-memory object到from和to空间的大小。&lt;/p&gt;
 &lt;p&gt;之后我们通过mmap先将其映射一次，以供mutator也就是实际的应用程序使用。然后再映射一次，以供GC使用。这里shm_open，ftruncate，和两次mmap，等效于map2。&lt;/p&gt;
 &lt;p&gt;回过去看之前的代码，&lt;/p&gt;
@@ -11406,7 +11462,9 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;这里有一个术语，当我们谈到log时，与今天阅读的&lt;a class=&#34;link&#34; href=&#34;https://pdos.csail.mit.edu/6.828/2020/readings/journal-design.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;论文&lt;/a&gt;所用到的journal是同一件事情，它们是同义词。&lt;/p&gt;
+    &gt;论文&lt;/a&gt;
+
+所用到的journal是同一件事情，它们是同义词。&lt;/p&gt;
 &lt;p&gt;除此之外，今天的论文是有关向ext2增加journal，并得到ext3文件系统（注，所以可以认为ext3文件系统就是ext2加上了logging系统）。&lt;/p&gt;
 &lt;p&gt;接下来我将从这几个方面来讨论ext3文件系统：某种程度上将其与XV6进行对比；解释ext3是如何修复XV6的logging存在的性能问题；解释ext3在故障恢复时语义上的一些变化。&lt;/p&gt;
 &lt;h2 id=&#34;xv6-file-system-logging回顾&#34;&gt;XV6 File system logging回顾
@@ -11482,7 +11540,9 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;虽然这么做有它的原因，但是ext3可以一定程度上修复这个问题。&lt;/p&gt;
 &lt;h2 id=&#34;ext3-file-system-log-format&#34;&gt;ext3 file system log format
 &lt;/h2&gt;&lt;p&gt;ext3文件系统就是基于今天要阅读的&lt;a class=&#34;link&#34; href=&#34;https://pdos.csail.mit.edu/6.828/2020/readings/journal-design.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;论文&lt;/a&gt;，再加上几年的开发得到的，并且ext3也曾经广泛的应用过。&lt;/p&gt;
+    &gt;论文&lt;/a&gt;
+
+，再加上几年的开发得到的，并且ext3也曾经广泛的应用过。&lt;/p&gt;
 &lt;p&gt;ext3是针对之前一种的文件系统（ext2）logging方案的修改，所以ext3就是在几乎不改变之前的ext2文件系统的前提下，在其上增加一层logging系统。&lt;/p&gt;
 &lt;p&gt;所以某种程度来说，logging是一个容易升级的模块。&lt;/p&gt;
 &lt;p&gt;ext3的数据结构与XV6是类似的。&lt;/p&gt;
@@ -20741,10 +20801,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;/h2&gt;&lt;p&gt;vm -&amp;gt; virtual memory ，map virtual to physical 隔离性&lt;/p&gt;
 &lt;p&gt;正确设置的VM可以实现隔离性&lt;/p&gt;
 &lt;p&gt;default下，不存在memory isolation&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;address spaces，地址空间&lt;/p&gt;
-&lt;ol&gt;
+&lt;h2 id=&#34;address-spaces地址空间&#34;&gt;address spaces，地址空间
+&lt;/h2&gt;&lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;给包括内核所有程序专属空间，这些空间相互独立&lt;/p&gt;
 &lt;/li&gt;
@@ -20754,8 +20812,6 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;而page table 页表由处理器硬件或内存管理单元MMU实现，映射内存的VA-&amp;gt;PG表存储在MMU中，也有表存储在内存中用来找到MMU中的表（e.g. SATP寄存器）&lt;/p&gt;
 &lt;p&gt;MMU是不定存储的，必要时读取表&lt;/p&gt;
 &lt;p&gt;改写SATP寄存器是内核的权利，用户无法改写&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;paging hw(risc-v)&lt;/p&gt;
@@ -20807,9 +20863,9 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;xv6 vm code + layout&lt;/p&gt;
-&lt;ol&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;xv6-vm-code--layout&#34;&gt;xv6 vm code + layout
+&lt;/h2&gt;&lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;kernelbase地址于0x800000时（kernel虚拟地址下的），产生的信息若地址低于它，则流向不同io设备，否则流向dram （当然可能也是unused，因为没那么多设备）&lt;/p&gt;
 &lt;/li&gt;
@@ -20871,15 +20927,13 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;/ol&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;在xv6的启动过程中，分页硬件起到了至关重要的作用。简单来说，分页硬件负责将程序使用的虚拟地址翻译成实际的物理地址，这是实现虚拟内存管理的核心机制。&lt;/p&gt;
-&lt;h3 id=&#34;分页硬件的作用&#34;&gt;分页硬件的作用
-&lt;/h3&gt;&lt;ol&gt;
+&lt;p&gt;在xv6的启动过程中，分页硬件起到了至关重要的作用。简单来说，分页硬件负责将程序使用的虚拟地址翻译成实际的物理地址，这是实现虚拟内存管理的核心机制。分页硬件的作用：&lt;/p&gt;
+&lt;ol&gt;
 &lt;li&gt;&lt;strong&gt;地址翻译&lt;/strong&gt;：分页硬件的主要任务是将CPU在执行指令时产生的虚拟地址，按照页表的规定，转换为实际的物理地址。这使得每个进程可以拥有一个独立的虚拟地址空间，而不需要关心实际的物理内存布局。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;内存保护&lt;/strong&gt;：分页硬件可以通过页表中的权限位，控制对内存的访问权限。例如，它可以设置某些内存区域只读、不可执行，或者仅允许内核访问，从而提供内存保护机制，防止进程之间互相干扰。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;支持进程隔离&lt;/strong&gt;：分页硬件使得不同进程可以拥有各自的虚拟地址空间，这些空间彼此独立。即使多个进程使用相同的虚拟地址，它们在物理内存中映射到的实际地址也不同，从而实现了进程间的隔离。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h3 id=&#34;分页硬件的启动&#34;&gt;分页硬件的启动
-&lt;/h3&gt;&lt;p&gt;分页硬件的启动步骤如下：&lt;/p&gt;
+&lt;p&gt;分页硬件的启动步骤如下：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;strong&gt;设置页表&lt;/strong&gt;：在启动分页硬件之前，内核首先要设置好页表。页表是一种数据结构，它记录了虚拟地址到物理地址的映射关系。xv6在启动过程中会建立一个初始的页表，这个页表会映射内核代码和数据到合适的物理地址。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;加载页表地址到控制寄存器 %cr3&lt;/strong&gt;：内核通过将页表的物理地址加载到控制寄存器 &lt;code&gt;%cr3&lt;/code&gt; 中，告诉CPU当前要使用哪一个页表来进行地址翻译。这个步骤是让分页硬件知道应该使用哪一张表来进行虚拟地址到物理地址的转换。&lt;/li&gt;
@@ -20889,33 +20943,59 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;在整个启动过程中，除了分页硬件外，还有几个关键的硬件组件也在发挥重要作用。这些硬件协同工作，确保操作系统能够成功启动并运行：&lt;/p&gt;
-&lt;h3 id=&#34;1-cpu中央处理器&#34;&gt;1. &lt;strong&gt;CPU（中央处理器）&lt;/strong&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;指令执行&lt;/strong&gt;：CPU是整个启动过程的核心，它负责执行从&lt;code&gt;boot loader&lt;/code&gt;到内核的所有指令。启动过程开始时，CPU从固化在硬件中的地址（通常是BIOS或EFI）开始执行，然后逐步加载和运行&lt;code&gt;boot loader&lt;/code&gt;，再到加载和执行内核。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;模式切换&lt;/strong&gt;：CPU在启动过程中会从实模式切换到保护模式，最后进入分页模式。在实模式下，CPU只处理简单的地址计算，但在保护模式和分页模式下，CPU可以利用复杂的内存管理和保护机制。&lt;/li&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;CPU（中央处理器）&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;指令执行&lt;/strong&gt;：CPU是整个启动过程的核心，它负责执行从&lt;code&gt;boot loader&lt;/code&gt;到内核的所有指令。启动过程开始时，CPU从固化在硬件中的地址（通常是BIOS或EFI）开始执行，然后逐步加载和运行&lt;code&gt;boot loader&lt;/code&gt;，再到加载和执行内核。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;模式切换&lt;/strong&gt;：CPU在启动过程中会从实模式切换到保护模式，最后进入分页模式。在实模式下，CPU只处理简单的地址计算，但在保护模式和分页模式下，CPU可以利用复杂的内存管理和保护机制。&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;2-biosuefi&#34;&gt;2. &lt;strong&gt;BIOS/UEFI&lt;/strong&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;硬件初始化&lt;/strong&gt;：BIOS（基本输入输出系统）或UEFI（统一可扩展固件接口）是计算机开机时首先运行的固件，它负责初始化计算机的硬件组件，如CPU、内存、硬盘和I/O设备。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;引导加载器加载&lt;/strong&gt;：BIOS/UEFI在完成硬件初始化后，会将控制权交给&lt;code&gt;boot loader&lt;/code&gt;，这通常是通过读取特定存储设备上的引导扇区来实现的。&lt;/li&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;BIOS/UEFI&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;硬件初始化&lt;/strong&gt;：BIOS（基本输入输出系统）或UEFI（统一可扩展固件接口）是计算机开机时首先运行的固件，它负责初始化计算机的硬件组件，如CPU、内存、硬盘和I/O设备。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;引导加载器加载&lt;/strong&gt;：BIOS/UEFI在完成硬件初始化后，会将控制权交给&lt;code&gt;boot loader&lt;/code&gt;，这通常是通过读取特定存储设备上的引导扇区来实现的。&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;3-内存ram&#34;&gt;3. &lt;strong&gt;内存（RAM）&lt;/strong&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;代码和数据存储&lt;/strong&gt;：内存用于存储启动过程中加载的所有代码和数据，包括&lt;code&gt;boot loader&lt;/code&gt;、内核代码、页表以及其他重要的数据结构。在内核启动并运行时，内存还会被用来存储进程的代码、数据和栈等。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;栈操作&lt;/strong&gt;：CPU在执行指令时使用内存中的栈来保存函数调用的信息、局部变量和返回地址。栈的正确初始化和管理对于顺利执行程序至关重要。&lt;/li&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;内存（RAM）&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;代码和数据存储&lt;/strong&gt;：内存用于存储启动过程中加载的所有代码和数据，包括&lt;code&gt;boot loader&lt;/code&gt;、内核代码、页表以及其他重要的数据结构。在内核启动并运行时，内存还会被用来存储进程的代码、数据和栈等。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;栈操作&lt;/strong&gt;：CPU在执行指令时使用内存中的栈来保存函数调用的信息、局部变量和返回地址。栈的正确初始化和管理对于顺利执行程序至关重要。&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;4-硬盘控制器&#34;&gt;4. &lt;strong&gt;硬盘控制器&lt;/strong&gt;
-&lt;/h3&gt;&lt;ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;硬盘控制器&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;加载内核&lt;/strong&gt;：硬盘控制器负责从硬盘中读取&lt;code&gt;boot loader&lt;/code&gt;和内核。&lt;code&gt;boot loader&lt;/code&gt;在启动时会通过硬盘控制器将内核从存储设备加载到内存的指定位置，以便CPU能够执行内核代码。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;5-io设备&#34;&gt;5. &lt;strong&gt;I/O设备&lt;/strong&gt;
-&lt;/h3&gt;&lt;ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;I/O设备&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;基本输入输出&lt;/strong&gt;：在启动过程中，I/O设备（如键盘、显示器、串口等）通常会被初始化，以便在启动过程的早期阶段，系统可以输出调试信息或接受输入。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;6-中断控制器&#34;&gt;6. &lt;strong&gt;中断控制器&lt;/strong&gt;
-&lt;/h3&gt;&lt;ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;中断控制器&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;中断管理&lt;/strong&gt;：中断控制器负责管理和处理硬件中断。在启动过程中，操作系统会设置中断向量表，以确保系统能够正确处理来自外部设备的中断请求。虽然在启动过程的早期阶段，系统可能不会处理复杂的中断，但中断控制器的初始化和配置是操作系统启动的一个重要步骤。&lt;/li&gt;
 &lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;创建第一个进程的过程可以分为几个重要步骤，以下是通俗但详细的讲解：&lt;/p&gt;
@@ -20995,73 +21075,71 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;在创建第一个进程的过程中，初始化页表是至关重要的，因为页表用于将虚拟地址映射到物理地址。每个进程都有自己的虚拟地址空间，操作系统使用页表来管理这些地址与实际物理内存的对应关系。&lt;/p&gt;
-&lt;h3 id=&#34;为什么要初始化页表&#34;&gt;为什么要初始化页表？
-&lt;/h3&gt;&lt;p&gt;初始化页表的主要目的是为新进程提供一个独立的虚拟地址空间，这样进程可以运行在它自己的地址空间中，而不会干扰其他进程。同时，页表的设置允许操作系统通过分页机制有效管理内存，确保安全性和内存隔离。&lt;/p&gt;
+&lt;p&gt;初始化页表的主要目的是为新进程提供一个独立的虚拟地址空间，这样进程可以运行在它自己的地址空间中，而不会干扰其他进程。同时，页表的设置允许操作系统通过分页机制有效管理内存，确保安全性和内存隔离。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;页表的重要性&lt;/strong&gt;：在系统中，所有进程都运行在各自的虚拟地址空间中，而操作系统通过页表将这些虚拟地址转换为实际的物理地址。初始化页表为进程的运行提供了正确的地址映射，从而确保了进程能够访问内核和用户空间的必要资源。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;这个页表最初只映射内核的内存区域是什么意思&#34;&gt;“这个页表最初只映射内核的内存区域”是什么意思？
-&lt;/h3&gt;&lt;p&gt;当我们说“这个页表最初只映射内核的内存区域”时，指的是在初始阶段，页表只设置了内核空间的映射，而没有映射用户空间的地址。内核的地址空间包括内核代码、数据、堆、栈（包括内核栈）等内核所需的内存区域。&lt;/p&gt;
+&lt;p&gt;当我们说“这个页表最初只映射内核的内存区域”时，指的是在初始阶段，页表只设置了内核空间的映射，而没有映射用户空间的地址。内核的地址空间包括内核代码、数据、堆、栈（包括内核栈）等内核所需的内存区域。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;内核栈&lt;/strong&gt;：内核栈是内核在执行时使用的栈，是每个进程在内核态运行时的重要部分。在进程执行系统调用或发生中断时，CPU 会从用户模式切换到内核模式，使用内核栈来处理内核态代码。这部分内存是内核地址空间的一部分，因此会被映射。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;所以，初始页表仅映射了内核的内存区域，意味着进程在最初的设置中只能访问内核空间的内存。这是为了保证进程一开始可以正常地在内核中执行。&lt;/p&gt;
-&lt;h3 id=&#34;这个代码是用来启动进程的这段代码是从哪里来的&#34;&gt;“这个代码是用来启动进程的”这段代码是从哪里来的？
-&lt;/h3&gt;&lt;p&gt;这里提到的“代码是用来启动进程的”指的是 &lt;code&gt;initcode.S&lt;/code&gt; 这段汇编代码，它是用于初始化并启动第一个用户进程的。&lt;/p&gt;
+&lt;p&gt;这里提到的“代码是用来启动进程的”指的是 &lt;code&gt;initcode.S&lt;/code&gt; 这段汇编代码，它是用于初始化并启动第一个用户进程的。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;&lt;code&gt;initcode.S&lt;/code&gt; 的来源&lt;/strong&gt;：&lt;code&gt;initcode.S&lt;/code&gt; 是一个小型的汇编程序，它作为内核的一部分编译并链接到内核映像中。在构建内核时，链接器会将这段代码作为二进制数据嵌入到内核映像中。内核通过两个符号 &lt;code&gt;_binary_initcode_start&lt;/code&gt; 和 &lt;code&gt;_binary_initcode_size&lt;/code&gt; 标识这段代码的起始位置和大小。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;作用&lt;/strong&gt;：这段代码的主要作用是为第一个进程（&lt;code&gt;initproc&lt;/code&gt;）提供一段简单的用户态代码。当第一个进程开始执行时，它会运行这段代码来初始化用户态的环境。其目的是确保进程能够顺利启动并进入用户态执行。这是内核为启动第一个进程提供的基础代码。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;作用&lt;/strong&gt;：这段代码的主要作用是为第一个进程（&lt;code&gt;initproc&lt;/code&gt;）提供一段简单的用户态代码。当第一个进程开始执行时，它会运行这段代码来初始化用户态的环境。其目的是确保进程能够顺利启动并进入用户态执行。这是内核为启动第一个进程提供的基础代码。&lt;/p&gt;
+&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;如何加载&lt;/strong&gt;：在创建第一个进程时，内核会通过 &lt;code&gt;inituvm&lt;/code&gt; 函数为该进程分配一页物理内存，并将 &lt;code&gt;initcode.S&lt;/code&gt; 的二进制代码拷贝到这段内存中。这段内存被映射到进程的虚拟地址空间的地址0。当进程第一次运行时，处理器会从地址0开始执行 &lt;code&gt;initcode.S&lt;/code&gt; 的指令。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;总结一下，初始化页表是为了设置进程的虚拟地址空间，而最初的页表只映射内核区域（包括内核栈），以便在内核态能够正常工作。&lt;code&gt;initcode.S&lt;/code&gt; 是一段汇编代码，它从内核编译时嵌入内核中，被加载到第一个进程的内存中，用于启动并运行该进程。&lt;/p&gt;
 &lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;16&#34;&gt;
 &lt;li&gt;
 &lt;p&gt;每个进程的内核栈&lt;strong&gt;不是相通的&lt;/strong&gt;，而是&lt;strong&gt;独立的&lt;/strong&gt;。但是，&lt;strong&gt;内核空间&lt;/strong&gt;在所有进程之间是&lt;strong&gt;共享的&lt;/strong&gt;，但各进程对其访问是受控的。&lt;/p&gt;
-&lt;h3 id=&#34;内核栈&#34;&gt;内核栈
-&lt;/h3&gt;&lt;ul&gt;
+&lt;p&gt;内核栈：&lt;/p&gt;
+&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;独立性&lt;/strong&gt;：每个进程都有自己独立的内核栈。当一个进程从用户态切换到内核态（例如执行系统调用或处理中断）时，它使用自己的内核栈来保存调用信息、局部变量以及处理中断或系统调用所需的其他数据。由于每个进程的内核栈是独立的，进程之间不会互相影响。这种独立性确保了进程的内核态执行环境的安全性和稳定性。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;切换上下文时的保存与恢复&lt;/strong&gt;：当操作系统在多个进程之间切换时（即进行上下文切换），它会保存当前进程的内核栈状态，并恢复下一个要运行的进程的内核栈。这种机制保证了每个进程可以独立执行，而不会干扰其他进程的内核栈。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;内核空间&#34;&gt;内核空间
-&lt;/h3&gt;&lt;ul&gt;
+&lt;p&gt;内核空间：&lt;/p&gt;
+&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;共享性&lt;/strong&gt;：内核空间是所有进程共享的地址空间的一部分。它包含了内核代码、全局数据结构、设备驱动程序、内核栈等。这意味着所有进程都可以访问相同的内核代码和全局内核数据。内核空间通常位于每个进程的虚拟地址空间的高地址部分。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;安全性&lt;/strong&gt;：虽然内核空间在所有进程之间是共享的，但普通用户进程无法直接访问内核空间。这是通过硬件机制和内核态/用户态的权限控制来实现的。只有在进程运行于内核态时（例如在系统调用或中断处理期间），进程才能访问内核空间的内容。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;统一的映射&lt;/strong&gt;：所有进程的页表都会映射到相同的内核空间区域。这意味着当系统切换进程时，尽管进程的用户空间地址不同，但内核空间地址是一致的。这使得内核能够高效地管理和调度多个进程，而不必为每个进程维护独立的内核空间。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;总结&#34;&gt;总结
-&lt;/h3&gt;&lt;ul&gt;
+&lt;p&gt;总结：&lt;/p&gt;
+&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;内核栈&lt;/strong&gt;：每个进程有自己的内核栈，互不相通，保证了内核态的独立性和安全性。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;内核空间&lt;/strong&gt;：内核空间在所有进程之间是共享的，但受权限控制，只有在内核态下进程才能访问内核空间。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;这种设计确保了系统的安全性和稳定性，同时也保证了操作系统的效率。&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;code&gt;p-&amp;gt;context-&amp;gt;eip&lt;/code&gt; 是进程控制块（&lt;code&gt;struct proc&lt;/code&gt;）中的一个字段，用于保存进程在内核态的执行状态，特别是保存进程执行时的程序计数器（即指令指针）。具体来说：&lt;/p&gt;
-&lt;h3 id=&#34;p-context-eip-指的是什么&#34;&gt;&lt;code&gt;p-&amp;gt;context-&amp;gt;eip&lt;/code&gt; 指的是什么？
-&lt;/h3&gt;&lt;ul&gt;
+&lt;p&gt;&lt;code&gt;p-&amp;gt;context-&amp;gt;eip&lt;/code&gt; 是进程控制块（&lt;code&gt;struct proc&lt;/code&gt;）中的一个字段，用于保存进程在内核态的执行状态，特别是保存进程执行时的程序计数器（即指令指针）。p-&amp;gt;context-&amp;gt;eip` 指的是什么？&lt;/p&gt;
+&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;&lt;code&gt;eip&lt;/code&gt;&lt;/strong&gt;：&lt;code&gt;eip&lt;/code&gt; 是 &lt;code&gt;x86&lt;/code&gt; 架构中的指令指针寄存器（也称为程序计数器）。它保存了 CPU 下一条将要执行的指令的地址。在上下文切换时，操作系统会保存当前进程的 &lt;code&gt;eip&lt;/code&gt; 值，以便在恢复这个进程时，它可以从之前中断的地方继续执行。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;&lt;code&gt;p-&amp;gt;context-&amp;gt;eip&lt;/code&gt;&lt;/strong&gt;：&lt;code&gt;p-&amp;gt;context&lt;/code&gt; 是一个指向进程上下文结构的指针，这个结构保存了内核态下的 CPU 寄存器状态，其中包括 &lt;code&gt;eip&lt;/code&gt;。当进程被切换出去时，&lt;code&gt;eip&lt;/code&gt; 会被保存到 &lt;code&gt;p-&amp;gt;context-&amp;gt;eip&lt;/code&gt;，当进程被切换回来的时候，&lt;code&gt;eip&lt;/code&gt; 会从 &lt;code&gt;p-&amp;gt;context-&amp;gt;eip&lt;/code&gt; 中恢复，这样进程就能继续从上次停止的地方执行。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;p-context-中有什么内容&#34;&gt;&lt;code&gt;p-&amp;gt;context&lt;/code&gt; 中有什么内容？
-&lt;/h3&gt;&lt;p&gt;&lt;code&gt;p-&amp;gt;context&lt;/code&gt; 是一个用于保存进程在内核态执行时 CPU 寄存器状态的结构。它通常包含以下内容：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;p-&amp;gt;context&lt;/code&gt; 是一个用于保存进程在内核态执行时 CPU 寄存器状态的结构。它通常包含以下内容：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;&lt;code&gt;eip&lt;/code&gt;&lt;/strong&gt;（指令指针）：保存下一条将要执行的指令的地址。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;&lt;code&gt;esp&lt;/code&gt;&lt;/strong&gt;（栈指针）：保存当前的栈指针，用于指示当前的栈顶位置。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;&lt;code&gt;ebx&lt;/code&gt;&lt;/strong&gt;、&lt;strong&gt;&lt;code&gt;ecx&lt;/code&gt;&lt;/strong&gt;、&lt;strong&gt;&lt;code&gt;edx&lt;/code&gt;&lt;/strong&gt;、&lt;strong&gt;&lt;code&gt;esi&lt;/code&gt;&lt;/strong&gt;、&lt;strong&gt;&lt;code&gt;edi&lt;/code&gt;&lt;/strong&gt;、&lt;strong&gt;&lt;code&gt;ebp&lt;/code&gt;&lt;/strong&gt;：这些都是通用寄存器，用于保存进程执行时的寄存器状态。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;&lt;code&gt;eflags&lt;/code&gt;&lt;/strong&gt;：保存 CPU 的状态标志寄存器，用于记录当前进程执行时的状态（如中断是否启用、运算结果的标志等）。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;作用与重要性&#34;&gt;作用与重要性
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;上下文切换&lt;/strong&gt;：当操作系统进行上下文切换时，会将当前进程的所有 CPU 寄存器状态保存到 &lt;code&gt;p-&amp;gt;context&lt;/code&gt; 中。然后操作系统会加载下一个进程的 &lt;code&gt;p-&amp;gt;context&lt;/code&gt;，恢复所有寄存器状态，使 CPU 继续执行该进程。这种机制确保了多任务操作系统可以高效地在多个进程之间切换，而不丢失每个进程的执行状态。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;指令指针 &lt;code&gt;eip&lt;/code&gt;&lt;/strong&gt; 的作用尤其重要，因为它决定了进程接下来会执行哪条指令。没有正确保存和恢复 &lt;code&gt;eip&lt;/code&gt;，进程可能会从错误的地址继续执行，导致系统不稳定甚至崩溃。&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;当操作系统进行上下文切换时，会将当前进程的所有 CPU 寄存器状态保存到 &lt;code&gt;p-&amp;gt;context&lt;/code&gt; 中。然后操作系统会加载下一个进程的 &lt;code&gt;p-&amp;gt;context&lt;/code&gt;，恢复所有寄存器状态，使 CPU 继续执行该进程。这种机制确保了多任务操作系统可以高效地在多个进程之间切换，而不丢失每个进程的执行状态。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;指令指针 &lt;code&gt;eip&lt;/code&gt;&lt;/strong&gt; 的作用尤其重要，因为它决定了进程接下来会执行哪条指令。没有正确保存和恢复 &lt;code&gt;eip&lt;/code&gt;，进程可能会从错误的地址继续执行，导致系统不稳定甚至崩溃。&lt;/p&gt;
 &lt;p&gt;总的来说，&lt;code&gt;p-&amp;gt;context&lt;/code&gt; 结构中的内容是进程上下文切换的核心，它记录了进程在内核态下所有关键的寄存器状态，以确保进程可以在被中断后正确恢复并继续执行。&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Lab时遇到的问题&lt;/p&gt;
-&lt;ol&gt;
+&lt;h2 id=&#34;lab时遇到的问题&#34;&gt;Lab时遇到的问题
+&lt;/h2&gt;&lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;“通过一个没有映射的页保护用户栈”是什么意思，怎么做到的&lt;/p&gt;
 &lt;p&gt;这句话的意思是：&lt;strong&gt;xv6 通过在用户栈的末尾放置一个没有映射的页（即一个虚拟地址空间内的页表条目不指向任何物理内存），来保护用户栈免受溢出错误的影响。&lt;/strong&gt;&lt;/p&gt;
@@ -21070,14 +21148,24 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;建立一个地址空间的过程可以分为以下几个步骤：&lt;/p&gt;
-&lt;h3 id=&#34;1-调用-kvmalloc&#34;&gt;1. &lt;strong&gt;调用 &lt;code&gt;kvmalloc()&lt;/code&gt;&lt;/strong&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;位置&lt;/strong&gt;：&lt;code&gt;main()&lt;/code&gt; 调用 &lt;code&gt;kvmalloc&lt;/code&gt;，位于代码的第1757行。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;作用&lt;/strong&gt;：&lt;code&gt;kvmalloc()&lt;/code&gt; 是用于创建并切换到一个拥有内核所需映射的页表。它确保在操作系统启动时，内核可以正常运行。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;关键操作&lt;/strong&gt;：该函数调用 &lt;code&gt;setupkvm()&lt;/code&gt; 来完成大部分工作。&lt;/li&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;调用 &lt;code&gt;kvmalloc()&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;位置&lt;/strong&gt;：&lt;code&gt;main()&lt;/code&gt; 调用 &lt;code&gt;kvmalloc&lt;/code&gt;，位于代码的第1757行。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;作用&lt;/strong&gt;：&lt;code&gt;kvmalloc()&lt;/code&gt; 是用于创建并切换到一个拥有内核所需映射的页表。它确保在操作系统启动时，内核可以正常运行。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;关键操作&lt;/strong&gt;：该函数调用 &lt;code&gt;setupkvm()&lt;/code&gt; 来完成大部分工作。&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;2-调用-setupkvm&#34;&gt;2. &lt;strong&gt;调用 &lt;code&gt;setupkvm()&lt;/code&gt;&lt;/strong&gt;
-&lt;/h3&gt;&lt;ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;调用 &lt;code&gt;setupkvm()&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;位置&lt;/strong&gt;：第1737行。&lt;/p&gt;
 &lt;/li&gt;
@@ -21088,14 +21176,14 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;具体步骤：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;strong&gt;分配页目录页&lt;/strong&gt;：&lt;code&gt;setupkvm()&lt;/code&gt; 首先会分配一页内存来存储页目录，这是分页的最高层结构，用于指向页表。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;调用 &lt;code&gt;mappages()&lt;/code&gt;&lt;/strong&gt;：使用 &lt;code&gt;mappages()&lt;/code&gt; 函数，创建映射表，这些映射表可以在 &lt;code&gt;kmap&lt;/code&gt; 数组中找到。&lt;code&gt;kmap&lt;/code&gt; 数组中包含了各种需要被映射的内存区域。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;ol start=&#34;2&#34;&gt;
-&lt;li&gt;&lt;strong&gt;调用 &lt;code&gt;mappages()&lt;/code&gt;&lt;/strong&gt;：使用 &lt;code&gt;mappages()&lt;/code&gt; 函数，创建映射表，这些映射表可以在 &lt;code&gt;kmap&lt;/code&gt; 数组中找到。&lt;code&gt;kmap&lt;/code&gt; 数组中包含了各种需要被映射的内存区域。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&#34;3-调用-mappages&#34;&gt;3. &lt;strong&gt;调用 &lt;code&gt;mappages()&lt;/code&gt;&lt;/strong&gt;
-&lt;/h3&gt;&lt;ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;调用 &lt;code&gt;mappages()&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;位置&lt;/strong&gt;：第1679行。&lt;/p&gt;
 &lt;/li&gt;
@@ -21111,8 +21199,10 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;/ol&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;4-调用-walkpgdir&#34;&gt;4. &lt;strong&gt;调用 &lt;code&gt;walkpgdir()&lt;/code&gt;&lt;/strong&gt;
-&lt;/h3&gt;&lt;ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;调用 &lt;code&gt;walkpgdir()&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;位置&lt;/strong&gt;：第1654行。&lt;/p&gt;
 &lt;/li&gt;
@@ -21129,8 +21219,10 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;/ol&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;5-初始化页表项-pte&#34;&gt;5. &lt;strong&gt;初始化页表项 (PTE)&lt;/strong&gt;
-&lt;/h3&gt;&lt;ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;初始化页表项 (PTE)&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;位置&lt;/strong&gt;：在 &lt;code&gt;mappages()&lt;/code&gt; 的第1691行。&lt;/p&gt;
 &lt;/li&gt;
@@ -21146,8 +21238,10 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;/ol&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;6-完成内核的基础映射&#34;&gt;6. &lt;strong&gt;完成内核的基础映射&lt;/strong&gt;
-&lt;/h3&gt;&lt;ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;完成内核的基础映射&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
 &lt;li&gt;setupkvm()完成了kmap数组中内核地址空间的映射，包括：
 &lt;ol&gt;
 &lt;li&gt;&lt;strong&gt;内核指令和数据段&lt;/strong&gt;的映射。&lt;/li&gt;
@@ -21156,116 +21250,218 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;/ol&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;7-未建立用户空间映射&#34;&gt;7. &lt;strong&gt;未建立用户空间映射&lt;/strong&gt;
-&lt;/h3&gt;&lt;ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;未建立用户空间映射&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;注意&lt;/strong&gt;：在这个阶段，&lt;code&gt;setupkvm()&lt;/code&gt; 仅仅完成了内核所需的映射，并未为用户空间内存建立映射。用户空间的映射将在稍后的执行过程中进行。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;8-切换到新页表&#34;&gt;8. &lt;strong&gt;切换到新页表&lt;/strong&gt;
-&lt;/h3&gt;&lt;ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;切换到新页表&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
 &lt;li&gt;当 &lt;code&gt;kvmalloc()&lt;/code&gt; 完成时，它会切换到新创建的页表，这确保了内核可以使用新建立的映射来执行代码。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;如何管理空闲物理内存页的分配与释放。&lt;/p&gt;
-&lt;h3 id=&#34;1-物理内存分配器中的数据结构&#34;&gt;1. &lt;strong&gt;物理内存分配器中的数据结构&lt;/strong&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;空闲链表&lt;/strong&gt;：分配器使用一个由空闲的物理内存页构成的链表来管理内存。链表中的每个元素是一个&lt;code&gt;struct run&lt;/code&gt;结构体，用于表示一个空闲页。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;自包含的结构&lt;/strong&gt;：为了节省空间，分配器将&lt;code&gt;struct run&lt;/code&gt;结构体存放在每个空闲页的开头部分，因为这些页本身是空闲的，没有其他数据。&lt;/li&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;物理内存分配器中的数据结构&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;空闲链表&lt;/strong&gt;：分配器使用一个由空闲的物理内存页构成的链表来管理内存。链表中的每个元素是一个&lt;code&gt;struct run&lt;/code&gt;结构体，用于表示一个空闲页。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;自包含的结构&lt;/strong&gt;：为了节省空间，分配器将&lt;code&gt;struct run&lt;/code&gt;结构体存放在每个空闲页的开头部分，因为这些页本身是空闲的，没有其他数据。&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;2-内存的安全保护&#34;&gt;2. &lt;strong&gt;内存的安全保护&lt;/strong&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Spin Lock&lt;/strong&gt;：分配器使用自旋锁（spin lock）来保护空闲链表的操作，防止并发操作引起的数据不一致问题。这个锁和链表一起封装在一个结构体中，以确保锁可以保护到相关的所有数据。&lt;/li&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;内存的安全保护&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Spin L	ock&lt;/strong&gt;：分配器使用自旋锁（spin lock）来保护空闲链表的操作，防止并发操作引起的数据不一致问题。这个锁和链表一起封装在一个结构体中，以确保锁可以保护到相关的所有数据。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;3-分配器的初始化&#34;&gt;3. &lt;strong&gt;分配器的初始化&lt;/strong&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;&lt;code&gt;kinit1&lt;/code&gt;和&lt;code&gt;kinit2&lt;/code&gt;函数&lt;/strong&gt;：分配器初始化分两步完成，&lt;code&gt;kinit1&lt;/code&gt;用于在系统启动初期分配前4MB的内存，因为此时不支持锁和高于4MB的内存操作。&lt;code&gt;kinit2&lt;/code&gt;允许使用锁，并解锁了更多的内存供系统使用。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;&lt;code&gt;PHYSTOP&lt;/code&gt;假设&lt;/strong&gt;：在x86架构上，操作系统假设系统有240MB的物理内存（PHYSTOP），从内核结束地址到PHYSTOP之间的内存作为空闲内存池。&lt;code&gt;freerange&lt;/code&gt;函数通过调用&lt;code&gt;kfree&lt;/code&gt;将这部分内存页逐一加入空闲链表。&lt;/li&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;分配器的初始化&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;kinit1&lt;/code&gt;和&lt;code&gt;kinit2&lt;/code&gt;函数&lt;/strong&gt;：分配器初始化分两步完成，&lt;code&gt;kinit1&lt;/code&gt;用于在系统启动初期分配前4MB的内存，因为此时不支持锁和高于4MB的内存操作。&lt;code&gt;kinit2&lt;/code&gt;允许使用锁，并解锁了更多的内存供系统使用。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;PHYSTOP&lt;/code&gt;假设&lt;/strong&gt;：在x86架构上，操作系统假设系统有240MB的物理内存（PHYSTOP），从内核结束地址到PHYSTOP之间的内存作为空闲内存池。&lt;code&gt;freerange&lt;/code&gt;函数通过调用&lt;code&gt;kfree&lt;/code&gt;将这部分内存页逐一加入空闲链表。&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;4-地址对齐和释放&#34;&gt;4. &lt;strong&gt;地址对齐和释放&lt;/strong&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;对齐处理&lt;/strong&gt;：&lt;code&gt;freerange&lt;/code&gt;函数使用&lt;code&gt;PGROUNDUP&lt;/code&gt;确保内存页是以4096字节对齐的地址进行释放的，因为PTE（页表项）只能指向对齐的物理地址。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;&lt;code&gt;kfree&lt;/code&gt;函数&lt;/strong&gt;：&lt;code&gt;kfree&lt;/code&gt;负责将物理页重新加入空闲链表。它首先将释放的内存页内容设置为全1，以确保访问已释放内存时立刻崩溃，而不是继续使用无效数据。&lt;/li&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;地址对齐和释放&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;对齐处理&lt;/strong&gt;：&lt;code&gt;freerange&lt;/code&gt;函数使用&lt;code&gt;PGROUNDUP&lt;/code&gt;确保内存页是以4096字节对齐的地址进行释放的，因为PTE（页表项）只能指向对齐的物理地址。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;kfree&lt;/code&gt;函数&lt;/strong&gt;：&lt;code&gt;kfree&lt;/code&gt;负责将物理页重新加入空闲链表。它首先将释放的内存页内容设置为全1，以确保访问已释放内存时立刻崩溃，而不是继续使用无效数据。&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;5-地址映射&#34;&gt;5. &lt;strong&gt;地址映射&lt;/strong&gt;
-&lt;/h3&gt;&lt;ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;地址映射&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;虚拟地址和物理地址&lt;/strong&gt;：分配器通过虚拟地址找到对应的物理页。这是因为在系统的内存管理中，物理内存通常被映射到高地址的虚拟内存空间中。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;6-类型转换&#34;&gt;6. &lt;strong&gt;类型转换&lt;/strong&gt;
-&lt;/h3&gt;&lt;ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;类型转换&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;双重用途的地址&lt;/strong&gt;：分配器在操作地址时，既将地址当作整数进行运算，也将其当作指针来操作内存中的数据。这种用法导致了大量的类型转换，同时也说明了分配器在释放或分配内存时可能会隐式地改变内存的类型。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;7-用户地址空间中的栈与堆&#34;&gt;7. &lt;strong&gt;用户地址空间中的栈与堆&lt;/strong&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;堆与栈的布局&lt;/strong&gt;：堆位于栈的上方，栈本身占用一页内存，包含进程启动时的初始数据。栈的顶部包含命令行参数及其指针数组，并模仿函数&lt;code&gt;main(argc, argv)&lt;/code&gt;的调用环境。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;保护页&lt;/strong&gt;：为了防止栈的溢出，栈的下方有一个未映射的保护页。如果栈增长超过这一页，会触发异常，从而保护系统不受非法访问的影响。&lt;/li&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;用户地址空间中的栈与堆&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;堆与栈的布局&lt;/strong&gt;：堆位于栈的上方，栈本身占用一页内存，包含进程启动时的初始数据。栈的顶部包含命令行参数及其指针数组，并模仿函数&lt;code&gt;main(argc, argv)&lt;/code&gt;的调用环境。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;保护页&lt;/strong&gt;：为了防止栈的溢出，栈的下方有一个未映射的保护页。如果栈增长超过这一页，会触发异常，从而保护系统不受非法访问的影响。&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;操作系统中 &lt;code&gt;exec&lt;/code&gt; 系统调用的工作原理，&lt;code&gt;exec&lt;/code&gt; 用于创建和初始化用户进程的地址空间。&lt;/p&gt;
-&lt;h3 id=&#34;1-elf-格式与-exec-的基本流程&#34;&gt;1. &lt;strong&gt;ELF 格式与 &lt;code&gt;exec&lt;/code&gt; 的基本流程&lt;/strong&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;ELF 文件&lt;/strong&gt;：&lt;code&gt;exec&lt;/code&gt; 通过读取并解析 ELF (Executable and Linkable Format) 文件来初始化用户地址空间。ELF 是一种通用的二进制文件格式，&lt;code&gt;exec&lt;/code&gt; 首先检查文件的 ELF 头部以验证文件格式是否正确。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;魔法数字检查&lt;/strong&gt;：ELF 文件以 4 个“魔法数字”（&lt;code&gt;0x7F, &#39;E&#39;, &#39;L&#39;, &#39;F&#39;&lt;/code&gt;）开头。&lt;code&gt;exec&lt;/code&gt; 首先通过检查这四个字节来确定文件是否是有效的 ELF 文件。如果魔法数字匹配，&lt;code&gt;exec&lt;/code&gt; 继续处理文件，否则放弃执行。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;2-内存分配与段加载&#34;&gt;2. &lt;strong&gt;内存分配与段加载&lt;/strong&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;页表设置&lt;/strong&gt;：&lt;code&gt;exec&lt;/code&gt; 通过 &lt;code&gt;setupkvm&lt;/code&gt; 函数创建一个新的页表，其中不包含用户部分的映射。这为用户地址空间的初始化做好了准备。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;内存分配与加载&lt;/strong&gt;：&lt;code&gt;exec&lt;/code&gt; 使用 &lt;code&gt;allocuvm&lt;/code&gt; 为 ELF 文件的每个段分配内存。接着，&lt;code&gt;loaduvm&lt;/code&gt; 将段的内容从文件中加载到内存中。&lt;code&gt;loaduvm&lt;/code&gt; 通过 &lt;code&gt;walkpgdir&lt;/code&gt; 找到内存中相应的物理地址，并通过 &lt;code&gt;readi&lt;/code&gt; 从文件读取数据。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;3-处理-program-header&#34;&gt;3. &lt;strong&gt;处理 Program Header&lt;/strong&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;段头解释&lt;/strong&gt;：ELF 文件包含多个段头（Program Header），每个段头描述了一个需要载入内存的程序段。&lt;code&gt;exec&lt;/code&gt; 依次处理每个段头，分配相应的内存并加载数据。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;&lt;code&gt;filesz&lt;/code&gt; 与 &lt;code&gt;memsz&lt;/code&gt;&lt;/strong&gt;：段头中的 &lt;code&gt;filesz&lt;/code&gt; 是从文件中读取的字节数，&lt;code&gt;memsz&lt;/code&gt; 是分配的内存大小。如果 &lt;code&gt;filesz&lt;/code&gt; 小于 &lt;code&gt;memsz&lt;/code&gt;，表示从文件读取的数据不足以填满分配的内存，未填充的部分通常用于存储未初始化的全局变量，并被填充为 0。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;4-用户栈的分配与初始化&#34;&gt;4. &lt;strong&gt;用户栈的分配与初始化&lt;/strong&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;栈内存分配&lt;/strong&gt;：&lt;code&gt;exec&lt;/code&gt; 为用户栈分配一页内存，并在栈顶放置传入的参数字符串。参数字符串的指针被保存在 &lt;code&gt;ustack&lt;/code&gt; 中，最后在参数列表 (&lt;code&gt;argv&lt;/code&gt;) 的末尾放置一个空指针，以便程序知道参数列表的结束。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;伪造的返回地址&lt;/strong&gt;：在栈上，&lt;code&gt;ustack&lt;/code&gt; 的前三个位置依次存放伪造的返回地址、参数个数 (&lt;code&gt;argc&lt;/code&gt;)、以及参数列表的指针 (&lt;code&gt;argv&lt;/code&gt;)。这使得当程序从 &lt;code&gt;main&lt;/code&gt; 函数开始执行时，能够正确访问这些参数。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;5-栈保护页&#34;&gt;5. &lt;strong&gt;栈保护页&lt;/strong&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;防止栈溢出&lt;/strong&gt;：在分配栈页下方，&lt;code&gt;exec&lt;/code&gt; 会设置一个无法访问的保护页。这个保护页用于防止栈意外增长超出分配的页数，从而引发内存访问错误。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;处理大参数&lt;/strong&gt;：如果传入的参数过大以至于超出栈的页，&lt;code&gt;exec&lt;/code&gt; 通过 &lt;code&gt;copyout&lt;/code&gt; 函数检测并返回错误，以避免栈溢出。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;6-错误处理与内存释放&#34;&gt;6. &lt;strong&gt;错误处理与内存释放&lt;/strong&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;错误处理&lt;/strong&gt;：如果 &lt;code&gt;exec&lt;/code&gt; 在创建新的内存映像过程中发现错误（例如无效的程序段），它会跳转到 &lt;code&gt;bad&lt;/code&gt; 标签处，释放已经分配的内存，并返回 &lt;code&gt;-1&lt;/code&gt;，表示调用失败。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;内存映像切换&lt;/strong&gt;：只有在确认新内存映像已经正确构建后，&lt;code&gt;exec&lt;/code&gt; 才会释放旧的内存映像。这是为了确保如果 &lt;code&gt;exec&lt;/code&gt; 失败时，能够安全地返回错误代码 &lt;code&gt;-1&lt;/code&gt;。成功完成后，&lt;code&gt;exec&lt;/code&gt; 返回 &lt;code&gt;0&lt;/code&gt;，表示执行成功。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;7-总结&#34;&gt;7. &lt;strong&gt;总结&lt;/strong&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;exec&lt;/code&gt; 是一个关键的系统调用，用于将用户进程的地址空间初始化为一个新的执行映像。它通过加载 ELF 文件、分配内存、设置栈空间等操作，确保用户进程可以正确启动并运行。&lt;/li&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;ELF 格式与 &lt;code&gt;exec&lt;/code&gt; 的基本流程&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;ELF 文件&lt;/strong&gt;：&lt;code&gt;exec&lt;/code&gt; 通过读取并解析 ELF (Executable and Linkable Format) 文件来初始化用户地址空间。ELF 是一种通用的二进制文件格式，&lt;code&gt;exec&lt;/code&gt; 首先检查文件的 ELF 头部以验证文件格式是否正确。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;魔法数字检查&lt;/strong&gt;：ELF 文件以 4 个“魔法数字”（&lt;code&gt;0x7F, &#39;E&#39;, &#39;L&#39;, &#39;F&#39;&lt;/code&gt;）开头。&lt;code&gt;exec&lt;/code&gt; 首先通过检查这四个字节来确定文件是否是有效的 ELF 文件。如果魔法数字匹配，&lt;code&gt;exec&lt;/code&gt; 继续处理文件，否则放弃执行。&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;栈只分配一页内存，这在某些情况下可能会显得太小，特别是当程序需要处理大量的参数或者深度递归时。这种设计是为了简化内存管理和避免过度浪费，但也带来了某些局限性。如果需要处理超过一页内存的大参数，系统有以下几种方法来应对：&lt;/p&gt;
-&lt;h3 id=&#34;1-增加栈的大小&#34;&gt;1. &lt;strong&gt;增加栈的大小&lt;/strong&gt;
-&lt;/h3&gt;&lt;p&gt;在某些系统中，可以动态增加栈的大小。具体方法包括：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;内存分配与段加载&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;手动扩展&lt;/strong&gt;：程序可以通过系统调用（例如 &lt;code&gt;mmap&lt;/code&gt;）手动分配更多的栈空间。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;自动扩展&lt;/strong&gt;：某些操作系统会在检测到栈溢出时自动扩展栈空间。这个过程通常是由内核负责的，通过捕获页面错误并分配新页面来实现栈的自动扩展。&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;页表设置&lt;/strong&gt;：&lt;code&gt;exec&lt;/code&gt; 通过 &lt;code&gt;setupkvm&lt;/code&gt; 函数创建一个新的页表，其中不包含用户部分的映射。这为用户地址空间的初始化做好了准备。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;内存分配与加载&lt;/strong&gt;：&lt;code&gt;exec&lt;/code&gt; 使用 &lt;code&gt;allocuvm&lt;/code&gt; 为 ELF 文件的每个段分配内存。接着，&lt;code&gt;loaduvm&lt;/code&gt; 将段的内容从文件中加载到内存中。&lt;code&gt;loaduvm&lt;/code&gt; 通过 &lt;code&gt;walkpgdir&lt;/code&gt; 找到内存中相应的物理地址，并通过 &lt;code&gt;readi&lt;/code&gt; 从文件读取数据。&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;2-使用堆内存&#34;&gt;2. &lt;strong&gt;使用堆内存&lt;/strong&gt;
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;堆内存分配&lt;/strong&gt;：程序可以使用堆（heap）来处理大数据，而不是依赖栈。通过调用 &lt;code&gt;malloc&lt;/code&gt; 或者 &lt;code&gt;calloc&lt;/code&gt; 这样的标准库函数，程序可以在堆上分配足够大的内存块来存储参数或其他数据。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;传递指针&lt;/strong&gt;：对于大参数，可以将参数放在堆中，然后在栈上只传递一个指向堆中数据的指针。这样可以有效减轻栈的压力，同时仍然能够处理大数据。&lt;/li&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;处理 Program Header&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;段头解释&lt;/strong&gt;：ELF 文件包含多个段头（Program Header），每个段头描述了一个需要载入内存的程序段。&lt;code&gt;exec&lt;/code&gt; 依次处理每个段头，分配相应的内存并加载数据。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;filesz&lt;/code&gt; 与 &lt;code&gt;memsz&lt;/code&gt;&lt;/strong&gt;：段头中的 &lt;code&gt;filesz&lt;/code&gt; 是从文件中读取的字节数，&lt;code&gt;memsz&lt;/code&gt; 是分配的内存大小。如果 &lt;code&gt;filesz&lt;/code&gt; 小于 &lt;code&gt;memsz&lt;/code&gt;，表示从文件读取的数据不足以填满分配的内存，未填充的部分通常用于存储未初始化的全局变量，并被填充为 0。&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;3-参数从文件读取&#34;&gt;3. &lt;strong&gt;参数从文件读取&lt;/strong&gt;
-&lt;/h3&gt;&lt;ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;用户栈的分配与初始化&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;栈内存分配&lt;/strong&gt;：&lt;code&gt;exec&lt;/code&gt; 为用户栈分配一页内存，并在栈顶放置传入的参数字符串。参数字符串的指针被保存在 &lt;code&gt;ustack&lt;/code&gt; 中，最后在参数列表 (&lt;code&gt;argv&lt;/code&gt;) 的末尾放置一个空指针，以便程序知道参数列表的结束。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;伪造的返回地址&lt;/strong&gt;：在栈上，&lt;code&gt;ustack&lt;/code&gt; 的前三个位置依次存放伪造的返回地址、参数个数 (&lt;code&gt;argc&lt;/code&gt;)、以及参数列表的指针 (&lt;code&gt;argv&lt;/code&gt;)。这使得当程序从 &lt;code&gt;main&lt;/code&gt; 函数开始执行时，能够正确访问这些参数。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;栈保护页&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;防止栈溢出&lt;/strong&gt;：在分配栈页下方，&lt;code&gt;exec&lt;/code&gt; 会设置一个无法访问的保护页。这个保护页用于防止栈意外增长超出分配的页数，从而引发内存访问错误。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;处理大参数&lt;/strong&gt;：如果传入的参数过大以至于超出栈的页，&lt;code&gt;exec&lt;/code&gt; 通过 &lt;code&gt;copyout&lt;/code&gt; 函数检测并返回错误，以避免栈溢出。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;错误处理与内存释放&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;错误处理&lt;/strong&gt;：如果 &lt;code&gt;exec&lt;/code&gt; 在创建新的内存映像过程中发现错误（例如无效的程序段），它会跳转到 &lt;code&gt;bad&lt;/code&gt; 标签处，释放已经分配的内存，并返回 &lt;code&gt;-1&lt;/code&gt;，表示调用失败。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;内存映像切换&lt;/strong&gt;：只有在确认新内存映像已经正确构建后，&lt;code&gt;exec&lt;/code&gt; 才会释放旧的内存映像。这是为了确保如果 &lt;code&gt;exec&lt;/code&gt; 失败时，能够安全地返回错误代码 &lt;code&gt;-1&lt;/code&gt;。成功完成后，&lt;code&gt;exec&lt;/code&gt; 返回 &lt;code&gt;0&lt;/code&gt;，表示执行成功。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;总结&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;exec&lt;/code&gt; 是一个关键的系统调用，用于将用户进程的地址空间初始化为一个新的执行映像。它通过加载 ELF 文件、分配内存、设置栈空间等操作，确保用户进程可以正确启动并运行。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;栈只分配一页内存，这在某些情况下可能会显得太小，特别是当程序需要处理大量的参数或者深度递归时。这种设计是为了简化内存管理和避免过度浪费，但也带来了某些局限性。如果需要处理超过一页内存的大参数，系统有以下几种方法来应对：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;增加栈的大小&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在某些系统中，可以动态增加栈的大小。具体方法包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;手动扩展&lt;/strong&gt;：程序可以通过系统调用（例如 &lt;code&gt;mmap&lt;/code&gt;）手动分配更多的栈空间。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;自动扩展&lt;/strong&gt;：某些操作系统会在检测到栈溢出时自动扩展栈空间。这个过程通常是由内核负责的，通过捕获页面错误并分配新页面来实现栈的自动扩展。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;使用堆内存&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;堆内存分配&lt;/strong&gt;：程序可以使用堆（heap）来处理大数据，而不是依赖栈。通过调用 &lt;code&gt;malloc&lt;/code&gt; 或者 &lt;code&gt;calloc&lt;/code&gt; 这样的标准库函数，程序可以在堆上分配足够大的内存块来存储参数或其他数据。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;传递指针&lt;/strong&gt;：对于大参数，可以将参数放在堆中，然后在栈上只传递一个指向堆中数据的指针。这样可以有效减轻栈的压力，同时仍然能够处理大数据。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;参数从文件读取&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;文件输入&lt;/strong&gt;：如果参数数据特别大，可以将其放在文件中，程序启动后从文件中读取。这种方式避免了将大量数据直接传递给程序，而是通过文件 I/O 进行处理，灵活性较高。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;4-分块处理&#34;&gt;4. &lt;strong&gt;分块处理&lt;/strong&gt;
-&lt;/h3&gt;&lt;ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;分块处理&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;分块加载&lt;/strong&gt;：对于过大的参数，可以考虑将其分块加载到内存中。每次只处理其中的一部分数据，处理完后再读取下一部分。这样可以降低对栈的要求，同时保持程序对大数据的处理能力。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;5-环境变量&#34;&gt;5. &lt;strong&gt;环境变量&lt;/strong&gt;
-&lt;/h3&gt;&lt;ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;环境变量&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;环境变量传递&lt;/strong&gt;：有时可以通过环境变量传递一些参数，环境变量不受栈大小的限制，且可以在程序运行时随时读取。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;6-系统配置&#34;&gt;6. &lt;strong&gt;系统配置&lt;/strong&gt;
-&lt;/h3&gt;&lt;ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;系统配置&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;修改系统配置&lt;/strong&gt;：某些操作系统允许通过修改配置文件或编译参数来增加默认的栈大小。这种方法可以在需要处理大量参数的应用中增大栈空间，避免因栈空间不足导致的错误。&lt;/li&gt;
 &lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;“超级页”的特点&lt;/strong&gt;&lt;/p&gt;
@@ -21275,8 +21471,6 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;li&gt;&lt;strong&gt;提高TLB（Translation Lookaside Buffer）效率&lt;/strong&gt;：TLB 是一个缓存，用于加速虚拟地址到物理地址的转换。由于超级页减少了页表项的数量，TLB 更有可能缓存所有需要的页表项，从而减少TLB缺失的几率，提高内存访问效率。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;适合大内存应用&lt;/strong&gt;：在拥有大量内存的机器上，使用超级页非常有效，因为它们可以减少页表的复杂性，提高内存管理的整体性能。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;浪费内存的风险&lt;/strong&gt;：当应用程序的内存需求较小时，超级页可能会导致内存浪费。例如，一个只需要8KB内存的程序，如果被分配了4MB的超级页，将会浪费大量未使用的内存。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
@@ -21299,9 +21493,13 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;li&gt;实际上RISC-V还有第三种模式称为machine mode。在大多数场景下，我们会忽略这种模式，所以我也不太会介绍这种模式。&lt;/li&gt;
 &lt;li&gt;在处理器的一个bit，当它为1的时候是user mode，当它为0时是kernel mode。当处理器在解析指令时，如果指令是特殊权限指令，并且该bit被设置为1，处理器会拒绝执行这条指令，就像在运算时不能除以0一样。&lt;/li&gt;
 &lt;li&gt;让整个操作系统代码都运行在kernel mode。大多数的Unix操作系统实现都运行在kernel mode。比如，XV6中，所有的操作系统服务都在kernel mode中，这种形式被称为Monolithic Kernel Design（&lt;a class=&#34;link&#34; href=&#34;https://en.wikipedia.org/wiki/Monolithic_kernel&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;宏内核&lt;/a&gt;）。&lt;/li&gt;
+    &gt;宏内核&lt;/a&gt;
+
+）。&lt;/li&gt;
 &lt;li&gt;另一种设计主要关注点是减少内核中的代码，它被称为Micro Kernel Design（&lt;a class=&#34;link&#34; href=&#34;https://en.wikipedia.org/wiki/Microkernel&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;微内核&lt;/a&gt;）。在这种模式下，希望在kernel mode中运行尽可能少的代码。所以这种设计下还是有内核，但是内核只有非常少的几个模块，例如，内核通常会有一些IPC的实现或者是Message passing；非常少的虚拟内存的支持，可能只支持了page table；以及分时复用CPU的一些支持。微内核的目的在于将大部分的操作系统运行在内核之外。因为在内核中的代码的数量较小，更少的代码意味着更少的Bug。&lt;/li&gt;
+    &gt;微内核&lt;/a&gt;
+
+）。在这种模式下，希望在kernel mode中运行尽可能少的代码。所以这种设计下还是有内核，但是内核只有非常少的几个模块，例如，内核通常会有一些IPC的实现或者是Message passing；非常少的虚拟内存的支持，可能只支持了page table；以及分时复用CPU的一些支持。微内核的目的在于将大部分的操作系统运行在内核之外。因为在内核中的代码的数量较小，更少的代码意味着更少的Bug。&lt;/li&gt;
 &lt;li&gt;在实际中，两种内核设计都会出现，出于历史原因大部分的桌面操作系统是宏内核，如果你运行需要大量内核计算的应用程序，例如在数据中心服务器上的操作系统，通常也是使用的宏内核，主要的原因是Linux提供了很好的性能。但是很多嵌入式系统，例如Minix，Cell，这些都是微内核设计。这两种设计都很流行，如果你从头开始写一个操作系统，你可能会从一个微内核设计开始。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2 id=&#34;system-calls&#34;&gt;System Calls
@@ -21319,14 +21517,18 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;内核有时候也被称为可被信任的计算空间（Trusted Computing Base），在一些安全的术语中也被称为TCB。&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/.%5cimage3.png&#34;
-	
-	
-	
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s0813os-organization-system-calls/image3.png&#34;
+	width=&#34;790&#34;
+	height=&#34;430&#34;
+	srcset=&#34;https://echudet.github.io/p/mit6s0813os-organization-system-calls/image3_hu1151391464123350295.png 480w, https://echudet.github.io/p/mit6s0813os-organization-system-calls/image3_hu8760441921124810311.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;image3&#34;
 	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;183&#34;
+		data-flex-basis=&#34;440px&#34;
 	
 &gt;&lt;/p&gt;
 &lt;ol&gt;
