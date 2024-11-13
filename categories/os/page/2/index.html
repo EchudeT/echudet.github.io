@@ -6,11 +6,11 @@
 
 <link rel='canonical' href='https://echudet.github.io/categories/os/'>
 
-<link rel="stylesheet" href="/scss/style.min.29ff19fc2531e24760c39aa8f14411e447a1182c20df7099a0cbbd158bf2f2ac.css"><meta property='og:title' content="Category: Os - echudet">
+<link rel="stylesheet" href="/scss/style.min.86fc5e5efb829fb1bdd7a2d2275017fb3ae01ba7fcf491e347d76495ae5e3ae2.css"><meta property='og:title' content="Category: Os - echudet">
 <meta property='og:description' content="和操作系统相关的分类">
 <meta property='og:url' content='https://echudet.github.io/categories/os/'>
 <meta property='og:site_name' content='echudet'>
-<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2024-11-13T17:04:51&#43;08:00 '/><meta property='og:image' content='https://echudet.github.io/categories/os/198374.jpg' />
+<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2024-11-13T21:49:12&#43;08:00 '/><meta property='og:image' content='https://echudet.github.io/categories/os/198374.jpg' />
 <meta name="twitter:title" content="Category: Os - echudet">
 <meta name="twitter:description" content="和操作系统相关的分类"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://echudet.github.io/categories/os/198374.jpg' /><link rel="alternate" type="application/rss&#43;xml" href="https://echudet.github.io/categories/os/index.xml">
@@ -526,6 +526,7 @@
     </nav>
 
 <footer class="site-footer">
+
     <section class="copyright">
         &copy; 
         
@@ -533,10 +534,145 @@
     </section>
     
     <section class="powerby">
-        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        
+
+
+        <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+
+        <script language="javascript"> 
+            var now = new Date();
+            function createtime(){
+                now.setTime(now.getTime()+250);
+                var grt= new Date("2024/11/10 00:00:00"); 
+                days = (now - grt ) / 1000 / 60 / 60 / 24;
+                dnum = Math.floor(days);
+                hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+                hnum = Math.floor(hours);
+                if(String(hnum).length ==1 ){hnum = "0" + hnum;}
+                minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+                mnum = Math.floor(minutes);
+                if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+                seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+                snum = Math.round(seconds);
+                if(String(snum).length ==1 ){snum = "0" + snum;}
+
+                document.getElementById("timeDate").innerHTML = "本站已稳定运行"+dnum+" 天 ";
+                document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒<br>"
+            }
+            setInterval("createtime()",250); 
+        </script> 
+
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        
+    
+        
+         
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+        
+
+        共 552947 字 , 24 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
         主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
+
 </footer>
+
 
 
             </main>
@@ -557,6 +693,7 @@
         document.head.appendChild(customFont);
     }());
 </script>
+
 
     </body>
 </html>

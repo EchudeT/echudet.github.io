@@ -6,11 +6,11 @@
 
 <link rel='canonical' href='https://echudet.github.io/p/mit6s08120kernels-and-hll/'>
 
-<link rel="stylesheet" href="/scss/style.min.29ff19fc2531e24760c39aa8f14411e447a1182c20df7099a0cbbd158bf2f2ac.css"><meta property='og:title' content="MIT6S081：20Kernels and HLL">
+<link rel="stylesheet" href="/scss/style.min.86fc5e5efb829fb1bdd7a2d2275017fb3ae01ba7fcf491e347d76495ae5e3ae2.css"><meta property='og:title' content="MIT6S081：20Kernels and HLL">
 <meta property='og:description' content="课程讨论使用高级编程语言实现操作系统的优点和代价。而论文探讨了在高性能操作系统内核中使用高级语言的可行性，特别是与传统C语言的对比。内核Biscuit得以构建，该内核使用Go语言编写，支持POSIX系统调用子集，并通过实验评估其性能与安全性。主要目标是研究高级语言在编写内核时带来的性能开销、实现挑战、以及编程效率和安全性。">
 <meta property='og:url' content='https://echudet.github.io/p/mit6s08120kernels-and-hll/'>
 <meta property='og:site_name' content='echudet'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-10-05T22:02:50&#43;08:00'/><meta property='article:modified_time' content='2024-11-12T23:05:03&#43;08:00'/><meta property='og:image' content='https://echudet.github.io/p/mit6s08120kernels-and-hll/bg.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-10-05T22:02:50&#43;08:00'/><meta property='article:modified_time' content='2024-11-13T21:49:12&#43;08:00'/><meta property='og:image' content='https://echudet.github.io/p/mit6s08120kernels-and-hll/bg.jpg' />
 <meta name="twitter:title" content="MIT6S081：20Kernels and HLL">
 <meta name="twitter:description" content="课程讨论使用高级编程语言实现操作系统的优点和代价。而论文探讨了在高性能操作系统内核中使用高级语言的可行性，特别是与传统C语言的对比。内核Biscuit得以构建，该内核使用Go语言编写，支持POSIX系统调用子集，并通过实验评估其性能与安全性。主要目标是研究高级语言在编写内核时带来的性能开销、实现挑战、以及编程效率和安全性。"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://echudet.github.io/p/mit6s08120kernels-and-hll/bg.jpg' />
@@ -270,18 +270,18 @@
   <ol>
     <li><a href="#课前预习">课前预习</a></li>
     <li><a href="#论文速览">论文速览</a></li>
-    <li><a href="#处理器架构"><strong>处理器架构</strong></a></li>
+    <li><a href="#处理器架构">处理器架构</a></li>
     <li><a href="#go-语言简介">Go 语言简介</a></li>
     <li><a href="#biscuit-heap-issue">Biscuit Heap Issue</a></li>
     <li><a href="#静态分析">静态分析</a></li>
-    <li><a href="#biscuit-的静态分析">Biscuit 的<strong>静态分析</strong></a></li>
+    <li><a href="#biscuit-的静态分析">Biscuit 的静态分析</a></li>
     <li><a href="#type-safe语言">Type-safe语言</a></li>
-    <li><a href="#用户空间的内核"><strong>用户空间的内核</strong></a></li>
-    <li><a href="#死锁风险"><strong>死锁风险</strong></a></li>
+    <li><a href="#用户空间的内核">用户空间的内核</a></li>
+    <li><a href="#死锁风险">死锁风险</a></li>
     <li><a href="#runtime">runtime</a></li>
     <li><a href="#futex">Futex</a></li>
-    <li><a href="#futexfast-userspace-mutex和普通互斥锁mutex"><strong>Futex</strong>（Fast Userspace Mutex）和<strong>普通互斥锁</strong>（Mutex）</a></li>
-    <li><a href="#futex-和-xv6-中的睡眠锁sleeping-locks"><strong>Futex</strong> 和 <strong>xv6 中的睡眠锁</strong>（sleeping locks）</a></li>
+    <li><a href="#futexfast-userspace-mutex和普通互斥锁mutex"><strong>Futex</strong>（Fast Userspace Mutex）和普通互斥锁（Mutex）</a></li>
+    <li><a href="#futex-和-xv6-中的睡眠锁sleeping-locks"><strong>Futex</strong> 和 xv6 中的睡眠锁（sleeping locks）</a></li>
     <li><a href="#针对schedule的复习">针对schedule的复习</a></li>
     <li><a href="#针对schedule的复习2">针对schedule的复习（2）</a></li>
     <li><a href="#针对schedule的复习3">针对schedule的复习（3）</a></li>
@@ -290,14 +290,14 @@
     <li><a href="#schedule的中断">schedule的中断</a></li>
     <li><a href="#biscuit-操作系统中断处理"><strong>Biscuit</strong> 操作系统中断处理</a></li>
     <li><a href="#biscuit速记">Biscuit速记</a></li>
-    <li><a href="#静态分析工具-maxlive">静态分析工具 <strong>MAXLIVE</strong></a></li>
+    <li><a href="#静态分析工具-maxlive">静态分析工具 MAXLIVE</a></li>
     <li><a href="#maxlive-的基本操作原理"><strong>MAXLIVE</strong> 的基本操作原理</a></li>
-    <li><a href="#biscuit-系统在应对-内存耗尽-问题时的局限性"><strong>Biscuit</strong> 系统在应对 <strong>内存耗尽</strong> 问题时的局限性</a></li>
-    <li><a href="#biscuit-内核-的实现细节"><strong>Biscuit 内核</strong> 的实现细节</a></li>
-    <li><a href="#内存屏障-memory-fence"><strong>内存屏障 (Memory Fence)</strong></a></li>
-    <li><a href="#dma直接内存访问direct-memory-access"><strong>DMA（直接内存访问，Direct Memory Access）</strong></a></li>
-    <li><a href="#biscuit-与-go-运行时环境-的协同工作"><strong>Biscuit</strong> 与 <strong>Go 运行时环境</strong> 的协同工作</a></li>
-    <li><a href="#biscuit-内核与-go-运行时-的集成方式"><strong>Biscuit</strong> 内核与 <strong>Go 运行时</strong> 的集成方式</a></li>
+    <li><a href="#biscuit-系统在应对-内存耗尽-问题时的局限性"><strong>Biscuit</strong> 系统在应对 内存耗尽 问题时的局限性</a></li>
+    <li><a href="#biscuit-内核-的实现细节">Biscuit 内核 的实现细节</a></li>
+    <li><a href="#内存屏障-memory-fence">内存屏障 (Memory Fence)</a></li>
+    <li><a href="#dma直接内存访问direct-memory-access">DMA（直接内存访问，Direct Memory Access）</a></li>
+    <li><a href="#biscuit-与-go-运行时环境-的协同工作"><strong>Biscuit</strong> 与 Go 运行时环境 的协同工作</a></li>
+    <li><a href="#biscuit-内核与-go-运行时-的集成方式"><strong>Biscuit</strong> 内核与 Go 运行时 的集成方式</a></li>
     <li><a href="#无读锁结构lock-free-read-structure"><strong>无读锁结构</strong>（lock-free read structure）</a></li>
     <li><a href="#什么是poll">什么是poll</a></li>
     <li><a href="#go-语言的高级语言特性hll对-biscuit-内核性能的影响">Go 语言的高级语言特性（HLL）对 Biscuit 内核性能的影响</a></li>
@@ -339,6 +339,8 @@
     
 
     <div class="article-details">
+
+
     
     <header class="article-category">
         
@@ -387,18 +389,113 @@
 
         
             <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="12" r="9" />
-  <polyline points="12 7 12 12 15 15" />
+                <?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="792px" height="792px" viewBox="0 0 792 792" style="enable-background:new 0 0 792 792;" xml:space="preserve">
+<g>
+	<g id="_x31_0_19_">
+		<g>
+			<path d="M643.5,742.5H594V569.25C594,473.566,516.434,396,420.75,396C516.434,396,594,318.434,594,222.75V49.5h49.5
+				c13.662,0,24.75-11.088,24.75-24.75S657.162,0,643.5,0h-495c-13.662,0-24.75,11.088-24.75,24.75S134.838,49.5,148.5,49.5H198
+				v173.25C198,318.434,275.566,396,371.25,396C275.566,396,198,473.566,198,569.25V742.5h-49.5c-13.662,0-24.75,11.088-24.75,24.75
+				S134.838,792,148.5,792h495c13.662,0,24.75-11.088,24.75-24.75S657.162,742.5,643.5,742.5z M247.5,222.75
+				c0-43.387,0-173.25,0-173.25h297c0,0,0,133.427,0,173.25c0,68.335-58.188,123.75-129.938,123.75h-37.125
+				C305.687,346.5,247.5,291.085,247.5,222.75z M544.5,742.5h-297c0,0,0-129.888,0-173.25c0-68.335,58.187-123.75,129.938-123.75
+				h37.125c71.75,0,129.938,55.415,129.938,123.75C544.5,609.072,544.5,742.5,544.5,742.5z"/>
+		</g>
+	</g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
 </svg>
-
-
 
                 <time class="article-time--reading">
                     阅读时长: 131 分钟
                 </time>
             </div>
+        
+
+         
+        <div>
+            <?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="79.536px" height="79.536px" viewBox="0 0 79.536 79.536" style="enable-background:new 0 0 79.536 79.536;"
+	 xml:space="preserve">
+<g>
+	<path style="fill:#010002;" d="M40.162,17.906C37.415,15.275,21.614,6.141,0,15.451c0,0.138,0,2.722,0,6.654v44.418h32.747
+		c1.126,0.968,3.798,1.651,6.926,1.651c3.119,0,5.802-0.684,6.931-1.651h32.933V22.105c0-3.933,0-6.517,0-6.654
+		C58.813,6.314,42.257,15.982,40.162,17.906z M37.229,63.349c0-1.75-15.372-11.981-33.125-0.818V19.216
+		c3.516-2.014,8.246-3.249,13.463-3.249c10.864,0,19.662,3.562,19.662,10.175V63.349z M75.684,62.53
+		c-17.751-11.163-33.108-0.932-33.108,0.818V26.146c0-6.612,8.792-10.175,19.646-10.175c5.22,0,9.952,1.235,13.463,3.249V62.53z"/>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+</svg>
+
+            <time class="article-words">
+                文章字数：65567字
+            </time>
+        </div>
         <div class="article-lastmod">
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
@@ -409,10 +506,15 @@
 
 
                 <time>
-                    Nov 12, 2024 23:05 &#43;0800
+                    Nov 13, 2024 21:49 &#43;0800
                 </time>
             </div></footer>
     
+
+    
+
+
+
 
     
 </div>
@@ -437,7 +539,7 @@
 <p>在讨论与未来工作 (Discussion and Future Work)部分，作者对Biscuit和Go语言在内核开发中的优势和不足进行了总结。虽然Go语言降低了编程复杂度和内存管理的错误风险，但在性能上仍不如C语言。最后，作者指出，Go语言适用于那些强调安全性和快速原型开发的新内核项目，但对于现有的大型C语言内核，切换到Go的成本可能超过其收益。</p>
 <p>这篇论文通过<strong>Biscuit</strong>内核的案例，深入探讨了高级语言在操作系统内核开发中的可行性和局限性，并提供了定量的实验评估数据。</p>
 <hr>
-<h2 id="处理器架构"><strong>处理器架构</strong>
+<h2 id="处理器架构">处理器架构
 </h2><p>x86-64 和 ARM 是两种主要的<strong>处理器架构（Instruction Set Architecture, ISA）</strong>，它们决定了计算机硬件如何与软件进行交互。ISA 定义了处理器能执行的指令集，也就是说，软件和硬件如何沟通、数据如何被处理和存储。</p>
 <p>为了帮助你理解，我会给你列出几种常见的处理器架构，并简单解释它们的特点。这样你就可以看到 x86-64 和 ARM 是如何与其他架构相似或不同的。</p>
 <ol>
@@ -953,7 +1055,7 @@
 </ul>
 <p>静态分析是一个强大的工具，广泛应用于软件开发的各个阶段。它可以帮助程序员发现潜在问题，优化代码，提升安全性。在 C 语言中，静态分析受到语言复杂性的限制，但在 Go 等现代语言中，由于其内存管理的简化和更严格的类型系统，静态分析变得更可行和有效。</p>
 <hr>
-<h2 id="biscuit-的静态分析">Biscuit 的<strong>静态分析</strong>
+<h2 id="biscuit-的静态分析">Biscuit 的静态分析
 </h2><p>Biscuit 能够使用<strong>静态分析</strong>来预测每个系统调用所需的堆内存，这是因为它采用了<strong>Go 语言</strong>，而 Go 语言的一些特性使得这种静态分析更为可行和有效。相比之下，<strong>C 语言</strong>由于语言本身的特性和复杂性，静态分析的难度要大得多。</p>
 <p>静态分析是指在<strong>编译时</strong>对程序代码进行分析，而不是在运行时进行。它可以通过检查源代码中的函数、变量、内存分配等，来推断程序的行为、性能或者资源需求。对于 Biscuit 来说，静态分析的目标是推断出每个系统调用的<strong>最大堆内存使用量</strong>，从而在系统调用开始之前预留足够的内存，确保不会在运行时遇到分配失败的问题。</p>
 <p>Go 语言在设计上有一些特性使得静态分析比 C 语言更容易实现：</p>
@@ -1039,7 +1141,7 @@
 </ul>
 <p><strong>Type-safe</strong> 是一种编程语言的关键特性，确保了类型使用的一致性与安全性，减少了潜在错误。它的重要性在现代软件开发中日益提升，尤其是在处理复杂系统、并发操作和大规模协作时。Go 等现代编程语言通过类型安全机制提供了更高的可靠性和可维护性，帮助开发者在代码开发过程中减少错误，提升生产力和系统稳定性。</p>
 <hr>
-<h2 id="用户空间的内核"><strong>用户空间的内核</strong>
+<h2 id="用户空间的内核">用户空间的内核
 </h2><p><strong>&ldquo;用户空间的内核&rdquo;</strong> 和 <strong>&ldquo;虚拟机上的内核&rdquo;</strong> 虽然有一些相似的功能，但它们本质上是不同的概念。</p>
 <ol>
 <li><strong>用户空间的内核（User-space Kernel）</strong></li>
@@ -1082,7 +1184,7 @@
 </ol>
 <p>虽然用户空间内核和虚拟机内核都有相似的隔离和安全目标，但它们的实现方式不同。<strong>用户空间内核</strong>（如 gVisor）通过在宿主操作系统上提供内核功能的模拟来隔离应用，而<strong>虚拟机内核</strong>则是虚拟化技术的一部分，它运行在模拟的硬件环境中，并管理整个虚拟机内部的操作系统和资源。</p>
 <hr>
-<h2 id="死锁风险"><strong>死锁风险</strong>
+<h2 id="死锁风险">死锁风险
 </h2><p>在 Linux 内核中，系统调用（system calls）会分配内存给内核来处理各种任务（如创建进程、管理文件系统等）。当内核堆内存耗尽时，系统调用可能无法完成分配所需的内存。Linux 的策略是<strong>乐观分配</strong>，让系统调用继续进行，直到实际的内存分配失败为止。</p>
 <p>如果分配失败，系统可能会进入等待状态，给 <strong>OOM Killer（Out-Of-Memory Killer）</strong> 线程一个机会来寻找并终止某个消耗大量内存的进程，从而释放出一些内存供其他进程使用。</p>
 <p>问题在于，当一个线程<strong>正在分配内存时，它可能持有某些资源的锁</strong>（例如文件系统的锁、进程表的锁等）。如果该线程因内存分配失败而进入等待状态，而此时 <strong>OOM Killer</strong> 线程杀死了另一个持有锁的进程，可能会导致死锁情况的出现。以下是几个场景：</p>
@@ -1169,7 +1271,7 @@
 </ul>
 <p>总的来说，<strong>Futex</strong> 是一种设计用于<strong>高效线程同步</strong>的机制，它允许在用户空间处理大部分的锁操作，只有在锁被争抢或资源不足时才进入内核。这种机制减少了系统调用开销，提升了多线程程序的性能。与线程的关系在于，futex 提供了线程之间的锁竞争、挂起与唤醒机制，是实现高效线程同步的重要工具。在像 <strong>Biscuit</strong> 这样的系统中，futex 为<strong>内核支持的线程同步</strong>提供了基础，确保了高效的线程管理。</p>
 <hr>
-<h2 id="futexfast-userspace-mutex和普通互斥锁mutex"><strong>Futex</strong>（Fast Userspace Mutex）和<strong>普通互斥锁</strong>（Mutex）
+<h2 id="futexfast-userspace-mutex和普通互斥锁mutex"><strong>Futex</strong>（Fast Userspace Mutex）和普通互斥锁（Mutex）
 </h2><p><strong>Futex</strong>（Fast Userspace Mutex）和<strong>普通互斥锁</strong>（Mutex）都用于实现线程之间的同步和互斥，确保多个线程安全地访问共享资源。然而，它们的实现方式和效率存在差异。接下来，我将分别介绍 futex 和普通 mutex，并通过举例说明它们的使用场景及区别。</p>
 <ol>
 <li>
@@ -1428,7 +1530,7 @@
 <li><strong>futex</strong> 是一种结合用户空间和内核的同步机制，减少了系统调用的次数，提高了性能，尤其适用于多线程高并发应用中。</li>
 </ul>
 <hr>
-<h2 id="futex-和-xv6-中的睡眠锁sleeping-locks"><strong>Futex</strong> 和 <strong>xv6 中的睡眠锁</strong>（sleeping locks）
+<h2 id="futex-和-xv6-中的睡眠锁sleeping-locks"><strong>Futex</strong> 和 xv6 中的睡眠锁（sleeping locks）
 </h2><p><strong>Futex</strong> 和 <strong>xv6 中的睡眠锁</strong>（sleeping locks）确实有一些相似之处，特别是在它们如何处理线程等待和唤醒的机制上。但两者的实现细节、使用场景以及设计目标有所不同。接下来我会详细对比 futex 和 xv6 的睡眠锁，并解释它们的区别和相似之处。</p>
 <ol>
 <li>
@@ -2098,7 +2200,7 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 <li>Biscuit 的预留内存机制通过确保每个系统调用在执行前已经预留了足够的内存，避免了系统调用在运行过程中遇到内存不足的问题。这消除了内存资源不足引发的阻塞或循环等待情况，因此系统调用在该机制下无需担心<strong>死锁</strong>。如果内存不足以启动系统调用，Biscuit 会通过垃圾回收或进程终止来释放资源，从而保证系统的正常运行。</li>
 </ol>
 <hr>
-<h2 id="静态分析工具-maxlive">静态分析工具 <strong>MAXLIVE</strong>
+<h2 id="静态分析工具-maxlive">静态分析工具 MAXLIVE
 </h2><p><strong>Biscuit 操作系统</strong>如何通过静态分析工具 <strong>MAXLIVE</strong> 来确定每个系统调用所需的最大内存保留量（即 <code>s</code>）。这个过程涉及分析 Biscuit 内核代码和所使用的 Go 包，以识别系统调用在执行过程中可能需要的最大活动内存量。让我们详细解释其工作原理。</p>
 <p>MAXLIVE 工具的目标是通过静态分析，计算出每个系统调用需要保留的内存大小 <code>s</code>。这对于确保系统调用能够成功执行，并防止内存不足导致的错误至关重要。</p>
 <p><strong>静态分析的核心挑战</strong></p>
@@ -2179,7 +2281,7 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 <li>这一静态分析工具的目的是为了准确计算系统调用需要保留的内存 <code>s</code>，从而确保系统调用能够在有限的内存中成功执行。</li>
 </ul>
 <hr>
-<h2 id="biscuit-系统在应对-内存耗尽-问题时的局限性"><strong>Biscuit</strong> 系统在应对 <strong>内存耗尽</strong> 问题时的局限性
+<h2 id="biscuit-系统在应对-内存耗尽-问题时的局限性"><strong>Biscuit</strong> 系统在应对 内存耗尽 问题时的局限性
 </h2><ol>
 <li><strong>内存耗尽与垃圾回收</strong>：Biscuit的设计要求垃圾收集器在<strong>内存几乎耗尽</strong>的情况下也能成功运行。然而，Go的垃圾收集器在运行时，可能需要额外分配内存，尤其是用于追踪未处理指针的工作栈（work stack）。这是垃圾回收的一个潜在问题：即使内存紧张，垃圾收集器仍可能需要分配内存来继续进行扫描。</li>
 <li><strong>解决方案的潜在改进</strong>：虽然目前Biscuit还没有实现解决这一问题的机制，但理论上它可以通过检测工作栈是否已满来应对这个问题。当工作栈满了时，可以回退到使用“标记位图”（mark bitmap）作为工作栈，通过扫描已经被标记的对象，并寻找那些包含未标记指针的对象。这种策略虽然可以确保垃圾收集完成，但效率会较低。好在这种情况预计比较少见，因为工作栈缓冲区可以事先以较低的成本进行预分配。在实验中，垃圾收集器最多只会为工作栈分配 <strong>0.8% 的堆内存</strong>。</li>
@@ -2187,7 +2289,7 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 <li><strong>解决碎片问题的潜在方法</strong>：为了解决碎片问题，系统应该在每个系统调用期间为不同大小类别的对象计算其最大存活量（MAXLIVE），以确保在调用时能预留足够的内存。但目前的实现还没有做到这一点。</li>
 </ol>
 <hr>
-<h2 id="biscuit-内核-的实现细节"><strong>Biscuit 内核</strong> 的实现细节
+<h2 id="biscuit-内核-的实现细节">Biscuit 内核 的实现细节
 </h2><ol>
 <li><strong>内核的编程语言</strong>：
 <ul>
@@ -2215,7 +2317,7 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 </li>
 </ol>
 <hr>
-<h2 id="内存屏障-memory-fence"><strong>内存屏障 (Memory Fence)</strong>
+<h2 id="内存屏障-memory-fence">内存屏障 (Memory Fence)
 </h2><p><strong>内存屏障</strong>是一种用于在多核或多线程环境中保证内存访问顺序的机制。它确保某些特定的内存操作在内存屏障之前或之后的顺序是被严格遵守的。通常，在现代处理器中，出于性能优化的考虑，内存读写操作可以被乱序执行。但在某些场景下，乱序可能导致数据一致性问题，尤其是在多线程或多核程序中。因此，需要使用<strong>内存屏障</strong>来确保对内存的访问按照预期顺序发生。</p>
 <p>假设有两个线程 <code>Thread A</code> 和 <code>Thread B</code>，它们共享一个变量 <code>x</code> 和一个标志位 <code>flag</code>。<code>Thread A</code> 会先写入变量 <code>x</code>，然后设置标志位 <code>flag</code>，而 <code>Thread B</code> 会根据 <code>flag</code> 的值来判断是否读取 <code>x</code>。</p>
 <ul>
@@ -2254,7 +2356,7 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 </ul>
 <p>在 <code>Thread A</code> 中，如果没有内存屏障，处理器可能会为了优化性能，<strong>先设置 <code>flag</code> 然后再写入 <code>x</code></strong>，这就会导致 <code>Thread B</code> 在读取 <code>x</code> 时得不到最新的值。通过插入内存屏障，可以确保写入 <code>x</code> 的操作在设置 <code>flag</code> 之前执行，从而保证数据的一致性。</p>
 <hr>
-<h2 id="dma直接内存访问direct-memory-access"><strong>DMA（直接内存访问，Direct Memory Access）</strong>
+<h2 id="dma直接内存访问direct-memory-access">DMA（直接内存访问，Direct Memory Access）
 </h2><p><strong>DMA（Direct Memory Access）</strong> 是一种让设备直接与内存交互而无需经过 CPU 的技术。通常情况下，设备与内存之间的数据传输需要通过 CPU 进行调度，这样会占用大量 CPU 的时间。而使用 DMA，设备可以自己控制数据传输，CPU 只需启动传输，然后继续处理其他任务，等数据传输完成后再处理通知。</p>
 <p>假设有一个计算机系统，连接了一个硬盘驱动器和一个内存模块。如果使用传统方式，数据从硬盘读入内存需要经过 CPU，CPU 需要把每个字节的数据从硬盘拷贝到内存，这样 CPU 的资源会被大量占用。</p>
 <p>而如果采用 <strong>DMA</strong>，硬盘驱动器可以直接与内存通信，数据从硬盘被直接传输到内存，而不需要 CPU 逐字节进行拷贝。CPU 只需要在传输开始时配置 DMA 控制器，并在传输结束后收到通知。这样可以大大提高系统性能，因为 CPU 可以在传输数据时继续执行其他任务。</p>
@@ -2270,7 +2372,7 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 </ul>
 <p>这种方式极大提高了数据传输效率，特别适合<strong>大规模数据传输</strong>，比如磁盘到内存的拷贝，网络数据包的处理等。</p>
 <hr>
-<h2 id="biscuit-与-go-运行时环境-的协同工作"><strong>Biscuit</strong> 与 <strong>Go 运行时环境</strong> 的协同工作
+<h2 id="biscuit-与-go-运行时环境-的协同工作"><strong>Biscuit</strong> 与 Go 运行时环境 的协同工作
 </h2><ol>
 <li><strong>对 Go 运行时的修改</strong>：
 <ul>
@@ -2295,7 +2397,7 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 </ol>
 <p>Biscuit 通过修改 Go 运行时以跟踪内存分配和调整栈大小，确保内核 goroutine 的高效运行。为了避免中断与锁竞争导致的死锁，Biscuit 采用了一种间接的方式处理设备中断。对于上下文切换，它依赖 Go 的抢占机制来确保 goroutine 的正常调度。</p>
 <hr>
-<h2 id="biscuit-内核与-go-运行时-的集成方式"><strong>Biscuit</strong> 内核与 <strong>Go 运行时</strong> 的集成方式
+<h2 id="biscuit-内核与-go-运行时-的集成方式"><strong>Biscuit</strong> 内核与 Go 运行时 的集成方式
 </h2><ol>
 <li>
 <p><strong>Goroutine 调度和上下文切换</strong>：</p>
@@ -2968,9 +3070,11 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 
 
         <span>
-            最后更新于 Nov 12, 2024 23:05 &#43;0800
+            最后更新于 Nov 13, 2024 21:49 &#43;0800
         </span>
     </section></footer>
+
+
 
 
     
@@ -3139,6 +3243,7 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
     
 
     <footer class="site-footer">
+
     <section class="copyright">
         &copy; 
         
@@ -3146,10 +3251,145 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
     </section>
     
     <section class="powerby">
-        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        
+
+
+        <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+
+        <script language="javascript"> 
+            var now = new Date();
+            function createtime(){
+                now.setTime(now.getTime()+250);
+                var grt= new Date("2024/11/10 00:00:00"); 
+                days = (now - grt ) / 1000 / 60 / 60 / 24;
+                dnum = Math.floor(days);
+                hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+                hnum = Math.floor(hours);
+                if(String(hnum).length ==1 ){hnum = "0" + hnum;}
+                minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+                mnum = Math.floor(minutes);
+                if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+                seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+                snum = Math.round(seconds);
+                if(String(snum).length ==1 ){snum = "0" + snum;}
+
+                document.getElementById("timeDate").innerHTML = "本站已稳定运行"+dnum+" 天 ";
+                document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒<br>"
+            }
+            setInterval("createtime()",250); 
+        </script> 
+
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        
+    
+        
+         
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+        
+
+        共 552947 字 , 24 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
         主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
+
 </footer>
+
 
 
     
@@ -3248,6 +3488,7 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
         document.head.appendChild(customFont);
     }());
 </script>
+
 
     </body>
 </html>
