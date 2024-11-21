@@ -2,13 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://echudet.github.io/categories/</loc>
-    <lastmod>2024-11-20T22:49:13+08:00</lastmod>
-  </url><url>
-    <loc>https://echudet.github.io/p/intro-verilog/</loc>
-    <lastmod>2024-11-20T22:49:13+08:00</lastmod>
+    <loc>https://echudet.github.io/p/pa/</loc>
+    <lastmod>2024-11-21T18:03:04+08:00</lastmod>
   </url><url>
     <loc>https://echudet.github.io/post/</loc>
+    <lastmod>2024-11-21T18:03:04+08:00</lastmod>
+  </url><url>
+    <loc>https://echudet.github.io/categories/</loc>
+    <lastmod>2024-11-21T18:03:04+08:00</lastmod>
+  </url><url>
+    <loc>https://echudet.github.io/p/intro-net/</loc>
+    <lastmod>2024-11-21T18:03:04+08:00</lastmod>
+  </url><url>
+    <loc>https://echudet.github.io/p/intro-net2/</loc>
+    <lastmod>2024-11-21T18:03:04+08:00</lastmod>
+  </url><url>
+    <loc>https://echudet.github.io/p/intro-net3/</loc>
+    <lastmod>2024-11-21T18:03:04+08:00</lastmod>
+  </url><url>
+    <loc>https://echudet.github.io/categories/network/</loc>
+    <lastmod>2024-11-21T18:03:04+08:00</lastmod>
+  </url><url>
+    <loc>https://echudet.github.io/categories/rust/</loc>
+    <lastmod>2024-11-21T18:03:04+08:00</lastmod>
+  </url><url>
+    <loc>https://echudet.github.io/p/rust%E9%9A%8F%E8%AE%B0/</loc>
+    <lastmod>2024-11-21T18:03:04+08:00</lastmod>
+  </url><url>
+    <loc>https://echudet.github.io/p/intro-verilog/</loc>
     <lastmod>2024-11-20T22:49:13+08:00</lastmod>
   </url><url>
     <loc>https://echudet.github.io/categories/verilog/</loc>
