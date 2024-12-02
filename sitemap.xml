@@ -2,10 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://echudet.github.io/p/aimodel/</loc>
-    <lastmod>2024-12-01T23:35:39+08:00</lastmod>
+    <loc>https://echudet.github.io/p/netmath2/</loc>
+    <lastmod>2024-12-02T23:26:21+08:00</lastmod>
   </url><url>
     <loc>https://echudet.github.io/post/</loc>
+    <lastmod>2024-12-02T23:26:21+08:00</lastmod>
+  </url><url>
+    <loc>https://echudet.github.io/p/netmath/</loc>
+    <lastmod>2024-12-02T23:26:21+08:00</lastmod>
+  </url><url>
+    <loc>https://echudet.github.io/p/aimodel/</loc>
     <lastmod>2024-12-01T23:35:39+08:00</lastmod>
   </url><url>
     <loc>https://echudet.github.io/categories/</loc>
