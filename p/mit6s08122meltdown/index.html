@@ -6,11 +6,11 @@
 
 <link rel='canonical' href='https://echudet.github.io/p/mit6s08122meltdown/'>
 
-<link rel="stylesheet" href="/scss/style.min.86fc5e5efb829fb1bdd7a2d2275017fb3ae01ba7fcf491e347d76495ae5e3ae2.css"><meta property='og:title' content="MIT6S081：22Meltdown">
+<link rel="stylesheet" href="/scss/style.min.da77a84796b4cbbce4984dfc653595f2e1f66158390942c69e60c576c66a6e8b.css"><meta property='og:title' content="MIT6S081：22Meltdown">
 <meta property='og:description' content="Meltdown漏洞破坏了这种隔离机制，使攻击者能够访问内核内存。这一漏洞不依赖操作系统或软件漏洞，而是通过利用处理器硬件特性来实施攻击。这一漏洞广泛影响了个人计算机、云服务器中的虚拟机等设备。">
 <meta property='og:url' content='https://echudet.github.io/p/mit6s08122meltdown/'>
 <meta property='og:site_name' content='echudet'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-10-07T22:02:50&#43;08:00'/><meta property='article:modified_time' content='2024-11-13T17:04:51&#43;08:00'/><meta property='og:image' content='https://echudet.github.io/p/mit6s08122meltdown/19.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-10-07T22:02:50&#43;08:00'/><meta property='article:modified_time' content='2025-09-03T22:10:01&#43;08:00'/><meta property='og:image' content='https://echudet.github.io/p/mit6s08122meltdown/19.jpg' />
 <meta name="twitter:title" content="MIT6S081：22Meltdown">
 <meta name="twitter:description" content="Meltdown漏洞破坏了这种隔离机制，使攻击者能够访问内核内存。这一漏洞不依赖操作系统或软件漏洞，而是通过利用处理器硬件特性来实施攻击。这一漏洞广泛影响了个人计算机、云服务器中的虚拟机等设备。"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://echudet.github.io/p/mit6s08122meltdown/19.jpg' />
@@ -59,7 +59,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu11199958555974308744.png" width="300"
+                        <img src="/img/avatar_hu_67bf1327fc98b60.png" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -306,8 +306,8 @@
     <header class="article-header">
         <div class="article-image">
             <a href="/p/mit6s08122meltdown/">
-                <img src="/p/mit6s08122meltdown/19_hu2490644830792030352.jpg"
-                        srcset="/p/mit6s08122meltdown/19_hu2490644830792030352.jpg 800w, /p/mit6s08122meltdown/19_hu13100884709289211059.jpg 1600w"
+                <img src="/p/mit6s08122meltdown/19_hu_9c0d7b23e3728c68.jpg"
+                        srcset="/p/mit6s08122meltdown/19_hu_9c0d7b23e3728c68.jpg 800w, /p/mit6s08122meltdown/19_hu_5f73d2416c1abb28.jpg 1600w"
                         width="800" 
                         height="500" 
                         loading="lazy"
@@ -472,7 +472,7 @@
 </svg>
 
             <time class="article-words">
-                文章字数：37770字
+                文章字数：37774字
             </time>
         </div>
         <div class="article-lastmod">
@@ -485,7 +485,7 @@
 
 
                 <time>
-                    Nov 13, 2024 17:04 &#43;0800
+                    Sep 03, 2025 22:10 &#43;0800
                 </time>
             </div></footer>
     
@@ -506,7 +506,11 @@
     <h1 id="lecture-22-meltdown">Lecture 22 Meltdown
 </h1><h2 id="课前预习">课前预习
 </h2><h2 id="论文速览">论文速览
-</h2><p><strong>摘要部分</strong>概述了Meltdown漏洞的关键概念。Meltdown利用现代处理器的乱序执行特性来从用户空间读取内核内存数据。它不依赖于任何软件漏洞，而是利用硬件层面的设计缺陷。这一漏洞广泛影响了个人计算机、云服务器中的虚拟机等设备。文章还特别提到KAISER防御机制在阻止Meltdown方面的意外效果。漏洞的严重性在于，它打破了内存隔离的安全保证，使攻击者能够读取其他进程或虚拟机的内存。</p>
+</h2><p><a class="link" href="https://pdos.csail.mit.edu/6.828/2020/readings/meltdown.pdf"  target="_blank" rel="noopener"
+    >论文链接</a>
+
+</p>
+<p><strong>摘要部分</strong>概述了Meltdown漏洞的关键概念。Meltdown利用现代处理器的乱序执行特性来从用户空间读取内核内存数据。它不依赖于任何软件漏洞，而是利用硬件层面的设计缺陷。这一漏洞广泛影响了个人计算机、云服务器中的虚拟机等设备。文章还特别提到KAISER防御机制在阻止Meltdown方面的意外效果。漏洞的严重性在于，它打破了内存隔离的安全保证，使攻击者能够读取其他进程或虚拟机的内存。</p>
 <p><strong>引言部分</strong>深入讨论了现代操作系统中内存隔离的重要性，特别是用户进程和内核之间的隔离。文章指出，Meltdown漏洞破坏了这种隔离机制，使攻击者能够访问内核内存。这一漏洞不依赖操作系统或软件漏洞，而是通过利用处理器硬件特性来实施攻击。引言还强调了Meltdown可以在不需要权限的情况下读取敏感数据，这对个人计算机用户和云计算环境中的用户都构成了重大威胁。</p>
 <p><strong>背景部分</strong>介绍了Meltdown攻击所依赖的关键技术，包括乱序执行、地址翻译和缓存攻击。乱序执行是现代处理器的性能优化机制，它允许CPU提前执行指令以提高效率，然而这种执行方式会带来缓存的副作用，成为信息泄露的基础。地址翻译部分解释了虚拟地址如何映射到物理地址，并描述了内核地址如何与用户空间隔离。缓存攻击则涉及利用缓存的时序差异来推断内存中的数据。</p>
 <p><strong>玩具示例</strong>提供了一个简单的代码示例，用以演示乱序执行如何通过缓存的副作用泄露数据。代码中，虽然某些指令会由于异常而未实际执行，但其带来的缓存变化仍然能够被利用来推测数据。这一部分的核心在于展示了即使未完成的指令也可能对微架构状态产生影响，而这正是Meltdown攻击的基础。</p>
@@ -1375,8 +1379,7 @@
 <p>有可能这是某人用来登录银行账号或者邮件用的密码。这意味着攻击者可能需要尝试每一个内核内存地址，以查找任何有价值的数据。</p>
 <p>或许攻击者会研究内核代码，找到内核中打印了数据的地址，检查数据结构和内核内存，最后理解内核是如何工作的，并找到对应的虚拟内存地址。因为类似的攻击已经存在了很长的时间，内核实际上会保护自己不受涉及到猜内核内存地址的攻击的影响。</p>
 <p>论文中提到了Kernal address space layout randomization。所以现代的内核实际上会将内核加载到随机地址，这样使得获取内核虚拟地址更难。这个功能在论文发表很久之前就存在，因为它可以帮助防御攻击。</p>
-<p>在这个攻守双方的游戏中，我们需要假设攻击者最后可以胜出并拿到内核的虚拟内存地址。所以我们会假设攻击者要么已经知道了一个内核虚拟地址，要么愿意尝试每一个内核虚拟内存地址。</p>
-</blockquote>
+<p>在这个攻守双方的游戏中，我们需要假设攻击者最后可以胜出并拿到内核的虚拟内存地址。所以我们会假设攻击者要么已经知道了一个内核虚拟地址，要么愿意尝试每一个内核虚拟内存地址。</p></blockquote>
 <p>我们会好奇，上面的代码怎么会对攻击者是有用的？如果CPU如手册中一样工作，那么这里的攻击是没有意义的，在第三行会有Page Fault。但是实际上CPU比手册中介绍的要复杂的多，而攻击能生效的原因是一些CPU的实现细节。</p>
 <p>这里攻击者依赖CPU的两个实现技巧，一个是Speculative execution（预测执行），另一个是CPU的缓存方式。</p>
 <hr>
@@ -1472,8 +1475,7 @@
 <p>Robert教授：这里有两个回答。首先，Intel芯片并不是这样工作的。其次，是的，我相信对于Intel来说如果先做权限检查会更简单，这样的话，在上面的例子中，r2寄存器就不会被修改。</p>
 <p>你们或许注意到论文中提到，尽管AMD CPU的手册与Intel的一样，它们有相同的指令集，Meltdown Attack并不会在AMD CPU上生效。普遍接受的观点是，AMD CPU在Speculative execution时，如果没有权限读取内存地址，是不会将内存地址中的数据读出。</p>
 <p>这就是为什么Meltdown Attack在AMD CPU上不生效的原因。最近的Intel CPU明显也采用了这种方法，如果程序没有权限，在Speculative execution的时候也不会加载内存数据。</p>
-<p>这里使用哪种方式对于性能来说没有明显区别，或许在指令Retired的时候再检查权限能省一些CPU的晶体管吧。这里我要提醒一下，这里有很多内容都是猜的，不过我认为我说的都是对的。Intel和AMD并没有太披露具体的细节。</p>
-</blockquote>
+<p>这里使用哪种方式对于性能来说没有明显区别，或许在指令Retired的时候再检查权限能省一些CPU的晶体管吧。这里我要提醒一下，这里有很多内容都是猜的，不过我认为我说的都是对的。Intel和AMD并没有太披露具体的细节。</p></blockquote>
 <p>这里有一些重要的术语。你可以从CPU手册中读到的，比如说一个add指令接收两个寄存器作为参数，并将结果存放在第三个寄存器，这一类设计被称为CPU的Architectural，或者通告的行为。</p>
 <p>如果你读取一个你没有权限的内存地址，你会得到一个Page Fault，你不允许读取这个内存地址，这就是一种通告的行为。</p>
 <p>CPU的实际行为被称作Micro-Architectural，CPU的通告行为与实际行为是模糊不清的。比如说CPU会悄悄的有Speculative execution。</p>
@@ -1498,7 +1500,7 @@
 <p><img src="/p/mit6s08122meltdown/p67.png"
 	width="970"
 	height="832"
-	srcset="/p/mit6s08122meltdown/p67_hu15096785322749632349.png 480w, /p/mit6s08122meltdown/p67_hu17676357426059994493.png 1024w"
+	srcset="/p/mit6s08122meltdown/p67_hu_f5b48b30308ed274.png 480w, /p/mit6s08122meltdown/p67_hu_abc45426d1d850bc.png 1024w"
 	loading="lazy"
 	
 		alt="p67"
@@ -1551,9 +1553,7 @@
 <ol>
 <li>主要用于缓存数据和指令，不存储地址映射表。</li>
 </ol>
-<p>总结：映射表主要在内存中，TLB用于缓存一部分映射以提高查询速度</p>
-</blockquote>
-</blockquote>
+<p>总结：映射表主要在内存中，TLB用于缓存一部分映射以提高查询速度</p></blockquote></blockquote>
 <hr>
 <h2 id="flush-and-reload">Flush and Reload
 </h2><p>为什么Cache与Meltdown相关呢？接下来我将讨论一下<a class="link" href="https://pdos.csail.mit.edu/6.828/2020/readings/meltdown.pdf"  target="_blank" rel="noopener"
@@ -1685,8 +1685,7 @@
 <p>另一个可能有用的场景是，当你的浏览器在访问web时，你的浏览器其实运行了很多不被信任的代码，这些代码是各种网站提供的，或许是以插件的形式提供，或许是以javascript的形式提供。</p>
 <p>这些代码会被加载到浏览器，然后被编译并被运行。有可能当你在浏览网页的时候，你运行在浏览器中的代码会发起Meltdown攻击，而你丝毫不知道有一个网站在窃取你笔记本上的内容，但是我并不知道这里的细节。</p>
 <p>学生提问：有人演示过通过javascript或者WebAssembly发起攻击吗？</p>
-<p>Robert教授：我不知道。人们肯定担心过WebAssembly，但是我不知道通过它发起攻击是否可行。对于javascript我知道难点在于时间的测量，你不能向上面一样获取到纳秒级别的时间，所以你并不能使用Flush and Reload。或许一些更聪明的人可以想明白怎么做，但是我不知道。</p>
-</blockquote>
+<p>Robert教授：我不知道。人们肯定担心过WebAssembly，但是我不知道通过它发起攻击是否可行。对于javascript我知道难点在于时间的测量，你不能向上面一样获取到纳秒级别的时间，所以你并不能使用Flush and Reload。或许一些更聪明的人可以想明白怎么做，但是我不知道。</p></blockquote>
 <p>实际中Meltdown Attack并不总是能生效，具体的原因我认为论文作者并没有解释或者只是猜测了一下。如果你查看论文的最后一页，</p>
 <p>你可以看到Meltdown Attack从机器的内核中读取了一些数据，这些数据里面有一些XXXX，这些是没能获取任何数据的位置，也就是Meltdown Attack失败的位置。</p>
 <p>论文中的Meltdown Attack重试了很多很多次，因为在论文6.2还讨论了性能，说了在某些场景下，获取数据的速率只有10字节每秒，这意味着代码在那不停的尝试了数千次，最后终于获取到了数据，也就是说Flush and Reload表明了两个内存地址只有一个在Cache中。</p>
@@ -1744,8 +1743,7 @@
 <p>Robert教授：有些内容明显是可以修复的，比如这节课介绍的Meltdown Attack是可以被修复的，并且不会牺牲任何性能。对于一些其他的攻击，并不十分确定你可以在不损伤性能的前提下修复它们。</p>
 <p>有些问题隐藏的非常非常的深，现在有很多共享的场景，例如分时共享的计算机，云计算。假设在你的云主机上有一个磁盘驱动和一个网卡驱动，你或许可以仅仅通过监测别人的流量是怎么影响你的流量的，这里的流量包括了网络流量和磁盘流量，来获取同一个主机上的其他用户信息。</p>
 <p>我不知道这是否可行，但是对于很多东西，人们都能发现可以攻击的点。</p>
-<p>所以很多这里的Micro-Architectural带来的问题可以在不损伤性能的前提下清除掉，但是也或许不能。</p>
-</blockquote>
+<p>所以很多这里的Micro-Architectural带来的问题可以在不损伤性能的前提下清除掉，但是也或许不能。</p></blockquote>
 
 </section>
 
@@ -1763,7 +1761,7 @@
 
 
         <span>
-            最后更新于 Nov 13, 2024 17:04 &#43;0800
+            最后更新于 Sep 03, 2025 22:10 &#43;0800
         </span>
     </section></footer>
 
@@ -1812,7 +1810,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08123rcu/bg.91a08bf3fe0a8ca435e8fbc902291fd5_hu4589796922609635382.jpg" 
+                <img src="/p/mit6s08123rcu/bg.91a08bf3fe0a8ca435e8fbc902291fd5_hu_50da030b7ba2cbe7.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -1836,7 +1834,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08121networking/bg.68c4376fd87b0b35da07319dd155c90d_hu10351534106733688476.jpg" 
+                <img src="/p/mit6s08121networking/bg.68c4376fd87b0b35da07319dd155c90d_hu_b8a716243c6f9679.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -1860,7 +1858,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08120kernels-and-hll/bg.4175e6a2793e0fc340e5aced2529e40b_hu6405785273338381617.jpg" 
+                <img src="/p/mit6s08120kernels-and-hll/bg.4175e6a2793e0fc340e5aced2529e40b_hu_de82d011b3d97ace.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -1884,7 +1882,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08119virtual-machines/bg.b02a7ba1d946705c0cf2809bcf960db8_hu14546491865979434532.jpg" 
+                <img src="/p/mit6s08119virtual-machines/bg.b02a7ba1d946705c0cf2809bcf960db8_hu_77df69a362eba544.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -1908,7 +1906,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08118os-organization/bg.6254618fb3eb08f3bf5d7cd89d4cd672_hu15449325963333300792.jpg" 
+                <img src="/p/mit6s08118os-organization/bg.6254618fb3eb08f3bf5d7cd89d4cd672_hu_845b73e21b5a04f1.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -1940,7 +1938,9 @@
     <section class="copyright">
         &copy; 
         
-        2024 echudet
+            2024 - 
+        
+        2025 echudet
     </section>
     
     <section class="powerby">
@@ -1973,6 +1973,12 @@
         </script> 
 
         
+        
+          
+        
+          
+        
+          
         
           
         
@@ -2119,9 +2125,15 @@
         
              
         
+             
+        
+             
+        
+             
+        
         
 
-        共 747479 字 , 35 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        共 756615 字 , 38 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
         主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 

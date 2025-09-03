@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="git的使用，包含日常项目使用的git指令和规范">
+<title>git commands</title>
+
+<link rel='canonical' href='https://echudet.github.io/p/git-commands/'>
+
+<link rel="stylesheet" href="/scss/style.min.da77a84796b4cbbce4984dfc653595f2e1f66158390942c69e60c576c66a6e8b.css"><meta property='og:title' content="git commands">
+<meta property='og:description' content="git的使用，包含日常项目使用的git指令和规范">
+<meta property='og:url' content='https://echudet.github.io/p/git-commands/'>
+<meta property='og:site_name' content='echudet'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-09-02T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-09-03T22:10:01&#43;08:00'/>
+<meta name="twitter:title" content="git commands">
+<meta name="twitter:description" content="git的使用，包含日常项目使用的git指令和规范">
+    <link rel="shortcut icon" href="/timer.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_67bf1327fc98b60.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">⌨️</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">echudet</a></h1>
+            <h2 class="site-description">探索编程的学生一枚</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/EchudeT'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://twitter.com'
+                        target="_blank"
+                        title="Twitter"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>档案</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+
+
+    
+    <header class="article-category">
+        
+            <a href="/categories/git/" >
+                Git
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/git-commands/">git commands</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            git的使用，包含日常项目使用的git指令和规范
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-09-02</time>
+            </div>
+        
+
+        
+            <div>
+                <?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="792px" height="792px" viewBox="0 0 792 792" style="enable-background:new 0 0 792 792;" xml:space="preserve">
+<g>
+	<g id="_x31_0_19_">
+		<g>
+			<path d="M643.5,742.5H594V569.25C594,473.566,516.434,396,420.75,396C516.434,396,594,318.434,594,222.75V49.5h49.5
+				c13.662,0,24.75-11.088,24.75-24.75S657.162,0,643.5,0h-495c-13.662,0-24.75,11.088-24.75,24.75S134.838,49.5,148.5,49.5H198
+				v173.25C198,318.434,275.566,396,371.25,396C275.566,396,198,473.566,198,569.25V742.5h-49.5c-13.662,0-24.75,11.088-24.75,24.75
+				S134.838,792,148.5,792h495c13.662,0,24.75-11.088,24.75-24.75S657.162,742.5,643.5,742.5z M247.5,222.75
+				c0-43.387,0-173.25,0-173.25h297c0,0,0,133.427,0,173.25c0,68.335-58.188,123.75-129.938,123.75h-37.125
+				C305.687,346.5,247.5,291.085,247.5,222.75z M544.5,742.5h-297c0,0,0-129.888,0-173.25c0-68.335,58.187-123.75,129.938-123.75
+				h37.125c71.75,0,129.938,55.415,129.938,123.75C544.5,609.072,544.5,742.5,544.5,742.5z"/>
+		</g>
+	</g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+</svg>
+
+                <time class="article-time--reading">
+                    阅读时长: 8 分钟
+                </time>
+            </div>
+        
+
+         
+        <div>
+            <?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="79.536px" height="79.536px" viewBox="0 0 79.536 79.536" style="enable-background:new 0 0 79.536 79.536;"
+	 xml:space="preserve">
+<g>
+	<path style="fill:#010002;" d="M40.162,17.906C37.415,15.275,21.614,6.141,0,15.451c0,0.138,0,2.722,0,6.654v44.418h32.747
+		c1.126,0.968,3.798,1.651,6.926,1.651c3.119,0,5.802-0.684,6.931-1.651h32.933V22.105c0-3.933,0-6.517,0-6.654
+		C58.813,6.314,42.257,15.982,40.162,17.906z M37.229,63.349c0-1.75-15.372-11.981-33.125-0.818V19.216
+		c3.516-2.014,8.246-3.249,13.463-3.249c10.864,0,19.662,3.562,19.662,10.175V63.349z M75.684,62.53
+		c-17.751-11.163-33.108-0.932-33.108,0.818V26.146c0-6.612,8.792-10.175,19.646-10.175c5.22,0,9.952,1.235,13.463,3.249V62.53z"/>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+</svg>
+
+            <time class="article-words">
+                文章字数：3633字
+            </time>
+        </div>
+        <div class="article-lastmod">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time>
+                    Sep 03, 2025 22:10 &#43;0800
+                </time>
+            </div></footer>
+    
+
+    
+
+
+
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>在参加OS内核比赛的时候，我们队最终项目是~1000 commits和10+ branches，可见使用git管理之麻烦。</p>
+<p>但也由此机会积累了不少使用git的经验，故此处记录下来，以便日后参考。</p>
+<p><del>虽然完全可以通过</del><code>git --help</code><del>或是</del><code>git &lt;cmd&gt; --help</code><del>来看如何使用。</del></p>
+<p><strong>初始化仓库</strong></p>
+<p>首先，使用<code>git init</code>可以创建一个git仓库，这个指令会在当前目录下面创建一个.git目录，并在里面存放git仓库管理的各类元文件，可以说有了它，当前目录才标识为git管理。如果你移除.git目录，需要重新执行<code>git init</code>指令才能重新将当前目录归于git管理，不过你之前的.git所含有的历史信息会全部丢失。</p>
+<details>
+    <summary>what is .git?</summary>
+    <blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">// .git的构成
+</span></span><span class="line"><span class="cl">.git
+</span></span><span class="line"><span class="cl">├── branches
+</span></span><span class="line"><span class="cl">├── hooks
+</span></span><span class="line"><span class="cl">├── info
+</span></span><span class="line"><span class="cl">├── logs
+</span></span><span class="line"><span class="cl">│   └── refs
+</span></span><span class="line"><span class="cl">│       ├── heads
+</span></span><span class="line"><span class="cl">│       └── remotes
+</span></span><span class="line"><span class="cl">│           └── origin
+</span></span><span class="line"><span class="cl">├── objects
+</span></span><span class="line"><span class="cl">└── refs
+</span></span><span class="line"><span class="cl">    ├── heads
+</span></span><span class="line"><span class="cl">    ├── remotes
+</span></span><span class="line"><span class="cl">    │   └── origin
+</span></span><span class="line"><span class="cl">    └── tags
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>branches: 早期 Git 的残留目录，现在基本不用了。以前用于实现“非参考方式”下的分支管理。现今版本几乎始终为空，可以忽略。</p>
+<p>hooks:包含客户端或服务端的钩子脚本（shell、python等），这些脚本在特定事件（如提交、合并、推送前后）时自动执行。</p>
+<p>info:存放一些辅助信息，比如 <code>.git/info/exclude</code> 文件，可以设置本地忽略文件（类似 .gitignore，但只对本地有效，不会提交）。</p>
+<p>logs:用于保存对分支和引用（ref）的操作日志。可用于 <code>git reflog</code> 命令查看 HEAD 和各分支的历史指向。例如<code>logs/refs/heads/</code>记录本地分支操作历史，<code>logs/refs/remotes/origin/</code>记录远程分支操作历史。</p>
+<p>objects:存储所有 Git 对象（数据的“内容”和历史），包括 commit（提交）、tree（目录）、blob（文件内容）、tag（标签）等对象。每个对象都是用 SHA-1 哈希命名的子目录。<strong>这是 Git 核心存储：所有历史内容都在这里！</strong></p>
+<p>refs:保存所有引用（ref，即对提交对象的指针）的信息，这些实际控制了你看到的分支和标签。</p>
+<ul>
+<li><code>refs/heads/</code>：本地分支，每个分支一个文件，内容是 commit 的 SHA-1 值。</li>
+<li><code>refs/remotes/origin/</code>：远程分支跟踪仓库的分支。</li>
+<li><code>refs/tags/</code>：标签指向的 commit。</li>
+</ul></blockquote>
+
+</details>
+
+<p><strong>仓库管理</strong></p>
+<p>git仓库有三个主要的管理区域。</p>
+<p>第一个是工作区，指当前在电脑上面修改文件的区域，这个区域里面文件的修改信息还没有记录在git里面。</p>
+<p>第二个是暂存区。暂存区是工作区和版本区过渡的一个区域，便于临时舍弃某个文件的修改，或是控制某些修改，可以通过<code>git status</code>来查看状态。想让文件的修改进入这个区域，需要通过<code>git add</code>指令来进行。<code>git add &lt;file&gt;</code>能够让特定文件的修改进入暂存区，<code>git add . </code>能够让当前仓库内所有文件的修改进入暂存区。</p>
+<p>第三个是版本区。这个区域就是所有通过<code>git commit -m &quot;&lt;update info&gt;&quot;</code>提交的信息所存放的地方。使用<code>git log</code>可以查看这个区域的信息。</p>
+<p><strong>撤销操作</strong></p>
+<p>实际操作中，我们可能会有很多误操作，这个时候需要我们进行撤销。</p>
+<ul>
+<li>在工作区对某文件进行错误修改时，可以使用<code>git checkout -- &lt;filename&gt;</code>来撤销指定文件的修改，还原为上一次commit的状态。</li>
+<li>在误提交错误文件到git管理时(例如某个超大文件)，可以使用<code>git rm &lt;filename&gt; &amp;&amp; git commit -m &quot;rm file&quot;</code>来删除工作区+版本区的文件，若不想在工作区删除该文件，可以使用<code>git rm --cached &lt;filename&gt;</code>来代替。</li>
+<li>在错误commit，想回退版本时，可以使用<code>git reset HEAD~1</code>，这将让HEAD指向上一个提交，但不会删除修改。如果想去掉修改的话，可以使用<code>git reset --hard HEAD~1</code>来代替。</li>
+</ul>
+<details>
+    <summary>git reset？</summary>
+    <blockquote>
+<p>git reset在排查错误的时候是非常有用的，能够帮我们定位bug发生在哪个版本里面。此处简单介绍git reset的一些功能。</p>
+<p>简单来说，git reset是使工作区的指针HEAD指向版本仓库里面的特定版本，也就是之前某次提交后的项目。</p>
+<p><code>HEAD</code>表示当前版本，<code>HEAD^</code>表示上一个版本，<code>HEAD^^</code>表示上上版本，以此类推。前100个版本就写不过来了，当然这还有更简单的方法<code>HEAD~x</code>，例如<code>HEAD~100</code>能够表示前100版本。</p>
+<p>也可以返回特定版本号<code>git reset 1a2b3d</code>。</p>
+<p><code>git reset --hard</code>: 工作区和缓存区的内容全部扔掉！然后返回指定版本。</p>
+<p><code>git reset --soft</code>: 保留工作区内容，并且已提交的内容于当前版本和返回版本的差异会存进缓存区。Attention:存进缓存区的方式是覆盖而不是追加！这意味着你之前存进缓存区的内容会丢失，所以不要连续使用两次<code>git reset --soft</code>。</p>
+<p><code>git reset (--mixed)</code>: 保留工作区内容，并且当前版本和返回版本的差异会追加存入工作区。</p>
+<p>查看日志，之前的日志<code>git log</code>，之后的日志<code>git reflog</code>。</p></blockquote>
+
+</details>
+
+<p><strong>新的分支</strong></p>
+<ul>
+<li>创建新的分支时，可以使用<code>git branch &lt;name&gt;</code></li>
+<li>查看所有分支时，可以使用<code>git branch -a</code></li>
+<li>创建新的分支+切到此分支时，可以使用<code>git checkout -b &lt;name&gt;</code></li>
+<li>切到某个分支时，可以使用<code>git checkout &lt;name&gt;</code></li>
+</ul>
+<details>
+    <summary>分支命名？</summary>
+    <blockquote>
+<p>规范的分支命名在一个项目中非常重要，保证了项目的稳定性和多人开发合作潜力。</p>
+<p>1.主分支(main/master): 存放稳定的、可发布的代码。不应该直接在主分支上开发，合并其他分支的代码进行更新。</p>
+<p>2.开发分支(develop): 用于集成开发中的功能分支。</p>
+<p>3.功能分支(feat):通常命名为<code>feature/&lt;feat-name&gt;</code>或<code>feat/&lt;feat-name&gt;</code>，用于开发新的功能，完成后可合并于develop分支，或是直接抛弃。</p>
+<p>4.修复分支(fix):通常命名为<code>bugfix/&lt;...&gt;</code>或<code>fix/&lt;...&gt;</code>，从develop分支创建，修复完成后合并回develop分支。</p>
+<p>5.热修复分支(hotfix):通常命名为<code>hotfix/&lt;...&gt;</code>，用于紧急修复生成环境的bug，从main分支创建，修复完成后合并回main和develop分支。</p>
+<p>6.发布分支(release):通常命名为<code>release/v1.0.0</code>或<code>release/2025-09-02</code>，从develop分支创建、发布完成后，合并到develop和main分支。</p>
+<p>7.支持分支(support):通常命名为<code>support/v1.0.x</code>，从main分支创建，用于维护旧版本。</p></blockquote>
+
+</details>
+
+<p><strong>合并</strong></p>
+<ul>
+<li>最简单的合并两个分支，<code>git merge &lt;sub-branch&gt;</code></li>
+<li>合并两个分支，但保留合并基分支的历史的线性化，不零碎掺杂合并从分支的提交历史，<code>git merge --no-ff &lt;sub-branch&gt;</code>。推荐主分支使用。</li>
+<li>远程拉取合并分支，<code>git pull origin &lt;branch&gt;</code>相当于<code>git fetch + git merge</code>，此指令如果远程和本地有不同的提交历史，会创建一个新的合并提交，导致提交历史出现分叉。</li>
+<li>远程拉取合并分支but rebase，<code>git pull --rebase origin &lt;branch&gt;</code>能够把远程分支的更改拉取到本地，然后将本地的提交一个个重新应用到远程分支的最新提交上，保持提交历史的线性化。推荐使用。</li>
+</ul>
+<p><strong>远程管理</strong></p>
+<ul>
+<li>添加远程仓库的URL， <code>git remote add &lt;remote-name&gt; &lt;remote-url&gt;</code>，并通过<code>git remote -v</code>确认是否添加。</li>
+<li>推送当前分支到远程仓库，并与远程分支关联，<code>git push -u origin &lt;branch&gt;</code>，其中<code>origin </code>为<code>&lt;remote-name&gt;</code>。</li>
+<li>推送当前分支到远程仓库，并与远程分支合并，<code>git push origin &lt;branch&gt;</code>，其中<code>origin </code>为<code>&lt;remote-name&gt;</code>。</li>
+<li>推送当前分支到远程仓库，并将远程分支覆盖，<code>git push -f origin &lt;branch&gt;</code>，其中<code>origin </code>为<code>&lt;remote-name&gt;</code>。</li>
+<li>删除远程分支，<code>git push --delete origin &lt;branch&gt;</code></li>
+<li>抓取远程分支，不合并，<code>git fetch origin &lt;branch&gt;</code>，一次性拉取远程所有分支，<code>git fetch --all</code></li>
+</ul>
+<p><strong>commit规范</strong></p>
+<p>事实上，我们的内核项目commit注释一直没有一个统一的规范，进行的比较随意，甚至当成了ctrl+s功能，想保存的时候就提交一下，这导致了我们项目后期debug的一些困难。因此，这里总结一些commit的注释规范，以为后来的项目做准备。</p>
+<p>一个简单的例子，表明增加的功能以及实现了哪些相关的内容。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">feat(search): add autocomplete suggestions
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">Implement real-time suggestions for search input field.
+</span></span><span class="line"><span class="cl">Fetch top 5 matching results from backend API as user types.
+</span></span><span class="line"><span class="cl">Enhance UX with keyboard navigation support.
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">Closes #101
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>抽象出来，由以下几部分构成：</p>
+<ol>
+<li><strong>类型（type）</strong>: 表示提交的类别。</li>
+<li><strong>范围（scope，可选）</strong>: 指定更改影响的模块或范围，用括号包裹。</li>
+<li><strong>主题（subject）</strong>: 简短描述更改内容，通常以动词开头，50-72 字符以内。</li>
+<li><strong>正文（body，可选）</strong>: 详细说明更改的原因和细节，每行不超过 72 字符。</li>
+<li><strong>脚注（footer，可选）</strong>: 关联问题或其他元信息，例如 issue ID。</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;类型&gt;(&lt;范围&gt;(可选)): &lt;主题&gt;
+</span></span><span class="line"><span class="cl">&lt;空行&gt;
+</span></span><span class="line"><span class="cl">&lt;正文&gt;(可选)
+</span></span><span class="line"><span class="cl">&lt;空行&gt;
+</span></span><span class="line"><span class="cl">&lt;脚注&gt;(可选)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>那么最简单的commit注释至少应该为</p>
+<p><code>feat: add autocomplete suggestions</code></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <span>
+            最后更新于 Sep 03, 2025 22:10 &#43;0800
+        </span>
+    </section></footer>
+
+
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2025 echudet
+    </section>
+    
+    <section class="powerby">
+        
+
+
+        <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+
+        <script language="javascript"> 
+            var now = new Date();
+            function createtime(){
+                now.setTime(now.getTime()+250);
+                var grt= new Date("2024/11/10 00:00:00"); 
+                days = (now - grt ) / 1000 / 60 / 60 / 24;
+                dnum = Math.floor(days);
+                hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+                hnum = Math.floor(hours);
+                if(String(hnum).length ==1 ){hnum = "0" + hnum;}
+                minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+                mnum = Math.floor(minutes);
+                if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+                seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+                snum = Math.round(seconds);
+                if(String(snum).length ==1 ){snum = "0" + snum;}
+
+                document.getElementById("timeDate").innerHTML = "本站已稳定运行"+dnum+" 天 ";
+                document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒<br>"
+            }
+            setInterval("createtime()",250); 
+        </script> 
+
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        
+    
+        
+         
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+        
+
+        共 756615 字 , 38 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+
+</footer>
+
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+
+    </body>
+</html>

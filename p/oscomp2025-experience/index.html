@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="参与OS内核比赛的经验总结">
+<title>oscomp2025 experience</title>
+
+<link rel='canonical' href='https://echudet.github.io/p/oscomp2025-experience/'>
+
+<link rel="stylesheet" href="/scss/style.min.da77a84796b4cbbce4984dfc653595f2e1f66158390942c69e60c576c66a6e8b.css"><meta property='og:title' content="oscomp2025 experience">
+<meta property='og:description' content="参与OS内核比赛的经验总结">
+<meta property='og:url' content='https://echudet.github.io/p/oscomp2025-experience/'>
+<meta property='og:site_name' content='echudet'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-09-03T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-09-03T22:10:01&#43;08:00'/><meta property='og:image' content='https://echudet.github.io/p/oscomp2025-experience/bg.jpg' />
+<meta name="twitter:title" content="oscomp2025 experience">
+<meta name="twitter:description" content="参与OS内核比赛的经验总结"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://echudet.github.io/p/oscomp2025-experience/bg.jpg' />
+    <link rel="shortcut icon" href="/timer.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_67bf1327fc98b60.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">⌨️</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">echudet</a></h1>
+            <h2 class="site-description">探索编程的学生一枚</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/EchudeT'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://twitter.com'
+                        target="_blank"
+                        title="Twitter"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>档案</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#赛前积累">赛前积累</a></li>
+    <li><a href="#比赛过程">比赛过程</a></li>
+    <li><a href="#内核组成">内核组成</a></li>
+    <li><a href="#调试经验">调试经验</a></li>
+    <li><a href="#遗憾">遗憾</a></li>
+    <li><a href="#反思">反思</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/oscomp2025-experience/">
+                <img src="/p/oscomp2025-experience/bg_hu_6fab50cd8659e296.jpg"
+                        srcset="/p/oscomp2025-experience/bg_hu_6fab50cd8659e296.jpg 800w, /p/oscomp2025-experience/bg_hu_fd1baed90862985c.jpg 1600w"
+                        width="800" 
+                        height="565" 
+                        loading="lazy"
+                        alt="Featured image of post oscomp2025 experience" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+
+
+    
+    <header class="article-category">
+        
+            <a href="/categories/os/" >
+                Os
+            </a>
+        
+            <a href="/categories/comp/" >
+                Comp
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/oscomp2025-experience/">oscomp2025 experience</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            参与OS内核比赛的经验总结
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-09-03</time>
+            </div>
+        
+
+        
+            <div>
+                <?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="792px" height="792px" viewBox="0 0 792 792" style="enable-background:new 0 0 792 792;" xml:space="preserve">
+<g>
+	<g id="_x31_0_19_">
+		<g>
+			<path d="M643.5,742.5H594V569.25C594,473.566,516.434,396,420.75,396C516.434,396,594,318.434,594,222.75V49.5h49.5
+				c13.662,0,24.75-11.088,24.75-24.75S657.162,0,643.5,0h-495c-13.662,0-24.75,11.088-24.75,24.75S134.838,49.5,148.5,49.5H198
+				v173.25C198,318.434,275.566,396,371.25,396C275.566,396,198,473.566,198,569.25V742.5h-49.5c-13.662,0-24.75,11.088-24.75,24.75
+				S134.838,792,148.5,792h495c13.662,0,24.75-11.088,24.75-24.75S657.162,742.5,643.5,742.5z M247.5,222.75
+				c0-43.387,0-173.25,0-173.25h297c0,0,0,133.427,0,173.25c0,68.335-58.188,123.75-129.938,123.75h-37.125
+				C305.687,346.5,247.5,291.085,247.5,222.75z M544.5,742.5h-297c0,0,0-129.888,0-173.25c0-68.335,58.187-123.75,129.938-123.75
+				h37.125c71.75,0,129.938,55.415,129.938,123.75C544.5,609.072,544.5,742.5,544.5,742.5z"/>
+		</g>
+	</g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+</svg>
+
+                <time class="article-time--reading">
+                    阅读时长: 8 分钟
+                </time>
+            </div>
+        
+
+         
+        <div>
+            <?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="79.536px" height="79.536px" viewBox="0 0 79.536 79.536" style="enable-background:new 0 0 79.536 79.536;"
+	 xml:space="preserve">
+<g>
+	<path style="fill:#010002;" d="M40.162,17.906C37.415,15.275,21.614,6.141,0,15.451c0,0.138,0,2.722,0,6.654v44.418h32.747
+		c1.126,0.968,3.798,1.651,6.926,1.651c3.119,0,5.802-0.684,6.931-1.651h32.933V22.105c0-3.933,0-6.517,0-6.654
+		C58.813,6.314,42.257,15.982,40.162,17.906z M37.229,63.349c0-1.75-15.372-11.981-33.125-0.818V19.216
+		c3.516-2.014,8.246-3.249,13.463-3.249c10.864,0,19.662,3.562,19.662,10.175V63.349z M75.684,62.53
+		c-17.751-11.163-33.108-0.932-33.108,0.818V26.146c0-6.612,8.792-10.175,19.646-10.175c5.22,0,9.952,1.235,13.463,3.249V62.53z"/>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+</svg>
+
+            <time class="article-words">
+                文章字数：3688字
+            </time>
+        </div>
+        <div class="article-lastmod">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time>
+                    Sep 03, 2025 22:10 &#43;0800
+                </time>
+            </div></footer>
+    
+
+    
+
+
+
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <blockquote>
+<p>OS火热招新 <a class="link" href="http://oslabs.hitsz.edu.cn/oscomp/oscomp.html"  target="_blank" rel="noopener"
+    >http://oslabs.hitsz.edu.cn/oscomp/oscomp.html</a>
+
+</p></blockquote>
+<p>大二寒假前看到校内有操作系统比赛的招新通知，又恰逢大段空闲时间，于是便抱着前来积累经验的想法，拉着什么都还没学的友人A，与主动加入我们的学长B组起了一个队伍，由我带队来参加操作系统比赛。最终凭借着运气+努力，取得了国一，可喜可贺。</p>
+<h2 id="赛前积累">赛前积累
+</h2><p>在比赛报名之前，我个人在操作系统方面的知识积累是mit6s081的xv6整个lab+南大的pa lab，学长B是学完了大三的整个操作系统课程，友人A则是还没有这方面的知识。</p>
+<p>在比赛之前，寒假期间，确定好比赛初期的时间安排，以及内核编写语言之后，我们开始组团进行rust语言的学习，时长为3周。关于rust方面的学习，主要是依赖以下几个内容。</p>
+<p>首先是阅读Rust Course(<a class="link" href="https://course.rs/about-book.html"  target="_blank" rel="noopener"
+    >https://course.rs/about-book.html</a>
+
+)，学习其中的<strong>Rust 语言基础学习</strong>和<strong>Rust 语言进阶学习</strong>两个大章，掌握rust语言的基本和进阶内容。</p>
+<p>其次是在Rust Practice(<a class="link" href="https://practice-zh.course.rs/why-exercise.html"  target="_blank" rel="noopener"
+    >https://practice-zh.course.rs/why-exercise.html</a>
+
+)里面进行简单的练习，做其中的习题，加深印象。</p>
+<p>最后是在CodeCrafters(<a class="link" href="https://app.codecrafters.io/catalog"  target="_blank" rel="noopener"
+    >https://app.codecrafters.io/catalog</a>
+
+)里面写一些简单的项目熟悉rust。我是选了shell和interpreter两个当时免费的项目来练习，写了shell和部分interpreter。这里面的项目分成多个块组成，并且内有自动判错，可以及时发现我们代码中隐含的错误，能让我们更熟练地用rust写项目。</p>
+<p>完成对rust的学习之后，在寒假的剩余时间里面，我们开始对rcore内核(<a class="link" href="https://rcore-os.cn/rCore-Tutorial-Book-v3/chapter0/index.html"  target="_blank" rel="noopener"
+    >https://rcore-os.cn/rCore-Tutorial-Book-v3/chapter0/index.html</a>
+
+)的学习。</p>
+<p>这一阶段比较简单，主要是跟着rCore-Tutorial-Book手册学习。</p>
+<p>新年之前学习手册的0~4章，包括环境配置、批处理系统、分时任务、地址空间四章，新年之后学习手册的5~8章，包括进程、文件系统、进程通信、并发四章，最后剩余的第九章则是留于之后写驱动的同学来看。</p>
+<p>完成每章的学习指看完各章的内容+完成章末的实验要求（貌似5~8某章实验有一个bug），在阅读各章内容的时候，要主动结合内核里面相应的代码来看，不能干看文档内容，这样难以深入理解。</p>
+<p>完成上述的内容后，寒假应该仅剩余一两周的时间了，最后的这段时间就是阅读我校往届的优秀内核，总结经验。</p>
+<p>我们阅读了MankorOS, TitanixOS, MinotaurOS, PhoenixOS的内容，然后在返校之后聚团讨论了一番，对内核的整体架构有了一定的设想，这为我们之后构建内核的工作打下了坚实的基础。同时，我们也简单阅读了一些linux的资料，对于内核设计有了更深的见解。</p>
+<h2 id="比赛过程">比赛过程
+</h2><p>我们在开学的几周后才开始正式构建内核，而同实验室的第一组则是早早开始了构建内核，这导致了我们的进度落后，再加上初赛结束在期末月，为我们初赛的落后埋下了伏笔&hellip;.</p>
+<p>我们的内核是从零开始构建的，主要参考的是PhoenixOS的架构，以其他内核作为优化点和来部分借鉴。花了几天时间构造内核的雏形之后，我们开了一个简单的会议划分了内核的分工。</p>
+<p>我将内核的工作划分为进程管理，内存，trap转换，文件系统，信号，驱动，网络，双架构。</p>
+<p>在最初的两周，我们需要实现进程管理，内存，trap转换这三个基本的功能，我负责进程，学长B负责内存，友人A负责trap。这一阶段比较简单，我们在计划时间内完美完成了这一阶段的内容，并尝试将basic测例的内容以嵌入内核的方式来运行。</p>
+<p>下一个阶段是文件系统，信号。文件系统方面比较繁杂，由我和学长B一起写，我主要写了文件系统的大体架构，学长B在这基础上进行优化和创新，之后我则侧重于扩展文件系统于OS侧的更多详细的功能。友人A则是在写信号方面的机制。这一阶段原本的计划时间也是两周，但是工作比想象中更繁杂，最后是花了三周的时间才完成，完成这一阶段之后，busybox测例集成功通过。</p>
+<p>第三阶段是驱动，网络，双架构+过更多的测例集。双架构方面文档比较多，需要阅读大量的文档，于是由学长B和友人A来一起写，我则是简单地了解loongArch方面的内容，对内核架构有大体的掌握。另一边，驱动和网络则是由我来写，网络方面参考ArceOS+PhoenixOS的实现，驱动方面则参考了MankorOS来写。而比赛测例集方面，则是由我来跑测例，如果遇到错误，我能解决就由我来解决，不能解决则是通知特定模块的负责人员来解决，或是合作debug。这一阶段一直持续到6月初，即期末月，也是初赛结束月。</p>
+<p>在期末月的时候，我们在复习期末的内容，没有再推进工作，在这之前我们基本完成了除了ltp和iperf以外的其他测例集，还存在少量的bug在修。完成期末考之后，忽然发现其他队伍跑ltp大大拉分，至少拉开了其他测例的总和分一倍，但鉴于我们要准备文档，ppt，视频，我们就没再修ltp，这导致了我们初赛落后于其他队伍。<del>（我们是没跑ltp队伍的第一名）</del></p>
+<p>最后初赛综合排名第九。</p>
+<p>然后是决赛阶段，我们痛定思痛，将ltp测例集用linux系统跑了一遍，统计其中的高分测例并制定成一个表格，决定集中突破里面的高分测例。</p>
+<p>决赛分工比较简单，我来搞内核的驱动、网络、上板，完善内核以通过更多的测例。学长B是集中突破ltp的fanotify等方面的高分测例，以及完善内核和文件系统的各个方面，友人A则是掌握交叉编译的知识，交叉编译了vim、gcc这两程序在内核上面跑（运气撞题）。最后我们成功上了riscv的星光板和loongArch的星云板(仍有点bug)，并且通过了大量的ltp测例，取得了决赛线上测例的高分和线下决赛的高分。</p>
+<p>最后的最后，在答辩之前的一个夜晚，我们内核赛四组在线上分别模拟答辩，由老师进行评价。在老师评价完我们的ppt之后，学长B和我一番讨论，决定完全推翻原来的ppt，重构大部分内容。接下来由学长B操刀ppt，一直忙到了凌晨4点，我则是3点上床养精蓄锐，准备同一天的八点半开始的答辩。我们的答辩是第3组，在答辩之前我简单过了一遍ppt就到时间上场，准备十分紧迫。但最终运气不错，算是流畅地完成了答辩，不过想来也是非常惊险的一个过程，日后应该早早做好准备，切忌临时发挥，临阵磨枪还是欠缺很多内容。</p>
+<p>比赛过程还是挺长的，从寒假到暑假，基本是半年的比赛流程，并且工作量也不少，除去校内课程的学习，就我个人，基本把剩余的课外时间都花在这上面，少有时间搞其他的活动。若要参加要做好忙起来的准备。</p>
+<h2 id="内核组成">内核组成
+</h2><p><a class="link" href="https://github.com/RustFlyer/OS/blob/main/NighthawkOS%E5%86%B3%E8%B5%9B%E6%96%87%E6%A1%A3.pdf"  target="_blank" rel="noopener"
+    >具体的内核文档见此</a>
+
+</p>
+<h2 id="调试经验">调试经验
+</h2><p>一般使用二分法进行调试，通过log输出大量的内容来确定上下文，一方面能够知晓发生bug的位置，另一方面能够获取其上下文的参数信息，方便调bug。如果log输出过多时，可以设置动态开关log，和过滤部分log的内容，从而筛选出关键信息。</p>
+<p>如果bug发生在库的深处，或是用户态，或是地址读写卡死崩溃问题，则考虑使用gdb进行跟踪调试，先通过log确定bug大致位置，在附近打断点，然后步进跟踪各个寄存器，或特权寄存器，或相关地址的值等，来确定bug发生的原因。不过对板子就不行了，因为板子上面没有gdb，就只能用二分法调bug了。（关于gdb，听说gdb-dashboard挺好用的，可以尝试使用）</p>
+<p>除此外，调试用户态的程序还可以使用qemu-riscv64或qemu-loongarch64(这个需要额外配置)，通过输出它们系统调用的日志，来对比自己的内核和标准的内核之间的差异，从而找出bug。</p>
+<h2 id="遗憾">遗憾
+</h2><ol>
+<li>多核仍有死锁情况，并发支持不完善。</li>
+<li>git本地支持正常，说明文件系统比较完善。但是git clone缺乏https，这可能是交叉编译缺失，或是文件系统还有缺陷，或是网络方面有bug，现场赛时间过短未能调出来。</li>
+<li>文件系统的挂载功能不完善，需要实现挂载队列，但这会导致预估3k+的代码重构，这个功能应该在构建内核的时候一起实现，在内核比较完善之后去改容易造成大规模的影响，积重难返。</li>
+<li>龙芯qemu的中断驱动仍存在问题，不能正常响应。并且龙芯板子上面存在奇怪的内存问题，当内核以release编译的时候会产生巨量的bug，而以debug模式编译则是少量bug，debug模式产生的未对齐处理多于release方面，怀疑是此方面问题，但是具体原因未知，未能debug出来。</li>
+<li>内核中枢多时间系统todo，但是没时间写。</li>
+</ol>
+<h2 id="反思">反思
+</h2><ol>
+<li>内核构建需要尽早开始，最后要留出一个月的时间给ltp，因为ltp拉分最甚。</li>
+<li>内存、arch、lock、log等模块尽量解耦合，放在外部，其他模块都需要依赖它们。</li>
+<li>尽早完善调试架构，完善log机制，多进程记录机制，方便之后的调试。</li>
+<li>文件系统的各个接口都需要留出扩展接口，用于未来更多的功能扩展。</li>
+<li>注重实现更多的功能，在保证实现充足的功能的基础上考虑创新点（实际上很多创新点都是说出来的，内核本身实现就包含着很多特点，选取一些包装一下就是创新点了）。</li>
+<li>在明确一个函数的内部逻辑，输入输出的时候可以用AI代写，省时省力，但不要让AI写你不理解的内容，这会导致石山代码。</li>
+<li>明确队伍的git commit规范和注释规范，合适的开发规范能够让维护成本降低。</li>
+</ol>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <span>
+            最后更新于 Sep 03, 2025 22:10 &#43;0800
+        </span>
+    </section></footer>
+
+
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/mit6s08123rcu/">
+        
+        
+            <div class="article-image">
+                <img src="/p/mit6s08123rcu/bg.91a08bf3fe0a8ca435e8fbc902291fd5_hu_50da030b7ba2cbe7.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post MIT6S081：23RCU"
+                        
+                        data-hash="md5-kaCL8/4KjKQ16PvJAikf1Q==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">MIT6S081：23RCU</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/mit6s08122meltdown/">
+        
+        
+            <div class="article-image">
+                <img src="/p/mit6s08122meltdown/19.8d880549dccba2f0c1613b3e41a721e5_hu_1493d831cda8626c.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post MIT6S081：22Meltdown"
+                        
+                        data-hash="md5-jYgFSdzLovDBYTs&#43;Qach5Q==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">MIT6S081：22Meltdown</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/mit6s08121networking/">
+        
+        
+            <div class="article-image">
+                <img src="/p/mit6s08121networking/bg.68c4376fd87b0b35da07319dd155c90d_hu_b8a716243c6f9679.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post MIT6S081：21Networking"
+                        
+                        data-hash="md5-aMQ3b9h7CzXaBzGd0VXJDQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">MIT6S081：21Networking</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/mit6s08120kernels-and-hll/">
+        
+        
+            <div class="article-image">
+                <img src="/p/mit6s08120kernels-and-hll/bg.4175e6a2793e0fc340e5aced2529e40b_hu_de82d011b3d97ace.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post MIT6S081：20Kernels and HLL"
+                        
+                        data-hash="md5-QXXmonk&#43;D8NA5aztJSnkCw==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">MIT6S081：20Kernels and HLL</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/mit6s08119virtual-machines/">
+        
+        
+            <div class="article-image">
+                <img src="/p/mit6s08119virtual-machines/bg.b02a7ba1d946705c0cf2809bcf960db8_hu_77df69a362eba544.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post MIT6S081：19Virtual Machines  "
+                        
+                        data-hash="md5-sCp7odlGcFwM8oCbz5YNuA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">MIT6S081：19Virtual Machines  </h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2025 echudet
+    </section>
+    
+    <section class="powerby">
+        
+
+
+        <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+
+        <script language="javascript"> 
+            var now = new Date();
+            function createtime(){
+                now.setTime(now.getTime()+250);
+                var grt= new Date("2024/11/10 00:00:00"); 
+                days = (now - grt ) / 1000 / 60 / 60 / 24;
+                dnum = Math.floor(days);
+                hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+                hnum = Math.floor(hours);
+                if(String(hnum).length ==1 ){hnum = "0" + hnum;}
+                minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+                mnum = Math.floor(minutes);
+                if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+                seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+                snum = Math.round(seconds);
+                if(String(snum).length ==1 ){snum = "0" + snum;}
+
+                document.getElementById("timeDate").innerHTML = "本站已稳定运行"+dnum+" 天 ";
+                document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒<br>"
+            }
+            setInterval("createtime()",250); 
+        </script> 
+
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        
+    
+        
+         
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+        
+
+        共 756615 字 , 38 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+
+</footer>
+
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+
+    </body>
+</html>

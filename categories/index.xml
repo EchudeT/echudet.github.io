@@ -7,7 +7,39 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>echudet</copyright>
-        <lastBuildDate>Sun, 01 Dec 2024 23:35:39 +0800</lastBuildDate><atom:link href="https://echudet.github.io/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 03 Sep 2025 22:10:01 +0800</lastBuildDate><atom:link href="https://echudet.github.io/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Comp</title>
+        <link>https://echudet.github.io/categories/comp/</link>
+        <pubDate>Wed, 03 Sep 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://echudet.github.io/categories/comp/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Git</title>
+        <link>https://echudet.github.io/categories/git/</link>
+        <pubDate>Tue, 02 Sep 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://echudet.github.io/categories/git/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Note</title>
+        <link>https://echudet.github.io/categories/note/</link>
+        <pubDate>Tue, 02 Sep 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://echudet.github.io/categories/note/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Ai</title>
+        <link>https://echudet.github.io/categories/ai/</link>
+        <pubDate>Sun, 01 Dec 2024 00:00:00 +0000</pubDate>
+        
+        <guid>https://echudet.github.io/categories/ai/</guid>
+        <description></description>
+        </item>
+        <item>
         <title>Database</title>
         <link>https://echudet.github.io/categories/database/</link>
         <pubDate>Wed, 27 Nov 2024 00:00:00 +0000</pubDate>

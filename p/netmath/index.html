@@ -6,11 +6,11 @@
 
 <link rel='canonical' href='https://echudet.github.io/p/netmath/'>
 
-<link rel="stylesheet" href="/scss/style.min.86fc5e5efb829fb1bdd7a2d2275017fb3ae01ba7fcf491e347d76495ae5e3ae2.css"><meta property='og:title' content="Netmath">
+<link rel="stylesheet" href="/scss/style.min.da77a84796b4cbbce4984dfc653595f2e1f66158390942c69e60c576c66a6e8b.css"><meta property='og:title' content="Netmath">
 <meta property='og:description' content="目录 基本概念回顾 排队模型分类 主要排队模型及其推导 3.1 M/M/1 模型 3.2 M/M/c 模型 3.3 M/G/1 模型 3.4 G/M/1 模型 3.5 M/D/1 模型 3.6 G/G/1 模型 关键性能指标的推导 概率论原理在推导中的应用 排队理论在计算机网络中路由器节点的应用 6.1 路由器缓冲区设计 6.2 数据包排队与丢弃策略 6.3 负载均衡与资源分配 6.4 路由器决策中的排队理论应用实例 6.5 优先级排队策略 6.6 排队理论在路由器中的综合应用 6.7 路由器缓冲区扩展与拥塞控制 基本概念回顾 在深入模型推导之前，简要回顾一些基本概念：\n">
 <meta property='og:url' content='https://echudet.github.io/p/netmath/'>
 <meta property='og:site_name' content='echudet'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-12-02T22:52:25&#43;08:00'/><meta property='article:modified_time' content='2024-12-02T23:26:21&#43;08:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-12-02T22:52:25&#43;08:00'/><meta property='article:modified_time' content='2025-09-03T22:10:01&#43;08:00'/>
 <meta name="twitter:title" content="Netmath">
 <meta name="twitter:description" content="目录 基本概念回顾 排队模型分类 主要排队模型及其推导 3.1 M/M/1 模型 3.2 M/M/c 模型 3.3 M/G/1 模型 3.4 G/M/1 模型 3.5 M/D/1 模型 3.6 G/G/1 模型 关键性能指标的推导 概率论原理在推导中的应用 排队理论在计算机网络中路由器节点的应用 6.1 路由器缓冲区设计 6.2 数据包排队与丢弃策略 6.3 负载均衡与资源分配 6.4 路由器决策中的排队理论应用实例 6.5 优先级排队策略 6.6 排队理论在路由器中的综合应用 6.7 路由器缓冲区扩展与拥塞控制 基本概念回顾 在深入模型推导之前，简要回顾一些基本概念：\n">
     <link rel="shortcut icon" href="/timer.ico" />
@@ -58,7 +58,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu11199958555974308744.png" width="300"
+                        <img src="/img/avatar_hu_67bf1327fc98b60.png" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -474,7 +474,7 @@
 </svg>
 
             <time class="article-words">
-                文章字数：10944字
+                文章字数：10964字
             </time>
         </div>
         <div class="article-lastmod">
@@ -487,7 +487,7 @@
 
 
                 <time>
-                    Dec 02, 2024 23:26 &#43;0800
+                    Sep 03, 2025 22:10 &#43;0800
                 </time>
             </div></footer>
     
@@ -702,7 +702,9 @@ $$
 <p><strong>Little 定理</strong>表述如下：</p>
 $$
 L = λ W
-$$$$
+$$<p>
+</p>
+$$
 Lq = λ Wq
 $$<p>该定理适用于广义的排队系统，只要满足稳定状态和某些基本假设。</p>
 <p>通过上述步骤，我们从基本的泊松到达过程和指数服务时间出发，利用马尔可夫链的平稳状态平衡方程，推导出 M/M/1 模型的各项性能指标。关键使用的概率论原理包括：</p>
@@ -921,7 +923,9 @@ $$
 <p>通过 P-K 公式，可以得到：</p>
 $$
 Wq = \frac{λ E[S^2]}{2(1 - \rho)}
-$$$$
+$$<p>
+</p>
+$$
 Lq = \lambda Wq = \frac{\lambda^2 E[S^2]}{2(1 - \rho)}
 $$<p>其中，<strong>E[S^2]</strong> 是服务时间的二阶矩。</p>
 <p><strong>5. 使用 Little 定理</strong></p>
@@ -1012,7 +1016,9 @@ $$
 <p>由于服务时间确定，可以使用 M/D/1 模型的特定公式：</p>
 $$
 Wq = \frac{λ D^2}{2(1 - ρ)}
-$$$$
+$$<p>
+</p>
+$$
 Lq = \lambda Wq = \frac{\lambda^2 D^2}{2(1 - ρ)}
 $$<p><strong>3. 使用 Little 定理</strong></p>
 $$
@@ -1072,7 +1078,9 @@ $$<p>其中：</p>
 <p>Little 定理是连接人数与时间的重要工具，表述如下：</p>
 $$
 L = λ W
-$$$$
+$$<p>
+</p>
+$$
 Lq = λ Wq
 $$<p>其中：</p>
 <ul>
@@ -1299,9 +1307,13 @@ $$
 <p><strong>计算无阻塞概率（P₀）</strong>：</p>
 $$
    P_0 = \left[ \sum_{n=0}^{2-1} \frac{(50/100)^n}{n!} + \frac{(50/100)^2}{2!} \cdot \frac{2 \times 100}{2 \times 100 - 50} \right]^{-1}
-   $$$$
+   $$<p>
+</p>
+$$
    P_0 = \left[ 1 + 0.5 + \frac{0.25}{2} \cdot \frac{200}{150} \right]^{-1} = \left[ 1 + 0.5 + \frac{0.125 \times 200}{150} \right]^{-1}
-   $$$$
+   $$<p>
+</p>
+$$
    P_0 = \left[ 1 + 0.5 + \frac{25}{150} \right]^{-1} = \left[ 1.5 + 0.1667 \right]^{-1} = \frac{1}{1.6667} \approx 0.6
    $$</li>
 <li>
@@ -1490,11 +1502,17 @@ $$
 <p><strong>计算无阻塞概率（P₀）</strong>（使用 M/M/c/K 模型）：</p>
 $$
    P_0 = \left[ \sum_{n=0}^{4-1} \frac{(500/600)^n}{n!} + \frac{(500/600)^4}{4!} \cdot \frac{4 \times 150}{4 \times 150 - 500} \right]^{-1}
-   $$$$
+   $$<p>
+</p>
+$$
    P_0 = \left[ 1 + \frac{5}{6} + \frac{(5/6)^2}{2} + \frac{(5/6)^3}{6} + \frac{(5/6)^4}{24} \cdot \frac{600}{100} \right]^{-1}
-   $$$$
+   $$<p>
+</p>
+$$
    P_0 = \left[ 1 + 0.833 + 0.347 + 0.115 + \frac{0.482}{24} \times 6 \right]^{-1}
-   $$$$
+   $$<p>
+</p>
+$$
    P_0 = \left[ 1 + 0.833 + 0.347 + 0.115 + 0.120 \right]^{-1} = \left[ 2.415 \right]^{-1} \approx 0.414
    $$</li>
 <li>
@@ -1504,7 +1522,9 @@ $$
 <p><strong>丢包率（P_loss）</strong>：</p>
 $$
      P_loss = P_K = P_0 \cdot \frac{(\lambda/\mu)^c}{c!} \cdot \frac{c \mu}{c \mu - \lambda} = 0.414 \times \frac{(500/600)^4}{24} \times \frac{600}{100}
-     $$$$
+     $$<p>
+</p>
+$$
      P_loss = 0.414 \times \frac{0.482}{24} \times 6 \approx 0.414 \times 0.120 \approx 0.0497 \approx 4.97\%
      $$<p>目前丢包率超过目标，需要优化。</p>
 </li>
@@ -1531,9 +1551,13 @@ $$
 <p><strong>重新计算无阻塞概率（P₀）</strong>：</p>
 $$
      P_0 = \left[ \sum_{n=0}^{3} \frac{(500/800)^n}{n!} + \frac{(500/800)^4}{4!} \cdot \frac{800}{800 - 500} \right]^{-1}
-     $$$$
+     $$<p>
+</p>
+$$
      P_0 = \left[ 1 + 0.625 + \frac{0.3906}{2} + \frac{0.2441}{6} + \frac{0.1526}{24} \times \frac{800}{300} \right]^{-1}
-     $$$$
+     $$<p>
+</p>
+$$
      P_0 = \left[ 1 + 0.625 + 0.1953 + 0.0407 + 0.1526 \right]^{-1} \approx \left[ 2.013 \right]^{-1} \approx 0.497
      $$</li>
 <li>
@@ -1554,7 +1578,9 @@ $$
 <p><strong>重新计算无阻塞概率（P₀）</strong>：</p>
 $$
        P_0 = \left[ \sum_{n=0}^{4} \frac{(500/1000)^n}{n!} + \frac{(500/1000)^5}{5!} \cdot \frac{1000}{1000 - 500} \right]^{-1}
-       $$$$
+       $$<p>
+</p>
+$$
        P_0 = \left[ 1 + 0.5 + 0.125 + 0.0208 + 0.0026 + \frac{0.03125}{120} \times 2 \right]^{-1} \approx \left[ 1 + 0.5 + 0.125 + 0.0208 + 0.0026 + 0.00052 \right]^{-1} \approx \left[ 1.648 \right]^{-1} \approx 0.607
        $$</li>
 <li>
@@ -1632,7 +1658,9 @@ $$
 <p><strong>计算无阻塞概率（P₀）</strong>：</p>
 $$
    P_0 = \left[ \sum_{n=0}^{2} \frac{(250/100)^n}{n!} + \frac{(250/100)^3}{3!} \cdot \frac{300}{300 - 250} \right]^{-1} = \left[ 1 + 2.5 + \frac{6.25}{2} + \frac{15.625}{6} \cdot \frac{300}{50} \right]^{-1}
-   $$$$
+   $$<p>
+</p>
+$$
    P_0 = \left[ 1 + 2.5 + 3.125 + \frac{15.625 \times 6}{6} \right]^{-1} = \left[ 1 + 2.5 + 3.125 + 15.625 \right]^{-1} = \left[ 22.25 \right]^{-1} \approx 0.045
    $$</li>
 <li>
@@ -1670,6 +1698,23 @@ $$
 <p><strong>优化缓冲区容量</strong>：在保证低丢包率的前提下，尽量减少缓冲区容量，以节省资源。</p>
 </li>
 </ul>
+<p>Other Link</p>
+<p><a class="link" href="https://zhuanlan.zhihu.com/p/375681567"  target="_blank" rel="noopener"
+    >https://zhuanlan.zhihu.com/p/375681567</a>
+
+</p>
+<p><a class="link" href="https://zhuanlan.zhihu.com/p/90923312"  target="_blank" rel="noopener"
+    >https://zhuanlan.zhihu.com/p/90923312</a>
+
+</p>
+<p><a class="link" href="https://blog.csdn.net/qq_39543783/article/details/107915998"  target="_blank" rel="noopener"
+    >https://blog.csdn.net/qq_39543783/article/details/107915998</a>
+
+</p>
+<p><a class="link" href="https://blog.csdn.net/Douglassssssss/article/details/134063217"  target="_blank" rel="noopener"
+    >https://blog.csdn.net/Douglassssssss/article/details/134063217</a>
+
+</p>
 
 </section>
 
@@ -1687,7 +1732,7 @@ $$
 
 
         <span>
-            最后更新于 Dec 02, 2024 23:26 &#43;0800
+            最后更新于 Sep 03, 2025 22:10 &#43;0800
         </span>
     </section></footer>
 
@@ -1735,7 +1780,9 @@ $$
     <section class="copyright">
         &copy; 
         
-        2024 echudet
+            2024 - 
+        
+        2025 echudet
     </section>
     
     <section class="powerby">
@@ -1768,6 +1815,12 @@ $$
         </script> 
 
         
+        
+          
+        
+          
+        
+          
         
           
         
@@ -1914,9 +1967,15 @@ $$
         
              
         
+             
+        
+             
+        
+             
+        
         
 
-        共 747479 字 , 35 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        共 756615 字 , 38 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
         主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 

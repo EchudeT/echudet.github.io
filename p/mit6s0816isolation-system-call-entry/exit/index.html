@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://echudet.github.io/p/mit6s0816isolation-system-call-entry/exit/'>
 
-<link rel="stylesheet" href="/scss/style.min.86fc5e5efb829fb1bdd7a2d2275017fb3ae01ba7fcf491e347d76495ae5e3ae2.css"><meta property='og:title' content="MIT6S081：6Isolation & system call entry/exit">
+<link rel="stylesheet" href="/scss/style.min.da77a84796b4cbbce4984dfc653595f2e1f66158390942c69e60c576c66a6e8b.css"><meta property='og:title' content="MIT6S081：6Isolation & system call entry/exit">
 <meta property='og:description' content="隔离和系统调用的进入/退出是保障系统安全和稳定运行的重要机制。隔离通过将用户空间与内核空间分开，确保用户程序不能直接访问或修改内核数据和代码，增强了系统整体的安全性和稳定性。系统调用的进入/退出原理是用户程序通过特定接口请求内核服务时，触发上下文切换，将运行环境从用户态转到内核态，然后执行完内核功能后再切回用户态。这种机制确保用户程序可以安全地访问底层资源，同时维持内核的完整性和隔离性。">
 <meta property='og:url' content='https://echudet.github.io/p/mit6s0816isolation-system-call-entry/exit/'>
 <meta property='og:site_name' content='echudet'>
@@ -59,7 +59,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu11199958555974308744.png" width="300"
+                        <img src="/img/avatar_hu_67bf1327fc98b60.png" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -273,12 +273,12 @@
         <li>
           <ol>
             <li><a href="#1-trap-发生时的初始状态">1. <strong>Trap 发生时的初始状态</strong></a></li>
-            <li><a href="#2-切换到-userveckerneltrampolines16">2. <strong>切换到 <code>uservec</code>（kernel/trampoline.S:16）</strong></a></li>
-            <li><a href="#3-uservec-的操作">3. <strong><code>uservec</code> 的操作</strong></a></li>
+            <li><a href="#2-切换到">2. <strong>切换到 <code>uservec</code>（kernel/trampoline.S:16）</strong></a></li>
+            <li><a href="#3-uservec">3. <strong><code>uservec</code> 的操作</strong></a></li>
             <li><a href="#4-切换到内核页表">4. <strong>切换到内核页表</strong></a></li>
-            <li><a href="#5-调用-usertrapkerneltrapc37">5. <strong>调用 <code>usertrap</code>（kernel/trap.c:37）</strong></a></li>
+            <li><a href="#5-调用">5. <strong>调用 <code>usertrap</code>（kernel/trap.c:37）</strong></a></li>
             <li><a href="#6-准备返回用户空间">6. <strong>准备返回用户空间</strong></a></li>
-            <li><a href="#7-userret-的操作">7. <strong><code>userret</code> 的操作</strong></a></li>
+            <li><a href="#7-userret">7. <strong><code>userret</code> 的操作</strong></a></li>
           </ol>
         </li>
         <li><a href="#关键点总结">关键点总结</a></li>
@@ -299,8 +299,8 @@
     <header class="article-header">
         <div class="article-image">
             <a href="/p/mit6s0816isolation-system-call-entry/exit/">
-                <img src="/p/mit6s0816isolation-system-call-entry/exit/bg_hu14015367985888633494.jpg"
-                        srcset="/p/mit6s0816isolation-system-call-entry/exit/bg_hu14015367985888633494.jpg 800w, /p/mit6s0816isolation-system-call-entry/exit/bg_hu146234010150949629.jpg 1600w"
+                <img src="/p/mit6s0816isolation-system-call-entry/exit/bg_hu_a34230b1aa11a483.jpg"
+                        srcset="/p/mit6s0816isolation-system-call-entry/exit/bg_hu_a34230b1aa11a483.jpg 800w, /p/mit6s0816isolation-system-call-entry/exit/bg_hu_e92ef70daec534fd.jpg 1600w"
                         width="800" 
                         height="530" 
                         loading="lazy"
@@ -572,12 +572,12 @@
 <li>用户程序在用户模式下运行，并使用用户页表。</li>
 <li>程序可能触发 trap，原因可能是系统调用（ecall 指令）、非法指令或硬件中断。</li>
 </ul>
-<h4 id="2-切换到-userveckerneltrampolines16">2. <strong>切换到 <code>uservec</code>（kernel/trampoline.S:16）</strong>
+<h4 id="2-切换到">2. <strong>切换到 <code>uservec</code>（kernel/trampoline.S:16）</strong>
 </h4><ul>
 <li>CPU 检测到 trap 并自动跳转到 <code>stvec</code> 指向的地址，即 <code>uservec</code>，这是一个位于内核中的 trap 处理程序的入口地址。</li>
 <li><strong>问题</strong>：此时仍在使用用户页表，用户页表可能无法映射内核的所有区域，直接访问内核会导致失败。</li>
 </ul>
-<h4 id="3-uservec-的操作">3. <strong><code>uservec</code> 的操作</strong>
+<h4 id="3-uservec">3. <strong><code>uservec</code> 的操作</strong>
 </h4><ul>
 <li><code>uservec</code> 是一个位于 trampoline 页的代码，trampoline 页同时映射在用户页表和内核页表中的相同虚拟地址上。</li>
 <li><code>uservec</code> 通过 <code>csrrw</code> 指令将寄存器 <code>a0</code> 与 <code>sscratch</code> 互换。此时，<code>a0</code> 变为可用，并指向了 <code>sscratch</code> 中的内核数据（通常为进程的 <code>trapframe</code>）。</li>
@@ -588,7 +588,7 @@
 <li><code>uservec</code> 设置寄存器，使得 <code>satp</code> 寄存器指向内核页表，并刷新 TLB（Translation Lookaside Buffer，地址转换缓冲）。</li>
 <li>切换页表后，系统安全地进入内核地址空间，可以正常访问内核的所有内存和功能。</li>
 </ul>
-<h4 id="5-调用-usertrapkerneltrapc37">5. <strong>调用 <code>usertrap</code>（kernel/trap.c:37）</strong>
+<h4 id="5-调用">5. <strong>调用 <code>usertrap</code>（kernel/trap.c:37）</strong>
 </h4><ul>
 <li><code>uservec</code> 完成初步处理后，跳转到 <code>usertrap</code>，它负责进一步处理 trap。</li>
 <li><code>usertrap</code> 首先更改 <code>stvec</code> 指向 <code>kernelvec</code>，以处理在内核模式下可能发生的其他 trap。</li>
@@ -624,7 +624,7 @@
 </ul>
 </li>
 </ul>
-<h4 id="7-userret-的操作">7. <strong><code>userret</code> 的操作</strong>
+<h4 id="7-userret">7. <strong><code>userret</code> 的操作</strong>
 </h4><ul>
 <li>
 <div class="highlight"><div class="chroma">
@@ -760,7 +760,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08123rcu/bg.91a08bf3fe0a8ca435e8fbc902291fd5_hu4589796922609635382.jpg" 
+                <img src="/p/mit6s08123rcu/bg.91a08bf3fe0a8ca435e8fbc902291fd5_hu_50da030b7ba2cbe7.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -784,7 +784,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08122meltdown/19.8d880549dccba2f0c1613b3e41a721e5_hu3753156070077914420.jpg" 
+                <img src="/p/mit6s08122meltdown/19.8d880549dccba2f0c1613b3e41a721e5_hu_1493d831cda8626c.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -808,7 +808,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08121networking/bg.68c4376fd87b0b35da07319dd155c90d_hu10351534106733688476.jpg" 
+                <img src="/p/mit6s08121networking/bg.68c4376fd87b0b35da07319dd155c90d_hu_b8a716243c6f9679.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -832,7 +832,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08120kernels-and-hll/bg.4175e6a2793e0fc340e5aced2529e40b_hu6405785273338381617.jpg" 
+                <img src="/p/mit6s08120kernels-and-hll/bg.4175e6a2793e0fc340e5aced2529e40b_hu_de82d011b3d97ace.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -856,7 +856,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08119virtual-machines/bg.b02a7ba1d946705c0cf2809bcf960db8_hu14546491865979434532.jpg" 
+                <img src="/p/mit6s08119virtual-machines/bg.b02a7ba1d946705c0cf2809bcf960db8_hu_77df69a362eba544.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -888,7 +888,9 @@
     <section class="copyright">
         &copy; 
         
-        2024 echudet
+            2024 - 
+        
+        2025 echudet
     </section>
     
     <section class="powerby">
@@ -921,6 +923,12 @@
         </script> 
 
         
+        
+          
+        
+          
+        
+          
         
           
         
@@ -1067,9 +1075,15 @@
         
              
         
+             
+        
+             
+        
+             
+        
         
 
-        共 747479 字 , 35 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        共 756615 字 , 38 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
         主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 

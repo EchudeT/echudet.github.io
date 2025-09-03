@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://echudet.github.io/p/mit6s08111thread-switching/'>
 
-<link rel="stylesheet" href="/scss/style.min.86fc5e5efb829fb1bdd7a2d2275017fb3ae01ba7fcf491e347d76495ae5e3ae2.css"><meta property='og:title' content="MIT6S081：11Thread switching">
+<link rel="stylesheet" href="/scss/style.min.da77a84796b4cbbce4984dfc653595f2e1f66158390942c69e60c576c66a6e8b.css"><meta property='og:title' content="MIT6S081：11Thread switching">
 <meta property='og:description' content="线程切换是实现多线程并发执行的核心机制。线程切换的原理在于操作系统在同一进程内或不同进程间调度不同的线程，以便在多核处理器上并发执行任务，提高系统利用率和响应性。切换时，操作系统会保存当前线程的上下文（如寄存器状态和程序计数器），加载下一个被调度线程的上下文，恢复其执行状态。线程切换使得多任务处理更加高效，有助于资源共享、任务并行和提高应用程序的性能，是现代操作系统实现高速并发计算的基础。">
 <meta property='og:url' content='https://echudet.github.io/p/mit6s08111thread-switching/'>
 <meta property='og:site_name' content='echudet'>
@@ -59,7 +59,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu11199958555974308744.png" width="300"
+                        <img src="/img/avatar_hu_67bf1327fc98b60.png" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -282,8 +282,8 @@
     <li><a href="#xv6线程切换一">XV6线程切换（一）</a></li>
     <li><a href="#xv6线程切换二">XV6线程切换（二）</a></li>
     <li><a href="#xv6进程切换示例程序">XV6进程切换示例程序</a></li>
-    <li><a href="#xv6线程切换--yieldsched函数">XV6线程切换&ndash;yield/sched函数</a></li>
-    <li><a href="#xv6线程切换--scheduler">XV6线程切换&ndash;scheduler</a></li>
+    <li><a href="#xv6线程切换yieldsched函数">XV6线程切换&ndash;yield/sched函数</a></li>
+    <li><a href="#xv6线程切换scheduler">XV6线程切换&ndash;scheduler</a></li>
     <li><a href="#xv6线程第一次调用switch函数">XV6线程第一次调用switch函数</a></li>
   </ol>
 </nav>
@@ -300,8 +300,8 @@
     <header class="article-header">
         <div class="article-image">
             <a href="/p/mit6s08111thread-switching/">
-                <img src="/p/mit6s08111thread-switching/bg_hu4518428176843800953.jpg"
-                        srcset="/p/mit6s08111thread-switching/bg_hu4518428176843800953.jpg 800w, /p/mit6s08111thread-switching/bg_hu13581772721640750802.jpg 1600w"
+                <img src="/p/mit6s08111thread-switching/bg_hu_d5fdd348b50b5c3e.jpg"
+                        srcset="/p/mit6s08111thread-switching/bg_hu_d5fdd348b50b5c3e.jpg 800w, /p/mit6s08111thread-switching/bg_hu_f84bb70c20abbc7f.jpg 1600w"
                         width="800" 
                         height="450" 
                         loading="lazy"
@@ -561,7 +561,7 @@
 <p><img src="/p/mit6s08111thread-switching/p1.png"
 	width="1280"
 	height="534"
-	srcset="/p/mit6s08111thread-switching/p1_hu15221383078518384773.png 480w, /p/mit6s08111thread-switching/p1_hu15272853361892182139.png 1024w"
+	srcset="/p/mit6s08111thread-switching/p1_hu_3d8a6b1724a682a4.png 480w, /p/mit6s08111thread-switching/p1_hu_65c434905c5b26f7.png 1024w"
 	loading="lazy"
 	
 		alt="p1"
@@ -611,8 +611,7 @@
 <li><strong>保存调度程序的状态</strong>：在执行进程切换时，调度程序需要保存当前的 CPU 状态、寄存器、调度算法的变量等信息。这些信息会保存在调度程序自己的内核栈中，而不会影响进程的内核栈。</li>
 <li><strong>执行进程调度逻辑</strong>：当调度程序决定暂停当前进程并切换到另一个进程时，它使用自己的内核栈来处理这个操作。调度程序在选择下一个进程时，所有与调度相关的局部变量和函数调用都存储在调度程序自己的栈中。</li>
 </ol>
-<p>这种设计保证了在多核环境下安全、高效地切换进程，并且避免了内核栈冲突。</p>
-</blockquote>
+<p>这种设计保证了在多核环境下安全、高效地切换进程，并且避免了内核栈冲突。</p></blockquote>
 <p>在本节中，我们将研究在内核线程和调度程序线程之间切换的机制。</p>
 <p>从一个线程切换到另一个线程需要保存旧线程的CPU寄存器，并恢复新线程先前保存的寄存器；栈指针和程序计数器被保存和恢复的事实意味着CPU将切换栈和执行中的代码。</p>
 <p>函数<code>swtch</code>为内核线程切换执行保存和恢复操作。</p>
@@ -625,8 +624,7 @@
 <p>我们在第4章中看到，中断结束时的一种可能性是<code>usertrap</code>调用了<code>yield</code>。</p>
 <p>依次地：<code>Yield</code>调用<code>sched</code>，<code>sched</code>调用<code>swtch</code>将当前上下文保存在<code>p-&gt;context</code>中，并切换到先前保存在<code>cpu-&gt;scheduler</code>（<em><strong>kernel/proc.c</strong></em>:517）中的调度程序上下文。</p>
 <blockquote>
-<p>注：当前版本的XV6中调度程序上下文是<code>cpu-&gt;context</code></p>
-</blockquote>
+<p>注：当前版本的XV6中调度程序上下文是<code>cpu-&gt;context</code></p></blockquote>
 <p><code>Swtch</code>（<em><strong>kernel/swtch.S</strong></em>:3）只保存被调用方保存的寄存器（callee-saved registers）；调用方保存的寄存器（caller-saved registers）通过调用C代码保存在栈上（如果需要）。</p>
 <p><code>Swtch</code>知道<code>struct context</code>中每个寄存器字段的偏移量。它不保存程序计数器。</p>
 <p>但<code>swtch</code>保存<code>ra</code>寄存器，该寄存器保存调用<code>swtch</code>的返回地址。</p>
@@ -659,8 +657,7 @@
 <li><strong>进程的上下文信息</strong>（内核态的寄存器、程序计数器等）保存在每个进程的 <code>context</code> 对象中，而不是在 CPU 专属的调度程序栈中。</li>
 <li><strong>CPU 专属的调度程序栈</strong> 仅用于调度程序在进程切换期间的执行，不保存具体进程的状态。</li>
 <li>调度程序执行进程切换时，会切换到 CPU 专属的栈，而当新的进程开始运行时，它会切换回到该进程的内核栈，继续执行。</li>
-</ul>
-</blockquote>
+</ul></blockquote>
 <p>在我们的示例中，<code>sched</code>调用<code>swtch</code>切换到<code>cpu-&gt;scheduler</code>，即每个CPU的调度程序上下文。</p>
 <p>调度程序上下文之前通过<code>scheduler</code>对<code>swtch</code>（<em><strong>kernel/proc.c</strong></em>:475）的调用进行了保存。</p>
 <p>当我们追踪<code>swtch</code>到返回时，他返回到<code>scheduler</code>而不是<code>sched</code>，并且它的栈指针指向当前CPU的调用程序栈（scheduler stack）。</p>
@@ -854,8 +851,7 @@
 <li>当进程正从 <code>RUNNING</code> 状态切换到 <code>RUNNABLE</code> 状态时，进程的寄存器可能还没有完全保存到 <code>p-&gt;context</code> 中。</li>
 <li>或者，进程的状态正在更新，可能还存在 CPU 在该进程的内核栈上运行，导致暂时的不一致。</li>
 </ul>
-<p>因此，<strong>在上下文切换的过程中</strong>，这些不变量可能会短暂地被打破。这就是为什么在 <code>sched</code> 执行过程中，<strong>必须持有 <code>p-&gt;lock</code></strong>，确保在完成整个上下文切换前，其他 CPU 不会并发地修改该进程的状态。</p>
-</blockquote>
+<p>因此，<strong>在上下文切换的过程中</strong>，这些不变量可能会短暂地被打破。这就是为什么在 <code>sched</code> 执行过程中，<strong>必须持有 <code>p-&gt;lock</code></strong>，确保在完成整个上下文切换前，其他 CPU 不会并发地修改该进程的状态。</p></blockquote>
 <p>维护上述不变量是xv6经常在一个线程中获取<code>p-&gt;lock</code>并在另一个线程中释放它的原因，例如在<code>yield</code>中获取并在<code>scheduler</code>中释放。</p>
 <p>一旦<code>yield</code>开始修改一个<code>RUNNING</code>进程的状态为<code>RUNNABLE</code>，锁必须保持被持有状态，直到不变量恢复：最早的正确释放点是<code>scheduler</code>（在其自身栈上运行）清除<code>c-&gt;proc</code>之后。类似地，一旦<code>scheduler</code>开始将<code>RUNNABLE</code>进程转换为<code>RUNNING</code>，在内核线程完全运行之前（在<code>swtch</code>之后，例如在<code>yield</code>中）绝不能释放锁。</p>
 <blockquote>
@@ -928,8 +924,7 @@
 <li><strong><code>yield</code> 后</strong>：锁不能立即释放，必须保持到调度器清理完 <code>c-&gt;proc</code>，并安全地将控制权交给另一个进程。</li>
 <li><strong><code>scheduler</code> 选择下一个进程后</strong>：当调度器把进程从 <code>RUNNABLE</code> 转换为 <code>RUNNING</code> 时，必须确保切换完成，才能释放锁。</li>
 </ol>
-<p>总的来说，<strong>锁的释放时机是确保状态和上下文切换完成，进程状态稳定</strong>后，才能释放锁，否则可能导致状态混乱和并发冲突。</p>
-</blockquote>
+<p>总的来说，<strong>锁的释放时机是确保状态和上下文切换完成，进程状态稳定</strong>后，才能释放锁，否则可能导致状态混乱和并发冲突。</p></blockquote>
 <p><code>p-&gt;lock</code>还保护其他东西：<code>exit</code>和<code>wait</code>之间的相互作用，避免丢失<code>wakeup</code>的机制（参见第7.5节），以及避免一个进程退出和其他进程读写其状态之间的争用（例如，<code>exit</code>系统调用查看<code>p-&gt;pid</code>并设置<code>p-&gt;killed</code>(*<strong>kernel/proc.c*</strong>:611)）。</p>
 <p>为了清晰起见，也许为了性能起见，有必要考虑一下<code>p-&gt;lock</code>的不同功能是否可以拆分。</p>
 <h2 id="代码mycpu和myproc">代码：mycpu和myproc
@@ -959,8 +954,7 @@
 <li><code>mycpu()</code> 函数返回当前 CPU 的 <code>struct cpu</code> 指针。它通过 <code>tp</code> 寄存器找到对应的 CPU 结构体。</li>
 <li><code>myproc()</code> 函数返回当前 CPU 上运行的进程的 <code>struct proc</code> 指针。它通过禁用中断，调用 <code>mycpu()</code> 函数从当前 CPU 的 <code>struct cpu</code> 中取出正在运行的进程指针。</li>
 </ul>
-<p>为了避免在中断或线程迁移（例如由于计时器中断导致线程切换到另一个 CPU）时返回值不再有效，Xv6 要求在获取这些信息时禁用中断，并在使用完后再启用。</p>
-</blockquote>
+<p>为了避免在中断或线程迁移（例如由于计时器中断导致线程切换到另一个 CPU）时返回值不再有效，Xv6 要求在获取这些信息时禁用中断，并在使用完后再启用。</p></blockquote>
 <h2 id="正课">正课
 </h2><h2 id="线程概述">线程概述
 </h2><p>今天的课程会讨论线程以及XV6如何实现线程切换。</p>
@@ -1127,37 +1121,32 @@
 <p>每一个内核线程都有一个context对象。但是内核线程实际上有两类。</p>
 <p>每一个用户进程有一个对应的内核线程，它的context对象保存在用户进程对应的proc结构体中。</p>
 <p>每一个调度器线程，它也有自己的context对象，但是它却没有对应的进程和proc结构体，所以调度器线程的context对象保存在cpu结构体中。</p>
-<p>在内核中，有一个cpu结构体的数组，每个cpu结构体对应一个CPU核，每个结构体中都有一个context字段。</p>
-</blockquote>
+<p>在内核中，有一个cpu结构体的数组，每个cpu结构体对应一个CPU核，每个结构体中都有一个context字段。</p></blockquote>
 <blockquote>
 <p>学生提问：为什么不能将context对象保存在进程对应的trapframe中？</p>
 <p>Robert教授：context可以保存在trapframe中，因为每一个进程都只有一个内核线程对应的一组寄存器，我们可以将这些寄存器保存在任何一个与进程一一对应的数据结构中。</p>
 <p>对于每个进程来说，有一个proc结构体，有一个trapframe结构体，所以我们可以将context保存于trapframe中。</p>
 <p>但是或许出于简化代码或者让代码更清晰的目的，trapframe还是只包含进入和离开内核时的数据。</p>
-<p>而context结构体中包含的是在内核线程和调度器线程之间切换时，需要保存和恢复的数据。</p>
-</blockquote>
+<p>而context结构体中包含的是在内核线程和调度器线程之间切换时，需要保存和恢复的数据。</p></blockquote>
 <blockquote>
 <p>学生提问：出让CPU是由用户发起的还是由内核发起的？</p>
 <p>Robert教授：对于XV6来说，并不会直接让用户线程出让CPU或者完成线程切换，而是由内核在合适的时间点做决定。</p>
 <p>有的时候你可以猜到特定的系统调用会导致出让CPU，例如一个用户进程读取pipe，而它知道pipe中并不能读到任何数据，这时你可以预测读取会被阻塞，而内核在等待数据的过程中会运行其他的进程。</p>
 <p>内核会在两个场景下出让CPU。</p>
 <p>当定时器中断触发了，内核总是会让当前进程出让CPU，因为我们需要在定时器中断间隔的时间点上交织执行所有想要运行的进程。</p>
-<p>另一种场景就是任何时候一个进程调用了系统调用并等待I/O，例如等待你敲入下一个按键，在你还没有按下按键时，等待I/O的机制会触发出让CPU。</p>
-</blockquote>
+<p>另一种场景就是任何时候一个进程调用了系统调用并等待I/O，例如等待你敲入下一个按键，在你还没有按下按键时，等待I/O的机制会触发出让CPU。</p></blockquote>
 <blockquote>
 <p>学生提问：用户进程调用sleep函数是不是会调用某个系统调用，然后将用户进程的信息保存在trapframe，然后触发进程切换，这时就不是定时器中断决定，而是用户进程自己决定了吧？</p>
 <p>Robert教授：如果进程执行了read系统调用，然后进入到了内核中。</p>
 <p>而read系统调用要求进程等待磁盘，这时系统调用代码会调用sleep，而sleep最后会调用swtch函数。</p>
 <p>swtch函数会保存内核线程的寄存器到进程的context中，然后切换到对应CPU的调度器线程，再让其他的线程运行。</p>
 <p>这样在当前线程等待磁盘读取结束时，其他线程还能运行。</p>
-<p>所以，这里的流程除了没有定时器中断，其他都一样，只是这里是因为一个系统调用需要等待I/O（注，感觉答非所问）</p>
-</blockquote>
+<p>所以，这里的流程除了没有定时器中断，其他都一样，只是这里是因为一个系统调用需要等待I/O（注，感觉答非所问）</p></blockquote>
 <blockquote>
 <p>学生提问：每一个CPU的调度器线程有自己的栈吗？</p>
 <p>Robert教授：是的，每一个调度器线程都有自己独立的栈。</p>
 <p>实际上调度器线程的所有内容，包括栈和context，与用户进程不一样，都是在系统启动时就设置好了。</p>
-<p>如果你查看XV6的start.s（注：是entry.S和start.c）文件，你就可以看到为每个CPU核设置好调度器线程。</p>
-</blockquote>
+<p>如果你查看XV6的start.s（注：是entry.S和start.c）文件，你就可以看到为每个CPU核设置好调度器线程。</p></blockquote>
 <p>这里有一个术语需要解释一下。</p>
 <p>当人们在说context switching，他们通常说的是从一个线程切换到另一个线程，因为在切换的过程中需要先保存前一个线程的寄存器，然后再恢复之前保存的后一个线程的寄存器，这些寄存器都是保存在context对象中。</p>
 <p>在有些时候，context switching也指从一个用户进程切换到另一个用户进程的完整过程。</p>
@@ -1175,8 +1164,7 @@
 <p>学生提问：我们这里一直在说线程，但是从我看来XV6的实现中，一个进程就只有一个线程，有没有可能一个进程有多个线程？</p>
 <p>Robert教授：我们这里的用词的确有点让人混淆。</p>
 <p>在XV6中，一个进程要么在用户空间执行指令，要么是在内核空间执行指令，要么它的状态被保存在context和trapframe中，并且没有执行任何指令。</p>
-<p>这里该怎么称呼它呢？你可以根据自己的喜好来称呼它，对于我来说，每个进程有两个线程，一个用户空间线程，一个内核空间线程，并且存在限制使得一个进程要么运行在用户空间线程，要么为了执行系统调用或者响应中断而运行在内核空间线程 ，但是永远也不会两者同时运行。</p>
-</blockquote>
+<p>这里该怎么称呼它呢？你可以根据自己的喜好来称呼它，对于我来说，每个进程有两个线程，一个用户空间线程，一个内核空间线程，并且存在限制使得一个进程要么运行在用户空间线程，要么为了执行系统调用或者响应中断而运行在内核空间线程 ，但是永远也不会两者同时运行。</p></blockquote>
 <h2 id="xv6进程切换示例程序">XV6进程切换示例程序
 </h2><p>我们先来看一下proc.h中的proc结构体，从结构体中我们可以看到很多之前介绍的内容。</p>
 <div class="highlight"><div class="chroma">
@@ -1239,7 +1227,7 @@
 <p>接下来会运行一个简单的演示程序，在这个程序中我们会从一个进程切换到另一个。<img src="/p/mit6s08111thread-switching/p2.png"
 	width="562"
 	height="544"
-	srcset="/p/mit6s08111thread-switching/p2_hu1693358805321326060.png 480w, /p/mit6s08111thread-switching/p2_hu527241409333239847.png 1024w"
+	srcset="/p/mit6s08111thread-switching/p2_hu_691008196811dfe4.png 480w, /p/mit6s08111thread-switching/p2_hu_228aa05e68038c95.png 1024w"
 	loading="lazy"
 	
 		alt="image"
@@ -1258,7 +1246,7 @@
 <p>接下来运行spin程序，<img src="/p/mit6s08111thread-switching/p3.png"
 	width="724"
 	height="324"
-	srcset="/p/mit6s08111thread-switching/p3_hu2024462625367836819.png 480w, /p/mit6s08111thread-switching/p3_hu1405761908147253642.png 1024w"
+	srcset="/p/mit6s08111thread-switching/p3_hu_d95fab29915914fc.png 480w, /p/mit6s08111thread-switching/p3_hu_f8da2e407ec97f76.png 1024w"
 	loading="lazy"
 	
 		alt="p3"
@@ -1276,7 +1264,7 @@
 <p><img src="/p/mit6s08111thread-switching/p4.png"
 	width="918"
 	height="1036"
-	srcset="/p/mit6s08111thread-switching/p4_hu5029313476404847184.png 480w, /p/mit6s08111thread-switching/p4_hu5066168765813689661.png 1024w"
+	srcset="/p/mit6s08111thread-switching/p4_hu_bdb8e8a29947d0d1.png 480w, /p/mit6s08111thread-switching/p4_hu_5ea85d5a7936ec2a.png 1024w"
 	loading="lazy"
 	
 		alt="p4"
@@ -1290,7 +1278,7 @@
 <p><img src="/p/mit6s08111thread-switching/p5.png"
 	width="798"
 	height="86"
-	srcset="/p/mit6s08111thread-switching/p5_hu7357509958749080609.png 480w, /p/mit6s08111thread-switching/p5_hu28250811026237817.png 1024w"
+	srcset="/p/mit6s08111thread-switching/p5_hu_ff5c7d04005d72e4.png 480w, /p/mit6s08111thread-switching/p5_hu_115b2b104cc2f7be.png 1024w"
 	loading="lazy"
 	
 		alt="p5"
@@ -1305,7 +1293,7 @@
 <p><img src="/p/mit6s08111thread-switching/p6.png"
 	width="780"
 	height="152"
-	srcset="/p/mit6s08111thread-switching/p6_hu6811547187374485424.png 480w, /p/mit6s08111thread-switching/p6_hu12400229481486757518.png 1024w"
+	srcset="/p/mit6s08111thread-switching/p6_hu_8f933fd47f869dd6.png 480w, /p/mit6s08111thread-switching/p6_hu_660c0477e12ef336.png 1024w"
 	loading="lazy"
 	
 		alt="p6"
@@ -1321,7 +1309,7 @@
 <p><img src="/p/mit6s08111thread-switching/p7.png"
 	width="714"
 	height="334"
-	srcset="/p/mit6s08111thread-switching/p7_hu3964657701307735048.png 480w, /p/mit6s08111thread-switching/p7_hu3297580789123514755.png 1024w"
+	srcset="/p/mit6s08111thread-switching/p7_hu_7054b9f699f5f13b.png 480w, /p/mit6s08111thread-switching/p7_hu_e3f8b4a99f1a4b57.png 1024w"
 	loading="lazy"
 	
 		alt="p7"
@@ -1336,7 +1324,7 @@
 <p><img src="/p/mit6s08111thread-switching/p8.png"
 	width="760"
 	height="224"
-	srcset="/p/mit6s08111thread-switching/p8_hu12352301448078710713.png 480w, /p/mit6s08111thread-switching/p8_hu14576638449005284615.png 1024w"
+	srcset="/p/mit6s08111thread-switching/p8_hu_8dc2b7ddbaab9b30.png 480w, /p/mit6s08111thread-switching/p8_hu_4e159fb09b94065b.png 1024w"
 	loading="lazy"
 	
 		alt="p8"
@@ -1356,8 +1344,7 @@
 <p>其中一件是，每个进程都有不同的内核栈，它由proc结构体中的kstack字段所指向；</p>
 <p>另一件就是，任何内核代码都可以通过调用myproc函数来获取当前CPU正在运行的进程。</p>
 <p>内核线程可以通过调用这个函数知道自己属于哪个用户进程。</p>
-<p>myproc函数会使用tp寄存器来获取当前的CPU核的ID，并使用这个ID在一个保存了所有CPU上运行的进程的结构体数组中，找到对应的proc结构体。这就是不同的内核线程区分自己的方法。</p>
-</blockquote>
+<p>myproc函数会使用tp寄存器来获取当前的CPU核的ID，并使用这个ID在一个保存了所有CPU上运行的进程的结构体数组中，找到对应的proc结构体。这就是不同的内核线程区分自己的方法。</p></blockquote>
 <p>首先会打印p-&gt;name来获取进程的名称，</p>
 <p>当前进程是spin程序，如预期一样。</p>
 <p>当前的进程ID是3，进程切换之后，我们预期进程ID会不一样。</p>
@@ -1377,15 +1364,13 @@
 <p>这个问题是可能发生的，因为电脑中有上亿的晶体管，有的时候电脑会有问题，但是这超出了内核的管理范围了。</p>
 <p>所以我们假设计算机可以正常工作。</p>
 <p>有的时候软件会尝试弥补硬件的错误，比如通过网络传输packet，总是会带上checksum，这样如果某个网络设备故障导致某个bit反转了，可以通过checksum发现这个问题。</p>
-<p>但是对于计算机内部的问题，人们倾向于不用软件来尝试弥补硬件的错误。</p>
-</blockquote>
+<p>但是对于计算机内部的问题，人们倾向于不用软件来尝试弥补硬件的错误。</p></blockquote>
 <blockquote>
 <p>学生提问：当一个线程结束执行了，比如说在用户空间通过exit系统调用结束线程，同时也会关闭进程的内核线程。那么线程结束之后和下一个定时器中断之间这段时间，CPU仍然会被这个线程占有吗？还是说我们在结束线程的时候会启动一个新的线程？</p>
 <p>Robert教授：exit系统调用会出让CPU。</p>
 <p>尽管我们这节课主要是基于定时器中断来讨论，但是实际上XV6切换线程的绝大部分场景都不是因为定时器中断，比如说一些系统调用在等待一些事件并决定让出CPU。</p>
-<p>exit系统调用会做各种操作然后调用yield函数来出让CPU，这里的出让并不依赖定时器中断。</p>
-</blockquote>
-<h2 id="xv6线程切换--yieldsched函数">XV6线程切换&ndash;yield/sched函数
+<p>exit系统调用会做各种操作然后调用yield函数来出让CPU，这里的出让并不依赖定时器中断。</p></blockquote>
+<h2 id="xv6线程切换yieldsched函数">XV6线程切换&ndash;yield/sched函数
 </h2><p>回到devintr函数返回到usertrap函数中的位置。</p>
 <p>在gdb里面输入几次step走到yield函数的调用。</p>
 <p>yield函数是整个线程切换的第一步，下面是yield函数的内容：</p>
@@ -1495,7 +1480,7 @@
 <p><img src="/p/mit6s08111thread-switching/p9.png"
 	width="958"
 	height="118"
-	srcset="/p/mit6s08111thread-switching/p9_hu10285545358071669460.png 480w, /p/mit6s08111thread-switching/p9_hu8796078071750968036.png 1024w"
+	srcset="/p/mit6s08111thread-switching/p9_hu_432db08261c6d4aa.png 480w, /p/mit6s08111thread-switching/p9_hu_3b8005bac571a085.png 1024w"
 	loading="lazy"
 	
 		alt="p9"
@@ -1512,7 +1497,7 @@
 <p><img src="/p/mit6s08111thread-switching/p10.png"
 	width="704"
 	height="70"
-	srcset="/p/mit6s08111thread-switching/p10_hu16065095697725850952.png 480w, /p/mit6s08111thread-switching/p10_hu1356209050733223766.png 1024w"
+	srcset="/p/mit6s08111thread-switching/p10_hu_70a2a7ca6fd2ffab.png 480w, /p/mit6s08111thread-switching/p10_hu_86566cec5537ed23.png 1024w"
 	loading="lazy"
 	
 		alt="p10"
@@ -1620,8 +1605,7 @@
 <p>我们可以打印ra寄存器，如你们所预期的一样，它指向了sched函数。</p>
 <p>为什么RISC-V中有32个寄存器，但是swtch函数中只保存并恢复了14个寄存器？</p>
 <blockquote>
-<p>因为switch是按照一个普通函数来调用的，对于有些寄存器，swtch函数的调用者默认swtch函数会做修改，所以调用者已经在自己的栈上保存了这些寄存器，当函数返回时，这些寄存器会自动恢复。所以swtch函数里只需要保存Callee Saved Register就行。</p>
-</blockquote>
+<p>因为switch是按照一个普通函数来调用的，对于有些寄存器，swtch函数的调用者默认swtch函数会做修改，所以调用者已经在自己的栈上保存了这些寄存器，当函数返回时，这些寄存器会自动恢复。所以swtch函数里只需要保存Callee Saved Register就行。</p></blockquote>
 <p>因为swtch函数是从C代码调用的，所以我们知道Caller Saved Register会被C编译器保存在当前的栈上。</p>
 <p>Caller Saved Register大概有15-18个，而我们在swtch函数中只需要处理C编译器不会保存，但是对于swtch函数又有用的一些寄存器。</p>
 <p>最后我想看的是sp（Stack Pointer）寄存器。</p>
@@ -1646,9 +1630,8 @@
 <p>可以肯定的是C语言中没有方法能更改sp、ra寄存器。</p>
 <p>所以在普通的C语言中很难完成寄存器的存储和加载，唯一的方法就是在C中嵌套汇编语言。</p>
 <p>所以我们也可以在C函数中内嵌switch中的指令，但是这跟我们直接定义一个汇编函数是一样的。</p>
-<p>或者说swtch函数中的操作是在C语言的层级之下，所以并不能使用C语言。</p>
-</blockquote>
-<h2 id="xv6线程切换--scheduler">XV6线程切换&ndash;scheduler
+<p>或者说swtch函数中的操作是在C语言的层级之下，所以并不能使用C语言。</p></blockquote>
+<h2 id="xv6线程切换scheduler">XV6线程切换&ndash;scheduler
 </h2><p>来看一下scheduler的完整代码，</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1777,7 +1760,7 @@
 <p><img src="/p/mit6s08111thread-switching/p11.png"
 	width="718"
 	height="412"
-	srcset="/p/mit6s08111thread-switching/p11_hu8694052433713630363.png 480w, /p/mit6s08111thread-switching/p11_hu3312515259515705091.png 1024w"
+	srcset="/p/mit6s08111thread-switching/p11_hu_fb0779744dd79a74.png 480w, /p/mit6s08111thread-switching/p11_hu_52e384a4dd73542f.png 1024w"
 	loading="lazy"
 	
 		alt="p11"
@@ -1807,8 +1790,7 @@
 <p>你基本上回答了自己的问题，如果我们因为定时器中断之外的原因而停止了执行当前的进程，switch会返回到一些系统调用的代码中，而不是我们这里看到sched函数。</p>
 <p>我记得sleep最后也调用了sched函数，虽然bracktrace可能看起来会不一样，但是还是会包含sched。</p>
 <p>所以我这里只介绍了一种进程间切换的方法，也就是因为定时器中断而发生切换。</p>
-<p>但是还有其他的可能会触发进程切换，例如等待I/O或者等待另一个进程向pipe写数据。</p>
-</blockquote>
+<p>但是还有其他的可能会触发进程切换，例如等待I/O或者等待另一个进程向pipe写数据。</p></blockquote>
 <p>这里有件事情需要注意，调度器线程调用了swtch函数，但是我们从swtch函数返回时，实际上是返回到了对于switch的另一个调用，而不是调度器线程中的调用。</p>
 <p>我们返回到的是pid为4的进程在很久之前对于switch的调用。这里可能会有点让人困惑，但是这就是线程切换的核心。</p>
 <p>另一件需要注意的事情是，swtch函数是线程切换的核心，但是swtch函数中只有保存寄存器，再加载寄存器的操作。</p>
@@ -1834,8 +1816,7 @@
 <p>学生提问：所以说一个进程中的多个线程会有相同的page table？</p>
 <p>Robert教授：是的，如果你在Linux上，你为一个进程创建了2个线程，我不确定它们是不是共享同一个的page table，还是说它们是不同的page table，但是内容是相同的。</p>
 <p>学生提问：有没有原因说这里的page table要是分开的？</p>
-<p>Robert教授：我不知道Linux究竟用了哪种方法。</p>
-</blockquote>
+<p>Robert教授：我不知道Linux究竟用了哪种方法。</p></blockquote>
 <p>以下是线程第一次调用switch的过程</p>
 <blockquote>
 <p>学生提问：当调用swtch函数的时候，实际上是从一个线程对于switch的调用切换到了另一个线程对于switch的调用。所以线程第一次调用swtch函数时，需要伪造一个“另一个线程”对于switch的调用，是吧？因为也不能通过swtch函数随机跳到其他代码去。</p>
@@ -1844,7 +1825,7 @@
 <p><img src="/p/mit6s08111thread-switching/p12.png"
 	width="536"
 	height="170"
-	srcset="/p/mit6s08111thread-switching/p12_hu10011283022753249809.png 480w, /p/mit6s08111thread-switching/p12_hu17797523608250037853.png 1024w"
+	srcset="/p/mit6s08111thread-switching/p12_hu_f15c8c22dd57218c.png 480w, /p/mit6s08111thread-switching/p12_hu_410de157f51f6227.png 1024w"
 	loading="lazy"
 	
 		alt="p12"
@@ -1972,8 +1953,7 @@
 </div><p>因为fork拷贝的进程会同时拷贝父进程的程序计数器，所以我们唯一不是通过fork创建进程的场景就是创建第一个进程的时候。这时需要设置程序计数器为0。</p>
 <p>学生提问：在fortret函数中，if(first)是什么意思？</p>
 <p>Robert教授：文件系统需要被初始化，具体来说，需要从磁盘读取一些数据来确保文件系统的运行，比如说文件系统究竟有多大，各种各样的东西在文件系统的哪个位置，同时还需要有crash recovery log。</p>
-<p>完成任何文件系统的操作都需要等待磁盘操作结束，但是XV6只能在进程的context下执行文件系统操作，比如等待I/O。所以初始化文件系统需要等到我们有了一个进程才能进行。而这一步是在第一次调用forkret时完成的，所以在forkret中才有了if(first)判断。</p>
-</blockquote>
+<p>完成任何文件系统的操作都需要等待磁盘操作结束，但是XV6只能在进程的context下执行文件系统操作，比如等待I/O。所以初始化文件系统需要等到我们有了一个进程才能进行。而这一步是在第一次调用forkret时完成的，所以在forkret中才有了if(first)判断。</p></blockquote>
 
 </section>
 
@@ -2040,7 +2020,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08123rcu/bg.91a08bf3fe0a8ca435e8fbc902291fd5_hu4589796922609635382.jpg" 
+                <img src="/p/mit6s08123rcu/bg.91a08bf3fe0a8ca435e8fbc902291fd5_hu_50da030b7ba2cbe7.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -2064,7 +2044,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08122meltdown/19.8d880549dccba2f0c1613b3e41a721e5_hu3753156070077914420.jpg" 
+                <img src="/p/mit6s08122meltdown/19.8d880549dccba2f0c1613b3e41a721e5_hu_1493d831cda8626c.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -2088,7 +2068,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08121networking/bg.68c4376fd87b0b35da07319dd155c90d_hu10351534106733688476.jpg" 
+                <img src="/p/mit6s08121networking/bg.68c4376fd87b0b35da07319dd155c90d_hu_b8a716243c6f9679.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -2112,7 +2092,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08120kernels-and-hll/bg.4175e6a2793e0fc340e5aced2529e40b_hu6405785273338381617.jpg" 
+                <img src="/p/mit6s08120kernels-and-hll/bg.4175e6a2793e0fc340e5aced2529e40b_hu_de82d011b3d97ace.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -2136,7 +2116,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08119virtual-machines/bg.b02a7ba1d946705c0cf2809bcf960db8_hu14546491865979434532.jpg" 
+                <img src="/p/mit6s08119virtual-machines/bg.b02a7ba1d946705c0cf2809bcf960db8_hu_77df69a362eba544.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -2168,7 +2148,9 @@
     <section class="copyright">
         &copy; 
         
-        2024 echudet
+            2024 - 
+        
+        2025 echudet
     </section>
     
     <section class="powerby">
@@ -2201,6 +2183,12 @@
         </script> 
 
         
+        
+          
+        
+          
+        
+          
         
           
         
@@ -2347,9 +2335,15 @@
         
              
         
+             
+        
+             
+        
+             
+        
         
 
-        共 747479 字 , 35 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        共 756615 字 , 38 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
         主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 

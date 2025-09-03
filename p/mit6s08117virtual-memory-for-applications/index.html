@@ -6,11 +6,11 @@
 
 <link rel='canonical' href='https://echudet.github.io/p/mit6s08117virtual-memory-for-applications/'>
 
-<link rel="stylesheet" href="/scss/style.min.86fc5e5efb829fb1bdd7a2d2275017fb3ae01ba7fcf491e347d76495ae5e3ae2.css"><meta property='og:title' content="MIT6S081：17Virtual memory for applications">
+<link rel="stylesheet" href="/scss/style.min.da77a84796b4cbbce4984dfc653595f2e1f66158390942c69e60c576c66a6e8b.css"><meta property='og:title' content="MIT6S081：17Virtual memory for applications">
 <meta property='og:description' content="虚拟内存在操作系统中扮演着重要角色，通过抽象物理内存的复杂性为每个进程提供一个统一、隔离的地址空间。这一机制允许程序运行时拥有自己的内存视图，确保不会相互干扰，提升了系统的稳定性与安全性。虚拟内存将物理内存和磁盘空间结合，允许系统运行比实际物理内存更大的程序。通过分页或分段等技术，操作系统能够在后台进行内存和存储之间的智能管理，使用页面置换算法来优化性能，保证多任务处理的高效性。这个机制不仅提高了内存利用率，还使得程序开发更为高效，因为开发者无需处理内存分配的复杂细节。">
 <meta property='og:url' content='https://echudet.github.io/p/mit6s08117virtual-memory-for-applications/'>
 <meta property='og:site_name' content='echudet'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-10-02T22:02:50&#43;08:00'/><meta property='article:modified_time' content='2024-11-13T17:04:51&#43;08:00'/><meta property='og:image' content='https://echudet.github.io/p/mit6s08117virtual-memory-for-applications/bg.png' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-10-02T22:02:50&#43;08:00'/><meta property='article:modified_time' content='2025-09-03T22:10:01&#43;08:00'/><meta property='og:image' content='https://echudet.github.io/p/mit6s08117virtual-memory-for-applications/bg.png' />
 <meta name="twitter:title" content="MIT6S081：17Virtual memory for applications">
 <meta name="twitter:description" content="虚拟内存在操作系统中扮演着重要角色，通过抽象物理内存的复杂性为每个进程提供一个统一、隔离的地址空间。这一机制允许程序运行时拥有自己的内存视图，确保不会相互干扰，提升了系统的稳定性与安全性。虚拟内存将物理内存和磁盘空间结合，允许系统运行比实际物理内存更大的程序。通过分页或分段等技术，操作系统能够在后台进行内存和存储之间的智能管理，使用页面置换算法来优化性能，保证多任务处理的高效性。这个机制不仅提高了内存利用率，还使得程序开发更为高效，因为开发者无需处理内存分配的复杂细节。"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://echudet.github.io/p/mit6s08117virtual-memory-for-applications/bg.png' />
@@ -59,7 +59,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu11199958555974308744.png" width="300"
+                        <img src="/img/avatar_hu_67bf1327fc98b60.png" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -314,8 +314,8 @@
     <header class="article-header">
         <div class="article-image">
             <a href="/p/mit6s08117virtual-memory-for-applications/">
-                <img src="/p/mit6s08117virtual-memory-for-applications/bg_hu13659540609009056379.png"
-                        srcset="/p/mit6s08117virtual-memory-for-applications/bg_hu13659540609009056379.png 800w, /p/mit6s08117virtual-memory-for-applications/bg_hu16658861918845069526.png 1600w"
+                <img src="/p/mit6s08117virtual-memory-for-applications/bg_hu_fcbd15227e75b2bf.png"
+                        srcset="/p/mit6s08117virtual-memory-for-applications/bg_hu_fcbd15227e75b2bf.png 800w, /p/mit6s08117virtual-memory-for-applications/bg_hu_4cc03b8dd20eee8f.png 1600w"
                         width="800" 
                         height="500" 
                         loading="lazy"
@@ -480,7 +480,7 @@
 </svg>
 
             <time class="article-words">
-                文章字数：36078字
+                文章字数：36082字
             </time>
         </div>
         <div class="article-lastmod">
@@ -493,7 +493,7 @@
 
 
                 <time>
-                    Nov 13, 2024 17:04 &#43;0800
+                    Sep 03, 2025 22:10 &#43;0800
                 </time>
             </div></footer>
     
@@ -514,7 +514,11 @@
     <h1 id="lecture-17-virtual-memory-for-applications">Lecture 17 Virtual memory for applications
 </h1><h2 id="课前预习">课前预习
 </h2><h2 id="论文速览">论文速览
-</h2><p>在<strong>简介</strong>部分提到，论文的核心讨论点是：虚拟内存（Virtual Memory）不仅仅可以用来扩展操作系统的地址空间，还能用于很多其他的目的，例如内存共享、写时复制（copy-on-write）以及处理保护违规。作者探讨了操作系统应提供给用户程序的虚拟内存基本原语，特别是这些原语如何支持不同的用户级应用。</p>
+</h2><p><a class="link" href="https://pdos.csail.mit.edu/6.828/2020/readings/appel-li.pdf"  target="_blank" rel="noopener"
+    >论文链接</a>
+
+</p>
+<p>在<strong>简介</strong>部分提到，论文的核心讨论点是：虚拟内存（Virtual Memory）不仅仅可以用来扩展操作系统的地址空间，还能用于很多其他的目的，例如内存共享、写时复制（copy-on-write）以及处理保护违规。作者探讨了操作系统应提供给用户程序的虚拟内存基本原语，特别是这些原语如何支持不同的用户级应用。</p>
 <p>在<strong>虚拟内存原语</strong>部分提到，论文中提到的关键虚拟内存操作包括：</p>
 <ul>
 <li><strong>trap：</strong> 处理用户模式下的页故障。</li>
@@ -577,8 +581,7 @@
 <li><strong>处理指针</strong>：垃圾收集器扫描相关页面，识别出从老代指向新代的指针。</li>
 <li><strong>解除保护</strong>：识别和处理后，解除该页面的只读保护，恢复其正常的读写权限。</li>
 </ol>
-<p>这一机制允许系统高效地处理指针赋值带来的潜在错误，同时优化了垃圾回收的效率，尤其是在内存增大的情况下。</p>
-</blockquote>
+<p>这一机制允许系统高效地处理指针赋值带来的潜在错误，同时优化了垃圾回收的效率，尤其是在内存增大的情况下。</p></blockquote>
 <h2 id="persistent-stores持久存储">Persistent stores(持久存储)
 </h2><p><strong>持久存储</strong>（Persistent Stores）是用于创建超越单个程序调用的动态分配堆。程序可以遍历和修改数据结构、提交更改，甚至可以在不进行永久更改的情况下放弃这些更改。</p>
 <p>在持久存储中，<strong>指针遍历</strong>（即读取操作）的设计与在主存储器中的数据读取操作（fetch）一样快速。这是因为持久存储通常被映射到磁盘文件上，从而允许在访问存储的新部分时触发页面错误（类似于内存中的正常操作）。</p>
@@ -642,8 +645,7 @@
 <li>使用trap后，虽然每次页面错误处理需要大约1200个周期，但它只会在堆溢出时触发，而不是在每次分配时进行比较和分支，因此可以将性能开销减少到<strong>0.3%</strong>。</li>
 </ul>
 <p>trap的原理是利用页面保护机制。当程序尝试访问一个受保护的页面时，系统会捕获这个错误，并触发一个陷阱（trap）。操作系统或用户态的错误处理程序会处理这个错误，然后可能会解除页面的保护，允许程序继续访问该页面。这个过程的关键在于减少程序在正常情况下的指令开销，而只在必要时通过页面错误机制处理特殊情况。</p>
-<p>在文中的例子中，垃圾收集器会在分配区域末端设置一个保护页面。当程序试图超出分配区域时，系统触发页面错误，这时垃圾收集器被调用，清理堆内存并允许程序继续运行。</p>
-</blockquote>
+<p>在文中的例子中，垃圾收集器会在分配区域末端设置一个保护页面。当程序试图超出分配区域时，系统触发页面错误，这时垃圾收集器被调用，清理堆内存并允许程序继续运行。</p></blockquote>
 <h2 id="vm-primitive-performance">VM primitive performance
 </h2><p>几乎我们在本文中描述的所有算法都属于以下两类之一。<strong>第一类算法</strong>会将页面批量保护起来（使其无法访问），然后在每次页面错误（page-fault）陷阱发生时，逐个解除这些页面的保护状态。<strong>第二类算法</strong>则是对页面进行单独的保护和解除保护操作。由于 <code>protN</code>（批量保护）、<code>trap</code>（陷阱）和 <code>unprot</code>（解除保护）始终是一起使用的，如果其中一个操作效率很高，而其他操作非常慢，那么该操作系统的性能也不会很好。</p>
 <p>我们对整体的用户模式虚拟内存性能进行了两项测试。<strong>第一项测试</strong>是测量 <code>prot1</code>、<code>trap</code> 和 <code>unprot</code> 的总耗时，方法是对以下基准程序执行100次：</p>
@@ -717,8 +719,7 @@
 <li><strong>TLB 清除的开销：</strong> 多个页面的清除成本可以被分摊，减少了逐个页面执行清除时的成本。</li>
 <li><strong>硬件依赖性降低：</strong> 批量处理可以使分页操作的效率提升，降低对硬件支持的需求。</li>
 </ul>
-<p>最终，批量操作不仅适用于本文中讨论的高级算法（如垃圾收集），也可以用于传统的磁盘分页系统，以更高效地释放物理内存和管理页面权限。</p>
-</blockquote>
+<p>最终，批量操作不仅适用于本文中讨论的高级算法（如垃圾收集），也可以用于传统的磁盘分页系统，以更高效地释放物理内存和管理页面权限。</p></blockquote>
 <h2 id="optimal-page-size">Optimal page size
 </h2><p>选择页面大小是一项重要的设计决策，受多种因素的影响。</p>
 <p>首先，小页面的主要优点是：当从磁盘读取或写入内存时，传输时间是线性增加的，而查找时间是固定的。因此，较小的页面减少了未使用数据传输到磁盘的浪费。这对于具有<strong>糟糕的局部性</strong>的应用程序来说尤为重要，因为它们的每个页面中只有很少的字被访问。</p>
@@ -758,8 +759,7 @@
 <li><strong>数据同步问题</strong>：如果同一个物理页面有多个缓存副本，当系统从某个虚拟地址修改数据后，如果不及时更新或清除其他虚拟地址的缓存副本，处理器在访问这些虚拟地址时可能会读取过时的数据，从而导致缓存一致性问题。</li>
 </ol>
 <p>缓存通常会根据虚拟地址进行分配，如果同一个物理页面通过多个虚拟地址映射，这些虚拟地址可能在缓存中占用不同的缓存行，而这正是造成不一致的根本原因。这种不一致性可能导致程序的错误运行，尤其是在垃圾回收等需要保证内存一致性的场景下。</p>
-<p>所以，<strong>每个虚拟地址不会抽出一个特定的缓存块</strong>，但同一个物理页面可能通过多个虚拟地址映射，从而在缓存中创建多个条目，增加了保持这些条目一致的复杂性。</p>
-</blockquote>
+<p>所以，<strong>每个虚拟地址不会抽出一个特定的缓存块</strong>，但同一个物理页面可能通过多个虚拟地址映射，从而在缓存中创建多个条目，增加了保持这些条目一致的复杂性。</p></blockquote>
 <h2 id="is-this-too-much-to-ask">Is this too much to ask?
 </h2><p>有些Unix的实现，在某些机器上，提供了非常干净且同步的信号处理机制。引发页面故障的指令会调用信号处理程序，而不会改变处理器的其他状态；后续的指令不会执行，等等。信号处理程序可以完全同步地访问机器寄存器，改变内存映射或机器寄存器，然后重新开始执行故障指令。然而，在高度流水化的机器上，可能会存在多个未处理的页面故障【26】，并且可能在注意到故障之前，多个故障后的指令已经将其结果写入寄存器；这些指令可以恢复执行，但不能重新启动。</p>
 <p>当用户程序依赖于同步行为时，它们在流水线机器上运行会很困难。现代UNIX系统让用户程序主动参与内存管理功能，允许它们显式地操作其内存映射。这在某种程度上就像是发出了“通往地狱的镌刻请柬”【26】。</p>
@@ -863,8 +863,7 @@
 <li>
 <p>以及map2。map2使得一个应用程序可以将一个特定的内存地址空间映射两次，并且这两次映射拥有不同的accessability。</p>
 <blockquote>
-<p>（注，也就是一段物理内存对应两份虚拟内存，并且两份虚拟内存有不同的accessability）。</p>
-</blockquote>
+<p>（注，也就是一段物理内存对应两份虚拟内存，并且两份虚拟内存有不同的accessability）。</p></blockquote>
 </li>
 </ul>
 <p>XV6在用户程序中支持以上任意的特性吗？</p>
@@ -900,8 +899,7 @@
 <p>（注，第四个参数是flags，MAP_PRIVATE是其中一个值，在mmap文件的场景下，MAP_PRIVATE表明更新文件不会写入磁盘，只会更新在内存中的拷贝，详见<a class="link" href="https://man7.org/linux/man-pages/man2/mmap.2.html"  target="_blank" rel="noopener"
     >man page</a>
 
-）。</p>
-</blockquote>
+）。</p></blockquote>
 </li>
 <li>
 <p>第五个参数是传入的对象，在上面的例子中就是文件描述符。</p>
@@ -924,8 +922,7 @@
 <p>（注，详见<a class="link" href="https://man7.org/linux/man-pages/man2/mprotect.2.html"  target="_blank" rel="noopener"
     >man page</a>
 
-）。</p>
-</blockquote>
+）。</p></blockquote>
 <p>当你将某个对象映射到了虚拟内存地址空间，你可以修改对应虚拟内存的权限，这样你就可以以特定的权限保护对象的一部分，或者整个对象。</p>
 <p>举个例子，通过上图对于mprotect的调用将权限设置成只读（R），这时，对于addr到addr+len这段地址，load指令还能执行，但是store指令将会变成Page Fault。</p>
 <p>类似的，如果你想要将一段地址空间变成完成不可访问的，那么可以在mprotect中的权限参数传入None，那么任何对于addr到addr+len这段地址的访问，都会生成Page Fault。</p>
@@ -947,8 +944,7 @@
 <p>sigaction也可以实现这个功能，只是它更加的通用，因为它可以响应不同类型的signal。</p>
 <blockquote>
 <p>学生提问：看起来mprotect暗示了你可以为单独的地址添加不同的权限，然而在XV6中，我们只能为整个Page设置相同的权限，这里是有区别吗？</p>
-<p>Frans教授：不，这里并没有区别，它们都在Page粒度工作。如果你好奇的话，有一个单独的系统调用可以查看Page的大小。</p>
-</blockquote>
+<p>Frans教授：不，这里并没有区别，它们都在Page粒度工作。如果你好奇的话，有一个单独的系统调用可以查看Page的大小。</p></blockquote>
 <h3 id="虚拟内存特性">虚拟内存特性
 </h3><p>如果你回想前面提到过的虚拟内存特性，我们可以将它们对应到这一节描述的Unix接口中来。</p>
 <ul>
@@ -1001,8 +997,7 @@
 </ul>
 </li>
 </ol>
-<p>因此，<strong>“硬件 Page Table”指的是地址翻译依赖于硬件完成</strong>，而不是说用户或操作系统完全无法控制页表。操作系统仍然可以通过内核态管理页表并间接影响地址空间，只不过实际的地址翻译过程由硬件（CPU 和 MMU）来加速处理，以提高效率。这种设计是为了平衡性能与灵活性，使得系统能够高效地管理和访问内存。</p>
-</blockquote>
+<p>因此，<strong>“硬件 Page Table”指的是地址翻译依赖于硬件完成</strong>，而不是说用户或操作系统完全无法控制页表。操作系统仍然可以通过内核态管理页表并间接影响地址空间，只不过实际的地址翻译过程由硬件（CPU 和 MMU）来加速处理，以提高效率。这种设计是为了平衡性能与灵活性，使得系统能够高效地管理和访问内存。</p></blockquote>
 <p>但是通常来说，地址空间还包含了一些操作系统的数据结构，这些数据结构与任何硬件设计都无关，它们被称为Virtual Memory Areas（VMAs）。</p>
 <p>VMA会记录一些有关连续虚拟内存地址段的信息。</p>
 <p>在一个地址空间中，可能包含了多个section，每一个section都由一个连续的地址段构成，对于每个section，都有一个VMA对象。</p>
@@ -1085,15 +1080,13 @@
 <li><strong>“segfault事件传播到用户空间”</strong> 是指通过信号机制，内核将 <code>segfault</code> 这个异常信息传递给用户态，用户态的 <code>handler</code> 处理程序可以在用户空间执行。</li>
 <li><strong>进程从trap到trampoline再到用户空间</strong> 的确是一个循环的过程。<code>handler</code> 本身无法直接更改 PTE 的权限，但它可以通过系统调用（如 <code>mprotect</code>）向内核请求修改，最终由内核来执行 PTE 的更新操作。</li>
 </ol>
-<p>这种机制在性能和安全性之间取得了平衡：<strong>用户程序通过信号机制间接地影响页表内容，而页表的实际修改仍然由内核完成</strong>。</p>
-</blockquote>
+<p>这种机制在性能和安全性之间取得了平衡：<strong>用户程序通过信号机制间接地影响页表内容，而页表的实际修改仍然由内核完成</strong>。</p></blockquote>
 <blockquote>
 <p>学生提问：当我们允许用户针对Page Fault来运行handler代码时，这不会引入安全漏洞吗？</p>
 <p>Frans教授：这是个很好的问题。会有安全问题吗？你们怎么想的？这会破坏User/kernel或者不同进程之间的隔离性吗？或者从另一个角度来说，你的问题是sigalarm会破坏隔离性吗？</p>
 <p>当我们执行upcall的时候，upcall会走到设置了handler的用户空间进程中，所以handler与设置了它的应用程序运行在相同的context，相同的Page Table中。</p>
 <p>所以handler唯一能做的事情就是影响那个应用程序，并不能影响其他的应用程序，因为它不能访问其他应用程序的Page Table，或者切换到其他应用程序的Page Table。所以这里还好。</p>
-<p>当然，如果handler没有返回，或者做了一些坏事，最终内核还是会杀掉进程。所以唯一可能出错的地方就是进程伤害了自己，但是它不能伤害任何其他进程。</p>
-</blockquote>
+<p>当然，如果handler没有返回，或者做了一些坏事，最终内核还是会杀掉进程。所以唯一可能出错的地方就是进程伤害了自己，但是它不能伤害任何其他进程。</p></blockquote>
 <h2 id="构建大的缓存表">构建大的缓存表
 </h2><p>接下来，我将通过介绍几个例子来看一下如何使用之前介绍的内容。</p>
 <p>我会从一个非常简单的例子开始，之后我们会看一下Garbage Collector，因为很多同学都问了Garbage Collector的问题，所以GC是一个可以深入探讨的好话题。</p>
@@ -1117,8 +1110,7 @@
 <p>所以你需要使用Prot1或者ProtN来减少这些Page的accessbility。</p>
 <blockquote>
 <p>学生提问：在分配物理内存Page时，我们需要让操作系统映射到地址空间的特定地址，否则的话可能会映射到任意地址，是吧？</p>
-<p>Frans教授：操作系统会告知是哪个地址，并且这里可能是任意的地址。</p>
-</blockquote>
+<p>Frans教授：操作系统会告知是哪个地址，并且这里可能是任意的地址。</p></blockquote>
 <p>为了更具体的描述这里的应用，我这里有个小的实现，我们可以看一看这里是如何使用现有的Unix特性。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1197,7 +1189,7 @@
 <p><img src="/p/mit6s08117virtual-memory-for-applications/p30.png"
 	width="800"
 	height="622"
-	srcset="/p/mit6s08117virtual-memory-for-applications/p30_hu8689687964618436358.png 480w, /p/mit6s08117virtual-memory-for-applications/p30_hu15381687237367237157.png 1024w"
+	srcset="/p/mit6s08117virtual-memory-for-applications/p30_hu_48c5e229022db3b3.png 480w, /p/mit6s08117virtual-memory-for-applications/p30_hu_9e954c317dfa7439.png 1024w"
 	loading="lazy"
 	
 		alt="p30"
@@ -1213,7 +1205,7 @@
 <p><img src="/p/mit6s08117virtual-memory-for-applications/p31.png"
 	width="750"
 	height="452"
-	srcset="/p/mit6s08117virtual-memory-for-applications/p31_hu12587021300830208574.png 480w, /p/mit6s08117virtual-memory-for-applications/p31_hu7924339075352379419.png 1024w"
+	srcset="/p/mit6s08117virtual-memory-for-applications/p31_hu_506d2eb62659da2c.png 480w, /p/mit6s08117virtual-memory-for-applications/p31_hu_c043a0daeec4cc28.png 1024w"
 	loading="lazy"
 	
 		alt="p31"
@@ -1242,8 +1234,7 @@
 <p>现在我们得到了一个Page Fault，我们只需要映射一个Page，在这个Page中，我们会存入i，i+1。。。的平方根（注，因为一个Page4096字节，一个double8个字节，所以一个Page可以保存512个表单项）。</p>
 <p>因为这是第一个Page Fault，之前并没有映射了内存Page，所以不需要做任何事情。</p>
 <p>之后，程序继续运行并且查找了表单中的更多项，如果查找一个没有位于已分配Page上的表单项时，会得到另一个Page Fault。</p>
-<p>这时，在handle_sigsegv会分配第二个内存Page，并为这个Page计算平方根的值。之后会munmap记录在last_page_base中的内存。</p>
-</blockquote>
+<p>这时，在handle_sigsegv会分配第二个内存Page，并为这个Page计算平方根的值。之后会munmap记录在last_page_base中的内存。</p></blockquote>
 <h2 id="bakers-real-time-copying-garbage-collector">Baker&rsquo;s Real-Time Copying Garbage Collector
 </h2><p>接下来我会讨论另一个例子，也就是Garbage Collector（注，后面将Garbage Collector和Garbage Collection都简称为GC），并且我也收到了很多有关Garbage Collector的问题。</p>
 <p>GC是指编程语言替程序员完成内存释放，这样程序员就不用像在C语言中一样调用free来释放内存。</p>
@@ -1323,8 +1314,7 @@
 <p>对于这些指针，GC会将对应的对象拷贝到to空间的unscanned区域中。</p>
 <p>之后，当应用程序使用了这些未被扫描的对象，它会再次得到Page Fault，进而再扫描这些对象，以此类推。</p>
 <p>学生提问：在完成了GC之后，会切换from和to空间吗？</p>
-<p>Frans教授：最开始我们使用的是from空间，当用完了的时候，你会将对象拷贝到to空间，一旦完成了扫描，from空间也被完全清空了，你可以切换两个空间的名字。现在会使用to空间来完成内存分配。直到它也满了，你会再次切换。</p>
-</blockquote>
+<p>Frans教授：最开始我们使用的是from空间，当用完了的时候，你会将对象拷贝到to空间，一旦完成了扫描，from空间也被完全清空了，你可以切换两个空间的名字。现在会使用to空间来完成内存分配。直到它也满了，你会再次切换。</p></blockquote>
 <blockquote>
 <p>在理解 <code>to</code> 空间的 <strong>unscanned 区域</strong>时，首先要明确 <code>to</code> 空间的作用及其与 <code>from</code> 空间的关系。这通常涉及到一种叫做 <strong>半空间垃圾回收算法</strong>（或称 <strong>复制收集算法</strong>），其中内存被划分为两个区域：<code>from</code> 空间和 <code>to</code> 空间。</p>
 <p>在复制收集算法中：</p>
@@ -1354,8 +1344,7 @@
 <li><code>from</code> 空间中原有的对象会被标记为可以回收。此时，<code>to</code> 空间中的对象成为新的活动对象集。</li>
 <li><strong>空间交换</strong>：<code>from</code> 和 <code>to</code> 空间交换角色。原来的 <code>to</code> 空间变为新的 <code>from</code> 空间，用于分配和存放新对象；原来的 <code>from</code> 空间则被完全清空，作为下一次 GC 的目标。</li>
 </ul>
-<p>在垃圾回收过程中，<code>to</code> 空间的 <code>unscanned</code> 区域存放的是<strong>从 <code>from</code> 空间拷贝过来的</strong>、<strong>尚未被扫描的活动对象</strong>。通过扫描这些对象，GC 可以递归地找到并拷贝其他活动对象，避免将垃圾对象转移到 <code>to</code> 空间。这样可以保证 <code>to</code> 空间在完成后只包含当前的活动对象，垃圾被完全丢弃在 <code>from</code> 空间中等待清空。</p>
-</blockquote>
+<p>在垃圾回收过程中，<code>to</code> 空间的 <code>unscanned</code> 区域存放的是<strong>从 <code>from</code> 空间拷贝过来的</strong>、<strong>尚未被扫描的活动对象</strong>。通过扫描这些对象，GC 可以递归地找到并拷贝其他活动对象，避免将垃圾对象转移到 <code>to</code> 空间。这样可以保证 <code>to</code> 空间在完成后只包含当前的活动对象，垃圾被完全丢弃在 <code>from</code> 空间中等待清空。</p></blockquote>
 <p>论文中提到使用虚拟内存的另一个好处是，它简化了GC的并发。</p>
 <p>GC现在可以遍历未被扫描的内存Page，并且一次扫描一个Page，同时可以确保应用程序不能访问这个内存Page，因为对于应用程序来说，未被扫描的内存Page权限为None。</p>
 <p>虚拟内存硬件引入了这种显式的同步机制，或者说对于抢占的保护。</p>
@@ -1371,8 +1360,7 @@
 <p>这里使用了map2将物理内存映射到应用程序地址空间中两次的能力，其中每次映射都有不同的权限，这样这里的场景才能工作。</p>
 <blockquote>
 <p>学生提问：GC和应用程序是不是有不同的Page Table？</p>
-<p>Frans教授：不，它们拥有相同的Page Table。它们只是将物理内存映射到了地址空间的两个位置，也就是Page Table的两个位置。在一个位置，PTE被标记成invalid，在另一个位置，PTE被标记成可读写的。</p>
-</blockquote>
+<p>Frans教授：不，它们拥有相同的Page Table。它们只是将物理内存映射到了地址空间的两个位置，也就是Page Table的两个位置。在一个位置，PTE被标记成invalid，在另一个位置，PTE被标记成可读写的。</p></blockquote>
 <h2 id="使用虚拟内存特性的gc代码展示">使用虚拟内存特性的GC代码展示
 </h2><p>为了更清晰的说明上一节的内容，我这里有个针对论文中方法的简单实现，我可以肯定它包含了一些bug，因为我并没有认真的测试它。</p>
 <p>首先，应用程序使用的API包括了new和readptr。</p>
@@ -1464,7 +1452,7 @@
 <p><img src="/p/mit6s08117virtual-memory-for-applications/p32.png"
 	width="594"
 	height="370"
-	srcset="/p/mit6s08117virtual-memory-for-applications/p32_hu17105423584646106132.png 480w, /p/mit6s08117virtual-memory-for-applications/p32_hu12474184965734027237.png 1024w"
+	srcset="/p/mit6s08117virtual-memory-for-applications/p32_hu_408404a57c9f3600.png 480w, /p/mit6s08117virtual-memory-for-applications/p32_hu_df08846290437c57.png 1024w"
 	loading="lazy"
 	
 		alt="p32"
@@ -1482,7 +1470,7 @@
 <p><img src="/p/mit6s08117virtual-memory-for-applications/p33.png"
 	width="692"
 	height="554"
-	srcset="/p/mit6s08117virtual-memory-for-applications/p33_hu16898069880985445187.png 480w, /p/mit6s08117virtual-memory-for-applications/p33_hu3940753797790679317.png 1024w"
+	srcset="/p/mit6s08117virtual-memory-for-applications/p33_hu_7020bc7deac206a5.png 480w, /p/mit6s08117virtual-memory-for-applications/p33_hu_f4673a265d10a608.png 1024w"
 	loading="lazy"
 	
 		alt="p33"
@@ -1497,7 +1485,7 @@
 <p><img src="/p/mit6s08117virtual-memory-for-applications/p34.png"
 	width="716"
 	height="394"
-	srcset="/p/mit6s08117virtual-memory-for-applications/p34_hu6363137880725121647.png 480w, /p/mit6s08117virtual-memory-for-applications/p34_hu11552956348787182468.png 1024w"
+	srcset="/p/mit6s08117virtual-memory-for-applications/p34_hu_826da80537292437.png 480w, /p/mit6s08117virtual-memory-for-applications/p34_hu_629e0e2da5e80ea3.png 1024w"
 	loading="lazy"
 	
 		alt="p34"
@@ -1513,7 +1501,7 @@
 <p><img src="/p/mit6s08117virtual-memory-for-applications/p35.png"
 	width="644"
 	height="254"
-	srcset="/p/mit6s08117virtual-memory-for-applications/p35_hu3053779400168255817.png 480w, /p/mit6s08117virtual-memory-for-applications/p35_hu137529026090888139.png 1024w"
+	srcset="/p/mit6s08117virtual-memory-for-applications/p35_hu_e757f02e6b7cd410.png 480w, /p/mit6s08117virtual-memory-for-applications/p35_hu_4e0a4027d6453543.png 1024w"
 	loading="lazy"
 	
 		alt="p35"
@@ -1530,7 +1518,7 @@
 <p><img src="/p/mit6s08117virtual-memory-for-applications/p36.png"
 	width="1145"
 	height="1227"
-	srcset="/p/mit6s08117virtual-memory-for-applications/p36_hu4063919198517707276.png 480w, /p/mit6s08117virtual-memory-for-applications/p36_hu10121875604825681120.png 1024w"
+	srcset="/p/mit6s08117virtual-memory-for-applications/p36_hu_61c0db9c8856b3e9.png 480w, /p/mit6s08117virtual-memory-for-applications/p36_hu_2455a94411ca4da1.png 1024w"
 	loading="lazy"
 	
 		alt="p36"
@@ -1551,7 +1539,7 @@
 <p><img src="/p/mit6s08117virtual-memory-for-applications/p35.png"
 	width="644"
 	height="254"
-	srcset="/p/mit6s08117virtual-memory-for-applications/p35_hu3053779400168255817.png 480w, /p/mit6s08117virtual-memory-for-applications/p35_hu137529026090888139.png 1024w"
+	srcset="/p/mit6s08117virtual-memory-for-applications/p35_hu_e757f02e6b7cd410.png 480w, /p/mit6s08117virtual-memory-for-applications/p35_hu_4e0a4027d6453543.png 1024w"
 	loading="lazy"
 	
 		alt="p35"
@@ -1567,7 +1555,7 @@
 <p><img src="/p/mit6s08117virtual-memory-for-applications/p37.png"
 	width="768"
 	height="354"
-	srcset="/p/mit6s08117virtual-memory-for-applications/p37_hu10110572656905954947.png 480w, /p/mit6s08117virtual-memory-for-applications/p37_hu3546012909068055607.png 1024w"
+	srcset="/p/mit6s08117virtual-memory-for-applications/p37_hu_38b12a7db6d6ac5d.png 480w, /p/mit6s08117virtual-memory-for-applications/p37_hu_fa2f001d115b445.png 1024w"
 	loading="lazy"
 	
 		alt="p37"
@@ -1586,7 +1574,7 @@
 <p><img src="/p/mit6s08117virtual-memory-for-applications/p38.png"
 	width="692"
 	height="554"
-	srcset="/p/mit6s08117virtual-memory-for-applications/p38_hu16898069880985445187.png 480w, /p/mit6s08117virtual-memory-for-applications/p38_hu3940753797790679317.png 1024w"
+	srcset="/p/mit6s08117virtual-memory-for-applications/p38_hu_7020bc7deac206a5.png 480w, /p/mit6s08117virtual-memory-for-applications/p38_hu_f4673a265d10a608.png 1024w"
 	loading="lazy"
 	
 		alt="p38"
@@ -1623,8 +1611,7 @@
 <p>学生提问：GC什么时候会停止，什么时候又会再开始？我认为GC可以一直运行，如果它是并发的。</p>
 <p>Frans教授：是的，基于虚拟内存的解决方案一个酷的地方在于，GC可以一直运行。它可以在没有unscanned对象时停止。</p>
 <p>学生提问：但是你需要遍历所有在from空间的对象，你怎么知道已经遍历了所有的对象呢？</p>
-<p>Frans教授：你会从根节点开始扫描整个对象的图，然后拷贝到to空间。在某个时间点，你不再添加新的对象了，因为所有的对象已经被拷贝过了。当你不再添加新的对象，你的unscanned区域就不再增长，如果它不再增长，那么你就遍历了所有的对象（注，可以想象一个普通的DFS或者BFS过程）。</p>
-</blockquote>
+<p>Frans教授：你会从根节点开始扫描整个对象的图，然后拷贝到to空间。在某个时间点，你不再添加新的对象了，因为所有的对象已经被拷贝过了。当你不再添加新的对象，你的unscanned区域就不再增长，如果它不再增长，那么你就遍历了所有的对象（注，可以想象一个普通的DFS或者BFS过程）。</p></blockquote>
 
 </section>
 
@@ -1642,7 +1629,7 @@
 
 
         <span>
-            最后更新于 Nov 13, 2024 17:04 &#43;0800
+            最后更新于 Sep 03, 2025 22:10 &#43;0800
         </span>
     </section></footer>
 
@@ -1691,7 +1678,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08123rcu/bg.91a08bf3fe0a8ca435e8fbc902291fd5_hu4589796922609635382.jpg" 
+                <img src="/p/mit6s08123rcu/bg.91a08bf3fe0a8ca435e8fbc902291fd5_hu_50da030b7ba2cbe7.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -1715,7 +1702,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08122meltdown/19.8d880549dccba2f0c1613b3e41a721e5_hu3753156070077914420.jpg" 
+                <img src="/p/mit6s08122meltdown/19.8d880549dccba2f0c1613b3e41a721e5_hu_1493d831cda8626c.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -1739,7 +1726,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08121networking/bg.68c4376fd87b0b35da07319dd155c90d_hu10351534106733688476.jpg" 
+                <img src="/p/mit6s08121networking/bg.68c4376fd87b0b35da07319dd155c90d_hu_b8a716243c6f9679.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -1763,7 +1750,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08120kernels-and-hll/bg.4175e6a2793e0fc340e5aced2529e40b_hu6405785273338381617.jpg" 
+                <img src="/p/mit6s08120kernels-and-hll/bg.4175e6a2793e0fc340e5aced2529e40b_hu_de82d011b3d97ace.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -1787,7 +1774,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08119virtual-machines/bg.b02a7ba1d946705c0cf2809bcf960db8_hu14546491865979434532.jpg" 
+                <img src="/p/mit6s08119virtual-machines/bg.b02a7ba1d946705c0cf2809bcf960db8_hu_77df69a362eba544.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -1819,7 +1806,9 @@
     <section class="copyright">
         &copy; 
         
-        2024 echudet
+            2024 - 
+        
+        2025 echudet
     </section>
     
     <section class="powerby">
@@ -1852,6 +1841,12 @@
         </script> 
 
         
+        
+          
+        
+          
+        
+          
         
           
         
@@ -1998,9 +1993,15 @@
         
              
         
+             
+        
+             
+        
+             
+        
         
 
-        共 747479 字 , 35 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        共 756615 字 , 38 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
         主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 

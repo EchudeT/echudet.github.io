@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Git on echudet</title>
+        <link>https://echudet.github.io/categories/git/</link>
+        <description>Recent content in Git on echudet</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>echudet</copyright>
+        <lastBuildDate>Wed, 03 Sep 2025 22:10:01 +0800</lastBuildDate><atom:link href="https://echudet.github.io/categories/git/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>git commands</title>
+        <link>https://echudet.github.io/p/git-commands/</link>
+        <pubDate>Tue, 02 Sep 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://echudet.github.io/p/git-commands/</guid>
+        <description>&lt;p&gt;在参加OS内核比赛的时候，我们队最终项目是~1000 commits和10+ branches，可见使用git管理之麻烦。&lt;/p&gt;
+&lt;p&gt;但也由此机会积累了不少使用git的经验，故此处记录下来，以便日后参考。&lt;/p&gt;
+&lt;p&gt;&lt;del&gt;虽然完全可以通过&lt;/del&gt;&lt;code&gt;git --help&lt;/code&gt;&lt;del&gt;或是&lt;/del&gt;&lt;code&gt;git &amp;lt;cmd&amp;gt; --help&lt;/code&gt;&lt;del&gt;来看如何使用。&lt;/del&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;初始化仓库&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;首先，使用&lt;code&gt;git init&lt;/code&gt;可以创建一个git仓库，这个指令会在当前目录下面创建一个.git目录，并在里面存放git仓库管理的各类元文件，可以说有了它，当前目录才标识为git管理。如果你移除.git目录，需要重新执行&lt;code&gt;git init&lt;/code&gt;指令才能重新将当前目录归于git管理，不过你之前的.git所含有的历史信息会全部丢失。&lt;/p&gt;
+&lt;details&gt;
+    &lt;summary&gt;what is .git?&lt;/summary&gt;
+    &lt;blockquote&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;// .git的构成
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;.git
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;├── branches
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;├── hooks
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;├── info
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;├── logs
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;│   └── refs
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;│       ├── heads
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;│       └── remotes
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;│           └── origin
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;├── objects
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;└── refs
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    ├── heads
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    ├── remotes
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    │   └── origin
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    └── tags
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;branches: 早期 Git 的残留目录，现在基本不用了。以前用于实现“非参考方式”下的分支管理。现今版本几乎始终为空，可以忽略。&lt;/p&gt;
+&lt;p&gt;hooks:包含客户端或服务端的钩子脚本（shell、python等），这些脚本在特定事件（如提交、合并、推送前后）时自动执行。&lt;/p&gt;
+&lt;p&gt;info:存放一些辅助信息，比如 &lt;code&gt;.git/info/exclude&lt;/code&gt; 文件，可以设置本地忽略文件（类似 .gitignore，但只对本地有效，不会提交）。&lt;/p&gt;
+&lt;p&gt;logs:用于保存对分支和引用（ref）的操作日志。可用于 &lt;code&gt;git reflog&lt;/code&gt; 命令查看 HEAD 和各分支的历史指向。例如&lt;code&gt;logs/refs/heads/&lt;/code&gt;记录本地分支操作历史，&lt;code&gt;logs/refs/remotes/origin/&lt;/code&gt;记录远程分支操作历史。&lt;/p&gt;
+&lt;p&gt;objects:存储所有 Git 对象（数据的“内容”和历史），包括 commit（提交）、tree（目录）、blob（文件内容）、tag（标签）等对象。每个对象都是用 SHA-1 哈希命名的子目录。&lt;strong&gt;这是 Git 核心存储：所有历史内容都在这里！&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;refs:保存所有引用（ref，即对提交对象的指针）的信息，这些实际控制了你看到的分支和标签。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;refs/heads/&lt;/code&gt;：本地分支，每个分支一个文件，内容是 commit 的 SHA-1 值。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;refs/remotes/origin/&lt;/code&gt;：远程分支跟踪仓库的分支。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;refs/tags/&lt;/code&gt;：标签指向的 commit。&lt;/li&gt;
+&lt;/ul&gt;&lt;/blockquote&gt;
+
+&lt;/details&gt;
+
+&lt;p&gt;&lt;strong&gt;仓库管理&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;git仓库有三个主要的管理区域。&lt;/p&gt;
+&lt;p&gt;第一个是工作区，指当前在电脑上面修改文件的区域，这个区域里面文件的修改信息还没有记录在git里面。&lt;/p&gt;
+&lt;p&gt;第二个是暂存区。暂存区是工作区和版本区过渡的一个区域，便于临时舍弃某个文件的修改，或是控制某些修改，可以通过&lt;code&gt;git status&lt;/code&gt;来查看状态。想让文件的修改进入这个区域，需要通过&lt;code&gt;git add&lt;/code&gt;指令来进行。&lt;code&gt;git add &amp;lt;file&amp;gt;&lt;/code&gt;能够让特定文件的修改进入暂存区，&lt;code&gt;git add . &lt;/code&gt;能够让当前仓库内所有文件的修改进入暂存区。&lt;/p&gt;
+&lt;p&gt;第三个是版本区。这个区域就是所有通过&lt;code&gt;git commit -m &amp;quot;&amp;lt;update info&amp;gt;&amp;quot;&lt;/code&gt;提交的信息所存放的地方。使用&lt;code&gt;git log&lt;/code&gt;可以查看这个区域的信息。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;撤销操作&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;实际操作中，我们可能会有很多误操作，这个时候需要我们进行撤销。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在工作区对某文件进行错误修改时，可以使用&lt;code&gt;git checkout -- &amp;lt;filename&amp;gt;&lt;/code&gt;来撤销指定文件的修改，还原为上一次commit的状态。&lt;/li&gt;
+&lt;li&gt;在误提交错误文件到git管理时(例如某个超大文件)，可以使用&lt;code&gt;git rm &amp;lt;filename&amp;gt; &amp;amp;&amp;amp; git commit -m &amp;quot;rm file&amp;quot;&lt;/code&gt;来删除工作区+版本区的文件，若不想在工作区删除该文件，可以使用&lt;code&gt;git rm --cached &amp;lt;filename&amp;gt;&lt;/code&gt;来代替。&lt;/li&gt;
+&lt;li&gt;在错误commit，想回退版本时，可以使用&lt;code&gt;git reset HEAD~1&lt;/code&gt;，这将让HEAD指向上一个提交，但不会删除修改。如果想去掉修改的话，可以使用&lt;code&gt;git reset --hard HEAD~1&lt;/code&gt;来代替。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;details&gt;
+    &lt;summary&gt;git reset？&lt;/summary&gt;
+    &lt;blockquote&gt;
+&lt;p&gt;git reset在排查错误的时候是非常有用的，能够帮我们定位bug发生在哪个版本里面。此处简单介绍git reset的一些功能。&lt;/p&gt;
+&lt;p&gt;简单来说，git reset是使工作区的指针HEAD指向版本仓库里面的特定版本，也就是之前某次提交后的项目。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;HEAD&lt;/code&gt;表示当前版本，&lt;code&gt;HEAD^&lt;/code&gt;表示上一个版本，&lt;code&gt;HEAD^^&lt;/code&gt;表示上上版本，以此类推。前100个版本就写不过来了，当然这还有更简单的方法&lt;code&gt;HEAD~x&lt;/code&gt;，例如&lt;code&gt;HEAD~100&lt;/code&gt;能够表示前100版本。&lt;/p&gt;
+&lt;p&gt;也可以返回特定版本号&lt;code&gt;git reset 1a2b3d&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git reset --hard&lt;/code&gt;: 工作区和缓存区的内容全部扔掉！然后返回指定版本。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git reset --soft&lt;/code&gt;: 保留工作区内容，并且已提交的内容于当前版本和返回版本的差异会存进缓存区。Attention:存进缓存区的方式是覆盖而不是追加！这意味着你之前存进缓存区的内容会丢失，所以不要连续使用两次&lt;code&gt;git reset --soft&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git reset (--mixed)&lt;/code&gt;: 保留工作区内容，并且当前版本和返回版本的差异会追加存入工作区。&lt;/p&gt;
+&lt;p&gt;查看日志，之前的日志&lt;code&gt;git log&lt;/code&gt;，之后的日志&lt;code&gt;git reflog&lt;/code&gt;。&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;/details&gt;
+
+&lt;p&gt;&lt;strong&gt;新的分支&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;创建新的分支时，可以使用&lt;code&gt;git branch &amp;lt;name&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;查看所有分支时，可以使用&lt;code&gt;git branch -a&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;创建新的分支+切到此分支时，可以使用&lt;code&gt;git checkout -b &amp;lt;name&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;切到某个分支时，可以使用&lt;code&gt;git checkout &amp;lt;name&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;details&gt;
+    &lt;summary&gt;分支命名？&lt;/summary&gt;
+    &lt;blockquote&gt;
+&lt;p&gt;规范的分支命名在一个项目中非常重要，保证了项目的稳定性和多人开发合作潜力。&lt;/p&gt;
+&lt;p&gt;1.主分支(main/master): 存放稳定的、可发布的代码。不应该直接在主分支上开发，合并其他分支的代码进行更新。&lt;/p&gt;
+&lt;p&gt;2.开发分支(develop): 用于集成开发中的功能分支。&lt;/p&gt;
+&lt;p&gt;3.功能分支(feat):通常命名为&lt;code&gt;feature/&amp;lt;feat-name&amp;gt;&lt;/code&gt;或&lt;code&gt;feat/&amp;lt;feat-name&amp;gt;&lt;/code&gt;，用于开发新的功能，完成后可合并于develop分支，或是直接抛弃。&lt;/p&gt;
+&lt;p&gt;4.修复分支(fix):通常命名为&lt;code&gt;bugfix/&amp;lt;...&amp;gt;&lt;/code&gt;或&lt;code&gt;fix/&amp;lt;...&amp;gt;&lt;/code&gt;，从develop分支创建，修复完成后合并回develop分支。&lt;/p&gt;
+&lt;p&gt;5.热修复分支(hotfix):通常命名为&lt;code&gt;hotfix/&amp;lt;...&amp;gt;&lt;/code&gt;，用于紧急修复生成环境的bug，从main分支创建，修复完成后合并回main和develop分支。&lt;/p&gt;
+&lt;p&gt;6.发布分支(release):通常命名为&lt;code&gt;release/v1.0.0&lt;/code&gt;或&lt;code&gt;release/2025-09-02&lt;/code&gt;，从develop分支创建、发布完成后，合并到develop和main分支。&lt;/p&gt;
+&lt;p&gt;7.支持分支(support):通常命名为&lt;code&gt;support/v1.0.x&lt;/code&gt;，从main分支创建，用于维护旧版本。&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;/details&gt;
+
+&lt;p&gt;&lt;strong&gt;合并&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;最简单的合并两个分支，&lt;code&gt;git merge &amp;lt;sub-branch&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;合并两个分支，但保留合并基分支的历史的线性化，不零碎掺杂合并从分支的提交历史，&lt;code&gt;git merge --no-ff &amp;lt;sub-branch&amp;gt;&lt;/code&gt;。推荐主分支使用。&lt;/li&gt;
+&lt;li&gt;远程拉取合并分支，&lt;code&gt;git pull origin &amp;lt;branch&amp;gt;&lt;/code&gt;相当于&lt;code&gt;git fetch + git merge&lt;/code&gt;，此指令如果远程和本地有不同的提交历史，会创建一个新的合并提交，导致提交历史出现分叉。&lt;/li&gt;
+&lt;li&gt;远程拉取合并分支but rebase，&lt;code&gt;git pull --rebase origin &amp;lt;branch&amp;gt;&lt;/code&gt;能够把远程分支的更改拉取到本地，然后将本地的提交一个个重新应用到远程分支的最新提交上，保持提交历史的线性化。推荐使用。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;远程管理&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;添加远程仓库的URL， &lt;code&gt;git remote add &amp;lt;remote-name&amp;gt; &amp;lt;remote-url&amp;gt;&lt;/code&gt;，并通过&lt;code&gt;git remote -v&lt;/code&gt;确认是否添加。&lt;/li&gt;
+&lt;li&gt;推送当前分支到远程仓库，并与远程分支关联，&lt;code&gt;git push -u origin &amp;lt;branch&amp;gt;&lt;/code&gt;，其中&lt;code&gt;origin &lt;/code&gt;为&lt;code&gt;&amp;lt;remote-name&amp;gt;&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;推送当前分支到远程仓库，并与远程分支合并，&lt;code&gt;git push origin &amp;lt;branch&amp;gt;&lt;/code&gt;，其中&lt;code&gt;origin &lt;/code&gt;为&lt;code&gt;&amp;lt;remote-name&amp;gt;&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;推送当前分支到远程仓库，并将远程分支覆盖，&lt;code&gt;git push -f origin &amp;lt;branch&amp;gt;&lt;/code&gt;，其中&lt;code&gt;origin &lt;/code&gt;为&lt;code&gt;&amp;lt;remote-name&amp;gt;&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;删除远程分支，&lt;code&gt;git push --delete origin &amp;lt;branch&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;抓取远程分支，不合并，&lt;code&gt;git fetch origin &amp;lt;branch&amp;gt;&lt;/code&gt;，一次性拉取远程所有分支，&lt;code&gt;git fetch --all&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;commit规范&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;事实上，我们的内核项目commit注释一直没有一个统一的规范，进行的比较随意，甚至当成了ctrl+s功能，想保存的时候就提交一下，这导致了我们项目后期debug的一些困难。因此，这里总结一些commit的注释规范，以为后来的项目做准备。&lt;/p&gt;
+&lt;p&gt;一个简单的例子，表明增加的功能以及实现了哪些相关的内容。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;feat(search): add autocomplete suggestions
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Implement real-time suggestions for search input field.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Fetch top 5 matching results from backend API as user types.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Enhance UX with keyboard navigation support.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Closes #101
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;抽象出来，由以下几部分构成：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;类型（type）&lt;/strong&gt;: 表示提交的类别。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;范围（scope，可选）&lt;/strong&gt;: 指定更改影响的模块或范围，用括号包裹。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;主题（subject）&lt;/strong&gt;: 简短描述更改内容，通常以动词开头，50-72 字符以内。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;正文（body，可选）&lt;/strong&gt;: 详细说明更改的原因和细节，每行不超过 72 字符。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;脚注（footer，可选）&lt;/strong&gt;: 关联问题或其他元信息，例如 issue ID。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;lt;类型&amp;gt;(&amp;lt;范围&amp;gt;(可选)): &amp;lt;主题&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;lt;空行&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;lt;正文&amp;gt;(可选)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;lt;空行&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;lt;脚注&amp;gt;(可选)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;那么最简单的commit注释至少应该为&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;feat: add autocomplete suggestions&lt;/code&gt;&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

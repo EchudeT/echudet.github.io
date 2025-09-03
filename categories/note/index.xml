@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Note on echudet</title>
+        <link>https://echudet.github.io/categories/note/</link>
+        <description>Recent content in Note on echudet</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>echudet</copyright>
+        <lastBuildDate>Wed, 03 Sep 2025 22:10:01 +0800</lastBuildDate><atom:link href="https://echudet.github.io/categories/note/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>how to write blogs</title>
+        <link>https://echudet.github.io/p/how-to-write-blogs/</link>
+        <pubDate>Tue, 02 Sep 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://echudet.github.io/p/how-to-write-blogs/</guid>
+        <description>&lt;p&gt;时隔一年没有记过博客，很多东西都遗忘了。上个学期一直在忙OS比赛的事情，现在终于结束了，于是又考虑整理起博客来。之前所写的博客大多AI辅助，现在想来略有不妥，博客理应是个人的经验收获，而过于借助外力写出来的博客与个人的经验收获毫无关系，它是属于AI的，而不是个人的。因此，此篇博客记录了我思考如何撰写个人博客的内容，以供之后借鉴。&lt;/p&gt;
+&lt;p&gt;写博客，第一要点是考虑博客所记录的内容。有了可写的内容，一篇博客才有写的价值，没有内容的博客是空洞而无意义的，应该避免无内容的书写。并且，在内容不够丰富的时候花少量的文笔记录，或是去搜索&lt;strong&gt;扩充&lt;/strong&gt;自己的知识面合并着一起记录，而不应该对内容泛泛而言，强行氵内容，不然只是在写流水账。&lt;/p&gt;
+&lt;p&gt;写博客，第二要点是环绕主题，有清晰的书写脉络，起承转合过度自然，适当扩展而不离题。在针对自己所想的内容拟定好标题之后，需要围绕着这个主题来整理内容，大篇幅围绕着主题来展开。当扩展的内容过多时，可以适当分割为其他博客并以&lt;strong&gt;超链接&lt;/strong&gt;的形式呈现，而不是全部堆在一篇文章里面。&lt;/p&gt;
+&lt;p&gt;写博客，第三要点是有良好的呈现格式。对于内容进行重点标注，表格划分，图像呈现&amp;hellip;.能够使博客的表达更为形象生动，内含的知识也更容易理解。&lt;/p&gt;
+&lt;p&gt;最后，对于我个人而言，目前阶段需要尽量避免使用AI，过度地使用AI产出内容其实是急功近利的倾向，正确的做法是回归自我，以人为本，可以用AI来查阅资料，但不能完全的照搬，要有个人自己的理解，否则仅仅是AI的搬运工，这就丧失了博客的初心。因此，之后的博客将采取本篇博客的书写方式来写，不照搬AI，写出自己的理解与思考。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

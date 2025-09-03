@@ -6,11 +6,11 @@
 
 <link rel='canonical' href='https://echudet.github.io/p/mit6s08121networking/'>
 
-<link rel="stylesheet" href="/scss/style.min.86fc5e5efb829fb1bdd7a2d2275017fb3ae01ba7fcf491e347d76495ae5e3ae2.css"><meta property='og:title' content="MIT6S081：21Networking">
+<link rel="stylesheet" href="/scss/style.min.da77a84796b4cbbce4984dfc653595f2e1f66158390942c69e60c576c66a6e8b.css"><meta property='og:title' content="MIT6S081：21Networking">
 <meta property='og:description' content="在网络协议栈中，接收活锁（Receive Livelock）是一个重要的问题，这是在高流量条件下系统因频繁处理中断而陷入的性能瓶颈现象。为了解决这一问题，采用轮询机制代替传统中断驱动，以减少高负载下的中断频率，能够提高系统性能的稳定性。此外，网卡的Ring Buffer 结构和 DMA 传输机制有助于数据包在网卡与系统内存之间高效传输。">
 <meta property='og:url' content='https://echudet.github.io/p/mit6s08121networking/'>
 <meta property='og:site_name' content='echudet'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-10-06T22:02:50&#43;08:00'/><meta property='article:modified_time' content='2024-11-13T17:04:51&#43;08:00'/><meta property='og:image' content='https://echudet.github.io/p/mit6s08121networking/bg.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-10-06T22:02:50&#43;08:00'/><meta property='article:modified_time' content='2025-09-03T22:10:01&#43;08:00'/><meta property='og:image' content='https://echudet.github.io/p/mit6s08121networking/bg.jpg' />
 <meta name="twitter:title" content="MIT6S081：21Networking">
 <meta name="twitter:description" content="在网络协议栈中，接收活锁（Receive Livelock）是一个重要的问题，这是在高流量条件下系统因频繁处理中断而陷入的性能瓶颈现象。为了解决这一问题，采用轮询机制代替传统中断驱动，以减少高负载下的中断频率，能够提高系统性能的稳定性。此外，网卡的Ring Buffer 结构和 DMA 传输机制有助于数据包在网卡与系统内存之间高效传输。"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://echudet.github.io/p/mit6s08121networking/bg.jpg' />
@@ -59,7 +59,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu11199958555974308744.png" width="300"
+                        <img src="/img/avatar_hu_67bf1327fc98b60.png" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -276,10 +276,10 @@
     <li><a href="#receive-livelock">Receive Livelock</a></li>
     <li><a href="#正课部分">正课部分</a></li>
     <li><a href="#计算机网络概述">计算机网络概述</a></li>
-    <li><a href="#二层网络-----ethernet">二层网络 &mdash; Ethernet</a></li>
-    <li><a href="#二三层地址转换-----arp">二/三层地址转换 &mdash; ARP</a></li>
-    <li><a href="#三层网络-----internet">三层网络 &mdash; Internet</a></li>
-    <li><a href="#四层网络-----udp">四层网络 &mdash; UDP</a></li>
+    <li><a href="#二层网络--ethernet">二层网络 &mdash; Ethernet</a></li>
+    <li><a href="#二三层地址转换--arp">二/三层地址转换 &mdash; ARP</a></li>
+    <li><a href="#三层网络--internet">三层网络 &mdash; Internet</a></li>
+    <li><a href="#四层网络--udp">四层网络 &mdash; UDP</a></li>
     <li><a href="#网络协议栈network-stack">网络协议栈（Network Stack）</a></li>
     <li><a href="#ring-buffer">Ring Buffer</a></li>
     <li><a href="#receive-livelock-1">Receive Livelock</a></li>
@@ -299,8 +299,8 @@
     <header class="article-header">
         <div class="article-image">
             <a href="/p/mit6s08121networking/">
-                <img src="/p/mit6s08121networking/bg_hu2737504911594360117.jpg"
-                        srcset="/p/mit6s08121networking/bg_hu2737504911594360117.jpg 800w, /p/mit6s08121networking/bg_hu15193076252142331852.jpg 1600w"
+                <img src="/p/mit6s08121networking/bg_hu_c132faa1d26b8a94.jpg"
+                        srcset="/p/mit6s08121networking/bg_hu_c132faa1d26b8a94.jpg 800w, /p/mit6s08121networking/bg_hu_ebcce394213e46d8.jpg 1600w"
                         width="800" 
                         height="567" 
                         loading="lazy"
@@ -465,7 +465,7 @@
 </svg>
 
             <time class="article-words">
-                文章字数：26291字
+                文章字数：26295字
             </time>
         </div>
         <div class="article-lastmod">
@@ -478,7 +478,7 @@
 
 
                 <time>
-                    Nov 13, 2024 17:04 &#43;0800
+                    Sep 03, 2025 22:10 &#43;0800
                 </time>
             </div></footer>
     
@@ -499,7 +499,11 @@
     <h1 id="lecture-21-networking">Lecture 21 Networking
 </h1><h2 id="课前预习">课前预习
 </h2><h2 id="论文速览">论文速览
-</h2><p>论文《Eliminating Receive Livelock in an Interrupt-driven Kernel》分为多个部分，每部分都有其核心内容，以下是各部分的详细总结：</p>
+</h2><p><a class="link" href="https://pdos.csail.mit.edu/6.828/2020/readings/mogul96usenix.pdf"  target="_blank" rel="noopener"
+    >论文链接</a>
+
+</p>
+<p>论文《Eliminating Receive Livelock in an Interrupt-driven Kernel》分为多个部分，每部分都有其核心内容，以下是各部分的详细总结：</p>
 <p>在引言（Introduction）部分首先介绍了接收活锁（receive livelock）问题。传统的中断机制适用于早期的流量控制系统，但在面对现代非流量控制协议（如多媒体和RPC客户端-服务器系统）时，这种机制容易导致活锁问题。接收活锁是指系统在处理中断时耗尽所有资源，却无法执行其他关键任务，从而使系统进程停滞。</p>
 <p>在激励应用（Motivating Applications）部分，作者提供了几种容易受到活锁影响的应用示例：</p>
 <ul>
@@ -831,7 +835,7 @@
 <p>从网络协议的角度来说，局域网通信由以太网协议决定。而局域网之上的长距离网络通信由Internet Protocol协议决定。以上就是网络的概述。</p>
 <p>接下来我想介绍一下，在局域网和互联网上传递的packet有什么样的结构，之后再讨论在主机和路由器中的软件是如何处理这些packet。</p>
 <hr>
-<h2 id="二层网络-----ethernet">二层网络 &mdash; Ethernet
+<h2 id="二层网络--ethernet">二层网络 &mdash; Ethernet
 </h2><p>让我从最底层开始，我们先来看一下一个以太网packet的结构是什么。当两个主机非常靠近时，或许是通过相同的线缆连接，或许连接在同一个wifi网络，或许连接到同一个以太网交换机。</p>
 <p>当局域网中的两个主机彼此间要通信时，最底层的协议是以太网协议。你可以认为Host1通过以太网将Frame发送给Host2。</p>
 <p>Frame是以太网中用来描述packet的单词，本质上这就是两个主机在以太网上传输的一个个的数据Byte。以太网协议会在Frame中放入足够的信息让主机能够识别彼此，并且识别这是不是发送给自己的Frame。</p>
@@ -839,7 +843,7 @@
 <p><img src="/p/mit6s08121networking/p53.png"
 	width="1116"
 	height="630"
-	srcset="/p/mit6s08121networking/p53_hu5082461355547701875.png 480w, /p/mit6s08121networking/p53_hu12450737063758896380.png 1024w"
+	srcset="/p/mit6s08121networking/p53_hu_6bae518fbd9fa527.png 480w, /p/mit6s08121networking/p53_hu_46127d8c1634925c.png 1024w"
 	loading="lazy"
 	
 		alt="p53"
@@ -858,8 +862,7 @@
 <blockquote>
 <p>学生提问：硬件用来识别以太网packet的开头和结束的标志是不是类似于lab中的End of Packets？</p>
 <p>Robert教授：并不是的，EOP是帮助驱动和网卡之间通信的机制。</p>
-<p>这里的开头和结束的标志是在线缆中传输的电信号或者光信号，这些标志位通常在一个packet中是不可能出现的。以结束的FCS为例，它的值通常是packet header和payload的校验和，可以用来判断packet是否合法。</p>
-</blockquote>
+<p>这里的开头和结束的标志是在线缆中传输的电信号或者光信号，这些标志位通常在一个packet中是不可能出现的。以结束的FCS为例，它的值通常是packet header和payload的校验和，可以用来判断packet是否合法。</p></blockquote>
 <p>有关以太网48bit地址，是为了给每一个制造出来的网卡分配一个唯一的ID，所以这里有大量的可用数字。</p>
 <p>这里48bit地址中，前24bit表示的是制造商，每个网卡制造商都有自己唯一的编号，并且会出现在前24bit中。后24bit是由网卡制造商提供的任意唯一数字，通常网卡制造商是递增的分配数字。</p>
 <p>所以，如果你从一个网卡制造商买了一批网卡，每个网卡都会被写入属于自己的地址，并且如果你查看这些地址，你可以发现，这批网卡的高24bit是一样的，而低24bit极有可能是一些连续的数字。</p>
@@ -869,7 +872,7 @@
 <p><img src="/p/mit6s08121networking/p54.png"
 	width="916"
 	height="190"
-	srcset="/p/mit6s08121networking/p54_hu15204464692332807933.png 480w, /p/mit6s08121networking/p54_hu16450299451388196205.png 1024w"
+	srcset="/p/mit6s08121networking/p54_hu_abdf84825194e52c.png 480w, /p/mit6s08121networking/p54_hu_c4feb6f9e7c4667c.png 1024w"
 	loading="lazy"
 	
 		alt="p54"
@@ -894,7 +897,7 @@
 <li>剩下的部分是ARP packet的payload。</li>
 </ul>
 <hr>
-<h2 id="二三层地址转换-----arp">二/三层地址转换 &mdash; ARP
+<h2 id="二三层地址转换--arp">二/三层地址转换 &mdash; ARP
 </h2><p>下一个与以太网通信相关的协议是ARP。</p>
 <p>在以太网层面，每个主机都有一个以太网地址。但是为了能在互联网上通信，你需要有32bit的IP地址。</p>
 <p>为什么需要IP地址呢？因为IP地址有额外的含义。</p>
@@ -907,7 +910,7 @@
 <p><img src="/p/mit6s08121networking/p55.png"
 	width="1094"
 	height="771"
-	srcset="/p/mit6s08121networking/p55_hu9525627550765042194.png 480w, /p/mit6s08121networking/p55_hu16089440296069243885.png 1024w"
+	srcset="/p/mit6s08121networking/p55_hu_96dcda9212cf8fbb.png 480w, /p/mit6s08121networking/p55_hu_bc0852ffb3d2106b.png 1024w"
 	loading="lazy"
 	
 		alt="p55"
@@ -927,7 +930,7 @@
 <p><img src="/p/mit6s08121networking/p56.png"
 	width="898"
 	height="282"
-	srcset="/p/mit6s08121networking/p56_hu9561999928152077835.png 480w, /p/mit6s08121networking/p56_hu15905466988636034815.png 1024w"
+	srcset="/p/mit6s08121networking/p56_hu_888433ec2e62d2a.png 480w, /p/mit6s08121networking/p56_hu_ab8f96f54cb71352.png 1024w"
 	loading="lazy"
 	
 		alt="p56"
@@ -956,8 +959,7 @@
 <p>现在我们是在以太网中发送ARP packet，以太网packet也包含了以太网地址，所以，如果在以太网上运行ARP，这些信息是冗余的。</p>
 <p>但是如果在其他的网络上运行ARP，你或许需要这些信息，因为其他网络的packet中并没有包含以太网地址。</p>
 <p>学生提问：tcpdump中原始数据的右侧是什么内容？</p>
-<p>Robert教授：这些是原始数据对应的ASCII码，“.”对应了一个字节并没有相应的ASCII码，0x52对应了R，0x55对应了U。当我们发送的packet包含了ASCII字符时，这里的信息会更加有趣。</p>
-</blockquote>
+<p>Robert教授：这些是原始数据对应的ASCII码，“.”对应了一个字节并没有相应的ASCII码，0x52对应了R，0x55对应了U。当我们发送的packet包含了ASCII字符时，这里的信息会更加有趣。</p></blockquote>
 <p>我希望你们在刚刚的讨论中注意到这一点，网络协议和网络协议header是嵌套的。我们刚刚看到的是一个packet拥有了ethernet header和ethernet payload。</p>
 <p>在ethernet payload中，首先出现的是ARP header，对于ARP来说并没有的payload。</p>
 <p>但是在ethernet packet中还可以包含其他更复杂的结构，比如说ethernet payload中包含一个IP packet，IP packet中又包含了一个UDP packet，所以IP header之后是UDP header。</p>
@@ -980,13 +982,13 @@
   </tbody>
 </table></div>
 <hr>
-<h2 id="三层网络-----internet">三层网络 &mdash; Internet
+<h2 id="三层网络--internet">三层网络 &mdash; Internet
 </h2><p>Ethernet header足够在一个局域网中将packet发送到一个host。</p>
 <p>如果你想在局域网发送一个IP packet，那么你可以使用ARP获得以太网地址。但是IP协议更加的通用，IP协议能帮助你向互联网上任意位置发送packet。下图是一个IP packet的header，你们可以在lab配套的代码中的net.h文件找到。</p>
 <p><img src="/p/mit6s08121networking/p57.png"
 	width="1119"
 	height="651"
-	srcset="/p/mit6s08121networking/p57_hu17859731178445837582.png 480w, /p/mit6s08121networking/p57_hu1316911422419639037.png 1024w"
+	srcset="/p/mit6s08121networking/p57_hu_1d685c0d2cd3d71e.png 480w, /p/mit6s08121networking/p57_hu_f44a3a022a63fd46.png 1024w"
 	loading="lazy"
 	
 		alt="p57"
@@ -1021,7 +1023,7 @@
 <p><img src="/p/mit6s08121networking/p58.png"
 	width="888"
 	height="210"
-	srcset="/p/mit6s08121networking/p58_hu15771808828671337644.png 480w, /p/mit6s08121networking/p58_hu17173033069996894068.png 1024w"
+	srcset="/p/mit6s08121networking/p58_hu_1b6cd2f45a03982a.png 480w, /p/mit6s08121networking/p58_hu_6e1de8902dc79b16.png 1024w"
 	loading="lazy"
 	
 		alt="p58"
@@ -1038,7 +1040,7 @@
 <p><img src="/p/mit6s08121networking/p59.png"
 	width="886"
 	height="210"
-	srcset="/p/mit6s08121networking/p59_hu12392152258668777607.png 480w, /p/mit6s08121networking/p59_hu17072750087407752085.png 1024w"
+	srcset="/p/mit6s08121networking/p59_hu_47a55a370c4020d6.png 480w, /p/mit6s08121networking/p59_hu_a2158fb9932e8aac.png 1024w"
 	loading="lazy"
 	
 		alt="p59"
@@ -1059,7 +1061,7 @@
 </ul>
 <p>IP header中的protocol字段告诉了目的主机的网络协议栈，这个packet应该被UDP软件处理。</p>
 <hr>
-<h2 id="四层网络-----udp">四层网络 &mdash; UDP
+<h2 id="四层网络--udp">四层网络 &mdash; UDP
 </h2><p>IP header足够让一个packet传输到互联网上的任意一个主机，但是我们希望做的更好一些。每一个主机都运行了大量需要使用网络的应用程序，所以我们需要有一种方式能区分一个packet应该传递给目的主机的哪一个应用程序，而IP header明显不包含这种区分方式。</p>
 <p>有一些其他的协议完成了这里的区分工作，其中一个是TCP，它比较复杂，而另一个是UDP。TCP不仅帮助你将packet发送到了正确的应用程序，同时也包含了序列号等用来检测丢包并重传的功能，这样即使网络出现问题，数据也能完整有序的传输。</p>
 <p>相比之下，UDP就要简单的多，它以一种“尽力而为”的方式将packet发送到目的主机，除此之外不提供任何其他功能。</p>
@@ -1067,7 +1069,7 @@
 <p><img src="/p/mit6s08121networking/p60.png"
 	width="878"
 	height="254"
-	srcset="/p/mit6s08121networking/p60_hu8906819964981415306.png 480w, /p/mit6s08121networking/p60_hu13094916978274572726.png 1024w"
+	srcset="/p/mit6s08121networking/p60_hu_cc90c954207ab1b8.png 480w, /p/mit6s08121networking/p60_hu_8f19cc39fd11a7ed.png 1024w"
 	loading="lazy"
 	
 		alt="p60"
@@ -1089,7 +1091,7 @@
 <p><img src="/p/mit6s08121networking/p61.png"
 	width="898"
 	height="186"
-	srcset="/p/mit6s08121networking/p61_hu6283478261879311494.png 480w, /p/mit6s08121networking/p61_hu9410369400483495854.png 1024w"
+	srcset="/p/mit6s08121networking/p61_hu_12e75554548378f8.png 480w, /p/mit6s08121networking/p61_hu_5557b2f2a425fe97.png 1024w"
 	loading="lazy"
 	
 		alt="p61"
@@ -1126,8 +1128,7 @@
 </li>
 </ul>
 <p>所以，以太网有1500或者9000字节的最大packet限制。</p>
-<p>除此之外，所有的协议都有长度字段，例如UDP的长度字段是16bit。所以即使以太网支持传输更大的packet，协议本身对于数据长度也有限制。</p>
-</blockquote>
+<p>除此之外，所有的协议都有长度字段，例如UDP的长度字段是16bit。所以即使以太网支持传输更大的packet，协议本身对于数据长度也有限制。</p></blockquote>
 <p>以上就是UDP的介绍。在lab的最后你们会通过实验提供的代码来向谷歌的DNS server发送一个查询，收到回复之后代码会打印输出。你们需要在设备驱动侧完成以太网数据的处理。</p>
 <hr>
 <h2 id="网络协议栈network-stack">网络协议栈（Network Stack）
@@ -1149,7 +1150,7 @@
 <p><img src="/p/mit6s08121networking/p62.png"
 	width="1143"
 	height="832"
-	srcset="/p/mit6s08121networking/p62_hu9115695183415614613.png 480w, /p/mit6s08121networking/p62_hu6654765213617764363.png 1024w"
+	srcset="/p/mit6s08121networking/p62_hu_da9d5cbdfd7726e0.png 480w, /p/mit6s08121networking/p62_hu_33d1f4a54f3403d6.png 1024w"
 	loading="lazy"
 	
 		alt="p62"
@@ -1182,7 +1183,7 @@
 <p><img src="/p/mit6s08121networking/p63.png"
 	width="1137"
 	height="877"
-	srcset="/p/mit6s08121networking/p63_hu12319267345925577640.png 480w, /p/mit6s08121networking/p63_hu17433909986223079428.png 1024w"
+	srcset="/p/mit6s08121networking/p63_hu_3cb73f3d86c9b0e.png 480w, /p/mit6s08121networking/p63_hu_e12ae4207c1d6c40.png 1024w"
 	loading="lazy"
 	
 		alt="p63"
@@ -1214,8 +1215,7 @@
 <p>比如说我家里的wifi路由器，它就有两张网卡，其中一个网卡连接到线缆并进一步连接到整个互联网，另一个网卡是wifi网卡。</p>
 <p>有很多服务器也有多个网卡，尤其是对于web服务器来说，会有一个网卡连接互联网，另一个网卡连接你的私有的敏感的数据库信息。两个网卡连接的是完全不同的网络。</p>
 <p>学生提问：所以多网卡的场景在于想要连接不同的网络？</p>
-<p>Robert教授：是的。如果你想要连接不同的网络，那么你需要有多块网卡。</p>
-</blockquote>
+<p>Robert教授：是的。如果你想要连接不同的网络，那么你需要有多块网卡。</p></blockquote>
 <p>我想再讨论一下当packet送到网卡时，网卡会做什么操作？这与networking lab非常相关。</p>
 <p>对于一个网卡的结构，会有一根线缆连接到外面的世界。网卡会检查线缆上的电信号，并将电信号转换成packet。网卡会接入到一个主机上，主机会带有网卡的驱动软件。我们需要将网卡解码出来的packet传递给主机的内存，这样软件才能解析packet。</p>
 <p>网卡内有许多内置的内存，当packet到达时，网卡会将packet存在自己的缓存中，并向主机发送中断，所以网卡内部会有一个队列。而主机的驱动包含了一个循环，它会与网卡交互，并询问当前是否缓存了packet。</p>
@@ -1235,7 +1235,7 @@
 <p><img src="/p/mit6s08121networking/p64.png"
 	width="1137"
 	height="830"
-	srcset="/p/mit6s08121networking/p64_hu7398524907513007903.png 480w, /p/mit6s08121networking/p64_hu8914899112137562952.png 1024w"
+	srcset="/p/mit6s08121networking/p64_hu_70361db660bb4911.png 480w, /p/mit6s08121networking/p64_hu_985fd72f7403c52.png 1024w"
 	loading="lazy"
 	
 		alt="p64"
@@ -1271,8 +1271,7 @@
 <p>网卡通过总线，并经过一些可编程芯片连接到了DRAM，我认为在现代的计算机中，你可以设置好地址翻译表，这样网卡可以使用虚拟内存地址，虚拟内存地址会由网卡和DRAM之间的硬件翻译，这对于一些场景还是很有价值的。</p>
 <p>另一方面，如果网卡需要读写一些内存地址，而内存数据现在正在CPU的cache中，那么意味着内存对应的最新数据位于CPU cache中，而不是在RAM。这种情况下，当网卡执行DMA时，我们希望网卡能读取CPU的cache而不是RAM。</p>
 <p>在Intel的机器上，有一些精心设计的机制可以确保当网卡需要从内存读取数据而最新的内存数据在CPU cache中时，CPU cache而不是RAM会返回数据。一些软件基于这种机制来获得高性能。对于写数据同样的也适用，网卡可以直接将数据写到CPU cache中，这样CPU可以非常快的读到数据。</p>
-<p>我们介绍的E1000的结构非常简单，但是实际中的网卡机制非常的复杂。</p>
-</blockquote>
+<p>我们介绍的E1000的结构非常简单，但是实际中的网卡机制非常的复杂。</p></blockquote>
 <hr>
 <h2 id="receive-livelock-1">Receive Livelock
 </h2><p>接下来我们看一下今天的<a class="link" href="https://pdos.csail.mit.edu/6.828/2020/readings/mogul96usenix.pdf"  target="_blank" rel="noopener"
@@ -1285,7 +1284,7 @@
 <p><img src="/p/mit6s08121networking/p65.png"
 	width="1121"
 	height="553"
-	srcset="/p/mit6s08121networking/p65_hu13332214379261348172.png 480w, /p/mit6s08121networking/p65_hu2982014947979558389.png 1024w"
+	srcset="/p/mit6s08121networking/p65_hu_8d455a421605cea5.png 480w, /p/mit6s08121networking/p65_hu_e2a80390e90a59b1.png 1024w"
 	loading="lazy"
 	
 		alt="p65"
@@ -1298,15 +1297,13 @@
 ></p>
 <p>首先，为什么这条曲线开始会上升？</p>
 <blockquote>
-<p>学生回答：在到达处理的瓶颈之前，路由器可以处理更多的接收方向的packet，也可以处理更多的发送发向的packet。</p>
-</blockquote>
+<p>学生回答：在到达处理的瓶颈之前，路由器可以处理更多的接收方向的packet，也可以处理更多的发送发向的packet。</p></blockquote>
 <p>完全正确，在出现错误之前，对于每个接收到的packet，路由器都可以转发出去。比如说当packet以2000pps的速度接收时，路由器直接将packet从输入网卡拷贝到输出网卡，所以路由器的发送速率与接收速率一样，都是2000pps，所以这里X轴与Y轴的值相等。这种状态一直保持，直到曲线到达转折点。</p>
 <p>那么为什么曲线不是一直上升的呢？</p>
 <blockquote>
 <p>学生回答：是不是因为中断不能被处理导致的？</p>
 <p>Robert教授：这个其实是为什么曲线会下降的原因。我这里的问题是为什么曲线在某个点之后就不再上升了。假设这里的设计是合理的，对于一个合理的系统，对应的曲线会一直上升吗？</p>
-<p>学生回答：我认为不会，就算系统能足够快的处理packet，对于足够多的packet，还是可能触发系统的瓶颈。</p>
-</blockquote>
+<p>学生回答：我认为不会，就算系统能足够快的处理packet，对于足够多的packet，还是可能触发系统的瓶颈。</p></blockquote>
 <p>是的，CPU的算力并不是无限的，CPU最多每秒执行一定数量的指令。</p>
 <p>对于每个packet，IP软件会查看packet的header，检查校验和，根据目的地址查找转发表等等，这个过程会消耗数百甚至数千条CPU指令时间来处理一个packet。所以，我们不能期望曲线能一直向上走，它必然会在某个位置停止向上。</p>
 <p>上面的图中，曲线在5000的位置就停止不再上升了，这告诉我们这台机器处理每个packet要消耗200微秒。所以，曲线的转折点隐含的包含了处理一个packet需要的时间信息。</p>
@@ -1332,7 +1329,7 @@
 <p><img src="/p/mit6s08121networking/p66.png"
 	width="1136"
 	height="554"
-	srcset="/p/mit6s08121networking/p66_hu12478504949961648075.png 480w, /p/mit6s08121networking/p66_hu14289068479660716522.png 1024w"
+	srcset="/p/mit6s08121networking/p66_hu_b07f82fedde846dc.png 480w, /p/mit6s08121networking/p66_hu_8086efcd9066ae63.png 1024w"
 	loading="lazy"
 	
 		alt="p66"
@@ -1374,8 +1371,7 @@
 <p>Livelock发生的根本原因是我们浪费时间处理了一些最终会被丢弃的packet，这里的处理是徒劳。</p>
 <p>另一种发生Livelock的可能是，当负载增加时，我们可能会消耗100%的CPU时间在packet处理线程上，而留给应用程序的CPU时间为0，这时还是会发生Livelock。</p>
 <p>论文在第六节中有相应的介绍，如果一个packet将要被传输给本地的应用程序，网络线程会查看应用程序的socket buffer，如果socket buffer过满的话，网络线程会停止从网卡读取packet，直到socket buffer变小。</p>
-<p>这意味着网络线程会停止运行，并给应用程序机会运行并处理packet，所以如果你不够小心的话，你可能会在任何阶段都经历类似Livelock的问题。</p>
-</blockquote>
+<p>这意味着网络线程会停止运行，并给应用程序机会运行并处理packet，所以如果你不够小心的话，你可能会在任何阶段都经历类似Livelock的问题。</p></blockquote>
 
 </section>
 
@@ -1393,7 +1389,7 @@
 
 
         <span>
-            最后更新于 Nov 13, 2024 17:04 &#43;0800
+            最后更新于 Sep 03, 2025 22:10 &#43;0800
         </span>
     </section></footer>
 
@@ -1442,7 +1438,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08123rcu/bg.91a08bf3fe0a8ca435e8fbc902291fd5_hu4589796922609635382.jpg" 
+                <img src="/p/mit6s08123rcu/bg.91a08bf3fe0a8ca435e8fbc902291fd5_hu_50da030b7ba2cbe7.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -1466,7 +1462,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08122meltdown/19.8d880549dccba2f0c1613b3e41a721e5_hu3753156070077914420.jpg" 
+                <img src="/p/mit6s08122meltdown/19.8d880549dccba2f0c1613b3e41a721e5_hu_1493d831cda8626c.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -1490,7 +1486,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08120kernels-and-hll/bg.4175e6a2793e0fc340e5aced2529e40b_hu6405785273338381617.jpg" 
+                <img src="/p/mit6s08120kernels-and-hll/bg.4175e6a2793e0fc340e5aced2529e40b_hu_de82d011b3d97ace.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -1514,7 +1510,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08119virtual-machines/bg.b02a7ba1d946705c0cf2809bcf960db8_hu14546491865979434532.jpg" 
+                <img src="/p/mit6s08119virtual-machines/bg.b02a7ba1d946705c0cf2809bcf960db8_hu_77df69a362eba544.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -1538,7 +1534,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08118os-organization/bg.6254618fb3eb08f3bf5d7cd89d4cd672_hu15449325963333300792.jpg" 
+                <img src="/p/mit6s08118os-organization/bg.6254618fb3eb08f3bf5d7cd89d4cd672_hu_845b73e21b5a04f1.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -1570,7 +1566,9 @@
     <section class="copyright">
         &copy; 
         
-        2024 echudet
+            2024 - 
+        
+        2025 echudet
     </section>
     
     <section class="powerby">
@@ -1603,6 +1601,12 @@
         </script> 
 
         
+        
+          
+        
+          
+        
+          
         
           
         
@@ -1749,9 +1753,15 @@
         
              
         
+             
+        
+             
+        
+             
+        
         
 
-        共 747479 字 , 35 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        共 756615 字 , 38 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
         主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 

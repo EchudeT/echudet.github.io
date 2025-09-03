@@ -6,11 +6,11 @@
 
 <link rel='canonical' href='https://echudet.github.io/p/mit6s08120kernels-and-hll/'>
 
-<link rel="stylesheet" href="/scss/style.min.86fc5e5efb829fb1bdd7a2d2275017fb3ae01ba7fcf491e347d76495ae5e3ae2.css"><meta property='og:title' content="MIT6S081：20Kernels and HLL">
+<link rel="stylesheet" href="/scss/style.min.da77a84796b4cbbce4984dfc653595f2e1f66158390942c69e60c576c66a6e8b.css"><meta property='og:title' content="MIT6S081：20Kernels and HLL">
 <meta property='og:description' content="课程讨论使用高级编程语言实现操作系统的优点和代价。而论文探讨了在高性能操作系统内核中使用高级语言的可行性，特别是与传统C语言的对比。内核Biscuit得以构建，该内核使用Go语言编写，支持POSIX系统调用子集，并通过实验评估其性能与安全性。主要目标是研究高级语言在编写内核时带来的性能开销、实现挑战、以及编程效率和安全性。">
 <meta property='og:url' content='https://echudet.github.io/p/mit6s08120kernels-and-hll/'>
 <meta property='og:site_name' content='echudet'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-10-05T22:02:50&#43;08:00'/><meta property='article:modified_time' content='2024-11-13T21:49:12&#43;08:00'/><meta property='og:image' content='https://echudet.github.io/p/mit6s08120kernels-and-hll/bg.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-10-05T22:02:50&#43;08:00'/><meta property='article:modified_time' content='2025-09-03T22:10:01&#43;08:00'/><meta property='og:image' content='https://echudet.github.io/p/mit6s08120kernels-and-hll/bg.jpg' />
 <meta name="twitter:title" content="MIT6S081：20Kernels and HLL">
 <meta name="twitter:description" content="课程讨论使用高级编程语言实现操作系统的优点和代价。而论文探讨了在高性能操作系统内核中使用高级语言的可行性，特别是与传统C语言的对比。内核Biscuit得以构建，该内核使用Go语言编写，支持POSIX系统调用子集，并通过实验评估其性能与安全性。主要目标是研究高级语言在编写内核时带来的性能开销、实现挑战、以及编程效率和安全性。"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://echudet.github.io/p/mit6s08120kernels-and-hll/bg.jpg' />
@@ -59,7 +59,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu11199958555974308744.png" width="300"
+                        <img src="/img/avatar_hu_67bf1327fc98b60.png" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -304,7 +304,7 @@
     <li><a href="#正课部分">正课部分</a></li>
     <li><a href="#c语言实现操作系统的优劣势">C语言实现操作系统的优劣势</a></li>
     <li><a href="#高级编程语言实现操作系统的优劣势">高级编程语言实现操作系统的优劣势</a></li>
-    <li><a href="#高级编程语言选择-----golang">高级编程语言选择 &mdash; Golang</a></li>
+    <li><a href="#高级编程语言选择--golang">高级编程语言选择 &mdash; Golang</a></li>
     <li><a href="#biscuit">Biscuit</a></li>
     <li><a href="#heap-exhaustion">Heap exhaustion</a></li>
     <li><a href="#heap-exhaustion-solution">Heap exhaustion solution</a></li>
@@ -327,8 +327,8 @@
     <header class="article-header">
         <div class="article-image">
             <a href="/p/mit6s08120kernels-and-hll/">
-                <img src="/p/mit6s08120kernels-and-hll/bg_hu7183797156165768649.jpg"
-                        srcset="/p/mit6s08120kernels-and-hll/bg_hu7183797156165768649.jpg 800w, /p/mit6s08120kernels-and-hll/bg_hu17950551623983395484.jpg 1600w"
+                <img src="/p/mit6s08120kernels-and-hll/bg_hu_e58348972d83c6d3.jpg"
+                        srcset="/p/mit6s08120kernels-and-hll/bg_hu_e58348972d83c6d3.jpg 800w, /p/mit6s08120kernels-and-hll/bg_hu_b7cf7c380f40f713.jpg 1600w"
                         width="800" 
                         height="350" 
                         loading="lazy"
@@ -493,7 +493,7 @@
 </svg>
 
             <time class="article-words">
-                文章字数：65567字
+                文章字数：65571字
             </time>
         </div>
         <div class="article-lastmod">
@@ -506,7 +506,7 @@
 
 
                 <time>
-                    Nov 13, 2024 21:49 &#43;0800
+                    Sep 03, 2025 22:10 &#43;0800
                 </time>
             </div></footer>
     
@@ -527,7 +527,11 @@
     <h1 id="lecture-20-kernels-and-hll">Lecture 20 Kernels and HLL
 </h1><h2 id="课前预习">课前预习
 </h2><h2 id="论文速览">论文速览
-</h2><p>这篇论文的标题是《The Benefits and Costs of Writing a POSIX Kernel in a High-Level Language》，通过梳理论文的结构和内容，以下是根据各部分标题总结的主要内容：</p>
+</h2><p><a class="link" href="https://pdos.csail.mit.edu/6.828/2020/readings/biscuit.pdf"  target="_blank" rel="noopener"
+    >论文链接</a>
+
+</p>
+<p>这篇论文的标题是《The Benefits and Costs of Writing a POSIX Kernel in a High-Level Language》，通过梳理论文的结构和内容，以下是根据各部分标题总结的主要内容：</p>
 <p>在引言 (Introduction)部分，作者探讨了在高性能操作系统内核中使用高级语言（如Go）的可行性，特别是与传统C语言的对比。他们构建了一个名为<strong>Biscuit</strong>的内核，该内核使用Go语言编写，支持POSIX系统调用子集，并通过实验评估其性能与安全性。主要目标是研究高级语言在编写内核时带来的性能开销、实现挑战、以及编程效率和安全性。</p>
 <p>在相关工作 (Related Work)部分，本节回顾了与高级语言编写操作系统内核相关的先前研究，包括早期基于高级语言的内核如Pilot和Lisp machine，以及现代的高级系统编程语言如Rust和Go。还探讨了内核中自动内存管理（垃圾回收）和其他内存分配方案的研究。</p>
 <p>在 动机 (Motivation)部分，这里讨论了选择C语言和高级语言的利弊。C语言在内核编写中被广泛使用，主要因为它的低级内存管理能力能够实现高性能。而高级语言（如Go）的优势则在于减少了编程复杂度和内存管理相关的错误，如缓冲区溢出和内存释放错误。</p>
@@ -788,49 +792,49 @@
 </span><span class="lnt">42
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
-</span></span><span class="line"><span class="cl"> <span class="s">&#34;encoding/json&#34;</span>
-</span></span><span class="line"><span class="cl"> <span class="s">&#34;log&#34;</span>
-</span></span><span class="line"><span class="cl"> <span class="s">&#34;net/http&#34;</span>
-</span></span><span class="line"><span class="cl"> <span class="s">&#34;time&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// 定义一个结构体来表示 JSON 响应的格式
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">type</span> <span class="nx">Response</span> <span class="kd">struct</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl"> <span class="nx">Message</span>   <span class="kt">string</span>    <span class="s">`json:&#34;message&#34;`</span>
-</span></span><span class="line"><span class="cl"> <span class="nx">Timestamp</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Time</span> <span class="s">`json:&#34;timestamp&#34;`</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// 处理根路径请求的处理函数
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="nf">helloHandler</span><span class="p">(</span><span class="nx">w</span> <span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span> <span class="nx">r</span> <span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl"> <span class="nx">response</span> <span class="o">:=</span> <span class="nx">Response</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">     <span class="nx">Message</span><span class="p">:</span>   <span class="s">&#34;Welcome to the Go Web Server!&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">     <span class="nx">Timestamp</span><span class="p">:</span> <span class="nx">time</span><span class="p">.</span><span class="nf">Now</span><span class="p">(),</span>
-</span></span><span class="line"><span class="cl"> <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"> <span class="c1">// 设置响应的 Content-Type 为 application/json
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span> <span class="nx">w</span><span class="p">.</span><span class="nf">Header</span><span class="p">().</span><span class="nf">Set</span><span class="p">(</span><span class="s">&#34;Content-Type&#34;</span><span class="p">,</span> <span class="s">&#34;application/json&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"> <span class="c1">// 将结构体编码为 JSON 并返回给客户端
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span> <span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">json</span><span class="p">.</span><span class="nf">NewEncoder</span><span class="p">(</span><span class="nx">w</span><span class="p">).</span><span class="nf">Encode</span><span class="p">(</span><span class="nx">response</span><span class="p">);</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">     <span class="nx">http</span><span class="p">.</span><span class="nf">Error</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span> <span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">(),</span> <span class="nx">http</span><span class="p">.</span><span class="nx">StatusInternalServerError</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">     <span class="k">return</span>
-</span></span><span class="line"><span class="cl"> <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl"> <span class="c1">// 将 / 路由绑定到 helloHandler 函数
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span> <span class="nx">http</span><span class="p">.</span><span class="nf">HandleFunc</span><span class="p">(</span><span class="s">&#34;/&#34;</span><span class="p">,</span> <span class="nx">helloHandler</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"> <span class="c1">// 启动 Web 服务器，监听 8080 端口
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span> <span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Starting server on :8080&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"> <span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">http</span><span class="p">.</span><span class="nf">ListenAndServe</span><span class="p">(</span><span class="s">&#34;:8080&#34;</span><span class="p">,</span> <span class="kc">nil</span><span class="p">);</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">     <span class="nx">log</span><span class="p">.</span><span class="nf">Fatalf</span><span class="p">(</span><span class="s">&#34;Could not start server: %s\n&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">())</span>
-</span></span><span class="line"><span class="cl"> <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span><span class="w"> </span><span class="nx">main</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="s">&#34;encoding/json&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="s">&#34;log&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="s">&#34;net/http&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="s">&#34;time&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// 定义一个结构体来表示 JSON 响应的格式</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">type</span><span class="w"> </span><span class="nx">Response</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">Message</span><span class="w">   </span><span class="kt">string</span><span class="w">    </span><span class="s">`json:&#34;message&#34;`</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">Timestamp</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Time</span><span class="w"> </span><span class="s">`json:&#34;timestamp&#34;`</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// 处理根路径请求的处理函数</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">func</span><span class="w"> </span><span class="nf">helloHandler</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">Response</span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">     </span><span class="nx">Message</span><span class="p">:</span><span class="w">   </span><span class="s">&#34;Welcome to the Go Web Server!&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">     </span><span class="nx">Timestamp</span><span class="p">:</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nf">Now</span><span class="p">(),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="c1">// 设置响应的 Content-Type 为 application/json</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">w</span><span class="p">.</span><span class="nf">Header</span><span class="p">().</span><span class="nf">Set</span><span class="p">(</span><span class="s">&#34;Content-Type&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;application/json&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="c1">// 将结构体编码为 JSON 并返回给客户端</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">json</span><span class="p">.</span><span class="nf">NewEncoder</span><span class="p">(</span><span class="nx">w</span><span class="p">).</span><span class="nf">Encode</span><span class="p">(</span><span class="nx">response</span><span class="p">);</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">     </span><span class="nx">http</span><span class="p">.</span><span class="nf">Error</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">(),</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusInternalServerError</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">     </span><span class="k">return</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">func</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="c1">// 将 / 路由绑定到 helloHandler 函数</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nf">HandleFunc</span><span class="p">(</span><span class="s">&#34;/&#34;</span><span class="p">,</span><span class="w"> </span><span class="nx">helloHandler</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="c1">// 启动 Web 服务器，监听 8080 端口</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Starting server on :8080&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nf">ListenAndServe</span><span class="p">(</span><span class="s">&#34;:8080&#34;</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span><span class="p">);</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">     </span><span class="nx">log</span><span class="p">.</span><span class="nf">Fatalf</span><span class="p">(</span><span class="s">&#34;Could not start server: %s\n&#34;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">())</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>代码说明：</p>
 <ol>
@@ -877,8 +881,7 @@
 <ul>
 <li>可以进一步扩展这个服务器，添加更多的路由（如 <code>/about</code>, <code>/users</code>），并处理不同的 HTTP 方法（如 <code>GET</code>, <code>POST</code>）。</li>
 <li>也可以引入 Go 的 web 框架如 <strong>Gin</strong> 或 <strong>Echo</strong>，以简化路由处理和中间件的使用。</li>
-</ul>
-</blockquote>
+</ul></blockquote>
 <hr>
 <h2 id="biscuit-heap-issue">Biscuit Heap Issue
 </h2><p>Biscuit 的方法，虽然看似没有引入全新的技术，但它的确提供了一种相对简单且有效的解决内核堆内存分配问题的方法。它并不是传统方法的革命性替代，但在特定上下文中有其优势，尤其是通过静态分析预估系统调用所需的内存并进行提前分配，从而避免了许多传统内存管理问题，比如复杂的分配失败恢复和内存死锁。以下是对 Biscuit 方法的更深入分析，并与传统方法对比：</p>
@@ -1098,14 +1101,14 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">i</span> <span class="kt">int</span> <span class="p">=</span> <span class="mi">10</span>
-</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">s</span> <span class="kt">string</span> <span class="p">=</span> <span class="s">&#34;hello&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// 编译时会报错，因为 i 是整数，而 s 是字符串
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">s</span> <span class="p">=</span> <span class="nx">i</span>  <span class="c1">// 错误：cannot use i (type int) as type string in assignment
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl"><span class="c1">// 必须使用显式的转换
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">s</span> <span class="p">=</span> <span class="nx">strconv</span><span class="p">.</span><span class="nf">Itoa</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span> <span class="c1">// 正确：将 int 转为 string
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">var</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">10</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">var</span><span class="w"> </span><span class="nx">s</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&#34;hello&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// 编译时会报错，因为 i 是整数，而 s 是字符串</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nx">s</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">i</span><span class="w">  </span><span class="c1">// 错误：cannot use i (type int) as type string in assignment</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// 必须使用显式的转换</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nx">s</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">strconv</span><span class="p">.</span><span class="nf">Itoa</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span><span class="w"> </span><span class="c1">// 正确：将 int 转为 string</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>Type-safe 的作用</p>
@@ -1762,8 +1765,7 @@
 <li><strong>调度器</strong>在内核态中执行，它负责在进程间进行上下文切换，让不同的进程共享 CPU 资源。调度器运行时，实际也是某个进程在 CPU 上执行内核态的调度逻辑。</li>
 <li>没有独立的 &ldquo;内核进程&rdquo; 在执行这些操作，而是当前 CPU 或进程在必要时进入内核态执行系统级的代码。</li>
 </ul>
-<p>所以，当你问 &ldquo;函数不是只有在运行在 CPU 上的进程时才能执行么&rdquo;，答案是<strong>是的</strong>，无论是内核态还是用户态，都是在进程执行时通过 CPU 来运行代码，只不过在内核态下，进程执行的是操作系统内核的功能，而不是用户代码。</p>
-</blockquote>
+<p>所以，当你问 &ldquo;函数不是只有在运行在 CPU 上的进程时才能执行么&rdquo;，答案是<strong>是的</strong>，无论是内核态还是用户态，都是在进程执行时通过 CPU 来运行代码，只不过在内核态下，进程执行的是操作系统内核的功能，而不是用户代码。</p></blockquote>
 <hr>
 <h2 id="针对schedule的复习3">针对schedule的复习（3）
 </h2><p>我们可以进一步解释一下<strong>进程切换</strong>和<strong>多核系统中的调度</strong>，特别是如何在内核态执行 <code>schedule</code> 以及如何确保不会重复调度已经在其他 CPU 上运行的进程。</p>
@@ -2170,8 +2172,7 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 <li><strong>Biscuit 系统的中断处理程序做标记并迅速返回</strong>，是为了避免在中断期间与 Go 运行时的调度机制产生冲突，从而防止死锁。</li>
 <li><strong>设备中断和 trap 不同</strong>，trap 的处理可以执行复杂的 Go 代码，因为它们是在安全的上下文中处理的。</li>
 <li><strong>这种设计非常类似 top-half 和 bottom-half 机制</strong>，将紧急、短暂的操作放在 top-half，复杂、耗时的工作放在 bottom-half，由底层调度来完成，从而提高系统响应效率和稳定性。</li>
-</ul>
-</blockquote>
+</ul></blockquote>
 <hr>
 <h2 id="biscuit速记">Biscuit速记
 </h2><ol>
@@ -2632,7 +2633,7 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 <p>这就是为什么不能对论文提出的问题（注，也就是应该使用什么样的编程语言实现操作系统）给出一个十分清晰的答案的原因。尽管如此，我们还是可以期望更深入的了解这个问题，而不是完全不知道它的内容。</p>
 <p>以上就是论文的背景，以及为什么很少有人会做同样的工作的原因。</p>
 <hr>
-<h2 id="高级编程语言选择-----golang">高级编程语言选择 &mdash; Golang
+<h2 id="高级编程语言选择--golang">高级编程语言选择 &mdash; Golang
 </h2><p>接下来我们看一下对比方法，图中左边是Biscuit，这是一个我们为了<a class="link" href="https://pdos.csail.mit.edu/6.828/2020/readings/biscuit.pdf"  target="_blank" rel="noopener"
     >论文</a>
 
@@ -2658,8 +2659,7 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 <p>这里涉及到一个有趣的问题：通过高级编程语言实现内核时，GC的代价到底有多少？而Rust通过不使用GC而跳过了这个问题。</p>
 <blockquote>
 <p>学生提问：如果我们这里使用Rust而不是Golang来实现高级编程语言内核，通过一定的优化有没有可能达到比C内核更高的性能？</p>
-<p>Frans教授：因为我们没有做过这样的实验，所以我就猜一下。我觉得不会有比C内核更高的性能，但是基本在同一个范围内。因为C是如此的底层，你可以假设你在Rust做的工作，都可以在C中完成。</p>
-</blockquote>
+<p>Frans教授：因为我们没有做过这样的实验，所以我就猜一下。我觉得不会有比C内核更高的性能，但是基本在同一个范围内。因为C是如此的底层，你可以假设你在Rust做的工作，都可以在C中完成。</p></blockquote>
 <p>这里有一个问题，并且在这节课最后我们会再次回顾这个问题。</p>
 <p>我们想要使用高级编程语言内核的部分原因是为了避免一类特定的Bug，那么你可以问自己的一个问题的是，你们在实验中遇到的Bug，是否可以通过使用高级编程语言来避免？</p>
 <p>我肯定你可以回想起一些Bug，它们耗费了你很多的时间，很多精力，现在你可以问自己，如果实验中的XV6是使用某种高级编程语言实现的，你的生活会不会更轻松一些？你是否能有更多时间做一些其他的事情。</p>
@@ -2680,8 +2680,7 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 <p>所以Biscuit比XV6更加完整，它有58个系统调用，而XV6只有大概18-19个系统调用；它有28000行代码，而XV6我认为只有少于10000行代码。所以Biscuit有更多的功能。</p>
 <blockquote>
 <p>学生提问：这里的接口与XV6类似对吧，所以进程需要存数据在寄存器中，进程也会调用ECALL。</p>
-<p>Frans教授：我稍后会再做介绍，但是这里完全相同。</p>
-</blockquote>
+<p>Frans教授：我稍后会再做介绍，但是这里完全相同。</p></blockquote>
 <p>以上是Biscuit的特性，有些我已经提到过了。</p>
 <ul>
 <li>首先它支持<strong>多核CPU</strong>。Golang对于并发有很好的支持，所以Biscuit也支持多核CPU。类似的，XV6却只对多核CPU有有限的支持。所以在这里，我们相比XV6有更好的同步协调机制。</li>
@@ -2709,8 +2708,7 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 <blockquote>
 <p>学生提问：我认为Golang更希望你使用channel而不是锁，所以这里在实现的时候会通过channel取代之前需要锁的场景吗？</p>
 <p>Frans教授：这是个好问题，我会稍后看这个问题，接下来我们有几页PPT会介绍我们在Biscuit中使用了Golang的什么特性，但是我们并没有使用太多的channel，大部分时候我们用的就是锁和conditional variable。</p>
-<p>所以某种程度上来说Biscuit与XV6的代码很像，而并没有使用channel。我们在文件系统中尝试过使用channel，但是结果并不好，相应的性能很差，所以我们切换回与XV6或者Linux类似的同步机制。</p>
-</blockquote>
+<p>所以某种程度上来说Biscuit与XV6的代码很像，而并没有使用channel。我们在文件系统中尝试过使用channel，但是结果并不好，相应的性能很差，所以我们切换回与XV6或者Linux类似的同步机制。</p></blockquote>
 <p>在实现Biscuit的时候有一些挑战：</p>
 <ul>
 <li>
@@ -2749,7 +2747,7 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 <p><img src="/p/mit6s08120kernels-and-hll/p47.png"
 	width="1145"
 	height="733"
-	srcset="/p/mit6s08120kernels-and-hll/p47_hu7288560551218251938.png 480w, /p/mit6s08120kernels-and-hll/p47_hu7806804087688768358.png 1024w"
+	srcset="/p/mit6s08120kernels-and-hll/p47_hu_b6c10a97f439dd16.png 480w, /p/mit6s08120kernels-and-hll/p47_hu_1c46cd6a41713d29.png 1024w"
 	loading="lazy"
 	
 		alt="p47"
@@ -2810,15 +2808,13 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 <p>学生提问：某些函数会根据不同的工作负载申请不同量的内存，那么在计算函数消耗的内存时，会计算最差的情况吗？</p>
 <p>Frans教授：是的。这里的工具会计算最深函数调用时最大可能使用的内存量。所以它会计算出每个系统调用可能使用的最多内存，虽然实际中系统调用可能只会使用少的多的内存。</p>
 <p>但是保险起见，我们会为最坏情况做准备。一些系统调用内的for循环依赖于传给系统调用的参数，所以你不能静态地分析出内存边界是什么。所以在一些场景下，我们会标注代码并规定好这是这个循环最大循环次数，并根据这个数字计算内存总量S。</p>
-<p>类似的，如果有你有递归调用的函数，谁知道会递归多少次呢？或许也取决于一个动态变量或者系统调用的参数。实际中，我们在Biscuit中做了特殊处理以避免递归函数调用。所以最后，我们才可能完成这里的内存分析。</p>
-</blockquote>
+<p>类似的，如果有你有递归调用的函数，谁知道会递归多少次呢？或许也取决于一个动态变量或者系统调用的参数。实际中，我们在Biscuit中做了特殊处理以避免递归函数调用。所以最后，我们才可能完成这里的内存分析。</p></blockquote>
 <p>所以，这里的内存分析不是没有代价的，也不是完全自动的。</p>
 <p>这花费了Cody（论文一作）好几天检查代码，检查所有的循环并标注代码。还有一些其他的Golang特有的问题需要处理，例如，向Slice添加元素可能会使内存使用量扩大一倍，所以我们也给Slice标注了最大的容量。</p>
 <p>但是所有这些工作都是可完成的，在花费了几天时间之后，使用这里的内存分析工具，你可以得到对于系统调用使用的最大内存量的合理评估。以上基本就是Biscuit如何解决heap exhaustion问题。</p>
 <blockquote>
 <p>学生提问：这里的静态内存分析工具，如果不是用来构建内核，它们通常会用来干嘛？</p>
-<p>Frans教授：Go编译器内部使用它来完成各种各样的优化，并分析得出最优的编译方式。这里正好编译器使用了一个包，我们也可以使用同样的包。在后面你还可以看到，我们还将它用于一些其他特性，有这么一个包非常的方便。</p>
-</blockquote>
+<p>Frans教授：Go编译器内部使用它来完成各种各样的优化，并分析得出最优的编译方式。这里正好编译器使用了一个包，我们也可以使用同样的包。在后面你还可以看到，我们还将它用于一些其他特性，有这么一个包非常的方便。</p></blockquote>
 <hr>
 <h2 id="evaluation-hll-benefits">Evaluation: HLL benefits
 </h2><p>Biscuit的实现与其他内核，例如XV6，非常相似，除了Biscuit比XV6性能要高的多。Biscuit采用了很多Linux内核的优化和聪明的设计：</p>
@@ -2844,7 +2840,7 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 <p><img src="/p/mit6s08120kernels-and-hll/p48.png"
 	width="1006"
 	height="766"
-	srcset="/p/mit6s08120kernels-and-hll/p48_hu10738859412535175576.png 480w, /p/mit6s08120kernels-and-hll/p48_hu9094950217176711344.png 1024w"
+	srcset="/p/mit6s08120kernels-and-hll/p48_hu_dc62c247b84a1c0e.png 480w, /p/mit6s08120kernels-and-hll/p48_hu_a93f66125ea71f15.png 1024w"
 	loading="lazy"
 	
 		alt="p48"
@@ -2871,8 +2867,7 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 <p>如你所见，有些特性Biscuit用的比Go runtime和moby更少，有些特性Biscuit用的更多，这里没有很明显的区别。所以从这张图中可以得出的主要结论是：Biscuit使用了Golang提供的高级编程语言特性，而不是为了得到好的性能而避开使用它们。</p>
 <blockquote>
 <p>学生提问：你这里是怎么统计的？是不是使用了静态分析工具？</p>
-<p>Frans教授：是的，这里使用的就是静态分析工具。通过写一个小程序利用静态分析工具来查看这些项目的每一行代码，并记录对应的特性是什么，这样就能统计这些特性的使用数量。</p>
-</blockquote>
+<p>Frans教授：是的，这里使用的就是静态分析工具。通过写一个小程序利用静态分析工具来查看这些项目的每一行代码，并记录对应的特性是什么，这样就能统计这些特性的使用数量。</p></blockquote>
 <p>第二个问题有点主观，高级编程语言有没有简化Biscuit代码？笼统的说我认为有的，我这里会讨论一两个例子。</p>
 <p>使用Garbage allocation是极好的，你可以回想XV6，当你调用exit时，有大量的结构化数据需要被释放回给内核，这样后面的进程才能使用。</p>
 <p>如果使用Garbage Collector这里的工作着实容易，Garbage Collector会完成这里的所有工作，你基本不用做任何事情。如果你从地址空间申请了一段内存，对应这段内存的VMA会自动被GC释放，所以这里可以简化代码。</p>
@@ -2898,7 +2893,7 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 <p><img src="/p/mit6s08120kernels-and-hll/p49.png"
 	width="1149"
 	height="683"
-	srcset="/p/mit6s08120kernels-and-hll/p49_hu8900748687767420232.png 480w, /p/mit6s08120kernels-and-hll/p49_hu6032594428648176963.png 1024w"
+	srcset="/p/mit6s08120kernels-and-hll/p49_hu_a1bbc1026c5a68b9.png 480w, /p/mit6s08120kernels-and-hll/p49_hu_7748da5172e96a39.png 1024w"
 	loading="lazy"
 	
 		alt="p49"
@@ -2921,7 +2916,7 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 </h2><p><img src="/p/mit6s08120kernels-and-hll/p50.png"
 	width="1141"
 	height="609"
-	srcset="/p/mit6s08120kernels-and-hll/p50_hu10946428304967497961.png 480w, /p/mit6s08120kernels-and-hll/p50_hu16952492634631476126.png 1024w"
+	srcset="/p/mit6s08120kernels-and-hll/p50_hu_e80716dab620e6d4.png 480w, /p/mit6s08120kernels-and-hll/p50_hu_1b657a780cc827bf.png 1024w"
 	loading="lazy"
 	
 		alt="p50"
@@ -2936,7 +2931,7 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 <p><img src="/p/mit6s08120kernels-and-hll/p51.png"
 	width="1135"
 	height="1034"
-	srcset="/p/mit6s08120kernels-and-hll/p51_hu18241543822846190995.png 480w, /p/mit6s08120kernels-and-hll/p51_hu8323672986732688372.png 1024w"
+	srcset="/p/mit6s08120kernels-and-hll/p51_hu_bfe4486f053aaf59.png 480w, /p/mit6s08120kernels-and-hll/p51_hu_64a5d178d033ed19.png 1024w"
 	loading="lazy"
 	
 		alt="p51"
@@ -2962,7 +2957,7 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 <p><img src="/p/mit6s08120kernels-and-hll/p52.png"
 	width="1137"
 	height="538"
-	srcset="/p/mit6s08120kernels-and-hll/p52_hu1895094889201711505.png 480w, /p/mit6s08120kernels-and-hll/p52_hu15874215975049906889.png 1024w"
+	srcset="/p/mit6s08120kernels-and-hll/p52_hu_5af1a039de7cea44.png 480w, /p/mit6s08120kernels-and-hll/p52_hu_6b28141069bdfc11.png 1024w"
 	loading="lazy"
 	
 		alt="p52"
@@ -2991,8 +2986,7 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 <p>Frans教授：你还记得Lec17的内容吗？当GC在运行的时候，需要检查指针是否在from空间，如果在from空间你需要拷贝它到to空间。write barrier是非常类似的功能，它的想法是一样的，你需要检查指针看它是否在你需要运行GC的区域内。</p>
 <p>学生提问：当存活对象的内存大于空闲内存的时候，GC该怎么工作呢？</p>
 <p>Frans教授：你买一些内存，vnode会使用一些内存，然后还剩下320MB空闲内存。当应用程序申请更多内存时，首先会从空闲内存中申请，直到空闲内存也用光了。</p>
-<p>与此同时，GC也在运行。所以我们刚刚的测试中是在3个不同配置下运行，在最后一个配置中，空闲内存是存活对象占用内存的两倍。这意味着GC有大量的headroom来与应用程序并行的运行，如果有大量的headroom，GC的overhead就没那么高了，只有10%左右，而不是34%。在第一个配置中，总共是640+320MB内存，而不是只有320MB内存。</p>
-</blockquote>
+<p>与此同时，GC也在运行。所以我们刚刚的测试中是在3个不同配置下运行，在最后一个配置中，空闲内存是存活对象占用内存的两倍。这意味着GC有大量的headroom来与应用程序并行的运行，如果有大量的headroom，GC的overhead就没那么高了，只有10%左右，而不是34%。在第一个配置中，总共是640+320MB内存，而不是只有320MB内存。</p></blockquote>
 <hr>
 <h2 id="evaluation-hll-performance-cost2">Evaluation: HLL performance cost(2)
 </h2><p>接下来稍微介绍GC pause。</p>
@@ -3020,8 +3014,7 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 <p>与其直接回答这个问题，我在这页有一些我们的结论和一些考虑。或许你们该回退一步，并问自己，你们更喜欢哪种方式？</p>
 <p>你们是喜欢像在实验中用C写XV6，还是喜欢使用类似Golang的高级编程语言。更具体的说，你们更想避免哪类Bug？或许在这节课的过程中想想你们遇到过什么Bug？我想听听你们的体验，你们是怎么想的？切换到高级编程语言会不会改变你们的体验？</p>
 <blockquote>
-<p>一些学生介绍自己的体验，有说C好的，有说C不好的</p>
-</blockquote>
+<p>一些学生介绍自己的体验，有说C好的，有说C不好的</p></blockquote>
 <p>当然，我们不会将XV6改成Golang或者任何高级编程语言。具体原因刚刚一些同学已经提到了，Golang还是隐藏了太多细节，这门课的意义在于理解系统调用接口到CPU之间的所有内容。</p>
 <p>举个例子，Golang隐藏了线程，我们并不想隐藏线程，我们想要向你解释线程是如何实现的。所以接下几年，这门课程还是会使用C语言。</p>
 <p>但是如果你要实现一个新的内核，并且目标不是教育你的学生有关内核的知识，目标是写一个安全的高性能内核。你可以从我们的研究中得出一些结论：</p>
@@ -3051,8 +3044,7 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 <p>即使C也有一个小的runtime，比如printf就是C runtime的中间层的一部分，或者字符串处理也是C runtime的一部分，它们也会被编译。C runtime有一些函数，但是这个runtime是如此之小，不像Go runtime需要支持许多Go程序所依赖的功能。</p>
 <p>学生提问：看起来这里的中间层像是一个mini的系统层，它执行了一些底层的系统功能。</p>
 <p>Frans教授：是的，或许一种理解中间层的方法是，XV6也有一个非常非常小的中间层。当它启动的时候，它做的第一件事情是分配一些Stack这样你才能调用C的main函数。</p>
-<p>你可以认为这一小段代码是针对XV6的中间层。一旦你执行了这些指令，你就在C代码中了，然后一切都能愉快的运行。Go runtime的中间层稍微要大一些，因为有一些功能需要被设置好，之后Go runtime才能愉快的运行。</p>
-</blockquote>
+<p>你可以认为这一小段代码是针对XV6的中间层。一旦你执行了这些指令，你就在C代码中了，然后一切都能愉快的运行。Go runtime的中间层稍微要大一些，因为有一些功能需要被设置好，之后Go runtime才能愉快的运行。</p></blockquote>
 
 </section>
 
@@ -3070,7 +3062,7 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 
 
         <span>
-            最后更新于 Nov 13, 2024 21:49 &#43;0800
+            最后更新于 Sep 03, 2025 22:10 &#43;0800
         </span>
     </section></footer>
 
@@ -3119,7 +3111,7 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
         
         
             <div class="article-image">
-                <img src="/p/mit6s08123rcu/bg.91a08bf3fe0a8ca435e8fbc902291fd5_hu4589796922609635382.jpg" 
+                <img src="/p/mit6s08123rcu/bg.91a08bf3fe0a8ca435e8fbc902291fd5_hu_50da030b7ba2cbe7.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -3143,7 +3135,7 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
         
         
             <div class="article-image">
-                <img src="/p/mit6s08122meltdown/19.8d880549dccba2f0c1613b3e41a721e5_hu3753156070077914420.jpg" 
+                <img src="/p/mit6s08122meltdown/19.8d880549dccba2f0c1613b3e41a721e5_hu_1493d831cda8626c.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -3167,7 +3159,7 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
         
         
             <div class="article-image">
-                <img src="/p/mit6s08121networking/bg.68c4376fd87b0b35da07319dd155c90d_hu10351534106733688476.jpg" 
+                <img src="/p/mit6s08121networking/bg.68c4376fd87b0b35da07319dd155c90d_hu_b8a716243c6f9679.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -3191,7 +3183,7 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
         
         
             <div class="article-image">
-                <img src="/p/mit6s08119virtual-machines/bg.b02a7ba1d946705c0cf2809bcf960db8_hu14546491865979434532.jpg" 
+                <img src="/p/mit6s08119virtual-machines/bg.b02a7ba1d946705c0cf2809bcf960db8_hu_77df69a362eba544.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -3215,7 +3207,7 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
         
         
             <div class="article-image">
-                <img src="/p/mit6s08118os-organization/bg.6254618fb3eb08f3bf5d7cd89d4cd672_hu15449325963333300792.jpg" 
+                <img src="/p/mit6s08118os-organization/bg.6254618fb3eb08f3bf5d7cd89d4cd672_hu_845b73e21b5a04f1.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -3247,7 +3239,9 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
     <section class="copyright">
         &copy; 
         
-        2024 echudet
+            2024 - 
+        
+        2025 echudet
     </section>
     
     <section class="powerby">
@@ -3280,6 +3274,12 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
         </script> 
 
         
+        
+          
+        
+          
+        
+          
         
           
         
@@ -3426,9 +3426,15 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
         
              
         
+             
+        
+             
+        
+             
+        
         
 
-        共 747479 字 , 35 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        共 756615 字 , 38 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
         主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 

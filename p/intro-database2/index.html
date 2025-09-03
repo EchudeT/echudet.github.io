@@ -6,11 +6,11 @@
 
 <link rel='canonical' href='https://echudet.github.io/p/intro-database2/'>
 
-<link rel="stylesheet" href="/scss/style.min.86fc5e5efb829fb1bdd7a2d2275017fb3ae01ba7fcf491e347d76495ae5e3ae2.css"><meta property='og:title' content="Intro Database（2）">
+<link rel="stylesheet" href="/scss/style.min.da77a84796b4cbbce4984dfc653595f2e1f66158390942c69e60c576c66a6e8b.css"><meta property='og:title' content="Intro Database（2）">
 <meta property='og:description' content="数据库知识的引入。">
 <meta property='og:url' content='https://echudet.github.io/p/intro-database2/'>
 <meta property='og:site_name' content='echudet'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-11-27T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2024-11-30T19:28:53&#43;08:00'/><meta property='og:image' content='https://echudet.github.io/p/intro-database2/bg.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-11-27T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-09-03T22:10:01&#43;08:00'/><meta property='og:image' content='https://echudet.github.io/p/intro-database2/bg.jpg' />
 <meta name="twitter:title" content="Intro Database（2）">
 <meta name="twitter:description" content="数据库知识的引入。"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://echudet.github.io/p/intro-database2/bg.jpg' />
@@ -59,7 +59,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu11199958555974308744.png" width="300"
+                        <img src="/img/avatar_hu_67bf1327fc98b60.png" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -322,8 +322,8 @@
     <header class="article-header">
         <div class="article-image">
             <a href="/p/intro-database2/">
-                <img src="/p/intro-database2/bg_hu15236633853356813809.jpg"
-                        srcset="/p/intro-database2/bg_hu15236633853356813809.jpg 800w, /p/intro-database2/bg_hu9567441905493188765.jpg 1600w"
+                <img src="/p/intro-database2/bg_hu_3f866d0ffd976d96.jpg"
+                        srcset="/p/intro-database2/bg_hu_3f866d0ffd976d96.jpg 800w, /p/intro-database2/bg_hu_4fd7e12685cdb4c.jpg 1600w"
                         width="800" 
                         height="390" 
                         loading="lazy"
@@ -484,7 +484,7 @@
 </svg>
 
             <time class="article-words">
-                文章字数：9087字
+                文章字数：9071字
             </time>
         </div>
         <div class="article-lastmod">
@@ -497,7 +497,7 @@
 
 
                 <time>
-                    Nov 30, 2024 19:28 &#43;0800
+                    Sep 03, 2025 22:10 &#43;0800
                 </time>
             </div></footer>
     
@@ -518,13 +518,14 @@
     <h2 id="数据仓库与商业智能">数据仓库与商业智能
 </h2><p>在当今信息爆炸的时代，企业面临着海量数据的收集与分析挑战。数据仓库与商业智能（Business Intelligence, BI）作为解决这一问题的核心技术，扮演着至关重要的角色。数据仓库通过系统化的存储与管理，为企业提供了一个整合、多维度的数据视图，而商业智能则利用这些数据进行深入分析，辅助决策者做出明智的商业决策。</p>
 <h3 id="数据仓库的概念">数据仓库的概念
-</h3><p>数据仓库是一种专门设计用于分析和报告的数据库系统，与传统的事务性数据库不同，它主要关注于历史数据的存储和管理。数据仓库的核心在于其集成性、主题性、非易失性和时变性。集成性指的是数据仓库将来自不同来源的数据进行整合，消除数据冗余和不一致性；主题性则强调数据仓库围绕特定的业务主题进行组织，如销售、财务、人力资源等；非易失性意味着一旦数据被加载到数据仓库中，就不会被频繁修改；时变性则允许数据仓库记录数据的历史变化，支持时间序列分析。</p>
+</h3><p>数据仓库是一种专门设计用于分析和报告的数据库系统，与传统的事务性数据库不同，它主要关注于历史数据的存储和管理。数据仓库的核心在于其集成性、主题性、非易失性和时变性。</p>
+<p>集成性指的是数据仓库将来自不同来源的数据进行整合，消除数据冗余和不一致性；主题性则强调数据仓库围绕特定的业务主题进行组织，如销售、财务、人力资源等；非易失性意味着一旦数据被加载到数据仓库中，就不会被频繁修改；时变性则允许数据仓库记录数据的历史变化，支持时间序列分析。</p>
 <p>例如，一家零售企业可能会建立一个销售数据仓库，将来自不同门店、不同地区的销售数据集中存储，方便进行全局销售趋势分析和市场策略调整。</p>
 <h3 id="etl过程">ETL过程
 </h3><p>数据仓库的构建离不开ETL（Extract, Transform, Load）的过程，这是数据仓库数据处理的核心步骤。</p>
-<p>**提取（Extract）**是指从各种数据源中抽取所需的数据。这些数据源可能包括企业内部的事务数据库、外部的市场数据源、日志文件等。提取过程需要确保数据的完整性和准确性，同时尽量减少对源系统的影响。</p>
-<p>**转换（Transform）**涉及对提取的数据进行清洗、整合和转换，以适应数据仓库的要求。这一步骤可能包括数据格式转换、数据去重、数据聚合以及根据业务规则进行计算。例如，将不同格式的日期统一为标准格式，或者将销售数据按月汇总。</p>
-<p>**加载（Load）**则是将转换后的数据加载到数据仓库中。加载过程需要考虑数据的分区、索引和存储优化，以确保数据仓库的查询性能和存取效率。</p>
+<p><strong>提取</strong>（Extract）是指从各种数据源中抽取所需的数据。这些数据源可能包括企业内部的事务数据库、外部的市场数据源、日志文件等。提取过程需要确保数据的完整性和准确性，同时尽量减少对源系统的影响。</p>
+<p><strong>转换</strong>（Transform）涉及对提取的数据进行清洗、整合和转换，以适应数据仓库的要求。这一步骤可能包括数据格式转换、数据去重、数据聚合以及根据业务规则进行计算。例如，将不同格式的日期统一为标准格式，或者将销售数据按月汇总。</p>
+<p><strong>加载</strong>（Load）则是将转换后的数据加载到数据仓库中。加载过程需要考虑数据的分区、索引和存储优化，以确保数据仓库的查询性能和存取效率。</p>
 <p>一个具体的例子是，银行在构建客户分析数据仓库时，通过ETL过程从多个分支机构的数据库中提取客户交易数据，经过清洗和转换后，统一加载到中央数据仓库中，供高层管理者进行客户行为分析和市场细分。</p>
 <h3 id="数据建模">数据建模
 </h3><p>数据建模是数据仓库设计的重要环节，通过构建合理的数据模型，确保数据仓库能够高效支持复杂的查询和分析需求。常见的数据建模方法包括星型模型和雪花模型。</p>
@@ -548,7 +549,7 @@
 <h2 id="大数据与数据库技术">大数据与数据库技术
 </h2><p>随着信息技术的迅猛发展，数据的生成速度和规模呈指数级增长，催生了“大数据”这一概念。大数据不仅改变了企业的运营方式，也对传统数据库技术提出了新的挑战与机遇。本章将深入探讨大数据的基本概念、Hadoop生态系统、分布式存储与计算，以及新兴的数据库技术，如NewSQL和时序数据库，阐明它们在现代数据管理中的重要性与应用。</p>
 <h3 id="大数据概述">大数据概述
-</h3><p>大数据指的是规模庞大、类型多样且生成速度极快的数据集合，通常被描述为“4V”：<strong>Volume（大量）</strong>、<strong>Velocity（高速）</strong>、<strong>Variety（多样）**和**Veracity（真实性）</strong>。这些数据不仅来源于传统的结构化数据，如数据库记录，还包括非结构化和半结构化数据，如社交媒体帖子、传感器数据、日志文件等。</p>
+</h3><p>大数据指的是规模庞大、类型多样且生成速度极快的数据集合，通常被描述为“4V”：<strong>Volume（大量）</strong>、<strong>Velocity（高速）</strong>、<strong>Variety（多样）<strong>和</strong>Veracity（真实性）</strong>。这些数据不仅来源于传统的结构化数据，如数据库记录，还包括非结构化和半结构化数据，如社交媒体帖子、传感器数据、日志文件等。</p>
 <p>大数据的应用广泛且深远。在商业领域，企业通过分析大数据可以洞察消费者行为、优化运营流程、提升产品质量。例如，电子商务平台利用大数据分析用户的浏览和购买记录，进行个性化推荐，提高销售转化率；在医疗领域，研究人员通过分析海量的基因数据，推动精准医学的发展。</p>
 <p>然而，大数据也带来了诸多挑战。传统的数据库系统在处理大规模、多样化和高速度的数据时往往力不从心，需要新的技术和架构来应对这些挑战。此外，数据隐私与安全、数据治理等问题也亟需解决，以确保大数据的有效利用和合法合规。</p>
 <h3 id="hadoop生态系统">Hadoop生态系统
@@ -778,7 +779,7 @@
 
 
         <span>
-            最后更新于 Nov 30, 2024 19:28 &#43;0800
+            最后更新于 Sep 03, 2025 22:10 &#43;0800
         </span>
     </section></footer>
 
@@ -827,7 +828,7 @@
         
         
             <div class="article-image">
-                <img src="/p/intro-database/bg.ffde7ff5e016b8481b8449ddaf9d6ceb_hu8295658141398612128.jpg" 
+                <img src="/p/intro-database/bg.ffde7ff5e016b8481b8449ddaf9d6ceb_hu_78b5206a8e5797e2.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -859,7 +860,9 @@
     <section class="copyright">
         &copy; 
         
-        2024 echudet
+            2024 - 
+        
+        2025 echudet
     </section>
     
     <section class="powerby">
@@ -892,6 +895,12 @@
         </script> 
 
         
+        
+          
+        
+          
+        
+          
         
           
         
@@ -1038,9 +1047,15 @@
         
              
         
+             
+        
+             
+        
+             
+        
         
 
-        共 747479 字 , 35 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        共 756615 字 , 38 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
         主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 

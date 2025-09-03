@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="基于排队理论的路由器缓冲区设计研究\n摘要\n随着计算机网络规模的不断扩大和数据流量的急剧增加，路由器作为网络核心设备，其性能直接影响整个网络的效率和可靠性。缓冲区作为路由器的重要组成部分，承担着临时存储和调度数据包的关键任务。本文通过应用运筹学中的排队理论，特别是M/M/c模型，对路由器缓冲区的设计进行深入研究。通过概率论的基本原理，分析系统利用率、缓冲区容量和丢包率等关键性能指标，探讨如何优化路由器的缓冲区设计，以提高网络性能并降低数据包丢失率。\n">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="基于概率论排队理论的路由器缓冲区研究\n摘要\n随着计算机网络规模的不断扩大和数据流量的急剧增加，路由器作为网络核心设备，其性能直接影响整个网络的效率和可靠性。缓冲区作为路由器的重要组成部分，承担着临时存储和调度数据包的关键任务。本文通过应用运筹学中的排队理论，特别是M/M/c模型，对路由器缓冲区的设计进行深入研究。通过概率论的基本原理，分析系统利用率、缓冲区容量和丢包率等关键性能指标，探讨如何优化路由器的缓冲区设计，以提高网络性能并降低数据包丢失率。\n">
 <title>Netmath2</title>
 
 <link rel='canonical' href='https://echudet.github.io/p/netmath2/'>
 
-<link rel="stylesheet" href="/scss/style.min.86fc5e5efb829fb1bdd7a2d2275017fb3ae01ba7fcf491e347d76495ae5e3ae2.css"><meta property='og:title' content="Netmath2">
-<meta property='og:description' content="基于排队理论的路由器缓冲区设计研究\n摘要\n随着计算机网络规模的不断扩大和数据流量的急剧增加，路由器作为网络核心设备，其性能直接影响整个网络的效率和可靠性。缓冲区作为路由器的重要组成部分，承担着临时存储和调度数据包的关键任务。本文通过应用运筹学中的排队理论，特别是M/M/c模型，对路由器缓冲区的设计进行深入研究。通过概率论的基本原理，分析系统利用率、缓冲区容量和丢包率等关键性能指标，探讨如何优化路由器的缓冲区设计，以提高网络性能并降低数据包丢失率。\n">
+<link rel="stylesheet" href="/scss/style.min.da77a84796b4cbbce4984dfc653595f2e1f66158390942c69e60c576c66a6e8b.css"><meta property='og:title' content="Netmath2">
+<meta property='og:description' content="基于概率论排队理论的路由器缓冲区研究\n摘要\n随着计算机网络规模的不断扩大和数据流量的急剧增加，路由器作为网络核心设备，其性能直接影响整个网络的效率和可靠性。缓冲区作为路由器的重要组成部分，承担着临时存储和调度数据包的关键任务。本文通过应用运筹学中的排队理论，特别是M/M/c模型，对路由器缓冲区的设计进行深入研究。通过概率论的基本原理，分析系统利用率、缓冲区容量和丢包率等关键性能指标，探讨如何优化路由器的缓冲区设计，以提高网络性能并降低数据包丢失率。\n">
 <meta property='og:url' content='https://echudet.github.io/p/netmath2/'>
 <meta property='og:site_name' content='echudet'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-12-02T23:19:30&#43;08:00'/><meta property='article:modified_time' content='2024-12-02T23:26:21&#43;08:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-12-02T23:19:30&#43;08:00'/><meta property='article:modified_time' content='2025-09-03T22:10:01&#43;08:00'/>
 <meta name="twitter:title" content="Netmath2">
-<meta name="twitter:description" content="基于排队理论的路由器缓冲区设计研究\n摘要\n随着计算机网络规模的不断扩大和数据流量的急剧增加，路由器作为网络核心设备，其性能直接影响整个网络的效率和可靠性。缓冲区作为路由器的重要组成部分，承担着临时存储和调度数据包的关键任务。本文通过应用运筹学中的排队理论，特别是M/M/c模型，对路由器缓冲区的设计进行深入研究。通过概率论的基本原理，分析系统利用率、缓冲区容量和丢包率等关键性能指标，探讨如何优化路由器的缓冲区设计，以提高网络性能并降低数据包丢失率。\n">
+<meta name="twitter:description" content="基于概率论排队理论的路由器缓冲区研究\n摘要\n随着计算机网络规模的不断扩大和数据流量的急剧增加，路由器作为网络核心设备，其性能直接影响整个网络的效率和可靠性。缓冲区作为路由器的重要组成部分，承担着临时存储和调度数据包的关键任务。本文通过应用运筹学中的排队理论，特别是M/M/c模型，对路由器缓冲区的设计进行深入研究。通过概率论的基本原理，分析系统利用率、缓冲区容量和丢包率等关键性能指标，探讨如何优化路由器的缓冲区设计，以提高网络性能并降低数据包丢失率。\n">
     <link rel="shortcut icon" href="/timer.ico" />
 
     </head>
@@ -58,7 +58,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu11199958555974308744.png" width="300"
+                        <img src="/img/avatar_hu_67bf1327fc98b60.png" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -337,7 +337,7 @@
 </svg>
 
                 <time class="article-time--reading">
-                    阅读时长: 6 分钟
+                    阅读时长: 8 分钟
                 </time>
             </div>
         
@@ -390,7 +390,7 @@
 </svg>
 
             <time class="article-words">
-                文章字数：2715字
+                文章字数：3803字
             </time>
         </div>
         <div class="article-lastmod">
@@ -403,7 +403,7 @@
 
 
                 <time>
-                    Dec 02, 2024 23:26 &#43;0800
+                    Sep 03, 2025 22:10 &#43;0800
                 </time>
             </div></footer>
     
@@ -421,10 +421,10 @@
     <section class="article-content">
     
     
-    <p>基于排队理论的路由器缓冲区设计研究</p>
+    <p>基于概率论排队理论的路由器缓冲区研究</p>
 <p><strong>摘要</strong></p>
 <p>随着计算机网络规模的不断扩大和数据流量的急剧增加，路由器作为网络核心设备，其性能直接影响整个网络的效率和可靠性。缓冲区作为路由器的重要组成部分，承担着临时存储和调度数据包的关键任务。本文通过应用运筹学中的排队理论，特别是M/M/c模型，对路由器缓冲区的设计进行深入研究。通过概率论的基本原理，分析系统利用率、缓冲区容量和丢包率等关键性能指标，探讨如何优化路由器的缓冲区设计，以提高网络性能并降低数据包丢失率。</p>
-<p><strong>关键词</strong>：排队理论；M/M/c模型；路由器；缓冲区设计；概率论；网络性能</p>
+<p><strong>关键词</strong>：概率论；排队理论；M/M/c模型；路由器；缓冲区设计</p>
 <hr>
 <h3 id="1-引言">1. 引言
 </h3><p>在现代计算机网络中，路由器作为连接不同网络段的关键设备，负责数据包的转发与调度。随着互联网应用的多样化和数据流量的爆发式增长，路由器的性能需求日益提高。</p>
@@ -513,7 +513,7 @@ $$<p>平均排队长度约为0.0024数据包，表明队列中几乎没有数据
 </h4>$$
 W_q = \frac{0.0024}{200} = 0.000012 \text{ 秒} = 0.012 \text{ 毫秒}
 $$$$
-W = 0.012 \text{ 毫秒} + \frac{1}{250} \text{ 秒} = 0.012 \text{ 毫秒} + 4 \text{ 毫秒} \approx 4.012 \text{ 毫秒}
+W = \frac{0.0024}{200} \text{ 秒} + \frac{1}{250} \text{ 秒} = 0.012 \text{ 毫秒} + 4 \text{ 毫秒} \approx 4.012 \text{ 毫秒}
 $$<h3 id="5-路由器决策中的排队理论应用">5. 路由器决策中的排队理论应用
 </h3><h4 id="51-缓冲区大小的确定">5.1 缓冲区大小的确定
 </h4><p>通过计算平均排队长度Lq和平均等待时间Wq，可以确定路由器缓冲区的合理大小。在上述案例中，Lq接近于零，表明当前缓冲区容量充足，且处理单元具有较低负载，可以适当减少缓冲区资源，降低成本。</p>
@@ -529,6 +529,78 @@ $$<p>重新计算P₀、Lq、Wq和W，若性能指标仍满足需求，则可以
 <h3 id="6-结论">6. 结论
 </h3><p>排队理论，特别是M/M/c模型，为路由器缓冲区的设计与优化提供了科学的数学工具。通过分析系统利用率、无阻塞概率、平均排队长度和等待时间等关键性能指标，能够合理配置缓冲区大小和处理单元数量，优化路由器性能，提升网络整体效率和可靠性。</p>
 <p>本文通过具体案例展示了排队理论在路由器缓冲区设计中的应用过程，强调了概率论在模型推导中的重要性。未来的研究可进一步拓展至更复杂的排队模型，如考虑数据包优先级、非指数服务时间分布等，以适应更为多样化和动态的网络环境需求。</p>
+<p>当系统中顾客数量 $ n &lt; c $ 时，每个顾客都有专属的服务器，因此系统的状态概率 $ P_n $ 由独立的泊松到达过程决定，公式为 $ P_n = \frac{(\lambda/\mu)^n}{n!} P_0 $，其中 $ (\lambda/\mu)^n $ 表示到达率与服务率的比率，$ n! $ 反映了 $ n $ 个顾客的排列组合。而当 $ n \geq c $ 时，所有 $ c $ 个服务器都在忙碌，额外的 $ n - c $ 个顾客需要排队等待，此时状态概率 $ P_n $ 需要考虑服务器全部占用的排列方式和排队的组合，因此公式为 $ P_n = \frac{(\lambda/\mu)^n}{c! \cdot c^{n - c}} P_0 $。这个分段公式分别反映了在不同顾客数量下系统的服务和排队情况，从而准确描述了 M/M/c 排队模型的概率分布。</p>
+<blockquote>
+<p>正在思考
+<strong>纠正公式不准确</strong>
+首先，指出用户提供的公式可能有错误，如大括号不匹配或其他问题。然后，详细分析公式的每个部分，确保准确无误。
+思考，持续 几秒</p></blockquote>
+<p>抱歉，之前的公式在 LaTeX 格式上确实有错误。让我为你更正并简洁地推导 <strong>M/M/c</strong> 排队模型中的 <strong>平均排队长度 $ L_q $</strong>。</p>
+<h3 id="重新推导平均排队长度--l_"><strong>重新推导平均排队长度 $ L_q $</strong>
+</h3><p>在 <strong>M/M/c</strong> 模型中，定义如下参数：</p>
+<ul>
+<li><strong>到达率（$ \lambda $）</strong>：单位时间内到达系统的顾客数量。</li>
+<li><strong>服务率（$ \mu $）</strong>：每个服务器单位时间内能服务的顾客数量。</li>
+<li><strong>服务器数量（$ c $）</strong>。</li>
+<li><strong>系统利用率（$ \rho $）</strong>：
+$$
+  \rho = \frac{\lambda}{c\mu}
+  $$</li>
+</ul>
+<h3 id="1-无阻塞概率--p_"><strong>1. 无阻塞概率 $ P_0 $</strong>
+</h3><p>无阻塞概率 $ P_0 $ 表示系统中没有顾客的概率，其公式为：
+</p>
+$$
+P_0 = \left[ \sum_{n=0}^{c-1} \frac{(\lambda/\mu)^n}{n!} + \frac{(\lambda/\mu)^c}{c!} \cdot \frac{1}{1 - \rho} \right]^{-1}
+$$<h3 id="2-有顾客需要等待的概率--p_erlang-c-公式"><strong>2. 有顾客需要等待的概率 $ P_{\text{wait}} $</strong>（Erlang C 公式）
+</h3><p>有顾客需要等待的概率 $ P_{\text{wait}} $ 表示系统中所有 $ c $ 个服务器都在忙碌，导致新到的顾客需要排队等待。根据 Erlang C 公式：
+</p>
+$$
+P_{\text{wait}} = \frac{ \frac{(\lambda/\mu)^c}{c!} \cdot \frac{1}{1 - \rho} }{ \sum_{n=0}^{c-1} \frac{(\lambda/\mu)^n}{n!} + \frac{(\lambda/\mu)^c}{c!} \cdot \frac{1}{1 - \rho} }
+$$<p>
+简化后，可以表示为：
+</p>
+$$
+P_{\text{wait}} = \frac{ (\lambda/\mu)^c \cdot \frac{1}{1 - \rho} }{ c! \left[ \sum_{n=0}^{c-1} \frac{(\lambda/\mu)^n}{n!} + \frac{(\lambda/\mu)^c}{c!} \cdot \frac{1}{1 - \rho} \right] } = \frac{ (\lambda/\mu)^c }{ c! } \cdot \frac{\rho}{1 - \rho} \cdot P_0
+$$<p>
+其中，$\rho = \frac{\lambda}{c\mu}$。</p>
+<h3 id="3-平均排队长度--l_"><strong>3. 平均排队长度 $ L_q $</strong>
+</h3><p>根据 <strong>Little 定理</strong>，平均排队长度 $ L_q $ 可以表示为：
+</p>
+$$
+L_q = \frac{ P_{\text{wait}} \cdot \rho }{ 1 - \rho }
+$$<p>
+将 $ P_{\text{wait}} $ 代入得：
+</p>
+$$
+L_q = \frac{ P_{\text{wait}} \cdot \rho }{ 1 - \rho } = \frac{ \left( \frac{ (\lambda/\mu)^c }{ c! } \cdot \frac{ \rho }{ 1 - \rho } \cdot P_0 \right) \cdot \rho }{ 1 - \rho } = \frac{ (\lambda/\mu)^c \cdot \rho^2 }{ c! \cdot (1 - \rho)^2 } \cdot P_0
+$$<p>
+简化后，通常表示为：
+</p>
+$$
+L_q = \frac{ (\lambda/\mu)^c \cdot \rho }{ c! \cdot (1 - \rho)^2 } \cdot P_0
+$$<h3 id="最终公式"><strong>最终公式</strong>
+</h3><p>综上所述，<strong>M/M/c</strong> 排队模型中 <strong>平均排队长度 $ L_q $</strong> 的公式为：
+</p>
+$$
+L_q = \frac{ P_0 \cdot (\lambda/\mu)^c \cdot \rho }{ c! \cdot (1 - \rho)^2 }
+$$<p>
+其中：
+</p>
+$$
+\rho = \frac{\lambda}{c\mu}
+$$<p>
+</p>
+$$
+P_0 = \left[ \sum_{n=0}^{c-1} \frac{(\lambda/\mu)^n}{n!} + \frac{(\lambda/\mu)^c}{c!} \cdot \frac{1}{1 - \rho} \right]^{-1}
+$$<h3 id="公式解释"><strong>公式解释</strong>
+</h3><ul>
+<li><strong>$ (\lambda/\mu)^c / c! $</strong>：表示当有 $ c $ 个顾客在系统中时的基本概率部分。</li>
+<li><strong>$ \rho / (1 - \rho)^2 $</strong>：反映了系统利用率对排队长度的影响，特别是当 $ \rho $ 接近 1 时，排队长度会迅速增加。</li>
+<li><strong>$ P_0 $</strong>：系统完全空闲的概率，用于归一化整个概率分布。</li>
+</ul>
+<h3 id="结论"><strong>结论</strong>
+</h3><p>通过以上推导，我们得出了 <strong>M/M/c</strong> 排队模型中 <strong>平均排队长度 $ L_q $</strong> 的准确公式。这个公式展示了系统参数（到达率、服务率、服务器数量）如何共同影响排队的平均长度，帮助我们在实际应用中优化资源配置，提升服务效率。</p>
 
 </section>
 
@@ -546,7 +618,7 @@ $$<p>重新计算P₀、Lq、Wq和W，若性能指标仍满足需求，则可以
 
 
         <span>
-            最后更新于 Dec 02, 2024 23:26 &#43;0800
+            最后更新于 Sep 03, 2025 22:10 &#43;0800
         </span>
     </section></footer>
 
@@ -594,7 +666,9 @@ $$<p>重新计算P₀、Lq、Wq和W，若性能指标仍满足需求，则可以
     <section class="copyright">
         &copy; 
         
-        2024 echudet
+            2024 - 
+        
+        2025 echudet
     </section>
     
     <section class="powerby">
@@ -698,6 +772,12 @@ $$<p>重新计算P₀、Lq、Wq和W，若性能指标仍满足需求，则可以
         
           
         
+          
+        
+          
+        
+          
+        
         
     
         
@@ -773,9 +853,15 @@ $$<p>重新计算P₀、Lq、Wq和W，若性能指标仍满足需求，则可以
         
              
         
+             
+        
+             
+        
+             
+        
         
 
-        共 747479 字 , 35 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        共 756615 字 , 38 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
         主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 

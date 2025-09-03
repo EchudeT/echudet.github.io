@@ -6,11 +6,11 @@
 
 <link rel='canonical' href='https://echudet.github.io/p/mit6s08119virtual-machines/'>
 
-<link rel="stylesheet" href="/scss/style.min.86fc5e5efb829fb1bdd7a2d2275017fb3ae01ba7fcf491e347d76495ae5e3ae2.css"><meta property='og:title' content="MIT6S081：19Virtual Machines  ">
+<link rel="stylesheet" href="/scss/style.min.da77a84796b4cbbce4984dfc653595f2e1f66158390942c69e60c576c66a6e8b.css"><meta property='og:title' content="MIT6S081：19Virtual Machines  ">
 <meta property='og:description' content="VMM提供了对于操作系统的一种不同视角。在操作系统的架构中，内核之上提供的封装单元是我们熟悉的进程，内核管理的是多个用户进程。而在VMM的架构中，VMM之上提供的封装单元是对计算机的模拟。VMM的架构使得我们可以从另一个角度重新审视我们讨论过的内容，例如内存分配，线程调度等等，这或许可以给我们一些新的思路并带回到传统的操作系统内核中。">
 <meta property='og:url' content='https://echudet.github.io/p/mit6s08119virtual-machines/'>
 <meta property='og:site_name' content='echudet'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-10-04T22:02:50&#43;08:00'/><meta property='article:modified_time' content='2024-11-12T23:05:03&#43;08:00'/><meta property='og:image' content='https://echudet.github.io/p/mit6s08119virtual-machines/bg.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-10-04T22:02:50&#43;08:00'/><meta property='article:modified_time' content='2025-09-03T22:10:01&#43;08:00'/><meta property='og:image' content='https://echudet.github.io/p/mit6s08119virtual-machines/bg.jpg' />
 <meta name="twitter:title" content="MIT6S081：19Virtual Machines  ">
 <meta name="twitter:description" content="VMM提供了对于操作系统的一种不同视角。在操作系统的架构中，内核之上提供的封装单元是我们熟悉的进程，内核管理的是多个用户进程。而在VMM的架构中，VMM之上提供的封装单元是对计算机的模拟。VMM的架构使得我们可以从另一个角度重新审视我们讨论过的内容，例如内存分配，线程调度等等，这或许可以给我们一些新的思路并带回到传统的操作系统内核中。"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://echudet.github.io/p/mit6s08119virtual-machines/bg.jpg' />
@@ -59,7 +59,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu11199958555974308744.png" width="300"
+                        <img src="/img/avatar_hu_67bf1327fc98b60.png" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -295,10 +295,10 @@
     <li><a href="#影子页表shadow-page-table">影子页表（Shadow Page Table）</a></li>
     <li><a href="#正课部分">正课部分</a></li>
     <li><a href="#why-virtual-machine">Why Virtual Machine</a></li>
-    <li><a href="#trap-and-emulate-----trap">Trap-and-Emulate &mdash; Trap</a></li>
-    <li><a href="#trap-and-emulate-----emulate">Trap-and-Emulate &mdash; Emulate</a></li>
-    <li><a href="#trap-and-emulate-----page-table">Trap-and-Emulate &mdash; Page Table</a></li>
-    <li><a href="#trap-and-emulate-----devices">Trap-and-Emulate &mdash; Devices</a></li>
+    <li><a href="#trap-and-emulate--trap">Trap-and-Emulate &mdash; Trap</a></li>
+    <li><a href="#trap-and-emulate--emulate">Trap-and-Emulate &mdash; Emulate</a></li>
+    <li><a href="#trap-and-emulate--page-table">Trap-and-Emulate &mdash; Page Table</a></li>
+    <li><a href="#trap-and-emulate--devices">Trap-and-Emulate &mdash; Devices</a></li>
     <li><a href="#硬件对虚拟机的支持">硬件对虚拟机的支持</a></li>
     <li><a href="#dune-safe-user-level-access-to-privileged-cpu-features">Dune: Safe User-level Access to Privileged CPU Features</a></li>
   </ol>
@@ -316,8 +316,8 @@
     <header class="article-header">
         <div class="article-image">
             <a href="/p/mit6s08119virtual-machines/">
-                <img src="/p/mit6s08119virtual-machines/bg_hu6414150680270374491.jpg"
-                        srcset="/p/mit6s08119virtual-machines/bg_hu6414150680270374491.jpg 800w, /p/mit6s08119virtual-machines/bg_hu108375851198926742.jpg 1600w"
+                <img src="/p/mit6s08119virtual-machines/bg_hu_8997448f15c879d7.jpg"
+                        srcset="/p/mit6s08119virtual-machines/bg_hu_8997448f15c879d7.jpg 800w, /p/mit6s08119virtual-machines/bg_hu_5b6105d5c5131518.jpg 1600w"
                         width="800" 
                         height="529" 
                         loading="lazy"
@@ -482,7 +482,7 @@
 </svg>
 
             <time class="article-words">
-                文章字数：60981字
+                文章字数：60985字
             </time>
         </div>
         <div class="article-lastmod">
@@ -495,7 +495,7 @@
 
 
                 <time>
-                    Nov 12, 2024 23:05 &#43;0800
+                    Sep 03, 2025 22:10 &#43;0800
                 </time>
             </div></footer>
     
@@ -516,7 +516,11 @@
     <h1 id="lecture-19-virtual-machines">Lecture 19 Virtual Machines
 </h1><h2 id="课前预习">课前预习
 </h2><h2 id="论文速览">论文速览
-</h2><p>这篇论文《Dune: Safe User-level Access to Privileged CPU Features》通过以下几个部分展开。</p>
+</h2><p><a class="link" href="https://pdos.csail.mit.edu/6.828/2020/readings/belay-dune.pdf"  target="_blank" rel="noopener"
+    >论文链接</a>
+
+</p>
+<p>这篇论文《Dune: Safe User-level Access to Privileged CPU Features》通过以下几个部分展开。</p>
 <p>在摘要 (Abstract)部分，提到Dune系统为应用程序提供安全、直接的硬件特权访问（如页表、特权模式等），并展示了其在64位x86 Linux系统上的实现。文中介绍了Dune在沙盒、权限分离以及垃圾回收器中的应用，展示了其性能优势。</p>
 <p>在引言 (Introduction)部分，介绍了许多应用程序需要访问“内核级”硬件功能的原因，但这些功能通常限制在内核空间。传统的解决方法（如修改内核或使用虚拟机）存在种种弊端，而Dune通过虚拟化硬件为用户程序提供了安全访问硬件功能的新方式。</p>
 <p>在虚拟化和硬件支持 (Virtualization and Hardware)部分，详细描述了Intel的VT-x扩展如何支持虚拟化，包括VMX root和VMX non-root模式。Dune利用这些硬件特性为用户程序提供对特权硬件（如异常处理、虚拟内存、特权模式等）的访问。</p>
@@ -659,8 +663,7 @@
 <p>大多数VMM采用Hypercall来支持半虚拟化。在这种情况下，客操作系统被修改以通过Hypercall与VMM通信。这些Hypercall是专门的虚拟化接口，通常由VMM来处理，处理时往往涉及复杂的步骤，因为VMM需要模拟硬件。
 假设我们有一个虚拟网络设备。客操作系统需要注册一个中断处理程序来处理虚拟设备的中断。在传统VMM中，客操作系统通过Hypercall告诉VMM：“我需要注册一个中断处理程序。” VMM接收到这个Hypercall后，会更新其内部的数据结构，并确保当虚拟设备产生中断时，中断处理程序将由客操作系统正确处理。</p>
 <p>在Dune中，Hypercall直接调用主机操作系统（比如Linux）的系统调用。这意味着Dune不需要维护复杂的虚拟化接口，借助操作系统已有的机制即可实现功能。
-同样是虚拟网络设备，在Dune中，进程不直接与Dune层通信以注册中断处理程序，而是通过标准的Linux系统调用来完成该操作。例如，进程可能使用<code>read</code>系统调用从一个TCP socket读取数据。实际上，这种调用通过Hypercall直接由Linux内核来处理，而不需要Dune进行复杂的虚拟化处理。</p>
-</blockquote>
+同样是虚拟网络设备，在Dune中，进程不直接与Dune层通信以注册中断处理程序，而是通过标准的Linux系统调用来完成该操作。例如，进程可能使用<code>read</code>系统调用从一个TCP socket读取数据。实际上，这种调用通过Hypercall直接由Linux内核来处理，而不需要Dune进行复杂的虚拟化处理。</p></blockquote>
 <p>关于状态保存：</p>
 <blockquote>
 <p>在传统的VMM中，每个虚拟机（包括其运行的客操作系统和应用程序）都有独立的计算状态，这包括CPU寄存器、内存状态、I/O设备状态等。当发生VM entry（进入虚拟机）或VM exit（退出虚拟机）时，VMM必须保存和恢复所有这些状态，以确保虚拟机的运行不受干扰。这是一项复杂且耗时的任务，因为状态信息非常多。
@@ -670,15 +673,13 @@
 <li>Dune进程是主机操作系统的一部分，从操作系统的角度来看，它是一个普通进程。</li>
 <li>当发生切换时，Linux已经处理了大部分的状态保存和恢复工作，Dune只需极少的额外处理。</li>
 </ul>
-<p>假设一个Dune进程需要执行IO操作。当进程被调度时，Linux内核会自动保存当前进程的状态（如寄存器、内存页表等），并恢复下一个进程的状态。这与标准的进程上下文切换相同，不需要Dune进行额外的状态管理。</p>
-</blockquote>
+<p>假设一个Dune进程需要执行IO操作。当进程被调度时，Linux内核会自动保存当前进程的状态（如寄存器、内存页表等），并恢复下一个进程的状态。这与标准的进程上下文切换相同，不需要Dune进行额外的状态管理。</p></blockquote>
 <p>关于硬件模拟：</p>
 <blockquote>
 <p>传统的VMM需要完整地模拟物理硬件层，以支持未修改的客操作系统。这意味着VMM必须提供虚拟CPU、虚拟内存管理单元、虚拟设备（如网络、显卡等）等。</p>
 <p>对于虚拟显卡，VMM需要模拟显卡的各种寄存器和状态，让客操作系统认为它在与一个真实的显卡打交道。这涉及到高复杂性的模拟和处理。</p>
 <p>Dune暴露的是硬件和操作系统之间的一层接口。它不完全模拟硬件，只是提供直接访问一些硬件功能的接口，而对于无法直接访问的功能，依赖于主机操作系统。</p>
-<p>在图形显示方面，Dune不会提供虚拟显卡，而是让进程使用操作系统的显示服务（例如通过Unix域套接字和共享内存访问X服务器）。这样，图形显示的复杂性被主机操作系统处理，Dune不需要额外的处理。</p>
-</blockquote>
+<p>在图形显示方面，Dune不会提供虚拟显卡，而是让进程使用操作系统的显示服务（例如通过Unix域套接字和共享内存访问X服务器）。这样，图形显示的复杂性被主机操作系统处理，Dune不需要额外的处理。</p></blockquote>
 <p>总结来说，Dune尝试通过暴露进程级的虚拟环境来简化虚拟化的复杂性，这样做不仅使其更加轻量和灵活，而且能够充分利用主机操作系统已提供的服务来实现功能。</p>
 <hr>
 <h2 id="dune-技术"><strong>Dune 技术</strong>
@@ -1402,9 +1403,7 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 <p>新的页表具有压缩特性，在同样完成V1 -&gt; P1，V2 -&gt; P2映射的同时，其方式更加优化和特定化，适应Dune环境。</p>
 </li>
 </ul>
-<p>尽管旧页表和新页表在内容上可能看起来相似（例如映射相同的虚拟地址到物理地址），但它们的格式、结构和布局可能存在显著差异，这些差异对于支持Dune模式下的高效虚拟化至关重要。直接使用旧的页表根无法满足这些需求，因此必须提供一个新的页表根来确保Dune模式下的正确性和性能。</p>
-</blockquote>
-</blockquote>
+<p>尽管旧页表和新页表在内容上可能看起来相似（例如映射相同的虚拟地址到物理地址），但它们的格式、结构和布局可能存在显著差异，这些差异对于支持Dune模式下的高效虚拟化至关重要。直接使用旧的页表根无法满足这些需求，因此必须提供一个新的页表根来确保Dune模式下的正确性和性能。</p></blockquote></blockquote>
 <hr>
 <h2 id="sandbox防御elf-header-攻击">sandbox防御ELF header 攻击
 </h2><p>ELF文件是Linux系统的常见可执行文件格式，包含了程序的头部（header），该头部定义了二进制文件的各种结构和加载方式。不良设计或恶意构造的ELF头部可能会试图利用ELF加载器中的漏洞，从而实现代码注入或其他攻击。</p>
@@ -1729,9 +1728,7 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 <li><strong>初始加载器</strong>功能有限，只负责加载高级加载器，并且设计简单，减少攻击面。</li>
 <li><strong>高级加载器</strong>运行在用户态，并且经过充分验证和使用，在加载不可信二进制文件时，能最大限度地减少安全风险。</li>
 </ul>
-<p>这种分离策略不仅提高了加载过程的安全性，还确保了即使不可信代码包含恶意头部，攻击的范围和影响也被限制在沙箱环境内。</p>
-</blockquote>
-</blockquote>
+<p>这种分离策略不仅提高了加载过程的安全性，还确保了即使不可信代码包含恶意头部，攻击的范围和影响也被限制在沙箱环境内。</p></blockquote></blockquote>
 <blockquote>
 <p>初始加载器确实在限定和设置高级加载器的运行环境方面起到了关键作用。如果没有初始加载器，直接加载高级加载器可能会带来一系列问题和安全隐患。让我们详细探讨这种分离策略的设计理由和必要性。</p>
 <p><strong>初始加载器的主要作用</strong></p>
@@ -1848,8 +1845,7 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 </span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="o">/</span><span class="n">lib64</span><span class="o">/</span><span class="n">ld</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">x86</span><span class="o">-</span><span class="mf">64.</span><span class="n">so</span><span class="mf">.2</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">untrusted_app</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>通过以上解释和示例可以看到，初始加载器在设置和限制高级加载器的运行环境方面起到了关键作用。没有初始加载器的附加保护，高级加载器的环境将无法控制，容易受到恶意代码的攻击和干扰。初始加载器确保了安全的环境初始化和基本配置，从而为高级加载器提供了一个安全和受控的执行环境。这种分离策略不仅提高了加载过程的安全性，还限制了恶意代码的攻击范围，确保整个系统的稳定和安全。</p>
-</blockquote>
+</div><p>通过以上解释和示例可以看到，初始加载器在设置和限制高级加载器的运行环境方面起到了关键作用。没有初始加载器的附加保护，高级加载器的环境将无法控制，容易受到恶意代码的攻击和干扰。初始加载器确保了安全的环境初始化和基本配置，从而为高级加载器提供了一个安全和受控的执行环境。这种分离策略不仅提高了加载过程的安全性，还限制了恶意代码的攻击范围，确保整个系统的稳定和安全。</p></blockquote>
 <hr>
 <h2 id="machine-abstraction">Machine Abstraction
 </h2><p>“使用虚拟化硬件提供进程抽象，而不是机器抽象”，实际上在描述虚拟化技术的不同层次和方式。为了更好地理解其中的概念，我们需要先弄清楚“进程抽象（process abstraction）”和“机器抽象（machine abstraction）”的含义。</p>
@@ -2195,7 +2191,7 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 <p><img src="/p/mit6s08119virtual-machines/p45.png"
 	width="1146"
 	height="725"
-	srcset="/p/mit6s08119virtual-machines/p45_hu17269911656025490841.png 480w, /p/mit6s08119virtual-machines/p45_hu12136153197092206098.png 1024w"
+	srcset="/p/mit6s08119virtual-machines/p45_hu_eb1fcdab6c59b2f5.png 480w, /p/mit6s08119virtual-machines/p45_hu_db58a8fae0c6948e.png 1024w"
 	loading="lazy"
 	
 		alt="p45"
@@ -2243,7 +2239,7 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 <p>出于效率的考虑，在VMM允许的前提下，Linux某些时候知道自己正在与VMM交互，以获得对于设备的高速访问权限。</p>
 <p>但这是一种被仔细控制的例外，实现虚拟机的大致策略还是完全准确的模拟物理服务器。</p>
 <hr>
-<h2 id="trap-and-emulate-----trap">Trap-and-Emulate &mdash; Trap
+<h2 id="trap-and-emulate--trap">Trap-and-Emulate &mdash; Trap
 </h2><p>我们该如何构建我们自己的VMM呢？</p>
 <p>一种实现方式是完全通过软件来实现，你可以想象写一个类似QEMU的软件，这个软件读取包含了XV6内核指令的文件，查看每一条指令并模拟RISC-V的状态，这里的状态包括了通过软件模拟32个寄存器。你的软件读取每条指令，确定指令类型，再将指令应用到通过软件模拟的32个寄存器和控制寄存器中。</p>
 <p>实际中有的方案就是这么做的，虽然说考虑到细节还需要做很多工作，但是这种方案从概念上来说很简单直观。</p>
@@ -2268,18 +2264,16 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 <p>Robert教授：我这里假设VMM运行在Supervisor mode。所以在这里的图中，VMM就是宿主机的kernel。</p>
 <p>这里我们不是启动类似Linux的操作系统，而是启动VMM（注，类似VMware的ESXi）。VMM以privileged权限运行，并拥有硬件的完整控制权限，这样我们就可以在VMM里面设置各种硬件寄存器。有一些VMM就是这么运行的，你在硬件上启动它们，并且只有VMM运行在Supervisor mode。</p>
 <p>实际上还有很多很多其他的虚拟机方案，比如说在硬件上启动Linux，之后要么Linux自带一个VMM，要么通过可加载的内核模块将VMM加载至Linux内核中，这样VMM可以在Linux内核中以Supervisor mode运行。今天我们要讨论的论文就是采用后者。</p>
-<p>这里主要的点在于，我们自己写的可信赖的VMM运行在Supervisor mode，而我们将不可信赖的Guest kernel运行在User mode，通过一系列的处理使得Guest kernel看起来好像自己是运行在Supervisor mode。</p>
-</blockquote>
+<p>这里主要的点在于，我们自己写的可信赖的VMM运行在Supervisor mode，而我们将不可信赖的Guest kernel运行在User mode，通过一系列的处理使得Guest kernel看起来好像自己是运行在Supervisor mode。</p></blockquote>
 <p>在RISC-V上，如果在User mode尝试运行任何一个需要Supervisor权限的指令都会触发trap。</p>
 <p>这里需要Supervisor权限的指令并不包括与Page Table相关的指令，我们稍后会介绍相关的内容。</p>
 <p>所以每当Guest操作系统尝试执行类似于读取SCAUSE寄存器，读写STVEC寄存器，都会触发一个trap，并走到VMM，之后我们就可以获得控制权。</p>
 <hr>
-<h2 id="trap-and-emulate-----emulate">Trap-and-Emulate &mdash; Emulate
+<h2 id="trap-and-emulate--emulate">Trap-and-Emulate &mdash; Emulate
 </h2><p>VMM会为每一个Guest维护一套虚拟状态信息。所以VMM里面会维护虚拟的STVEC寄存器，虚拟的SEPC寄存器以及其他所有的privileged寄存器。</p>
 <p>当Guest操作系统运行指令需要读取某个privileged寄存器时，首先会通过trap走到VMM，因为在用户空间读取privileged寄存器是非法的。之后VMM会检查这条指令并发现这是一个比如说读取SEPC寄存器的指令，之后VMM会模拟这条指令，并将自己维护的虚拟SEPC寄存器，拷贝到trapframe的用户寄存器中。</p>
 <blockquote>
-<p>（注，有关trapframe详见Lec06，这里假设Guest操作系统通过类似“sread a0, sepc”的指令想要将spec读取到用户寄存器a0）</p>
-</blockquote>
+<p>（注，有关trapframe详见Lec06，这里假设Guest操作系统通过类似“sread a0, sepc”的指令想要将spec读取到用户寄存器a0）</p></blockquote>
 <p>之后，VMM会将trapframe中保存的用户寄存器拷贝回真正的用户寄存器，通过sret指令，使得Guest从trap中返回。</p>
 <p>这时，用户寄存器a0里面保存的就是SEPC寄存器的值了，之后Guest操作系统会继续执行指令。最终，Guest读到了VMM替自己保管的虚拟SEPC寄存器。</p>
 <blockquote>
@@ -2294,8 +2288,7 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 <p>但是假设Guest操作系统只是从Guest用户进程执行了一个系统调用，Guest操作系统需要看到SCAUSE的值是系统调用。</p>
 <p>也就是说Guest操作系统在自己的trap handler中处理来自Guest用户进程的系统调用时，需要SCAUSE的值表明是系统调用。</p>
 <p>而实际的SCAUSE寄存器的值却表明是因为指令违反了privilege规则才走到的trap。通常情况下，VMM需要看到真实寄存器的值，而Guest操作系统需要能看到符合自己视角的寄存器的值。</p>
-<p>（注，在Guest操作系统中，可能有两种情况会触发trap，一种是Guest用户空间进程的系统调用，也就是正常操作系统中正常的trap流程，另一种是Guest内核空间读取privileged寄存器时，因为Guest内核空间实际上也是在宿主机的用户空间，导致这是个非法操作并触发trap。Robert这边举的例子的流程应该是这样，Guest用户进程执行系统调用，在这一个瞬间SCAUSE寄存器的值是ECALL，也就是8，详见6.6。但是稍后在Guest系统内核的trap handler中需要读取SCAUSE的值，以确定在Guest中引起trap的原因，但是这就触发了第二种trap，SCAUSE的值会变成Illegal Access。我们不能让Guest系统内核看到这个值，所以VMM这里将它变成ECALL并返回。）</p>
-</blockquote>
+<p>（注，在Guest操作系统中，可能有两种情况会触发trap，一种是Guest用户空间进程的系统调用，也就是正常操作系统中正常的trap流程，另一种是Guest内核空间读取privileged寄存器时，因为Guest内核空间实际上也是在宿主机的用户空间，导致这是个非法操作并触发trap。Robert这边举的例子的流程应该是这样，Guest用户进程执行系统调用，在这一个瞬间SCAUSE寄存器的值是ECALL，也就是8，详见6.6。但是稍后在Guest系统内核的trap handler中需要读取SCAUSE的值，以确定在Guest中引起trap的原因，但是这就触发了第二种trap，SCAUSE的值会变成Illegal Access。我们不能让Guest系统内核看到这个值，所以VMM这里将它变成ECALL并返回。）</p></blockquote>
 <p>在这种虚拟机的实现中，Guest整个运行在用户空间，任何时候它想要执行需要privilege权限的指令时，会通过trap走到VMM，VMM可以模拟这些指令。</p>
 <p>这种实现风格叫做Trap and Emulate。</p>
 <p>你可以完全通过软件实现这种VMM，也就是说你可以只通过修改软件就将XV6变成一个可以运行在RISC-V上的VMM，然后再在之上运行XV6虚拟机。当然，与常规的XV6一样，VMM需要运行在Supervisor mode。</p>
@@ -2317,8 +2310,7 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 <p>Robert教授：有的。Guest操作系统就是一个未被修改的普通操作系统，所以我们在Guest中运行的就是Linux内核或者XV6内核。</p>
 <p>而XV6内核知道自己运行在Supervisor mode，从代码的角度来说，内核代码会认为自己运行在Supervisor mode，并执行各种privileged指令，并期望这些指令能工作。</p>
 <p>当Guest操作系统执行sret指令时，它也知道自己将要进入到User空间。不过在宿主机上，Guest操作系统是运行在User mode，VMM也确保了这里能正常工作。</p>
-<p>但是从Guest角度来说，自己的内核看起来像是运行在Supervisor mode，自己的用户程序看起来像是运行在User mode。</p>
-</blockquote>
+<p>但是从Guest角度来说，自己的内核看起来像是运行在Supervisor mode，自己的用户程序看起来像是运行在User mode。</p></blockquote>
 <p>所以，当Guest执行sret指令从Supervisor mode进入到User mode，因为sret是privileged指令，会通过trap进入到VMM。</p>
 <p>VMM会更新虚拟状态信息中的mode为User mode，尽管当前的真实mode还是Supervisor mode，因为我们还在执行VMM中的代码。</p>
 <p>在VMM从trap中返回之前，VMM会将真实的SEPC寄存器设置成自己保存在虚拟状态信息中的虚拟SEPC寄存器。</p>
@@ -2333,11 +2325,10 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 <p>将虚拟的SCAUSE设置为系统调用；</p>
 <p>将真实的SEPC设置成虚拟的STVEC寄存器；</p>
 <blockquote>
-<p>注，STVEC保存的是trap函数的地址，将真实的SEPC设置成STVEC这样当VMM执行sret指令返回到Guest时，可以返回到Guest的trap handler。Guest执行系统调用以为自己通过trap走到了Guest内核，但是实际上却走到了VMM，这时VMM需要做一些处理，让Guest以及之后Guest的所有privileged指令都看起来好像是Guest真的走到了Guest内核</p>
-</blockquote>
+<p>注，STVEC保存的是trap函数的地址，将真实的SEPC设置成STVEC这样当VMM执行sret指令返回到Guest时，可以返回到Guest的trap handler。Guest执行系统调用以为自己通过trap走到了Guest内核，但是实际上却走到了VMM，这时VMM需要做一些处理，让Guest以及之后Guest的所有privileged指令都看起来好像是Guest真的走到了Guest内核</p></blockquote>
 <p>之后调用sret指令跳转到Guest操作系统的trap handler，也就是STVEC指向的地址。</p>
 <hr>
-<h2 id="trap-and-emulate-----page-table">Trap-and-Emulate &mdash; Page Table
+<h2 id="trap-and-emulate--page-table">Trap-and-Emulate &mdash; Page Table
 </h2><p>有关Trap and Emulate的实现还有两个重要的部分，一个是Page Table，另一个是外部设备。</p>
 <p>Page Table包含了两个部分，第一个部分是Guest操作系统在很多时候会修改SATP寄存器（注，SATP寄存器是物理内存中包含了Page Table的地址，详见4.3），当然这会变成一个trap走到VMM，之后VMM可以接管。</p>
 <p>但是我们不想让VMM只是简单的替Guest设置真实的SATP寄存器，因为这样的话Guest就可以访问任意的内存地址，而不只是VMM分配给它的内存地址，所以我们不能让Guest操作系统简单的设置SATP寄存器。</p>
@@ -2348,7 +2339,7 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 <p><img src="/p/mit6s08119virtual-machines/p46.png"
 	width="1115"
 	height="728"
-	srcset="/p/mit6s08119virtual-machines/p46_hu5540572329762936997.png 480w, /p/mit6s08119virtual-machines/p46_hu13058415282507184088.png 1024w"
+	srcset="/p/mit6s08119virtual-machines/p46_hu_49f9170a10c11261.png 480w, /p/mit6s08119virtual-machines/p46_hu_a680f5eac4bc5bf0.png 1024w"
 	loading="lazy"
 	
 		alt="p46"
@@ -2372,8 +2363,7 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 </ul>
 <p>在创建完之后，VMM会将Shadow Page Table设置到真实的SATP寄存器中，再返回到Guest内核中。</p>
 <blockquote>
-<p>注，这样的效果是，Guest里面看到的Page Table就是一个正常的Page Table，而Guest通过SATP寄存器指向的Page Table，将虚拟内存地址翻译得到的又是真实的物理内存地址</p>
-</blockquote>
+<p>注，这样的效果是，Guest里面看到的Page Table就是一个正常的Page Table，而Guest通过SATP寄存器指向的Page Table，将虚拟内存地址翻译得到的又是真实的物理内存地址</p></blockquote>
 <p>所以，Guest kernel认为自己使用的是一个正常的Page Table，但是实际的硬件使用的是Shadow Page Table。</p>
 <p>这种方式可以阻止Guest从被允许使用的内存中逃逸。Shadow Page Table只能包含VMM分配给虚拟机的主机物理内存地址。</p>
 <p>Guest不能向Page Table写入任何VMM未分配给Guest的内存地址。这是VMM实现隔离的一个关键部分。</p>
@@ -2384,15 +2374,13 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 <p>但是它又不能设置实际的SATP寄存器，因为这是一个privileged操作，所以设置SATP寄存器会触发trap并走到VMM。</p>
 <p>VMM会查看trap对应的指令，并发现Guest要尝试设置SATP寄存器，之后VMM会创建一个新的Shadow Page Table。</p>
 <p>VMM会查看Guest尝试要设置的Page Table的每一条记录，通过gpa-&gt;hpa的映射关系，将gva和hpa的对应关系翻译出来。</p>
-<p>如果Guest尝试使用一个不被允许的物理地址，VMM会生成一个真实的Page Fault。之后VMM会将Shadow Page Table设置到真实的SATP寄存器中，并返回到Guest中。</p>
-</blockquote>
+<p>如果Guest尝试使用一个不被允许的物理地址，VMM会生成一个真实的Page Fault。之后VMM会将Shadow Page Table设置到真实的SATP寄存器中，并返回到Guest中。</p></blockquote>
 <p>Shadow Page Table是实现VMM时一个比较麻烦的地方。</p>
 <p>除了设置SATP寄存器，Guest操作系统还有另一种方式可以与Page Table进行交互。</p>
 <p>XV6有时候会直接修改属于自己的Page Table Entry，或者读取PTE中的dirty bit。如果你读了RISC-V的文档，你可以发现在RISC-V上，如果软件更改了PTE，RISC-V不会做任何事情。</p>
 <p>如果你修改了PTE，RISC-V并不承诺可以立即观察到对于PTE的修改，在修改那一瞬间，你完全是不知道PTE被修改了。</p>
 <blockquote>
-<p>注，这里主要对比的是privileged指令，因为如果在用户空间执行了privileged指令，会立刻触发trap，而这里修改PTE不会有任何的额外的动作</p>
-</blockquote>
+<p>注，这里主要对比的是privileged指令，因为如果在用户空间执行了privileged指令，会立刻触发trap，而这里修改PTE不会有任何的额外的动作</p></blockquote>
 <p>相应的，文档是这么说的，如果你修改PTE并且希望MMU可以看到这个改动，你需要执行sfence.vma指令，这个指令会使得硬件注意到你对Page Table的修改。</p>
 <p>所以如果你要自己写一个VMM，你在RISC-V上的VMM会完全忽略Guest对于PTE的修改，但是你知道Guest在修改完PTE之后将会执行sfence.vma指令，并且这是一个privileged指令，因为它以s开头，所以这条指令会通过trap走到VMM，VMM就可以知道sfence.vma指令被执行了。</p>
 <p>之后VMM会重新扫描Guest的当前Page Table，查找更新了的Page Table Entry。</p>
@@ -2407,10 +2395,9 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 <p>学生提问：我们刚刚说过性能的损耗，如果我们使用VMM，对于这里的trap机制看起来也会有大量的性能损耗。</p>
 <p>Robert教授：是的。如果你的操作系统执行了大量的privileged指令，那么你也会有大量的trap，这会对性能有大的损耗。</p>
 <p>这里的损耗是现代硬件增加对虚拟机支持的动机。今天要讨论的论文使用的就是现在硬件对于虚拟机的支持，Intel和AMD在硬件上支持更加有效的trap，或者说对于虚拟机方案，会有少得多的trap。</p>
-<p>所以是的，性能很重要。但是上面介绍的方案，人们也使用了很多年，它能工作并且也很成功，尽管它会慢的多，但是还没有慢到让人们讨厌的程度，人们其实很喜欢这个方案。</p>
-</blockquote>
+<p>所以是的，性能很重要。但是上面介绍的方案，人们也使用了很多年，它能工作并且也很成功，尽管它会慢的多，但是还没有慢到让人们讨厌的程度，人们其实很喜欢这个方案。</p></blockquote>
 <hr>
-<h2 id="trap-and-emulate-----devices">Trap-and-Emulate &mdash; Devices
+<h2 id="trap-and-emulate--devices">Trap-and-Emulate &mdash; Devices
 </h2><p>接下来我们来看Trap and Emulate的最后一个部分，也就是虚拟机的外部设备。</p>
 <p>外部设备是指，一个普通的操作系统期望能有一个磁盘用来存储文件系统，或者是期望有一个网卡，甚至对于XV6来说期望有一个UART设备来与console交互，或者期望有一张声卡，一个显卡，键盘鼠标等等各种各样的东西。所以我们我们的虚拟机方案，需要能够至少使得Guest认为所有它需要的外部设备是存在的。</p>
 <p>这里人们通常会使用三种策略。</p>
@@ -2555,10 +2542,7 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 <ul>
 <li><strong>使用设备模拟（策略一）</strong>：每次数据库服务器向磁盘发起写操作，VMM 都会模拟磁盘寄存器的访问。由于每次都需要 trap，数据库的性能会受到很大影响，尤其是磁盘 IO 操作较为频繁时，频繁的上下文切换会消耗大量 CPU 资源。</li>
 <li><strong>使用虚拟设备（策略二）</strong>：Virtio 磁盘驱动通过高效的内存共享方式将读写命令发送给 VMM，VMM 直接从命令队列中读取指令，执行完命令后直接将数据写入内存。这种方式减少了大量的 trap 操作，大大提升了数据库的 IO 性能。</li>
-</ul>
-</blockquote>
-</blockquote>
-</blockquote>
+</ul></blockquote></blockquote></blockquote>
 <hr>
 <h2 id="硬件对虚拟机的支持">硬件对虚拟机的支持
 </h2><p>接下来我将讨论硬件对于虚拟机的支持，这里特指的就是Intel的VT-x。为什么Intel和其他的硬件厂商会为虚拟机提供直接的硬件支持呢？</p>
@@ -2617,8 +2601,7 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 <p>学生提问：那也需要一个新的VMM吗？</p>
 <p>Robert教授：VMM可以像一个普通的操作系统一样。XV6可以支持多个进程，并且为每个进程配备一个proc结构体。</p>
 <p>而我们的VMM也会为每个虚拟机配备一个vm结构体，用来跟踪Guest的信息。</p>
-<p>并且，如我之前所说的，如果你只有一个CPU核，但是有3个Guest，可以通过定时器中断结合VMM在3个Guest之间切换。</p>
-</blockquote>
+<p>并且，如我之前所说的，如果你只有一个CPU核，但是有3个Guest，可以通过定时器中断结合VMM在3个Guest之间切换。</p></blockquote>
 <hr>
 <h2 id="dune-safe-user-level-access-to-privileged-cpu-features">Dune: Safe User-level Access to Privileged CPU Features
 </h2><p>今天要讨论的<a class="link" href="https://pdos.csail.mit.edu/6.828/2020/readings/belay-dune.pdf"  target="_blank" rel="noopener"
@@ -2665,21 +2648,18 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 <p>Robert教授：现在我们使用了Dune，并且有一个进程是被Dune管理的。</p>
 <p>这个进程通过VT-x实现了Supervisor mode和User mode，我们在User mode运行了一个插件，并且插件也是由带GC的编程语言写的，所以它有属于自己的Page Table，并且其中的PTE也包含了dirty位。</p>
 <p>但是刚刚说的GC加速在这不能工作，因为Dune会将插件运行在Guest User mode，而就像普通的User mode一样，Guest User mode不允许使用CR3寄存器。</p>
-<p>所以在Guest User mode，我们不能快速的访问PTE的dirty位。只有在Guest Supervisor mode，才能通过CR3寄存器访问Page Table。所以，并不能同时使用以上Dune提供的两种功能。</p>
-</blockquote>
+<p>所以在Guest User mode，我们不能快速的访问PTE的dirty位。只有在Guest Supervisor mode，才能通过CR3寄存器访问Page Table。所以，并不能同时使用以上Dune提供的两种功能。</p></blockquote>
 <hr>
 <blockquote>
 <p>学生提问：如果某人基于Dune写了个浏览器，那么对于不支持Dune的计算机来说就很难使用这样的浏览器，对吗？就像很难直接让Chrome使用Dune，因为不是所有的计算机都有这个内核模块。</p>
 <p>Robert教授：首先，这里提到的内容需要运行在支持VT-x的计算机上，也就是说底层的计算机必须支持VT-x，所以需要VT-x来运行Dune。</p>
 <p>其次Dune需要被加载来运行浏览器以利用前面说到的特性。</p>
 <p>所以是的，你需要将所有的东西都设置好。并且Dune是一个研究项目，它的目标是使得人们去思考可以部署在真实世界，并且有足够的价值的一些东西。</p>
-<p>就像Linux一样，Linux有成千上万个功能，如果某人决定将Dune添加到Linux中作为一个标准功能，那么我们就可以依赖这个功能，并且Chrome也可以直接用它了。</p>
-</blockquote>
+<p>就像Linux一样，Linux有成千上万个功能，如果某人决定将Dune添加到Linux中作为一个标准功能，那么我们就可以依赖这个功能，并且Chrome也可以直接用它了。</p></blockquote>
 <hr>
 <blockquote>
 <p>学生提问：所以从整体来看，这里就像是创建了一个VM，但是实际上运行的又是一个进程？</p>
-<p>Robert教授：你可以这么描述。这里主要是对进程进行抽象，但是这里没有用Page Table硬件来时先进程间的隔离（注，其实也使用了，但是主要不依赖Page Table硬件），这里使用的是CPU上的硬件来支持进程，这里说的CPU上的硬件就是VT-x，它包含了一些额外的功能，例如设置好属于进程的Page Table。</p>
-</blockquote>
+<p>Robert教授：你可以这么描述。这里主要是对进程进行抽象，但是这里没有用Page Table硬件来时先进程间的隔离（注，其实也使用了，但是主要不依赖Page Table硬件），这里使用的是CPU上的硬件来支持进程，这里说的CPU上的硬件就是VT-x，它包含了一些额外的功能，例如设置好属于进程的Page Table。</p></blockquote>
 <hr>
 <blockquote>
 <p>学生提问：论文里提到了，如果Dune管理的一个进程fork了，那就会变成一个不被Dune管理的进程，这不会是一个安全漏洞吗？</p>
@@ -2690,25 +2670,21 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 <p>假设进程的Guest Supervisor mode部分代码写的非常的小心，并且不会被欺骗，那么它不会执行fork，所以这时fork不能工作。</p>
 <p>如果Supervisor mode的代码允许fork，它会调用Linux的fork系统调用，并得到一个fork进程包含了与原进程有相同的内存镜像，所以我们在新进程中包含可能是恶意的插件代码。</p>
 <p>如果新进程没有意识到Dune已经被关闭了，那么原来的Supervisor mode中的privileged指令会是非法的。</p>
-<p>所以我们需要假设Dune管理的进程里面的Supervisor mode部分代码能够足够的小心且足够的聪明，来阻止User mode中的插件代码执行fork。</p>
-</blockquote>
+<p>所以我们需要假设Dune管理的进程里面的Supervisor mode部分代码能够足够的小心且足够的聪明，来阻止User mode中的插件代码执行fork。</p></blockquote>
 <hr>
 <blockquote>
 <p>学生：被Dune管理的进程拥有Supervisor mode并没有不安全，因为它实际上是non-root mode下的Supervisor mode，就像是Guest操作系统中的Supervisor mode一样，你可以让它做任何事情，因为VT-x的存在，进程就像是一个虚拟机一样，并不能伤害到真正的操作系统。</p>
-<p>Robert教授：是的，进程不能逃逸出来，因为存在EPT，而EPT会限制进程的地址空间。</p>
-</blockquote>
+<p>Robert教授：是的，进程不能逃逸出来，因为存在EPT，而EPT会限制进程的地址空间。</p></blockquote>
 <hr>
 <blockquote>
 <p>学生提问：在VT-x的方案中，当我们访问Page Table时，因为我们需要通过EPT进行第二层翻译，将Guest物理内存地址翻译到Host物理内存地址，这样从Page Table返回的延时是不是增加了？</p>
 <p>Robert教授：这里可能会花费更多的时间让硬件MMU来翻译内存地址。</p>
 <p>在最坏的情况下，比如在RISC-V中，会有多层Page Table，MMU需要一层一层的去查找PTE，x86下同样也有多层Page Table，所以在x86中首先会查找主Page Table，如果要访问更多的内存地址，每一次内存地址的访问都需要再次走到EPT，而EPT也是一个多层的Page Table。</p>
-<p>所以我并不知道最差情况下需要访问Page Table多少次才能完成翻译，但是很明显在VT-x下会比普通情况下差得多。不过实际中会有cache所以通常不会走到最坏的情况。</p>
-</blockquote>
+<p>所以我并不知道最差情况下需要访问Page Table多少次才能完成翻译，但是很明显在VT-x下会比普通情况下差得多。不过实际中会有cache所以通常不会走到最坏的情况。</p></blockquote>
 <hr>
 <blockquote>
 <p>学生提问：今天的虚拟机还是普遍会更慢吗？如果是的话，AWS是怎么工作的，因为看起来还挺快的，并且工作的也很好。</p>
-<p>Robert教授：我认为他们使用了硬件上的VT-x支持，并且使用了我们讨论过的一些功能，这样使得AWS虚拟机比较快，或者并不比真实的计算机慢多少。</p>
-</blockquote>
+<p>Robert教授：我认为他们使用了硬件上的VT-x支持，并且使用了我们讨论过的一些功能，这样使得AWS虚拟机比较快，或者并不比真实的计算机慢多少。</p></blockquote>
 <hr>
 <blockquote>
 <p>学生提问：我对于Trap and Emulate中的Shadow Page Table有个问题，每次都会创建Shadow Page Table吗？难道不能记住上次的Shadow Page Table吗？</p>
@@ -2719,8 +2695,7 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 <p>而类似于VT-x的硬件支持使得这部分工作更加的容易了，因为EPT表示你不用构建Shadow Page Table了。</p>
 <p>学生提问：我有个问题有关GC的，如果有dirty位的话需要重新扫描对象，那么有没有可能会无限扫描？</p>
 <p>Robert教授：是的，这有个问题，如果一直有对象在更新，扫描能正常结束吗？</p>
-<p>实际中，GC会先扫描一次，之后它会冻结除了GC线程以外的其他线程，所以这期间不可能再发生任何其他的变更。之后GC才会查看所有PTE的dirty位，但是因为其他所有线程都冻结了，所以不可能会有更多的dirty位了，所以GC查看了所有的dirty位，之后结束GC会结束扫描并创建需要释放对象的列表，最后再恢复所有之前冻结的线程的执行。GC是一个复杂的流程，Dune的论文中并没有足够的篇幅讨论它。</p>
-</blockquote>
+<p>实际中，GC会先扫描一次，之后它会冻结除了GC线程以外的其他线程，所以这期间不可能再发生任何其他的变更。之后GC才会查看所有PTE的dirty位，但是因为其他所有线程都冻结了，所以不可能会有更多的dirty位了，所以GC查看了所有的dirty位，之后结束GC会结束扫描并创建需要释放对象的列表，最后再恢复所有之前冻结的线程的执行。GC是一个复杂的流程，Dune的论文中并没有足够的篇幅讨论它。</p></blockquote>
 
 </section>
 
@@ -2738,7 +2713,7 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 
 
         <span>
-            最后更新于 Nov 12, 2024 23:05 &#43;0800
+            最后更新于 Sep 03, 2025 22:10 &#43;0800
         </span>
     </section></footer>
 
@@ -2787,7 +2762,7 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
         
         
             <div class="article-image">
-                <img src="/p/mit6s08123rcu/bg.91a08bf3fe0a8ca435e8fbc902291fd5_hu4589796922609635382.jpg" 
+                <img src="/p/mit6s08123rcu/bg.91a08bf3fe0a8ca435e8fbc902291fd5_hu_50da030b7ba2cbe7.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -2811,7 +2786,7 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
         
         
             <div class="article-image">
-                <img src="/p/mit6s08122meltdown/19.8d880549dccba2f0c1613b3e41a721e5_hu3753156070077914420.jpg" 
+                <img src="/p/mit6s08122meltdown/19.8d880549dccba2f0c1613b3e41a721e5_hu_1493d831cda8626c.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -2835,7 +2810,7 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
         
         
             <div class="article-image">
-                <img src="/p/mit6s08121networking/bg.68c4376fd87b0b35da07319dd155c90d_hu10351534106733688476.jpg" 
+                <img src="/p/mit6s08121networking/bg.68c4376fd87b0b35da07319dd155c90d_hu_b8a716243c6f9679.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -2859,7 +2834,7 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
         
         
             <div class="article-image">
-                <img src="/p/mit6s08120kernels-and-hll/bg.4175e6a2793e0fc340e5aced2529e40b_hu6405785273338381617.jpg" 
+                <img src="/p/mit6s08120kernels-and-hll/bg.4175e6a2793e0fc340e5aced2529e40b_hu_de82d011b3d97ace.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -2883,7 +2858,7 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
         
         
             <div class="article-image">
-                <img src="/p/mit6s08118os-organization/bg.6254618fb3eb08f3bf5d7cd89d4cd672_hu15449325963333300792.jpg" 
+                <img src="/p/mit6s08118os-organization/bg.6254618fb3eb08f3bf5d7cd89d4cd672_hu_845b73e21b5a04f1.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -2915,7 +2890,9 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
     <section class="copyright">
         &copy; 
         
-        2024 echudet
+            2024 - 
+        
+        2025 echudet
     </section>
     
     <section class="powerby">
@@ -2948,6 +2925,12 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
         </script> 
 
         
+        
+          
+        
+          
+        
+          
         
           
         
@@ -3094,9 +3077,15 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
         
              
         
+             
+        
+             
+        
+             
+        
         
 
-        共 747479 字 , 35 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        共 756615 字 , 38 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
         主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 

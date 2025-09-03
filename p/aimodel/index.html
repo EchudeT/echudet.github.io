@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="目录 引言 *PyTorch 模型的基本组成 2.1 模型架构（Architecture） 主干网络（Backbone） 特征金字塔（Feature Pyramid） 特征融合模块（Neck） 头部网络（Head） 2.2 模型参数（Parameters） 2.3 模型配置 Swin Transformer 的详细分析 3.1 *模型概述 3.2 *关键名词解释 3.3 Patch Embedding 3.4 Swin Transformer Block 3.4.1 多头注意力机制（Multi-Head Self-Attention） 3.4.2 窗口注意力（Window Attention） 3.4.3 移动窗口（Shifted Window）机制 3.4.4 前馈网络（Feed-Forward Network, FFN） 3.5 *Stage 和 Block 的层次结构 3.6 模型参数的调整 3.7 *模型的层级结构和通道的关系 MiDaS 模型中的应用 4.1 模型结构图 4.2 特征提取与融合 4.3 深度估计的实现 *模型调用流程 5.1 模型加载与初始化 5.2 数据加载与预处理 5.3 前向传播过程 5.4 后处理与输出 *关键名词解释 6.1 Block（块） 6.2 Patch（补丁） 6.3 Depth（深度） 6.4 Head（注意力头） 6.5 embed_dim（嵌入维度） 6.6 Channels（通道数） 6.7 Hooks（特征提取点） 6.8 .pt（模型文件） 模型训练与参数调整 7.1 损失函数与优化器 7.2 训练循环 7.3 超参数的影响 ">
-<title>Aimodel</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="大一立项时对三维重建midas微模型的理解和训练">
+<title>aimodel</title>
 
 <link rel='canonical' href='https://echudet.github.io/p/aimodel/'>
 
-<link rel="stylesheet" href="/scss/style.min.86fc5e5efb829fb1bdd7a2d2275017fb3ae01ba7fcf491e347d76495ae5e3ae2.css"><meta property='og:title' content="Aimodel">
-<meta property='og:description' content="目录 引言 *PyTorch 模型的基本组成 2.1 模型架构（Architecture） 主干网络（Backbone） 特征金字塔（Feature Pyramid） 特征融合模块（Neck） 头部网络（Head） 2.2 模型参数（Parameters） 2.3 模型配置 Swin Transformer 的详细分析 3.1 *模型概述 3.2 *关键名词解释 3.3 Patch Embedding 3.4 Swin Transformer Block 3.4.1 多头注意力机制（Multi-Head Self-Attention） 3.4.2 窗口注意力（Window Attention） 3.4.3 移动窗口（Shifted Window）机制 3.4.4 前馈网络（Feed-Forward Network, FFN） 3.5 *Stage 和 Block 的层次结构 3.6 模型参数的调整 3.7 *模型的层级结构和通道的关系 MiDaS 模型中的应用 4.1 模型结构图 4.2 特征提取与融合 4.3 深度估计的实现 *模型调用流程 5.1 模型加载与初始化 5.2 数据加载与预处理 5.3 前向传播过程 5.4 后处理与输出 *关键名词解释 6.1 Block（块） 6.2 Patch（补丁） 6.3 Depth（深度） 6.4 Head（注意力头） 6.5 embed_dim（嵌入维度） 6.6 Channels（通道数） 6.7 Hooks（特征提取点） 6.8 .pt（模型文件） 模型训练与参数调整 7.1 损失函数与优化器 7.2 训练循环 7.3 超参数的影响 ">
+<link rel="stylesheet" href="/scss/style.min.da77a84796b4cbbce4984dfc653595f2e1f66158390942c69e60c576c66a6e8b.css"><meta property='og:title' content="aimodel">
+<meta property='og:description' content="大一立项时对三维重建midas微模型的理解和训练">
 <meta property='og:url' content='https://echudet.github.io/p/aimodel/'>
 <meta property='og:site_name' content='echudet'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-12-01T15:02:45&#43;08:00'/><meta property='article:modified_time' content='2024-12-01T23:35:39&#43;08:00'/>
-<meta name="twitter:title" content="Aimodel">
-<meta name="twitter:description" content="目录 引言 *PyTorch 模型的基本组成 2.1 模型架构（Architecture） 主干网络（Backbone） 特征金字塔（Feature Pyramid） 特征融合模块（Neck） 头部网络（Head） 2.2 模型参数（Parameters） 2.3 模型配置 Swin Transformer 的详细分析 3.1 *模型概述 3.2 *关键名词解释 3.3 Patch Embedding 3.4 Swin Transformer Block 3.4.1 多头注意力机制（Multi-Head Self-Attention） 3.4.2 窗口注意力（Window Attention） 3.4.3 移动窗口（Shifted Window）机制 3.4.4 前馈网络（Feed-Forward Network, FFN） 3.5 *Stage 和 Block 的层次结构 3.6 模型参数的调整 3.7 *模型的层级结构和通道的关系 MiDaS 模型中的应用 4.1 模型结构图 4.2 特征提取与融合 4.3 深度估计的实现 *模型调用流程 5.1 模型加载与初始化 5.2 数据加载与预处理 5.3 前向传播过程 5.4 后处理与输出 *关键名词解释 6.1 Block（块） 6.2 Patch（补丁） 6.3 Depth（深度） 6.4 Head（注意力头） 6.5 embed_dim（嵌入维度） 6.6 Channels（通道数） 6.7 Hooks（特征提取点） 6.8 .pt（模型文件） 模型训练与参数调整 7.1 损失函数与优化器 7.2 训练循环 7.3 超参数的影响 ">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-12-01T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-09-03T22:10:01&#43;08:00'/>
+<meta name="twitter:title" content="aimodel">
+<meta name="twitter:description" content="大一立项时对三维重建midas微模型的理解和训练">
     <link rel="shortcut icon" href="/timer.ico" />
 
     </head>
@@ -58,7 +58,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu11199958555974308744.png" width="300"
+                        <img src="/img/avatar_hu_67bf1327fc98b60.png" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -347,12 +347,24 @@
 
 
     
+    <header class="article-category">
+        
+            <a href="/categories/ai/" >
+                Ai
+            </a>
+        
+    </header>
+    
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/aimodel/">Aimodel</a>
+            <a href="/p/aimodel/">aimodel</a>
         </h2>
     
+        
+        <h3 class="article-subtitle">
+            大一立项时对三维重建midas微模型的理解和训练
+        </h3>
         
     </div>
 
@@ -495,7 +507,7 @@
 
 
                 <time>
-                    Dec 01, 2024 23:35 &#43;0800
+                    Sep 03, 2025 22:10 &#43;0800
                 </time>
             </div></footer>
     
@@ -916,8 +928,7 @@
 <li>卷积操作使用空间形式 [B, C, H, W]</li>
 <li>两种形式可以相互转换</li>
 <li>特征维度（C）和空间分辨率（H,W）在两种形式中都保持不变</li>
-</ol>
-</blockquote>
+</ol></blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -3179,7 +3190,7 @@
 
 
         <span>
-            最后更新于 Dec 01, 2024 23:35 &#43;0800
+            最后更新于 Sep 03, 2025 22:10 &#43;0800
         </span>
     </section></footer>
 
@@ -3227,7 +3238,9 @@
     <section class="copyright">
         &copy; 
         
-        2024 echudet
+            2024 - 
+        
+        2025 echudet
     </section>
     
     <section class="powerby">
@@ -3260,6 +3273,12 @@
         </script> 
 
         
+        
+          
+        
+          
+        
+          
         
           
         
@@ -3406,9 +3425,15 @@
         
              
         
+             
+        
+             
+        
+             
+        
         
 
-        共 747479 字 , 35 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        共 756615 字 , 38 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
         主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 
