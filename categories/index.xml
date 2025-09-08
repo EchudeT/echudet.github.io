@@ -7,7 +7,15 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>echudet</copyright>
-        <lastBuildDate>Wed, 03 Sep 2025 22:10:01 +0800</lastBuildDate><atom:link href="https://echudet.github.io/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 08 Sep 2025 18:16:29 +0800</lastBuildDate><atom:link href="https://echudet.github.io/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Face-Recognition</title>
+        <link>https://echudet.github.io/categories/face-recognition/</link>
+        <pubDate>Sun, 07 Sep 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://echudet.github.io/categories/face-recognition/</guid>
+        <description></description>
+        </item>
+        <item>
         <title>Comp</title>
         <link>https://echudet.github.io/categories/comp/</link>
         <pubDate>Wed, 03 Sep 2025 00:00:00 +0000</pubDate>

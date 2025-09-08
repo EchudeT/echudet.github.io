@@ -6,11 +6,11 @@
 
 <link rel='canonical' href='https://echudet.github.io/p/oscomp2025-experience/'>
 
-<link rel="stylesheet" href="/scss/style.min.da77a84796b4cbbce4984dfc653595f2e1f66158390942c69e60c576c66a6e8b.css"><meta property='og:title' content="oscomp2025 experience">
+<link rel="stylesheet" href="/scss/style.min.86fc5e5efb829fb1bdd7a2d2275017fb3ae01ba7fcf491e347d76495ae5e3ae2.css"><meta property='og:title' content="oscomp2025 experience">
 <meta property='og:description' content="参与OS内核比赛的经验总结">
 <meta property='og:url' content='https://echudet.github.io/p/oscomp2025-experience/'>
 <meta property='og:site_name' content='echudet'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-09-03T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-09-03T22:10:01&#43;08:00'/><meta property='og:image' content='https://echudet.github.io/p/oscomp2025-experience/bg.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-09-03T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-09-08T18:16:29&#43;08:00'/><meta property='og:image' content='https://echudet.github.io/p/oscomp2025-experience/bg.jpg' />
 <meta name="twitter:title" content="oscomp2025 experience">
 <meta name="twitter:description" content="参与OS内核比赛的经验总结"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://echudet.github.io/p/oscomp2025-experience/bg.jpg' />
@@ -455,7 +455,7 @@
 </svg>
 
             <time class="article-words">
-                文章字数：3688字
+                文章字数：3842字
             </time>
         </div>
         <div class="article-lastmod">
@@ -468,7 +468,7 @@
 
 
                 <time>
-                    Sep 03, 2025 22:10 &#43;0800
+                    Sep 08, 2025 18:16 &#43;0800
                 </time>
             </div></footer>
     
@@ -491,7 +491,7 @@
     >http://oslabs.hitsz.edu.cn/oscomp/oscomp.html</a>
 
 </p></blockquote>
-<p>大二寒假前看到校内有操作系统比赛的招新通知，又恰逢大段空闲时间，于是便抱着前来积累经验的想法，拉着什么都还没学的友人A，与主动加入我们的学长B组起了一个队伍，由我带队来参加操作系统比赛。最终凭借着运气+努力，取得了国一，可喜可贺。</p>
+<p>大二寒假前看到校内有操作系统比赛的招新通知，又恰逢大段空闲时间，于是便抱着前来积累经验的想法，拉着友人A，与主动加入我们的学长B组起了一个队伍，由我带队来参加操作系统比赛。最终凭借着运气+努力，取得了国一，可喜可贺。</p>
 <h2 id="赛前积累">赛前积累
 </h2><p>在比赛报名之前，我个人在操作系统方面的知识积累是mit6s081的xv6整个lab+南大的pa lab，学长B是学完了大三的整个操作系统课程，友人A则是还没有这方面的知识。</p>
 <p>在比赛之前，寒假期间，确定好比赛初期的时间安排，以及内核编写语言之后，我们开始组团进行rust语言的学习，时长为3周。关于rust方面的学习，主要是依赖以下几个内容。</p>
@@ -538,6 +538,7 @@
 </h2><p>一般使用二分法进行调试，通过log输出大量的内容来确定上下文，一方面能够知晓发生bug的位置，另一方面能够获取其上下文的参数信息，方便调bug。如果log输出过多时，可以设置动态开关log，和过滤部分log的内容，从而筛选出关键信息。</p>
 <p>如果bug发生在库的深处，或是用户态，或是地址读写卡死崩溃问题，则考虑使用gdb进行跟踪调试，先通过log确定bug大致位置，在附近打断点，然后步进跟踪各个寄存器，或特权寄存器，或相关地址的值等，来确定bug发生的原因。不过对板子就不行了，因为板子上面没有gdb，就只能用二分法调bug了。（关于gdb，听说gdb-dashboard挺好用的，可以尝试使用）</p>
 <p>除此外，调试用户态的程序还可以使用qemu-riscv64或qemu-loongarch64(这个需要额外配置)，通过输出它们系统调用的日志，来对比自己的内核和标准的内核之间的差异，从而找出bug。</p>
+<p>另外，我个人觉得操作系统里面比较难调的bug是内存bug和多线程bug，内存方面需要提前做好内存权限的管理，明确各个地址段的功能，这样更好追踪bug的产生。多线程则是需要为各个task建立健全的debug机制，可以在任意时间log出task的相关内容，调度时间信息等，看清楚了执行流，调bug就简单了（但也不是那么简单）。</p>
 <h2 id="遗憾">遗憾
 </h2><ol>
 <li>多核仍有死锁情况，并发支持不完善。</li>
@@ -573,7 +574,7 @@
 
 
         <span>
-            最后更新于 Sep 03, 2025 22:10 &#43;0800
+            最后更新于 Sep 08, 2025 18:16 &#43;0800
         </span>
     </section></footer>
 
@@ -862,6 +863,8 @@
         
           
         
+          
+        
         
     
         
@@ -943,9 +946,11 @@
         
              
         
+             
+        
         
 
-        共 756615 字 , 38 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        共 765849 字 , 39 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
         主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 

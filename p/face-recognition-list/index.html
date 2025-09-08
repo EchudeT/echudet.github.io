@@ -1,0 +1,2085 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="人脸识别技术大览，嵌入式比赛备选">
+<title>face-recognition-list</title>
+
+<link rel='canonical' href='https://echudet.github.io/p/face-recognition-list/'>
+
+<link rel="stylesheet" href="/scss/style.min.86fc5e5efb829fb1bdd7a2d2275017fb3ae01ba7fcf491e347d76495ae5e3ae2.css"><meta property='og:title' content="face-recognition-list">
+<meta property='og:description' content="人脸识别技术大览，嵌入式比赛备选">
+<meta property='og:url' content='https://echudet.github.io/p/face-recognition-list/'>
+<meta property='og:site_name' content='echudet'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-09-07T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-09-08T18:16:29&#43;08:00'/>
+<meta name="twitter:title" content="face-recognition-list">
+<meta name="twitter:description" content="人脸识别技术大览，嵌入式比赛备选">
+    <link rel="shortcut icon" href="/timer.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_67bf1327fc98b60.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">⌨️</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">echudet</a></h1>
+            <h2 class="site-description">探索编程的学生一枚</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/EchudeT'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://twitter.com'
+                        target="_blank"
+                        title="Twitter"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>档案</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#板子性能">板子性能</a></li>
+    <li><a href="#备选指标">备选指标</a></li>
+    <li><a href="#人脸识别的主要阶段">人脸识别的主要阶段</a></li>
+    <li><a href="#各阶段的主要技术">各阶段的主要技术</a>
+      <ol>
+        <li><a href="#人脸检测阶段">人脸检测阶段</a></li>
+        <li><a href="#人脸对齐阶段">人脸对齐阶段</a></li>
+        <li><a href="#特征提取阶段">特征提取阶段</a></li>
+        <li><a href="#特征匹配与识别阶段">特征匹配与识别阶段</a></li>
+      </ol>
+    </li>
+    <li><a href="#组合方案传统">组合方案（传统）</a>
+      <ol>
+        <li><a href="#极简的嵌入方案">极简的嵌入方案</a></li>
+        <li><a href="#平衡型传统方案">平衡型传统方案</a></li>
+        <li><a href="#高精度传统方案">高精度传统方案</a></li>
+      </ol>
+    </li>
+    <li><a href="#组合方案混合">组合方案（混合）</a>
+      <ol>
+        <li><a href="#轻量级混合方案">轻量级混合方案</a></li>
+        <li><a href="#速度优先混合方案">速度优先混合方案</a></li>
+        <li><a href="#精度优先混合方案">精度优先混合方案</a></li>
+        <li><a href="#大规模搜索方案">大规模搜索方案</a></li>
+      </ol>
+    </li>
+    <li><a href="#端到端模型">端到端模型</a></li>
+    <li><a href="#跨阶段方案">跨阶段方案</a>
+      <ol>
+        <li><a href="#yolo-face--arcface头">YOLO-Face + ArcFace头</a></li>
+        <li><a href="#siamese--mtcnn">Siamese + MTCNN</a></li>
+        <li><a href="#centerface--mobilefacenet">CenterFace + MobileFaceNet</a></li>
+        <li><a href="#nanodet--shufflefacenet">NanoDet + ShuffleFaceNet</a></li>
+      </ol>
+    </li>
+    <li><a href="#选取的方案">选取的方案</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+
+
+    
+    <header class="article-category">
+        
+            <a href="/categories/face-recognition/" >
+                Face-Recognition
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/face-recognition-list/">face-recognition-list</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            人脸识别技术大览，嵌入式比赛备选
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-09-07</time>
+            </div>
+        
+
+        
+            <div>
+                <?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="792px" height="792px" viewBox="0 0 792 792" style="enable-background:new 0 0 792 792;" xml:space="preserve">
+<g>
+	<g id="_x31_0_19_">
+		<g>
+			<path d="M643.5,742.5H594V569.25C594,473.566,516.434,396,420.75,396C516.434,396,594,318.434,594,222.75V49.5h49.5
+				c13.662,0,24.75-11.088,24.75-24.75S657.162,0,643.5,0h-495c-13.662,0-24.75,11.088-24.75,24.75S134.838,49.5,148.5,49.5H198
+				v173.25C198,318.434,275.566,396,371.25,396C275.566,396,198,473.566,198,569.25V742.5h-49.5c-13.662,0-24.75,11.088-24.75,24.75
+				S134.838,792,148.5,792h495c13.662,0,24.75-11.088,24.75-24.75S657.162,742.5,643.5,742.5z M247.5,222.75
+				c0-43.387,0-173.25,0-173.25h297c0,0,0,133.427,0,173.25c0,68.335-58.188,123.75-129.938,123.75h-37.125
+				C305.687,346.5,247.5,291.085,247.5,222.75z M544.5,742.5h-297c0,0,0-129.888,0-173.25c0-68.335,58.187-123.75,129.938-123.75
+				h37.125c71.75,0,129.938,55.415,129.938,123.75C544.5,609.072,544.5,742.5,544.5,742.5z"/>
+		</g>
+	</g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+</svg>
+
+                <time class="article-time--reading">
+                    阅读时长: 19 分钟
+                </time>
+            </div>
+        
+
+         
+        <div>
+            <?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="79.536px" height="79.536px" viewBox="0 0 79.536 79.536" style="enable-background:new 0 0 79.536 79.536;"
+	 xml:space="preserve">
+<g>
+	<path style="fill:#010002;" d="M40.162,17.906C37.415,15.275,21.614,6.141,0,15.451c0,0.138,0,2.722,0,6.654v44.418h32.747
+		c1.126,0.968,3.798,1.651,6.926,1.651c3.119,0,5.802-0.684,6.931-1.651h32.933V22.105c0-3.933,0-6.517,0-6.654
+		C58.813,6.314,42.257,15.982,40.162,17.906z M37.229,63.349c0-1.75-15.372-11.981-33.125-0.818V19.216
+		c3.516-2.014,8.246-3.249,13.463-3.249c10.864,0,19.662,3.562,19.662,10.175V63.349z M75.684,62.53
+		c-17.751-11.163-33.108-0.932-33.108,0.818V26.146c0-6.612,8.792-10.175,19.646-10.175c5.22,0,9.952,1.235,13.463,3.249V62.53z"/>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+</svg>
+
+            <time class="article-words">
+                文章字数：9080字
+            </time>
+        </div>
+        <div class="article-lastmod">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time>
+                    Sep 08, 2025 18:16 &#43;0800
+                </time>
+            </div></footer>
+    
+
+    
+
+
+
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="板子性能">板子性能
+</h2><p>首先看看板子的性能，确定后面模型算法的选择范围。</p>
+<center class="half">
+<img src="board01.png" width="300"/>
+<img src="board02.png" width="300"/>
+</center>
+<p>从硬件规格来看，Ti60F225板子的关键性能指标包括：</p>
+<ul>
+<li><strong>片上RAM（325KB）</strong> - 最高速缓存，用于实时计算</li>
+<li><strong>HyperRAM（256Mbit=32MB）</strong> - 高速中等容量存储，可用于模型权重的快速访问</li>
+<li><strong>DDR3（4GB或512MB）</strong> - 大容量主存储，用于模型、数据库和应用程序</li>
+<li><strong>SPI Flash（128Mbit=16MB）</strong> - 非易失性存储，用于存储固件和持久化数据选择原则</li>
+</ul>
+<p>类比电脑来看</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>名称</th>
+          <th>嵌入式/FPGA角色</th>
+          <th>PC角色</th>
+          <th>用法</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>DDR/SDRAM</td>
+          <td>运行内存/工作区</td>
+          <td>电脑内存条（RAM）</td>
+          <td>随意读写高速</td>
+      </tr>
+      <tr>
+          <td>Flash/NAND</td>
+          <td>固态/持久存储</td>
+          <td>SSD/U盘/硬盘</td>
+          <td>存数据/代码</td>
+      </tr>
+      <tr>
+          <td>片上RAM</td>
+          <td>高速缓存（KB级别）</td>
+          <td>CPU缓存（Cache）</td>
+          <td>算法Buffer</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>总结来说，我们能用的：</p>
+<ul>
+<li>内存（跑模型算法的）： RAM 325KB + HyperRAM 32MB + DDR3 4GB或512MB</li>
+<li>固态存储： Flash 16MB + 任意硬盘/U盘/SDcard X MB</li>
+</ul>
+<p>所以一般的模型算法(~几百MB)都能使用，不用过度考虑内存问题。</p>
+
+<div class="notice notice-tip" >
+    <div class="notice-title"><svg xmlns="http://www.w3.org/2000/svg" class="icon notice-icon" viewBox="0 0 512 512" fill="#437052"><path d="M504 256a248 248 0 11-496 0 248 248 0 01496 0zM227 387l184-184c7-6 7-16 0-22l-22-23c-7-6-17-6-23 0L216 308l-70-70c-6-6-16-6-23 0l-22 23c-7 6-7 16 0 22l104 104c6 7 16 7 22 0z"/></svg></div><p>为什么嵌入式和PC相比，固态存储这么小？</p>
+<p>SPI Flash通常只是用来存放启动镜像、Bootloader、基础的程序等，实际上还需要插tf卡，或者sd卡，或者USB接入U盘。</p></div>
+
+<h2 id="备选指标">备选指标
+</h2><p>广义上来说，人脸识别分为人脸验证($1:1$)和人脸识别($1:N$)两部分。前者只需要根据给定的图片及名字信息来确认他个人的身份，而后者则需要将给定的图片和数据库里面的所有图片进行对比，找出最有可能的身份或确定是否在数据库里面。</p>
+<p>我们要做的人脸识别技术就是后者。不幸的是，后者的难度远远大于前者。粗略估计，倘若对比一次的准确率为$n$，那么人脸验证的准确率为$n$，人脸识别的准确率为$n^k$，其中$k$为数据库里面所含有的图片数量（若$n=0.9,k=10$，那么$n^k = 0.3487$）。因此，我们要注重单次人脸识别的准确度，尽量保证在$0.9$以上。</p>
+<p>另外，板子需要实时处理，对速度要求高。</p>
+<p>除此之外，实现的复杂度、内存和是否CPU亲和也需要考虑。实现复杂度决定了我们能否顺利实现，依赖的环境复不复杂。内存虽然不用过度考虑，但是也不能用过大的模型算法。板子上面没有GPU，因此CPU亲和也非常重要。</p>
+<h2 id="人脸识别的主要阶段">人脸识别的主要阶段
+</h2><p>在传统技术中，人脸识别系统通常包含以下<strong>四个核心阶段</strong>：</p>
+<p>首先是<strong>人脸检测</strong>，这个阶段会在图像中定位人脸的位置，并输出人脸边界框。</p>
+<p>然后是<strong>人脸对齐</strong>，这个阶段将检测人脸关键点，将人脸归一化到标准的位置和角度，例如偏脸变正脸。</p>
+<p>其次是<strong>特征提取</strong>，这个阶段会从对齐后的人脸图像提取特征向量，生成能够代表个体身份的特征表示。</p>
+<p>最后是<strong>特征匹配</strong>，这个阶段将提取的特征与数据库进行对比，完成身份识别。</p>
+
+<div class="notice notice-tip" >
+    <div class="notice-title"><svg xmlns="http://www.w3.org/2000/svg" class="icon notice-icon" viewBox="0 0 512 512" fill="#437052"><path d="M504 256a248 248 0 11-496 0 248 248 0 01496 0zM227 387l184-184c7-6 7-16 0-22l-22-23c-7-6-17-6-23 0L216 308l-70-70c-6-6-16-6-23 0l-22 23c-7 6-7 16 0 22l104 104c6 7 16 7 22 0z"/></svg></div><p>简单来说，人脸识别的大致流程是这样的。人脸识别程序T运行在嵌入式设备的RTOS操作系统上面，通过RTOS的摄像外设驱动获取照片P，首先将照片P中可能的人类框选剪切出来(<strong>人脸检测</strong>)，然后将不同角度的人脸以一定的标准统一化(<strong>人脸对齐</strong>)，接着从统一后的人脸中提取特征，例如眼睛轮廓等(<strong>特征提取</strong>)，最后将提取特征的向量和数据库的进行对比，完成身份识别(<strong>特征匹配</strong>)。</p></div>
+
+<p>（深度学习中，有一些模型能够实现端到端，例如把后面三个阶段直接压缩为一个阶段，这个之后再提）</p>
+<h2 id="各阶段的主要技术">各阶段的主要技术
+</h2><h3 id="人脸检测阶段">人脸检测阶段
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>技术方法</th>
+          <th>速度</th>
+          <th>准确度</th>
+          <th>实现难度</th>
+          <th>内存需求</th>
+          <th>硬件要求</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>传统方法</strong></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>Viola-Jones检测器</td>
+          <td>⭐⭐⭐⭐⭐</td>
+          <td>⭐⭐</td>
+          <td>⭐⭐</td>
+          <td>⭐</td>
+          <td>⭐</td>
+      </tr>
+      <tr>
+          <td>HOG + SVM</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐⭐</td>
+          <td>⭐⭐</td>
+      </tr>
+      <tr>
+          <td>DPM</td>
+          <td>⭐⭐</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐⭐⭐</td>
+      </tr>
+      <tr>
+          <td><strong>深度学习方法</strong></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>MTCNN</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐⭐⭐</td>
+      </tr>
+      <tr>
+          <td>SSD-Face</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐</td>
+      </tr>
+      <tr>
+          <td>YOLO-Face系列</td>
+          <td>⭐⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐⭐</td>
+          <td>⭐⭐</td>
+          <td>⭐⭐</td>
+      </tr>
+      <tr>
+          <td>RetinaFace</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐</td>
+      </tr>
+      <tr>
+          <td>DSFD</td>
+          <td>⭐⭐</td>
+          <td>⭐⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐⭐</td>
+      </tr>
+      <tr>
+          <td>CenterFace</td>
+          <td>⭐⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐⭐</td>
+          <td>⭐⭐</td>
+          <td>⭐⭐</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>传统方法方面有三个技术可以使用</p>
+<ul>
+<li>
+<p><a class="link" href="https://zh.wikipedia.org/wiki/%E7%BB%B4%E5%A5%A5%E6%8B%89-%E7%90%BC%E6%96%AF%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E6%A1%86%E6%9E%B6"  target="_blank" rel="noopener"
+    >Viola-Jones检测器</a>
+
+</p>
+<p>第一种可以实时处理并给出良好物体检出率的物体检测技术(虽然有点古老，2001年发表)，主要应用于人脸识别方面。通过分类器的级联来实现目标检测，对单个分类器的误检率要求非常宽容，但对检测率要求较高。</p>
+<p>基于Haar特征和AdaBoost级联分类器。速度极快，可以实时，但准确率较差，需要正脸。</p>
+<p>实现比较简单，可以直接调用opencv现成的库，并且内存需求几mb即可，对硬件要求低。</p>
+</li>
+<li>
+<p><a class="link" href="https://juejin.cn/post/6844903614985535501"  target="_blank" rel="noopener"
+    >HOG + SVM</a>
+
+</p>
+<p>使用方向梯度直方图特征结合支持向量机。其原理类似于yolo的，但是机器学习。可用yolo取代。</p>
+<p>速度中等，但是准确度比Viola-Jones高，实现需要理解HOG，没有现成的库调用。内存方面需求较低，几十mb即可，普通的CPU可以运行。</p>
+<img src="hog.png" alt="hog" style="zoom: 25%;" />
+<details>
+    <summary>what is hog?</summary>
+    <p>方向梯度直方图（Histogram of oriented gradient, HOG）,是抓取图像轮廓线条的算法，现将图片切成很多个区域（Cell）,从每个区域中找出方向梯度，并把它描绘出来，就形成了对象的轮廓，与其他边缘提取的算法比起来，它对环境的变化，如光线有较强的辨识能力。</p>
+<p>使用方向梯度直方图(HOG)来检测人脸位置。先将图片灰度化，接着计算图像中像素的梯度。通过将图像转变成HOG形式，就可以获得人脸位置。</p>
+<p>HOG有一个缺点：<strong>很难处理遮挡问题，人体姿势动作幅度过大或物体方向改变也不易检测</strong>。</p>
+
+</details>
+
+</li>
+<li>
+<p><a class="link" href="https://www.cnblogs.com/henuliulei/p/12109100.html"  target="_blank" rel="noopener"
+    >DPM</a>
+
+</p>
+<p>DPM算法本身是一种基于组件的检测算法，对扭曲，性别，多姿态，多角度等的人脸都有非常好的检测效果。</p>
+<p>DPM算法采用了改进后的HOG特征，SVM分类器和滑动窗口（Sliding Windows）检测思想(属于是前面一个的上位替代，除了速度和内存)。</p>
+<p>速度较慢，准确度在传统方法里面最好，能够辨别变形的人脸，但是实现比较复杂，并且对内存有一定需求，比HOG+SVM需要更多的内存，但具体多少还不确定。</p>
+</li>
+</ul>
+<p>深度学习方法有六个可以选择</p>
+<ul>
+<li>
+<p><a class="link" href="https://zhuanlan.zhihu.com/p/595252411"  target="_blank" rel="noopener"
+    >MTCNN(Multi-task convolutional neural network)</a>
+
+</p>
+<p>多阶段级联CNN，同时检测人脸和关键点。但如果后面使用端到端的模型，这里的关键点是没用的。</p>
+<p>速度快，准确率高，有成熟实现，内存需求约50MB，属于是移动端实时人脸检测的首选（嵌入式也算？）。</p>
+</li>
+<li>
+<p><a class="link" href="https://github.com/zjchenchujie/ssd-face"  target="_blank" rel="noopener"
+    >SSD-Face</a>
+
+</p>
+<p>基于SSD目标检测框架的人脸检测器。</p>
+<p>单次前传检测所有人脸，速度较快，准确率高，有成熟实现，内存需求为100~200MB，建议使用GPU。</p>
+<p>适合用于同时检测多个人脸的场景（众脸检测）。</p>
+</li>
+<li>
+<p><a class="link" href="https://github.com/YapaLab/yolo-face"  target="_blank" rel="noopener"
+    >YOLO-Face系列</a>
+
+</p>
+<p>著名人脸识别模型。</p>
+<p>速度极快，准确率略有牺牲，框架成熟，容易部署。</p>
+<p>内存方面取决于版本，tiny版本仅需20MB且CPU能跑，对于不同版本而言也有更小的。</p>
+<p>也可以一次检测多个人脸，适合“众脸”的场景。</p>
+<p>往年比赛有使用YOLO-v5的，因此可以作为备选。</p>
+</li>
+<li>
+<p><a class="link" href="https://github.com/serengil/retinaface"  target="_blank" rel="noopener"
+    >RetinaFace</a>
+
+</p>
+<p>速度中等，但准确率是目前所有模型中最优的。</p>
+<p>实现需要多任务学习，比较复杂。内存方面需要200MB+，并且使用GPU。</p>
+<p>适合于高精度的应用，例如人脸支付。但是不是很适合众脸识别的项目。</p>
+</li>
+<li>
+<p><a class="link" href="https://github.com/Tencent/FaceDetection-DSFD"  target="_blank" rel="noopener"
+    >DSFD</a>
+
+</p>
+<p>速度较慢，但准确率高，小脸检测能力强。</p>
+<p>实现比较复杂，需要完成双路结构。内存方面需要300MB+，并且使用好的GPU。</p>
+<p>适合远距离、小脸检测。</p>
+<p>GPU+复杂实现+高内存+速度慢，不考虑备选。</p>
+</li>
+<li>
+<p><a class="link" href="https://github.com/Star-Clouds/CenterFace"  target="_blank" rel="noopener"
+    >CenterFace</a>
+
+</p>
+<p>速度极快，和YOLO相当，准确率中等。</p>
+<p>基于CenterNet，易实现。并且内存方面要求不高，轻量级，&lt;50MB。</p>
+<p>对CPU友好，可以使用CPU顺利运行。</p>
+<p>适合边缘设备、移动端，嵌入式设备本身就是边缘设备的一种？因此可以作为备选。</p>
+</li>
+</ul>
+<h3 id="人脸对齐阶段">人脸对齐阶段
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>技术方法</th>
+          <th>速度</th>
+          <th>准确度</th>
+          <th>实现难度</th>
+          <th>内存需求</th>
+          <th>硬件要求</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>传统方法</strong></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>ASM</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐⭐</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>⭐⭐</td>
+          <td>⭐⭐</td>
+      </tr>
+      <tr>
+          <td>AAM</td>
+          <td>⭐⭐</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐⭐⭐</td>
+      </tr>
+      <tr>
+          <td>CLM</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐⭐⭐</td>
+      </tr>
+      <tr>
+          <td>SDM</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐⭐</td>
+          <td>⭐⭐</td>
+      </tr>
+      <tr>
+          <td>基于SIFT特征</td>
+          <td>⭐⭐</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐⭐⭐</td>
+      </tr>
+      <tr>
+          <td><strong>深度学习方法</strong></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>DAN</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐⭐⭐</td>
+      </tr>
+      <tr>
+          <td>MDM</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐</td>
+      </tr>
+      <tr>
+          <td>FAN</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐</td>
+      </tr>
+      <tr>
+          <td>PRNet</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐</td>
+      </tr>
+      <tr>
+          <td>3DDFA</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐</td>
+      </tr>
+      <tr>
+          <td>HRNet</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐⭐</td>
+      </tr>
+      <tr>
+          <td>PFLD</td>
+          <td>⭐⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐⭐</td>
+          <td>⭐</td>
+          <td>⭐</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>传统方法方面有五类方法</p>
+<ul>
+<li>
+<p><a class="link" href="https://vibaike.com/174423/"  target="_blank" rel="noopener"
+    >ASM（主动形状模型）</a>
+
+</p>
+<p>ASM主要是通过对形状向量的统计建模来控制合理的形状分布，同时每个单独特征点的局部梯度统计模型，用于在预测迭代时确定点的移动方向和位置。</p>
+<p>速度迭代优化较慢，只考虑形状信息，准确率较低，并且实现非常复杂。</p>
+<p>但是内存硬件需求较低。</p>
+<p>属于是早期研究的产物(1995)，目前已很少使用。</p>
+</li>
+<li>
+<p><a class="link" href="https://vibaike.com/174416/"  target="_blank" rel="noopener"
+    >AAM（主动外观模型）</a>
+
+</p>
+<p>AAM是一种广泛应用于人脸识别领域的技术。它通过分析人脸图像的几何形状和纹理信息，实现人脸对齐和特征提取。这里实现了两个阶段，但为方便起见，归类于首个阶段。</p>
+<p>比ASM更慢，准确度高一点，实现更加复杂，计算量大。</p>
+<p>属于是近期学术研究的产物，同样不适合使用。</p>
+</li>
+<li>
+<p><a class="link" href="https://blog.csdn.net/delltdk/article/details/49800821"  target="_blank" rel="noopener"
+    >CLM（约束局部模型）</a>
+
+</p>
+<p>速度中等，局部特征鲁棒性好，准确率良。</p>
+<p>实现需要多个检测器，难度较高。并且网上搜索用的人较少，参考资料也较少。</p>
+<p>貌似已经被CLNF取代。CLNF速度、准确率均优于CLM。</p>
+<p>内存和硬件要求中等，可以使用cpu。</p>
+<p>适合部分遮挡情况。不推荐使用。</p>
+</li>
+<li>
+<p><a class="link" href="https://dreamocean.github.io/2017/08/03/sdm/"  target="_blank" rel="noopener"
+    >SDM（监督下降法）</a>
+
+</p>
+<p>一类机器学习的方法，通过回归的过程实现。对于一张给定的人脸，给出一个初始的形状，通过不断地迭代，将初始形状回归到接近甚至等于真实形状的位置。</p>
+<p>速度快，准确率高，内存需求较小，CPU高效执行。</p>
+<p>嵌入式设备的好选择，如果不用深度学习的话。可作为备选。</p>
+</li>
+<li>
+<p><a class="link" href="https://zhuanlan.zhihu.com/p/421792422"  target="_blank" rel="noopener"
+    >基于SIFT特征的对齐</a>
+
+</p>
+<p>SIFT算法包括两个主要步骤：关键点检测和描述子生成。特征点的检测是指在图像中寻找具有代表性的点作为局部特征点，如角点、边缘、斑点等。这些特征点应具有良好的尺度不变性、旋转不变性和一定的亮度不变性。描述子的生成则是通过分析特征点周围的图像信息，构建一个高维的特征向量来描述每个特征点的局部特征。这使得即使在图像发生一定变化后，这些特征点的描述子仍然可以匹配到一起。</p>
+<p>特征提取慢，但特征点匹配可靠。</p>
+<p>内存需求中等，计算密集。</p>
+<p>适合大姿态变化的场景。</p>
+</li>
+</ul>
+<p>深度学习方面有四类方法</p>
+<ul>
+<li>
+<p><a class="link" href="https://github.com/MarekKowalski/DeepAlignmentNetwork"  target="_blank" rel="noopener"
+    >DAN（深度对齐网络）</a>
+
+</p>
+<p>高效CNN实现，速度较快，级联结构提升精度，准确率也较高。</p>
+<p>实现难度中等，内存需求中等。但是硬件方面更适合用GPU。</p>
+<p>适合通用。</p>
+</li>
+<li>
+<p><a class="link" href="https://github.com/1adrianb/face-alignment"  target="_blank" rel="noopener"
+    >FAN（人脸对齐网络）</a>
+
+</p>
+<p>沙漏结构，速度比DAN慢。但是准确率非常高。</p>
+<p>内存需求非常大，所以别想了。适合高精度。</p>
+</li>
+<li>
+<p><a class="link" href="https://github.com/yfeng95/PRNet"  target="_blank" rel="noopener"
+    >PRNet</a>
+
+</p>
+<p>回归3D人脸位置图，适合3D信息的应用。速度慢，但是准确率高。</p>
+<p>内存要求非常高且GPU必需，故不在考虑范围内。</p>
+</li>
+<li>
+<p><a class="link" href="https://zhuanlan.zhihu.com/p/73546427"  target="_blank" rel="noopener"
+    >PFLD（实用人脸关键点检测器）</a>
+
+</p>
+<p>专为速度优化，速度极快。速度优先，故准确率中等。</p>
+<p>结构简单，内存需求&lt;1MB，移动CPU可以跑。属于是移动端首选。</p>
+<p>非常优秀的对齐模型，可作为备选。</p>
+</li>
+</ul>
+<h3 id="特征提取阶段">特征提取阶段
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>技术方法</th>
+          <th>速度</th>
+          <th>准确度</th>
+          <th>实现难度</th>
+          <th>内存需求</th>
+          <th>硬件要求</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>传统方法</strong></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>PCA/Eigenfaces</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>⭐⭐</td>
+          <td>⭐⭐</td>
+          <td>⭐⭐</td>
+          <td>⭐</td>
+      </tr>
+      <tr>
+          <td>LDA/Fisherfaces</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐⭐</td>
+          <td>⭐</td>
+      </tr>
+      <tr>
+          <td>ICA</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐⭐</td>
+      </tr>
+      <tr>
+          <td>LBP</td>
+          <td>⭐⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐</td>
+          <td>⭐</td>
+          <td>⭐</td>
+      </tr>
+      <tr>
+          <td>Gabor小波</td>
+          <td>⭐⭐</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐</td>
+      </tr>
+      <tr>
+          <td>SIFT/SURF</td>
+          <td>⭐⭐</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐⭐⭐</td>
+      </tr>
+      <tr>
+          <td>HOG</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐⭐</td>
+          <td>⭐⭐</td>
+          <td>⭐⭐</td>
+      </tr>
+      <tr>
+          <td>LBPH</td>
+          <td>⭐⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐</td>
+          <td>⭐</td>
+          <td>⭐</td>
+      </tr>
+      <tr>
+          <td><strong>深度学习方法</strong></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>DeepFace</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐</td>
+      </tr>
+      <tr>
+          <td>DeepID系列</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐</td>
+      </tr>
+      <tr>
+          <td>FaceNet</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐</td>
+      </tr>
+      <tr>
+          <td>VGGFace/VGGFace2</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>⭐⭐</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐</td>
+      </tr>
+      <tr>
+          <td>ResNet-Face</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐</td>
+      </tr>
+      <tr>
+          <td>MobileFaceNet</td>
+          <td>⭐⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐⭐</td>
+          <td>⭐</td>
+          <td>⭐</td>
+      </tr>
+      <tr>
+          <td>ArcFace</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐</td>
+      </tr>
+      <tr>
+          <td>CosFace</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐</td>
+      </tr>
+      <tr>
+          <td>SphereFace</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐</td>
+      </tr>
+      <tr>
+          <td><del>AdaFace</del></td>
+          <td>⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>传统方法有四个</p>
+<ul>
+<li>
+<p><a class="link" href="https://zhuanlan.zhihu.com/p/356640804"  target="_blank" rel="noopener"
+    >PCA/Eigenfaces</a>
+
+</p>
+<p>老东西，1991年提出。借助 PCA 分析主要成分，对人脸数据进行降维，再进行相关计算，以减少复杂度。</p>
+<p>降维后复杂度低，速度快。但是准确率低。</p>
+<p>实现简单，内存需求少，可运行于CPU。</p>
+<p>适合考古、教学，不适合人脸识别真正使用。</p>
+</li>
+<li>
+<p><a class="link" href="https://zhuanlan.zhihu.com/p/363819175"  target="_blank" rel="noopener"
+    >LDA/Fisherfaces</a>
+
+</p>
+<p>LDA与PCA实际上十分类似，LDA和PCA本质上都是对矩阵（人脸）进行降维，并且降维后仍然可以重建人脸。</p>
+<p>它们的不同之处主要在于它们降维目的的不同，PCA降维是朝着”我要最小化重构误差“的思路去降维的，而PCA是朝着”我要最小化类内散度，最大化类间散度“的思路去降维的。换句话说，PCA是为了更好的压缩与重建，而LDA是为了更好地分类。</p>
+<p>需要说明的是，LDA和PCA两种方法对光照都是比较敏感的，如果你用光照均匀的图像作为依据去判别非均匀的，那基本就惨了。</p>
+<p>与PCA相比，速度同样快，准确度和数据库大小有关，但基本比PCA高。</p>
+<p>实现需要类标签，比PCA复杂。内存硬件要求低。</p>
+<p>适合小规模的人脸库。</p>
+</li>
+<li>
+<p><a class="link" href="https://zhuanlan.zhihu.com/p/166653678"  target="_blank" rel="noopener"
+    >LBP（局部二值模式）</a>
+
+</p>
+<p>LBP描述子不仅计算过程相对简单，而且产生的最终效果也不错，因而在学术界和工业界的很多领域都得到了较为广泛的应用。LDA和PCA都是从数据整体入手而不同于LBP提取局部纹理特征。</p>
+<p>速度极快，并且准确率较高。实现简单，内存需求少。</p>
+<p>非常适合于实时系统和嵌入式，加入备选。</p>
+</li>
+<li>
+<p><a class="link" href="https://github.com/laidefa/Gabor_Face_Recognition"  target="_blank" rel="noopener"
+    >Gabor小波</a>
+
+</p>
+<p>受采集人脸图像时环境光照等因素影响，传统的代数算法很难达到较高识别率。Gabor 小波变换呈现为频率和方向的多尺度变换，并且与人类视觉感受野剖面非常相似，因此 Gabor 滤波器被用与提取图像局部纹理特征或对整体图像进行卷积得到 Gabor 滤波后的图像。</p>
+<p>总而言之，该方法准确率很高，但是速度慢，内存要求高，计算复杂。</p>
+<p>适合高精度，纹理敏感使用。</p>
+</li>
+</ul>
+<p>深度学习方面有四个</p>
+<ul>
+<li>
+<p><a class="link" href="https://zhuanlan.zhihu.com/p/76520981"  target="_blank" rel="noopener"
+    >DeepFace</a>
+
+</p>
+<p>中等速度。准确率较高。但是实现难度高，内存需求大，GPU必需。直接排除。</p>
+<p>注意：和github上的deepface项目不是同一个</p>
+</li>
+<li>
+<p><a class="link" href="https://github.com/davidsandberg/facenet"  target="_blank" rel="noopener"
+    >FaceNet</a>
+
+</p>
+<p>FaceNet的核心思想是学习一个将人脸图像映射到特征向量的函数。Triplet Loss实现，经典的三元组损失。</p>
+<p>速度快，准确率非常高。内存需求中等。适合工业级的应用。</p>
+</li>
+<li>
+<p><a class="link" href="https://github.com/Xiaoccer/MobileFaceNet_Pytorch"  target="_blank" rel="noopener"
+    >MobileFaceNet</a>
+
+</p>
+<p>mobilefacenet是运行在移动设备上的网络，单个网络模型只有4M并且有较高的准确率。</p>
+<p>速度非常快，几乎实时。硬件要求非常低，手机可跑。自然也适合嵌入式环境，备选。</p>
+<p>(不过大部分模型都用python跑，比较麻烦)</p>
+</li>
+<li>
+<p><a class="link" href="https://zhuanlan.zhihu.com/p/285598652"  target="_blank" rel="noopener"
+    >ArcFace/CosFace/SphereFace</a>
+
+</p>
+<p>ArcFace、CosFace、SphereFace是用于人脸识别的先进损失函数，它们通过优化特征空间来提高识别精度。</p>
+<p>推理高效，速度快。准确率当前最优。</p>
+<p>但是实现非常复杂，并且网上没找到现成模型，资料少，内存需求大。适合高精度场景。</p>
+</li>
+</ul>
+<h3 id="特征匹配与识别阶段">特征匹配与识别阶段
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>技术方法</th>
+          <th>速度</th>
+          <th>准确度</th>
+          <th>实现难度</th>
+          <th>内存需求</th>
+          <th>硬件要求</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>传统方法</strong></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>欧氏距离</td>
+          <td>⭐⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐</td>
+          <td>⭐</td>
+          <td>⭐</td>
+      </tr>
+      <tr>
+          <td>马氏距离</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐⭐</td>
+          <td>⭐⭐</td>
+          <td>⭐</td>
+      </tr>
+      <tr>
+          <td>余弦相似度</td>
+          <td>⭐⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>⭐</td>
+          <td>⭐</td>
+          <td>⭐</td>
+      </tr>
+      <tr>
+          <td>Chi-squared距离</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐⭐</td>
+          <td>⭐</td>
+          <td>⭐</td>
+      </tr>
+      <tr>
+          <td>SVM分类器</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐⭐</td>
+      </tr>
+      <tr>
+          <td><strong>深度学习方法</strong></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>Siamese网络</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>⭐⭐</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐⭐⭐</td>
+      </tr>
+      <tr>
+          <td>Triplet网络</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐⭐</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>传统方法有三</p>
+<ul>
+<li>
+<p>欧式距离</p>
+<p>经典求欧式距离，所有作差再平方。速度最快，准确率中等。</p>
+<p>实现非常简单，并且几乎不占任何内存。</p>
+</li>
+<li>
+<p>马氏距离</p>
+<p>考虑特征协方差的距离。速度快，准确率中等。有一定的内存需求。</p>
+<p>评价是不如欧式距离。</p>
+</li>
+<li>
+<p>余弦相似度</p>
+<p>余弦相似度是一种衡量两个向量在方向上相似程度的度量，其值域为 [-1, 1]。值越接近1，表示两个向量的方向越接近，即越相似。在人脸比对中，通常会将人脸图像转换为特征向量，然后利用余弦相似度计算这些向量之间的相似度，以此判断两张人脸是否相似。</p>
+<p>速度极快，准确率比欧式距离法高。</p>
+<p>同样实现简单，不占内存。</p>
+</li>
+<li>
+<p>Chi-squared距离</p>
+<p>适用于直方图特征。速度快，准确率一般。</p>
+<p>实现有点难度，同样不如欧氏距离法。</p>
+</li>
+<li>
+<p>SVM分类器</p>
+<p>速度中等，准确率较高。但是机器学习，需要内存调优，并且占用一定量的内存。</p>
+<p>麻烦，不考虑使用。</p>
+</li>
+</ul>
+<p>深度学习有二</p>
+<ul>
+<li>
+<p><a class="link" href="https://zhuanlan.zhihu.com/p/706930791"  target="_blank" rel="noopener"
+    >Siamese网络</a>
+
+</p>
+<p>这里仅仅用来对比特征数据流，后面会有别的用法。</p>
+<p>单次比较快，准确率较高。实现结构简单，可以使用CPU。</p>
+</li>
+<li>
+<p><a class="link" href="https://github.com/andreasveit/triplet-network-pytorch"  target="_blank" rel="noopener"
+    >Triplet网络</a>
+
+</p>
+<p>Triplet网络是一种深度学习模型，主要用于解决样本类别多且训练数据集样本数少的情况，如人脸识别和人脸验证。它是Siamese网络的一种延伸，通过比较距离来学习有用的变量。</p>
+<p>三路输入，所以速度一般，并且内存需求非常高，硬件要求高。但准确率最高。</p>
+</li>
+</ul>
+<h2 id="组合方案传统">组合方案（传统）
+</h2><h3 id="极简的嵌入方案">极简的嵌入方案
+</h3><p>适合于单片机、早期嵌入式设备，可以给嵌入式设备简单测试视觉功能，但是不会参赛真正使用。准确率过低，不适用于众脸识别。</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>阶段</th>
+          <th>技术选择</th>
+          <th>理由</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>检测</td>
+          <td>Viola-Jones</td>
+          <td>速度极快，内存占用极小</td>
+      </tr>
+      <tr>
+          <td>对齐</td>
+          <td>简单几何归一化</td>
+          <td>仅做基本的眼睛定位和旋转校正</td>
+      </tr>
+      <tr>
+          <td>特征</td>
+          <td>LBP</td>
+          <td>计算简单，实时性好</td>
+      </tr>
+      <tr>
+          <td>匹配</td>
+          <td>欧氏距离</td>
+          <td>最简单快速</td>
+      </tr>
+  </tbody>
+</table></div>
+<p><strong>优势</strong>：可在8位/16位MCU上运行，总内存需求&lt;10MB</p>
+<p><strong>劣势</strong>：只适合正面人脸，准确率有限（约70-80%）</p>
+<h3 id="平衡型传统方案">平衡型传统方案
+</h3><p>适用于中端嵌入式平台，准确率有所提升，但仍在90%以下，比较堪忧。</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>阶段</th>
+          <th>技术选择</th>
+          <th>理由</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>检测</td>
+          <td>HOG + SVM</td>
+          <td>准确度和速度的平衡</td>
+      </tr>
+      <tr>
+          <td>对齐</td>
+          <td>SDM</td>
+          <td>传统方法中最优，速度快</td>
+      </tr>
+      <tr>
+          <td>特征</td>
+          <td>LBP + PCA</td>
+          <td>LBP提取纹理，PCA降维</td>
+      </tr>
+      <tr>
+          <td>匹配</td>
+          <td>余弦相似度</td>
+          <td>对特征归一化友好</td>
+      </tr>
+  </tbody>
+</table></div>
+<p><strong>优势</strong>：纯CPU实现，准确率可达85%左右</p>
+<p><strong>劣势</strong>：对光照变化敏感</p>
+<h3 id="高精度传统方案">高精度传统方案
+</h3><p>适用于计算资源充足但不能使用深度学习的场景，实现复杂，速度慢，才仅仅90%准确率，不考虑使用。</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>阶段</th>
+          <th>技术选择</th>
+          <th>理由</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>检测</td>
+          <td>DPM</td>
+          <td>传统方法最准确</td>
+      </tr>
+      <tr>
+          <td>对齐</td>
+          <td>AAM/CLM</td>
+          <td>考虑纹理信息</td>
+      </tr>
+      <tr>
+          <td>特征</td>
+          <td>Gabor + LDA</td>
+          <td>多尺度特征+判别分析</td>
+      </tr>
+      <tr>
+          <td>匹配</td>
+          <td>SVM</td>
+          <td>复杂决策边界</td>
+      </tr>
+  </tbody>
+</table></div>
+<p><strong>优势</strong>：传统方法的极限，准确率可达90%</p>
+<p><strong>劣势</strong>：速度慢，实现复杂</p>
+<h2 id="组合方案混合">组合方案（混合）
+</h2><h3 id="轻量级混合方案">轻量级混合方案
+</h3><p>适合移动设备、边缘计算设备，检测和对齐一体化，减少计算，特征质量高，模型小（&lt;5MB），并且整体准确率&gt;95%，可以作为备选。（只能说模型性能碾压算法）</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>阶段</th>
+          <th>技术选择</th>
+          <th>类型</th>
+          <th>理由</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>检测</td>
+          <td>MTCNN</td>
+          <td>深度学习</td>
+          <td>速度快，同时输出关键点</td>
+      </tr>
+      <tr>
+          <td>对齐</td>
+          <td>基于MTCNN关键点的仿射变换</td>
+          <td>传统方法</td>
+          <td>利用检测的副产品</td>
+      </tr>
+      <tr>
+          <td>特征</td>
+          <td>MobileFaceNet</td>
+          <td>深度学习</td>
+          <td>专为移动端设计</td>
+      </tr>
+      <tr>
+          <td>匹配</td>
+          <td>余弦相似度</td>
+          <td>传统方法</td>
+          <td>简单高效</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="速度优先混合方案">速度优先混合方案
+</h3><p>适合实时视频监控、高帧率要求场合，内存占用小，可达100+ FPS，可以作为备选。</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>阶段</th>
+          <th>技术选择</th>
+          <th>类型</th>
+          <th>理由</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>检测</td>
+          <td>YOLO-Fastest</td>
+          <td>深度学习</td>
+          <td>极速检测</td>
+      </tr>
+      <tr>
+          <td>对齐</td>
+          <td>跳过或简单归一化</td>
+          <td>传统方法</td>
+          <td>节省时间</td>
+      </tr>
+      <tr>
+          <td>特征</td>
+          <td>LBP</td>
+          <td>传统方法</td>
+          <td>毫秒级提取</td>
+      </tr>
+      <tr>
+          <td>匹配</td>
+          <td>哈希+汉明距离</td>
+          <td>传统方法</td>
+          <td>二进制匹配极快</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="精度优先混合方案">精度优先混合方案
+</h3><p>适用于门禁系统、支付认证这些高精度需求场合，准确率 &gt; 99%，不过准确率这么高，有必要吗？</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>阶段</th>
+          <th>技术选择</th>
+          <th>类型</th>
+          <th>理由</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>检测</td>
+          <td>RetinaFace</td>
+          <td>深度学习</td>
+          <td>最高精度，处理困难情况</td>
+      </tr>
+      <tr>
+          <td>对齐</td>
+          <td>SDM精细调整</td>
+          <td>传统方法</td>
+          <td>在深度学习基础上微调</td>
+      </tr>
+      <tr>
+          <td>特征</td>
+          <td>ArcFace</td>
+          <td>深度学习</td>
+          <td>当前最优特征</td>
+      </tr>
+      <tr>
+          <td>匹配</td>
+          <td>余弦相似度 + SVM验证</td>
+          <td>混合</td>
+          <td>双重验证提高安全性</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="大规模搜索方案">大规模搜索方案
+</h3><p>适合百万级人脸库搜索，对硬件要求高，CPU亲和性差，暂时不考虑。</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>阶段</th>
+          <th>技术选择</th>
+          <th>类型</th>
+          <th>理由</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>检测</td>
+          <td>YOLO-Face</td>
+          <td>深度学习</td>
+          <td>批量处理效率高</td>
+      </tr>
+      <tr>
+          <td>对齐</td>
+          <td>批量仿射变换</td>
+          <td>传统方法</td>
+          <td>GPU并行（但也能CPU跑，不过速度会慢）</td>
+      </tr>
+      <tr>
+          <td>特征</td>
+          <td>FaceNet</td>
+          <td>深度学习</td>
+          <td>紧凑的128维特征</td>
+      </tr>
+      <tr>
+          <td>匹配</td>
+          <td>LSH + 余弦相似度</td>
+          <td>混合</td>
+          <td>先粗筛后精匹</td>
+      </tr>
+  </tbody>
+</table></div>
+<h2 id="端到端模型">端到端模型
+</h2><p>所谓端到端就是指忽略中间步骤，直接从输入得到输出的过程。</p>
+<p>例如传统人脸识别的后面三个阶段（人脸对齐，特征提取，特征匹配），都可以通过一个人脸图片比较模型来一次性完成。</p>
+<p>例如Siamese检测网络（Siamese-YOLO），将监控图像和数据库图像同时输入，来得到它们的相似度矩阵，从而判断是否是同一个人。</p>
+<h2 id="跨阶段方案">跨阶段方案
+</h2><h3 id="yolo-face--arcface头">YOLO-Face + ArcFace头
+</h3><p>YOLO-Face用于人脸检测，ArcFace（通常指ArcFace loss头，或ArcFace模型）用于人脸特征提取和身份识别。</p>
+<ul>
+<li>速度：40-50 FPS (GPU)，15-20 FPS (CPU)</li>
+<li>准确率：检测 93%，识别 96%</li>
+<li>模型大小：YOLOv5s版本约15MB，总体而言于几十MB这个量级</li>
+</ul>
+<p>性能方面比较优秀，具体的实现流程也比较简单。</p>
+<ol>
+<li>输入图片或视频帧。</li>
+<li>用YOLO-Face检测所有人脸框。</li>
+<li>对每一个人脸框，截取人脸区域，送入ArcFace模型提特征。</li>
+<li>ArcFace特征与已知身份的人脸特征库做余弦相似度或欧氏距离比对，找出最相似身份（或判定未知）。</li>
+<li>在原图上标注识别结果。</li>
+</ol>
+<h3 id="siamese--mtcnn">Siamese + MTCNN
+</h3><p>MTCNN是一个经典的人脸检测与对齐网络，只做检测、定位和人脸关键点，不识别身份。Siamese是一种度量学习方法，擅长进行相似/不同的二分类判断（即1:1比对），可用于面部验证，如A和B是不是同一个人。</p>
+<ul>
+<li>速度：20-25 FPS</li>
+<li>准确率：1:1验证 97%，1:N识别 92%</li>
+<li>模型大小：MTCNN 2MB + Siamese 5MB，个位到十位的量级</li>
+</ul>
+<p>Siamese-MTCNN能够实现特定人脸识别，但通常更适合于“是不是同一个人”（1:1核验），大规模1:N时效率一般。不考虑使用。</p>
+<h3 id="centerface--mobilefacenet">CenterFace + MobileFaceNet
+</h3><p>CenterFace是一种轻量级人脸检测器，能快速准确检测人脸区域。MobileFaceNet是高效的人脸识别特征提取网络，用于提取人脸embedding，并进行身份比对，适合移动端部署。</p>
+<ul>
+<li>速度：60+ FPS (移动GPU)</li>
+<li>准确率：检测 91%，识别 93%</li>
+<li>模型大小：总计不到5MB，个位到十位的量级</li>
+</ul>
+<p>CenterFace和MobileFaceNet合起来，即：</p>
+<ol>
+<li>用CenterFace检测人脸；</li>
+<li>用MobileFaceNet提取每个人脸特征；</li>
+<li>跟已有的人脸特征库比对，找出最相似的身份，实现特定身份的识别。</li>
+</ol>
+<p>CenterFace + MobileFaceNet可以很好地实现特定人脸（1:N）识别，效率高，适合实际部署和移动端应用。</p>
+<h3 id="nanodet--shufflefacenet">NanoDet + ShuffleFaceNet
+</h3><p>NanoDet仅1.8MB，ShuffleFaceNet仅2MB，属于是超轻量的模型。适合极限嵌入式环境。</p>
+<ul>
+<li>速度：80+ FPS (ARM CPU)</li>
+<li>准确率：检测 85%，识别 88%</li>
+<li>模型大小：总计&lt;4MB，个位量级</li>
+</ul>
+<p>板子应该没有这么小？所以不考虑。</p>
+<h2 id="选取的方案">选取的方案
+</h2><p>综上来说，我考虑以下几种方案：</p>
+<ol>
+<li>
+<p>轻量级混合方案 (MTCNN + 仿射变换 + MobileFaceNet + 余弦相似度)</p>
+<p>这个方案所用的模型小（&lt;5MB），并且整体准确率&gt;95%，速度快，适合嵌入式环境，但是要写一些算法，可能会导致工期变长，并且算法需要额外的FPGA优化，工作量更大。流程变长也意味着出现bug的可能性变大。</p>
+</li>
+<li>
+<p>速度优先混合方案(YOLO-Fastest + 跳过或简单归一化 + LBP + 哈希-汉明距离)</p>
+<p>准确率不高（但也不低），但速度很快，适用于实时监测，并且内存占用小。实际上是四个方案中最末的方案，不高准确率意味着人脸识别的效果不会很好，倘若嵌入环境比理论的更糟糕才考虑的方案。</p>
+</li>
+<li>
+<p>YOLO-Face + ArcFace头</p>
+<p>速度快，准确率达90%+，内存小，优秀的工作流。</p>
+<p>两个都属于模型，方便FPGA统一优化，一旦完成了其中一个模型的执行流，另外一个也差不多了。</p>
+<p>最推荐的方案，YOLO这些模型所用的领域非常广，因此各个方面对它的支持是最多的，开发起来最为便捷。</p>
+</li>
+<li>
+<p>CenterFace + MobileFaceNet</p>
+<p>同样速度快，准确率高，内存小，两个都属于模型，方便FPGA统一优化。</p>
+<p>并且可以很好地实现特定人脸（1:N）识别，效率高，适合实际部署和移动端应用。</p>
+<p>作为方案三的备选，有着和方案三差不多的效果。但是模型不如方案三知名。</p>
+</li>
+</ol>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <span>
+            最后更新于 Sep 08, 2025 18:16 &#43;0800
+        </span>
+    </section></footer>
+
+
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2025 echudet
+    </section>
+    
+    <section class="powerby">
+        
+
+
+        <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+
+        <script language="javascript"> 
+            var now = new Date();
+            function createtime(){
+                now.setTime(now.getTime()+250);
+                var grt= new Date("2024/11/10 00:00:00"); 
+                days = (now - grt ) / 1000 / 60 / 60 / 24;
+                dnum = Math.floor(days);
+                hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+                hnum = Math.floor(hours);
+                if(String(hnum).length ==1 ){hnum = "0" + hnum;}
+                minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+                mnum = Math.floor(minutes);
+                if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+                seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+                snum = Math.round(seconds);
+                if(String(snum).length ==1 ){snum = "0" + snum;}
+
+                document.getElementById("timeDate").innerHTML = "本站已稳定运行"+dnum+" 天 ";
+                document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒<br>"
+            }
+            setInterval("createtime()",250); 
+        </script> 
+
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        
+    
+        
+         
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+        
+
+        共 765849 字 , 39 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+
+</footer>
+
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+
+    </body>
+</html>
