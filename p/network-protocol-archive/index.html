@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="对一些常用网络协议进行整理。">
+<title>Network Protocol Archive</title>
+
+<link rel='canonical' href='https://echudet.github.io/p/network-protocol-archive/'>
+
+<link rel="stylesheet" href="/scss/style.min.209f2315995b57a9cdd733e5afe32e05ebb1138a0b3bb750cfcb86dff885e546.css"><meta property='og:title' content="Network Protocol Archive">
+<meta property='og:description' content="对一些常用网络协议进行整理。">
+<meta property='og:url' content='https://echudet.github.io/p/network-protocol-archive/'>
+<meta property='og:site_name' content='echudet'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-11-21T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-11-01T19:46:45&#43;08:00'/><meta property='og:image' content='https://echudet.github.io/p/network-protocol-archive/bg.png' />
+<meta name="twitter:title" content="Network Protocol Archive">
+<meta name="twitter:description" content="对一些常用网络协议进行整理。"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://echudet.github.io/p/network-protocol-archive/bg.png' />
+    <link rel="shortcut icon" href="/timer.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_67bf1327fc98b60.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">⌨️</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">echudet</a></h1>
+            <h2 class="site-description">探索编程的学生一枚</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/EchudeT'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://twitter.com'
+                        target="_blank"
+                        title="Twitter"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>档案</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#网络协议整理">网络协议整理</a>
+      <ol>
+        <li><a href="#物理层physical-layer">物理层（Physical Layer）</a></li>
+        <li><a href="#数据链路层data-link-layer">数据链路层（Data Link Layer）</a></li>
+        <li><a href="#网络层network-layer">网络层（Network Layer）</a></li>
+        <li><a href="#传输层transport-layer">传输层（Transport Layer）</a></li>
+        <li><a href="#会话层session-layer">会话层（Session Layer）</a></li>
+        <li><a href="#表示层presentation-layer">表示层（Presentation Layer）</a></li>
+        <li><a href="#应用层application-layer">应用层（Application Layer）</a></li>
+        <li><a href="#安全协议">安全协议</a></li>
+        <li><a href="#无线与移动网络协议">无线与移动网络协议</a></li>
+        <li><a href="#网络管理协议">网络管理协议</a></li>
+        <li><a href="#现代网络技术协议">现代网络技术协议</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/network-protocol-archive/">
+                <img src="/p/network-protocol-archive/bg_hu_b2b42aade6b61bd5.png"
+                        srcset="/p/network-protocol-archive/bg_hu_b2b42aade6b61bd5.png 800w, /p/network-protocol-archive/bg_hu_15b5f1dd818899db.png 1600w"
+                        width="800" 
+                        height="450" 
+                        loading="lazy"
+                        alt="Featured image of post Network Protocol Archive" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+
+
+    
+    <header class="article-category">
+        
+            <a href="/categories/network/" >
+                Network
+            </a>
+        
+            <a href="/categories/ai-assist/" >
+                Ai Assist
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/network-protocol-archive/">Network Protocol Archive</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            对一些常用网络协议进行整理。
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2024-11-21</time>
+            </div>
+        
+
+        
+            <div>
+                <?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="792px" height="792px" viewBox="0 0 792 792" style="enable-background:new 0 0 792 792;" xml:space="preserve">
+<g>
+	<g id="_x31_0_19_">
+		<g>
+			<path d="M643.5,742.5H594V569.25C594,473.566,516.434,396,420.75,396C516.434,396,594,318.434,594,222.75V49.5h49.5
+				c13.662,0,24.75-11.088,24.75-24.75S657.162,0,643.5,0h-495c-13.662,0-24.75,11.088-24.75,24.75S134.838,49.5,148.5,49.5H198
+				v173.25C198,318.434,275.566,396,371.25,396C275.566,396,198,473.566,198,569.25V742.5h-49.5c-13.662,0-24.75,11.088-24.75,24.75
+				S134.838,792,148.5,792h495c13.662,0,24.75-11.088,24.75-24.75S657.162,742.5,643.5,742.5z M247.5,222.75
+				c0-43.387,0-173.25,0-173.25h297c0,0,0,133.427,0,173.25c0,68.335-58.188,123.75-129.938,123.75h-37.125
+				C305.687,346.5,247.5,291.085,247.5,222.75z M544.5,742.5h-297c0,0,0-129.888,0-173.25c0-68.335,58.187-123.75,129.938-123.75
+				h37.125c71.75,0,129.938,55.415,129.938,123.75C544.5,609.072,544.5,742.5,544.5,742.5z"/>
+		</g>
+	</g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+</svg>
+
+                <time class="article-time--reading">
+                    阅读时长: 8 分钟
+                </time>
+            </div>
+        
+
+         
+        <div>
+            <?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="79.536px" height="79.536px" viewBox="0 0 79.536 79.536" style="enable-background:new 0 0 79.536 79.536;"
+	 xml:space="preserve">
+<g>
+	<path style="fill:#010002;" d="M40.162,17.906C37.415,15.275,21.614,6.141,0,15.451c0,0.138,0,2.722,0,6.654v44.418h32.747
+		c1.126,0.968,3.798,1.651,6.926,1.651c3.119,0,5.802-0.684,6.931-1.651h32.933V22.105c0-3.933,0-6.517,0-6.654
+		C58.813,6.314,42.257,15.982,40.162,17.906z M37.229,63.349c0-1.75-15.372-11.981-33.125-0.818V19.216
+		c3.516-2.014,8.246-3.249,13.463-3.249c10.864,0,19.662,3.562,19.662,10.175V63.349z M75.684,62.53
+		c-17.751-11.163-33.108-0.932-33.108,0.818V26.146c0-6.612,8.792-10.175,19.646-10.175c5.22,0,9.952,1.235,13.463,3.249V62.53z"/>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+</svg>
+
+            <time class="article-words">
+                文章字数：3805字
+            </time>
+        </div>
+        <div class="article-lastmod">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time>
+                    Nov 01, 2025 19:46 &#43;0800
+                </time>
+            </div></footer>
+    
+
+    
+
+
+
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="网络协议整理">网络协议整理
+</h2><h3 id="物理层physical-layer">物理层（Physical Layer）
+</h3><p><strong>物理层</strong>负责数据的实际传输，通过物理媒介（如电缆、光纤、无线电波）将比特流从一台设备传输到另一台设备。关键协议和技术包括：</p>
+<ul>
+<li><strong>Ethernet（以太网）</strong>：定义了局域网（LAN）中数据包的传输方式，包括电缆类型、信号电平和传输速率，广泛用于办公室、家庭和数据中心的有线网络连接。</li>
+<li><strong>IEEE 802.11（Wi-Fi）</strong>：无线局域网（WLAN）标准，支持无线数据传输，广泛应用于家庭、办公和公共场所的无线网络。</li>
+<li><strong>DSL（数字用户线）</strong>：通过电话线传输高速互联网数据，适用于家庭和小型企业的宽带接入。</li>
+</ul>
+<h3 id="数据链路层data-link-layer">数据链路层（Data Link Layer）
+</h3><p><strong>数据链路层</strong>负责节点之间的数据帧传输，确保数据在物理层的可靠传输，并处理帧的差错检测与纠正。关键协议和技术包括：</p>
+<ul>
+<li><strong>Ethernet（以太网）</strong>：除了物理层功能，Ethernet在数据链路层定义了帧格式和介质访问控制（MAC）机制。</li>
+<li><strong>Wi-Fi（IEEE 802.11）</strong>：在数据链路层定义了无线设备的接入和数据传输机制，管理无线网络中的设备连接。</li>
+<li><strong>PPP（点对点协议）</strong>：用于通过串行链路（如电话线、光纤）进行直接通信，支持数据链路层的封装和认证。</li>
+<li><strong>MAC（媒体访问控制）协议</strong>：如CSMA/CD（载波监听多路访问/碰撞检测），用于管理共享介质上的设备访问。</li>
+</ul>
+<h3 id="网络层network-layer">网络层（Network Layer）
+</h3><p><strong>网络层</strong>负责数据包在不同网络之间的路由选择和转发，确保数据从源头到目的地的传输。关键协议和技术包括：</p>
+<ul>
+<li><strong>IP（互联网协议）</strong>：定义了数据包的格式和寻址方式，负责数据包的路由和转发，支持IPv4和IPv6。</li>
+<li><strong>ICMP（互联网控制消息协议）</strong>：用于在网络设备之间传递控制消息和错误报告，如“目标不可达”。</li>
+<li><strong>IPsec（互联网协议安全）</strong>：为IP通信提供加密和认证，确保数据的机密性、完整性和真实性，常用于建立虚拟专用网（VPN）。</li>
+<li><strong>ARP（地址解析协议）</strong>：将IP地址解析为物理MAC地址，支持局域网内的数据传输。</li>
+<li><strong>RIP（路由信息协议）和 OSPF（开放最短路径优先）</strong>：用于动态路由选择和网络路径优化。</li>
+</ul>
+<h3 id="传输层transport-layer">传输层（Transport Layer）
+</h3><p><strong>传输层</strong>负责端到端的数据传输，提供可靠的通信服务，管理数据流量控制和错误检测。关键协议和技术包括：</p>
+<ul>
+<li><strong>TCP（传输控制协议）</strong>：提供面向连接、可靠的数据传输，确保数据包按序到达，广泛应用于Web浏览（HTTP/HTTPS）、电子邮件（SMTP）和文件传输（FTP/SFTP）。</li>
+<li><strong>UDP（用户数据报协议）</strong>：提供无连接、不可靠的数据传输，适用于对实时性要求高但容忍数据丢失的应用，如视频会议、在线游戏和DNS查询。</li>
+<li><strong>SCTP（流控制传输协议）</strong>：结合TCP和UDP的特点，支持多流和多宿主，适用于电信信令和高可靠性应用。</li>
+</ul>
+<h3 id="会话层session-layer">会话层（Session Layer）
+</h3><p><strong>会话层</strong>负责建立、管理和终止应用程序之间的会话，提供同步和恢复机制。关键协议和技术包括：</p>
+<ul>
+<li><strong>NetConf（网络配置协议）</strong>：基于XML的协议，用于网络设备的配置和管理，支持会话层的控制和事务处理。</li>
+<li><strong>SSH（安全外壳协议）</strong>：提供安全的远程登录和会话管理，确保会话数据的加密和完整性，广泛用于远程服务器管理和安全文件传输。</li>
+<li><strong>RPC（远程过程调用）</strong>：允许程序在不同计算机上执行代码和函数，支持分布式应用的通信和协调。</li>
+</ul>
+<h3 id="表示层presentation-layer">表示层（Presentation Layer）
+</h3><p><strong>表示层</strong>负责数据的语法和语义转换，确保不同系统之间的数据能够互操作。关键协议和技术包括：</p>
+<ul>
+<li><strong>TLS/SSL（传输层安全协议/安全套接层）</strong>：在传输层之上提供加密和认证，确保数据传输的安全性和完整性，广泛应用于HTTPS、电子邮件和VPN连接。</li>
+<li><strong>Protocol Buffers（Protobuf）</strong>：由Google开发的高效数据序列化库，用于定义和序列化结构化数据，支持多种编程语言，提升数据传输效率。</li>
+<li><strong>gRPC</strong>：基于HTTP/2和Protocol Buffers的高性能远程过程调用（RPC）框架，实现高效的服务间通信，广泛应用于微服务架构和分布式系统。</li>
+</ul>
+<h3 id="应用层application-layer">应用层（Application Layer）
+</h3><p><strong>应用层</strong>提供用户直接交互的网络服务和应用，涵盖了各种高层协议和应用程序接口。关键协议和技术包括：</p>
+<ul>
+<li><strong>HTTP/HTTPS（超文本传输协议/安全超文本传输协议）</strong>：用于Web浏览器和服务器之间的数据传输，支持网页内容的请求和响应，HTTPS在HTTP基础上加入了SSL/TLS加密层。</li>
+<li><strong>FTP/SFTP（文件传输协议/安全文件传输协议）</strong>：用于在客户端和服务器之间传输文件，支持文件的上传、下载和管理，SFTP基于SSH提供加密的文件传输。</li>
+<li><strong>SMTP/POP3/IMAP（简单邮件传输协议/邮局协议3/互联网消息访问协议）</strong>：构成电子邮件系统的基础，SMTP用于发送邮件，POP3和IMAP用于接收和管理邮件，IMAP支持多设备同步。</li>
+<li><strong>DNS（域名系统）</strong>：将域名解析为IP地址，支持互联网域名的管理和查询，关键于网站访问和电子邮件路由。</li>
+<li><strong>DHCP（动态主机配置协议）</strong>：自动分配IP地址和网络配置参数，简化网络设备的配置和管理，防止地址冲突。</li>
+<li><strong>Telnet</strong>：提供基于文本的远程登录服务，允许用户通过网络连接到远程主机执行命令，因安全性较低，逐渐被SSH取代。</li>
+<li><strong>SNMP（简单网络管理协议）</strong>：用于网络设备的管理和监控，支持设备状态查询、性能监控和配置管理，通过Manager和Agent架构实现远程管理。</li>
+<li><strong>RESTful API</strong>：基于HTTP协议的应用程序接口，支持标准化的网络通信和数据交换，广泛应用于Web服务、云应用和微服务架构，实现服务间的互操作性和数据共享。</li>
+<li><strong>OAuth（开放授权）</strong>：用于授权第三方应用访问用户在服务提供商上的资源，无需暴露用户的凭证，广泛应用于社交媒体和云服务的集成。</li>
+<li><strong>JWT（JSON Web Tokens）</strong>：基于JSON的开放标准，用于在网络应用环境间安全地传输声明，支持认证和授权机制，常用于基于令牌的认证和单点登录（SSO）。</li>
+<li><strong>WebRTC（网页实时通信）</strong>：支持浏览器之间的实时音视频通信和数据传输，提供低延迟的点对点通信能力，应用于视频会议、在线教育和远程医疗。</li>
+<li><strong>RTMP（实时消息协议）</strong>：用于音视频数据的实时传输和流媒体传输，支持低延迟的数据传输，广泛应用于直播流媒体服务和在线视频平台。</li>
+<li><strong>MQTT（消息队列遥测传输）</strong>：轻量级的消息传输协议，专为物联网设备设计，支持发布-订阅模式和低带宽通信，适用于实时数据传输和远程监控系统。</li>
+<li><strong>CoAP（受限应用协议）</strong>：专为受限设备和低功耗网络设计的Web传输协议，基于UDP，支持RESTful架构，适用于物联网设备的数据交互和管理。</li>
+<li><strong>OneM2M</strong>：全球统一的物联网标准，支持不同物联网平台和设备之间的互操作性，通过统一的API和协议实现数据交换和设备管理，促进物联网生态系统的协同发展。</li>
+</ul>
+<h3 id="安全协议">安全协议
+</h3><p>除了上述各层级的安全协议，还有一些关键的安全协议在现代网络中扮演重要角色：</p>
+<ul>
+<li><strong>S/MIME（安全/多用途互联网邮件扩展）</strong>：用于电子邮件的加密和签名，确保邮件内容的机密性和发送者的身份验证，广泛应用于企业和敏感通信场景。</li>
+<li><strong>Kerberos</strong>：一种基于对称密钥密码学的网络身份验证协议，提供强大的身份验证和安全的通信环境，常用于企业内部网络和分布式系统中。</li>
+<li><strong>SASL（简单认证和安全层）</strong>：一种用于扩展认证机制的协议，支持多种认证方法（如PLAIN、CRAM-MD5、GSSAPI），增强了应用层协议（如SMTP、IMAP、LDAP）的安全性。</li>
+</ul>
+<h3 id="无线与移动网络协议">无线与移动网络协议
+</h3><p>在无线与移动网络领域，除了IEEE 802.11（Wi-Fi）、IEEE 802.16（WiMAX）和蓝牙协议外，还有其他关键协议：</p>
+<ul>
+<li><strong>LTE（长期演进）</strong>：4G移动通信技术标准，支持高速数据传输和低延迟通信，广泛应用于移动互联网和多媒体服务。</li>
+<li><strong>5G NR（新无线电）</strong>：第五代移动通信技术标准，支持超高速数据传输、极低延迟和大规模设备连接，适用于智能城市、无人驾驶和物联网等前沿应用。</li>
+<li><strong>NFC（近场通信）</strong>：短距离无线通信技术，支持设备间的快速数据交换和支付功能，广泛应用于移动支付和智能卡片系统。</li>
+</ul>
+<h3 id="网络管理协议">网络管理协议
+</h3><p>在网络管理与监控方面，除了SNMP、NetConf和RESTful API外，还有其他重要协议和技术：</p>
+<ul>
+<li><strong>Syslog</strong>：一种标准化的日志记录协议，用于网络设备和应用程序生成和传输日志消息，支持集中式日志管理和故障诊断。</li>
+<li><strong>RMON（远程监控）</strong>：扩展SNMP功能的协议，提供更详细的网络流量和性能监控，帮助网络管理员深入分析网络状态和流量模式。</li>
+<li><strong>sFlow</strong>：一种流量采样协议，用于实时监控和分析大规模网络环境中的数据流，支持高效的流量管理和性能优化。</li>
+</ul>
+<h3 id="现代网络技术协议">现代网络技术协议
+</h3><p>现代网络技术不断演进，新的协议和标准不断涌现，以满足复杂和多样化的网络需求：</p>
+<ul>
+<li><strong>SDN协议（如OpenFlow）</strong>：用于软件定义网络的控制层与数据层之间的通信，支持集中化的网络管理和动态配置，实现网络的高度可编程性。</li>
+<li><strong>NFV MANO（管理与编排）协议</strong>：用于网络功能虚拟化的管理与编排，支持虚拟网络功能（VNF）的生命周期管理和资源调度，提升网络的灵活性和自动化水平。</li>
+<li><strong>gRPC</strong>：基于HTTP/2和Protocol Buffers的高性能RPC框架，支持多语言开发，广泛应用于微服务架构和分布式系统，提升服务间通信效率。</li>
+<li><strong>MQTT-SN（MQTT for Sensor Networks）</strong>：MQTT的扩展版本，专为低功耗和受限设备设计，适用于无线传感器网络和物联网应用。</li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <span>
+            最后更新于 Nov 01, 2025 19:46 &#43;0800
+        </span>
+    </section></footer>
+
+
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/simple-network/">
+        
+        
+            <div class="article-image">
+                <img src="/p/simple-network/bg.d266c4a87c29396fe7fc417cff63212a_hu_3d450349083fed81.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Simple Network"
+                        
+                        data-hash="md5-0mbEqHwpOW/n/EF8/2MhKg==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Simple Network</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/cs144-code-analysis/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">cs144 code analysis</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/face-recognition-list/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">face-recognition-list</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/aimodel/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">aimodel</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/simple-database/">
+        
+        
+            <div class="article-image">
+                <img src="/p/simple-database/bg.ffde7ff5e016b8481b8449ddaf9d6ceb_hu_78b5206a8e5797e2.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Simple Database"
+                        
+                        data-hash="md5-/95/9eAWuEgbhEndr51s6w==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Simple Database</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2025 echudet
+    </section>
+    
+    <section class="powerby">
+        
+
+
+        <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+
+        <script language="javascript"> 
+            var now = new Date();
+            function createtime(){
+                now.setTime(now.getTime()+250);
+                var grt= new Date("2024/11/10 00:00:00"); 
+                days = (now - grt ) / 1000 / 60 / 60 / 24;
+                dnum = Math.floor(days);
+                hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+                hnum = Math.floor(hours);
+                if(String(hnum).length ==1 ){hnum = "0" + hnum;}
+                minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+                mnum = Math.floor(minutes);
+                if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+                seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+                snum = Math.round(seconds);
+                if(String(snum).length ==1 ){snum = "0" + snum;}
+
+                document.getElementById("timeDate").innerHTML = "本站已稳定运行"+dnum+" 天 ";
+                document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒<br>"
+            }
+            setInterval("createtime()",250); 
+        </script> 
+
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        
+    
+        
+         
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+        
+
+        共 742374 字 , 39 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+
+</footer>
+
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+
+    </body>
+</html>

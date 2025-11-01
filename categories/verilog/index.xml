@@ -7,17 +7,18 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>echudet</copyright>
-        <lastBuildDate>Wed, 03 Sep 2025 22:10:01 +0800</lastBuildDate><atom:link href="https://echudet.github.io/categories/verilog/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>Intro Verilog</title>
-        <link>https://echudet.github.io/p/intro-verilog/</link>
+        <lastBuildDate>Sat, 01 Nov 2025 19:46:45 +0800</lastBuildDate><atom:link href="https://echudet.github.io/categories/verilog/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Simple Verilog</title>
+        <link>https://echudet.github.io/p/simple-verilog/</link>
         <pubDate>Wed, 20 Nov 2024 00:00:00 +0000</pubDate>
         
-        <guid>https://echudet.github.io/p/intro-verilog/</guid>
-        <description>&lt;img src="https://echudet.github.io/p/intro-verilog/bg.png" alt="Featured image of post Intro Verilog" /&gt;&lt;details&gt;
+        <guid>https://echudet.github.io/p/simple-verilog/</guid>
+        <description>&lt;img src="https://echudet.github.io/p/simple-verilog/bg.png" alt="Featured image of post Simple Verilog" /&gt;&lt;details&gt;
     &lt;summary&gt;为什么要学习Verilog&lt;/summary&gt;
     &lt;blockquote&gt;
-&lt;p&gt;因为本人在学校的五个verilog的数逻实验都是借助了魔法海螺(ai)来完成的，临近考试，诚惶诚恐，故补此知识点。&lt;del&gt;（并且之后的龙芯杯也需要使用）&lt;/del&gt;&lt;/p&gt;
-&lt;p&gt;龙芯杯鸽了。最后是在小学期写CPU的时候真正学习了。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;因为本人在学校的五个verilog的数逻实验都是借助了魔法海螺(ai)来完成的，临近考试，诚惶诚恐，故补此知识点。也考虑在之后参加龙芯杯时进一步整理和学习。&lt;/p&gt;
+&lt;p&gt;补：龙芯杯鸽了。最后是在小学期写CPU的时候真正学习了。&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;/details&gt;
 

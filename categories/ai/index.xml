@@ -7,7 +7,338 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>echudet</copyright>
-        <lastBuildDate>Wed, 03 Sep 2025 22:10:01 +0800</lastBuildDate><atom:link href="https://echudet.github.io/categories/ai/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 01 Nov 2025 19:46:45 +0800</lastBuildDate><atom:link href="https://echudet.github.io/categories/ai/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Transformer探究</title>
+        <link>https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/</link>
+        <pubDate>Sat, 13 Sep 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/</guid>
+        <description>&lt;p&gt;参考+图片来源：&lt;a class=&#34;link&#34; href=&#34;https://jalammar.github.io/illustrated-transformer/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://jalammar.github.io/illustrated-transformer/&lt;/a&gt;
+
+&lt;/p&gt;
+&lt;p&gt;Transformer由谷歌于2017年在《Attention Is All You Need》论文中提出，凭借其完全基于注意力机制的创新设计，彻底改变了自然语言处理领域的格局，成为BERT、Llama等主流模型的核心组件。&lt;/p&gt;
+&lt;p&gt;Transformer模型的其中一个优点，就是使得模型训练过程能够并行计算。在 RNN 中，每一个 time step 的计算都依赖于上一个 time step 的输出，这就使得所有的 time step 必须串行化，无法并行计算。&lt;/p&gt;
+&lt;p&gt;而在 Transformer 中，所有 time step 的数据，都是经过 Self Attention 计算，使得整个运算过程可以并行化计算。&lt;/p&gt;
+&lt;p&gt;Transformer 使用了Seq2Seq任务中常用的结构——包括两个部分：Encoder 和 Decoder，这两大部分根据模型参数量的不同堆叠的层数也是不同的。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/en-de.png&#34;
+	width=&#34;1319&#34;
+	height=&#34;935&#34;
+	srcset=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/en-de_hu_6f426a3f66b30ff1.png 480w, https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/en-de_hu_bef70536c233f457.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;en-de&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;141&#34;
+		data-flex-basis=&#34;338px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;编码器&#34;&gt;编码器
+&lt;/h2&gt;&lt;p&gt;每个编码器在结构上是相同的，并且可以分为两部分看待。&lt;/p&gt;
+&lt;p&gt;第一部分是Self-Attention Layer层。这个层处理一个词的时候，不仅会使用这个词本身的信息，也会使用句子中其他词的信息。&lt;/p&gt;
+&lt;p&gt;下面来分析 Self-Attention 的具体机制。
+假设我们想要翻译的句子是：The animal didn&amp;rsquo;t cross the street because it was too tired
+这个句子中的it是一个指代词，那么it指的是什么呢？它是指animal还是street？这个问题对人来说，是很简单的，但是对算法来说并不是那么容易。当模型在处理（翻译）it的时候，Self Attention机制能够让模型把it和animal关联起来。&lt;/p&gt;
+&lt;p&gt;同理，当模型处理句子中的每个词时，Self Attention机制使得模型不仅能够关注这个位置的词，而且能够关注句子中其他位置的词，作为辅助线索，进而可以更好地编码当前位置的词。&lt;/p&gt;
+&lt;p&gt;如果你熟悉 RNN，回忆一下：RNN 在处理一个词时，会考虑前面传过来的hidden state，而hidden state就包含了前面的词的信息。而 Transformer 使用Self Attention机制，会把其他单词的理解融入处理当前的单词。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/self-attention.png&#34;
+	width=&#34;630&#34;
+	height=&#34;618&#34;
+	srcset=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/self-attention_hu_a42a98bcd5308b23.png 480w, https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/self-attention_hu_e7f54b9b6e10c2e.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;self-attention&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;101&#34;
+		data-flex-basis=&#34;244px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;当我们在第五层编码器中（编码部分中的最后一层编码器）编码“it”时，有一部分注意力集中在“The animal”上，并且把这两个词的信息融合到了&amp;quot;it&amp;quot;这个单词中。&lt;/p&gt;
+&lt;p&gt;第二部分是Feed Forward Neural Network层（前馈神经网络）。&lt;/p&gt;
+&lt;p&gt;作用很简单，乘以一定的参数并且向前传递。&lt;/p&gt;
+&lt;p&gt;Transformer 有一个重要特性：每个位置的词向量经过编码器都有自己单独的路径。具体来说，在 Self Attention 层中，这些路径之间是有依赖关系的；而在 Feed Forward （前馈神经网络）层中，这些路径之间是没有依赖关系的。因此这些词向量在经过 Feed Forward 层中可以并行计算。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/encoder_with_tensors_2.png&#34;
+	width=&#34;1268&#34;
+	height=&#34;771&#34;
+	srcset=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/encoder_with_tensors_2_hu_2eceb48ed69e48b4.png 480w, https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/encoder_with_tensors_2_hu_606d7ea7ac509e29.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;encoder_with_tensors_2&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;164&#34;
+		data-flex-basis=&#34;394px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;self-attention计算过程&#34;&gt;Self-Attention计算过程
+&lt;/h2&gt;&lt;p&gt;下面我们先看下如何使用向量来计算 Self Attention，然后再看下如何使用矩阵来实现 Self Attention。矩阵运算的方式，使得 Self Attention 的计算能够并行化，这也是 Self Attention 最终的实现方式。&lt;/p&gt;
+&lt;p&gt;第 1 步是对输入编码器的每个词向量，都创建 3 个向量，分别是：Query 向量，Key 向量，Value 向量。这 3 个向量是词向量分别和 3 个矩阵相乘得到的，而这个矩阵是我们要学习的参数。&lt;/p&gt;
+&lt;p&gt;注意，这 3 个新得到的向量一般比原来的词向量的长度更小。&lt;/p&gt;
+&lt;p&gt;Query 向量，Key 向量，Value 向量是什么含义呢？&lt;/p&gt;
+&lt;p&gt;其实它们就是 3 个向量，给它们加上一个名称，可以让我们更好地理解 Self-Attention 的计算过程和逻辑含义。&lt;/p&gt;
+&lt;p&gt;第 2 步是计算 Attention Score（注意力分数）。&lt;/p&gt;
+&lt;p&gt;假设我们现在计算第一个词Thinking的 Attention Score（注意力分数），需要根据Thinking这个词，对句子中的其他每个词都计算一个分数。这些分数决定了我们在编码Thinking这个词时，需要对句子中其他位置的每个词放置多少的注意力。&lt;/p&gt;
+&lt;p&gt;这些分数，是通过计算 &amp;ldquo;Thinking&amp;rdquo; 对应的 Query 向量和其他位置的每个词的 Key 向量的点积，而得到的。&lt;/p&gt;
+&lt;p&gt;第 3 步就是把每个分数除以Key 向量的长度。你也可以除以其他数，除以一个数是为了在反向传播时，求取梯度更加稳定。&lt;/p&gt;
+&lt;p&gt;第 4 步，接着把这些分数经过一个 Softmax 层，Softmax可以将分数归一化，这样使得分数都是正数并且加起来等于 1。&lt;/p&gt;
+&lt;p&gt;这些分数决定了在编码当前位置（这里的例子是第一个位置）的词时，对所有位置的词分别有多少的注意力。&lt;/p&gt;
+&lt;p&gt;一般来说，对自己的注意力是最多的。&lt;/p&gt;
+&lt;p&gt;第 5 步，得到每个位置的分数后，将每个分数分别与每个 Value 向量相乘。&lt;/p&gt;
+&lt;p&gt;这种做法背后的直觉理解就是：对于分数高的位置，相乘后的值就越大，我们把更多的注意力放到了它们身上；对于分数低的位置，相乘后的值就越小，这些位置的词可能是相关性不大的，这样我们就忽略了这些位置的词。&lt;/p&gt;
+&lt;p&gt;第 6 步是把上一步得到的向量相加，就得到了 Self Attention 层在这个位置（这里的例子是第一个位置）的输出。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/self-attention2.png&#34;
+	width=&#34;1109&#34;
+	height=&#34;1162&#34;
+	srcset=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/self-attention2_hu_95aad7cb0c730ba4.png 480w, https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/self-attention2_hu_a83290a92f152107.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;self-attention2&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;95&#34;
+		data-flex-basis=&#34;229px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;上面这张图，包含了 Self Attention 的全过程，最终得到的当前位置（这里的例子是第一个位置）的向量会输入到前馈神经网络。&lt;/p&gt;
+&lt;p&gt;但这样每次只能计算一个位置的输出向量，在实际的代码实现中，Self Attention 的计算过程是使用矩阵来实现的，这样可以加速计算，一次就得到所有位置的输出向量。下面让我们来看，如何使用矩阵来计算所有位置的输出向量。&lt;/p&gt;
+&lt;p&gt;又知道Q，K，W可以由X和相关的权重矩阵W得到。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/self-attention-matrix-calculation.png&#34;
+	width=&#34;581&#34;
+	height=&#34;658&#34;
+	srcset=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/self-attention-matrix-calculation_hu_9c897284d2e8432.png 480w, https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/self-attention-matrix-calculation_hu_41f2416af9f7c03.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;self-attention-matrix-calculation&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;88&#34;
+		data-flex-basis=&#34;211px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;综合上述步骤，可以得到Self-Attention的一个简便矩阵运算&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/self-attention-matrix-calculation-2.png&#34;
+	width=&#34;893&#34;
+	height=&#34;349&#34;
+	srcset=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/self-attention-matrix-calculation-2_hu_cad135bd56c93184.png 480w, https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/self-attention-matrix-calculation-2_hu_619d452627693f3b.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;self-attention-matrix-calculation-2&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;255&#34;
+		data-flex-basis=&#34;614px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;the-beast-with-many-heads&#34;&gt;The Beast With Many Heads
+&lt;/h2&gt;&lt;p&gt;Transformer 的论文通过增加多头注意力机制（一组注意力称为一个 attention head），进一步完善了 Self Attention 层。这种机制从如下两个方面增强了 attention 层的能力：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;它扩展了模型关注不同位置的能力。&lt;/p&gt;
+&lt;p&gt;在上面的例子中，第一个位置的输出 z1 包含了句子中其他每个位置的很小一部分信息，但 z1 可能主要是由第一个位置的信息决定的。&lt;/p&gt;
+&lt;p&gt;当我们翻译句子：The animal didn’t cross the street because it was too tired时，我们想让机器知道其中的it指代的是什么。这时，多头注意力机制会有帮助。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;多头注意力机制赋予 attention 层多个“子表示空间”。&lt;/p&gt;
+&lt;p&gt;下面我们会看到，多头注意力机制会有多组的权重矩阵（在 Transformer 的论文中，使用了 8 组注意力（attention heads）。因此，接下来我也是用 8 组注意力头 （attention heads））。&lt;/p&gt;
+&lt;p&gt;每一组注意力的权重矩阵都是随机初始化的。经过训练之后，每一组注意力可以看作是把输入的向量映射到一个”子表示空间“。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/transformer_attention_heads_qkv.png&#34;
+	width=&#34;1310&#34;
+	height=&#34;774&#34;
+	srcset=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/transformer_attention_heads_qkv_hu_9bc04b9209a178fc.png 480w, https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/transformer_attention_heads_qkv_hu_eca9cf4f72e8acc8.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;transformer_attention_heads_qkv&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;169&#34;
+		data-flex-basis=&#34;406px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;在多头注意力机制中，我们为每组注意力维护单独的 WQ, WK, WV 权重矩阵。将输入 X 和每组注意力的WQ, WK, WV 相乘，得到 8 组 Q, K, V 矩阵。&lt;/p&gt;
+&lt;p&gt;接着，我们把每组 K, Q, V 计算得到每组的 Z 矩阵，就得到 8 个 Z 矩阵。&lt;/p&gt;
+&lt;p&gt;接下来就有点麻烦了，因为前馈神经网络层接收的是 1 个矩阵，而不是 8 个矩阵。所以我们需要一种方法，把 8 个矩阵整合为一个矩阵。&lt;/p&gt;
+&lt;p&gt;怎么才能做到呢？我们把矩阵拼接起来，然后和另一个权重矩阵相乘。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/transformer_attention_heads_weight_matrix_o.png&#34;
+	width=&#34;1372&#34;
+	height=&#34;759&#34;
+	srcset=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/transformer_attention_heads_weight_matrix_o_hu_50b84b9827074158.png 480w, https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/transformer_attention_heads_weight_matrix_o_hu_aa11f938095a88ae.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;transformer_attention_heads_weight_matrix_o&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;180&#34;
+		data-flex-basis=&#34;433px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;这就是多头注意力的全部内容。&lt;/p&gt;
+&lt;p&gt;既然我们已经谈到了多头注意力，现在让我们重新回顾之前的翻译例子，看下当我们编码单词it时，不同的 attention heads （注意力头）关注的是什么部分。&lt;/p&gt;
+&lt;p&gt;当我们编码单词&amp;quot;it&amp;quot;时，其中一个 attention head （注意力头）最关注的是&amp;quot;the animal&amp;quot;，另外一个 attention head 关注的是&amp;quot;tired&amp;quot;。因此在某种意义上，&amp;ldquo;it&amp;quot;在模型中的表示，融合了&amp;quot;animal&amp;quot;和&amp;quot;word&amp;quot;的部分表达。&lt;/p&gt;
+&lt;p&gt;然而，当我们把所有 attention heads（注意力头） 都在图上画出来时，多头注意力又变得难以解释了。&lt;/p&gt;
+&lt;img src=&#34;transformer_self-attention_visualization_2.png&#34; alt=&#34;transformer_self-attention_visualization_2&#34; style=&#34;zoom: 80%;&#34; /&gt;
+&lt;img src=&#34;transformer_self-attention_visualization_3.png&#34; alt=&#34;transformer_self-attention_visualization_3&#34; style=&#34;zoom: 80%;&#34; /&gt;
+&lt;h2 id=&#34;使用位置编码来表示序列的顺序&#34;&gt;使用位置编码来表示序列的顺序
+&lt;/h2&gt;&lt;p&gt;到目前为止，我们阐述的模型中缺失了一个东西，那就是表示序列中单词顺序的方法。&lt;/p&gt;
+&lt;p&gt;为了解决这个问题，Transformer 模型对每个输入的向量都添加了一个向量。这些向量遵循模型学习到的特定模式，有助于确定每个单词的位置，或者句子中不同单词之间的距离。&lt;/p&gt;
+&lt;p&gt;这种做法背后的直觉是：将这些表示位置的向量添加到词向量中，得到了新的向量，这些新向量映射到 Q/K/V，然后计算点积得到 attention 时，可以提供有意义的信息。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/transformer_positional_encoding_vectors.png&#34;
+	width=&#34;1438&#34;
+	height=&#34;793&#34;
+	srcset=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/transformer_positional_encoding_vectors_hu_ce670065d195f36b.png 480w, https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/transformer_positional_encoding_vectors_hu_23f97f095153c536.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;transformer_positional_encoding_vectors&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;181&#34;
+		data-flex-basis=&#34;435px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;为了让模型了解单词的顺序，我们添加了带有位置编码的向量&amp;ndash;这些向量的值遵循特定的模式。&lt;/p&gt;
+&lt;p&gt;那么带有位置编码的向量到底遵循什么模式？&lt;/p&gt;
+&lt;p&gt;在下图中，每一行表示一个带有位置编码的向量。所以，第一行对应于序列中第一个单词的位置编码向量。每一行都包含 512 个值，每个值的范围在 -1 和 1 之间。我对这些向量进行了涂色可视化，你可以从中看到向量遵循的模式。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/transformer_positional_encoding_large_example.png&#34;
+	width=&#34;1238&#34;
+	height=&#34;907&#34;
+	srcset=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/transformer_positional_encoding_large_example_hu_fc1050dc4802f425.png 480w, https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/transformer_positional_encoding_large_example_hu_386e0007a94bdb6c.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;transformer_positional_encoding_large_example&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;136&#34;
+		data-flex-basis=&#34;327px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;这是一个真实的例子，包含了 20 个词，每个词向量的维度是 512。你可以看到，它看起来像从中间一分为二。这是因为左半部分的值是由 sine 函数产生的，而右半部分的值是由 cosine 函数产生的，然后将他们拼接起来，得到每个位置编码向量。&lt;/p&gt;
+&lt;p&gt;此为生成位置编码的公式，在 Transformer 论文的 3.5 节中有详细说明。
+这不是唯一一种生成位置编码的方法。但这种方法的优点是：可以扩展到未知的序列长度。&lt;/p&gt;
+&lt;p&gt;例如：当我们的模型需要翻译一个句子，而这个句子的长度大于训练集中所有句子的长度，这时，这种位置编码的方法也可以生成一样长的位置编码向量。&lt;/p&gt;
+&lt;h2 id=&#34;残差连接&#34;&gt;残差连接
+&lt;/h2&gt;&lt;p&gt;编码器结构中有一个需要注意的细节是：编码器的每个子层（Self Attention 层和 FFNN）都有一个残差连接和层标准化（layer-normalization）。&lt;/p&gt;
+&lt;p&gt;将 Self-Attention 层的层标准化（layer-normalization）和向量都进行可视化，如下所示：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/transformer_resideual_layer_norm_2.png&#34;
+	width=&#34;712&#34;
+	height=&#34;666&#34;
+	srcset=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/transformer_resideual_layer_norm_2_hu_80a81a94d0dd503d.png 480w, https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/transformer_resideual_layer_norm_2_hu_9b0c6ede5f221a74.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;transformer_resideual_layer_norm_2&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;106&#34;
+		data-flex-basis=&#34;256px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;在解码器的子层里面也有层标准化（layer-normalization）。假设一个 Transformer 是由 2 层编码器和两层解码器组成的，如下图所示。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/transformer_resideual_layer_norm_3.png&#34;
+	width=&#34;1415&#34;
+	height=&#34;804&#34;
+	srcset=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/transformer_resideual_layer_norm_3_hu_bdb27ccfef4b06d1.png 480w, https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/transformer_resideual_layer_norm_3_hu_3d83b009eb8bed6e.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;transformer_resideual_layer_norm_3&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;175&#34;
+		data-flex-basis=&#34;422px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;解码器&#34;&gt;解码器
+&lt;/h2&gt;&lt;p&gt;解码器由三层构成。&lt;/p&gt;
+&lt;p&gt;第一层是Self-Attention Layer层。&lt;/p&gt;
+&lt;p&gt;第二层是Encoder-Decoder Attention层，这个层能帮助解码器聚焦于输入句子的相关部分（类似于 seq2seq 模型 中的 Attention）。&lt;/p&gt;
+&lt;p&gt;第三层是Feed Forward Neural Network层。&lt;/p&gt;
+&lt;p&gt;现在让我们来看下， 编码器和解码器是如何协同工作的。&lt;/p&gt;
+&lt;p&gt;上面说了，编码器一般有多层，第一个编码器的输入是一个序列，最后一个编码器输出是一组注意力向量 K 和 V。这些注意力向量将会输入到每个解码器的Encoder-Decoder Attention层，这有助于解码器把注意力集中中输入序列的合适位置。&lt;/p&gt;
+&lt;p&gt;在完成了编码（encoding）阶段之后，我们开始解码（decoding）阶段。解码（decoding ）阶段的每一个时间步都输出一个翻译后的单词。&lt;/p&gt;
+&lt;p&gt;接下来会重复这个过程，直到输出一个结束符，Transformer 就完成了所有的输出。&lt;/p&gt;
+&lt;p&gt;每一步的输出都会在下一个时间步输入到下面的第一个解码器。Decoder 就像 Encoder 那样，从下往上一层一层地输出结果。正对如编码器的输入所做的处理，我们把解码器的输入向量，也加上位置编码向量，来指示每个词的位置。&lt;/p&gt;
+&lt;p&gt;解码器中的 Self Attention 层，和编码器中的 Self Attention 层不太一样：在解码器里，Self Attention 层只允许关注到输出序列中早于当前位置之前的单词。&lt;/p&gt;
+&lt;p&gt;具体做法是：在 Self Attention 分数经过 Softmax 层之前，屏蔽当前位置之后的那些位置。&lt;/p&gt;
+&lt;p&gt;Decoder Attention层的原理和多头注意力（multiheaded Self Attention）机制类似，不同之处是：Decoder Attention层是使用前一层的输出来构造 Query 矩阵，而 Key 矩阵和 Value 矩阵来自于编码器（Encoder）最终的输出。&lt;/p&gt;
+&lt;h2 id=&#34;最后的线性层和-softmax-层&#34;&gt;最后的线性层和 Softmax 层
+&lt;/h2&gt;&lt;p&gt;Decoder 最终的输出是一个向量，其中每个元素是浮点数。我们怎么把这个向量转换为单词呢？这是由 Softmax 层后面的线性层来完成的。&lt;/p&gt;
+&lt;p&gt;线性层就是一个普通的全连接神经网络，可以把解码器输出的向量，映射到一个更长的向量，这个向量称为 logits 向量。&lt;/p&gt;
+&lt;p&gt;现在假设我们的模型有 10000 个英语单词（模型的输出词汇表），这些单词是从训练集中学到的。因此 logits 向量有 10000 个数字，每个数表示一个单词的分数。我们就是这样去理解线性层的输出。&lt;/p&gt;
+&lt;p&gt;然后，Softmax 层会把这些分数转换为概率（把所有的分数转换为正数，并且加起来等于 1）。然后选择最高概率的那个数字对应的词，就是这个时间步的输出单词。&lt;/p&gt;
+&lt;h2 id=&#34;transformer-的训练过程&#34;&gt;Transformer 的训练过程
+&lt;/h2&gt;&lt;p&gt;现在我们已经了解了 Transformer 的前向传播过程，下面讲讲 Transformer 的训练过程，这也是非常有用的知识。&lt;/p&gt;
+&lt;p&gt;在训练过程中，模型会经过上面讲的所有前向传播的步骤。但是，当我们在一个标注好的数据集上训练这个模型的时候，我们可以对比模型的输出和真实的标签。&lt;/p&gt;
+&lt;p&gt;为了可视化这个对比，让我们假设输出词汇表只包含 6 个单词（“a”, “am”, “i”, “thanks”, “student”, and “&amp;lt;eos&amp;gt;”（“&amp;lt;eos&amp;gt;”表示句子末尾））。&lt;/p&gt;
+&lt;p&gt;我们模型的输出词汇表，是在训练之前的数据预处理阶段构造的。当我们确定了输出词汇表，我们可以用向量来表示词汇表中的每个单词。这个表示方法也称为 one-hot encoding。例如，我们可以把单词 “am” 用下面的向量来表示：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/one-hot-vocabulary-example.png&#34;
+	width=&#34;1259&#34;
+	height=&#34;640&#34;
+	srcset=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/one-hot-vocabulary-example_hu_e279a78071018bf1.png 480w, https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/one-hot-vocabulary-example_hu_adff6db62bf30bbe.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;one-hot-vocabulary-example&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;196&#34;
+		data-flex-basis=&#34;472px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;介绍了训练过程，我们接着讨论模型的损失函数，这我们在训练时需要优化的目标，通过优化这个目标来得到一个训练好的、非常精确的模型。&lt;/p&gt;
+&lt;h2 id=&#34;损失函数&#34;&gt;损失函数
+&lt;/h2&gt;&lt;p&gt;用一个简单的例子来说明训练过程，比如：把“merci”翻译为“thanks”。
+这意味着我们希望模型最终输出的概率分布，会指向单词 ”thanks“（在“thanks”这个词的概率最高）。但模型还没训练好，它输出的概率分布可能和我们希望的概率分布相差甚远。&lt;/p&gt;
+&lt;p&gt;由于模型的参数都是随机初始化的。模型在每个词输出的概率都是随机的。我们可以把这个概率和正确的输出概率做对比，然后使用反向传播来调整模型的权重，使得输出的概率分布更加接近震数输出。&lt;/p&gt;
+&lt;p&gt;那我们要怎么比较两个概率分布呢？我们可以简单地用一个概率分布减去另一个概率分布。关于更多细节，你可以查看交叉熵(cross-entropy)]和KL 散度(Kullback–Leibler divergence)的相关概念。&lt;/p&gt;
+&lt;p&gt;但上面的例子是经过简化的，因为我们的句子只有一个单词。在实际中，我们使用的句子不只有一个单词。例如&amp;ndash;输入是：“je suis étudiant” ，输出是：“i am a student”。这意味着，我们的模型需要输出多个概率分布，满足如下条件：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;每个概率分布都是一个向量，长度是 vocab_size（我们的例子中，向量长度是 6，但实际中更可能是 30000 或者 50000）&lt;/li&gt;
+&lt;li&gt;第一个概率分布中，最高概率对应的单词是“i”&lt;/li&gt;
+&lt;li&gt;第二个概率分布中，最高概率对应的单词是“am”&lt;/li&gt;
+&lt;li&gt;以此类推，直到第 5 个概率分布中，最高概率对应的单词是“&amp;lt;eos&amp;gt;”，表示没有下一个单词了&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;希望经过训练，模型会输出我们希望的正确翻译。当然，如果你要翻译的句子是训练集中的一部分，那输出的结果并不能说明什么。&lt;/p&gt;
+&lt;p&gt;我们希望的是模型在没见过的句子上也能够准确翻译。需要注意的是：概率分布向量中，每个位置都会有一点概率，即使这个位置不是输出对应的单词&amp;ndash;这是 Softmax 中一个很有用的特性，有助于帮助训练过程。&lt;/p&gt;
+&lt;p&gt;现在，由于模型每个时间步只产生一个输出，我们可以认为：模型是从概率分布中选择概率最大的词，并且丢弃其他词。这种方法叫做贪婪解码（greedy decoding）。&lt;/p&gt;
+&lt;p&gt;另一种方法是每个时间步保留两个最高概率的输出词，然后在下一个时间步，重复执行这个过程：假设第一个位置概率最高的两个输出的词是”I“和”a“，这两个词都保留，然后根据第一个词计算第二个位置的词的概率分布，再取出 2 个概率最高的词，对于第二个位置和第三个位置，我们也重复这个过程。&lt;/p&gt;
+&lt;p&gt;这种方法称为集束搜索(beam search)，在我们的例子中，beam_size 的值是 2（含义是：在所有时间步，我们保留两个最高概率），top_beams 的值也是 2（表示我们最终会返回两个翻译的结果）。beam_size 和 top_beams 都是你可以在实验中尝试的超参数。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>vLLM Service</title>
+        <link>https://echudet.github.io/p/vllm-service/</link>
+        <pubDate>Sat, 13 Sep 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://echudet.github.io/p/vllm-service/</guid>
+        <description>&lt;h2 id=&#34;vllm是什么&#34;&gt;vLLM是什么
+&lt;/h2&gt;&lt;p&gt;vLLM是一类开源的大模型高性能推理与服务框架，最初由加州大学伯克利分校Sky Computing实验室开发，目前已成长为产业界与学界共同维护的社区项目。
+它专门用于提升Transformer类大模型在推理阶段的吞吐、并发和部署效率，广泛支持主流的开源语言模型，比如Llama、Mixtral、DeepSeek-V系列等。&lt;/p&gt;
+&lt;p&gt;vLLM的核心技术之一是PagedAttention，一种创新的KV缓存管理策略，能够高效地在GPU上管理、分配显存，并显著提升自回归生成时的推理速率。通过PagedAttention，vLLM可以更好地支持多请求、多会话并发，并有效降低显存消耗，实现高吞吐量推理服务。&lt;/p&gt;
+&lt;p&gt;vLLM还结合了连续批处理、高效的CUDA/HIP图执行机制、FlashAttention等优化技术。另外，vLLM支持多种量化算法，如GPTQ、AWQ、INT4/INT8/FP8等，可进一步加速推理并节省显存。&lt;/p&gt;
+&lt;p&gt;vLLM可以无缝兼容HuggingFace大多数主流模型和API。支持多种解码策略（并行采样、束搜索等）、分布式推理（张量/流水/数据/专家并行）、流式输出，以及多种硬件环境，如NVIDIA/AMD/Intel/华为/IBM等。同时，它还能通过OpenAI兼容API轻松部署为生产服务。&lt;/p&gt;
+&lt;p&gt;目前vLLM专注于支持Transformer系列模型，如Llama、GPT、Mixtral、GLM等；不适用于其他结构类型的大模型，如RWKV、RNN等。&lt;/p&gt;
+&lt;p&gt;此外，因高度性能优化，仍以CUDA为主进行加速，虽然支持AMD/Intel等多种硬件适配，但最佳性能主要在CUDA环境下实现。&lt;/p&gt;
+&lt;h2 id=&#34;vllm推理过程&#34;&gt;vLLM推理过程
+&lt;/h2&gt;&lt;h2 id=&#34;vllm的构成&#34;&gt;vLLM的构成
+&lt;/h2&gt;&lt;h2 id=&#34;vllm的关键技术&#34;&gt;vLLM的关键技术
+&lt;/h2&gt;&lt;h2 id=&#34;vllm的内存优化&#34;&gt;vLLM的内存优化
+&lt;/h2&gt;&lt;p&gt;todo&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>aimodel</title>
         <link>https://echudet.github.io/p/aimodel/</link>
         <pubDate>Sun, 01 Dec 2024 00:00:00 +0000</pubDate>
@@ -416,7 +747,8 @@
 &lt;li&gt;卷积操作使用空间形式 [B, C, H, W]&lt;/li&gt;
 &lt;li&gt;两种形式可以相互转换&lt;/li&gt;
 &lt;li&gt;特征维度（C）和空间分辨率（H,W）在两种形式中都保持不变&lt;/li&gt;
-&lt;/ol&gt;&lt;/blockquote&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -2622,45 +2954,6 @@
 &lt;li&gt;&lt;strong&gt;批次大小&lt;/strong&gt;：需要根据 GPU 内存大小进行设置，较大的批次大小可以稳定梯度，但会占用更多内存。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;权重衰减&lt;/strong&gt;：防止模型过拟合，通常设置为 &lt;code&gt;1e-4&lt;/code&gt; 或 &lt;code&gt;1e-5&lt;/code&gt;。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;参考&#34;&gt;参考
-&lt;/h2&gt;&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;Swin Transformer: Hierarchical Vision Transformer using Shifted Windows&lt;/strong&gt;
-&lt;ul&gt;
-&lt;li&gt;作者：Ze Liu, Yutong Lin, Yue Cao, et al.&lt;/li&gt;
-&lt;li&gt;链接：&lt;a class=&#34;link&#34; href=&#34;https://arxiv.org/abs/2103.14030&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;https://arxiv.org/abs/2103.14030&lt;/a&gt;
-
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;MiDaS: Robust Monocular Depth Estimation with Mix and Match of Dense and Sparse Depth Samples&lt;/strong&gt;
-&lt;ul&gt;
-&lt;li&gt;作者：René Ranftl, Katrin Lasinger, David Hafner, et al.&lt;/li&gt;
-&lt;li&gt;链接：&lt;a class=&#34;link&#34; href=&#34;https://arxiv.org/abs/1907.01341&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;https://arxiv.org/abs/1907.01341&lt;/a&gt;
-
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;PyTorch 官方文档&lt;/strong&gt;
-&lt;ul&gt;
-&lt;li&gt;链接：&lt;a class=&#34;link&#34; href=&#34;https://pytorch.org/docs/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;https://pytorch.org/docs/&lt;/a&gt;
-
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;timm: PyTorch Image Models&lt;/strong&gt;
-&lt;ul&gt;
-&lt;li&gt;作者：Ross Wightman&lt;/li&gt;
-&lt;li&gt;链接：&lt;a class=&#34;link&#34; href=&#34;https://github.com/rwightman/pytorch-image-models&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;https://github.com/rwightman/pytorch-image-models&lt;/a&gt;
-
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
 </description>
         </item>
         

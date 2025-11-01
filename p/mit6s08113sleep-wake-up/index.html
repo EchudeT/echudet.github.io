@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://echudet.github.io/p/mit6s08113sleep-wake-up/'>
 
-<link rel="stylesheet" href="/scss/style.min.86fc5e5efb829fb1bdd7a2d2275017fb3ae01ba7fcf491e347d76495ae5e3ae2.css"><meta property='og:title' content="MIT6S081：13Sleep & Wake up">
+<link rel="stylesheet" href="/scss/style.min.209f2315995b57a9cdd733e5afe32e05ebb1138a0b3bb750cfcb86dff885e546.css"><meta property='og:title' content="MIT6S081：13Sleep & Wake up">
 <meta property='og:description' content="进程的“睡眠”和“唤醒”机制是进程调度和资源管理的重要部分。其原理是通过将不需要立即执行的进程置于睡眠状态，释放CPU资源，从而提高系统效率。当进程进入睡眠状态时，它会主动放弃CPU，进行等待某事件的完成。一旦该事件发生，操作系统会通过中断、信号或条件变量等方式唤醒进程，重新将其调度到可执行状态。睡眠和唤醒机制有助于优化资源分配，减少忙等，提高多任务处理的效率，并确保系统响应性和性能的优化。">
 <meta property='og:url' content='https://echudet.github.io/p/mit6s08113sleep-wake-up/'>
 <meta property='og:site_name' content='echudet'>
@@ -801,7 +801,8 @@
 <p>在某个时刻，一个进程将获取条件锁，设置睡眠者正在等待的条件，并调用<code>wakeup(chan)</code>。</p>
 <p>在持有状态锁时调用<code>wakeup</code>非常重要。</p>
 <blockquote>
-<p>严格地说，<code>wakeup</code>只需跟在<code>acquire</code>之后就足够了（也就是说，可以在<code>release</code>之后调用<code>wakeup</code>）</p></blockquote>
+<p>严格地说，<code>wakeup</code>只需跟在<code>acquire</code>之后就足够了（也就是说，可以在<code>release</code>之后调用<code>wakeup</code>）</p>
+</blockquote>
 <p><code>wakeup</code>遍历进程表（<em><strong>kernel/proc.c</strong></em>:582）。</p>
 <p>它获取它所检查的每个进程的<code>p-&gt;lock</code>，这既是因为它可能会操纵该进程的状态，也是因为<code>p-&gt;lock</code>确保<code>sleep</code>和<code>wakeup</code>不会彼此错过。</p>
 <p>当<code>wakeup</code>发现一个<code>SLEEPING</code>的进程且<code>chan</code>相匹配时，它会将该进程的状态更改为<code>RUNNABLE</code>。调度器下次运行时，将看到进程已准备好运行。</p>
@@ -938,7 +939,8 @@
 <p>这可能比正常情况要晚一点（例如，当virtio驱动程序返回受害者正在等待的磁盘块时）或永远不会发生（例如，如果受害者正在等待来自控制台的输入，但用户没有键入任何输入）。</p>
 <blockquote>
 <p>注：上节中说到kill的工作方式，<code>kill</code>设置<code>p-&gt;killed</code>，如果遇到进程正在休眠，则会唤醒它，此后在<code>usertrap</code>中检测<code>p-&gt;killed</code>，并使进程退出</p>
-<p>而如果像上面说的，在检查<code>p-&gt;killed</code>之后调用<code>sleep</code>之前唤醒受害者进程，那么接下来执行<code>sleep</code>就会导致进程无法进入内核，无法在<code>usertrap</code>中退出，而必须等待所需事件的发生再次唤醒</p></blockquote>
+<p>而如果像上面说的，在检查<code>p-&gt;killed</code>之后调用<code>sleep</code>之前唤醒受害者进程，那么接下来执行<code>sleep</code>就会导致进程无法进入内核，无法在<code>usertrap</code>中退出，而必须等待所需事件的发生再次唤醒</p>
+</blockquote>
 <p>一个实际的操作系统将在固定时间内使用空闲列表找到自由的<code>proc</code>结构体，而不是<code>allocproc</code>中的线性时间搜索；xv6使用线性扫描是为了简单起见。</p>
 <h2 id="正课">正课
 </h2><h2 id="线程切换过程中锁的限制">线程切换过程中锁的限制
@@ -964,7 +966,8 @@
 <p>我们之后会用到它，因为这是Sleep&amp;Wakeup设计中众多限制条件之一。</p>
 <blockquote>
 <p>学生提问：当我们有多个CPU核时，它们能看到同样的锁对象的唯一原因只可能是它们有一个共享的物理内存系统，对吧？</p>
-<p>Robert教授：是的。如果你有两个电脑，那么它们不会共享内存，并且我们就不会有这些问题。现在的处理器上，总是有多个CPU核，它们共享了相同的内存系统。</p></blockquote>
+<p>Robert教授：是的。如果你有两个电脑，那么它们不会共享内存，并且我们就不会有这些问题。现在的处理器上，总是有多个CPU核，它们共享了相同的内存系统。</p>
+</blockquote>
 <p>在线程切换的过程中，还有一点我之前没有提过。</p>
 <p>XV6中，不允许进程在执行switch函数的过程中，持有任何其他的锁。</p>
 <p>所以，进程在调用switch函数的过程中，必须要持有p-&gt;lock（注，也就是进程对应的proc结构体中的锁），但是同时又不能持有任何其他的锁。</p>
@@ -988,7 +991,8 @@
 <p>所以不幸的是，当我们在自旋等待锁释放时会关闭中断，进而阻止了定时器中断并且阻止了进程P2将CPU出让回给进程P1。嗯，这是个好问题。</p>
 <p>学生提问：能重复一下死锁是如何避免的吗？</p>
 <p>Robert教授：哦，在XV6中，死锁是通过禁止在线程切换的时候加锁来避免的。</p>
-<p>XV6禁止在调用switch函数时，获取除了p-&gt;lock以外的其他锁。如果你查看sched函数的代码（注，详见11.6），里面包含了一些检查代码来确保除了p-&gt;lock以外线程不持有其他锁。所以上面会产生死锁的代码在XV6中是不合法的并被禁止的。</p></blockquote>
+<p>XV6禁止在调用switch函数时，获取除了p-&gt;lock以外的其他锁。如果你查看sched函数的代码（注，详见11.6），里面包含了一些检查代码来确保除了p-&gt;lock以外线程不持有其他锁。所以上面会产生死锁的代码在XV6中是不合法的并被禁止的。</p>
+</blockquote>
 <p>将这里描述的对于锁的两个限制条件记住，因为我们后面讨论Sleep&amp;Wakeup如何工作时会再次使用它们。</p>
 <blockquote>
 <p>在多核系统中，进程或者线程为了同步和共享资源，通常使用锁（如自旋锁）。但是在锁的操作中，如果处理不当，可能会引发<strong>死锁</strong>。死锁发生在多个进程/线程因为争抢资源（锁）而互相等待，导致系统无法前进。</p>
@@ -1004,7 +1008,8 @@
 <li><strong>避免中断处理程序的竞争</strong>：当一个进程关闭中断并开始等待锁时，确保了 CPU 不会因为中断处理而切换到另一个进程。这样，持有锁的进程（如 P1）可以继续执行，直到释放锁，而不会因为中断导致死锁。</li>
 <li><strong>防止并发修改状态</strong>：锁保护的是共享数据的访问，关闭中断后，确保了其他硬件中断（比如定时器、设备中断）不会打断当前进程对锁和共享数据的操作。中断处理程序不能抢占当前进程，数据一致性得以保障。</li>
 </ul>
-<p>如果我们在自旋等待锁释放时才关闭中断（即：先“自旋”再关闭中断），会存在一个竞态条件。在这个短暂的时间段内，虽然锁还没有被成功获取，但是中断已经没有关闭。这种情况下，设备中断可能会触发，并执行某些需要持有锁的操作，导致中断处理程序和进程竞争同一个锁，从而引发死锁。</p></blockquote>
+<p>如果我们在自旋等待锁释放时才关闭中断（即：先“自旋”再关闭中断），会存在一个竞态条件。在这个短暂的时间段内，虽然锁还没有被成功获取，但是中断已经没有关闭。这种情况下，设备中断可能会触发，并执行某些需要持有锁的操作，导致中断处理程序和进程竞争同一个锁，从而引发死锁。</p>
+</blockquote>
 <h2 id="sleepwakeup接口">Sleep&amp;Wakeup接口
 </h2><p>接下来看一下通过Sleep&amp;Wakeup实现Coordination。</p>
 <p>锁可以使得线程本身不必关心其他线程的具体实现。</p>
@@ -1090,7 +1095,8 @@
 <blockquote>
 <p>学生提问：进程会在写入每个字符时候都被唤醒一次吗？</p>
 <p>Robert教授：在这个我出于演示目的而特别改过的UART驱动中，传输每个字符都会有一个中断，所以你是对的，对于buffer中的每个字符，我们都会等待UART可以接收下一个字符，之后写入一个字符，将tx_done设置为0，回到循环的最开始并再次调用sleep函数进行睡眠状态，直到tx_done为1。当UART传输完了这个字符，uartintr函数会将tx_done设置为1，并唤醒uartwrite所在的线程。所以对于每个字符都有调用一次sleep和wakeup，并占用一次循环。</p>
-<p>UART实际上支持一次传输4或者16个字符，所以一个更有效的驱动会在每一次循环都传输16个字符给UART，并且中断也是每16个字符触发一次。更高速的设备，例如以太网卡通常会更多个字节触发一次中断。</p></blockquote>
+<p>UART实际上支持一次传输4或者16个字符，所以一个更有效的驱动会在每一次循环都传输16个字符给UART，并且中断也是每16个字符触发一次。更高速的设备，例如以太网卡通常会更多个字节触发一次中断。</p>
+</blockquote>
 <p>以上就是接口的演示。</p>
 <p>Sleep&amp;wakeup的一个优点是它们可以很灵活，它们不关心代码正在执行什么操作，你不用告诉sleep函数你在等待什么事件，你也不用告诉wakeup函数发生了什么事件，你只需要匹配好64bit的sleep channel就行。</p>
 <p>不过，对于sleep函数，有一个有趣的参数，我们需要将一个锁作为第二个参数传入，这背后是一个大的故事，我后面会介绍背后的原因。</p>
@@ -1219,7 +1225,8 @@
 <p>我来敲一下cat README，这会输出数千个字符。</p>
 <p>可以看到每过几个字符就会hang一次，需要我再次输入某个字符。</p>
 <p>这个过程我们可以看到很多lost wakeup。</p>
-<p>之前之所以没有出现，是因为lost wakeup需要中断已经在等待获取锁，并且uartwrite位于release和broken_sleep之间，这需要一定的巧合并不总是会发生。</p></blockquote>
+<p>之前之所以没有出现，是因为lost wakeup需要中断已经在等待获取锁，并且uartwrite位于release和broken_sleep之间，这需要一定的巧合并不总是会发生。</p>
+</blockquote>
 <h2 id="如何避免lost-wakeup">如何避免Lost wakeup
 </h2><p>现在我们的目标是消灭掉lost wakeup。这可以通过消除下面的窗口时间来实现。</p>
 <p><img src="/p/mit6s08113sleep-wake-up/p18.png"
@@ -1955,7 +1962,8 @@
 <p>这意味着，正在退出的进程获取自己的锁到它调用sched进入到调度器线程之间（注，因为调度器线程会释放进程的锁），父进程并不能看到这之间代码引起的中间状态。</p>
 <p>所以这之间的代码顺序并不重要。</p>
 <p>大部分时候，如果没有持有锁，exit中任何代码顺序都不能工作。</p>
-<p>因为有了锁，代码的顺序就不再重要，因为父进程也看不到进程状态。</p></blockquote>
+<p>因为有了锁，代码的顺序就不再重要，因为父进程也看不到进程状态。</p>
+</blockquote>
 <p>所以，直到子进程exit的最后，它都没有释放所有的资源，因为它还在运行的过程中，所以不能释放这些资源。</p>
 <p>相应的其他的进程，也就是父进程，释放了运行子进程代码所需要的资源。这样的设计可以让我们极大的精简exit的实现。</p>
 <h2 id="kill系统调用">kill系统调用
@@ -2310,7 +2318,8 @@
 <p>如果你正在运行一些重要的服务器，例如数据库服务器，并且许多其他计算机依赖这个数据库并通过网络使用它。</p>
 <p>那谁知道呢？答案或许是你不能就这么直接关闭操作系统，因为你正在提供一个对于其他计算机来说非常关键的服务。</p>
 <p>如果你的计算机并没有在做任何事情，那么你可以直接关闭它。</p>
-<p>或许对于你的问题来说，如果你想关闭一个计算机，确保文件系统是正确的，之后停止执行指令，之后就可以关闭计算机了。</p></blockquote>
+<p>或许对于你的问题来说，如果你想关闭一个计算机，确保文件系统是正确的，之后停止执行指令，之后就可以关闭计算机了。</p>
+</blockquote>
 
 </section>
 
@@ -2704,7 +2713,7 @@
         
         
 
-        共 765849 字 , 39 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        共 742374 字 , 39 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
         主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 

@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://echudet.github.io/p/mit6s08118os-organization/'>
 
-<link rel="stylesheet" href="/scss/style.min.86fc5e5efb829fb1bdd7a2d2275017fb3ae01ba7fcf491e347d76495ae5e3ae2.css"><meta property='og:title' content="MIT6S081：18OS organization">
+<link rel="stylesheet" href="/scss/style.min.209f2315995b57a9cdd733e5afe32e05ebb1138a0b3bb750cfcb86dff885e546.css"><meta property='og:title' content="MIT6S081：18OS organization">
 <meta property='og:description' content="微内核的核心实现了IPC（Inter-Process Communication）以及线程和任务的tiny kernel。所以微内核只提供了进程抽象和通过IPC进程间通信的方式，除此之外别无他物。任何你想要做的事情，例如文件系统，都会通过一个用户空间进程来实现，完全不会在内核中实现。">
 <meta property='og:url' content='https://echudet.github.io/p/mit6s08118os-organization/'>
 <meta property='og:site_name' content='echudet'>
@@ -922,7 +922,9 @@
 <li><strong>当页表发生变化时，TLB 中的缓存可能会失效</strong>，继续使用这些失效的映射会导致错误的地址转换。</li>
 <li><strong>flush TLB 是为了清除旧的映射</strong>，保证 CPU 在新的映射生效时不会使用错误的地址映射。</li>
 </ul>
-<p>所以，更换页表的时候，flush TLB 不是把页表条目装载进 TLB，而是<strong>为了防止使用无效的映射</strong>，确保地址转换的正确性。</p></blockquote></blockquote>
+<p>所以，更换页表的时候，flush TLB 不是把页表条目装载进 TLB，而是<strong>为了防止使用无效的映射</strong>，确保地址转换的正确性。</p>
+</blockquote>
+</blockquote>
 <hr>
 <h2 id="emulation-library"><strong>Emulation Library</strong>
 </h2><p>在 L4Linux 的上下文中，<strong>“emulation library”</strong> 通常指的是一个用于支持系统调用或信号处理的库。它模拟了传统 Linux 系统调用或行为，以便在 L4 这种不同内核架构下运行标准的 Linux 应用程序。它可以让 Linux 应用程序以为它们在一个完整的 Linux 环境中运行，虽然底层实际上是 L4 微内核。</p>
@@ -965,7 +967,8 @@
 </ul>
 </li>
 </ol>
-<p>结论：“进程进入 Linux”确实主要是指 <strong>L4Linux 服务器进程内部状态的改变</strong>，而 <strong>L4 微内核本身并不改变用户态和内核态的划分</strong>。L4 系统的设计本质上就是通过减少这种切换来提升性能和简化操作系统的架构。</p></blockquote>
+<p>结论：“进程进入 Linux”确实主要是指 <strong>L4Linux 服务器进程内部状态的改变</strong>，而 <strong>L4 微内核本身并不改变用户态和内核态的划分</strong>。L4 系统的设计本质上就是通过减少这种切换来提升性能和简化操作系统的架构。</p>
+</blockquote>
 <hr>
 <h2 id="两个执行路径">两个执行路径
 </h2><p>在L4Linux环境中，<strong>主线程会有一张页表</strong>，这张页表主要用于管理用户进程的地址空间，并映射该进程可以访问的虚拟地址到实际的物理地址。这意味着：</p>
@@ -1134,7 +1137,8 @@
 </ul>
 </li>
 </ol>
-<p>总结：L4Linux 中延迟 <code>schedule()</code> 调用的策略虽然看起来像是现代操作系统的一种标准优化，但它的<strong>出色之处</strong>在于适应了 L4 微内核的架构，特别是减少了协程切换和上下文切换的频率，提高了系统的整体效率。在某些早期的操作系统中，<strong>系统调用后立即调度</strong>的方式曾是常见的，但这种方式的高开销在现代系统中逐渐被优化设计所取代。</p></blockquote>
+<p>总结：L4Linux 中延迟 <code>schedule()</code> 调用的策略虽然看起来像是现代操作系统的一种标准优化，但它的<strong>出色之处</strong>在于适应了 L4 微内核的架构，特别是减少了协程切换和上下文切换的频率，提高了系统的整体效率。在某些早期的操作系统中，<strong>系统调用后立即调度</strong>的方式曾是常见的，但这种方式的高开销在现代系统中逐渐被优化设计所取代。</p>
+</blockquote>
 <hr>
 <h2 id="在所有地址空间中代码和数据的虚拟分配相同会最大化独立应用程序之间的-tlb-冲突">在所有地址空间中代码和数据的虚拟分配相同会最大化独立应用程序之间的 TLB 冲突
 </h2><p>TLB 是一种高速缓存，用来加速虚拟地址到物理地址的转换。每次内存访问时，处理器首先查找 TLB，如果找到匹配的虚拟地址条目，就可以快速获取对应的物理地址，避免慢速的页表查找。</p>
@@ -1432,7 +1436,8 @@
 </ul>
 </li>
 </ul>
-<p>因此，在原生 Linux 中，由于内核和用户空间共享同一个地址空间，访问更快且管理简单。而在 L4 微内核架构下，L4Linux 运行于用户态、进程间隔离严格，导致无法像原生 Linux 那样自由高效地管理和共享地址空间，这就是为什么在 L4 上无法简单复用 Linux 的虚拟地址管理方式的原因。</p></blockquote>
+<p>因此，在原生 Linux 中，由于内核和用户空间共享同一个地址空间，访问更快且管理简单。而在 L4 微内核架构下，L4Linux 运行于用户态、进程间隔离严格，导致无法像原生 Linux 那样自由高效地管理和共享地址空间，这就是为什么在 L4 上无法简单复用 Linux 的虚拟地址管理方式的原因。</p>
+</blockquote>
 <hr>
 <h2 id="l4中的共享库">L4中的共享库
 </h2><p>L4中的共享库主要通过动态链接的方式，将共享的代码库（如标准C库 <code>libc.so</code>）与应用程序进程关联在一起，促进跨进程调用的优化和性能提升。以下是L4环境下共享库的工作流程和每个环节所需的时间：</p>
@@ -1607,7 +1612,8 @@
 <blockquote>
 <p>在一个实验中，一个64×64矩阵乘法被周期性地中断，以产生最大化缓存冲突的合成负载。在不受干扰的情况下，矩阵乘法需要10.9毫秒。每100微秒（μs）中断一次，最坏情况下的执行时间为96.1毫秒，减慢了8.85倍。</p>
 <p>在缓存分区的情况下，分页器从总共64个二级缓存页面中专门为矩阵乘法分配了3个页面。这既不能避免主缓存的干扰，也不能避免矩阵乘法的数据工作集（64 KB）的二级缓存未命中。然而，通过避免与其他任务的二级缓存干扰，最坏情况下的执行时间减少到24.9毫秒，减慢了仅2.29倍。从实时角度来看，分区后的矩阵乘法比未分区的快近4倍。</p>
-<p>为实时系统分配资源会降低分时性能。然而，描述的技术使系统资源在实时和分时系统之间进行定制的动态分区成为可能。</p></blockquote>
+<p>为实时系统分配资源会降低分时性能。然而，描述的技术使系统资源在实时和分时系统之间进行定制的动态分区成为可能。</p>
+</blockquote>
 <hr>
 <h2 id="co-location">co-location
 </h2><p>在计算机体系结构和操作系统领域，&ldquo;co-location&rdquo;（共置或同址）通常指的是将相关的或彼此需要频繁交互的代码或资源放置在相同的物理位置（如相同的内存或存储单元）或运行在相同的上下文或地址空间内，以减少上下文切换和通信开销。其目标是提高系统性能和效率。</p>
@@ -1849,7 +1855,8 @@
 <ul>
 <li><strong>PCT</strong>适用于需要快速控制流切换的场景，无需参数传递。</li>
 <li><strong>IPC</strong>用于进程之间的数据和消息传递，支持更复杂的通信和同步需求。</li>
-</ul></blockquote>
+</ul>
+</blockquote>
 <h2 id="正课部分">正课部分
 </h2><h2 id="monolithic-kernel">Monolithic kernel
 </h2><p>今天主要会讨论微内核（Mircro kernel）。</p>
@@ -2144,7 +2151,8 @@
 <p>如果你在XV6中有一个进程，它只能包含一个线程。</p>
 <p>但是在现代的操作系统和L4中，在一个进程，一个地址空间中，可以有多个线程。</p>
 <p>如果你有多个CPU核，那么多个CPU核可以同时运行一个Task。</p>
-<p>每个线程在Task的地址空间中都有一个设置好的Stack，这意味着你可以写一个程序，并通过并行运行在多个CPU核上得到性能的提升，其中的每个线程都运行在不同的CPU核上。</p></blockquote>
+<p>每个线程在Task的地址空间中都有一个设置好的Stack，这意味着你可以写一个程序，并通过并行运行在多个CPU核上得到性能的提升，其中的每个线程都运行在不同的CPU核上。</p>
+</blockquote>
 <p>所以你们可以看到，这里的设计非常依赖IPC，因为如果你想与你的文件系统交互，文件系统想要与设备驱动交互，你都需要来回发送IPC消息。</p>
 <p>对于每个系统调用，每个Page Fault，每个设备中断，都会有反复的IPC消息。所以IPC系统需要非常快。</p>
 <h2 id="improving-ipc-by-kernel-design">Improving IPC by Kernel Design
@@ -2344,7 +2352,9 @@
 <li>在单个 CPU 系统中，线程进入内核态确实意味着权限提升，但操作系统通过硬件支持和系统调用接口的设计来保证安全性。</li>
 <li>权限切换的过程并不直接暴露内核，内核会对系统调用进行严格的校验和控制。</li>
 <li>即使权限提升了，恶意线程仍然无法绕过操作系统的保护机制，内核态的执行是受控制的，不会随意执行用户态提供的有害代码。</li>
-</ul></blockquote></blockquote>
+</ul>
+</blockquote>
+</blockquote>
 <p>实际中，对于这里的场景：发送一个消息并期待收到回复，你可以抛开这种方法并获得简单的多的设计，L4就是采用了后者。</p>
 <p>有关简单的设计在一篇著名的论文中有提到，论文是<a class="link" href="https://www.cse.unsw.edu.au/~cs9242/19/papers/Liedtke_93.pdf"  target="_blank" rel="noopener"
     >Improving IPC by Kernel Design</a>
@@ -2460,7 +2470,9 @@
 <li><strong>RPC 是一种特殊的 IPC 实现方式</strong>，通过封装函数调用的形式，简化了进程间的通信。</li>
 <li><strong>IPC 包含多种方式</strong>，包括管道、消息队列、共享内存、信号等，每种方式都有自己的使用场景和性能特点。</li>
 <li><strong>L4 微内核中的优化</strong>，如 <code>call</code> 和 <code>sendrecv</code>，是为提高 RPC 性能而设计的，减少了频繁的用户态和内核态切换。</li>
-</ul></blockquote></blockquote>
+</ul>
+</blockquote>
+</blockquote>
 <h2 id="run-linux-on-top-of-l4-micro-kernel">Run Linux on top of L4 micro kernel
 </h2><p>前一节对于IPC的优化使得人们开始认真考虑使用微内核替代monolithic kernel。</p>
 <p>然而，这里仍然有个问题，即使IPC很快了，操作系统的剩余部分从哪里去获取？现在的微内核大概只有一个完整操作系统的百分之几，我们该怎么处理操作系统剩下的部分？</p>
@@ -2591,7 +2603,8 @@
 <p>学生提问：看起来一些任务更适合在内核中，但是内核的方案中，要么所有东西都在内核要么都不在。所以要么你有一个monolithic kernel可以完成所有的事情，要么有个micro kernel什么也不做。我认为虚拟内存、文件系统和一些其他的事情在内核中做会非常的有效。不能有些系统具备有一些功能，然后你又可以选择用不用这些功能吗？</p>
 <p>Robert教授：所有你说的都有非常有道理。</p>
 <p>实际上有很多微内核相关的项目都构建了各种hybrid内核，MACH有一些不同的版本，其中一些就是hybrid内核，这些内核的核心是包括了IPC的微内核，同时在内核中又是一个完整的Unix系统，比如MACH 2.5就是这样一个hybrid内核，其中一些东西是按照微内核的方式构建，一些东西又是按照Unix方式构建。</p>
-<p>现代的macOS也以与你描述类似的方式构建，macOS本身是个完整的操作系统，包含了文件系统，同时也很好的支持了IPC和其他用来构建微内核的东西。Google Fuchsia也实现了一些这里的想法。</p></blockquote>
+<p>现代的macOS也以与你描述类似的方式构建，macOS本身是个完整的操作系统，包含了文件系统，同时也很好的支持了IPC和其他用来构建微内核的东西。Google Fuchsia也实现了一些这里的想法。</p>
+</blockquote>
 
 </section>
 
@@ -2985,7 +2998,7 @@
         
         
 
-        共 765849 字 , 39 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        共 742374 字 , 39 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
         主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 

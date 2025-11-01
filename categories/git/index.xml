@@ -69,7 +69,8 @@
 &lt;li&gt;&lt;code&gt;refs/heads/&lt;/code&gt;：本地分支，每个分支一个文件，内容是 commit 的 SHA-1 值。&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;refs/remotes/origin/&lt;/code&gt;：远程分支跟踪仓库的分支。&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;refs/tags/&lt;/code&gt;：标签指向的 commit。&lt;/li&gt;
-&lt;/ul&gt;&lt;/blockquote&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
 
 &lt;/details&gt;
 
@@ -95,7 +96,8 @@
 &lt;p&gt;&lt;code&gt;git reset --hard&lt;/code&gt;: 工作区和缓存区的内容全部扔掉！然后返回指定版本。&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;git reset --soft&lt;/code&gt;: 保留工作区内容，并且已提交的内容于当前版本和返回版本的差异会存进缓存区。Attention:存进缓存区的方式是覆盖而不是追加！这意味着你之前存进缓存区的内容会丢失，所以不要连续使用两次&lt;code&gt;git reset --soft&lt;/code&gt;。&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;git reset (--mixed)&lt;/code&gt;: 保留工作区内容，并且当前版本和返回版本的差异会追加存入工作区。&lt;/p&gt;
-&lt;p&gt;查看日志，之前的日志&lt;code&gt;git log&lt;/code&gt;，之后的日志&lt;code&gt;git reflog&lt;/code&gt;。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;查看日志，之前的日志&lt;code&gt;git log&lt;/code&gt;，之后的日志&lt;code&gt;git reflog&lt;/code&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;/details&gt;
 
@@ -116,7 +118,8 @@
 &lt;p&gt;4.修复分支(fix):通常命名为&lt;code&gt;bugfix/&amp;lt;...&amp;gt;&lt;/code&gt;或&lt;code&gt;fix/&amp;lt;...&amp;gt;&lt;/code&gt;，从develop分支创建，修复完成后合并回develop分支。&lt;/p&gt;
 &lt;p&gt;5.热修复分支(hotfix):通常命名为&lt;code&gt;hotfix/&amp;lt;...&amp;gt;&lt;/code&gt;，用于紧急修复生成环境的bug，从main分支创建，修复完成后合并回main和develop分支。&lt;/p&gt;
 &lt;p&gt;6.发布分支(release):通常命名为&lt;code&gt;release/v1.0.0&lt;/code&gt;或&lt;code&gt;release/2025-09-02&lt;/code&gt;，从develop分支创建、发布完成后，合并到develop和main分支。&lt;/p&gt;
-&lt;p&gt;7.支持分支(support):通常命名为&lt;code&gt;support/v1.0.x&lt;/code&gt;，从main分支创建，用于维护旧版本。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;7.支持分支(support):通常命名为&lt;code&gt;support/v1.0.x&lt;/code&gt;，从main分支创建，用于维护旧版本。&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;/details&gt;
 

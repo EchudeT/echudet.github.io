@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://echudet.github.io/p/mit6s08110multiprocessors-and-locking/'>
 
-<link rel="stylesheet" href="/scss/style.min.86fc5e5efb829fb1bdd7a2d2275017fb3ae01ba7fcf491e347d76495ae5e3ae2.css"><meta property='og:title' content="MIT6S081：10Multiprocessors and locking">
+<link rel="stylesheet" href="/scss/style.min.209f2315995b57a9cdd733e5afe32e05ebb1138a0b3bb750cfcb86dff885e546.css"><meta property='og:title' content="MIT6S081：10Multiprocessors and locking">
 <meta property='og:description' content="多处理器系统和锁机制是实现高效并行计算和数据一致性的关键因素。多处理器在于利用多个CPU同时执行任务，显著提升计算能力和系统吞吐量。随着多处理器系统的普及，资源竞争问题变得更加突出，这时锁机制的地位显得尤为重要。锁通过对共享资源的访问进行同步控制，防止多个处理器同时修改数据导致的不一致问题。常用的锁机制包括互斥锁、读写锁和自旋锁，确保在多处理环境下保持数据的完整性和正确性。这种结合实现了高效的资源利用率，保证了多处理系统对复杂任务的快速响应和可靠处理。">
 <meta property='og:url' content='https://echudet.github.io/p/mit6s08110multiprocessors-and-locking/'>
 <meta property='og:site_name' content='echudet'>
@@ -1403,7 +1403,8 @@
 <p>这就是为什么在acquire和release中都有__sync_synchronize函数的调用。</p>
 <blockquote>
 <p>学生提问：有没有可能在锁acquire之前的一条指令被移到锁release之后？或者说这里会有一个界限不允许这么做？</p>
-<p>Frans教授：在这里的例子中，acquire和release都有自己的界限（注，也就是__sync_synchronize函数的调用点）。所以发生在锁acquire之前的指令不会被移到acquire的__sync_synchronize函数调用之后，这是一个界限。在锁的release函数中有另一个界限。所以在第一个界限之前的指令会一直在这个界限之前，在两个界限之间的指令会保持在两个界限之间，在第二个界限之后的指令会保持在第二个界限之后。</p></blockquote>
+<p>Frans教授：在这里的例子中，acquire和release都有自己的界限（注，也就是__sync_synchronize函数的调用点）。所以发生在锁acquire之前的指令不会被移到acquire的__sync_synchronize函数调用之后，这是一个界限。在锁的release函数中有另一个界限。所以在第一个界限之前的指令会一直在这个界限之前，在两个界限之间的指令会保持在两个界限之间，在第二个界限之后的指令会保持在第二个界限之后。</p>
+</blockquote>
 <h2 id="总结">总结
 </h2><p>让我来总结一下这节课的内容。</p>
 <p>首先，锁确保了正确性，但是同时又会降低性能，这是个令人失望的现实，我们是因为并发运行代码才需要使用锁，而锁另一方面又限制了代码的并发运行。</p>
@@ -1411,7 +1412,8 @@
 <p>最后，使用race detector来找到race condition，如果你将锁的acquire和release放置于错误的位置，那么就算使用了锁还是会有race。</p>
 <blockquote>
 <p>学生提问：在一个处理器上运行多个线程与在多个处理器上运行多个进程是否一样？</p>
-<p>Frans教授：差不多吧，如果你有多个线程，但是只有一个CPU，那么你还是会想要特定内核代码能够原子执行。所以你还是需要有critical section的概念。你或许不需要锁，但是你还是需要能够对特定的代码打开或者关闭中断。如果你查看一些操作系统的内核代码，通常它们都没有锁的acquire，因为它们假定自己都运行在单个处理器上，但是它们都有开关中断的操作。</p></blockquote>
+<p>Frans教授：差不多吧，如果你有多个线程，但是只有一个CPU，那么你还是会想要特定内核代码能够原子执行。所以你还是需要有critical section的概念。你或许不需要锁，但是你还是需要能够对特定的代码打开或者关闭中断。如果你查看一些操作系统的内核代码，通常它们都没有锁的acquire，因为它们假定自己都运行在单个处理器上，但是它们都有开关中断的操作。</p>
+</blockquote>
 
 </section>
 
@@ -1805,7 +1807,7 @@
         
         
 
-        共 765849 字 , 39 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        共 742374 字 , 39 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
         主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 

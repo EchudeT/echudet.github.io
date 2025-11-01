@@ -2,23 +2,41 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://echudet.github.io/categories/ai-assist/</loc>
+    <lastmod>2025-11-01T19:46:45+08:00</lastmod>
+  </url><url>
     <loc>https://echudet.github.io/categories/</loc>
-    <lastmod>2025-09-08T18:16:29+08:00</lastmod>
+    <lastmod>2025-11-01T19:46:45+08:00</lastmod>
   </url><url>
-    <loc>https://echudet.github.io/categories/face-recognition/</loc>
-    <lastmod>2025-09-08T18:16:29+08:00</lastmod>
+    <loc>https://echudet.github.io/p/cs144-code-analysis/</loc>
+    <lastmod>2025-11-01T19:46:45+08:00</lastmod>
   </url><url>
-    <loc>https://echudet.github.io/p/face-recognition-list/</loc>
-    <lastmod>2025-09-08T18:16:29+08:00</lastmod>
+    <loc>https://echudet.github.io/categories/net/</loc>
+    <lastmod>2025-11-01T19:46:45+08:00</lastmod>
   </url><url>
     <loc>https://echudet.github.io/post/</loc>
-    <lastmod>2025-09-08T18:16:29+08:00</lastmod>
+    <lastmod>2025-11-01T19:46:45+08:00</lastmod>
+  </url><url>
+    <loc>https://echudet.github.io/categories/ai/</loc>
+    <lastmod>2025-11-01T19:46:45+08:00</lastmod>
+  </url><url>
+    <loc>https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/</loc>
+    <lastmod>2025-11-01T19:46:45+08:00</lastmod>
+  </url><url>
+    <loc>https://echudet.github.io/p/vllm-service/</loc>
+    <lastmod>2025-11-01T19:46:45+08:00</lastmod>
+  </url><url>
+    <loc>https://echudet.github.io/categories/face-recognition/</loc>
+    <lastmod>2025-11-01T19:46:45+08:00</lastmod>
+  </url><url>
+    <loc>https://echudet.github.io/p/face-recognition-list/</loc>
+    <lastmod>2025-11-01T19:46:45+08:00</lastmod>
   </url><url>
     <loc>https://echudet.github.io/categories/comp/</loc>
-    <lastmod>2025-09-08T18:16:29+08:00</lastmod>
+    <lastmod>2025-11-01T19:46:45+08:00</lastmod>
   </url><url>
     <loc>https://echudet.github.io/p/oscomp2025-experience/</loc>
-    <lastmod>2025-09-08T18:16:29+08:00</lastmod>
+    <lastmod>2025-11-01T19:46:45+08:00</lastmod>
   </url><url>
     <loc>https://echudet.github.io/categories/git/</loc>
     <lastmod>2025-09-03T22:10:01+08:00</lastmod>
@@ -32,53 +50,38 @@
     <loc>https://echudet.github.io/categories/note/</loc>
     <lastmod>2025-09-03T22:10:01+08:00</lastmod>
   </url><url>
-    <loc>https://echudet.github.io/p/netmath2/</loc>
-    <lastmod>2025-09-03T22:10:01+08:00</lastmod>
+    <loc>https://echudet.github.io/p/router-buffer-based-on-queue-theory/</loc>
+    <lastmod>2025-11-01T19:46:45+08:00</lastmod>
   </url><url>
-    <loc>https://echudet.github.io/p/netmath/</loc>
-    <lastmod>2025-09-03T22:10:01+08:00</lastmod>
-  </url><url>
-    <loc>https://echudet.github.io/categories/ai/</loc>
-    <lastmod>2025-09-03T22:10:01+08:00</lastmod>
+    <loc>https://echudet.github.io/p/probability-theory-queuing-model/</loc>
+    <lastmod>2025-11-01T19:46:45+08:00</lastmod>
   </url><url>
     <loc>https://echudet.github.io/p/aimodel/</loc>
-    <lastmod>2025-09-03T22:10:01+08:00</lastmod>
+    <lastmod>2025-11-01T19:46:45+08:00</lastmod>
   </url><url>
     <loc>https://echudet.github.io/categories/database/</loc>
-    <lastmod>2025-09-03T22:10:01+08:00</lastmod>
+    <lastmod>2025-11-01T19:46:45+08:00</lastmod>
   </url><url>
-    <loc>https://echudet.github.io/p/intro-database2/</loc>
-    <lastmod>2025-09-03T22:10:01+08:00</lastmod>
-  </url><url>
-    <loc>https://echudet.github.io/p/intro-database/</loc>
-    <lastmod>2024-12-01T23:35:39+08:00</lastmod>
+    <loc>https://echudet.github.io/p/simple-database/</loc>
+    <lastmod>2025-11-01T19:46:45+08:00</lastmod>
   </url><url>
     <loc>https://echudet.github.io/p/pa/</loc>
     <lastmod>2025-09-03T22:10:01+08:00</lastmod>
   </url><url>
-    <loc>https://echudet.github.io/p/intro-net/</loc>
-    <lastmod>2024-11-26T23:33:54+08:00</lastmod>
-  </url><url>
-    <loc>https://echudet.github.io/p/intro-net2/</loc>
-    <lastmod>2024-11-21T18:03:04+08:00</lastmod>
-  </url><url>
-    <loc>https://echudet.github.io/p/intro-net3/</loc>
-    <lastmod>2024-11-21T18:03:04+08:00</lastmod>
-  </url><url>
     <loc>https://echudet.github.io/categories/network/</loc>
-    <lastmod>2024-11-26T23:33:54+08:00</lastmod>
+    <lastmod>2025-11-01T19:46:45+08:00</lastmod>
   </url><url>
-    <loc>https://echudet.github.io/categories/rust/</loc>
-    <lastmod>2024-11-21T18:03:04+08:00</lastmod>
+    <loc>https://echudet.github.io/p/network-protocol-archive/</loc>
+    <lastmod>2025-11-01T19:46:45+08:00</lastmod>
   </url><url>
-    <loc>https://echudet.github.io/p/rust%E9%9A%8F%E8%AE%B0/</loc>
-    <lastmod>2024-11-21T18:03:04+08:00</lastmod>
+    <loc>https://echudet.github.io/p/simple-network/</loc>
+    <lastmod>2025-11-01T19:46:45+08:00</lastmod>
   </url><url>
-    <loc>https://echudet.github.io/p/intro-verilog/</loc>
-    <lastmod>2025-09-03T22:10:01+08:00</lastmod>
+    <loc>https://echudet.github.io/p/simple-verilog/</loc>
+    <lastmod>2025-11-01T19:46:45+08:00</lastmod>
   </url><url>
     <loc>https://echudet.github.io/categories/verilog/</loc>
-    <lastmod>2025-09-03T22:10:01+08:00</lastmod>
+    <lastmod>2025-11-01T19:46:45+08:00</lastmod>
   </url><url>
     <loc>https://echudet.github.io/categories/mit6s081/</loc>
     <lastmod>2025-09-03T22:10:01+08:00</lastmod>

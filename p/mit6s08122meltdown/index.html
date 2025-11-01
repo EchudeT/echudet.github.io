@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://echudet.github.io/p/mit6s08122meltdown/'>
 
-<link rel="stylesheet" href="/scss/style.min.86fc5e5efb829fb1bdd7a2d2275017fb3ae01ba7fcf491e347d76495ae5e3ae2.css"><meta property='og:title' content="MIT6S081：22Meltdown">
+<link rel="stylesheet" href="/scss/style.min.209f2315995b57a9cdd733e5afe32e05ebb1138a0b3bb750cfcb86dff885e546.css"><meta property='og:title' content="MIT6S081：22Meltdown">
 <meta property='og:description' content="Meltdown漏洞破坏了这种隔离机制，使攻击者能够访问内核内存。这一漏洞不依赖操作系统或软件漏洞，而是通过利用处理器硬件特性来实施攻击。这一漏洞广泛影响了个人计算机、云服务器中的虚拟机等设备。">
 <meta property='og:url' content='https://echudet.github.io/p/mit6s08122meltdown/'>
 <meta property='og:site_name' content='echudet'>
@@ -1379,7 +1379,8 @@
 <p>有可能这是某人用来登录银行账号或者邮件用的密码。这意味着攻击者可能需要尝试每一个内核内存地址，以查找任何有价值的数据。</p>
 <p>或许攻击者会研究内核代码，找到内核中打印了数据的地址，检查数据结构和内核内存，最后理解内核是如何工作的，并找到对应的虚拟内存地址。因为类似的攻击已经存在了很长的时间，内核实际上会保护自己不受涉及到猜内核内存地址的攻击的影响。</p>
 <p>论文中提到了Kernal address space layout randomization。所以现代的内核实际上会将内核加载到随机地址，这样使得获取内核虚拟地址更难。这个功能在论文发表很久之前就存在，因为它可以帮助防御攻击。</p>
-<p>在这个攻守双方的游戏中，我们需要假设攻击者最后可以胜出并拿到内核的虚拟内存地址。所以我们会假设攻击者要么已经知道了一个内核虚拟地址，要么愿意尝试每一个内核虚拟内存地址。</p></blockquote>
+<p>在这个攻守双方的游戏中，我们需要假设攻击者最后可以胜出并拿到内核的虚拟内存地址。所以我们会假设攻击者要么已经知道了一个内核虚拟地址，要么愿意尝试每一个内核虚拟内存地址。</p>
+</blockquote>
 <p>我们会好奇，上面的代码怎么会对攻击者是有用的？如果CPU如手册中一样工作，那么这里的攻击是没有意义的，在第三行会有Page Fault。但是实际上CPU比手册中介绍的要复杂的多，而攻击能生效的原因是一些CPU的实现细节。</p>
 <p>这里攻击者依赖CPU的两个实现技巧，一个是Speculative execution（预测执行），另一个是CPU的缓存方式。</p>
 <hr>
@@ -1475,7 +1476,8 @@
 <p>Robert教授：这里有两个回答。首先，Intel芯片并不是这样工作的。其次，是的，我相信对于Intel来说如果先做权限检查会更简单，这样的话，在上面的例子中，r2寄存器就不会被修改。</p>
 <p>你们或许注意到论文中提到，尽管AMD CPU的手册与Intel的一样，它们有相同的指令集，Meltdown Attack并不会在AMD CPU上生效。普遍接受的观点是，AMD CPU在Speculative execution时，如果没有权限读取内存地址，是不会将内存地址中的数据读出。</p>
 <p>这就是为什么Meltdown Attack在AMD CPU上不生效的原因。最近的Intel CPU明显也采用了这种方法，如果程序没有权限，在Speculative execution的时候也不会加载内存数据。</p>
-<p>这里使用哪种方式对于性能来说没有明显区别，或许在指令Retired的时候再检查权限能省一些CPU的晶体管吧。这里我要提醒一下，这里有很多内容都是猜的，不过我认为我说的都是对的。Intel和AMD并没有太披露具体的细节。</p></blockquote>
+<p>这里使用哪种方式对于性能来说没有明显区别，或许在指令Retired的时候再检查权限能省一些CPU的晶体管吧。这里我要提醒一下，这里有很多内容都是猜的，不过我认为我说的都是对的。Intel和AMD并没有太披露具体的细节。</p>
+</blockquote>
 <p>这里有一些重要的术语。你可以从CPU手册中读到的，比如说一个add指令接收两个寄存器作为参数，并将结果存放在第三个寄存器，这一类设计被称为CPU的Architectural，或者通告的行为。</p>
 <p>如果你读取一个你没有权限的内存地址，你会得到一个Page Fault，你不允许读取这个内存地址，这就是一种通告的行为。</p>
 <p>CPU的实际行为被称作Micro-Architectural，CPU的通告行为与实际行为是模糊不清的。比如说CPU会悄悄的有Speculative execution。</p>
@@ -1553,7 +1555,9 @@
 <ol>
 <li>主要用于缓存数据和指令，不存储地址映射表。</li>
 </ol>
-<p>总结：映射表主要在内存中，TLB用于缓存一部分映射以提高查询速度</p></blockquote></blockquote>
+<p>总结：映射表主要在内存中，TLB用于缓存一部分映射以提高查询速度</p>
+</blockquote>
+</blockquote>
 <hr>
 <h2 id="flush-and-reload">Flush and Reload
 </h2><p>为什么Cache与Meltdown相关呢？接下来我将讨论一下<a class="link" href="https://pdos.csail.mit.edu/6.828/2020/readings/meltdown.pdf"  target="_blank" rel="noopener"
@@ -1685,7 +1689,8 @@
 <p>另一个可能有用的场景是，当你的浏览器在访问web时，你的浏览器其实运行了很多不被信任的代码，这些代码是各种网站提供的，或许是以插件的形式提供，或许是以javascript的形式提供。</p>
 <p>这些代码会被加载到浏览器，然后被编译并被运行。有可能当你在浏览网页的时候，你运行在浏览器中的代码会发起Meltdown攻击，而你丝毫不知道有一个网站在窃取你笔记本上的内容，但是我并不知道这里的细节。</p>
 <p>学生提问：有人演示过通过javascript或者WebAssembly发起攻击吗？</p>
-<p>Robert教授：我不知道。人们肯定担心过WebAssembly，但是我不知道通过它发起攻击是否可行。对于javascript我知道难点在于时间的测量，你不能向上面一样获取到纳秒级别的时间，所以你并不能使用Flush and Reload。或许一些更聪明的人可以想明白怎么做，但是我不知道。</p></blockquote>
+<p>Robert教授：我不知道。人们肯定担心过WebAssembly，但是我不知道通过它发起攻击是否可行。对于javascript我知道难点在于时间的测量，你不能向上面一样获取到纳秒级别的时间，所以你并不能使用Flush and Reload。或许一些更聪明的人可以想明白怎么做，但是我不知道。</p>
+</blockquote>
 <p>实际中Meltdown Attack并不总是能生效，具体的原因我认为论文作者并没有解释或者只是猜测了一下。如果你查看论文的最后一页，</p>
 <p>你可以看到Meltdown Attack从机器的内核中读取了一些数据，这些数据里面有一些XXXX，这些是没能获取任何数据的位置，也就是Meltdown Attack失败的位置。</p>
 <p>论文中的Meltdown Attack重试了很多很多次，因为在论文6.2还讨论了性能，说了在某些场景下，获取数据的速率只有10字节每秒，这意味着代码在那不停的尝试了数千次，最后终于获取到了数据，也就是说Flush and Reload表明了两个内存地址只有一个在Cache中。</p>
@@ -1743,7 +1748,8 @@
 <p>Robert教授：有些内容明显是可以修复的，比如这节课介绍的Meltdown Attack是可以被修复的，并且不会牺牲任何性能。对于一些其他的攻击，并不十分确定你可以在不损伤性能的前提下修复它们。</p>
 <p>有些问题隐藏的非常非常的深，现在有很多共享的场景，例如分时共享的计算机，云计算。假设在你的云主机上有一个磁盘驱动和一个网卡驱动，你或许可以仅仅通过监测别人的流量是怎么影响你的流量的，这里的流量包括了网络流量和磁盘流量，来获取同一个主机上的其他用户信息。</p>
 <p>我不知道这是否可行，但是对于很多东西，人们都能发现可以攻击的点。</p>
-<p>所以很多这里的Micro-Architectural带来的问题可以在不损伤性能的前提下清除掉，但是也或许不能。</p></blockquote>
+<p>所以很多这里的Micro-Architectural带来的问题可以在不损伤性能的前提下清除掉，但是也或许不能。</p>
+</blockquote>
 
 </section>
 
@@ -2137,7 +2143,7 @@
         
         
 
-        共 765849 字 , 39 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        共 742374 字 , 39 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
         主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 

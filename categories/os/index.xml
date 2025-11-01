@@ -7,6 +7,27 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>echudet</copyright><atom:link href="https://echudet.github.io/categories/os/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>vLLM Service</title>
+        <link>https://echudet.github.io/p/vllm-service/</link>
+        <pubDate>Sat, 13 Sep 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://echudet.github.io/p/vllm-service/</guid>
+        <description>&lt;h2 id=&#34;vllm是什么&#34;&gt;vLLM是什么
+&lt;/h2&gt;&lt;p&gt;vLLM是一类开源的大模型高性能推理与服务框架，最初由加州大学伯克利分校Sky Computing实验室开发，目前已成长为产业界与学界共同维护的社区项目。
+它专门用于提升Transformer类大模型在推理阶段的吞吐、并发和部署效率，广泛支持主流的开源语言模型，比如Llama、Mixtral、DeepSeek-V系列等。&lt;/p&gt;
+&lt;p&gt;vLLM的核心技术之一是PagedAttention，一种创新的KV缓存管理策略，能够高效地在GPU上管理、分配显存，并显著提升自回归生成时的推理速率。通过PagedAttention，vLLM可以更好地支持多请求、多会话并发，并有效降低显存消耗，实现高吞吐量推理服务。&lt;/p&gt;
+&lt;p&gt;vLLM还结合了连续批处理、高效的CUDA/HIP图执行机制、FlashAttention等优化技术。另外，vLLM支持多种量化算法，如GPTQ、AWQ、INT4/INT8/FP8等，可进一步加速推理并节省显存。&lt;/p&gt;
+&lt;p&gt;vLLM可以无缝兼容HuggingFace大多数主流模型和API。支持多种解码策略（并行采样、束搜索等）、分布式推理（张量/流水/数据/专家并行）、流式输出，以及多种硬件环境，如NVIDIA/AMD/Intel/华为/IBM等。同时，它还能通过OpenAI兼容API轻松部署为生产服务。&lt;/p&gt;
+&lt;p&gt;目前vLLM专注于支持Transformer系列模型，如Llama、GPT、Mixtral、GLM等；不适用于其他结构类型的大模型，如RWKV、RNN等。&lt;/p&gt;
+&lt;p&gt;此外，因高度性能优化，仍以CUDA为主进行加速，虽然支持AMD/Intel等多种硬件适配，但最佳性能主要在CUDA环境下实现。&lt;/p&gt;
+&lt;h2 id=&#34;vllm推理过程&#34;&gt;vLLM推理过程
+&lt;/h2&gt;&lt;h2 id=&#34;vllm的构成&#34;&gt;vLLM的构成
+&lt;/h2&gt;&lt;h2 id=&#34;vllm的关键技术&#34;&gt;vLLM的关键技术
+&lt;/h2&gt;&lt;h2 id=&#34;vllm的内存优化&#34;&gt;vLLM的内存优化
+&lt;/h2&gt;&lt;p&gt;todo&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>oscomp2025 experience</title>
         <link>https://echudet.github.io/p/oscomp2025-experience/</link>
         <pubDate>Wed, 03 Sep 2025 00:00:00 +0000</pubDate>
@@ -16,15 +37,16 @@
 &lt;p&gt;OS火热招新 &lt;a class=&#34;link&#34; href=&#34;http://oslabs.hitsz.edu.cn/oscomp/oscomp.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;http://oslabs.hitsz.edu.cn/oscomp/oscomp.html&lt;/a&gt;
 
-&lt;/p&gt;&lt;/blockquote&gt;
-&lt;p&gt;大二寒假前看到校内有操作系统比赛的招新通知，又恰逢大段空闲时间，于是便抱着前来积累经验的想法，拉着友人A，与主动加入我们的学长B组起了一个队伍，由我带队来参加操作系统比赛。最终凭借着运气+努力，取得了国一，可喜可贺。&lt;/p&gt;
+&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;大二寒假前看到校内有操作系统比赛的招新通知，恰好有大段空闲时间，所以抱着前来积累经验的想法来参赛，同友人A和学长B组队参加。最终凭借着三分努力七分运气，取得了国一奖项。&lt;/p&gt;
 &lt;h2 id=&#34;赛前积累&#34;&gt;赛前积累
-&lt;/h2&gt;&lt;p&gt;在比赛报名之前，我个人在操作系统方面的知识积累是mit6s081的xv6整个lab+南大的pa lab，学长B是学完了大三的整个操作系统课程，友人A则是还没有这方面的知识。&lt;/p&gt;
-&lt;p&gt;在比赛之前，寒假期间，确定好比赛初期的时间安排，以及内核编写语言之后，我们开始组团进行rust语言的学习，时长为3周。关于rust方面的学习，主要是依赖以下几个内容。&lt;/p&gt;
+&lt;/h2&gt;&lt;p&gt;在比赛报名之前，我们关于操作系统方面的经验如下：我做过mit6s081的xv6整个lab+南大的pa lab，学长B学完了大三的整个操作系统课程，并且有一定的科研经历，友人A则在这方面比较薄弱，但有学过算法课的知识。&lt;/p&gt;
+&lt;p&gt;在比赛前的寒假期间，确定好比赛初期的时间安排以及内核编写语言之后，我们组团开始rust语言的学习，计划时长为3周。关于rust方面的学习，主要是通过以下几个渠道。&lt;/p&gt;
 &lt;p&gt;首先是阅读Rust Course(&lt;a class=&#34;link&#34; href=&#34;https://course.rs/about-book.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;https://course.rs/about-book.html&lt;/a&gt;
 
-)，学习其中的&lt;strong&gt;Rust 语言基础学习&lt;/strong&gt;和&lt;strong&gt;Rust 语言进阶学习&lt;/strong&gt;两个大章，掌握rust语言的基本和进阶内容。&lt;/p&gt;
+)，学习其中的&lt;strong&gt;Rust 语言基础学习&lt;/strong&gt;和&lt;strong&gt;Rust 语言进阶学习&lt;/strong&gt;两个大章，掌握rust语言的基本和进阶内容。不过实际上在比赛中用到的进阶内容不是很多，可以粗略学习，之后有需要再回顾。&lt;/p&gt;
 &lt;p&gt;其次是在Rust Practice(&lt;a class=&#34;link&#34; href=&#34;https://practice-zh.course.rs/why-exercise.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;https://practice-zh.course.rs/why-exercise.html&lt;/a&gt;
 
@@ -32,29 +54,31 @@
 &lt;p&gt;最后是在CodeCrafters(&lt;a class=&#34;link&#34; href=&#34;https://app.codecrafters.io/catalog&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;https://app.codecrafters.io/catalog&lt;/a&gt;
 
-)里面写一些简单的项目熟悉rust。我是选了shell和interpreter两个当时免费的项目来练习，写了shell和部分interpreter。这里面的项目分成多个块组成，并且内有自动判错，可以及时发现我们代码中隐含的错误，能让我们更熟练地用rust写项目。&lt;/p&gt;
+)里面写一些简单的项目熟悉rust。我选了shell和interpreter两个当时免费的项目来练习，写了shell和部分的interpreter。这里面的项目分成多个块组成，并且内有自动判错，和xv6的lab类似，可以及时发现我们代码中隐含的错误。&lt;/p&gt;
 &lt;p&gt;完成对rust的学习之后，在寒假的剩余时间里面，我们开始对rcore内核(&lt;a class=&#34;link&#34; href=&#34;https://rcore-os.cn/rCore-Tutorial-Book-v3/chapter0/index.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;https://rcore-os.cn/rCore-Tutorial-Book-v3/chapter0/index.html&lt;/a&gt;
 
 )的学习。&lt;/p&gt;
-&lt;p&gt;这一阶段比较简单，主要是跟着rCore-Tutorial-Book手册学习。&lt;/p&gt;
+&lt;p&gt;这一阶段比较简单，主要是跟着rCore-Tutorial-Book手册学习。有os方面的基础不是很难，主要是掌握rust语言的os的构建模式。并且很多参赛的内核都是以rcore为基础来搭建的，掌握这个框架方便我们参考更多的rust内核。同时，也为友人A提供了内核学习的机会，能够打牢基础。&lt;/p&gt;
 &lt;p&gt;新年之前学习手册的0~4章，包括环境配置、批处理系统、分时任务、地址空间四章，新年之后学习手册的5~8章，包括进程、文件系统、进程通信、并发四章，最后剩余的第九章则是留于之后写驱动的同学来看。&lt;/p&gt;
-&lt;p&gt;完成每章的学习指看完各章的内容+完成章末的实验要求（貌似5~8某章实验有一个bug），在阅读各章内容的时候，要主动结合内核里面相应的代码来看，不能干看文档内容，这样难以深入理解。&lt;/p&gt;
-&lt;p&gt;完成上述的内容后，寒假应该仅剩余一两周的时间了，最后的这段时间就是阅读我校往届的优秀内核，总结经验。&lt;/p&gt;
-&lt;p&gt;我们阅读了MankorOS, TitanixOS, MinotaurOS, PhoenixOS的内容，然后在返校之后聚团讨论了一番，对内核的整体架构有了一定的设想，这为我们之后构建内核的工作打下了坚实的基础。同时，我们也简单阅读了一些linux的资料，对于内核设计有了更深的见解。&lt;/p&gt;
+&lt;p&gt;完成每章的学习指看完各章的内容+完成章末的实验要求（貌似5~8某章实验有一个bug），在阅读各章内容的时候，要主动结合内核里面相应的代码来看，而不仅干看文档内容，这样难以深入了解内核的结构。&lt;/p&gt;
+&lt;p&gt;完成上述的内容后，寒假应该仅剩余一两周的时间了，最后的这段时间就是阅读往届的优秀内核，总结经验。&lt;/p&gt;
+&lt;p&gt;我们阅读了MankorOS, TitanixOS, MinotaurOS, PhoenixOS的代码及文档，并在返校之后开会讨论，对内核的整体架构有了一定的设想，这为我们之后构建内核的工作打下了坚实的基础。同时，我们也简单阅读了一些linux的资料，对于内核设计有了更深的见解。&lt;/p&gt;
 &lt;h2 id=&#34;比赛过程&#34;&gt;比赛过程
 &lt;/h2&gt;&lt;p&gt;我们在开学的几周后才开始正式构建内核，而同实验室的第一组则是早早开始了构建内核，这导致了我们的进度落后，再加上初赛结束在期末月，为我们初赛的落后埋下了伏笔&amp;hellip;.&lt;/p&gt;
+&lt;p&gt;一个教训，构建内核，越早越好。不要相信参赛时间安排。&lt;/p&gt;
 &lt;p&gt;我们的内核是从零开始构建的，主要参考的是PhoenixOS的架构，以其他内核作为优化点和来部分借鉴。花了几天时间构造内核的雏形之后，我们开了一个简单的会议划分了内核的分工。&lt;/p&gt;
-&lt;p&gt;我将内核的工作划分为进程管理，内存，trap转换，文件系统，信号，驱动，网络，双架构。&lt;/p&gt;
-&lt;p&gt;在最初的两周，我们需要实现进程管理，内存，trap转换这三个基本的功能，我负责进程，学长B负责内存，友人A负责trap。这一阶段比较简单，我们在计划时间内完美完成了这一阶段的内容，并尝试将basic测例的内容以嵌入内核的方式来运行。&lt;/p&gt;
-&lt;p&gt;下一个阶段是文件系统，信号。文件系统方面比较繁杂，由我和学长B一起写，我主要写了文件系统的大体架构，学长B在这基础上进行优化和创新，之后我则侧重于扩展文件系统于OS侧的更多详细的功能。友人A则是在写信号方面的机制。这一阶段原本的计划时间也是两周，但是工作比想象中更繁杂，最后是花了三周的时间才完成，完成这一阶段之后，busybox测例集成功通过。&lt;/p&gt;
-&lt;p&gt;第三阶段是驱动，网络，双架构+过更多的测例集。双架构方面文档比较多，需要阅读大量的文档，于是由学长B和友人A来一起写，我则是简单地了解loongArch方面的内容，对内核架构有大体的掌握。另一边，驱动和网络则是由我来写，网络方面参考ArceOS+PhoenixOS的实现，驱动方面则参考了MankorOS来写。而比赛测例集方面，则是由我来跑测例，如果遇到错误，我能解决就由我来解决，不能解决则是通知特定模块的负责人员来解决，或是合作debug。这一阶段一直持续到6月初，即期末月，也是初赛结束月。&lt;/p&gt;
+&lt;p&gt;我将内核的工作划分为进程管理，内存，trap转换，文件系统，信号，驱动，网络，双架构，并在此基础上划分出前中后三个阶段。在内核开发的初期，我们要实现的是进程管理，内存，trap转换这三个基本模块，这三个模块保障了内核能够完成一个程序的内存映射，以及内核态用户态之间的切换，同时也保证多进程的实现。完成这个阶段，内核能够以嵌入的形式跑一些基本的用户程序。进入内核开发的中期后，我们要实现文件系统，信号这两个方面的内容，文件系统是内核的重要组成部分，并且也是基础测例的重点内容，有将近一半的测例与它有关。而信号部分则保证了父进程能够正常的控制子进程的执行，实现了信号，我们的内核能够进一步地跑一些程序，例如busybox。完成这一阶段，我们能够把测例程序打包到文件系统中进行测试和执行。最后到内核开发的后期，这一时期主要是对内核内容进行进一步的扩充，实现驱动树，优雅地管理驱动，实现网络，支持网络方面的系统调用，实现双架构，支持riscv和loongArch多平台。实现这一阶段之后，就是对内核功能的进一步完善了，没有大的机制变动。&lt;/p&gt;
+&lt;p&gt;在最初的两周，我们需要实现进程管理，内存，trap转换这三个基本的功能，我负责进程管理调度，友人A负责trap上下文切换，学长B负责最难的内存部分。这一阶段比较简单，我们在计划时间内完成了这一阶段的内容，并将部分basic测例的内容以嵌入内核的方式运行起来。&lt;/p&gt;
+&lt;p&gt;下一个阶段是文件系统，进程间通信。文件系统方面比较繁杂，这部分的内容主要是构建内核的虚拟文件系统和对接外部库的具体文件系统，由我和学长B一起写，我主要写了文件系统的大体架构，学长B在这基础上进行优化和创新。友人A负责写信号等进程间通信的机制。除此之外，完成这部分内容之后，还要将测试用例装入我们内核的磁盘文件中进行加载读取和执行。这一阶段原本的计划时间也是两周，但是工作比想象中更繁杂，最后是花了三周的时间才完成，完成这一阶段之后，busybox测例集成功通过。&lt;/p&gt;
+&lt;p&gt;第三阶段是驱动，网络，双架构+过更多的测例集。这一部分的内容是超出计划时间最多的，不仅因为实现功能的繁杂，还因为需要运行的测试用例更多，即所需要的系统调用更多。双架构方面文档比较多，需要阅读大量的文档，于是由学长B和友人A来一起写，我仅简单了解loongArch的内容，对内核框架有大体的掌握。另一边，我负责驱动和网络部分。实现过程中，网络方面参考ArceOS+PhoenixOS的实现，驱动方面则参考了MankorOS来写。而比赛测例集方面，我负责跑测例，如果遇到错误，能解决就直接解决，不能解决就通知特定模块的负责人员来解决，或是合作debug。这一阶段一直持续到6月初，即期末月，也是初赛结束月。&lt;/p&gt;
 &lt;p&gt;在期末月的时候，我们在复习期末的内容，没有再推进工作，在这之前我们基本完成了除了ltp和iperf以外的其他测例集，还存在少量的bug在修。完成期末考之后，忽然发现其他队伍跑ltp大大拉分，至少拉开了其他测例的总和分一倍，但鉴于我们要准备文档，ppt，视频，我们就没再修ltp，这导致了我们初赛落后于其他队伍。&lt;del&gt;（我们是没跑ltp队伍的第一名）&lt;/del&gt;&lt;/p&gt;
 &lt;p&gt;最后初赛综合排名第九。&lt;/p&gt;
 &lt;p&gt;然后是决赛阶段，我们痛定思痛，将ltp测例集用linux系统跑了一遍，统计其中的高分测例并制定成一个表格，决定集中突破里面的高分测例。&lt;/p&gt;
-&lt;p&gt;决赛分工比较简单，我来搞内核的驱动、网络、上板，完善内核以通过更多的测例。学长B是集中突破ltp的fanotify等方面的高分测例，以及完善内核和文件系统的各个方面，友人A则是掌握交叉编译的知识，交叉编译了vim、gcc这两程序在内核上面跑（运气撞题）。最后我们成功上了riscv的星光板和loongArch的星云板(仍有点bug)，并且通过了大量的ltp测例，取得了决赛线上测例的高分和线下决赛的高分。&lt;/p&gt;
-&lt;p&gt;最后的最后，在答辩之前的一个夜晚，我们内核赛四组在线上分别模拟答辩，由老师进行评价。在老师评价完我们的ppt之后，学长B和我一番讨论，决定完全推翻原来的ppt，重构大部分内容。接下来由学长B操刀ppt，一直忙到了凌晨4点，我则是3点上床养精蓄锐，准备同一天的八点半开始的答辩。我们的答辩是第3组，在答辩之前我简单过了一遍ppt就到时间上场，准备十分紧迫。但最终运气不错，算是流畅地完成了答辩，不过想来也是非常惊险的一个过程，日后应该早早做好准备，切忌临时发挥，临阵磨枪还是欠缺很多内容。&lt;/p&gt;
-&lt;p&gt;比赛过程还是挺长的，从寒假到暑假，基本是半年的比赛流程，并且工作量也不少，除去校内课程的学习，就我个人，基本把剩余的课外时间都花在这上面，少有时间搞其他的活动。若要参加要做好忙起来的准备。&lt;/p&gt;
+&lt;p&gt;决赛分工比较简单，我负责内核的驱动、网络、上板，其实大致的驱动树和网络的框架在初赛阶段已经完成，这里只是进一步的完善。同时，我也和学长B并行跑Ltp，完善内核以通过更多测例。学长B是集中突破ltp的fanotify等方面的高分测例，以及优化内核和文件系统的各个方面，友人A负责交叉编译，交叉编译vim、gcc程序到内核上（运气撞题），并在完成这部分内容后，整理能通过的ltp测例和跑更多的信号机制的ltp测例。最后我们成功将内核移植到riscv的星光板和loongArch的星云板(仍有点bug)，通过了大量的ltp测例，取得了决赛线上测例的高分和线下决赛的高分。&lt;/p&gt;
+&lt;p&gt;最后的最后，通过现场赛后，在答辩之前的一个夜晚，我们内核赛四组在线上分别模拟答辩，老师进行点评。完成一轮答辩后，学长B和我一番讨论，决定完全推翻原来的ppt，重构大部分内容。接下来主要由学长B操刀ppt，一直忙到了凌晨4点，我则是3点上床养精蓄锐，准备同一天的八点半开始的答辩。我们的答辩是第3组，在答辩开始前仅留了过一遍ppt的时间，准备十分紧迫。最后运气还不错，掐点准时完成答辩。虽然答辩过程没有做到十全十美，但也取得了不错的成绩，给比赛画上了一个圆满的句号。&lt;/p&gt;
+&lt;p&gt;比赛过程还是挺长的，从寒假到暑假，基本是半年的比赛流程，并且工作量也不少。就我个人而言，基本把大部分的课外时间都花在了些内核和debug上面，很少参加其他的活动。因此如果想参加，就要做好忙起来的准备。&lt;/p&gt;
+&lt;p&gt;最终内核的rust代码行数为40k+，不包含外部库和注释的内容。累计到达约1k的commit记录，并且有充实的内核文档。&lt;/p&gt;
 &lt;h2 id=&#34;内核组成&#34;&gt;内核组成
 &lt;/h2&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/RustFlyer/OS/blob/main/NighthawkOS%E5%86%B3%E8%B5%9B%E6%96%87%E6%A1%A3.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;具体的内核文档见此&lt;/a&gt;
@@ -64,7 +88,7 @@
 &lt;/h2&gt;&lt;p&gt;一般使用二分法进行调试，通过log输出大量的内容来确定上下文，一方面能够知晓发生bug的位置，另一方面能够获取其上下文的参数信息，方便调bug。如果log输出过多时，可以设置动态开关log，和过滤部分log的内容，从而筛选出关键信息。&lt;/p&gt;
 &lt;p&gt;如果bug发生在库的深处，或是用户态，或是地址读写卡死崩溃问题，则考虑使用gdb进行跟踪调试，先通过log确定bug大致位置，在附近打断点，然后步进跟踪各个寄存器，或特权寄存器，或相关地址的值等，来确定bug发生的原因。不过对板子就不行了，因为板子上面没有gdb，就只能用二分法调bug了。（关于gdb，听说gdb-dashboard挺好用的，可以尝试使用）&lt;/p&gt;
 &lt;p&gt;除此外，调试用户态的程序还可以使用qemu-riscv64或qemu-loongarch64(这个需要额外配置)，通过输出它们系统调用的日志，来对比自己的内核和标准的内核之间的差异，从而找出bug。&lt;/p&gt;
-&lt;p&gt;另外，我个人觉得操作系统里面比较难调的bug是内存bug和多线程bug，内存方面需要提前做好内存权限的管理，明确各个地址段的功能，这样更好追踪bug的产生。多线程则是需要为各个task建立健全的debug机制，可以在任意时间log出task的相关内容，调度时间信息等，看清楚了执行流，调bug就简单了（但也不是那么简单）。&lt;/p&gt;
+&lt;p&gt;另外，我觉得操作系统里面比较难调的bug是内存bug和多线程bug，内存方面需要提前做好内存权限的管理，明确各个地址段的功能，这样更好追踪bug的产生。多线程则是需要为各个task建立健全的debug机制，可以在任意时间log出task的相关内容，调度时间信息等，看清楚了执行流，调bug就简单了（但也不是那么简单）。&lt;/p&gt;
 &lt;h2 id=&#34;遗憾&#34;&gt;遗憾
 &lt;/h2&gt;&lt;ol&gt;
 &lt;li&gt;多核仍有死锁情况，并发支持不完善。&lt;/li&gt;
@@ -561,7 +585,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;在这个例子中，RCU 的读操作是并发的，且不需要阻塞写操作。写操作通过自旋锁保护，并在合适的时间点调用 &lt;code&gt;call_rcu&lt;/code&gt; 异步释放旧数据。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;/div&gt;&lt;p&gt;在这个例子中，RCU 的读操作是并发的，且不需要阻塞写操作。写操作通过自旋锁保护，并在合适的时间点调用 &lt;code&gt;call_rcu&lt;/code&gt; 异步释放旧数据。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;linux-的-slab-分配器&#34;&gt;Linux 的 slab 分配器
 &lt;/h2&gt;&lt;p&gt;Linux 的 slab 分配器是一种内存管理机制，用于高效地管理和分配内核中频繁使用的小对象内存。它通过将一块大的内存页面分割成多个相同大小的对象，并维护对象的生命周期，以便快速分配和释放内存。与常规的动态内存分配器相比，slab 分配器有以下几个特点：&lt;/p&gt;
@@ -932,7 +957,8 @@
 &lt;p&gt;你要么只有一个数据写入者，要么有多个数据读取者，不可能有别的可能。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;学生提问：当某人持有了读锁时，读写锁是采用什么方案来阻止其他人写入数据的？&lt;/p&gt;
-&lt;p&gt;Robert教授：并没有什么方案，这就像XV6的锁一样。我们这里讨论的是由值得信赖且负责的开发人员编写的内核代码，所以就像XV6的spinlock一样，如果使用锁的代码是不正确的，那么结果就是不正确的，这是内核代码典型的编写方式，你只能假设开发内核的人员遵循这里的规则。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Robert教授：并没有什么方案，这就像XV6的锁一样。我们这里讨论的是由值得信赖且负责的开发人员编写的内核代码，所以就像XV6的spinlock一样，如果使用锁的代码是不正确的，那么结果就是不正确的，这是内核代码典型的编写方式，你只能假设开发内核的人员遵循这里的规则。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;如果我们有一个大部分都是读取操作的数据结构，我们会希望能有多个用户能同时使用这个数据结构，这样我们就可以通过多核CPU获得真正的性能提升。&lt;/p&gt;
 &lt;p&gt;如果没有其他问题的话，那么读写锁就可以解决今天的问题，我们也没有必要读&lt;a class=&#34;link&#34; href=&#34;https://pdos.csail.mit.edu/6.828/2020/readings/rcu-decade-later.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;RCU这篇论文&lt;/a&gt;
@@ -1006,7 +1032,8 @@
 &lt;p&gt;学生提问：有没有可能计算x的过程中，发生了一个中断？&lt;/p&gt;
 &lt;p&gt;Robert教授：你是指我们在执行CAS指令之前计算它的第三个参数的过程中发生中断吗？CAS实际上是一个指令，如果中断发生在我们计算x+1的过程中，那么意味着我们还没有调用CAS，这时包括中断在内的各种事情都可能发生。&lt;/p&gt;
 &lt;p&gt;如果我们在最初读取n的时候读到0，那么不管发不发生中断，我们都会将1作为CAS的第三个参数传入，因为中断并不会更改作为本地变量的x，所以CAS的第二个和第三个参数会是0和1。如果n还是0，我们会将其设置为1，这是我们想看到的；如果n不是0，那么CAS并不会更新n。&lt;/p&gt;
-&lt;p&gt;如果这里没有使用本地变量x，那么就会有大问题了，因为n可能在任意时间被修改，所以我们需要在最开始在本地变量x中存储n的一个固定的值。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;如果这里没有使用本地变量x，那么就会有大问题了，因为n可能在任意时间被修改，所以我们需要在最开始在本地变量x中存储n的一个固定的值。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;上面介绍了w_lock与r_lock同时调用的场景。多个r_lock同时调用的场景同样也很有趣。&lt;/p&gt;
 &lt;p&gt;假设n从0开始，当两个r_lock同时调用时，我们希望当两个r_lock都返回时，n变成2，因为我们希望两个数据读取者可以并行的使用数据。两个r_lock在最开始都将看到n为0，并且都会通过传入第二个参数0，第三个参数1来调用CAS指令，但是只有一个CAS指令能成功。&lt;/p&gt;
 &lt;p&gt;CAS是一个原子操作，一次只能发生一个CAS指令。不管哪个CAS指令先执行，将会看到n等于0，并将其设置为1。另一个CAS指令将会看到n等于1，返回失败，并回到循环的最开始，这一次x可以读到1，并且接下来执行CAS的时候，第二个参数将会是1，第三个参数是2，这一次CAS指令可以执行成功。&lt;/p&gt;
@@ -1016,7 +1043,8 @@
 &lt;p&gt;Robert教授：如果多个数据读取者获取了锁，每一个都会通过CAS指令将n加1，现在n会大于0。如果这时一个数据写入者尝试要获取锁，它的CAS指令会将n与0做对比，只有当n等于0时，才会将其设置为-1。&lt;/p&gt;
 &lt;p&gt;但是因为存在多个数据读取者，n不等于0，所以CAS指令会失败。数据写入者会在w_lock的循环中不断尝试并等待n等于0，如果存在大量的数据读取者，这意味着数据写入者有可能会一直等待。这是这种锁机制的一个缺陷。&lt;/p&gt;
 &lt;p&gt;学生提问：在刚刚两个数据读取者要获取锁的过程中，第二个数据读取者需要再经历一次循环，这看起来有点浪费，如果有多个数据读取者，那么它们都需要重试。&lt;/p&gt;
-&lt;p&gt;Robert教授：你说到了人们为什么不喜欢这种锁的点子上了。即使没有任何的数据写入者，仅仅是在多个CPU核上有大量的数据读取者，r_lock也可能会有非常高的代价。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Robert教授：你说到了人们为什么不喜欢这种锁的点子上了。即使没有任何的数据写入者，仅仅是在多个CPU核上有大量的数据读取者，r_lock也可能会有非常高的代价。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;在一个多核的系统中，每个CPU核都有一个关联的cache，也就是L1 cache。每当CPU核读写数据时，都会保存在cache中。除此之外，还有一些内部连接的线路使得CPU可以彼此交互，因为如果某个CPU核修改了某个数据，它需要告诉其他CPU核不要去缓存这个数据，这个过程被称为(cache) invalidation。&lt;/p&gt;
 &lt;p&gt;如果有多个数据读取者在多个CPU上同时调用r_lock，它们都会读取读写锁的计数l-&amp;gt;n，并将这个数据加载到CPU的cache中，它们也都会调用CAS指令，但是第一个调用CAS指令的CPU会修改l-&amp;gt;n的内容。作为修改的一部分，它需要使得其他CPU上的cache失效。&lt;/p&gt;
 &lt;p&gt;所以执行第一个CAS指令的CPU需要通过线路发送invalidate消息给其他每一个CPU核，之后其他的CPU核在执行CAS指令时，需要重新读取l-&amp;gt;n，但是这时CAS指令会失败，因为l-&amp;gt;n已经等于1了，但x还是等于0。&lt;/p&gt;
@@ -1107,7 +1135,8 @@
 &lt;p&gt;学生提问：旧的E2和E3之间的关系会被删除吗？&lt;/p&gt;
 &lt;p&gt;Robert教授：会被保留。这是个好问题，并且这也是RCU中较为复杂的主要部分，现在我们假设旧的E2被保留了。&lt;/p&gt;
 &lt;p&gt;学生提问：我们并不用担心E2和E3之间的关系，因为在普通的实现中，E2也会被释放，就算没有RCU我们也不用担心这里的关系，是吗（注，这里应该说的是GC会回收E2）？&lt;/p&gt;
-&lt;p&gt;Robert教授：这里的问题是，在我们更新E1的next指针时，部分数据读取者通过E1的旧的next指针走到了旧的E2，所以当完成更新时，部分数据读取者可能正在读取旧的E2，我们最好不要释放它。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Robert教授：这里的问题是，在我们更新E1的next指针时，部分数据读取者通过E1的旧的next指针走到了旧的E2，所以当完成更新时，部分数据读取者可能正在读取旧的E2，我们最好不要释放它。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;这里将E1的next指针从旧的E2切换到新的E2，在我（Robert教授）脑海里，我将其称为committing write。&lt;/p&gt;
 &lt;p&gt;这里能工作的部分原因是，单个committing write是原子的，从数据读取者的角度来说更新指针要么发生要么不发生。通过这一条不可拆分的原子指令，我们将E1的next指针从旧的E2切换到的新的E2。写E1的next指针完成表明使用的是新版本的E2。&lt;/p&gt;
 &lt;p&gt;这是对于RCU来说一个非常基本同时也是非常重要的技术，它表示RCU主要能用在具备单个committing write的数据结构上。这意味着一些数据结构在使用RCU时会非常的奇怪，例如一个双向链表，其中的每个元素都有双向指针，这时就不能通过单个committing write来删除链表元素，因为在大多数机器上不能同时原子性的更改两个内存地址。所以双向链表对于RCU来说不太友好。&lt;/p&gt;
@@ -1185,7 +1214,8 @@
 &lt;p&gt;学生提问：什么情况下才可能在将E1的next指针加载到r1之前，就先读取r1中指针指向的内容？&lt;/p&gt;
 &lt;p&gt;Robert教授：我觉得你难住我了。一种可能是，不论r1指向的是什么，它或许已经在CPU核上有了缓存，或许一分钟之前这段内存被用作其他用途了，我们在CPU的缓存上有了E1-&amp;gt;next对应地址的一个旧版本。&lt;/p&gt;
 &lt;p&gt;我不确定这是不是会真的发生，这里都是我编的，如果r1-&amp;gt;x可以使用旧的缓存的数据，那么我们将会有大麻烦。&lt;/p&gt;
-&lt;p&gt;说实话我不知道这个问题的答案，呵呵。我课下会想一个具体的例子。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;说实话我不知道这个问题的答案，呵呵。我课下会想一个具体的例子。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;rcu实现3---读写规则&#34;&gt;RCU实现(3) - 读写规则
 &lt;/h2&gt;&lt;p&gt;前面有同学也提到过，数据写入者会将E1的next指针从指向旧的E2切换到指向新的E2‘，但是可能有数据读取者在切换之前读到了旧的E2，并且仍然在查看旧的E2。&lt;/p&gt;
@@ -1231,7 +1261,8 @@
 &lt;p&gt;RCU使用的方式是，在Linux中本来有一些被普通锁或者读写锁保护的代码，然后某人会觉得锁会带来糟糕的性能问题，他会将Locking区域替换成RCU区域，尽管实际中会更加复杂一些。&lt;/p&gt;
 &lt;p&gt;Locking区域已经尽可能的短了，因为当你持有锁的时候，可能有很多个CPU核在等待锁，所以普通锁保护的区域会尽量的短。因为RCU区域通常是用来替代Lock区域，它也趋向于简短，所以通常情况下不用担心RCU区域的长短。&lt;/p&gt;
 &lt;p&gt;这里实际的限制是，数据读取者不能在context switch时持有指针指向被RCU保护的数据，这意味着你不能读磁盘，然后在等读磁盘返回的过程中又持有指针指向被RCU保护的数据。&lt;/p&gt;
-&lt;p&gt;所以通常的问题不是RCU区域的长短，而是禁止出让CPU。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;所以通常的问题不是RCU区域的长短，而是禁止出让CPU。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;rcu用例代码&#34;&gt;RCU用例代码
 &lt;/h2&gt;&lt;p&gt;为了巩固前面介绍的内容，接下来看一段使用了RCU的简单代码。上半段是读取被RCU保护的链表 ，下半段代码是替换链表的第一个元素。&lt;/p&gt;
@@ -1292,7 +1323,8 @@
 &lt;p&gt;所以rcu_read_lock会设置一个标志位来阻止定时器中断导致的context switch，中断或许还会发生，但是不会导致context switch（注，也就是线程切换）。rcu_read_unlock会取消该标志位。&lt;/p&gt;
 &lt;p&gt;所以这是一个集成在RCU critical区域的计数器。rcu_read_lock和rcu_read_unlock因为几乎不做任何工作所以极其的快。&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;注，这里有个问题，23.2中描述的读写锁慢的原因是因为在读数据的时候引入了写计数器的操作，这里同样也是需要额外的写操作，为什么这里不会有问题？这是因为读写锁的计数器是所有CPU共享的，而这里的标志位是针对每个CPU的，所以修改这里的标志位并不会引起CPU之间的缓存一致消息&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;注，这里有个问题，23.2中描述的读写锁慢的原因是因为在读数据的时候引入了写计数器的操作，这里同样也是需要额外的写操作，为什么这里不会有问题？这是因为读写锁的计数器是所有CPU共享的，而这里的标志位是针对每个CPU的，所以修改这里的标志位并不会引起CPU之间的缓存一致消息&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;其中的while循环会扫描链表，rcu_dereference函数会插入memory barrier，它首先会从内存中拷贝e，触发一个memory barrier，之后返回指向e的指针。之后我们就可以读取e指针指向的数据内容，并走向下一个链表元素。数据读取部分非常简单。&lt;/p&gt;
 &lt;p&gt;数据写入部分更复杂点。&lt;/p&gt;
 &lt;ul&gt;
@@ -1310,7 +1342,8 @@
 &lt;blockquote&gt;
 &lt;p&gt;学生提问：这样是不是说我们不可能返回下标是i的元素所包含的内容？&lt;/p&gt;
 &lt;p&gt;Robert教授：可以返回一个拷贝，如果e-&amp;gt;x是个字符串，那么我们可以返回一个该字符串的拷贝，这是没有问题的。&lt;/p&gt;
-&lt;p&gt;但是如果我们直接返回一个指针指向e-&amp;gt;x，那就违反了RCU规则。实际上返回e中的任何指针都是错误的，因为我们不能在持有指向RCU保护数据的指针时，发生context switch。通常的习惯是直接在RCU critical区域内使用这些数据。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;但是如果我们直接返回一个指针指向e-&amp;gt;x，那就违反了RCU规则。实际上返回e中的任何指针都是错误的，因为我们不能在持有指向RCU保护数据的指针时，发生context switch。通常的习惯是直接在RCU critical区域内使用这些数据。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;接下来我将再简短的介绍性能。&lt;/p&gt;
 &lt;p&gt;如果你使用RCU，数据读取会非常的快，除了读取数据本身的开销之外就几乎没有别的额外的开销了。如果你的链表有10亿个元素，读取链表本身就要很长的时间，但是这里的时间消耗并不是因为同步（注，也就是类似加锁等操作）引起的。&lt;/p&gt;
 &lt;p&gt;所以你几乎可以认为RCU对于数据读取者来说没有额外的负担。唯一额外的工作就是在rcu_read_lock和rcu_read_unlock里面设置好不要触发context switch，并且在rcu_dereference中设置memory barrier，这些可能会消耗几十个CPU cycle，但是相比锁来说代价要小的多。&lt;/p&gt;
@@ -1365,7 +1398,8 @@
 &lt;p&gt;一个场景是分布式数据库，你将数据分发给多个计算机，但是如果你想要执行一个transaction，并使用分布在多个计算机上的数据，你将需要从多个计算机上收集锁。&lt;/p&gt;
 &lt;p&gt;另一个场景是，有一些系统会尝试在独立的计算机之间模拟共享内存，比如说一个计算机使用了另一个计算机的内存，背后需要有一些工具能够使得计算机之间能交互并请求内存。&lt;/p&gt;
 &lt;p&gt;这样就可以在一个集群的计算机上运行一些现有的并行程序，而不是在一个大的多核计算机上，这样成本会更低。&lt;/p&gt;
-&lt;p&gt;这时需要对spinlock或者任何你使用的锁做一些额外的处理，人们发明了各种技术来使得锁能很好的工作，这些技术与我们介绍的技术就不太一样了，尽管避免性能损失的压力会更大。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;这时需要对spinlock或者任何你使用的锁做一些额外的处理，人们发明了各种技术来使得锁能很好的工作，这些技术与我们介绍的技术就不太一样了，尽管避免性能损失的压力会更大。&lt;/p&gt;
+&lt;/blockquote&gt;
 </description>
         </item>
         <item>
@@ -2250,7 +2284,8 @@
 &lt;p&gt;有可能这是某人用来登录银行账号或者邮件用的密码。这意味着攻击者可能需要尝试每一个内核内存地址，以查找任何有价值的数据。&lt;/p&gt;
 &lt;p&gt;或许攻击者会研究内核代码，找到内核中打印了数据的地址，检查数据结构和内核内存，最后理解内核是如何工作的，并找到对应的虚拟内存地址。因为类似的攻击已经存在了很长的时间，内核实际上会保护自己不受涉及到猜内核内存地址的攻击的影响。&lt;/p&gt;
 &lt;p&gt;论文中提到了Kernal address space layout randomization。所以现代的内核实际上会将内核加载到随机地址，这样使得获取内核虚拟地址更难。这个功能在论文发表很久之前就存在，因为它可以帮助防御攻击。&lt;/p&gt;
-&lt;p&gt;在这个攻守双方的游戏中，我们需要假设攻击者最后可以胜出并拿到内核的虚拟内存地址。所以我们会假设攻击者要么已经知道了一个内核虚拟地址，要么愿意尝试每一个内核虚拟内存地址。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;在这个攻守双方的游戏中，我们需要假设攻击者最后可以胜出并拿到内核的虚拟内存地址。所以我们会假设攻击者要么已经知道了一个内核虚拟地址，要么愿意尝试每一个内核虚拟内存地址。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;我们会好奇，上面的代码怎么会对攻击者是有用的？如果CPU如手册中一样工作，那么这里的攻击是没有意义的，在第三行会有Page Fault。但是实际上CPU比手册中介绍的要复杂的多，而攻击能生效的原因是一些CPU的实现细节。&lt;/p&gt;
 &lt;p&gt;这里攻击者依赖CPU的两个实现技巧，一个是Speculative execution（预测执行），另一个是CPU的缓存方式。&lt;/p&gt;
 &lt;hr&gt;
@@ -2346,7 +2381,8 @@
 &lt;p&gt;Robert教授：这里有两个回答。首先，Intel芯片并不是这样工作的。其次，是的，我相信对于Intel来说如果先做权限检查会更简单，这样的话，在上面的例子中，r2寄存器就不会被修改。&lt;/p&gt;
 &lt;p&gt;你们或许注意到论文中提到，尽管AMD CPU的手册与Intel的一样，它们有相同的指令集，Meltdown Attack并不会在AMD CPU上生效。普遍接受的观点是，AMD CPU在Speculative execution时，如果没有权限读取内存地址，是不会将内存地址中的数据读出。&lt;/p&gt;
 &lt;p&gt;这就是为什么Meltdown Attack在AMD CPU上不生效的原因。最近的Intel CPU明显也采用了这种方法，如果程序没有权限，在Speculative execution的时候也不会加载内存数据。&lt;/p&gt;
-&lt;p&gt;这里使用哪种方式对于性能来说没有明显区别，或许在指令Retired的时候再检查权限能省一些CPU的晶体管吧。这里我要提醒一下，这里有很多内容都是猜的，不过我认为我说的都是对的。Intel和AMD并没有太披露具体的细节。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;这里使用哪种方式对于性能来说没有明显区别，或许在指令Retired的时候再检查权限能省一些CPU的晶体管吧。这里我要提醒一下，这里有很多内容都是猜的，不过我认为我说的都是对的。Intel和AMD并没有太披露具体的细节。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;这里有一些重要的术语。你可以从CPU手册中读到的，比如说一个add指令接收两个寄存器作为参数，并将结果存放在第三个寄存器，这一类设计被称为CPU的Architectural，或者通告的行为。&lt;/p&gt;
 &lt;p&gt;如果你读取一个你没有权限的内存地址，你会得到一个Page Fault，你不允许读取这个内存地址，这就是一种通告的行为。&lt;/p&gt;
 &lt;p&gt;CPU的实际行为被称作Micro-Architectural，CPU的通告行为与实际行为是模糊不清的。比如说CPU会悄悄的有Speculative execution。&lt;/p&gt;
@@ -2424,7 +2460,9 @@
 &lt;ol&gt;
 &lt;li&gt;主要用于缓存数据和指令，不存储地址映射表。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;总结：映射表主要在内存中，TLB用于缓存一部分映射以提高查询速度&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;总结：映射表主要在内存中，TLB用于缓存一部分映射以提高查询速度&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;flush-and-reload&#34;&gt;Flush and Reload
 &lt;/h2&gt;&lt;p&gt;为什么Cache与Meltdown相关呢？接下来我将讨论一下&lt;a class=&#34;link&#34; href=&#34;https://pdos.csail.mit.edu/6.828/2020/readings/meltdown.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
@@ -2556,7 +2594,8 @@
 &lt;p&gt;另一个可能有用的场景是，当你的浏览器在访问web时，你的浏览器其实运行了很多不被信任的代码，这些代码是各种网站提供的，或许是以插件的形式提供，或许是以javascript的形式提供。&lt;/p&gt;
 &lt;p&gt;这些代码会被加载到浏览器，然后被编译并被运行。有可能当你在浏览网页的时候，你运行在浏览器中的代码会发起Meltdown攻击，而你丝毫不知道有一个网站在窃取你笔记本上的内容，但是我并不知道这里的细节。&lt;/p&gt;
 &lt;p&gt;学生提问：有人演示过通过javascript或者WebAssembly发起攻击吗？&lt;/p&gt;
-&lt;p&gt;Robert教授：我不知道。人们肯定担心过WebAssembly，但是我不知道通过它发起攻击是否可行。对于javascript我知道难点在于时间的测量，你不能向上面一样获取到纳秒级别的时间，所以你并不能使用Flush and Reload。或许一些更聪明的人可以想明白怎么做，但是我不知道。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Robert教授：我不知道。人们肯定担心过WebAssembly，但是我不知道通过它发起攻击是否可行。对于javascript我知道难点在于时间的测量，你不能向上面一样获取到纳秒级别的时间，所以你并不能使用Flush and Reload。或许一些更聪明的人可以想明白怎么做，但是我不知道。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;实际中Meltdown Attack并不总是能生效，具体的原因我认为论文作者并没有解释或者只是猜测了一下。如果你查看论文的最后一页，&lt;/p&gt;
 &lt;p&gt;你可以看到Meltdown Attack从机器的内核中读取了一些数据，这些数据里面有一些XXXX，这些是没能获取任何数据的位置，也就是Meltdown Attack失败的位置。&lt;/p&gt;
 &lt;p&gt;论文中的Meltdown Attack重试了很多很多次，因为在论文6.2还讨论了性能，说了在某些场景下，获取数据的速率只有10字节每秒，这意味着代码在那不停的尝试了数千次，最后终于获取到了数据，也就是说Flush and Reload表明了两个内存地址只有一个在Cache中。&lt;/p&gt;
@@ -2614,7 +2653,8 @@
 &lt;p&gt;Robert教授：有些内容明显是可以修复的，比如这节课介绍的Meltdown Attack是可以被修复的，并且不会牺牲任何性能。对于一些其他的攻击，并不十分确定你可以在不损伤性能的前提下修复它们。&lt;/p&gt;
 &lt;p&gt;有些问题隐藏的非常非常的深，现在有很多共享的场景，例如分时共享的计算机，云计算。假设在你的云主机上有一个磁盘驱动和一个网卡驱动，你或许可以仅仅通过监测别人的流量是怎么影响你的流量的，这里的流量包括了网络流量和磁盘流量，来获取同一个主机上的其他用户信息。&lt;/p&gt;
 &lt;p&gt;我不知道这是否可行，但是对于很多东西，人们都能发现可以攻击的点。&lt;/p&gt;
-&lt;p&gt;所以很多这里的Micro-Architectural带来的问题可以在不损伤性能的前提下清除掉，但是也或许不能。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;所以很多这里的Micro-Architectural带来的问题可以在不损伤性能的前提下清除掉，但是也或许不能。&lt;/p&gt;
+&lt;/blockquote&gt;
 </description>
         </item>
         <item>
@@ -2989,7 +3029,8 @@
 &lt;blockquote&gt;
 &lt;p&gt;学生提问：硬件用来识别以太网packet的开头和结束的标志是不是类似于lab中的End of Packets？&lt;/p&gt;
 &lt;p&gt;Robert教授：并不是的，EOP是帮助驱动和网卡之间通信的机制。&lt;/p&gt;
-&lt;p&gt;这里的开头和结束的标志是在线缆中传输的电信号或者光信号，这些标志位通常在一个packet中是不可能出现的。以结束的FCS为例，它的值通常是packet header和payload的校验和，可以用来判断packet是否合法。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;这里的开头和结束的标志是在线缆中传输的电信号或者光信号，这些标志位通常在一个packet中是不可能出现的。以结束的FCS为例，它的值通常是packet header和payload的校验和，可以用来判断packet是否合法。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;有关以太网48bit地址，是为了给每一个制造出来的网卡分配一个唯一的ID，所以这里有大量的可用数字。&lt;/p&gt;
 &lt;p&gt;这里48bit地址中，前24bit表示的是制造商，每个网卡制造商都有自己唯一的编号，并且会出现在前24bit中。后24bit是由网卡制造商提供的任意唯一数字，通常网卡制造商是递增的分配数字。&lt;/p&gt;
 &lt;p&gt;所以，如果你从一个网卡制造商买了一批网卡，每个网卡都会被写入属于自己的地址，并且如果你查看这些地址，你可以发现，这批网卡的高24bit是一样的，而低24bit极有可能是一些连续的数字。&lt;/p&gt;
@@ -3086,7 +3127,8 @@
 &lt;p&gt;现在我们是在以太网中发送ARP packet，以太网packet也包含了以太网地址，所以，如果在以太网上运行ARP，这些信息是冗余的。&lt;/p&gt;
 &lt;p&gt;但是如果在其他的网络上运行ARP，你或许需要这些信息，因为其他网络的packet中并没有包含以太网地址。&lt;/p&gt;
 &lt;p&gt;学生提问：tcpdump中原始数据的右侧是什么内容？&lt;/p&gt;
-&lt;p&gt;Robert教授：这些是原始数据对应的ASCII码，“.”对应了一个字节并没有相应的ASCII码，0x52对应了R，0x55对应了U。当我们发送的packet包含了ASCII字符时，这里的信息会更加有趣。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Robert教授：这些是原始数据对应的ASCII码，“.”对应了一个字节并没有相应的ASCII码，0x52对应了R，0x55对应了U。当我们发送的packet包含了ASCII字符时，这里的信息会更加有趣。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;我希望你们在刚刚的讨论中注意到这一点，网络协议和网络协议header是嵌套的。我们刚刚看到的是一个packet拥有了ethernet header和ethernet payload。&lt;/p&gt;
 &lt;p&gt;在ethernet payload中，首先出现的是ARP header，对于ARP来说并没有的payload。&lt;/p&gt;
 &lt;p&gt;但是在ethernet packet中还可以包含其他更复杂的结构，比如说ethernet payload中包含一个IP packet，IP packet中又包含了一个UDP packet，所以IP header之后是UDP header。&lt;/p&gt;
@@ -3255,7 +3297,8 @@
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;所以，以太网有1500或者9000字节的最大packet限制。&lt;/p&gt;
-&lt;p&gt;除此之外，所有的协议都有长度字段，例如UDP的长度字段是16bit。所以即使以太网支持传输更大的packet，协议本身对于数据长度也有限制。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;除此之外，所有的协议都有长度字段，例如UDP的长度字段是16bit。所以即使以太网支持传输更大的packet，协议本身对于数据长度也有限制。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;以上就是UDP的介绍。在lab的最后你们会通过实验提供的代码来向谷歌的DNS server发送一个查询，收到回复之后代码会打印输出。你们需要在设备驱动侧完成以太网数据的处理。&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;网络协议栈network-stack&#34;&gt;网络协议栈（Network Stack）
@@ -3342,7 +3385,8 @@
 &lt;p&gt;比如说我家里的wifi路由器，它就有两张网卡，其中一个网卡连接到线缆并进一步连接到整个互联网，另一个网卡是wifi网卡。&lt;/p&gt;
 &lt;p&gt;有很多服务器也有多个网卡，尤其是对于web服务器来说，会有一个网卡连接互联网，另一个网卡连接你的私有的敏感的数据库信息。两个网卡连接的是完全不同的网络。&lt;/p&gt;
 &lt;p&gt;学生提问：所以多网卡的场景在于想要连接不同的网络？&lt;/p&gt;
-&lt;p&gt;Robert教授：是的。如果你想要连接不同的网络，那么你需要有多块网卡。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Robert教授：是的。如果你想要连接不同的网络，那么你需要有多块网卡。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;我想再讨论一下当packet送到网卡时，网卡会做什么操作？这与networking lab非常相关。&lt;/p&gt;
 &lt;p&gt;对于一个网卡的结构，会有一根线缆连接到外面的世界。网卡会检查线缆上的电信号，并将电信号转换成packet。网卡会接入到一个主机上，主机会带有网卡的驱动软件。我们需要将网卡解码出来的packet传递给主机的内存，这样软件才能解析packet。&lt;/p&gt;
 &lt;p&gt;网卡内有许多内置的内存，当packet到达时，网卡会将packet存在自己的缓存中，并向主机发送中断，所以网卡内部会有一个队列。而主机的驱动包含了一个循环，它会与网卡交互，并询问当前是否缓存了packet。&lt;/p&gt;
@@ -3398,7 +3442,8 @@
 &lt;p&gt;网卡通过总线，并经过一些可编程芯片连接到了DRAM，我认为在现代的计算机中，你可以设置好地址翻译表，这样网卡可以使用虚拟内存地址，虚拟内存地址会由网卡和DRAM之间的硬件翻译，这对于一些场景还是很有价值的。&lt;/p&gt;
 &lt;p&gt;另一方面，如果网卡需要读写一些内存地址，而内存数据现在正在CPU的cache中，那么意味着内存对应的最新数据位于CPU cache中，而不是在RAM。这种情况下，当网卡执行DMA时，我们希望网卡能读取CPU的cache而不是RAM。&lt;/p&gt;
 &lt;p&gt;在Intel的机器上，有一些精心设计的机制可以确保当网卡需要从内存读取数据而最新的内存数据在CPU cache中时，CPU cache而不是RAM会返回数据。一些软件基于这种机制来获得高性能。对于写数据同样的也适用，网卡可以直接将数据写到CPU cache中，这样CPU可以非常快的读到数据。&lt;/p&gt;
-&lt;p&gt;我们介绍的E1000的结构非常简单，但是实际中的网卡机制非常的复杂。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;我们介绍的E1000的结构非常简单，但是实际中的网卡机制非常的复杂。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;receive-livelock-1&#34;&gt;Receive Livelock
 &lt;/h2&gt;&lt;p&gt;接下来我们看一下今天的&lt;a class=&#34;link&#34; href=&#34;https://pdos.csail.mit.edu/6.828/2020/readings/mogul96usenix.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
@@ -3424,13 +3469,15 @@
 &gt;&lt;/p&gt;
 &lt;p&gt;首先，为什么这条曲线开始会上升？&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;学生回答：在到达处理的瓶颈之前，路由器可以处理更多的接收方向的packet，也可以处理更多的发送发向的packet。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;学生回答：在到达处理的瓶颈之前，路由器可以处理更多的接收方向的packet，也可以处理更多的发送发向的packet。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;完全正确，在出现错误之前，对于每个接收到的packet，路由器都可以转发出去。比如说当packet以2000pps的速度接收时，路由器直接将packet从输入网卡拷贝到输出网卡，所以路由器的发送速率与接收速率一样，都是2000pps，所以这里X轴与Y轴的值相等。这种状态一直保持，直到曲线到达转折点。&lt;/p&gt;
 &lt;p&gt;那么为什么曲线不是一直上升的呢？&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;学生回答：是不是因为中断不能被处理导致的？&lt;/p&gt;
 &lt;p&gt;Robert教授：这个其实是为什么曲线会下降的原因。我这里的问题是为什么曲线在某个点之后就不再上升了。假设这里的设计是合理的，对于一个合理的系统，对应的曲线会一直上升吗？&lt;/p&gt;
-&lt;p&gt;学生回答：我认为不会，就算系统能足够快的处理packet，对于足够多的packet，还是可能触发系统的瓶颈。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;学生回答：我认为不会，就算系统能足够快的处理packet，对于足够多的packet，还是可能触发系统的瓶颈。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;是的，CPU的算力并不是无限的，CPU最多每秒执行一定数量的指令。&lt;/p&gt;
 &lt;p&gt;对于每个packet，IP软件会查看packet的header，检查校验和，根据目的地址查找转发表等等，这个过程会消耗数百甚至数千条CPU指令时间来处理一个packet。所以，我们不能期望曲线能一直向上走，它必然会在某个位置停止向上。&lt;/p&gt;
 &lt;p&gt;上面的图中，曲线在5000的位置就停止不再上升了，这告诉我们这台机器处理每个packet要消耗200微秒。所以，曲线的转折点隐含的包含了处理一个packet需要的时间信息。&lt;/p&gt;
@@ -3498,7 +3545,8 @@
 &lt;p&gt;Livelock发生的根本原因是我们浪费时间处理了一些最终会被丢弃的packet，这里的处理是徒劳。&lt;/p&gt;
 &lt;p&gt;另一种发生Livelock的可能是，当负载增加时，我们可能会消耗100%的CPU时间在packet处理线程上，而留给应用程序的CPU时间为0，这时还是会发生Livelock。&lt;/p&gt;
 &lt;p&gt;论文在第六节中有相应的介绍，如果一个packet将要被传输给本地的应用程序，网络线程会查看应用程序的socket buffer，如果socket buffer过满的话，网络线程会停止从网卡读取packet，直到socket buffer变小。&lt;/p&gt;
-&lt;p&gt;这意味着网络线程会停止运行，并给应用程序机会运行并处理packet，所以如果你不够小心的话，你可能会在任何阶段都经历类似Livelock的问题。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;这意味着网络线程会停止运行，并给应用程序机会运行并处理packet，所以如果你不够小心的话，你可能会在任何阶段都经历类似Livelock的问题。&lt;/p&gt;
+&lt;/blockquote&gt;
 </description>
         </item>
         <item>
@@ -3864,7 +3912,8 @@
 &lt;ul&gt;
 &lt;li&gt;可以进一步扩展这个服务器，添加更多的路由（如 &lt;code&gt;/about&lt;/code&gt;, &lt;code&gt;/users&lt;/code&gt;），并处理不同的 HTTP 方法（如 &lt;code&gt;GET&lt;/code&gt;, &lt;code&gt;POST&lt;/code&gt;）。&lt;/li&gt;
 &lt;li&gt;也可以引入 Go 的 web 框架如 &lt;strong&gt;Gin&lt;/strong&gt; 或 &lt;strong&gt;Echo&lt;/strong&gt;，以简化路由处理和中间件的使用。&lt;/li&gt;
-&lt;/ul&gt;&lt;/blockquote&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;biscuit-heap-issue&#34;&gt;Biscuit Heap Issue
 &lt;/h2&gt;&lt;p&gt;Biscuit 的方法，虽然看似没有引入全新的技术，但它的确提供了一种相对简单且有效的解决内核堆内存分配问题的方法。它并不是传统方法的革命性替代，但在特定上下文中有其优势，尤其是通过静态分析预估系统调用所需的内存并进行提前分配，从而避免了许多传统内存管理问题，比如复杂的分配失败恢复和内存死锁。以下是对 Biscuit 方法的更深入分析，并与传统方法对比：&lt;/p&gt;
@@ -4748,7 +4797,8 @@
 &lt;li&gt;&lt;strong&gt;调度器&lt;/strong&gt;在内核态中执行，它负责在进程间进行上下文切换，让不同的进程共享 CPU 资源。调度器运行时，实际也是某个进程在 CPU 上执行内核态的调度逻辑。&lt;/li&gt;
 &lt;li&gt;没有独立的 &amp;ldquo;内核进程&amp;rdquo; 在执行这些操作，而是当前 CPU 或进程在必要时进入内核态执行系统级的代码。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;所以，当你问 &amp;ldquo;函数不是只有在运行在 CPU 上的进程时才能执行么&amp;rdquo;，答案是&lt;strong&gt;是的&lt;/strong&gt;，无论是内核态还是用户态，都是在进程执行时通过 CPU 来运行代码，只不过在内核态下，进程执行的是操作系统内核的功能，而不是用户代码。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;所以，当你问 &amp;ldquo;函数不是只有在运行在 CPU 上的进程时才能执行么&amp;rdquo;，答案是&lt;strong&gt;是的&lt;/strong&gt;，无论是内核态还是用户态，都是在进程执行时通过 CPU 来运行代码，只不过在内核态下，进程执行的是操作系统内核的功能，而不是用户代码。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;针对schedule的复习3&#34;&gt;针对schedule的复习（3）
 &lt;/h2&gt;&lt;p&gt;我们可以进一步解释一下&lt;strong&gt;进程切换&lt;/strong&gt;和&lt;strong&gt;多核系统中的调度&lt;/strong&gt;，特别是如何在内核态执行 &lt;code&gt;schedule&lt;/code&gt; 以及如何确保不会重复调度已经在其他 CPU 上运行的进程。&lt;/p&gt;
@@ -5155,7 +5205,8 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 &lt;li&gt;&lt;strong&gt;Biscuit 系统的中断处理程序做标记并迅速返回&lt;/strong&gt;，是为了避免在中断期间与 Go 运行时的调度机制产生冲突，从而防止死锁。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;设备中断和 trap 不同&lt;/strong&gt;，trap 的处理可以执行复杂的 Go 代码，因为它们是在安全的上下文中处理的。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;这种设计非常类似 top-half 和 bottom-half 机制&lt;/strong&gt;，将紧急、短暂的操作放在 top-half，复杂、耗时的工作放在 bottom-half，由底层调度来完成，从而提高系统响应效率和稳定性。&lt;/li&gt;
-&lt;/ul&gt;&lt;/blockquote&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;biscuit速记&#34;&gt;Biscuit速记
 &lt;/h2&gt;&lt;ol&gt;
@@ -5642,7 +5693,8 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 &lt;p&gt;这里涉及到一个有趣的问题：通过高级编程语言实现内核时，GC的代价到底有多少？而Rust通过不使用GC而跳过了这个问题。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;学生提问：如果我们这里使用Rust而不是Golang来实现高级编程语言内核，通过一定的优化有没有可能达到比C内核更高的性能？&lt;/p&gt;
-&lt;p&gt;Frans教授：因为我们没有做过这样的实验，所以我就猜一下。我觉得不会有比C内核更高的性能，但是基本在同一个范围内。因为C是如此的底层，你可以假设你在Rust做的工作，都可以在C中完成。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Frans教授：因为我们没有做过这样的实验，所以我就猜一下。我觉得不会有比C内核更高的性能，但是基本在同一个范围内。因为C是如此的底层，你可以假设你在Rust做的工作，都可以在C中完成。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;这里有一个问题，并且在这节课最后我们会再次回顾这个问题。&lt;/p&gt;
 &lt;p&gt;我们想要使用高级编程语言内核的部分原因是为了避免一类特定的Bug，那么你可以问自己的一个问题的是，你们在实验中遇到的Bug，是否可以通过使用高级编程语言来避免？&lt;/p&gt;
 &lt;p&gt;我肯定你可以回想起一些Bug，它们耗费了你很多的时间，很多精力，现在你可以问自己，如果实验中的XV6是使用某种高级编程语言实现的，你的生活会不会更轻松一些？你是否能有更多时间做一些其他的事情。&lt;/p&gt;
@@ -5663,7 +5715,8 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 &lt;p&gt;所以Biscuit比XV6更加完整，它有58个系统调用，而XV6只有大概18-19个系统调用；它有28000行代码，而XV6我认为只有少于10000行代码。所以Biscuit有更多的功能。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;学生提问：这里的接口与XV6类似对吧，所以进程需要存数据在寄存器中，进程也会调用ECALL。&lt;/p&gt;
-&lt;p&gt;Frans教授：我稍后会再做介绍，但是这里完全相同。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Frans教授：我稍后会再做介绍，但是这里完全相同。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;以上是Biscuit的特性，有些我已经提到过了。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;首先它支持&lt;strong&gt;多核CPU&lt;/strong&gt;。Golang对于并发有很好的支持，所以Biscuit也支持多核CPU。类似的，XV6却只对多核CPU有有限的支持。所以在这里，我们相比XV6有更好的同步协调机制。&lt;/li&gt;
@@ -5691,7 +5744,8 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 &lt;blockquote&gt;
 &lt;p&gt;学生提问：我认为Golang更希望你使用channel而不是锁，所以这里在实现的时候会通过channel取代之前需要锁的场景吗？&lt;/p&gt;
 &lt;p&gt;Frans教授：这是个好问题，我会稍后看这个问题，接下来我们有几页PPT会介绍我们在Biscuit中使用了Golang的什么特性，但是我们并没有使用太多的channel，大部分时候我们用的就是锁和conditional variable。&lt;/p&gt;
-&lt;p&gt;所以某种程度上来说Biscuit与XV6的代码很像，而并没有使用channel。我们在文件系统中尝试过使用channel，但是结果并不好，相应的性能很差，所以我们切换回与XV6或者Linux类似的同步机制。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;所以某种程度上来说Biscuit与XV6的代码很像，而并没有使用channel。我们在文件系统中尝试过使用channel，但是结果并不好，相应的性能很差，所以我们切换回与XV6或者Linux类似的同步机制。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;在实现Biscuit的时候有一些挑战：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -5791,13 +5845,15 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 &lt;p&gt;学生提问：某些函数会根据不同的工作负载申请不同量的内存，那么在计算函数消耗的内存时，会计算最差的情况吗？&lt;/p&gt;
 &lt;p&gt;Frans教授：是的。这里的工具会计算最深函数调用时最大可能使用的内存量。所以它会计算出每个系统调用可能使用的最多内存，虽然实际中系统调用可能只会使用少的多的内存。&lt;/p&gt;
 &lt;p&gt;但是保险起见，我们会为最坏情况做准备。一些系统调用内的for循环依赖于传给系统调用的参数，所以你不能静态地分析出内存边界是什么。所以在一些场景下，我们会标注代码并规定好这是这个循环最大循环次数，并根据这个数字计算内存总量S。&lt;/p&gt;
-&lt;p&gt;类似的，如果有你有递归调用的函数，谁知道会递归多少次呢？或许也取决于一个动态变量或者系统调用的参数。实际中，我们在Biscuit中做了特殊处理以避免递归函数调用。所以最后，我们才可能完成这里的内存分析。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;类似的，如果有你有递归调用的函数，谁知道会递归多少次呢？或许也取决于一个动态变量或者系统调用的参数。实际中，我们在Biscuit中做了特殊处理以避免递归函数调用。所以最后，我们才可能完成这里的内存分析。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;所以，这里的内存分析不是没有代价的，也不是完全自动的。&lt;/p&gt;
 &lt;p&gt;这花费了Cody（论文一作）好几天检查代码，检查所有的循环并标注代码。还有一些其他的Golang特有的问题需要处理，例如，向Slice添加元素可能会使内存使用量扩大一倍，所以我们也给Slice标注了最大的容量。&lt;/p&gt;
 &lt;p&gt;但是所有这些工作都是可完成的，在花费了几天时间之后，使用这里的内存分析工具，你可以得到对于系统调用使用的最大内存量的合理评估。以上基本就是Biscuit如何解决heap exhaustion问题。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;学生提问：这里的静态内存分析工具，如果不是用来构建内核，它们通常会用来干嘛？&lt;/p&gt;
-&lt;p&gt;Frans教授：Go编译器内部使用它来完成各种各样的优化，并分析得出最优的编译方式。这里正好编译器使用了一个包，我们也可以使用同样的包。在后面你还可以看到，我们还将它用于一些其他特性，有这么一个包非常的方便。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Frans教授：Go编译器内部使用它来完成各种各样的优化，并分析得出最优的编译方式。这里正好编译器使用了一个包，我们也可以使用同样的包。在后面你还可以看到，我们还将它用于一些其他特性，有这么一个包非常的方便。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;evaluation-hll-benefits&#34;&gt;Evaluation: HLL benefits
 &lt;/h2&gt;&lt;p&gt;Biscuit的实现与其他内核，例如XV6，非常相似，除了Biscuit比XV6性能要高的多。Biscuit采用了很多Linux内核的优化和聪明的设计：&lt;/p&gt;
@@ -5850,7 +5906,8 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 &lt;p&gt;如你所见，有些特性Biscuit用的比Go runtime和moby更少，有些特性Biscuit用的更多，这里没有很明显的区别。所以从这张图中可以得出的主要结论是：Biscuit使用了Golang提供的高级编程语言特性，而不是为了得到好的性能而避开使用它们。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;学生提问：你这里是怎么统计的？是不是使用了静态分析工具？&lt;/p&gt;
-&lt;p&gt;Frans教授：是的，这里使用的就是静态分析工具。通过写一个小程序利用静态分析工具来查看这些项目的每一行代码，并记录对应的特性是什么，这样就能统计这些特性的使用数量。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Frans教授：是的，这里使用的就是静态分析工具。通过写一个小程序利用静态分析工具来查看这些项目的每一行代码，并记录对应的特性是什么，这样就能统计这些特性的使用数量。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;第二个问题有点主观，高级编程语言有没有简化Biscuit代码？笼统的说我认为有的，我这里会讨论一两个例子。&lt;/p&gt;
 &lt;p&gt;使用Garbage allocation是极好的，你可以回想XV6，当你调用exit时，有大量的结构化数据需要被释放回给内核，这样后面的进程才能使用。&lt;/p&gt;
 &lt;p&gt;如果使用Garbage Collector这里的工作着实容易，Garbage Collector会完成这里的所有工作，你基本不用做任何事情。如果你从地址空间申请了一段内存，对应这段内存的VMA会自动被GC释放，所以这里可以简化代码。&lt;/p&gt;
@@ -5969,7 +6026,8 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 &lt;p&gt;Frans教授：你还记得Lec17的内容吗？当GC在运行的时候，需要检查指针是否在from空间，如果在from空间你需要拷贝它到to空间。write barrier是非常类似的功能，它的想法是一样的，你需要检查指针看它是否在你需要运行GC的区域内。&lt;/p&gt;
 &lt;p&gt;学生提问：当存活对象的内存大于空闲内存的时候，GC该怎么工作呢？&lt;/p&gt;
 &lt;p&gt;Frans教授：你买一些内存，vnode会使用一些内存，然后还剩下320MB空闲内存。当应用程序申请更多内存时，首先会从空闲内存中申请，直到空闲内存也用光了。&lt;/p&gt;
-&lt;p&gt;与此同时，GC也在运行。所以我们刚刚的测试中是在3个不同配置下运行，在最后一个配置中，空闲内存是存活对象占用内存的两倍。这意味着GC有大量的headroom来与应用程序并行的运行，如果有大量的headroom，GC的overhead就没那么高了，只有10%左右，而不是34%。在第一个配置中，总共是640+320MB内存，而不是只有320MB内存。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;与此同时，GC也在运行。所以我们刚刚的测试中是在3个不同配置下运行，在最后一个配置中，空闲内存是存活对象占用内存的两倍。这意味着GC有大量的headroom来与应用程序并行的运行，如果有大量的headroom，GC的overhead就没那么高了，只有10%左右，而不是34%。在第一个配置中，总共是640+320MB内存，而不是只有320MB内存。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;evaluation-hll-performance-cost2&#34;&gt;Evaluation: HLL performance cost(2)
 &lt;/h2&gt;&lt;p&gt;接下来稍微介绍GC pause。&lt;/p&gt;
@@ -5997,7 +6055,8 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 &lt;p&gt;与其直接回答这个问题，我在这页有一些我们的结论和一些考虑。或许你们该回退一步，并问自己，你们更喜欢哪种方式？&lt;/p&gt;
 &lt;p&gt;你们是喜欢像在实验中用C写XV6，还是喜欢使用类似Golang的高级编程语言。更具体的说，你们更想避免哪类Bug？或许在这节课的过程中想想你们遇到过什么Bug？我想听听你们的体验，你们是怎么想的？切换到高级编程语言会不会改变你们的体验？&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;一些学生介绍自己的体验，有说C好的，有说C不好的&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;一些学生介绍自己的体验，有说C好的，有说C不好的&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;当然，我们不会将XV6改成Golang或者任何高级编程语言。具体原因刚刚一些同学已经提到了，Golang还是隐藏了太多细节，这门课的意义在于理解系统调用接口到CPU之间的所有内容。&lt;/p&gt;
 &lt;p&gt;举个例子，Golang隐藏了线程，我们并不想隐藏线程，我们想要向你解释线程是如何实现的。所以接下几年，这门课程还是会使用C语言。&lt;/p&gt;
 &lt;p&gt;但是如果你要实现一个新的内核，并且目标不是教育你的学生有关内核的知识，目标是写一个安全的高性能内核。你可以从我们的研究中得出一些结论：&lt;/p&gt;
@@ -6027,7 +6086,8 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 &lt;p&gt;即使C也有一个小的runtime，比如printf就是C runtime的中间层的一部分，或者字符串处理也是C runtime的一部分，它们也会被编译。C runtime有一些函数，但是这个runtime是如此之小，不像Go runtime需要支持许多Go程序所依赖的功能。&lt;/p&gt;
 &lt;p&gt;学生提问：看起来这里的中间层像是一个mini的系统层，它执行了一些底层的系统功能。&lt;/p&gt;
 &lt;p&gt;Frans教授：是的，或许一种理解中间层的方法是，XV6也有一个非常非常小的中间层。当它启动的时候，它做的第一件事情是分配一些Stack这样你才能调用C的main函数。&lt;/p&gt;
-&lt;p&gt;你可以认为这一小段代码是针对XV6的中间层。一旦你执行了这些指令，你就在C代码中了，然后一切都能愉快的运行。Go runtime的中间层稍微要大一些，因为有一些功能需要被设置好，之后Go runtime才能愉快的运行。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;你可以认为这一小段代码是针对XV6的中间层。一旦你执行了这些指令，你就在C代码中了，然后一切都能愉快的运行。Go runtime的中间层稍微要大一些，因为有一些功能需要被设置好，之后Go runtime才能愉快的运行。&lt;/p&gt;
+&lt;/blockquote&gt;
 </description>
         </item>
         <item>
@@ -6186,7 +6246,8 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 &lt;p&gt;大多数VMM采用Hypercall来支持半虚拟化。在这种情况下，客操作系统被修改以通过Hypercall与VMM通信。这些Hypercall是专门的虚拟化接口，通常由VMM来处理，处理时往往涉及复杂的步骤，因为VMM需要模拟硬件。
 假设我们有一个虚拟网络设备。客操作系统需要注册一个中断处理程序来处理虚拟设备的中断。在传统VMM中，客操作系统通过Hypercall告诉VMM：“我需要注册一个中断处理程序。” VMM接收到这个Hypercall后，会更新其内部的数据结构，并确保当虚拟设备产生中断时，中断处理程序将由客操作系统正确处理。&lt;/p&gt;
 &lt;p&gt;在Dune中，Hypercall直接调用主机操作系统（比如Linux）的系统调用。这意味着Dune不需要维护复杂的虚拟化接口，借助操作系统已有的机制即可实现功能。
-同样是虚拟网络设备，在Dune中，进程不直接与Dune层通信以注册中断处理程序，而是通过标准的Linux系统调用来完成该操作。例如，进程可能使用&lt;code&gt;read&lt;/code&gt;系统调用从一个TCP socket读取数据。实际上，这种调用通过Hypercall直接由Linux内核来处理，而不需要Dune进行复杂的虚拟化处理。&lt;/p&gt;&lt;/blockquote&gt;
+同样是虚拟网络设备，在Dune中，进程不直接与Dune层通信以注册中断处理程序，而是通过标准的Linux系统调用来完成该操作。例如，进程可能使用&lt;code&gt;read&lt;/code&gt;系统调用从一个TCP socket读取数据。实际上，这种调用通过Hypercall直接由Linux内核来处理，而不需要Dune进行复杂的虚拟化处理。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;关于状态保存：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;在传统的VMM中，每个虚拟机（包括其运行的客操作系统和应用程序）都有独立的计算状态，这包括CPU寄存器、内存状态、I/O设备状态等。当发生VM entry（进入虚拟机）或VM exit（退出虚拟机）时，VMM必须保存和恢复所有这些状态，以确保虚拟机的运行不受干扰。这是一项复杂且耗时的任务，因为状态信息非常多。
@@ -6196,13 +6257,15 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 &lt;li&gt;Dune进程是主机操作系统的一部分，从操作系统的角度来看，它是一个普通进程。&lt;/li&gt;
 &lt;li&gt;当发生切换时，Linux已经处理了大部分的状态保存和恢复工作，Dune只需极少的额外处理。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;假设一个Dune进程需要执行IO操作。当进程被调度时，Linux内核会自动保存当前进程的状态（如寄存器、内存页表等），并恢复下一个进程的状态。这与标准的进程上下文切换相同，不需要Dune进行额外的状态管理。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;假设一个Dune进程需要执行IO操作。当进程被调度时，Linux内核会自动保存当前进程的状态（如寄存器、内存页表等），并恢复下一个进程的状态。这与标准的进程上下文切换相同，不需要Dune进行额外的状态管理。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;关于硬件模拟：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;传统的VMM需要完整地模拟物理硬件层，以支持未修改的客操作系统。这意味着VMM必须提供虚拟CPU、虚拟内存管理单元、虚拟设备（如网络、显卡等）等。&lt;/p&gt;
 &lt;p&gt;对于虚拟显卡，VMM需要模拟显卡的各种寄存器和状态，让客操作系统认为它在与一个真实的显卡打交道。这涉及到高复杂性的模拟和处理。&lt;/p&gt;
 &lt;p&gt;Dune暴露的是硬件和操作系统之间的一层接口。它不完全模拟硬件，只是提供直接访问一些硬件功能的接口，而对于无法直接访问的功能，依赖于主机操作系统。&lt;/p&gt;
-&lt;p&gt;在图形显示方面，Dune不会提供虚拟显卡，而是让进程使用操作系统的显示服务（例如通过Unix域套接字和共享内存访问X服务器）。这样，图形显示的复杂性被主机操作系统处理，Dune不需要额外的处理。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;在图形显示方面，Dune不会提供虚拟显卡，而是让进程使用操作系统的显示服务（例如通过Unix域套接字和共享内存访问X服务器）。这样，图形显示的复杂性被主机操作系统处理，Dune不需要额外的处理。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;总结来说，Dune尝试通过暴露进程级的虚拟环境来简化虚拟化的复杂性，这样做不仅使其更加轻量和灵活，而且能够充分利用主机操作系统已提供的服务来实现功能。&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;dune-技术&#34;&gt;&lt;strong&gt;Dune 技术&lt;/strong&gt;
@@ -6926,7 +6989,9 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;新的页表具有压缩特性，在同样完成V1 -&amp;gt; P1，V2 -&amp;gt; P2映射的同时，其方式更加优化和特定化，适应Dune环境。&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;尽管旧页表和新页表在内容上可能看起来相似（例如映射相同的虚拟地址到物理地址），但它们的格式、结构和布局可能存在显著差异，这些差异对于支持Dune模式下的高效虚拟化至关重要。直接使用旧的页表根无法满足这些需求，因此必须提供一个新的页表根来确保Dune模式下的正确性和性能。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;尽管旧页表和新页表在内容上可能看起来相似（例如映射相同的虚拟地址到物理地址），但它们的格式、结构和布局可能存在显著差异，这些差异对于支持Dune模式下的高效虚拟化至关重要。直接使用旧的页表根无法满足这些需求，因此必须提供一个新的页表根来确保Dune模式下的正确性和性能。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;sandbox防御elf-header-攻击&#34;&gt;sandbox防御ELF header 攻击
 &lt;/h2&gt;&lt;p&gt;ELF文件是Linux系统的常见可执行文件格式，包含了程序的头部（header），该头部定义了二进制文件的各种结构和加载方式。不良设计或恶意构造的ELF头部可能会试图利用ELF加载器中的漏洞，从而实现代码注入或其他攻击。&lt;/p&gt;
@@ -7251,7 +7316,9 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;li&gt;&lt;strong&gt;初始加载器&lt;/strong&gt;功能有限，只负责加载高级加载器，并且设计简单，减少攻击面。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;高级加载器&lt;/strong&gt;运行在用户态，并且经过充分验证和使用，在加载不可信二进制文件时，能最大限度地减少安全风险。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;这种分离策略不仅提高了加载过程的安全性，还确保了即使不可信代码包含恶意头部，攻击的范围和影响也被限制在沙箱环境内。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;这种分离策略不仅提高了加载过程的安全性，还确保了即使不可信代码包含恶意头部，攻击的范围和影响也被限制在沙箱环境内。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
 &lt;blockquote&gt;
 &lt;p&gt;初始加载器确实在限定和设置高级加载器的运行环境方面起到了关键作用。如果没有初始加载器，直接加载高级加载器可能会带来一系列问题和安全隐患。让我们详细探讨这种分离策略的设计理由和必要性。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;初始加载器的主要作用&lt;/strong&gt;&lt;/p&gt;
@@ -7368,7 +7435,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;lib64&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ld&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;linux&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x86&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;64.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;so&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;.2&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;path&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;to&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;untrusted_app&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;通过以上解释和示例可以看到，初始加载器在设置和限制高级加载器的运行环境方面起到了关键作用。没有初始加载器的附加保护，高级加载器的环境将无法控制，容易受到恶意代码的攻击和干扰。初始加载器确保了安全的环境初始化和基本配置，从而为高级加载器提供了一个安全和受控的执行环境。这种分离策略不仅提高了加载过程的安全性，还限制了恶意代码的攻击范围，确保整个系统的稳定和安全。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;/div&gt;&lt;p&gt;通过以上解释和示例可以看到，初始加载器在设置和限制高级加载器的运行环境方面起到了关键作用。没有初始加载器的附加保护，高级加载器的环境将无法控制，容易受到恶意代码的攻击和干扰。初始加载器确保了安全的环境初始化和基本配置，从而为高级加载器提供了一个安全和受控的执行环境。这种分离策略不仅提高了加载过程的安全性，还限制了恶意代码的攻击范围，确保整个系统的稳定和安全。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;machine-abstraction&#34;&gt;Machine Abstraction
 &lt;/h2&gt;&lt;p&gt;“使用虚拟化硬件提供进程抽象，而不是机器抽象”，实际上在描述虚拟化技术的不同层次和方式。为了更好地理解其中的概念，我们需要先弄清楚“进程抽象（process abstraction）”和“机器抽象（machine abstraction）”的含义。&lt;/p&gt;
@@ -7787,7 +7855,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;Robert教授：我这里假设VMM运行在Supervisor mode。所以在这里的图中，VMM就是宿主机的kernel。&lt;/p&gt;
 &lt;p&gt;这里我们不是启动类似Linux的操作系统，而是启动VMM（注，类似VMware的ESXi）。VMM以privileged权限运行，并拥有硬件的完整控制权限，这样我们就可以在VMM里面设置各种硬件寄存器。有一些VMM就是这么运行的，你在硬件上启动它们，并且只有VMM运行在Supervisor mode。&lt;/p&gt;
 &lt;p&gt;实际上还有很多很多其他的虚拟机方案，比如说在硬件上启动Linux，之后要么Linux自带一个VMM，要么通过可加载的内核模块将VMM加载至Linux内核中，这样VMM可以在Linux内核中以Supervisor mode运行。今天我们要讨论的论文就是采用后者。&lt;/p&gt;
-&lt;p&gt;这里主要的点在于，我们自己写的可信赖的VMM运行在Supervisor mode，而我们将不可信赖的Guest kernel运行在User mode，通过一系列的处理使得Guest kernel看起来好像自己是运行在Supervisor mode。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;这里主要的点在于，我们自己写的可信赖的VMM运行在Supervisor mode，而我们将不可信赖的Guest kernel运行在User mode，通过一系列的处理使得Guest kernel看起来好像自己是运行在Supervisor mode。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;在RISC-V上，如果在User mode尝试运行任何一个需要Supervisor权限的指令都会触发trap。&lt;/p&gt;
 &lt;p&gt;这里需要Supervisor权限的指令并不包括与Page Table相关的指令，我们稍后会介绍相关的内容。&lt;/p&gt;
 &lt;p&gt;所以每当Guest操作系统尝试执行类似于读取SCAUSE寄存器，读写STVEC寄存器，都会触发一个trap，并走到VMM，之后我们就可以获得控制权。&lt;/p&gt;
@@ -7796,7 +7865,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;/h2&gt;&lt;p&gt;VMM会为每一个Guest维护一套虚拟状态信息。所以VMM里面会维护虚拟的STVEC寄存器，虚拟的SEPC寄存器以及其他所有的privileged寄存器。&lt;/p&gt;
 &lt;p&gt;当Guest操作系统运行指令需要读取某个privileged寄存器时，首先会通过trap走到VMM，因为在用户空间读取privileged寄存器是非法的。之后VMM会检查这条指令并发现这是一个比如说读取SEPC寄存器的指令，之后VMM会模拟这条指令，并将自己维护的虚拟SEPC寄存器，拷贝到trapframe的用户寄存器中。&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;（注，有关trapframe详见Lec06，这里假设Guest操作系统通过类似“sread a0, sepc”的指令想要将spec读取到用户寄存器a0）&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;（注，有关trapframe详见Lec06，这里假设Guest操作系统通过类似“sread a0, sepc”的指令想要将spec读取到用户寄存器a0）&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;之后，VMM会将trapframe中保存的用户寄存器拷贝回真正的用户寄存器，通过sret指令，使得Guest从trap中返回。&lt;/p&gt;
 &lt;p&gt;这时，用户寄存器a0里面保存的就是SEPC寄存器的值了，之后Guest操作系统会继续执行指令。最终，Guest读到了VMM替自己保管的虚拟SEPC寄存器。&lt;/p&gt;
 &lt;blockquote&gt;
@@ -7811,7 +7881,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;但是假设Guest操作系统只是从Guest用户进程执行了一个系统调用，Guest操作系统需要看到SCAUSE的值是系统调用。&lt;/p&gt;
 &lt;p&gt;也就是说Guest操作系统在自己的trap handler中处理来自Guest用户进程的系统调用时，需要SCAUSE的值表明是系统调用。&lt;/p&gt;
 &lt;p&gt;而实际的SCAUSE寄存器的值却表明是因为指令违反了privilege规则才走到的trap。通常情况下，VMM需要看到真实寄存器的值，而Guest操作系统需要能看到符合自己视角的寄存器的值。&lt;/p&gt;
-&lt;p&gt;（注，在Guest操作系统中，可能有两种情况会触发trap，一种是Guest用户空间进程的系统调用，也就是正常操作系统中正常的trap流程，另一种是Guest内核空间读取privileged寄存器时，因为Guest内核空间实际上也是在宿主机的用户空间，导致这是个非法操作并触发trap。Robert这边举的例子的流程应该是这样，Guest用户进程执行系统调用，在这一个瞬间SCAUSE寄存器的值是ECALL，也就是8，详见6.6。但是稍后在Guest系统内核的trap handler中需要读取SCAUSE的值，以确定在Guest中引起trap的原因，但是这就触发了第二种trap，SCAUSE的值会变成Illegal Access。我们不能让Guest系统内核看到这个值，所以VMM这里将它变成ECALL并返回。）&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;（注，在Guest操作系统中，可能有两种情况会触发trap，一种是Guest用户空间进程的系统调用，也就是正常操作系统中正常的trap流程，另一种是Guest内核空间读取privileged寄存器时，因为Guest内核空间实际上也是在宿主机的用户空间，导致这是个非法操作并触发trap。Robert这边举的例子的流程应该是这样，Guest用户进程执行系统调用，在这一个瞬间SCAUSE寄存器的值是ECALL，也就是8，详见6.6。但是稍后在Guest系统内核的trap handler中需要读取SCAUSE的值，以确定在Guest中引起trap的原因，但是这就触发了第二种trap，SCAUSE的值会变成Illegal Access。我们不能让Guest系统内核看到这个值，所以VMM这里将它变成ECALL并返回。）&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;在这种虚拟机的实现中，Guest整个运行在用户空间，任何时候它想要执行需要privilege权限的指令时，会通过trap走到VMM，VMM可以模拟这些指令。&lt;/p&gt;
 &lt;p&gt;这种实现风格叫做Trap and Emulate。&lt;/p&gt;
 &lt;p&gt;你可以完全通过软件实现这种VMM，也就是说你可以只通过修改软件就将XV6变成一个可以运行在RISC-V上的VMM，然后再在之上运行XV6虚拟机。当然，与常规的XV6一样，VMM需要运行在Supervisor mode。&lt;/p&gt;
@@ -7833,7 +7904,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;Robert教授：有的。Guest操作系统就是一个未被修改的普通操作系统，所以我们在Guest中运行的就是Linux内核或者XV6内核。&lt;/p&gt;
 &lt;p&gt;而XV6内核知道自己运行在Supervisor mode，从代码的角度来说，内核代码会认为自己运行在Supervisor mode，并执行各种privileged指令，并期望这些指令能工作。&lt;/p&gt;
 &lt;p&gt;当Guest操作系统执行sret指令时，它也知道自己将要进入到User空间。不过在宿主机上，Guest操作系统是运行在User mode，VMM也确保了这里能正常工作。&lt;/p&gt;
-&lt;p&gt;但是从Guest角度来说，自己的内核看起来像是运行在Supervisor mode，自己的用户程序看起来像是运行在User mode。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;但是从Guest角度来说，自己的内核看起来像是运行在Supervisor mode，自己的用户程序看起来像是运行在User mode。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;所以，当Guest执行sret指令从Supervisor mode进入到User mode，因为sret是privileged指令，会通过trap进入到VMM。&lt;/p&gt;
 &lt;p&gt;VMM会更新虚拟状态信息中的mode为User mode，尽管当前的真实mode还是Supervisor mode，因为我们还在执行VMM中的代码。&lt;/p&gt;
 &lt;p&gt;在VMM从trap中返回之前，VMM会将真实的SEPC寄存器设置成自己保存在虚拟状态信息中的虚拟SEPC寄存器。&lt;/p&gt;
@@ -7848,7 +7920,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;将虚拟的SCAUSE设置为系统调用；&lt;/p&gt;
 &lt;p&gt;将真实的SEPC设置成虚拟的STVEC寄存器；&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;注，STVEC保存的是trap函数的地址，将真实的SEPC设置成STVEC这样当VMM执行sret指令返回到Guest时，可以返回到Guest的trap handler。Guest执行系统调用以为自己通过trap走到了Guest内核，但是实际上却走到了VMM，这时VMM需要做一些处理，让Guest以及之后Guest的所有privileged指令都看起来好像是Guest真的走到了Guest内核&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;注，STVEC保存的是trap函数的地址，将真实的SEPC设置成STVEC这样当VMM执行sret指令返回到Guest时，可以返回到Guest的trap handler。Guest执行系统调用以为自己通过trap走到了Guest内核，但是实际上却走到了VMM，这时VMM需要做一些处理，让Guest以及之后Guest的所有privileged指令都看起来好像是Guest真的走到了Guest内核&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;之后调用sret指令跳转到Guest操作系统的trap handler，也就是STVEC指向的地址。&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;trap-and-emulate--page-table&#34;&gt;Trap-and-Emulate &amp;mdash; Page Table
@@ -7886,7 +7959,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;/ul&gt;
 &lt;p&gt;在创建完之后，VMM会将Shadow Page Table设置到真实的SATP寄存器中，再返回到Guest内核中。&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;注，这样的效果是，Guest里面看到的Page Table就是一个正常的Page Table，而Guest通过SATP寄存器指向的Page Table，将虚拟内存地址翻译得到的又是真实的物理内存地址&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;注，这样的效果是，Guest里面看到的Page Table就是一个正常的Page Table，而Guest通过SATP寄存器指向的Page Table，将虚拟内存地址翻译得到的又是真实的物理内存地址&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;所以，Guest kernel认为自己使用的是一个正常的Page Table，但是实际的硬件使用的是Shadow Page Table。&lt;/p&gt;
 &lt;p&gt;这种方式可以阻止Guest从被允许使用的内存中逃逸。Shadow Page Table只能包含VMM分配给虚拟机的主机物理内存地址。&lt;/p&gt;
 &lt;p&gt;Guest不能向Page Table写入任何VMM未分配给Guest的内存地址。这是VMM实现隔离的一个关键部分。&lt;/p&gt;
@@ -7897,13 +7971,15 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;但是它又不能设置实际的SATP寄存器，因为这是一个privileged操作，所以设置SATP寄存器会触发trap并走到VMM。&lt;/p&gt;
 &lt;p&gt;VMM会查看trap对应的指令，并发现Guest要尝试设置SATP寄存器，之后VMM会创建一个新的Shadow Page Table。&lt;/p&gt;
 &lt;p&gt;VMM会查看Guest尝试要设置的Page Table的每一条记录，通过gpa-&amp;gt;hpa的映射关系，将gva和hpa的对应关系翻译出来。&lt;/p&gt;
-&lt;p&gt;如果Guest尝试使用一个不被允许的物理地址，VMM会生成一个真实的Page Fault。之后VMM会将Shadow Page Table设置到真实的SATP寄存器中，并返回到Guest中。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;如果Guest尝试使用一个不被允许的物理地址，VMM会生成一个真实的Page Fault。之后VMM会将Shadow Page Table设置到真实的SATP寄存器中，并返回到Guest中。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;Shadow Page Table是实现VMM时一个比较麻烦的地方。&lt;/p&gt;
 &lt;p&gt;除了设置SATP寄存器，Guest操作系统还有另一种方式可以与Page Table进行交互。&lt;/p&gt;
 &lt;p&gt;XV6有时候会直接修改属于自己的Page Table Entry，或者读取PTE中的dirty bit。如果你读了RISC-V的文档，你可以发现在RISC-V上，如果软件更改了PTE，RISC-V不会做任何事情。&lt;/p&gt;
 &lt;p&gt;如果你修改了PTE，RISC-V并不承诺可以立即观察到对于PTE的修改，在修改那一瞬间，你完全是不知道PTE被修改了。&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;注，这里主要对比的是privileged指令，因为如果在用户空间执行了privileged指令，会立刻触发trap，而这里修改PTE不会有任何的额外的动作&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;注，这里主要对比的是privileged指令，因为如果在用户空间执行了privileged指令，会立刻触发trap，而这里修改PTE不会有任何的额外的动作&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;相应的，文档是这么说的，如果你修改PTE并且希望MMU可以看到这个改动，你需要执行sfence.vma指令，这个指令会使得硬件注意到你对Page Table的修改。&lt;/p&gt;
 &lt;p&gt;所以如果你要自己写一个VMM，你在RISC-V上的VMM会完全忽略Guest对于PTE的修改，但是你知道Guest在修改完PTE之后将会执行sfence.vma指令，并且这是一个privileged指令，因为它以s开头，所以这条指令会通过trap走到VMM，VMM就可以知道sfence.vma指令被执行了。&lt;/p&gt;
 &lt;p&gt;之后VMM会重新扫描Guest的当前Page Table，查找更新了的Page Table Entry。&lt;/p&gt;
@@ -7918,7 +7994,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;学生提问：我们刚刚说过性能的损耗，如果我们使用VMM，对于这里的trap机制看起来也会有大量的性能损耗。&lt;/p&gt;
 &lt;p&gt;Robert教授：是的。如果你的操作系统执行了大量的privileged指令，那么你也会有大量的trap，这会对性能有大的损耗。&lt;/p&gt;
 &lt;p&gt;这里的损耗是现代硬件增加对虚拟机支持的动机。今天要讨论的论文使用的就是现在硬件对于虚拟机的支持，Intel和AMD在硬件上支持更加有效的trap，或者说对于虚拟机方案，会有少得多的trap。&lt;/p&gt;
-&lt;p&gt;所以是的，性能很重要。但是上面介绍的方案，人们也使用了很多年，它能工作并且也很成功，尽管它会慢的多，但是还没有慢到让人们讨厌的程度，人们其实很喜欢这个方案。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;所以是的，性能很重要。但是上面介绍的方案，人们也使用了很多年，它能工作并且也很成功，尽管它会慢的多，但是还没有慢到让人们讨厌的程度，人们其实很喜欢这个方案。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;trap-and-emulate--devices&#34;&gt;Trap-and-Emulate &amp;mdash; Devices
 &lt;/h2&gt;&lt;p&gt;接下来我们来看Trap and Emulate的最后一个部分，也就是虚拟机的外部设备。&lt;/p&gt;
@@ -8065,7 +8142,10 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;使用设备模拟（策略一）&lt;/strong&gt;：每次数据库服务器向磁盘发起写操作，VMM 都会模拟磁盘寄存器的访问。由于每次都需要 trap，数据库的性能会受到很大影响，尤其是磁盘 IO 操作较为频繁时，频繁的上下文切换会消耗大量 CPU 资源。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;使用虚拟设备（策略二）&lt;/strong&gt;：Virtio 磁盘驱动通过高效的内存共享方式将读写命令发送给 VMM，VMM 直接从命令队列中读取指令，执行完命令后直接将数据写入内存。这种方式减少了大量的 trap 操作，大大提升了数据库的 IO 性能。&lt;/li&gt;
-&lt;/ul&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;硬件对虚拟机的支持&#34;&gt;硬件对虚拟机的支持
 &lt;/h2&gt;&lt;p&gt;接下来我将讨论硬件对于虚拟机的支持，这里特指的就是Intel的VT-x。为什么Intel和其他的硬件厂商会为虚拟机提供直接的硬件支持呢？&lt;/p&gt;
@@ -8124,7 +8204,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;学生提问：那也需要一个新的VMM吗？&lt;/p&gt;
 &lt;p&gt;Robert教授：VMM可以像一个普通的操作系统一样。XV6可以支持多个进程，并且为每个进程配备一个proc结构体。&lt;/p&gt;
 &lt;p&gt;而我们的VMM也会为每个虚拟机配备一个vm结构体，用来跟踪Guest的信息。&lt;/p&gt;
-&lt;p&gt;并且，如我之前所说的，如果你只有一个CPU核，但是有3个Guest，可以通过定时器中断结合VMM在3个Guest之间切换。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;并且，如我之前所说的，如果你只有一个CPU核，但是有3个Guest，可以通过定时器中断结合VMM在3个Guest之间切换。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;dune-safe-user-level-access-to-privileged-cpu-features&#34;&gt;Dune: Safe User-level Access to Privileged CPU Features
 &lt;/h2&gt;&lt;p&gt;今天要讨论的&lt;a class=&#34;link&#34; href=&#34;https://pdos.csail.mit.edu/6.828/2020/readings/belay-dune.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
@@ -8171,18 +8252,21 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;Robert教授：现在我们使用了Dune，并且有一个进程是被Dune管理的。&lt;/p&gt;
 &lt;p&gt;这个进程通过VT-x实现了Supervisor mode和User mode，我们在User mode运行了一个插件，并且插件也是由带GC的编程语言写的，所以它有属于自己的Page Table，并且其中的PTE也包含了dirty位。&lt;/p&gt;
 &lt;p&gt;但是刚刚说的GC加速在这不能工作，因为Dune会将插件运行在Guest User mode，而就像普通的User mode一样，Guest User mode不允许使用CR3寄存器。&lt;/p&gt;
-&lt;p&gt;所以在Guest User mode，我们不能快速的访问PTE的dirty位。只有在Guest Supervisor mode，才能通过CR3寄存器访问Page Table。所以，并不能同时使用以上Dune提供的两种功能。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;所以在Guest User mode，我们不能快速的访问PTE的dirty位。只有在Guest Supervisor mode，才能通过CR3寄存器访问Page Table。所以，并不能同时使用以上Dune提供的两种功能。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;blockquote&gt;
 &lt;p&gt;学生提问：如果某人基于Dune写了个浏览器，那么对于不支持Dune的计算机来说就很难使用这样的浏览器，对吗？就像很难直接让Chrome使用Dune，因为不是所有的计算机都有这个内核模块。&lt;/p&gt;
 &lt;p&gt;Robert教授：首先，这里提到的内容需要运行在支持VT-x的计算机上，也就是说底层的计算机必须支持VT-x，所以需要VT-x来运行Dune。&lt;/p&gt;
 &lt;p&gt;其次Dune需要被加载来运行浏览器以利用前面说到的特性。&lt;/p&gt;
 &lt;p&gt;所以是的，你需要将所有的东西都设置好。并且Dune是一个研究项目，它的目标是使得人们去思考可以部署在真实世界，并且有足够的价值的一些东西。&lt;/p&gt;
-&lt;p&gt;就像Linux一样，Linux有成千上万个功能，如果某人决定将Dune添加到Linux中作为一个标准功能，那么我们就可以依赖这个功能，并且Chrome也可以直接用它了。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;就像Linux一样，Linux有成千上万个功能，如果某人决定将Dune添加到Linux中作为一个标准功能，那么我们就可以依赖这个功能，并且Chrome也可以直接用它了。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;blockquote&gt;
 &lt;p&gt;学生提问：所以从整体来看，这里就像是创建了一个VM，但是实际上运行的又是一个进程？&lt;/p&gt;
-&lt;p&gt;Robert教授：你可以这么描述。这里主要是对进程进行抽象，但是这里没有用Page Table硬件来时先进程间的隔离（注，其实也使用了，但是主要不依赖Page Table硬件），这里使用的是CPU上的硬件来支持进程，这里说的CPU上的硬件就是VT-x，它包含了一些额外的功能，例如设置好属于进程的Page Table。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Robert教授：你可以这么描述。这里主要是对进程进行抽象，但是这里没有用Page Table硬件来时先进程间的隔离（注，其实也使用了，但是主要不依赖Page Table硬件），这里使用的是CPU上的硬件来支持进程，这里说的CPU上的硬件就是VT-x，它包含了一些额外的功能，例如设置好属于进程的Page Table。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;blockquote&gt;
 &lt;p&gt;学生提问：论文里提到了，如果Dune管理的一个进程fork了，那就会变成一个不被Dune管理的进程，这不会是一个安全漏洞吗？&lt;/p&gt;
@@ -8193,21 +8277,25 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;假设进程的Guest Supervisor mode部分代码写的非常的小心，并且不会被欺骗，那么它不会执行fork，所以这时fork不能工作。&lt;/p&gt;
 &lt;p&gt;如果Supervisor mode的代码允许fork，它会调用Linux的fork系统调用，并得到一个fork进程包含了与原进程有相同的内存镜像，所以我们在新进程中包含可能是恶意的插件代码。&lt;/p&gt;
 &lt;p&gt;如果新进程没有意识到Dune已经被关闭了，那么原来的Supervisor mode中的privileged指令会是非法的。&lt;/p&gt;
-&lt;p&gt;所以我们需要假设Dune管理的进程里面的Supervisor mode部分代码能够足够的小心且足够的聪明，来阻止User mode中的插件代码执行fork。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;所以我们需要假设Dune管理的进程里面的Supervisor mode部分代码能够足够的小心且足够的聪明，来阻止User mode中的插件代码执行fork。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;blockquote&gt;
 &lt;p&gt;学生：被Dune管理的进程拥有Supervisor mode并没有不安全，因为它实际上是non-root mode下的Supervisor mode，就像是Guest操作系统中的Supervisor mode一样，你可以让它做任何事情，因为VT-x的存在，进程就像是一个虚拟机一样，并不能伤害到真正的操作系统。&lt;/p&gt;
-&lt;p&gt;Robert教授：是的，进程不能逃逸出来，因为存在EPT，而EPT会限制进程的地址空间。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Robert教授：是的，进程不能逃逸出来，因为存在EPT，而EPT会限制进程的地址空间。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;blockquote&gt;
 &lt;p&gt;学生提问：在VT-x的方案中，当我们访问Page Table时，因为我们需要通过EPT进行第二层翻译，将Guest物理内存地址翻译到Host物理内存地址，这样从Page Table返回的延时是不是增加了？&lt;/p&gt;
 &lt;p&gt;Robert教授：这里可能会花费更多的时间让硬件MMU来翻译内存地址。&lt;/p&gt;
 &lt;p&gt;在最坏的情况下，比如在RISC-V中，会有多层Page Table，MMU需要一层一层的去查找PTE，x86下同样也有多层Page Table，所以在x86中首先会查找主Page Table，如果要访问更多的内存地址，每一次内存地址的访问都需要再次走到EPT，而EPT也是一个多层的Page Table。&lt;/p&gt;
-&lt;p&gt;所以我并不知道最差情况下需要访问Page Table多少次才能完成翻译，但是很明显在VT-x下会比普通情况下差得多。不过实际中会有cache所以通常不会走到最坏的情况。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;所以我并不知道最差情况下需要访问Page Table多少次才能完成翻译，但是很明显在VT-x下会比普通情况下差得多。不过实际中会有cache所以通常不会走到最坏的情况。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;blockquote&gt;
 &lt;p&gt;学生提问：今天的虚拟机还是普遍会更慢吗？如果是的话，AWS是怎么工作的，因为看起来还挺快的，并且工作的也很好。&lt;/p&gt;
-&lt;p&gt;Robert教授：我认为他们使用了硬件上的VT-x支持，并且使用了我们讨论过的一些功能，这样使得AWS虚拟机比较快，或者并不比真实的计算机慢多少。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Robert教授：我认为他们使用了硬件上的VT-x支持，并且使用了我们讨论过的一些功能，这样使得AWS虚拟机比较快，或者并不比真实的计算机慢多少。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;blockquote&gt;
 &lt;p&gt;学生提问：我对于Trap and Emulate中的Shadow Page Table有个问题，每次都会创建Shadow Page Table吗？难道不能记住上次的Shadow Page Table吗？&lt;/p&gt;
@@ -8218,7 +8306,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;而类似于VT-x的硬件支持使得这部分工作更加的容易了，因为EPT表示你不用构建Shadow Page Table了。&lt;/p&gt;
 &lt;p&gt;学生提问：我有个问题有关GC的，如果有dirty位的话需要重新扫描对象，那么有没有可能会无限扫描？&lt;/p&gt;
 &lt;p&gt;Robert教授：是的，这有个问题，如果一直有对象在更新，扫描能正常结束吗？&lt;/p&gt;
-&lt;p&gt;实际中，GC会先扫描一次，之后它会冻结除了GC线程以外的其他线程，所以这期间不可能再发生任何其他的变更。之后GC才会查看所有PTE的dirty位，但是因为其他所有线程都冻结了，所以不可能会有更多的dirty位了，所以GC查看了所有的dirty位，之后结束GC会结束扫描并创建需要释放对象的列表，最后再恢复所有之前冻结的线程的执行。GC是一个复杂的流程，Dune的论文中并没有足够的篇幅讨论它。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;实际中，GC会先扫描一次，之后它会冻结除了GC线程以外的其他线程，所以这期间不可能再发生任何其他的变更。之后GC才会查看所有PTE的dirty位，但是因为其他所有线程都冻结了，所以不可能会有更多的dirty位了，所以GC查看了所有的dirty位，之后结束GC会结束扫描并创建需要释放对象的列表，最后再恢复所有之前冻结的线程的执行。GC是一个复杂的流程，Dune的论文中并没有足够的篇幅讨论它。&lt;/p&gt;
+&lt;/blockquote&gt;
 </description>
         </item>
         <item>
@@ -8628,7 +8717,9 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;li&gt;&lt;strong&gt;当页表发生变化时，TLB 中的缓存可能会失效&lt;/strong&gt;，继续使用这些失效的映射会导致错误的地址转换。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;flush TLB 是为了清除旧的映射&lt;/strong&gt;，保证 CPU 在新的映射生效时不会使用错误的地址映射。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;所以，更换页表的时候，flush TLB 不是把页表条目装载进 TLB，而是&lt;strong&gt;为了防止使用无效的映射&lt;/strong&gt;，确保地址转换的正确性。&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;所以，更换页表的时候，flush TLB 不是把页表条目装载进 TLB，而是&lt;strong&gt;为了防止使用无效的映射&lt;/strong&gt;，确保地址转换的正确性。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;emulation-library&#34;&gt;&lt;strong&gt;Emulation Library&lt;/strong&gt;
 &lt;/h2&gt;&lt;p&gt;在 L4Linux 的上下文中，&lt;strong&gt;“emulation library”&lt;/strong&gt; 通常指的是一个用于支持系统调用或信号处理的库。它模拟了传统 Linux 系统调用或行为，以便在 L4 这种不同内核架构下运行标准的 Linux 应用程序。它可以让 Linux 应用程序以为它们在一个完整的 Linux 环境中运行，虽然底层实际上是 L4 微内核。&lt;/p&gt;
@@ -8671,7 +8762,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;结论：“进程进入 Linux”确实主要是指 &lt;strong&gt;L4Linux 服务器进程内部状态的改变&lt;/strong&gt;，而 &lt;strong&gt;L4 微内核本身并不改变用户态和内核态的划分&lt;/strong&gt;。L4 系统的设计本质上就是通过减少这种切换来提升性能和简化操作系统的架构。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;结论：“进程进入 Linux”确实主要是指 &lt;strong&gt;L4Linux 服务器进程内部状态的改变&lt;/strong&gt;，而 &lt;strong&gt;L4 微内核本身并不改变用户态和内核态的划分&lt;/strong&gt;。L4 系统的设计本质上就是通过减少这种切换来提升性能和简化操作系统的架构。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;两个执行路径&#34;&gt;两个执行路径
 &lt;/h2&gt;&lt;p&gt;在L4Linux环境中，&lt;strong&gt;主线程会有一张页表&lt;/strong&gt;，这张页表主要用于管理用户进程的地址空间，并映射该进程可以访问的虚拟地址到实际的物理地址。这意味着：&lt;/p&gt;
@@ -8840,7 +8932,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;总结：L4Linux 中延迟 &lt;code&gt;schedule()&lt;/code&gt; 调用的策略虽然看起来像是现代操作系统的一种标准优化，但它的&lt;strong&gt;出色之处&lt;/strong&gt;在于适应了 L4 微内核的架构，特别是减少了协程切换和上下文切换的频率，提高了系统的整体效率。在某些早期的操作系统中，&lt;strong&gt;系统调用后立即调度&lt;/strong&gt;的方式曾是常见的，但这种方式的高开销在现代系统中逐渐被优化设计所取代。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;总结：L4Linux 中延迟 &lt;code&gt;schedule()&lt;/code&gt; 调用的策略虽然看起来像是现代操作系统的一种标准优化，但它的&lt;strong&gt;出色之处&lt;/strong&gt;在于适应了 L4 微内核的架构，特别是减少了协程切换和上下文切换的频率，提高了系统的整体效率。在某些早期的操作系统中，&lt;strong&gt;系统调用后立即调度&lt;/strong&gt;的方式曾是常见的，但这种方式的高开销在现代系统中逐渐被优化设计所取代。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;在所有地址空间中代码和数据的虚拟分配相同会最大化独立应用程序之间的-tlb-冲突&#34;&gt;在所有地址空间中代码和数据的虚拟分配相同会最大化独立应用程序之间的 TLB 冲突
 &lt;/h2&gt;&lt;p&gt;TLB 是一种高速缓存，用来加速虚拟地址到物理地址的转换。每次内存访问时，处理器首先查找 TLB，如果找到匹配的虚拟地址条目，就可以快速获取对应的物理地址，避免慢速的页表查找。&lt;/p&gt;
@@ -9138,7 +9231,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;因此，在原生 Linux 中，由于内核和用户空间共享同一个地址空间，访问更快且管理简单。而在 L4 微内核架构下，L4Linux 运行于用户态、进程间隔离严格，导致无法像原生 Linux 那样自由高效地管理和共享地址空间，这就是为什么在 L4 上无法简单复用 Linux 的虚拟地址管理方式的原因。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;因此，在原生 Linux 中，由于内核和用户空间共享同一个地址空间，访问更快且管理简单。而在 L4 微内核架构下，L4Linux 运行于用户态、进程间隔离严格，导致无法像原生 Linux 那样自由高效地管理和共享地址空间，这就是为什么在 L4 上无法简单复用 Linux 的虚拟地址管理方式的原因。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;l4中的共享库&#34;&gt;L4中的共享库
 &lt;/h2&gt;&lt;p&gt;L4中的共享库主要通过动态链接的方式，将共享的代码库（如标准C库 &lt;code&gt;libc.so&lt;/code&gt;）与应用程序进程关联在一起，促进跨进程调用的优化和性能提升。以下是L4环境下共享库的工作流程和每个环节所需的时间：&lt;/p&gt;
@@ -9313,7 +9407,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;blockquote&gt;
 &lt;p&gt;在一个实验中，一个64×64矩阵乘法被周期性地中断，以产生最大化缓存冲突的合成负载。在不受干扰的情况下，矩阵乘法需要10.9毫秒。每100微秒（μs）中断一次，最坏情况下的执行时间为96.1毫秒，减慢了8.85倍。&lt;/p&gt;
 &lt;p&gt;在缓存分区的情况下，分页器从总共64个二级缓存页面中专门为矩阵乘法分配了3个页面。这既不能避免主缓存的干扰，也不能避免矩阵乘法的数据工作集（64 KB）的二级缓存未命中。然而，通过避免与其他任务的二级缓存干扰，最坏情况下的执行时间减少到24.9毫秒，减慢了仅2.29倍。从实时角度来看，分区后的矩阵乘法比未分区的快近4倍。&lt;/p&gt;
-&lt;p&gt;为实时系统分配资源会降低分时性能。然而，描述的技术使系统资源在实时和分时系统之间进行定制的动态分区成为可能。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;为实时系统分配资源会降低分时性能。然而，描述的技术使系统资源在实时和分时系统之间进行定制的动态分区成为可能。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;co-location&#34;&gt;co-location
 &lt;/h2&gt;&lt;p&gt;在计算机体系结构和操作系统领域，&amp;ldquo;co-location&amp;rdquo;（共置或同址）通常指的是将相关的或彼此需要频繁交互的代码或资源放置在相同的物理位置（如相同的内存或存储单元）或运行在相同的上下文或地址空间内，以减少上下文切换和通信开销。其目标是提高系统性能和效率。&lt;/p&gt;
@@ -9555,7 +9650,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;PCT&lt;/strong&gt;适用于需要快速控制流切换的场景，无需参数传递。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;IPC&lt;/strong&gt;用于进程之间的数据和消息传递，支持更复杂的通信和同步需求。&lt;/li&gt;
-&lt;/ul&gt;&lt;/blockquote&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;正课部分&#34;&gt;正课部分
 &lt;/h2&gt;&lt;h2 id=&#34;monolithic-kernel&#34;&gt;Monolithic kernel
 &lt;/h2&gt;&lt;p&gt;今天主要会讨论微内核（Mircro kernel）。&lt;/p&gt;
@@ -9850,7 +9946,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;如果你在XV6中有一个进程，它只能包含一个线程。&lt;/p&gt;
 &lt;p&gt;但是在现代的操作系统和L4中，在一个进程，一个地址空间中，可以有多个线程。&lt;/p&gt;
 &lt;p&gt;如果你有多个CPU核，那么多个CPU核可以同时运行一个Task。&lt;/p&gt;
-&lt;p&gt;每个线程在Task的地址空间中都有一个设置好的Stack，这意味着你可以写一个程序，并通过并行运行在多个CPU核上得到性能的提升，其中的每个线程都运行在不同的CPU核上。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;每个线程在Task的地址空间中都有一个设置好的Stack，这意味着你可以写一个程序，并通过并行运行在多个CPU核上得到性能的提升，其中的每个线程都运行在不同的CPU核上。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;所以你们可以看到，这里的设计非常依赖IPC，因为如果你想与你的文件系统交互，文件系统想要与设备驱动交互，你都需要来回发送IPC消息。&lt;/p&gt;
 &lt;p&gt;对于每个系统调用，每个Page Fault，每个设备中断，都会有反复的IPC消息。所以IPC系统需要非常快。&lt;/p&gt;
 &lt;h2 id=&#34;improving-ipc-by-kernel-design&#34;&gt;Improving IPC by Kernel Design
@@ -10050,7 +10147,9 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;li&gt;在单个 CPU 系统中，线程进入内核态确实意味着权限提升，但操作系统通过硬件支持和系统调用接口的设计来保证安全性。&lt;/li&gt;
 &lt;li&gt;权限切换的过程并不直接暴露内核，内核会对系统调用进行严格的校验和控制。&lt;/li&gt;
 &lt;li&gt;即使权限提升了，恶意线程仍然无法绕过操作系统的保护机制，内核态的执行是受控制的，不会随意执行用户态提供的有害代码。&lt;/li&gt;
-&lt;/ul&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;实际中，对于这里的场景：发送一个消息并期待收到回复，你可以抛开这种方法并获得简单的多的设计，L4就是采用了后者。&lt;/p&gt;
 &lt;p&gt;有关简单的设计在一篇著名的论文中有提到，论文是&lt;a class=&#34;link&#34; href=&#34;https://www.cse.unsw.edu.au/~cs9242/19/papers/Liedtke_93.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Improving IPC by Kernel Design&lt;/a&gt;
@@ -10166,7 +10265,9 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;li&gt;&lt;strong&gt;RPC 是一种特殊的 IPC 实现方式&lt;/strong&gt;，通过封装函数调用的形式，简化了进程间的通信。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;IPC 包含多种方式&lt;/strong&gt;，包括管道、消息队列、共享内存、信号等，每种方式都有自己的使用场景和性能特点。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;L4 微内核中的优化&lt;/strong&gt;，如 &lt;code&gt;call&lt;/code&gt; 和 &lt;code&gt;sendrecv&lt;/code&gt;，是为提高 RPC 性能而设计的，减少了频繁的用户态和内核态切换。&lt;/li&gt;
-&lt;/ul&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;run-linux-on-top-of-l4-micro-kernel&#34;&gt;Run Linux on top of L4 micro kernel
 &lt;/h2&gt;&lt;p&gt;前一节对于IPC的优化使得人们开始认真考虑使用微内核替代monolithic kernel。&lt;/p&gt;
 &lt;p&gt;然而，这里仍然有个问题，即使IPC很快了，操作系统的剩余部分从哪里去获取？现在的微内核大概只有一个完整操作系统的百分之几，我们该怎么处理操作系统剩下的部分？&lt;/p&gt;
@@ -10297,7 +10398,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;学生提问：看起来一些任务更适合在内核中，但是内核的方案中，要么所有东西都在内核要么都不在。所以要么你有一个monolithic kernel可以完成所有的事情，要么有个micro kernel什么也不做。我认为虚拟内存、文件系统和一些其他的事情在内核中做会非常的有效。不能有些系统具备有一些功能，然后你又可以选择用不用这些功能吗？&lt;/p&gt;
 &lt;p&gt;Robert教授：所有你说的都有非常有道理。&lt;/p&gt;
 &lt;p&gt;实际上有很多微内核相关的项目都构建了各种hybrid内核，MACH有一些不同的版本，其中一些就是hybrid内核，这些内核的核心是包括了IPC的微内核，同时在内核中又是一个完整的Unix系统，比如MACH 2.5就是这样一个hybrid内核，其中一些东西是按照微内核的方式构建，一些东西又是按照Unix方式构建。&lt;/p&gt;
-&lt;p&gt;现代的macOS也以与你描述类似的方式构建，macOS本身是个完整的操作系统，包含了文件系统，同时也很好的支持了IPC和其他用来构建微内核的东西。Google Fuchsia也实现了一些这里的想法。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;现代的macOS也以与你描述类似的方式构建，macOS本身是个完整的操作系统，包含了文件系统，同时也很好的支持了IPC和其他用来构建微内核的东西。Google Fuchsia也实现了一些这里的想法。&lt;/p&gt;
+&lt;/blockquote&gt;
 </description>
         </item>
         <item>
@@ -10376,7 +10478,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;li&gt;&lt;strong&gt;处理指针&lt;/strong&gt;：垃圾收集器扫描相关页面，识别出从老代指向新代的指针。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;解除保护&lt;/strong&gt;：识别和处理后，解除该页面的只读保护，恢复其正常的读写权限。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;这一机制允许系统高效地处理指针赋值带来的潜在错误，同时优化了垃圾回收的效率，尤其是在内存增大的情况下。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;这一机制允许系统高效地处理指针赋值带来的潜在错误，同时优化了垃圾回收的效率，尤其是在内存增大的情况下。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;persistent-stores持久存储&#34;&gt;Persistent stores(持久存储)
 &lt;/h2&gt;&lt;p&gt;&lt;strong&gt;持久存储&lt;/strong&gt;（Persistent Stores）是用于创建超越单个程序调用的动态分配堆。程序可以遍历和修改数据结构、提交更改，甚至可以在不进行永久更改的情况下放弃这些更改。&lt;/p&gt;
 &lt;p&gt;在持久存储中，&lt;strong&gt;指针遍历&lt;/strong&gt;（即读取操作）的设计与在主存储器中的数据读取操作（fetch）一样快速。这是因为持久存储通常被映射到磁盘文件上，从而允许在访问存储的新部分时触发页面错误（类似于内存中的正常操作）。&lt;/p&gt;
@@ -10440,7 +10543,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;li&gt;使用trap后，虽然每次页面错误处理需要大约1200个周期，但它只会在堆溢出时触发，而不是在每次分配时进行比较和分支，因此可以将性能开销减少到&lt;strong&gt;0.3%&lt;/strong&gt;。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;trap的原理是利用页面保护机制。当程序尝试访问一个受保护的页面时，系统会捕获这个错误，并触发一个陷阱（trap）。操作系统或用户态的错误处理程序会处理这个错误，然后可能会解除页面的保护，允许程序继续访问该页面。这个过程的关键在于减少程序在正常情况下的指令开销，而只在必要时通过页面错误机制处理特殊情况。&lt;/p&gt;
-&lt;p&gt;在文中的例子中，垃圾收集器会在分配区域末端设置一个保护页面。当程序试图超出分配区域时，系统触发页面错误，这时垃圾收集器被调用，清理堆内存并允许程序继续运行。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;在文中的例子中，垃圾收集器会在分配区域末端设置一个保护页面。当程序试图超出分配区域时，系统触发页面错误，这时垃圾收集器被调用，清理堆内存并允许程序继续运行。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;vm-primitive-performance&#34;&gt;VM primitive performance
 &lt;/h2&gt;&lt;p&gt;几乎我们在本文中描述的所有算法都属于以下两类之一。&lt;strong&gt;第一类算法&lt;/strong&gt;会将页面批量保护起来（使其无法访问），然后在每次页面错误（page-fault）陷阱发生时，逐个解除这些页面的保护状态。&lt;strong&gt;第二类算法&lt;/strong&gt;则是对页面进行单独的保护和解除保护操作。由于 &lt;code&gt;protN&lt;/code&gt;（批量保护）、&lt;code&gt;trap&lt;/code&gt;（陷阱）和 &lt;code&gt;unprot&lt;/code&gt;（解除保护）始终是一起使用的，如果其中一个操作效率很高，而其他操作非常慢，那么该操作系统的性能也不会很好。&lt;/p&gt;
 &lt;p&gt;我们对整体的用户模式虚拟内存性能进行了两项测试。&lt;strong&gt;第一项测试&lt;/strong&gt;是测量 &lt;code&gt;prot1&lt;/code&gt;、&lt;code&gt;trap&lt;/code&gt; 和 &lt;code&gt;unprot&lt;/code&gt; 的总耗时，方法是对以下基准程序执行100次：&lt;/p&gt;
@@ -10514,7 +10618,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;li&gt;&lt;strong&gt;TLB 清除的开销：&lt;/strong&gt; 多个页面的清除成本可以被分摊，减少了逐个页面执行清除时的成本。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;硬件依赖性降低：&lt;/strong&gt; 批量处理可以使分页操作的效率提升，降低对硬件支持的需求。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;最终，批量操作不仅适用于本文中讨论的高级算法（如垃圾收集），也可以用于传统的磁盘分页系统，以更高效地释放物理内存和管理页面权限。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;最终，批量操作不仅适用于本文中讨论的高级算法（如垃圾收集），也可以用于传统的磁盘分页系统，以更高效地释放物理内存和管理页面权限。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;optimal-page-size&#34;&gt;Optimal page size
 &lt;/h2&gt;&lt;p&gt;选择页面大小是一项重要的设计决策，受多种因素的影响。&lt;/p&gt;
 &lt;p&gt;首先，小页面的主要优点是：当从磁盘读取或写入内存时，传输时间是线性增加的，而查找时间是固定的。因此，较小的页面减少了未使用数据传输到磁盘的浪费。这对于具有&lt;strong&gt;糟糕的局部性&lt;/strong&gt;的应用程序来说尤为重要，因为它们的每个页面中只有很少的字被访问。&lt;/p&gt;
@@ -10554,7 +10659,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;li&gt;&lt;strong&gt;数据同步问题&lt;/strong&gt;：如果同一个物理页面有多个缓存副本，当系统从某个虚拟地址修改数据后，如果不及时更新或清除其他虚拟地址的缓存副本，处理器在访问这些虚拟地址时可能会读取过时的数据，从而导致缓存一致性问题。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;缓存通常会根据虚拟地址进行分配，如果同一个物理页面通过多个虚拟地址映射，这些虚拟地址可能在缓存中占用不同的缓存行，而这正是造成不一致的根本原因。这种不一致性可能导致程序的错误运行，尤其是在垃圾回收等需要保证内存一致性的场景下。&lt;/p&gt;
-&lt;p&gt;所以，&lt;strong&gt;每个虚拟地址不会抽出一个特定的缓存块&lt;/strong&gt;，但同一个物理页面可能通过多个虚拟地址映射，从而在缓存中创建多个条目，增加了保持这些条目一致的复杂性。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;所以，&lt;strong&gt;每个虚拟地址不会抽出一个特定的缓存块&lt;/strong&gt;，但同一个物理页面可能通过多个虚拟地址映射，从而在缓存中创建多个条目，增加了保持这些条目一致的复杂性。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;is-this-too-much-to-ask&#34;&gt;Is this too much to ask?
 &lt;/h2&gt;&lt;p&gt;有些Unix的实现，在某些机器上，提供了非常干净且同步的信号处理机制。引发页面故障的指令会调用信号处理程序，而不会改变处理器的其他状态；后续的指令不会执行，等等。信号处理程序可以完全同步地访问机器寄存器，改变内存映射或机器寄存器，然后重新开始执行故障指令。然而，在高度流水化的机器上，可能会存在多个未处理的页面故障【26】，并且可能在注意到故障之前，多个故障后的指令已经将其结果写入寄存器；这些指令可以恢复执行，但不能重新启动。&lt;/p&gt;
 &lt;p&gt;当用户程序依赖于同步行为时，它们在流水线机器上运行会很困难。现代UNIX系统让用户程序主动参与内存管理功能，允许它们显式地操作其内存映射。这在某种程度上就像是发出了“通往地狱的镌刻请柬”【26】。&lt;/p&gt;
@@ -10658,7 +10764,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;li&gt;
 &lt;p&gt;以及map2。map2使得一个应用程序可以将一个特定的内存地址空间映射两次，并且这两次映射拥有不同的accessability。&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;（注，也就是一段物理内存对应两份虚拟内存，并且两份虚拟内存有不同的accessability）。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;（注，也就是一段物理内存对应两份虚拟内存，并且两份虚拟内存有不同的accessability）。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;XV6在用户程序中支持以上任意的特性吗？&lt;/p&gt;
@@ -10694,7 +10801,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;（注，第四个参数是flags，MAP_PRIVATE是其中一个值，在mmap文件的场景下，MAP_PRIVATE表明更新文件不会写入磁盘，只会更新在内存中的拷贝，详见&lt;a class=&#34;link&#34; href=&#34;https://man7.org/linux/man-pages/man2/mmap.2.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;man page&lt;/a&gt;
 
-）。&lt;/p&gt;&lt;/blockquote&gt;
+）。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;第五个参数是传入的对象，在上面的例子中就是文件描述符。&lt;/p&gt;
@@ -10717,7 +10825,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;（注，详见&lt;a class=&#34;link&#34; href=&#34;https://man7.org/linux/man-pages/man2/mprotect.2.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;man page&lt;/a&gt;
 
-）。&lt;/p&gt;&lt;/blockquote&gt;
+）。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;当你将某个对象映射到了虚拟内存地址空间，你可以修改对应虚拟内存的权限，这样你就可以以特定的权限保护对象的一部分，或者整个对象。&lt;/p&gt;
 &lt;p&gt;举个例子，通过上图对于mprotect的调用将权限设置成只读（R），这时，对于addr到addr+len这段地址，load指令还能执行，但是store指令将会变成Page Fault。&lt;/p&gt;
 &lt;p&gt;类似的，如果你想要将一段地址空间变成完成不可访问的，那么可以在mprotect中的权限参数传入None，那么任何对于addr到addr+len这段地址的访问，都会生成Page Fault。&lt;/p&gt;
@@ -10739,7 +10848,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;sigaction也可以实现这个功能，只是它更加的通用，因为它可以响应不同类型的signal。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;学生提问：看起来mprotect暗示了你可以为单独的地址添加不同的权限，然而在XV6中，我们只能为整个Page设置相同的权限，这里是有区别吗？&lt;/p&gt;
-&lt;p&gt;Frans教授：不，这里并没有区别，它们都在Page粒度工作。如果你好奇的话，有一个单独的系统调用可以查看Page的大小。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Frans教授：不，这里并没有区别，它们都在Page粒度工作。如果你好奇的话，有一个单独的系统调用可以查看Page的大小。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;虚拟内存特性&#34;&gt;虚拟内存特性
 &lt;/h3&gt;&lt;p&gt;如果你回想前面提到过的虚拟内存特性，我们可以将它们对应到这一节描述的Unix接口中来。&lt;/p&gt;
 &lt;ul&gt;
@@ -10792,7 +10902,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;因此，&lt;strong&gt;“硬件 Page Table”指的是地址翻译依赖于硬件完成&lt;/strong&gt;，而不是说用户或操作系统完全无法控制页表。操作系统仍然可以通过内核态管理页表并间接影响地址空间，只不过实际的地址翻译过程由硬件（CPU 和 MMU）来加速处理，以提高效率。这种设计是为了平衡性能与灵活性，使得系统能够高效地管理和访问内存。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;因此，&lt;strong&gt;“硬件 Page Table”指的是地址翻译依赖于硬件完成&lt;/strong&gt;，而不是说用户或操作系统完全无法控制页表。操作系统仍然可以通过内核态管理页表并间接影响地址空间，只不过实际的地址翻译过程由硬件（CPU 和 MMU）来加速处理，以提高效率。这种设计是为了平衡性能与灵活性，使得系统能够高效地管理和访问内存。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;但是通常来说，地址空间还包含了一些操作系统的数据结构，这些数据结构与任何硬件设计都无关，它们被称为Virtual Memory Areas（VMAs）。&lt;/p&gt;
 &lt;p&gt;VMA会记录一些有关连续虚拟内存地址段的信息。&lt;/p&gt;
 &lt;p&gt;在一个地址空间中，可能包含了多个section，每一个section都由一个连续的地址段构成，对于每个section，都有一个VMA对象。&lt;/p&gt;
@@ -10875,13 +10986,15 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;li&gt;&lt;strong&gt;“segfault事件传播到用户空间”&lt;/strong&gt; 是指通过信号机制，内核将 &lt;code&gt;segfault&lt;/code&gt; 这个异常信息传递给用户态，用户态的 &lt;code&gt;handler&lt;/code&gt; 处理程序可以在用户空间执行。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;进程从trap到trampoline再到用户空间&lt;/strong&gt; 的确是一个循环的过程。&lt;code&gt;handler&lt;/code&gt; 本身无法直接更改 PTE 的权限，但它可以通过系统调用（如 &lt;code&gt;mprotect&lt;/code&gt;）向内核请求修改，最终由内核来执行 PTE 的更新操作。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;这种机制在性能和安全性之间取得了平衡：&lt;strong&gt;用户程序通过信号机制间接地影响页表内容，而页表的实际修改仍然由内核完成&lt;/strong&gt;。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;这种机制在性能和安全性之间取得了平衡：&lt;strong&gt;用户程序通过信号机制间接地影响页表内容，而页表的实际修改仍然由内核完成&lt;/strong&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;blockquote&gt;
 &lt;p&gt;学生提问：当我们允许用户针对Page Fault来运行handler代码时，这不会引入安全漏洞吗？&lt;/p&gt;
 &lt;p&gt;Frans教授：这是个很好的问题。会有安全问题吗？你们怎么想的？这会破坏User/kernel或者不同进程之间的隔离性吗？或者从另一个角度来说，你的问题是sigalarm会破坏隔离性吗？&lt;/p&gt;
 &lt;p&gt;当我们执行upcall的时候，upcall会走到设置了handler的用户空间进程中，所以handler与设置了它的应用程序运行在相同的context，相同的Page Table中。&lt;/p&gt;
 &lt;p&gt;所以handler唯一能做的事情就是影响那个应用程序，并不能影响其他的应用程序，因为它不能访问其他应用程序的Page Table，或者切换到其他应用程序的Page Table。所以这里还好。&lt;/p&gt;
-&lt;p&gt;当然，如果handler没有返回，或者做了一些坏事，最终内核还是会杀掉进程。所以唯一可能出错的地方就是进程伤害了自己，但是它不能伤害任何其他进程。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;当然，如果handler没有返回，或者做了一些坏事，最终内核还是会杀掉进程。所以唯一可能出错的地方就是进程伤害了自己，但是它不能伤害任何其他进程。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;构建大的缓存表&#34;&gt;构建大的缓存表
 &lt;/h2&gt;&lt;p&gt;接下来，我将通过介绍几个例子来看一下如何使用之前介绍的内容。&lt;/p&gt;
 &lt;p&gt;我会从一个非常简单的例子开始，之后我们会看一下Garbage Collector，因为很多同学都问了Garbage Collector的问题，所以GC是一个可以深入探讨的好话题。&lt;/p&gt;
@@ -10905,7 +11018,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;所以你需要使用Prot1或者ProtN来减少这些Page的accessbility。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;学生提问：在分配物理内存Page时，我们需要让操作系统映射到地址空间的特定地址，否则的话可能会映射到任意地址，是吧？&lt;/p&gt;
-&lt;p&gt;Frans教授：操作系统会告知是哪个地址，并且这里可能是任意的地址。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Frans教授：操作系统会告知是哪个地址，并且这里可能是任意的地址。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;为了更具体的描述这里的应用，我这里有个小的实现，我们可以看一看这里是如何使用现有的Unix特性。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -11029,7 +11143,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;现在我们得到了一个Page Fault，我们只需要映射一个Page，在这个Page中，我们会存入i，i+1。。。的平方根（注，因为一个Page4096字节，一个double8个字节，所以一个Page可以保存512个表单项）。&lt;/p&gt;
 &lt;p&gt;因为这是第一个Page Fault，之前并没有映射了内存Page，所以不需要做任何事情。&lt;/p&gt;
 &lt;p&gt;之后，程序继续运行并且查找了表单中的更多项，如果查找一个没有位于已分配Page上的表单项时，会得到另一个Page Fault。&lt;/p&gt;
-&lt;p&gt;这时，在handle_sigsegv会分配第二个内存Page，并为这个Page计算平方根的值。之后会munmap记录在last_page_base中的内存。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;这时，在handle_sigsegv会分配第二个内存Page，并为这个Page计算平方根的值。之后会munmap记录在last_page_base中的内存。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;bakers-real-time-copying-garbage-collector&#34;&gt;Baker&amp;rsquo;s Real-Time Copying Garbage Collector
 &lt;/h2&gt;&lt;p&gt;接下来我会讨论另一个例子，也就是Garbage Collector（注，后面将Garbage Collector和Garbage Collection都简称为GC），并且我也收到了很多有关Garbage Collector的问题。&lt;/p&gt;
 &lt;p&gt;GC是指编程语言替程序员完成内存释放，这样程序员就不用像在C语言中一样调用free来释放内存。&lt;/p&gt;
@@ -11109,7 +11224,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;对于这些指针，GC会将对应的对象拷贝到to空间的unscanned区域中。&lt;/p&gt;
 &lt;p&gt;之后，当应用程序使用了这些未被扫描的对象，它会再次得到Page Fault，进而再扫描这些对象，以此类推。&lt;/p&gt;
 &lt;p&gt;学生提问：在完成了GC之后，会切换from和to空间吗？&lt;/p&gt;
-&lt;p&gt;Frans教授：最开始我们使用的是from空间，当用完了的时候，你会将对象拷贝到to空间，一旦完成了扫描，from空间也被完全清空了，你可以切换两个空间的名字。现在会使用to空间来完成内存分配。直到它也满了，你会再次切换。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Frans教授：最开始我们使用的是from空间，当用完了的时候，你会将对象拷贝到to空间，一旦完成了扫描，from空间也被完全清空了，你可以切换两个空间的名字。现在会使用to空间来完成内存分配。直到它也满了，你会再次切换。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;blockquote&gt;
 &lt;p&gt;在理解 &lt;code&gt;to&lt;/code&gt; 空间的 &lt;strong&gt;unscanned 区域&lt;/strong&gt;时，首先要明确 &lt;code&gt;to&lt;/code&gt; 空间的作用及其与 &lt;code&gt;from&lt;/code&gt; 空间的关系。这通常涉及到一种叫做 &lt;strong&gt;半空间垃圾回收算法&lt;/strong&gt;（或称 &lt;strong&gt;复制收集算法&lt;/strong&gt;），其中内存被划分为两个区域：&lt;code&gt;from&lt;/code&gt; 空间和 &lt;code&gt;to&lt;/code&gt; 空间。&lt;/p&gt;
 &lt;p&gt;在复制收集算法中：&lt;/p&gt;
@@ -11139,7 +11255,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;li&gt;&lt;code&gt;from&lt;/code&gt; 空间中原有的对象会被标记为可以回收。此时，&lt;code&gt;to&lt;/code&gt; 空间中的对象成为新的活动对象集。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;空间交换&lt;/strong&gt;：&lt;code&gt;from&lt;/code&gt; 和 &lt;code&gt;to&lt;/code&gt; 空间交换角色。原来的 &lt;code&gt;to&lt;/code&gt; 空间变为新的 &lt;code&gt;from&lt;/code&gt; 空间，用于分配和存放新对象；原来的 &lt;code&gt;from&lt;/code&gt; 空间则被完全清空，作为下一次 GC 的目标。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;在垃圾回收过程中，&lt;code&gt;to&lt;/code&gt; 空间的 &lt;code&gt;unscanned&lt;/code&gt; 区域存放的是&lt;strong&gt;从 &lt;code&gt;from&lt;/code&gt; 空间拷贝过来的&lt;/strong&gt;、&lt;strong&gt;尚未被扫描的活动对象&lt;/strong&gt;。通过扫描这些对象，GC 可以递归地找到并拷贝其他活动对象，避免将垃圾对象转移到 &lt;code&gt;to&lt;/code&gt; 空间。这样可以保证 &lt;code&gt;to&lt;/code&gt; 空间在完成后只包含当前的活动对象，垃圾被完全丢弃在 &lt;code&gt;from&lt;/code&gt; 空间中等待清空。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;在垃圾回收过程中，&lt;code&gt;to&lt;/code&gt; 空间的 &lt;code&gt;unscanned&lt;/code&gt; 区域存放的是&lt;strong&gt;从 &lt;code&gt;from&lt;/code&gt; 空间拷贝过来的&lt;/strong&gt;、&lt;strong&gt;尚未被扫描的活动对象&lt;/strong&gt;。通过扫描这些对象，GC 可以递归地找到并拷贝其他活动对象，避免将垃圾对象转移到 &lt;code&gt;to&lt;/code&gt; 空间。这样可以保证 &lt;code&gt;to&lt;/code&gt; 空间在完成后只包含当前的活动对象，垃圾被完全丢弃在 &lt;code&gt;from&lt;/code&gt; 空间中等待清空。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;论文中提到使用虚拟内存的另一个好处是，它简化了GC的并发。&lt;/p&gt;
 &lt;p&gt;GC现在可以遍历未被扫描的内存Page，并且一次扫描一个Page，同时可以确保应用程序不能访问这个内存Page，因为对于应用程序来说，未被扫描的内存Page权限为None。&lt;/p&gt;
 &lt;p&gt;虚拟内存硬件引入了这种显式的同步机制，或者说对于抢占的保护。&lt;/p&gt;
@@ -11155,7 +11272,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;这里使用了map2将物理内存映射到应用程序地址空间中两次的能力，其中每次映射都有不同的权限，这样这里的场景才能工作。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;学生提问：GC和应用程序是不是有不同的Page Table？&lt;/p&gt;
-&lt;p&gt;Frans教授：不，它们拥有相同的Page Table。它们只是将物理内存映射到了地址空间的两个位置，也就是Page Table的两个位置。在一个位置，PTE被标记成invalid，在另一个位置，PTE被标记成可读写的。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Frans教授：不，它们拥有相同的Page Table。它们只是将物理内存映射到了地址空间的两个位置，也就是Page Table的两个位置。在一个位置，PTE被标记成invalid，在另一个位置，PTE被标记成可读写的。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;使用虚拟内存特性的gc代码展示&#34;&gt;使用虚拟内存特性的GC代码展示
 &lt;/h2&gt;&lt;p&gt;为了更清晰的说明上一节的内容，我这里有个针对论文中方法的简单实现，我可以肯定它包含了一些bug，因为我并没有认真的测试它。&lt;/p&gt;
 &lt;p&gt;首先，应用程序使用的API包括了new和readptr。&lt;/p&gt;
@@ -11406,7 +11524,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;学生提问：GC什么时候会停止，什么时候又会再开始？我认为GC可以一直运行，如果它是并发的。&lt;/p&gt;
 &lt;p&gt;Frans教授：是的，基于虚拟内存的解决方案一个酷的地方在于，GC可以一直运行。它可以在没有unscanned对象时停止。&lt;/p&gt;
 &lt;p&gt;学生提问：但是你需要遍历所有在from空间的对象，你怎么知道已经遍历了所有的对象呢？&lt;/p&gt;
-&lt;p&gt;Frans教授：你会从根节点开始扫描整个对象的图，然后拷贝到to空间。在某个时间点，你不再添加新的对象了，因为所有的对象已经被拷贝过了。当你不再添加新的对象，你的unscanned区域就不再增长，如果它不再增长，那么你就遍历了所有的对象（注，可以想象一个普通的DFS或者BFS过程）。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Frans教授：你会从根节点开始扫描整个对象的图，然后拷贝到to空间。在某个时间点，你不再添加新的对象了，因为所有的对象已经被拷贝过了。当你不再添加新的对象，你的unscanned区域就不再增长，如果它不再增长，那么你就遍历了所有的对象（注，可以想象一个普通的DFS或者BFS过程）。&lt;/p&gt;
+&lt;/blockquote&gt;
 </description>
         </item>
         <item>
@@ -11491,7 +11610,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;假设root目录下有两个子目录D1和D2，D1目录下有两个文件F1和F2，每个文件又包含了一些block。&lt;/p&gt;
 &lt;p&gt;除此之外，还有一些其他并非是树状结构的数据，比如bitmap表明了每一个data block是空闲的还是已经被分配了。&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;注，Frans和Robert在这里可能有些概念不统一，对于Frans来说，目录内容应该也属于文件内容，目录是一种特殊的文件，详见14.3；而对于Robert来说，目录内容是metadata。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;注，Frans和Robert在这里可能有些概念不统一，对于Frans来说，目录内容应该也属于文件内容，目录是一种特殊的文件，详见14.3；而对于Robert来说，目录内容是metadata。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;inode，目录内容，bitmap block，我们将会称之为metadata block，另一类就是持有了文件内容的block，或者叫data block。&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
@@ -11608,7 +11728,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;在磁盘上的transaction，只能以log记录的形式存在，并且还没有写到对应的文件系统block中。&lt;/p&gt;
 &lt;p&gt;logging系统在后台会从最早的transaction开始，将transaction中的data block写入到对应的文件系统中。&lt;/p&gt;
 &lt;p&gt;当整个transaction的data block都写完了，之后logging系统才能释放并重用log中的空间。&lt;/p&gt;
-&lt;p&gt;所以log其实是个循环的数据结构，如果用到了log的最后，logging系统会从log的最开始位置重新使用。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;所以log其实是个循环的数据结构，如果用到了log的最后，logging系统会从log的最开始位置重新使用。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;记住这里的log的结构，它对于后面的内容也很重要。&lt;/p&gt;
 &lt;h2 id=&#34;ext3如何提升性能&#34;&gt;ext3如何提升性能
 &lt;/h2&gt;&lt;p&gt;ext3通过3种方式提升了性能：&lt;/p&gt;
@@ -11620,7 +11741,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;这些基本上就是ext3有的，而XV6没有的特性。接下来我将一一介绍这里的特性。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;学生提问：有关batching，XV6不是也支持多个系统调用同时执行start_op和end_op，然后再一起commit吗？&lt;/p&gt;
-&lt;p&gt;Robert教授：是的，XV6具备有限能力的batching。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Robert教授：是的，XV6具备有限能力的batching。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;首先是&lt;strong&gt;异步的系统调用&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;这表示系统调用修改完位于缓存中的block之后就返回，并不会触发写磁盘。&lt;/p&gt;
 &lt;p&gt;所以这里明显的优势就是系统调用能够快速的返回。&lt;/p&gt;
@@ -11642,7 +11764,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;对于大部分程序，例如编译器，如果crash了编译器的输出丢失了其实没什么，所以许多程序并不会调用fsync，并且乐于获得异步系统调用带来的高性能。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;学生提问：这是不是有时也被称为flush，因为我之前经常听到这个单词？&lt;/p&gt;
-&lt;p&gt;Robert教授：是的，一个合理的解释fsync的工作的方式是，它flush了所有文件相关的写磁盘操作到了磁盘中，之后再返回，所以flush也是针对这个场景的一个合理的单词。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Robert教授：是的，一个合理的解释fsync的工作的方式是，它flush了所有文件相关的写磁盘操作到了磁盘中，之后再返回，所以flush也是针对这个场景的一个合理的单词。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;以上就是异步系统调用，下一个ext3使用的技术是&lt;strong&gt;批量执行&lt;/strong&gt;（batching）。&lt;/p&gt;
 &lt;p&gt;在任何时候，ext3只会有一个open transaction。&lt;/p&gt;
 &lt;p&gt;ext3中的一个transaction可以包含多个不同的系统调用。&lt;/p&gt;
@@ -11704,7 +11827,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;Robert教授：这的确会是一个问题，这里有个潜在的困难点，因为transaction写入到log中的内容只能包含由该transaction中的系统调用所做的更新，而不能包含在该transaction之后的系统调用的更新。&lt;/p&gt;
 &lt;p&gt;因为如果这么做了的话，那么可能log中会只包含系统调用的部分更新，而我们需要确保transaction包含系统调用的所有更新。所以我们不能承担transaction包含任何在该transaction之后的更新的风险。&lt;/p&gt;
 &lt;p&gt;ext3是这样解决这个问题的，当它决定结束当前的open transaction时，它会在内存中拷贝所有相关的block，之后transaction的commit是基于这些block的拷贝进行的。&lt;/p&gt;
-&lt;p&gt;所以transaction会有属于自己的block的拷贝。为了保证这里的效率，操作系统会使用copy-on-write（注，详见8.4）来避免不必要的拷贝，这样只有当对应的block在后面的transaction中被更新了，它在内存中才会实际被拷贝。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;所以transaction会有属于自己的block的拷贝。为了保证这里的效率，操作系统会使用copy-on-write（注，详见8.4）来避免不必要的拷贝，这样只有当对应的block在后面的transaction中被更新了，它在内存中才会实际被拷贝。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;concurrency之所以能帮助提升性能，是因为它可以帮助我们并行的运行系统调用，我们可以得到多核的并行能力。&lt;/p&gt;
 &lt;p&gt;如果我们可以在运行应用程序和系统调用的同时，来写磁盘，我们可以得到I/O concurrency，也就是同时运行CPU和磁盘I/O。这些都能帮助我们更有效，更精细的使用硬件资源。&lt;/p&gt;
 &lt;h2 id=&#34;ext3文件系统调用格式&#34;&gt;ext3文件系统调用格式
@@ -11778,7 +11902,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;Robert教授：是的，如果需要写入的数据足够多，并且log迅速的用光了。我们甚至都不能在释放log空间之前开始新的系统调用。如果你们关注细节的话，这里会有一些潜在的死锁。首先系统调用需要预声明需要多少个block，这样logging系统才知道对于该transaction需要多少log空间，因为我们不会在没有足够空间来commit transaction时，开始一个新的transaction（注，难道不能将不能写入到磁盘log中的transaction先缓存在内存中吗？虽然这样可能会导致堆积）。&lt;/p&gt;
 &lt;p&gt;学生提问：如果新的transaction需要的空间走到了T8，那么现在就需要等待T7，T8结束，这是怎么工作的呢？&lt;/p&gt;
 &lt;p&gt;Robert教授：图中的T7，T8，T9其中的系统调用都完成了，并且都已经在commit到log中了。在上面的图中，我们会直接开始T10，新的系统调用会写入到transaction T10，最终当T10需要commit到log中，并且它大到需用用到T8的空间时，它需要等待T7，T8结束。&lt;/p&gt;
-&lt;p&gt;文件系统会记录每个transaction的大小，这样文件系统就知道要等待多少个之前的transaction结束。所以这里还有不少的记录工作，这样文件系统才能理解所有旧的transaction的状态。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;文件系统会记录每个transaction的大小，这样文件系统就知道要等待多少个之前的transaction结束。所以这里还有不少的记录工作，这样文件系统才能理解所有旧的transaction的状态。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;有关如何重用log空间，这里有个小细节。&lt;/p&gt;
 &lt;p&gt;在log的最开始有一个super block，所以在任何时候log都是由一个super block和一些transaction组成。&lt;/p&gt;
 &lt;p&gt;假设T4是最新的transaction，之前是T1，T2，T3。&lt;/p&gt;
@@ -11801,7 +11926,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;现在的问题是恢复软件如何可靠的区分出来呢？是的，每个descriptor和commit block都以某个魔法数字作为起始，这是一个32bit的数字。&lt;/p&gt;
 &lt;p&gt;所以如果扫描完了T8，下一个block以魔法数字作为起始，那么恢复软件就会认为这是一个descriptor block。&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;（注，也有可能T5正好完美的跟在T8后面，也就是说T8的commit block之后就是T5的descriptor block，同时T5的commit block也存在，所以这里必然还需要一些其他的机制，我猜是用到了transaction的序列号）&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;（注，也有可能T5正好完美的跟在T8后面，也就是说T8的commit block之后就是T5的descriptor block，同时T5的commit block也存在，所以这里必然还需要一些其他的机制，我猜是用到了transaction的序列号）&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;但是，现在我们看到的block可能是包含了任意数据的data block，所以它可能是文件中的一个data block并且也是以魔法数字作为起始。&lt;/p&gt;
 &lt;p&gt;所以这里的最后一个细节是，logging系统需要能区分一个以魔法数字作为起始的descriptor block和一个以魔法数字作为起始的data block。&lt;/p&gt;
 &lt;p&gt;你可以想到各种方法来实现这种区分，ext3是这样做的，当它向log写一个block时，如果这个block既不是descriptor block也不是commit block，但是又以魔法数字作为起始，文件系统会以0替换前32bit，并在transaction的descriptor block中为该data block设置一个bit。&lt;/p&gt;
@@ -11825,7 +11951,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;学生提问：但是在XV6我还是可以有多个transaction，只是说不能异步的执行它们，对吗？&lt;/p&gt;
 &lt;p&gt;Robert教授：这里其实有点模糊，XV6实际上允许在一个transaction中包含多个系统调用（注，详见15.8），所以XV6有一些并发和batching的能力，但是当XV6决定要commit一个transaction时，在完全完成这个transaction之前，是不能执行任何新的系统调用的。&lt;/p&gt;
 &lt;p&gt;因为直到前一个transaction完全完成，并没有log空间来存放新的系统调用。&lt;/p&gt;
-&lt;p&gt;所以XV6要么是在运行一些系统调用，要么是在commit transaction，但是它不能同时干这两件事情，而ext3可以同时干这两件事情。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;所以XV6要么是在运行一些系统调用，要么是在commit transaction，但是它不能同时干这两件事情，而ext3可以同时干这两件事情。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;为什么新transaction需要等前一个transaction中系统调用执行完成&#34;&gt;为什么新transaction需要等前一个transaction中系统调用执行完成
 &lt;/h2&gt;&lt;p&gt;以上就是ext3中相对来说直观的部分。实际上还有一些棘手的细节我想讨论一下。&lt;/p&gt;
 &lt;p&gt;之前我提到过，ext3中存在一个open transaction，但是当ext3决定要关闭该transaction时，它需要等待该transaction中的所有系统调用都结束，之后才能开始新的transaction。&lt;/p&gt;
@@ -11858,7 +11985,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;因为直到T1 commit了，整个unlink都不被允许执行。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;学生提问：当你关闭一个open transaction时，具体会发生什么呢？会对当前的缓存做一个快照吗？&lt;/p&gt;
-&lt;p&gt;Robert教授：会的，当我们关闭一个transaction，文件系统会拷贝被transaction中的系统调用所修改的所有block，之后transaction才会commit这些block。后面的transaction会在真正的block cache上运行。当将block都commit到log之后，对于block cache的拷贝就可以丢弃了。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Robert教授：会的，当我们关闭一个transaction，文件系统会拷贝被transaction中的系统调用所修改的所有block，之后transaction才会commit这些block。后面的transaction会在真正的block cache上运行。当将block都commit到log之后，对于block cache的拷贝就可以丢弃了。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;总结&#34;&gt;总结
 &lt;/h2&gt;&lt;p&gt;最后我希望同学们记住的有关logging和ext3的是：&lt;/p&gt;
 &lt;ul&gt;
@@ -11913,7 +12041,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;ext3的ordered data通过先写入文件内容到磁盘中，再commit修改了的inode来解决这里的问题。&lt;/p&gt;
 &lt;p&gt;如果你是个应用程序，你写了一个文件并导致一个新的文件系统data block被分配出来，文件系统会将新的文件内容写到新分配的data block中，之后才会commit transaction，进而导致inode更新并包含新分配的data block编号。&lt;/p&gt;
 &lt;p&gt;如果在写文件数据和更新inode之间发生了crash，你也看不到其他人的旧的数据，因为这时就算有了更新了的data block，但是也没关系，因为现在不仅inode没有更新，连bitmap block也没更新，相应的data block还处于空闲状态，并且可以分配给其他的程序，你并不会因此丢失block。&lt;/p&gt;
-&lt;p&gt;这里的效果就是我们写了一个data block但是最终并没有被任何文件所使用。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;这里的效果就是我们写了一个data block但是最终并没有被任何文件所使用。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;qa&#34;&gt;Q&amp;amp;A
 &lt;/h2&gt;&lt;h2 id=&#34;拷贝具体过程&#34;&gt;拷贝具体过程
 &lt;/h2&gt;&lt;p&gt;在 ext3 文件系统中，当关闭一个开放的事务（open transaction）时，涉及的拷贝过程是为了保证事务的一致性和数据的原子性。让我们逐步解析这个拷贝过程，了解它的各个环节及其对后续事务的影响。&lt;/p&gt;
@@ -12218,14 +12347,16 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;块的总数和 inode 的总数&lt;/strong&gt;：超级块记录了文件系统中总的块数和 inode 数。inode 是文件系统中的一种数据结构，每个 inode 对应一个文件或目录，存储了它们的元数据信息（如文件大小、权限等）。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;文件系统的其他元数据&lt;/strong&gt;：例如文件系统的版本号、磁盘块大小等信息。&lt;/li&gt;
-&lt;/ol&gt;&lt;/blockquote&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;它由一个头块（header block）和一系列更新块的副本（logged block）组成。&lt;/p&gt;
 &lt;p&gt;头块包含一个扇区号数组（每个logged block对应一个扇区号）以及日志块的计数。&lt;/p&gt;
 &lt;p&gt;磁盘上的头块中的计数或者为零，表示日志中没有事务；或者为非零，表示日志包含一个完整的已提交事务，并具有指定数量的logged block。&lt;/p&gt;
 &lt;p&gt;在事务提交（commit）时Xv6才向头块写入数据，在此之前不会写入，并在将logged blocks复制到文件系统后将计数设置为零。&lt;/p&gt;
 &lt;p&gt;因此，事务中途崩溃将导致日志头块中的计数为零；提交后的崩溃将导致非零计数。&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;注：logged block表示已经记录了操作信息的日志块，而log block仅表示日志块&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;注：logged block表示已经记录了操作信息的日志块，而log block仅表示日志块&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;每个系统调用的代码都指示写入序列的起止，考虑到崩溃，写入序列必须具有原子性。&lt;/p&gt;
 &lt;p&gt;为了允许不同进程并发执行文件系统操作，日志系统可以将多个系统调用的写入累积到一个事务中。&lt;/p&gt;
 &lt;p&gt;因此，单个提交可能涉及多个完整系统调用的写入。&lt;/p&gt;
@@ -12269,12 +12400,14 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;&lt;code&gt;log_write&lt;/code&gt;（&lt;em&gt;&lt;strong&gt;kernel/log.c&lt;/strong&gt;&lt;/em&gt;:214）充当&lt;code&gt;bwrite&lt;/code&gt;的代理。它将块的扇区号记录在内存中，在磁盘上的日志中预定一个槽位，并调用&lt;code&gt;bpin&lt;/code&gt;将缓存固定在block cache中，以防止block cache将其逐出。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;注：固定在block cache是指在缓存不足需要考虑替换时，不会将这个block换出，因为事务具有原子性：假设块45被写入，将其换出的话需要写入磁盘中文件系统对应的位置，而日志系统要求所有内存必须都存入日志，最后才能写入文件系统。&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;bpin&lt;/code&gt;是通过增加引用计数防止块被换出的，之后需要再调用&lt;code&gt;bunpin&lt;/code&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;&lt;code&gt;bpin&lt;/code&gt;是通过增加引用计数防止块被换出的，之后需要再调用&lt;code&gt;bunpin&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;在提交之前，块必须留在缓存中：在提交之前，缓存的副本是修改的唯一记录；只有在提交后才能将其写入磁盘上的位置；同一事务中的其他读取必须看到修改。&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;log_write&lt;/code&gt;会注意到在单个事务中多次写入一个块的情况，并在日志中为该块分配相同的槽位。这种优化通常称为合并（absorption）。&lt;/p&gt;
 &lt;p&gt;例如，包含多个文件inode的磁盘块在一个事务中被多次写入是很常见的。通过将多个磁盘写入合并到一个磁盘中，文件系统可以节省日志空间并实现更好的性能，因为只有一个磁盘块副本必须写入磁盘。&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;注：日志需要写入磁盘，以便重启后读取，但日志头块和日志数据块也会在block cache中有一个副本&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;注：日志需要写入磁盘，以便重启后读取，但日志头块和日志数据块也会在block cache中有一个副本&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;&lt;code&gt;end_op&lt;/code&gt;（&lt;em&gt;&lt;strong&gt;kernel/log.c&lt;/strong&gt;&lt;/em&gt;:146）首先减少未完成系统调用的计数。&lt;/p&gt;
 &lt;p&gt;如果计数现在为零，则通过调用&lt;code&gt;commit()&lt;/code&gt;提交当前事务。这一过程分为四个阶段。&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;write_log()&lt;/code&gt;（&lt;em&gt;&lt;strong&gt;kernel/log.c&lt;/strong&gt;&lt;/em&gt;:178）将事务中修改的每个块从缓冲区缓存复制到磁盘上日志槽位中。&lt;/p&gt;
@@ -12323,7 +12456,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;li&gt;
 &lt;p&gt;在文件系统操作过程中的内核panic&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;包括XV6在内的大部分内核都会panic，panic可能是由内核bug引起，它会突然导致你的系统故障，但是你肯定期望能够在重启之后还能使用文件系统。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;包括XV6在内的大部分内核都会panic，panic可能是由内核bug引起，它会突然导致你的系统故障，但是你肯定期望能够在重启之后还能使用文件系统。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;文件系统的操作都包含了多个步骤，在多个步骤的错误位置crash或者电力故障了，存储在磁盘上的文件系统可能会是一种不一致的状态，之后可能会发生一些坏的事情。&lt;/p&gt;
@@ -12333,7 +12467,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;XV6的实现非常简单，几乎是最简单的实现logging的方法，因为我们只是为了演示关键的思想。&lt;/p&gt;
 &lt;p&gt;由于XV6实现的较为简单，XV6中的logging存在一个缺点，它的性能并不咋样，尽管logging系统原则上来说可以获得好的性能。&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;在下节课我们将通过学习Linux的ext3文件系统所使用的logging系统，来看一下如何实现一个高性能logging系统。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;在下节课我们将通过学习Linux的ext3文件系统所使用的logging系统，来看一下如何实现一个高性能logging系统。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;这是我们最后一节有关XV6的课程。这节课之后，我们将切换到阅读论文。&lt;/p&gt;
 &lt;p&gt;因为这节课讲完了之后，我们就覆盖了操作系统的基本概念，我们可以通过阅读论文看一些更高级的操作系统思想。&lt;/p&gt;
 &lt;p&gt;这节课关注的场景。类似于创建文件，写文件这样的文件系统操作，都包含了多个步骤的写磁盘操作。&lt;/p&gt;
@@ -12483,7 +12618,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;学生提问：因为这里的接口只有read/write，但是如果我们做append操作，就不再安全了，对吧？&lt;/p&gt;
 &lt;p&gt;Frans教授：某种程度来说，append是文件系统层面的操作，在这个层面，我们可以使用上面介绍的logging机制确保其原子性（注，append也可以拆解成底层的read/write）。&lt;/p&gt;
 &lt;p&gt;学生提问：当正在commit log的时候crash了会发生什么？比如说你想执行多个写操作，但是只commit了一半。&lt;/p&gt;
-&lt;p&gt;Frans教授：在上面的第2步，执行commit操作时，你只会在记录了所有的write操作之后，才会执行commit操作。所以在执行commit时，所有的write操作必然都在log中。而commit操作本身也有个有趣的问题，它究竟会发生什么？如我在前面指出的，commit操作本身只会写一个block。文件系统通常可以这么假设，单个block或者单个sector的write是原子操作（注，有关block和sector的区别详见14.3）。这里的意思是，如果你执行写操作，要么整个sector都会被写入，要么sector完全不会被修改。所以sector本身永远也不会被部分写入，并且commit的目标sector总是包含了有效的数据。而commit操作本身只是写log的header，如果它成功了只是在commit header中写入log的长度，例如5，这样我们就知道log的长度为5。这时crash并重启，我们就知道需要重新install 5个block的log。如果commit header没能成功写入磁盘，那这里的数值会是0。我们会认为这一次事务并没有发生过。这里本质上是write ahead rule，它表示logging系统在所有的写操作都记录在log中之前，不能install log。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Frans教授：在上面的第2步，执行commit操作时，你只会在记录了所有的write操作之后，才会执行commit操作。所以在执行commit时，所有的write操作必然都在log中。而commit操作本身也有个有趣的问题，它究竟会发生什么？如我在前面指出的，commit操作本身只会写一个block。文件系统通常可以这么假设，单个block或者单个sector的write是原子操作（注，有关block和sector的区别详见14.3）。这里的意思是，如果你执行写操作，要么整个sector都会被写入，要么sector完全不会被修改。所以sector本身永远也不会被部分写入，并且commit的目标sector总是包含了有效的数据。而commit操作本身只是写log的header，如果它成功了只是在commit header中写入log的长度，例如5，这样我们就知道log的长度为5。这时crash并重启，我们就知道需要重新install 5个block的log。如果commit header没能成功写入磁盘，那这里的数值会是0。我们会认为这一次事务并没有发生过。这里本质上是write ahead rule，它表示logging系统在所有的写操作都记录在log中之前，不能install log。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;Logging的实现方式有很多，我这里展示的指示一种非常简单的方案，这个方案中clean log和install log都被推迟了。&lt;/p&gt;
 &lt;p&gt;接下来我会运行这种非常简单的实现方式，之后在下节课我们会看到更加复杂的logging协议。&lt;/p&gt;
 &lt;p&gt;不过所有的这些协议都遵循了write ahead rule，也就是说在写入commit记录之前，你需要确保所有的写操作都在log中。&lt;/p&gt;
@@ -12792,7 +12928,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;任何文件系统调用，如果需要更新block或者说更新block cache中的block，都会将block编号加在这个内存数据中（注，也就是log header在内存中的cache），除非编号已经存在。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;学生提问：这是不是意味着，bwrite不能直接使用？&lt;/p&gt;
-&lt;p&gt;Frans教授：是的，可以这么认为，文件系统中的所有bwrite都需要被log_write替换。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Frans教授：是的，可以这么认为，文件系统中的所有bwrite都需要被log_write替换。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;end_op函数&#34;&gt;end_op函数
 &lt;/h2&gt;&lt;p&gt;位于log.c中的end_op函数中会发生什么？&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -13044,7 +13181,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;在commit函数中，install结束之后，会将log header中的n设置为0，再将log header写回到磁盘中。将n设置为0的效果就是清除log。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;学生提问：install_trans函数在写block的时候，先写的缓存。可不可以优化一下直接写磁盘而不写缓存让代码运行的更快一些？&lt;/p&gt;
-&lt;p&gt;Frans教授：这里的接口是不太好。你可能会想问反正都要写入新数据，为什么要先读出目标block来。这里的代码肯定还有很多优化空间，但是为了看起来简单我们并没有这么做。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Frans教授：这里的接口是不太好。你可能会想问反正都要写入新数据，为什么要先读出目标block来。这里的代码肯定还有很多优化空间，但是为了看起来简单我们并没有这么做。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;以上就是commit内容。&lt;/p&gt;
 &lt;h2 id=&#34;file-system-recovering&#34;&gt;File system recovering
 &lt;/h2&gt;&lt;p&gt;接下来我们看一下发生在XV6的启动过程中的文件系统的恢复流程。&lt;/p&gt;
@@ -13109,7 +13247,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;如果我们在commit之前crash了多次，在最终成功commit时，log可能会install多次。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;学生提问：如果一个进程向磁盘写了一些数据，但是在commit之前进程出现了故障，假设故障之后进程退出了，这样会有问题吗？&lt;/p&gt;
-&lt;p&gt;Frans教授：简单回答是没问题，因此磁盘不会被更新，所以效果就像文件系统操作没有发生过一样。并且进程并不能在故障后恢复，唯一能在故障之后还能保持的是保存在磁盘中的状态。（注，应该是没有理解问题。进程通过write系统调用成功写入的数据，就算在成功落盘之前进程异常退出了，内核还是会写入到磁盘中，前提是内核还在运行。）&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Frans教授：简单回答是没问题，因此磁盘不会被更新，所以效果就像文件系统操作没有发生过一样。并且进程并不能在故障后恢复，唯一能在故障之后还能保持的是保存在磁盘中的状态。（注，应该是没有理解问题。进程通过write系统调用成功写入的数据，就算在成功落盘之前进程异常退出了，内核还是会写入到磁盘中，前提是内核还在运行。）&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;log写磁盘流程&#34;&gt;Log写磁盘流程
 &lt;/h2&gt;&lt;p&gt;我已经在bwrite函数中加了一个print语句。&lt;/p&gt;
 &lt;p&gt;bwrite函数是block cache中实际写磁盘的函数，所以我们将会看到实际写磁盘的记录。&lt;/p&gt;
@@ -13151,7 +13290,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;/ul&gt;
 &lt;blockquote&gt;
 &lt;p&gt;学生提问：可以从这里的记录找到一次文件操作的begin_op和end_op位置吗？&lt;/p&gt;
-&lt;p&gt;Frans教授：大概可以知道。我们实际上不知道begin_op的位置，但是所有的文件系统操作都从begin_op开始。更新commit记录必然在end_op中，所以我们可以找到文件系统操作的end_op位置，之后就是begin_op（注，其实这里所有的操作都在end_op中，只需要区分每一次end_op的调用就可以找到begin_op）。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Frans教授：大概可以知道。我们实际上不知道begin_op的位置，但是所有的文件系统操作都从begin_op开始。更新commit记录必然在end_op中，所以我们可以找到文件系统操作的end_op位置，之后就是begin_op（注，其实这里所有的操作都在end_op中，只需要区分每一次end_op的调用就可以找到begin_op）。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;所以以上就是XV6中文件系统的logging介绍，即使是这么一个简单的logging系统也有一定的复杂度。&lt;/p&gt;
 &lt;p&gt;这里立刻可以想到的一个问题是，通过观察这些记录，这是一个很有效的实现吗？很明显不是的，因为数据被写了两次。&lt;/p&gt;
 &lt;p&gt;如果我写一个大文件，我需要在磁盘中将这个大文件写两次。所以这必然不是一个高性能的实现，为了实现Crash safety我们将原本的性能降低了一倍。&lt;/p&gt;
@@ -13303,7 +13443,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;有的时候这被称为group commit，因为这里将多个操作像一个大的transaction一样提交了，这里的多个操作要么全部发生了，要么全部没有发生。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;学生提问：group commit有必要吗？不能当一个文件系统操作结束的时候就commit掉，然后再commit其他的操作吗？&lt;/p&gt;
-&lt;p&gt;Frans教授：如果这样的话你需要非常非常小心。因为有一点我没有说得很清楚，我们需要保证write系统调用的顺序。如果一个read看到了一个write，再执行了一次write，那么第二个write必须要发生在第一个write之后。在log中的顺序，本身就反应了write系统调用的顺序，你不能改变log中write系统调用的执行顺序，因为这可能会导致对用户程序可见的奇怪的行为。所以必须以transaction发生的顺序commit它们，而一次性提交所有的操作总是比较安全的，这可以保证文件系统处于一个好的状态。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Frans教授：如果这样的话你需要非常非常小心。因为有一点我没有说得很清楚，我们需要保证write系统调用的顺序。如果一个read看到了一个write，再执行了一次write，那么第二个write必须要发生在第一个write之后。在log中的顺序，本身就反应了write系统调用的顺序，你不能改变log中write系统调用的执行顺序，因为这可能会导致对用户程序可见的奇怪的行为。所以必须以transaction发生的顺序commit它们，而一次性提交所有的操作总是比较安全的，这可以保证文件系统处于一个好的状态。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;最后我们再回到最开始，看一下begin_op，&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -13431,7 +13572,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;这节课讨论的是使用logging来解决crash safety或者说多个步骤的文件系统操作的安全性。这种方式对于安全性来说没有问题，但是性能不咋地。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;学生提问：前面说到cache size至少要跟log size一样大，如果它们一样大的话，并且log pin了30个block，其他操作就不能再进行了，因为buffer中没有额外的空间了。&lt;/p&gt;
-&lt;p&gt;Frans教授：如果buffer cache中没有空间了，XV6会直接panic。这并不理想，实际上有点恐怖。所以我们在挑选buffer cache size的时候希望用一个不太可能导致这里问题的数字。这里为什么不能直接返回错误，而是要panic？因为很多文件系统操作都是多个步骤的操作，假设我们执行了两个write操作，但是第三个write操作找不到可用的cache空间，那么第三个操作无法完成，我们不能就直接返回错误，因为我们可能已经更新了一个目录的某个部分，为了保证文件系统的正确性，我们需要撤回之前的更新。所以如果log pin了30个block，并且buffer cache没有额外的空间了，会直接panic。当然这种情况不太会发生，只有一些极端情况才会发生。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Frans教授：如果buffer cache中没有空间了，XV6会直接panic。这并不理想，实际上有点恐怖。所以我们在挑选buffer cache size的时候希望用一个不太可能导致这里问题的数字。这里为什么不能直接返回错误，而是要panic？因为很多文件系统操作都是多个步骤的操作，假设我们执行了两个write操作，但是第三个write操作找不到可用的cache空间，那么第三个操作无法完成，我们不能就直接返回错误，因为我们可能已经更新了一个目录的某个部分，为了保证文件系统的正确性，我们需要撤回之前的更新。所以如果log pin了30个block，并且buffer cache没有额外的空间了，会直接panic。当然这种情况不太会发生，只有一些极端情况才会发生。&lt;/p&gt;
+&lt;/blockquote&gt;
 </description>
         </item>
         <item>
@@ -13571,7 +13713,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;li&gt;向后扫描时选择最近最少使用的缓冲区来重用，保证了缓存的合理利用。&lt;/li&gt;
 &lt;li&gt;如果所有缓冲区都处于忙碌状态，&lt;strong&gt;bget&lt;/strong&gt; 会触发 panic，虽然更优雅的处理方式是等待空闲缓冲区，但可能导致死锁。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;Buffer cache&lt;/strong&gt; 管理流程的核心在于利用双向链表来组织缓冲区，并通过局部性优化缓冲区的查找和重用。同时，通过锁机制确保多个进程之间对缓冲区的访问和操作是安全的。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Buffer cache&lt;/strong&gt; 管理流程的核心在于利用双向链表来组织缓冲区，并通过局部性优化缓冲区的查找和重用。同时，通过锁机制确保多个进程之间对缓冲区的访问和操作是安全的。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;索引结点层&#34;&gt;索引结点层
 &lt;/h2&gt;&lt;p&gt;术语inode（即索引结点）可以具有两种相关含义之一。&lt;/p&gt;
 &lt;p&gt;它可能是指包含&lt;u&gt;文件大小&lt;/u&gt;和&lt;u&gt;数据块编号列表&lt;/u&gt;的磁盘上的数据结构。&lt;/p&gt;
@@ -13727,7 +13870,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;li&gt;&lt;strong&gt;inode&lt;/strong&gt; 是文件的核心元数据结构，磁盘上通过 &lt;strong&gt;dinode&lt;/strong&gt; 定义，内存中通过 &lt;strong&gt;inode&lt;/strong&gt; 管理。&lt;/li&gt;
 &lt;li&gt;两者通过字段如 &lt;code&gt;type&lt;/code&gt;、&lt;code&gt;nlink&lt;/code&gt; 和 &lt;code&gt;size&lt;/code&gt; 共同维护文件的状态和信息。&lt;/li&gt;
 &lt;li&gt;关键函数如 &lt;strong&gt;iget&lt;/strong&gt;、&lt;strong&gt;iput&lt;/strong&gt;、&lt;strong&gt;ilock&lt;/strong&gt;、&lt;strong&gt;iunlock&lt;/strong&gt; 负责对 inode 的引用、锁定和同步，确保文件系统在并发访问下的正确性。&lt;/li&gt;
-&lt;/ul&gt;&lt;/blockquote&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
 &lt;blockquote&gt;
 &lt;p&gt;在文件系统中，&lt;strong&gt;link&lt;/strong&gt; 指的是一个文件或目录在不同的目录项（directory entries）中有多个指向同一个 &lt;strong&gt;inode&lt;/strong&gt; 的引用。这些指向同一个 &lt;strong&gt;inode&lt;/strong&gt; 的引用称为 &lt;strong&gt;硬链接（hard links）&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;nlink 的含义&lt;/strong&gt;&lt;/p&gt;
@@ -13825,7 +13969,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;li&gt;&lt;strong&gt;nlink&lt;/strong&gt; 记录了指向同一个文件（inode）的硬链接数。&lt;/li&gt;
 &lt;li&gt;当创建多个硬链接时，所有的链接指向同一个 &lt;strong&gt;inode&lt;/strong&gt;，因此它们共享文件的内容和元数据。&lt;/li&gt;
 &lt;li&gt;只有当 &lt;strong&gt;nlink&lt;/strong&gt; 变为 &lt;strong&gt;0&lt;/strong&gt; 时，文件的内容和 inode 才会被真正删除。&lt;/li&gt;
-&lt;/ul&gt;&lt;/blockquote&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;代码inodes&#34;&gt;代码：Inodes
 &lt;/h2&gt;&lt;p&gt;为了分配新的inode（例如，在创建文件时），xv6调用&lt;code&gt;ialloc&lt;/code&gt;（&lt;em&gt;&lt;strong&gt;kernel/fs.c&lt;/strong&gt;&lt;/em&gt;:196）。&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;ialloc&lt;/code&gt;类似于&lt;code&gt;balloc&lt;/code&gt;：它一次一个块地遍历磁盘上的索引节点结构体，查找标记为空闲的一个。&lt;/p&gt;
@@ -13949,7 +14094,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;li&gt;截断文件是指释放文件的磁盘空间，这仅在文件的 &lt;code&gt;nlink&lt;/code&gt; 和 &lt;code&gt;ref&lt;/code&gt; 都为零时发生。&lt;/li&gt;
 &lt;li&gt;目录项是文件名和 inode 之间的映射关系，当所有目录项删除且文件描述符关闭时，inode 才会真正释放。&lt;/li&gt;
 &lt;li&gt;具体流程中，&lt;code&gt;iput()&lt;/code&gt; 检查 inode 的状态，决定是否立即释放它，同时处理可能的竞争条件。&lt;/li&gt;
-&lt;/ul&gt;&lt;/blockquote&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
 &lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;strong&gt;&lt;code&gt;ip-&amp;gt;ref&lt;/code&gt;（引用计数）&lt;/strong&gt;&lt;/li&gt;
@@ -14010,7 +14156,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;ul&gt;
 &lt;li&gt;当删除一个文件时，&lt;code&gt;nlink&lt;/code&gt; 会降到 0，文件从目录中消失。但如果一个进程已经打开了该文件并正在使用它，&lt;code&gt;ip-&amp;gt;ref&lt;/code&gt; 会大于 1。&lt;/li&gt;
 &lt;li&gt;直到最后一个进程关闭文件描述符，&lt;code&gt;ip-&amp;gt;ref&lt;/code&gt; 也降为 1，&lt;code&gt;iput()&lt;/code&gt; 最终会释放 inode。这时，文件的所有数据会被清除，inode 和磁盘块被回收。&lt;/li&gt;
-&lt;/ul&gt;&lt;/blockquote&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;代码inode包含内容&#34;&gt;代码：Inode包含内容
 &lt;/h2&gt;&lt;p&gt;磁盘上的inode结构体&lt;code&gt;struct dinode&lt;/code&gt;包含一个&lt;code&gt;size&lt;/code&gt;和一个块号数组（见图8.3）。&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08114file-systems/p20.png&#34;
@@ -14179,7 +14326,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;/li&gt;
 &lt;li&gt;偏移量用于定位目录条目在目录文件中的位置，便于读取或修改。&lt;/li&gt;
 &lt;li&gt;目录项与 inode 的关系是：目录项通过 inode 编号定位文件，inode 保存了文件的元数据及存储信息。&lt;/li&gt;
-&lt;/ul&gt;&lt;/blockquote&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;代码路径名&#34;&gt;代码：路径名
 &lt;/h2&gt;&lt;p&gt;路径名查找涉及一系列对&lt;code&gt;dirlookup&lt;/code&gt;的调用，每个路径组件调用一个。&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;Namei&lt;/code&gt;（&lt;em&gt;&lt;strong&gt;kernel/fs.c&lt;/strong&gt;&lt;/em&gt;:661）计算&lt;code&gt;path&lt;/code&gt;并返回相应的inode。&lt;/p&gt;
@@ -14192,7 +14340,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;li&gt;&lt;strong&gt;&lt;code&gt;namei&lt;/code&gt;（kernel/fs.c:661）&lt;/strong&gt;：负责计算路径名并返回对应的 inode。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;&lt;code&gt;nameiparent&lt;/code&gt;&lt;/strong&gt;：是 &lt;code&gt;namei&lt;/code&gt; 的变体，它在查找路径时返回最后一个路径元素的 &lt;strong&gt;父目录&lt;/strong&gt; 的 inode，并将最后一个路径元素复制到 &lt;code&gt;name&lt;/code&gt;。&lt;/li&gt;
 &lt;li&gt;两个函数都调用了通用函数 &lt;strong&gt;&lt;code&gt;namex&lt;/code&gt;&lt;/strong&gt; 来完成实际的路径查找工作。&lt;/li&gt;
-&lt;/ul&gt;&lt;/blockquote&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;&lt;code&gt;Namex&lt;/code&gt;（&lt;em&gt;&lt;strong&gt;kernel/fs.c&lt;/strong&gt;&lt;/em&gt;:626）首先决定路径计算的开始位置。&lt;/p&gt;
 &lt;p&gt;如果路径以斜线开始，则计算从根目录开始；否则，从当前目录开始（&lt;em&gt;&lt;strong&gt;kernel/fs.c&lt;/strong&gt;&lt;/em&gt;:630-633）。&lt;/p&gt;
 &lt;p&gt;然后，它使用&lt;code&gt;skipelem&lt;/code&gt;依次考察路径的每个元素（&lt;em&gt;&lt;strong&gt;kernel/fs.c&lt;/strong&gt;&lt;/em&gt;:635）。&lt;/p&gt;
@@ -14217,7 +14366,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;ul&gt;
 &lt;li&gt;如果调用的是 &lt;strong&gt;&lt;code&gt;nameiparent&lt;/code&gt;&lt;/strong&gt;，且查找到了路径的最后一个元素，那么 &lt;code&gt;namex&lt;/code&gt; 会提前停止，并将最后一个路径元素的名称复制到 &lt;code&gt;name&lt;/code&gt;，返回 &lt;strong&gt;父目录&lt;/strong&gt; 的 inode（kernel/fs.c:641-645）。&lt;/li&gt;
 &lt;li&gt;否则，&lt;code&gt;namex&lt;/code&gt; 会使用 &lt;strong&gt;&lt;code&gt;dirlookup&lt;/code&gt;&lt;/strong&gt; 查找当前目录中的下一个路径元素，并为下一次迭代设置新的 inode（kernel/fs.c:646-651）。&lt;/li&gt;
-&lt;/ul&gt;&lt;/blockquote&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;&lt;code&gt;namex&lt;/code&gt;过程可能需要很长时间才能完成：它可能涉及多个磁盘操作来读取路径名中所遍历目录的索引节点和目录块（如果它们不在buffer cache中）。&lt;/p&gt;
 &lt;p&gt;Xv6经过精心设计，如果一个内核线程对&lt;code&gt;namex&lt;/code&gt;的调用在磁盘I/O上阻塞，另一个查找不同路径名的内核线程可以同时进行。&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;Namex&lt;/code&gt;分别锁定路径中的每个目录，以便在不同目录中进行并行查找。&lt;/p&gt;
@@ -14226,7 +14376,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;&lt;code&gt;namex&lt;/code&gt;&lt;/strong&gt; 可能需要多个磁盘操作来读取遍历路径中的目录和 inode，特别是在相关目录和 inode 不在 &lt;strong&gt;buffer cache&lt;/strong&gt; 中时。这可能导致磁盘 I/O 延迟。&lt;/li&gt;
 &lt;li&gt;xv6 设计允许多个内核线程并发查找不同的路径名。&lt;strong&gt;每个目录在查找时都被分别加锁&lt;/strong&gt;，使得不同线程可以同时访问不同的目录，避免彼此阻塞。&lt;/li&gt;
-&lt;/ul&gt;&lt;/blockquote&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;这种并发性带来了一些挑战。&lt;/p&gt;
 &lt;p&gt;例如，当一个内核线程正在查找路径名时，另一个内核线程可能正在通过取消目录链接来更改目录树。&lt;/p&gt;
 &lt;p&gt;一个潜在的风险是，查找可能正在搜索已被另一个内核线程删除且其块已被重新用于另一个目录或文件的目录。&lt;/p&gt;
@@ -14240,7 +14391,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;并发风险&lt;/strong&gt;：当一个线程在执行路径查找时，另一个线程可能在删除目录或更改目录树。查找可能正在访问已被删除的目录条目，其块可能被重新分配给其他文件或目录。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;解决方案&lt;/strong&gt;：在 &lt;strong&gt;&lt;code&gt;namex&lt;/code&gt;&lt;/strong&gt; 中，路径查找线程在执行 &lt;strong&gt;&lt;code&gt;dirlookup&lt;/code&gt;&lt;/strong&gt; 时会锁定目录。&lt;code&gt;dirlookup&lt;/code&gt; 返回一个通过 &lt;strong&gt;&lt;code&gt;iget&lt;/code&gt;&lt;/strong&gt; 获取的 inode，并增加其引用计数。&lt;strong&gt;只有在获取到 inode 后，才会释放目录的锁&lt;/strong&gt;。这样，即使另一个线程删除该 inode，它也不会立即被回收，因为引用计数仍然大于零。&lt;/li&gt;
-&lt;/ul&gt;&lt;/blockquote&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;另一个风险是死锁。&lt;/p&gt;
 &lt;p&gt;例如，查找“&lt;code&gt;.&lt;/code&gt;”时，&lt;code&gt;next&lt;/code&gt;指向与&lt;code&gt;ip&lt;/code&gt;相同的inode。在释放&lt;code&gt;ip&lt;/code&gt;上的锁之前锁定&lt;code&gt;next&lt;/code&gt;将导致死锁。&lt;/p&gt;
 &lt;p&gt;在释放&lt;code&gt;ip&lt;/code&gt;上的锁之前锁定&lt;code&gt;next&lt;/code&gt;将导致死锁。&lt;/p&gt;
@@ -14251,7 +14403,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;死锁风险&lt;/strong&gt;：如果在查找路径名如 &lt;code&gt;&amp;quot;.&amp;quot;&lt;/code&gt; 时，&lt;code&gt;next&lt;/code&gt; inode 和 &lt;code&gt;ip&lt;/code&gt; 是同一个 inode，在释放 &lt;code&gt;ip&lt;/code&gt; 的锁之前尝试锁定 &lt;code&gt;next&lt;/code&gt; 会导致死锁。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;解决方案&lt;/strong&gt;：为了避免这种死锁，&lt;code&gt;namex&lt;/code&gt; 在锁定下一个目录（&lt;code&gt;next&lt;/code&gt;）之前，先解锁当前的 inode（&lt;code&gt;ip&lt;/code&gt;）。这也是为什么 xv6 将 &lt;strong&gt;&lt;code&gt;iget&lt;/code&gt;&lt;/strong&gt; 和 &lt;strong&gt;&lt;code&gt;ilock&lt;/code&gt;&lt;/strong&gt; 分离的原因&lt;/li&gt;
-&lt;/ul&gt;&lt;/blockquote&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;关键函数和变量&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
@@ -14262,7 +14415,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;li&gt;&lt;strong&gt;&lt;code&gt;dirlookup&lt;/code&gt;&lt;/strong&gt;：查找目录中的指定条目，返回对应 inode。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;&lt;code&gt;iget&lt;/code&gt;&lt;/strong&gt;：通过 inode 编号获取对应的 inode 并增加引用计数。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;&lt;code&gt;ilock&lt;/code&gt;&lt;/strong&gt;：锁定 inode，确保对其独占访问。&lt;/li&gt;
-&lt;/ul&gt;&lt;/blockquote&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;文件描述符层&#34;&gt;文件描述符层
 &lt;/h2&gt;&lt;p&gt;Unix界面的一个很酷的方面是，Unix中的大多数资源都表示为文件，包括控制台、管道等设备，当然还有真实文件。文件描述符层是实现这种一致性的层。&lt;/p&gt;
 &lt;p&gt;正如我们在第1章中看到的，Xv6为每个进程提供了自己的打开文件表或文件描述符。&lt;/p&gt;
@@ -14311,7 +14465,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;/li&gt;
 &lt;li&gt;如果文件是一个管道，管道并不支持偏移量，所以操作逻辑会有所不同。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;同时，所有 inode 操作都要求调用方自己负责管理锁定（在 &lt;code&gt;kernel/file.c:94-96&lt;/code&gt;、&lt;code&gt;kernel/file.c:121-124&lt;/code&gt; 和 &lt;code&gt;kernel/file.c:163-166&lt;/code&gt; 中实现）。这种锁定有一个额外的好处：它确保了对同一个文件的并发写入不会相互覆盖，虽然数据写入的顺序可能会交错。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;同时，所有 inode 操作都要求调用方自己负责管理锁定（在 &lt;code&gt;kernel/file.c:94-96&lt;/code&gt;、&lt;code&gt;kernel/file.c:121-124&lt;/code&gt; 和 &lt;code&gt;kernel/file.c:163-166&lt;/code&gt; 中实现）。这种锁定有一个额外的好处：它确保了对同一个文件的并发写入不会相互覆盖，虽然数据写入的顺序可能会交错。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;代码系统调用&#34;&gt;代码：系统调用
 &lt;/h2&gt;&lt;p&gt;通过使用底层提供的函数，大多数系统调用的实现都很简单（请参阅&lt;em&gt;&lt;strong&gt;kernel/sysfile.c&lt;/strong&gt;&lt;/em&gt;）。&lt;/p&gt;
 &lt;p&gt;有几个调用值得仔细看看。&lt;/p&gt;
@@ -14323,7 +14478,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;&lt;code&gt;new&lt;/code&gt;的父目录必须存在并且与现有inode位于同一设备上：inode编号在一个磁盘上只有唯一的含义。&lt;/p&gt;
 &lt;p&gt;如果出现这样的错误，&lt;code&gt;sys_link&lt;/code&gt;必须返回并减少&lt;code&gt;ip-&amp;gt;nlink&lt;/code&gt;。&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;在 xv6 文件系统中，&lt;code&gt;ip&lt;/code&gt; 和 &lt;code&gt;dp&lt;/code&gt; 是常用的变量名，通常分别代表 &lt;strong&gt;inode 指针&lt;/strong&gt; 和 &lt;strong&gt;目录 inode 指针&lt;/strong&gt;。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;在 xv6 文件系统中，&lt;code&gt;ip&lt;/code&gt; 和 &lt;code&gt;dp&lt;/code&gt; 是常用的变量名，通常分别代表 &lt;strong&gt;inode 指针&lt;/strong&gt; 和 &lt;strong&gt;目录 inode 指针&lt;/strong&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;事务简化了实现，因为它需要更新多个磁盘块，但我们不必担心更新的顺序。&lt;/p&gt;
 &lt;p&gt;他们要么全部成功，要么什么都不做。&lt;/p&gt;
 &lt;p&gt;例如在没有事务的情况下，在创建一个链接之前更新&lt;code&gt;ip-&amp;gt;nlink&lt;/code&gt;会使文件系统暂时处于不安全状态，而在这两者之间发生的崩溃可能会造成严重破坏。&lt;/p&gt;
@@ -14381,7 +14537,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;注意，此时文件只存在于当前进程的文件表中，其他进程无法访问这个“部分初始化”的文件，因此不存在竞争问题。&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;sys_pipe&lt;/code&gt;：在第7章中我们已经探讨了管道的实现。&lt;code&gt;sys_pipe&lt;/code&gt; 函数将管道系统连接到文件系统中。它的作用是创建一对管道：一个用于读取，一个用于写入。调用时，传递的参数是一个指向两个整数的指针，这两个整数用于记录管道的两个文件描述符。随后，&lt;code&gt;sys_pipe&lt;/code&gt; 会分配管道并在文件描述符表中为其安装对应的读写端。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;&lt;code&gt;sys_pipe&lt;/code&gt;：在第7章中我们已经探讨了管道的实现。&lt;code&gt;sys_pipe&lt;/code&gt; 函数将管道系统连接到文件系统中。它的作用是创建一对管道：一个用于读取，一个用于写入。调用时，传递的参数是一个指向两个整数的指针，这两个整数用于记录管道的两个文件描述符。随后，&lt;code&gt;sys_pipe&lt;/code&gt; 会分配管道并在文件描述符表中为其安装对应的读写端。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;真实世界&#34;&gt;真实世界
 &lt;/h2&gt;&lt;p&gt;实际操作系统中的buffer cache比xv6复杂得多，但它有两个相同的用途：缓存和同步对磁盘的访问。&lt;/p&gt;
 &lt;p&gt;与UNIX V6一样，Xv6的buffer cache使用简单的最近最少使用（LRU）替换策略；有许多更复杂的策略可以实现，每种策略都适用于某些工作场景，而不适用于其他工作场景。&lt;/p&gt;
@@ -14424,7 +14581,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;Xv6 对于磁盘故障的处理非常基础：&lt;strong&gt;一旦磁盘操作失败，系统就会调用 panic 进行崩溃&lt;/strong&gt;。这种处理方式是否合理取决于硬件情况：如果系统使用的硬件有冗余机制来屏蔽磁盘故障（如 RAID），那么 panic 处理是可以接受的；但如果操作系统运行在普通硬件上，系统应该能够优雅地处理这些故障，防止单个文件损坏影响整个文件系统。&lt;/p&gt;
 &lt;p&gt;Xv6 要求文件系统安装在单一的磁盘设备上，且文件系统大小是固定的。随着数据量的不断增长，这种设计已经无法满足现代应用的需求。如今，操作系统通过多种方法来打破“每个文件系统只能对应一个磁盘”的限制。&lt;strong&gt;RAID&lt;/strong&gt; 是一种常见的硬件解决方案，它通过将多个物理磁盘组合成一个逻辑磁盘。但现代趋势是更多地依靠软件来实现这些功能，并支持动态添加或删除磁盘。&lt;/p&gt;
 &lt;p&gt;Xv6 文件系统缺乏许多现代文件系统的高级功能。例如，它没有 &lt;strong&gt;快照（snapshot）和增量备份&lt;/strong&gt; 的功能。快照可以在某一时刻冻结文件系统状态，从而支持快速备份，而增量备份只备份变化的数据，大大节省存储空间。&lt;/p&gt;
-&lt;p&gt;在现代的 Unix 系统中，很多不同类型的资源（如命名管道、网络连接、远程文件系统等）都可以通过与磁盘文件相同的系统调用（如 &lt;code&gt;read&lt;/code&gt; 和 &lt;code&gt;write&lt;/code&gt;）进行访问。这比 xv6 中使用简单的 &lt;code&gt;if&lt;/code&gt; 语句来判断文件类型更灵活。在这些系统中，每个打开的文件都会有一个函数指针表，不同的操作会指向不同的实现函数。例如，&lt;strong&gt;网络文件系统&lt;/strong&gt; 可能会将文件读写操作转化为网络请求并等待响应。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;在现代的 Unix 系统中，很多不同类型的资源（如命名管道、网络连接、远程文件系统等）都可以通过与磁盘文件相同的系统调用（如 &lt;code&gt;read&lt;/code&gt; 和 &lt;code&gt;write&lt;/code&gt;）进行访问。这比 xv6 中使用简单的 &lt;code&gt;if&lt;/code&gt; 语句来判断文件类型更灵活。在这些系统中，每个打开的文件都会有一个函数指针表，不同的操作会指向不同的实现函数。例如，&lt;strong&gt;网络文件系统&lt;/strong&gt; 可能会将文件读写操作转化为网络请求并等待响应。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;正课&#34;&gt;正课
 &lt;/h2&gt;&lt;h2 id=&#34;文件系统引入&#34;&gt;文件系统引入
 &lt;/h2&gt;&lt;p&gt;今天介绍的是文件系统。实际上我们会花三节课的时间来学习文件系统。&lt;/p&gt;
@@ -14438,7 +14596,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;Frans教授：很好，那有什么相似的地方吗？&lt;/p&gt;
 &lt;p&gt;学生回答：基本的结构是类似的，比如说都有文件名，都有inode，目录等等。&lt;/p&gt;
 &lt;p&gt;Fans教授：很好，我再问一个同学，XV6的文件系统与你正在使用的文件系统有什么异同？&lt;/p&gt;
-&lt;p&gt;学生回答：文件目录结构都是层级的。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;学生回答：文件目录结构都是层级的。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;接下来让我列出一些文件系统突出的特性：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;其中一点刚刚有同学提到了，就是对于用户友好的文件名，具体来说就是层级的路径名，这可以帮助用户组织目录中的文件。&lt;/li&gt;
@@ -14486,7 +14645,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;学生提问：能介绍一下soft link和hard link吗？&lt;/p&gt;
 &lt;p&gt;Frans教授：我今天不会讨论这些内容。但是你们将会在下一个File system lab中实现soft link。所以XV6本身实现了hard link，需要你们来实现soft link。&lt;/p&gt;
 &lt;p&gt;学生提问：link是对inode做操作，而不是对文件描述符做操作，对吧？&lt;/p&gt;
-&lt;p&gt;Frans教授：是的，link是对inode做操作，我们接下来介绍这部分内容。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Frans教授：是的，link是对inode做操作，我们接下来介绍这部分内容。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;接下来我们看一下文件系统的结构。文件系统究竟维护了什么样的结构来实现前面介绍的API呢？&lt;/p&gt;
 &lt;p&gt;首先，最重要的可能就是inode，这是代表一个文件的对象，并且它不依赖于文件名。&lt;/p&gt;
 &lt;p&gt;实际上，inode是通过自身的编号来进行区分的，这里的编号就是个整数。&lt;/p&gt;
@@ -14566,7 +14726,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;Frans教授：你可以认为一个磁盘的驱动与console的驱动是基本一样的。&lt;/p&gt;
 &lt;p&gt;驱动向设备发送一个命令表明开始读或者写，过了一会当设备完成了操作，会产生一个中断表明完成了相应的命令。&lt;/p&gt;
 &lt;p&gt;但是因为磁盘本身比console复杂的多，所以磁盘的驱动也会比我们之前看过的console的驱动复杂的多。&lt;/p&gt;
-&lt;p&gt;不过驱动中的代码结构还是类似的，也有bottom部分和top部分，中断和读写控制寄存器（注，详见lec09）。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;不过驱动中的代码结构还是类似的，也有bottom部分和top部分，中断和读写控制寄存器（注，详见lec09）。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;从文件系统的角度来看磁盘还是很直观的。&lt;/p&gt;
 &lt;p&gt;因为对于磁盘就是读写block或者sector，我们可以将磁盘看作是一个巨大的block的数组，数组从0开始，一直增长到磁盘的最后。&lt;/p&gt;
 &lt;p&gt;而文件系统的工作就是将所有的数据结构以一种能够在重启之后重新构建文件系统的方式，存放在磁盘上。虽然有不同的方式，但是XV6使用了一种非常简单，但是还挺常见的布局结构。&lt;/p&gt;
@@ -14587,7 +14748,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;学生提问：所以XV6是存储在虚拟磁盘上？&lt;/p&gt;
 &lt;p&gt;Frans教授：在QEMU中，我们实际上走了捷径。QEMU中有个标志位-kernel，它指向了内核的镜像文件，QEMU会将这个镜像的内容加载到了物理内存的0x80000000。所以当我们使用QEMU时，我们不需要考虑boot sector。&lt;/p&gt;
 &lt;p&gt;学生提问：所以当你运行QEMU时，你就是将程序通过命令行传入，然后直接就运行传入的程序，然后就不需要从虚拟磁盘上读取数据了？&lt;/p&gt;
-&lt;p&gt;Frans教授：完全正确。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Frans教授：完全正确。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;假设inode是64字节，如果你想要读取inode10，那么你应该按照下面的公式去对应的block读取inode。&lt;/p&gt;
 &lt;p&gt;$n_{block} = 32 + inode * 64 / 1024$&lt;/p&gt;
 &lt;p&gt;所以inode0在block32，inode17会在block33。只要有inode的编号，我们总是可以找到inode在磁盘上存储的位置。&lt;/p&gt;
@@ -14603,12 +14765,14 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;以上基本就是XV6中inode的组成部分。&lt;/p&gt;
 &lt;p&gt;基于上面的内容，XV6中文件最大的长度是多少呢？&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;学生回答：会是268*1024字节&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;学生回答：会是268*1024字节&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;是的，最大文件尺寸对应的是下面的公式。&lt;/p&gt;
 &lt;p&gt;$size_{max} = (256 + 12) * 1024$&lt;/p&gt;
 &lt;p&gt;可以算出这里就是268KB，这么点大小能存个什么呢？所以这是个很小的文件长度，实际的文件系统，文件最大的长度会大的多得多。那可以做一些什么来让文件系统支持大得多的文件呢？&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;学生回答：可以扩展inode中indirect部分吗？&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;学生回答：可以扩展inode中indirect部分吗？&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;是的，可以用类似page table的方式，构建一个双重indirect block number指向一个block，这个block中再包含了256个indirect block number，每一个又指向了包含256个block number的block。&lt;/p&gt;
 &lt;p&gt;这样的话，最大的文件长度会大得多（注，是256&lt;em&gt;256&lt;/em&gt;1K）。&lt;/p&gt;
 &lt;p&gt;这里修改了inode的数据结构，你可以使用类似page table的树状结构，也可以按照B树或者其他更复杂的树结构实现。&lt;/p&gt;
@@ -14616,7 +14780,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;实际上，在接下来的File system lab中，你将会实现双重indirect block number来支持更大的文件。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;学生提问：为什么每个block存储256个block编号？&lt;/p&gt;
-&lt;p&gt;Frans教授：因为每个编号是4个字节。1024/4 = 256。这又带出了一个问题，如果block编号只是4个字节，磁盘最大能有多大？是的，2的32次方（注，4TB）。有些磁盘比这个数字要大，所以通常人们会使用比32bit更长的数字来表示block编号。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Frans教授：因为每个编号是4个字节。1024/4 = 256。这又带出了一个问题，如果block编号只是4个字节，磁盘最大能有多大？是的，2的32次方（注，4TB）。有些磁盘比这个数字要大，所以通常人们会使用比32bit更长的数字来表示block编号。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;在下一个File system lab，你们需要将inode中的一个block number变成双重indirect block number，这个双重indirect block number将会指向一个包含了256个indirect block number的block，其中的每一个indirect block number再指向一个包含了256个block number的block，这样文件就可以大得多。&lt;/p&gt;
 &lt;p&gt;接下来，我们想要实现read系统调用。&lt;/p&gt;
 &lt;p&gt;假设我们需要读取文件的第8000个字节，那么你该读取哪个block呢？从inode的数据结构中该如何计算呢？&lt;/p&gt;
@@ -14645,7 +14810,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;结果可能是找到了，也可能是没有找到。如果找到了，那么目录y也会有一个inode编号，假设是251，我们可以继续从inode 251查找，先读取inode 251的内容，之后再扫描inode所有对应的block，找到“x”并得到文件x对应的inode编号，最后将其作为路径名查找的结果返回。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;学生提问：有没有一些元数据表明当前的inode是目录而不是一个文件？&lt;/p&gt;
-&lt;p&gt;Frans教授：有的，实际上是在inode中。inode中的type字段表明这是一个目录还是一个文件。如果你对一个类型是文件的inode进行查找，文件系统会返回错误。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Frans教授：有的，实际上是在inode中。inode中的type字段表明这是一个目录还是一个文件。如果你对一个类型是文件的inode进行查找，文件系统会返回错误。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;这里的结构不是很有效。&lt;/p&gt;
 &lt;p&gt;为了找到一个目录名，你需要线性扫描。实际的文件系统会使用更复杂的数据结构来使得查找更快，当然这又是设计数据结构的问题，而不是设计操作系统的问题。&lt;/p&gt;
 &lt;p&gt;你可以使用你喜欢的数据结构并提升性能。出于简单和更容易解释的目的，XV6使用了这里这种非常简单的数据结构。&lt;/p&gt;
@@ -14723,10 +14889,12 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;所以这里将inode的type从空闲改成了文件，并写入磁盘表示这个inode已经被使用了。第二个write 33就是实际的写入inode的内容。inode的内容会包含linkcount为1以及其他内容。&lt;/p&gt;
 &lt;p&gt;write 46是向第一个data block写数据，那么这个data block属于谁呢？&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;学生回答：属于根目录。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;学生回答：属于根目录。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;是的，block 46是根目录的第一个block。为什么它需要被写入数据呢？&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;学生回答：因为我们正在向根目录创建一个新文件。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;学生回答：因为我们正在向根目录创建一个新文件。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;是的，这里我们向根目录增加了一个新的entry，其中包含了文件名x，以及我们刚刚分配的inode编号。&lt;/p&gt;
 &lt;p&gt;接下来的write 32又是什么意思呢？block 32保存的仍然是inode，那么inode中的什么发生了变化使得需要将更新后的inode写入磁盘？是的，根目录的大小变了，因为我们刚刚添加了16个字节的entry来代表文件x的信息。&lt;/p&gt;
 &lt;p&gt;最后又有一次write 33，我在稍后会介绍这次写入的内容，这里我们再次更新了文件x的inode， 尽管我们又还没有写入任何数据。&lt;/p&gt;
@@ -14740,7 +14908,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;学生提问：block 595看起来在磁盘中很靠后了，是因为前面的block已经被系统内核占用了吗？&lt;/p&gt;
 &lt;p&gt;Frans教授：我们可以看前面makefs指令，makefs存了很多文件在磁盘镜像中，这些都发生在创建文件x之前，所以磁盘中很大一部分已经被这些文件填满了。&lt;/p&gt;
 &lt;p&gt;学生提问：第二阶段最后的write 33是否会将block 595与文件x的inode关联起来？&lt;/p&gt;
-&lt;p&gt;Frans教授：会的。这里的write 33会发生几件事情：首先inode的size字段会更新；第一个direct block number会更新。这两个信息都会通过write 33一次更新到磁盘上的inode中。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Frans教授：会的。这里的write 33会发生几件事情：首先inode的size字段会更新；第一个direct block number会更新。这两个信息都会通过write 33一次更新到磁盘上的inode中。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;以上就是磁盘中文件系统的组织结构的核心，希望你们都能理解背后的原理。&lt;/p&gt;
 &lt;h2 id=&#34;xv6创建inode代码展示&#34;&gt;XV6创建inode代码展示
 &lt;/h2&gt;&lt;p&gt;接下来我们通过查看XV6中的代码，更进一步的了解文件系统。因为我们前面已经分配了inode，我们先来看一下这是如何发生的。&lt;/p&gt;
@@ -15154,7 +15323,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;这里的代码还有点复杂。我猜你们之前已经看过这里的代码，那么这里的代码在干嘛？&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;学生回答：这里遍历了linked-list，来看看现有的cache是否符合要找的block。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;学生回答：这里遍历了linked-list，来看看现有的cache是否符合要找的block。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;是的，我们这里看一下block 33的cache是否存在，如果存在的话，将block对象的引用计数（refcnt）加1，之后再释放bcache锁，因为现在我们已经完成了对于cache的检查并找到了block cache。之后，代码会尝试获取block cache的锁。&lt;/p&gt;
 &lt;p&gt;所以，如果有多个进程同时调用bget的话，其中一个可以获取bcache的锁并扫描buffer cache。&lt;/p&gt;
 &lt;p&gt;此时，其他进程是没有办法修改buffer cache的（注，因为bacche的锁被占住了）。&lt;/p&gt;
@@ -15167,7 +15337,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;而另一个进程会在acquiresleep中等待第一个进程释放锁。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;学生提问：当一个block cache的refcnt不为0时，可以更新block cache吗？因为释放锁之后，可能会修改block cache。&lt;/p&gt;
-&lt;p&gt;Frans教授：这里我想说几点；首先XV6中对bcache做任何修改的话，都必须持有bcache的锁；其次对block 33的cache做任何修改你需要持有block 33的sleep lock。所以在任何时候，release(&amp;amp;bcache.lock)之后，b-&amp;gt;refcnt都大于0。block的cache只会在refcnt为0的时候才会被驱逐，任何时候refcnt大于0都不会驱逐block cache。所以当b-&amp;gt;refcnt大于0的时候，block cache本身不会被buffer cache修改。这里的第二个锁，也就是block cache的sleep lock，是用来保护block cache的内容的。它确保了任何时候只有一个进程可以读写block cache。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Frans教授：这里我想说几点；首先XV6中对bcache做任何修改的话，都必须持有bcache的锁；其次对block 33的cache做任何修改你需要持有block 33的sleep lock。所以在任何时候，release(&amp;amp;bcache.lock)之后，b-&amp;gt;refcnt都大于0。block的cache只会在refcnt为0的时候才会被驱逐，任何时候refcnt大于0都不会驱逐block cache。所以当b-&amp;gt;refcnt大于0的时候，block cache本身不会被buffer cache修改。这里的第二个锁，也就是block cache的sleep lock，是用来保护block cache的内容的。它确保了任何时候只有一个进程可以读写block cache。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;如果buffer cache中有两份block 33的cache将会出现问题。假设一个进程要更新inode19，另一个进程要更新inode20。&lt;/p&gt;
 &lt;p&gt;如果它们都在处理block 33的cache，并且cache有两份，那么第一个进程可能持有一份cache并先将inode19写回到磁盘中，而另一个进程持有另一份cache会将inode20写回到磁盘中，并将inode19的更新覆盖掉。&lt;/p&gt;
 &lt;p&gt;所以一个block只能在buffer cache中出现一次。你们在完成File system lab时，必须要维持buffer cache的这个属性。&lt;/p&gt;
@@ -15176,7 +15347,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;Frans教授：如果第一个进程结束了对block 33的读写操作，它会对block的cache调用brelse（block cache release）函数。&lt;/p&gt;
 &lt;p&gt;这个函数会对refcnt减1，并释放sleep lock。这意味着，如果有任何一个其他进程正在等待使用这个block cache，现在它就能获得这个block cache的sleep lock，并发现刚刚做的改动。&lt;/p&gt;
 &lt;p&gt;假设两个进程都需要分配一个新的inode，且新的inode都位于block 33。如果第一个进程分配到了inode18并完成了更新，那么它对于inode18的更新是可见的。另一个进程就只能分配到inode19，因为inode18已经被标记为已使用，任何之后的进程都可以看到第一个进程对它的更新。&lt;/p&gt;
-&lt;p&gt;这正是我们想看到的结果，如果一个进程创建了一个inode或者创建了一个文件，之后的进程执行读就应该看到那个文件。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;这正是我们想看到的结果，如果一个进程创建了一个inode或者创建了一个文件，之后的进程执行读就应该看到那个文件。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;sleep-lock&#34;&gt;Sleep Lock
 &lt;/h2&gt;&lt;p&gt;block cache使用的是sleep lock。sleep lock区别于一个常规的spinlock。我们先看来一下sleep lock。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -15292,7 +15464,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;下节课我将会介绍crash safety，这是文件系统设计中非常棒的一部分。我们将会在crash safety讲两节课。下节课我们会看到基于log实现的crash safety机制，下下节课我们会看到Linux的ext3是如何实现的logging，这种方式要快得多。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;学生提问：我有个关于brelease函数的问题，看起来它先释放了block cache的锁，然后再对引用计数refcnt减一，为什么可以这样呢？&lt;/p&gt;
-&lt;p&gt;Frans教授：这是个好问题。如果我们释放了sleep lock，这时另一个进程正在等待锁，那么refcnt必然大于1，而b-&amp;gt;refcnt &amp;ndash;只是表明当前执行brelease的进程不再关心block cache。如果还有其他进程正在等待锁，那么refcnt必然不等于0，我们也必然不会执行if(b-&amp;gt;refcnt == 0)中的代码。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Frans教授：这是个好问题。如果我们释放了sleep lock，这时另一个进程正在等待锁，那么refcnt必然大于1，而b-&amp;gt;refcnt &amp;ndash;只是表明当前执行brelease的进程不再关心block cache。如果还有其他进程正在等待锁，那么refcnt必然不等于0，我们也必然不会执行if(b-&amp;gt;refcnt == 0)中的代码。&lt;/p&gt;
+&lt;/blockquote&gt;
 </description>
         </item>
         <item>
@@ -15607,7 +15780,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;在某个时刻，一个进程将获取条件锁，设置睡眠者正在等待的条件，并调用&lt;code&gt;wakeup(chan)&lt;/code&gt;。&lt;/p&gt;
 &lt;p&gt;在持有状态锁时调用&lt;code&gt;wakeup&lt;/code&gt;非常重要。&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;严格地说，&lt;code&gt;wakeup&lt;/code&gt;只需跟在&lt;code&gt;acquire&lt;/code&gt;之后就足够了（也就是说，可以在&lt;code&gt;release&lt;/code&gt;之后调用&lt;code&gt;wakeup&lt;/code&gt;）&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;严格地说，&lt;code&gt;wakeup&lt;/code&gt;只需跟在&lt;code&gt;acquire&lt;/code&gt;之后就足够了（也就是说，可以在&lt;code&gt;release&lt;/code&gt;之后调用&lt;code&gt;wakeup&lt;/code&gt;）&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;&lt;code&gt;wakeup&lt;/code&gt;遍历进程表（&lt;em&gt;&lt;strong&gt;kernel/proc.c&lt;/strong&gt;&lt;/em&gt;:582）。&lt;/p&gt;
 &lt;p&gt;它获取它所检查的每个进程的&lt;code&gt;p-&amp;gt;lock&lt;/code&gt;，这既是因为它可能会操纵该进程的状态，也是因为&lt;code&gt;p-&amp;gt;lock&lt;/code&gt;确保&lt;code&gt;sleep&lt;/code&gt;和&lt;code&gt;wakeup&lt;/code&gt;不会彼此错过。&lt;/p&gt;
 &lt;p&gt;当&lt;code&gt;wakeup&lt;/code&gt;发现一个&lt;code&gt;SLEEPING&lt;/code&gt;的进程且&lt;code&gt;chan&lt;/code&gt;相匹配时，它会将该进程的状态更改为&lt;code&gt;RUNNABLE&lt;/code&gt;。调度器下次运行时，将看到进程已准备好运行。&lt;/p&gt;
@@ -15744,7 +15918,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;这可能比正常情况要晚一点（例如，当virtio驱动程序返回受害者正在等待的磁盘块时）或永远不会发生（例如，如果受害者正在等待来自控制台的输入，但用户没有键入任何输入）。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;注：上节中说到kill的工作方式，&lt;code&gt;kill&lt;/code&gt;设置&lt;code&gt;p-&amp;gt;killed&lt;/code&gt;，如果遇到进程正在休眠，则会唤醒它，此后在&lt;code&gt;usertrap&lt;/code&gt;中检测&lt;code&gt;p-&amp;gt;killed&lt;/code&gt;，并使进程退出&lt;/p&gt;
-&lt;p&gt;而如果像上面说的，在检查&lt;code&gt;p-&amp;gt;killed&lt;/code&gt;之后调用&lt;code&gt;sleep&lt;/code&gt;之前唤醒受害者进程，那么接下来执行&lt;code&gt;sleep&lt;/code&gt;就会导致进程无法进入内核，无法在&lt;code&gt;usertrap&lt;/code&gt;中退出，而必须等待所需事件的发生再次唤醒&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;而如果像上面说的，在检查&lt;code&gt;p-&amp;gt;killed&lt;/code&gt;之后调用&lt;code&gt;sleep&lt;/code&gt;之前唤醒受害者进程，那么接下来执行&lt;code&gt;sleep&lt;/code&gt;就会导致进程无法进入内核，无法在&lt;code&gt;usertrap&lt;/code&gt;中退出，而必须等待所需事件的发生再次唤醒&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;一个实际的操作系统将在固定时间内使用空闲列表找到自由的&lt;code&gt;proc&lt;/code&gt;结构体，而不是&lt;code&gt;allocproc&lt;/code&gt;中的线性时间搜索；xv6使用线性扫描是为了简单起见。&lt;/p&gt;
 &lt;h2 id=&#34;正课&#34;&gt;正课
 &lt;/h2&gt;&lt;h2 id=&#34;线程切换过程中锁的限制&#34;&gt;线程切换过程中锁的限制
@@ -15770,7 +15945,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;我们之后会用到它，因为这是Sleep&amp;amp;Wakeup设计中众多限制条件之一。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;学生提问：当我们有多个CPU核时，它们能看到同样的锁对象的唯一原因只可能是它们有一个共享的物理内存系统，对吧？&lt;/p&gt;
-&lt;p&gt;Robert教授：是的。如果你有两个电脑，那么它们不会共享内存，并且我们就不会有这些问题。现在的处理器上，总是有多个CPU核，它们共享了相同的内存系统。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Robert教授：是的。如果你有两个电脑，那么它们不会共享内存，并且我们就不会有这些问题。现在的处理器上，总是有多个CPU核，它们共享了相同的内存系统。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;在线程切换的过程中，还有一点我之前没有提过。&lt;/p&gt;
 &lt;p&gt;XV6中，不允许进程在执行switch函数的过程中，持有任何其他的锁。&lt;/p&gt;
 &lt;p&gt;所以，进程在调用switch函数的过程中，必须要持有p-&amp;gt;lock（注，也就是进程对应的proc结构体中的锁），但是同时又不能持有任何其他的锁。&lt;/p&gt;
@@ -15794,7 +15970,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;所以不幸的是，当我们在自旋等待锁释放时会关闭中断，进而阻止了定时器中断并且阻止了进程P2将CPU出让回给进程P1。嗯，这是个好问题。&lt;/p&gt;
 &lt;p&gt;学生提问：能重复一下死锁是如何避免的吗？&lt;/p&gt;
 &lt;p&gt;Robert教授：哦，在XV6中，死锁是通过禁止在线程切换的时候加锁来避免的。&lt;/p&gt;
-&lt;p&gt;XV6禁止在调用switch函数时，获取除了p-&amp;gt;lock以外的其他锁。如果你查看sched函数的代码（注，详见11.6），里面包含了一些检查代码来确保除了p-&amp;gt;lock以外线程不持有其他锁。所以上面会产生死锁的代码在XV6中是不合法的并被禁止的。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;XV6禁止在调用switch函数时，获取除了p-&amp;gt;lock以外的其他锁。如果你查看sched函数的代码（注，详见11.6），里面包含了一些检查代码来确保除了p-&amp;gt;lock以外线程不持有其他锁。所以上面会产生死锁的代码在XV6中是不合法的并被禁止的。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;将这里描述的对于锁的两个限制条件记住，因为我们后面讨论Sleep&amp;amp;Wakeup如何工作时会再次使用它们。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;在多核系统中，进程或者线程为了同步和共享资源，通常使用锁（如自旋锁）。但是在锁的操作中，如果处理不当，可能会引发&lt;strong&gt;死锁&lt;/strong&gt;。死锁发生在多个进程/线程因为争抢资源（锁）而互相等待，导致系统无法前进。&lt;/p&gt;
@@ -15810,7 +15987,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;li&gt;&lt;strong&gt;避免中断处理程序的竞争&lt;/strong&gt;：当一个进程关闭中断并开始等待锁时，确保了 CPU 不会因为中断处理而切换到另一个进程。这样，持有锁的进程（如 P1）可以继续执行，直到释放锁，而不会因为中断导致死锁。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;防止并发修改状态&lt;/strong&gt;：锁保护的是共享数据的访问，关闭中断后，确保了其他硬件中断（比如定时器、设备中断）不会打断当前进程对锁和共享数据的操作。中断处理程序不能抢占当前进程，数据一致性得以保障。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;如果我们在自旋等待锁释放时才关闭中断（即：先“自旋”再关闭中断），会存在一个竞态条件。在这个短暂的时间段内，虽然锁还没有被成功获取，但是中断已经没有关闭。这种情况下，设备中断可能会触发，并执行某些需要持有锁的操作，导致中断处理程序和进程竞争同一个锁，从而引发死锁。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;如果我们在自旋等待锁释放时才关闭中断（即：先“自旋”再关闭中断），会存在一个竞态条件。在这个短暂的时间段内，虽然锁还没有被成功获取，但是中断已经没有关闭。这种情况下，设备中断可能会触发，并执行某些需要持有锁的操作，导致中断处理程序和进程竞争同一个锁，从而引发死锁。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;sleepwakeup接口&#34;&gt;Sleep&amp;amp;Wakeup接口
 &lt;/h2&gt;&lt;p&gt;接下来看一下通过Sleep&amp;amp;Wakeup实现Coordination。&lt;/p&gt;
 &lt;p&gt;锁可以使得线程本身不必关心其他线程的具体实现。&lt;/p&gt;
@@ -15896,7 +16074,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;blockquote&gt;
 &lt;p&gt;学生提问：进程会在写入每个字符时候都被唤醒一次吗？&lt;/p&gt;
 &lt;p&gt;Robert教授：在这个我出于演示目的而特别改过的UART驱动中，传输每个字符都会有一个中断，所以你是对的，对于buffer中的每个字符，我们都会等待UART可以接收下一个字符，之后写入一个字符，将tx_done设置为0，回到循环的最开始并再次调用sleep函数进行睡眠状态，直到tx_done为1。当UART传输完了这个字符，uartintr函数会将tx_done设置为1，并唤醒uartwrite所在的线程。所以对于每个字符都有调用一次sleep和wakeup，并占用一次循环。&lt;/p&gt;
-&lt;p&gt;UART实际上支持一次传输4或者16个字符，所以一个更有效的驱动会在每一次循环都传输16个字符给UART，并且中断也是每16个字符触发一次。更高速的设备，例如以太网卡通常会更多个字节触发一次中断。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;UART实际上支持一次传输4或者16个字符，所以一个更有效的驱动会在每一次循环都传输16个字符给UART，并且中断也是每16个字符触发一次。更高速的设备，例如以太网卡通常会更多个字节触发一次中断。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;以上就是接口的演示。&lt;/p&gt;
 &lt;p&gt;Sleep&amp;amp;wakeup的一个优点是它们可以很灵活，它们不关心代码正在执行什么操作，你不用告诉sleep函数你在等待什么事件，你也不用告诉wakeup函数发生了什么事件，你只需要匹配好64bit的sleep channel就行。&lt;/p&gt;
 &lt;p&gt;不过，对于sleep函数，有一个有趣的参数，我们需要将一个锁作为第二个参数传入，这背后是一个大的故事，我后面会介绍背后的原因。&lt;/p&gt;
@@ -16025,7 +16204,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;我来敲一下cat README，这会输出数千个字符。&lt;/p&gt;
 &lt;p&gt;可以看到每过几个字符就会hang一次，需要我再次输入某个字符。&lt;/p&gt;
 &lt;p&gt;这个过程我们可以看到很多lost wakeup。&lt;/p&gt;
-&lt;p&gt;之前之所以没有出现，是因为lost wakeup需要中断已经在等待获取锁，并且uartwrite位于release和broken_sleep之间，这需要一定的巧合并不总是会发生。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;之前之所以没有出现，是因为lost wakeup需要中断已经在等待获取锁，并且uartwrite位于release和broken_sleep之间，这需要一定的巧合并不总是会发生。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;如何避免lost-wakeup&#34;&gt;如何避免Lost wakeup
 &lt;/h2&gt;&lt;p&gt;现在我们的目标是消灭掉lost wakeup。这可以通过消除下面的窗口时间来实现。&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/mit6s08113sleep-wake-up/p18.png&#34;
@@ -16761,7 +16941,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;这意味着，正在退出的进程获取自己的锁到它调用sched进入到调度器线程之间（注，因为调度器线程会释放进程的锁），父进程并不能看到这之间代码引起的中间状态。&lt;/p&gt;
 &lt;p&gt;所以这之间的代码顺序并不重要。&lt;/p&gt;
 &lt;p&gt;大部分时候，如果没有持有锁，exit中任何代码顺序都不能工作。&lt;/p&gt;
-&lt;p&gt;因为有了锁，代码的顺序就不再重要，因为父进程也看不到进程状态。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;因为有了锁，代码的顺序就不再重要，因为父进程也看不到进程状态。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;所以，直到子进程exit的最后，它都没有释放所有的资源，因为它还在运行的过程中，所以不能释放这些资源。&lt;/p&gt;
 &lt;p&gt;相应的其他的进程，也就是父进程，释放了运行子进程代码所需要的资源。这样的设计可以让我们极大的精简exit的实现。&lt;/p&gt;
 &lt;h2 id=&#34;kill系统调用&#34;&gt;kill系统调用
@@ -17116,7 +17297,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;如果你正在运行一些重要的服务器，例如数据库服务器，并且许多其他计算机依赖这个数据库并通过网络使用它。&lt;/p&gt;
 &lt;p&gt;那谁知道呢？答案或许是你不能就这么直接关闭操作系统，因为你正在提供一个对于其他计算机来说非常关键的服务。&lt;/p&gt;
 &lt;p&gt;如果你的计算机并没有在做任何事情，那么你可以直接关闭它。&lt;/p&gt;
-&lt;p&gt;或许对于你的问题来说，如果你想关闭一个计算机，确保文件系统是正确的，之后停止执行指令，之后就可以关闭计算机了。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;或许对于你的问题来说，如果你想关闭一个计算机，确保文件系统是正确的，之后停止执行指令，之后就可以关闭计算机了。&lt;/p&gt;
+&lt;/blockquote&gt;
 </description>
         </item>
         <item>
@@ -17239,7 +17421,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;li&gt;&lt;strong&gt;保存调度程序的状态&lt;/strong&gt;：在执行进程切换时，调度程序需要保存当前的 CPU 状态、寄存器、调度算法的变量等信息。这些信息会保存在调度程序自己的内核栈中，而不会影响进程的内核栈。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;执行进程调度逻辑&lt;/strong&gt;：当调度程序决定暂停当前进程并切换到另一个进程时，它使用自己的内核栈来处理这个操作。调度程序在选择下一个进程时，所有与调度相关的局部变量和函数调用都存储在调度程序自己的栈中。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;这种设计保证了在多核环境下安全、高效地切换进程，并且避免了内核栈冲突。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;这种设计保证了在多核环境下安全、高效地切换进程，并且避免了内核栈冲突。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;在本节中，我们将研究在内核线程和调度程序线程之间切换的机制。&lt;/p&gt;
 &lt;p&gt;从一个线程切换到另一个线程需要保存旧线程的CPU寄存器，并恢复新线程先前保存的寄存器；栈指针和程序计数器被保存和恢复的事实意味着CPU将切换栈和执行中的代码。&lt;/p&gt;
 &lt;p&gt;函数&lt;code&gt;swtch&lt;/code&gt;为内核线程切换执行保存和恢复操作。&lt;/p&gt;
@@ -17252,7 +17435,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;我们在第4章中看到，中断结束时的一种可能性是&lt;code&gt;usertrap&lt;/code&gt;调用了&lt;code&gt;yield&lt;/code&gt;。&lt;/p&gt;
 &lt;p&gt;依次地：&lt;code&gt;Yield&lt;/code&gt;调用&lt;code&gt;sched&lt;/code&gt;，&lt;code&gt;sched&lt;/code&gt;调用&lt;code&gt;swtch&lt;/code&gt;将当前上下文保存在&lt;code&gt;p-&amp;gt;context&lt;/code&gt;中，并切换到先前保存在&lt;code&gt;cpu-&amp;gt;scheduler&lt;/code&gt;（&lt;em&gt;&lt;strong&gt;kernel/proc.c&lt;/strong&gt;&lt;/em&gt;:517）中的调度程序上下文。&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;注：当前版本的XV6中调度程序上下文是&lt;code&gt;cpu-&amp;gt;context&lt;/code&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;注：当前版本的XV6中调度程序上下文是&lt;code&gt;cpu-&amp;gt;context&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;&lt;code&gt;Swtch&lt;/code&gt;（&lt;em&gt;&lt;strong&gt;kernel/swtch.S&lt;/strong&gt;&lt;/em&gt;:3）只保存被调用方保存的寄存器（callee-saved registers）；调用方保存的寄存器（caller-saved registers）通过调用C代码保存在栈上（如果需要）。&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;Swtch&lt;/code&gt;知道&lt;code&gt;struct context&lt;/code&gt;中每个寄存器字段的偏移量。它不保存程序计数器。&lt;/p&gt;
 &lt;p&gt;但&lt;code&gt;swtch&lt;/code&gt;保存&lt;code&gt;ra&lt;/code&gt;寄存器，该寄存器保存调用&lt;code&gt;swtch&lt;/code&gt;的返回地址。&lt;/p&gt;
@@ -17285,7 +17469,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;li&gt;&lt;strong&gt;进程的上下文信息&lt;/strong&gt;（内核态的寄存器、程序计数器等）保存在每个进程的 &lt;code&gt;context&lt;/code&gt; 对象中，而不是在 CPU 专属的调度程序栈中。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;CPU 专属的调度程序栈&lt;/strong&gt; 仅用于调度程序在进程切换期间的执行，不保存具体进程的状态。&lt;/li&gt;
 &lt;li&gt;调度程序执行进程切换时，会切换到 CPU 专属的栈，而当新的进程开始运行时，它会切换回到该进程的内核栈，继续执行。&lt;/li&gt;
-&lt;/ul&gt;&lt;/blockquote&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;在我们的示例中，&lt;code&gt;sched&lt;/code&gt;调用&lt;code&gt;swtch&lt;/code&gt;切换到&lt;code&gt;cpu-&amp;gt;scheduler&lt;/code&gt;，即每个CPU的调度程序上下文。&lt;/p&gt;
 &lt;p&gt;调度程序上下文之前通过&lt;code&gt;scheduler&lt;/code&gt;对&lt;code&gt;swtch&lt;/code&gt;（&lt;em&gt;&lt;strong&gt;kernel/proc.c&lt;/strong&gt;&lt;/em&gt;:475）的调用进行了保存。&lt;/p&gt;
 &lt;p&gt;当我们追踪&lt;code&gt;swtch&lt;/code&gt;到返回时，他返回到&lt;code&gt;scheduler&lt;/code&gt;而不是&lt;code&gt;sched&lt;/code&gt;，并且它的栈指针指向当前CPU的调用程序栈（scheduler stack）。&lt;/p&gt;
@@ -17479,7 +17664,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;li&gt;当进程正从 &lt;code&gt;RUNNING&lt;/code&gt; 状态切换到 &lt;code&gt;RUNNABLE&lt;/code&gt; 状态时，进程的寄存器可能还没有完全保存到 &lt;code&gt;p-&amp;gt;context&lt;/code&gt; 中。&lt;/li&gt;
 &lt;li&gt;或者，进程的状态正在更新，可能还存在 CPU 在该进程的内核栈上运行，导致暂时的不一致。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;因此，&lt;strong&gt;在上下文切换的过程中&lt;/strong&gt;，这些不变量可能会短暂地被打破。这就是为什么在 &lt;code&gt;sched&lt;/code&gt; 执行过程中，&lt;strong&gt;必须持有 &lt;code&gt;p-&amp;gt;lock&lt;/code&gt;&lt;/strong&gt;，确保在完成整个上下文切换前，其他 CPU 不会并发地修改该进程的状态。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;因此，&lt;strong&gt;在上下文切换的过程中&lt;/strong&gt;，这些不变量可能会短暂地被打破。这就是为什么在 &lt;code&gt;sched&lt;/code&gt; 执行过程中，&lt;strong&gt;必须持有 &lt;code&gt;p-&amp;gt;lock&lt;/code&gt;&lt;/strong&gt;，确保在完成整个上下文切换前，其他 CPU 不会并发地修改该进程的状态。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;维护上述不变量是xv6经常在一个线程中获取&lt;code&gt;p-&amp;gt;lock&lt;/code&gt;并在另一个线程中释放它的原因，例如在&lt;code&gt;yield&lt;/code&gt;中获取并在&lt;code&gt;scheduler&lt;/code&gt;中释放。&lt;/p&gt;
 &lt;p&gt;一旦&lt;code&gt;yield&lt;/code&gt;开始修改一个&lt;code&gt;RUNNING&lt;/code&gt;进程的状态为&lt;code&gt;RUNNABLE&lt;/code&gt;，锁必须保持被持有状态，直到不变量恢复：最早的正确释放点是&lt;code&gt;scheduler&lt;/code&gt;（在其自身栈上运行）清除&lt;code&gt;c-&amp;gt;proc&lt;/code&gt;之后。类似地，一旦&lt;code&gt;scheduler&lt;/code&gt;开始将&lt;code&gt;RUNNABLE&lt;/code&gt;进程转换为&lt;code&gt;RUNNING&lt;/code&gt;，在内核线程完全运行之前（在&lt;code&gt;swtch&lt;/code&gt;之后，例如在&lt;code&gt;yield&lt;/code&gt;中）绝不能释放锁。&lt;/p&gt;
 &lt;blockquote&gt;
@@ -17552,7 +17738,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;li&gt;&lt;strong&gt;&lt;code&gt;yield&lt;/code&gt; 后&lt;/strong&gt;：锁不能立即释放，必须保持到调度器清理完 &lt;code&gt;c-&amp;gt;proc&lt;/code&gt;，并安全地将控制权交给另一个进程。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;&lt;code&gt;scheduler&lt;/code&gt; 选择下一个进程后&lt;/strong&gt;：当调度器把进程从 &lt;code&gt;RUNNABLE&lt;/code&gt; 转换为 &lt;code&gt;RUNNING&lt;/code&gt; 时，必须确保切换完成，才能释放锁。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;总的来说，&lt;strong&gt;锁的释放时机是确保状态和上下文切换完成，进程状态稳定&lt;/strong&gt;后，才能释放锁，否则可能导致状态混乱和并发冲突。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;总的来说，&lt;strong&gt;锁的释放时机是确保状态和上下文切换完成，进程状态稳定&lt;/strong&gt;后，才能释放锁，否则可能导致状态混乱和并发冲突。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;&lt;code&gt;p-&amp;gt;lock&lt;/code&gt;还保护其他东西：&lt;code&gt;exit&lt;/code&gt;和&lt;code&gt;wait&lt;/code&gt;之间的相互作用，避免丢失&lt;code&gt;wakeup&lt;/code&gt;的机制（参见第7.5节），以及避免一个进程退出和其他进程读写其状态之间的争用（例如，&lt;code&gt;exit&lt;/code&gt;系统调用查看&lt;code&gt;p-&amp;gt;pid&lt;/code&gt;并设置&lt;code&gt;p-&amp;gt;killed&lt;/code&gt;(*&lt;strong&gt;kernel/proc.c*&lt;/strong&gt;:611)）。&lt;/p&gt;
 &lt;p&gt;为了清晰起见，也许为了性能起见，有必要考虑一下&lt;code&gt;p-&amp;gt;lock&lt;/code&gt;的不同功能是否可以拆分。&lt;/p&gt;
 &lt;h2 id=&#34;代码mycpu和myproc&#34;&gt;代码：mycpu和myproc
@@ -17582,7 +17769,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;li&gt;&lt;code&gt;mycpu()&lt;/code&gt; 函数返回当前 CPU 的 &lt;code&gt;struct cpu&lt;/code&gt; 指针。它通过 &lt;code&gt;tp&lt;/code&gt; 寄存器找到对应的 CPU 结构体。&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;myproc()&lt;/code&gt; 函数返回当前 CPU 上运行的进程的 &lt;code&gt;struct proc&lt;/code&gt; 指针。它通过禁用中断，调用 &lt;code&gt;mycpu()&lt;/code&gt; 函数从当前 CPU 的 &lt;code&gt;struct cpu&lt;/code&gt; 中取出正在运行的进程指针。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;为了避免在中断或线程迁移（例如由于计时器中断导致线程切换到另一个 CPU）时返回值不再有效，Xv6 要求在获取这些信息时禁用中断，并在使用完后再启用。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;为了避免在中断或线程迁移（例如由于计时器中断导致线程切换到另一个 CPU）时返回值不再有效，Xv6 要求在获取这些信息时禁用中断，并在使用完后再启用。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;正课&#34;&gt;正课
 &lt;/h2&gt;&lt;h2 id=&#34;线程概述&#34;&gt;线程概述
 &lt;/h2&gt;&lt;p&gt;今天的课程会讨论线程以及XV6如何实现线程切换。&lt;/p&gt;
@@ -17749,32 +17937,37 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;每一个内核线程都有一个context对象。但是内核线程实际上有两类。&lt;/p&gt;
 &lt;p&gt;每一个用户进程有一个对应的内核线程，它的context对象保存在用户进程对应的proc结构体中。&lt;/p&gt;
 &lt;p&gt;每一个调度器线程，它也有自己的context对象，但是它却没有对应的进程和proc结构体，所以调度器线程的context对象保存在cpu结构体中。&lt;/p&gt;
-&lt;p&gt;在内核中，有一个cpu结构体的数组，每个cpu结构体对应一个CPU核，每个结构体中都有一个context字段。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;在内核中，有一个cpu结构体的数组，每个cpu结构体对应一个CPU核，每个结构体中都有一个context字段。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;blockquote&gt;
 &lt;p&gt;学生提问：为什么不能将context对象保存在进程对应的trapframe中？&lt;/p&gt;
 &lt;p&gt;Robert教授：context可以保存在trapframe中，因为每一个进程都只有一个内核线程对应的一组寄存器，我们可以将这些寄存器保存在任何一个与进程一一对应的数据结构中。&lt;/p&gt;
 &lt;p&gt;对于每个进程来说，有一个proc结构体，有一个trapframe结构体，所以我们可以将context保存于trapframe中。&lt;/p&gt;
 &lt;p&gt;但是或许出于简化代码或者让代码更清晰的目的，trapframe还是只包含进入和离开内核时的数据。&lt;/p&gt;
-&lt;p&gt;而context结构体中包含的是在内核线程和调度器线程之间切换时，需要保存和恢复的数据。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;而context结构体中包含的是在内核线程和调度器线程之间切换时，需要保存和恢复的数据。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;blockquote&gt;
 &lt;p&gt;学生提问：出让CPU是由用户发起的还是由内核发起的？&lt;/p&gt;
 &lt;p&gt;Robert教授：对于XV6来说，并不会直接让用户线程出让CPU或者完成线程切换，而是由内核在合适的时间点做决定。&lt;/p&gt;
 &lt;p&gt;有的时候你可以猜到特定的系统调用会导致出让CPU，例如一个用户进程读取pipe，而它知道pipe中并不能读到任何数据，这时你可以预测读取会被阻塞，而内核在等待数据的过程中会运行其他的进程。&lt;/p&gt;
 &lt;p&gt;内核会在两个场景下出让CPU。&lt;/p&gt;
 &lt;p&gt;当定时器中断触发了，内核总是会让当前进程出让CPU，因为我们需要在定时器中断间隔的时间点上交织执行所有想要运行的进程。&lt;/p&gt;
-&lt;p&gt;另一种场景就是任何时候一个进程调用了系统调用并等待I/O，例如等待你敲入下一个按键，在你还没有按下按键时，等待I/O的机制会触发出让CPU。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;另一种场景就是任何时候一个进程调用了系统调用并等待I/O，例如等待你敲入下一个按键，在你还没有按下按键时，等待I/O的机制会触发出让CPU。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;blockquote&gt;
 &lt;p&gt;学生提问：用户进程调用sleep函数是不是会调用某个系统调用，然后将用户进程的信息保存在trapframe，然后触发进程切换，这时就不是定时器中断决定，而是用户进程自己决定了吧？&lt;/p&gt;
 &lt;p&gt;Robert教授：如果进程执行了read系统调用，然后进入到了内核中。&lt;/p&gt;
 &lt;p&gt;而read系统调用要求进程等待磁盘，这时系统调用代码会调用sleep，而sleep最后会调用swtch函数。&lt;/p&gt;
 &lt;p&gt;swtch函数会保存内核线程的寄存器到进程的context中，然后切换到对应CPU的调度器线程，再让其他的线程运行。&lt;/p&gt;
 &lt;p&gt;这样在当前线程等待磁盘读取结束时，其他线程还能运行。&lt;/p&gt;
-&lt;p&gt;所以，这里的流程除了没有定时器中断，其他都一样，只是这里是因为一个系统调用需要等待I/O（注，感觉答非所问）&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;所以，这里的流程除了没有定时器中断，其他都一样，只是这里是因为一个系统调用需要等待I/O（注，感觉答非所问）&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;blockquote&gt;
 &lt;p&gt;学生提问：每一个CPU的调度器线程有自己的栈吗？&lt;/p&gt;
 &lt;p&gt;Robert教授：是的，每一个调度器线程都有自己独立的栈。&lt;/p&gt;
 &lt;p&gt;实际上调度器线程的所有内容，包括栈和context，与用户进程不一样，都是在系统启动时就设置好了。&lt;/p&gt;
-&lt;p&gt;如果你查看XV6的start.s（注：是entry.S和start.c）文件，你就可以看到为每个CPU核设置好调度器线程。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;如果你查看XV6的start.s（注：是entry.S和start.c）文件，你就可以看到为每个CPU核设置好调度器线程。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;这里有一个术语需要解释一下。&lt;/p&gt;
 &lt;p&gt;当人们在说context switching，他们通常说的是从一个线程切换到另一个线程，因为在切换的过程中需要先保存前一个线程的寄存器，然后再恢复之前保存的后一个线程的寄存器，这些寄存器都是保存在context对象中。&lt;/p&gt;
 &lt;p&gt;在有些时候，context switching也指从一个用户进程切换到另一个用户进程的完整过程。&lt;/p&gt;
@@ -17792,7 +17985,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;学生提问：我们这里一直在说线程，但是从我看来XV6的实现中，一个进程就只有一个线程，有没有可能一个进程有多个线程？&lt;/p&gt;
 &lt;p&gt;Robert教授：我们这里的用词的确有点让人混淆。&lt;/p&gt;
 &lt;p&gt;在XV6中，一个进程要么在用户空间执行指令，要么是在内核空间执行指令，要么它的状态被保存在context和trapframe中，并且没有执行任何指令。&lt;/p&gt;
-&lt;p&gt;这里该怎么称呼它呢？你可以根据自己的喜好来称呼它，对于我来说，每个进程有两个线程，一个用户空间线程，一个内核空间线程，并且存在限制使得一个进程要么运行在用户空间线程，要么为了执行系统调用或者响应中断而运行在内核空间线程 ，但是永远也不会两者同时运行。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;这里该怎么称呼它呢？你可以根据自己的喜好来称呼它，对于我来说，每个进程有两个线程，一个用户空间线程，一个内核空间线程，并且存在限制使得一个进程要么运行在用户空间线程，要么为了执行系统调用或者响应中断而运行在内核空间线程 ，但是永远也不会两者同时运行。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;xv6进程切换示例程序&#34;&gt;XV6进程切换示例程序
 &lt;/h2&gt;&lt;p&gt;我们先来看一下proc.h中的proc结构体，从结构体中我们可以看到很多之前介绍的内容。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -17972,7 +18166,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;其中一件是，每个进程都有不同的内核栈，它由proc结构体中的kstack字段所指向；&lt;/p&gt;
 &lt;p&gt;另一件就是，任何内核代码都可以通过调用myproc函数来获取当前CPU正在运行的进程。&lt;/p&gt;
 &lt;p&gt;内核线程可以通过调用这个函数知道自己属于哪个用户进程。&lt;/p&gt;
-&lt;p&gt;myproc函数会使用tp寄存器来获取当前的CPU核的ID，并使用这个ID在一个保存了所有CPU上运行的进程的结构体数组中，找到对应的proc结构体。这就是不同的内核线程区分自己的方法。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;myproc函数会使用tp寄存器来获取当前的CPU核的ID，并使用这个ID在一个保存了所有CPU上运行的进程的结构体数组中，找到对应的proc结构体。这就是不同的内核线程区分自己的方法。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;首先会打印p-&amp;gt;name来获取进程的名称，&lt;/p&gt;
 &lt;p&gt;当前进程是spin程序，如预期一样。&lt;/p&gt;
 &lt;p&gt;当前的进程ID是3，进程切换之后，我们预期进程ID会不一样。&lt;/p&gt;
@@ -17992,12 +18187,14 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;这个问题是可能发生的，因为电脑中有上亿的晶体管，有的时候电脑会有问题，但是这超出了内核的管理范围了。&lt;/p&gt;
 &lt;p&gt;所以我们假设计算机可以正常工作。&lt;/p&gt;
 &lt;p&gt;有的时候软件会尝试弥补硬件的错误，比如通过网络传输packet，总是会带上checksum，这样如果某个网络设备故障导致某个bit反转了，可以通过checksum发现这个问题。&lt;/p&gt;
-&lt;p&gt;但是对于计算机内部的问题，人们倾向于不用软件来尝试弥补硬件的错误。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;但是对于计算机内部的问题，人们倾向于不用软件来尝试弥补硬件的错误。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;blockquote&gt;
 &lt;p&gt;学生提问：当一个线程结束执行了，比如说在用户空间通过exit系统调用结束线程，同时也会关闭进程的内核线程。那么线程结束之后和下一个定时器中断之间这段时间，CPU仍然会被这个线程占有吗？还是说我们在结束线程的时候会启动一个新的线程？&lt;/p&gt;
 &lt;p&gt;Robert教授：exit系统调用会出让CPU。&lt;/p&gt;
 &lt;p&gt;尽管我们这节课主要是基于定时器中断来讨论，但是实际上XV6切换线程的绝大部分场景都不是因为定时器中断，比如说一些系统调用在等待一些事件并决定让出CPU。&lt;/p&gt;
-&lt;p&gt;exit系统调用会做各种操作然后调用yield函数来出让CPU，这里的出让并不依赖定时器中断。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;exit系统调用会做各种操作然后调用yield函数来出让CPU，这里的出让并不依赖定时器中断。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;xv6线程切换yieldsched函数&#34;&gt;XV6线程切换&amp;ndash;yield/sched函数
 &lt;/h2&gt;&lt;p&gt;回到devintr函数返回到usertrap函数中的位置。&lt;/p&gt;
 &lt;p&gt;在gdb里面输入几次step走到yield函数的调用。&lt;/p&gt;
@@ -18233,7 +18430,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;我们可以打印ra寄存器，如你们所预期的一样，它指向了sched函数。&lt;/p&gt;
 &lt;p&gt;为什么RISC-V中有32个寄存器，但是swtch函数中只保存并恢复了14个寄存器？&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;因为switch是按照一个普通函数来调用的，对于有些寄存器，swtch函数的调用者默认swtch函数会做修改，所以调用者已经在自己的栈上保存了这些寄存器，当函数返回时，这些寄存器会自动恢复。所以swtch函数里只需要保存Callee Saved Register就行。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;因为switch是按照一个普通函数来调用的，对于有些寄存器，swtch函数的调用者默认swtch函数会做修改，所以调用者已经在自己的栈上保存了这些寄存器，当函数返回时，这些寄存器会自动恢复。所以swtch函数里只需要保存Callee Saved Register就行。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;因为swtch函数是从C代码调用的，所以我们知道Caller Saved Register会被C编译器保存在当前的栈上。&lt;/p&gt;
 &lt;p&gt;Caller Saved Register大概有15-18个，而我们在swtch函数中只需要处理C编译器不会保存，但是对于swtch函数又有用的一些寄存器。&lt;/p&gt;
 &lt;p&gt;最后我想看的是sp（Stack Pointer）寄存器。&lt;/p&gt;
@@ -18258,7 +18456,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;可以肯定的是C语言中没有方法能更改sp、ra寄存器。&lt;/p&gt;
 &lt;p&gt;所以在普通的C语言中很难完成寄存器的存储和加载，唯一的方法就是在C中嵌套汇编语言。&lt;/p&gt;
 &lt;p&gt;所以我们也可以在C函数中内嵌switch中的指令，但是这跟我们直接定义一个汇编函数是一样的。&lt;/p&gt;
-&lt;p&gt;或者说swtch函数中的操作是在C语言的层级之下，所以并不能使用C语言。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;或者说swtch函数中的操作是在C语言的层级之下，所以并不能使用C语言。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;xv6线程切换scheduler&#34;&gt;XV6线程切换&amp;ndash;scheduler
 &lt;/h2&gt;&lt;p&gt;来看一下scheduler的完整代码，&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -18418,7 +18617,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;你基本上回答了自己的问题，如果我们因为定时器中断之外的原因而停止了执行当前的进程，switch会返回到一些系统调用的代码中，而不是我们这里看到sched函数。&lt;/p&gt;
 &lt;p&gt;我记得sleep最后也调用了sched函数，虽然bracktrace可能看起来会不一样，但是还是会包含sched。&lt;/p&gt;
 &lt;p&gt;所以我这里只介绍了一种进程间切换的方法，也就是因为定时器中断而发生切换。&lt;/p&gt;
-&lt;p&gt;但是还有其他的可能会触发进程切换，例如等待I/O或者等待另一个进程向pipe写数据。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;但是还有其他的可能会触发进程切换，例如等待I/O或者等待另一个进程向pipe写数据。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;这里有件事情需要注意，调度器线程调用了swtch函数，但是我们从swtch函数返回时，实际上是返回到了对于switch的另一个调用，而不是调度器线程中的调用。&lt;/p&gt;
 &lt;p&gt;我们返回到的是pid为4的进程在很久之前对于switch的调用。这里可能会有点让人困惑，但是这就是线程切换的核心。&lt;/p&gt;
 &lt;p&gt;另一件需要注意的事情是，swtch函数是线程切换的核心，但是swtch函数中只有保存寄存器，再加载寄存器的操作。&lt;/p&gt;
@@ -18444,7 +18644,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;学生提问：所以说一个进程中的多个线程会有相同的page table？&lt;/p&gt;
 &lt;p&gt;Robert教授：是的，如果你在Linux上，你为一个进程创建了2个线程，我不确定它们是不是共享同一个的page table，还是说它们是不同的page table，但是内容是相同的。&lt;/p&gt;
 &lt;p&gt;学生提问：有没有原因说这里的page table要是分开的？&lt;/p&gt;
-&lt;p&gt;Robert教授：我不知道Linux究竟用了哪种方法。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Robert教授：我不知道Linux究竟用了哪种方法。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;以下是线程第一次调用switch的过程&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;学生提问：当调用swtch函数的时候，实际上是从一个线程对于switch的调用切换到了另一个线程对于switch的调用。所以线程第一次调用swtch函数时，需要伪造一个“另一个线程”对于switch的调用，是吧？因为也不能通过swtch函数随机跳到其他代码去。&lt;/p&gt;
@@ -18581,7 +18782,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;/div&gt;&lt;p&gt;因为fork拷贝的进程会同时拷贝父进程的程序计数器，所以我们唯一不是通过fork创建进程的场景就是创建第一个进程的时候。这时需要设置程序计数器为0。&lt;/p&gt;
 &lt;p&gt;学生提问：在fortret函数中，if(first)是什么意思？&lt;/p&gt;
 &lt;p&gt;Robert教授：文件系统需要被初始化，具体来说，需要从磁盘读取一些数据来确保文件系统的运行，比如说文件系统究竟有多大，各种各样的东西在文件系统的哪个位置，同时还需要有crash recovery log。&lt;/p&gt;
-&lt;p&gt;完成任何文件系统的操作都需要等待磁盘操作结束，但是XV6只能在进程的context下执行文件系统操作，比如等待I/O。所以初始化文件系统需要等到我们有了一个进程才能进行。而这一步是在第一次调用forkret时完成的，所以在forkret中才有了if(first)判断。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;完成任何文件系统的操作都需要等待磁盘操作结束，但是XV6只能在进程的context下执行文件系统操作，比如等待I/O。所以初始化文件系统需要等到我们有了一个进程才能进行。而这一步是在第一次调用forkret时完成的，所以在forkret中才有了if(first)判断。&lt;/p&gt;
+&lt;/blockquote&gt;
 </description>
         </item>
         <item>
@@ -19491,7 +19693,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;这就是为什么在acquire和release中都有__sync_synchronize函数的调用。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;学生提问：有没有可能在锁acquire之前的一条指令被移到锁release之后？或者说这里会有一个界限不允许这么做？&lt;/p&gt;
-&lt;p&gt;Frans教授：在这里的例子中，acquire和release都有自己的界限（注，也就是__sync_synchronize函数的调用点）。所以发生在锁acquire之前的指令不会被移到acquire的__sync_synchronize函数调用之后，这是一个界限。在锁的release函数中有另一个界限。所以在第一个界限之前的指令会一直在这个界限之前，在两个界限之间的指令会保持在两个界限之间，在第二个界限之后的指令会保持在第二个界限之后。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Frans教授：在这里的例子中，acquire和release都有自己的界限（注，也就是__sync_synchronize函数的调用点）。所以发生在锁acquire之前的指令不会被移到acquire的__sync_synchronize函数调用之后，这是一个界限。在锁的release函数中有另一个界限。所以在第一个界限之前的指令会一直在这个界限之前，在两个界限之间的指令会保持在两个界限之间，在第二个界限之后的指令会保持在第二个界限之后。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;总结&#34;&gt;总结
 &lt;/h2&gt;&lt;p&gt;让我来总结一下这节课的内容。&lt;/p&gt;
 &lt;p&gt;首先，锁确保了正确性，但是同时又会降低性能，这是个令人失望的现实，我们是因为并发运行代码才需要使用锁，而锁另一方面又限制了代码的并发运行。&lt;/p&gt;
@@ -19499,7 +19702,8 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 &lt;p&gt;最后，使用race detector来找到race condition，如果你将锁的acquire和release放置于错误的位置，那么就算使用了锁还是会有race。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;学生提问：在一个处理器上运行多个线程与在多个处理器上运行多个进程是否一样？&lt;/p&gt;
-&lt;p&gt;Frans教授：差不多吧，如果你有多个线程，但是只有一个CPU，那么你还是会想要特定内核代码能够原子执行。所以你还是需要有critical section的概念。你或许不需要锁，但是你还是需要能够对特定的代码打开或者关闭中断。如果你查看一些操作系统的内核代码，通常它们都没有锁的acquire，因为它们假定自己都运行在单个处理器上，但是它们都有开关中断的操作。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Frans教授：差不多吧，如果你有多个线程，但是只有一个CPU，那么你还是会想要特定内核代码能够原子执行。所以你还是需要有critical section的概念。你或许不需要锁，但是你还是需要能够对特定的代码打开或者关闭中断。如果你查看一些操作系统的内核代码，通常它们都没有锁的acquire，因为它们假定自己都运行在单个处理器上，但是它们都有开关中断的操作。&lt;/p&gt;
+&lt;/blockquote&gt;
 </description>
         </item>
         <item>

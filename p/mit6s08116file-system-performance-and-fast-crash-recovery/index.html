@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://echudet.github.io/p/mit6s08116file-system-performance-and-fast-crash-recovery/'>
 
-<link rel="stylesheet" href="/scss/style.min.86fc5e5efb829fb1bdd7a2d2275017fb3ae01ba7fcf491e347d76495ae5e3ae2.css"><meta property='og:title' content="MIT6S081：16File system performance and fast crash recovery">
+<link rel="stylesheet" href="/scss/style.min.209f2315995b57a9cdd733e5afe32e05ebb1138a0b3bb750cfcb86dff885e546.css"><meta property='og:title' content="MIT6S081：16File system performance and fast crash recovery">
 <meta property='og:description' content="文件系统性能和日志系统是提升数据存取效率和系统可靠性的关键因素。高性能文件系统通过优化读写操作、减少延迟和提高吞吐量，以增强用户体验和应用程序的效率。日志系统则通过记录操作日志确保数据在意外故障后仍能保持一致性，保证数据不会丢失，系统能够迅速恢复。这两者结合，不仅提高了系统的稳健性，还加强了用户对数据准确性和可用性的信任。">
 <meta property='og:url' content='https://echudet.github.io/p/mit6s08116file-system-performance-and-fast-crash-recovery/'>
 <meta property='og:site_name' content='echudet'>
@@ -576,7 +576,8 @@
 <p>假设root目录下有两个子目录D1和D2，D1目录下有两个文件F1和F2，每个文件又包含了一些block。</p>
 <p>除此之外，还有一些其他并非是树状结构的数据，比如bitmap表明了每一个data block是空闲的还是已经被分配了。</p>
 <blockquote>
-<p>注，Frans和Robert在这里可能有些概念不统一，对于Frans来说，目录内容应该也属于文件内容，目录是一种特殊的文件，详见14.3；而对于Robert来说，目录内容是metadata。</p></blockquote>
+<p>注，Frans和Robert在这里可能有些概念不统一，对于Frans来说，目录内容应该也属于文件内容，目录是一种特殊的文件，详见14.3；而对于Robert来说，目录内容是metadata。</p>
+</blockquote>
 <p>inode，目录内容，bitmap block，我们将会称之为metadata block，另一类就是持有了文件内容的block，或者叫data block。</p>
 </li>
 <li>
@@ -693,7 +694,8 @@
 <p>在磁盘上的transaction，只能以log记录的形式存在，并且还没有写到对应的文件系统block中。</p>
 <p>logging系统在后台会从最早的transaction开始，将transaction中的data block写入到对应的文件系统中。</p>
 <p>当整个transaction的data block都写完了，之后logging系统才能释放并重用log中的空间。</p>
-<p>所以log其实是个循环的数据结构，如果用到了log的最后，logging系统会从log的最开始位置重新使用。</p></blockquote>
+<p>所以log其实是个循环的数据结构，如果用到了log的最后，logging系统会从log的最开始位置重新使用。</p>
+</blockquote>
 <p>记住这里的log的结构，它对于后面的内容也很重要。</p>
 <h2 id="ext3如何提升性能">ext3如何提升性能
 </h2><p>ext3通过3种方式提升了性能：</p>
@@ -705,7 +707,8 @@
 <p>这些基本上就是ext3有的，而XV6没有的特性。接下来我将一一介绍这里的特性。</p>
 <blockquote>
 <p>学生提问：有关batching，XV6不是也支持多个系统调用同时执行start_op和end_op，然后再一起commit吗？</p>
-<p>Robert教授：是的，XV6具备有限能力的batching。</p></blockquote>
+<p>Robert教授：是的，XV6具备有限能力的batching。</p>
+</blockquote>
 <p>首先是<strong>异步的系统调用</strong>。</p>
 <p>这表示系统调用修改完位于缓存中的block之后就返回，并不会触发写磁盘。</p>
 <p>所以这里明显的优势就是系统调用能够快速的返回。</p>
@@ -727,7 +730,8 @@
 <p>对于大部分程序，例如编译器，如果crash了编译器的输出丢失了其实没什么，所以许多程序并不会调用fsync，并且乐于获得异步系统调用带来的高性能。</p>
 <blockquote>
 <p>学生提问：这是不是有时也被称为flush，因为我之前经常听到这个单词？</p>
-<p>Robert教授：是的，一个合理的解释fsync的工作的方式是，它flush了所有文件相关的写磁盘操作到了磁盘中，之后再返回，所以flush也是针对这个场景的一个合理的单词。</p></blockquote>
+<p>Robert教授：是的，一个合理的解释fsync的工作的方式是，它flush了所有文件相关的写磁盘操作到了磁盘中，之后再返回，所以flush也是针对这个场景的一个合理的单词。</p>
+</blockquote>
 <p>以上就是异步系统调用，下一个ext3使用的技术是<strong>批量执行</strong>（batching）。</p>
 <p>在任何时候，ext3只会有一个open transaction。</p>
 <p>ext3中的一个transaction可以包含多个不同的系统调用。</p>
@@ -789,7 +793,8 @@
 <p>Robert教授：这的确会是一个问题，这里有个潜在的困难点，因为transaction写入到log中的内容只能包含由该transaction中的系统调用所做的更新，而不能包含在该transaction之后的系统调用的更新。</p>
 <p>因为如果这么做了的话，那么可能log中会只包含系统调用的部分更新，而我们需要确保transaction包含系统调用的所有更新。所以我们不能承担transaction包含任何在该transaction之后的更新的风险。</p>
 <p>ext3是这样解决这个问题的，当它决定结束当前的open transaction时，它会在内存中拷贝所有相关的block，之后transaction的commit是基于这些block的拷贝进行的。</p>
-<p>所以transaction会有属于自己的block的拷贝。为了保证这里的效率，操作系统会使用copy-on-write（注，详见8.4）来避免不必要的拷贝，这样只有当对应的block在后面的transaction中被更新了，它在内存中才会实际被拷贝。</p></blockquote>
+<p>所以transaction会有属于自己的block的拷贝。为了保证这里的效率，操作系统会使用copy-on-write（注，详见8.4）来避免不必要的拷贝，这样只有当对应的block在后面的transaction中被更新了，它在内存中才会实际被拷贝。</p>
+</blockquote>
 <p>concurrency之所以能帮助提升性能，是因为它可以帮助我们并行的运行系统调用，我们可以得到多核的并行能力。</p>
 <p>如果我们可以在运行应用程序和系统调用的同时，来写磁盘，我们可以得到I/O concurrency，也就是同时运行CPU和磁盘I/O。这些都能帮助我们更有效，更精细的使用硬件资源。</p>
 <h2 id="ext3文件系统调用格式">ext3文件系统调用格式
@@ -863,7 +868,8 @@
 <p>Robert教授：是的，如果需要写入的数据足够多，并且log迅速的用光了。我们甚至都不能在释放log空间之前开始新的系统调用。如果你们关注细节的话，这里会有一些潜在的死锁。首先系统调用需要预声明需要多少个block，这样logging系统才知道对于该transaction需要多少log空间，因为我们不会在没有足够空间来commit transaction时，开始一个新的transaction（注，难道不能将不能写入到磁盘log中的transaction先缓存在内存中吗？虽然这样可能会导致堆积）。</p>
 <p>学生提问：如果新的transaction需要的空间走到了T8，那么现在就需要等待T7，T8结束，这是怎么工作的呢？</p>
 <p>Robert教授：图中的T7，T8，T9其中的系统调用都完成了，并且都已经在commit到log中了。在上面的图中，我们会直接开始T10，新的系统调用会写入到transaction T10，最终当T10需要commit到log中，并且它大到需用用到T8的空间时，它需要等待T7，T8结束。</p>
-<p>文件系统会记录每个transaction的大小，这样文件系统就知道要等待多少个之前的transaction结束。所以这里还有不少的记录工作，这样文件系统才能理解所有旧的transaction的状态。</p></blockquote>
+<p>文件系统会记录每个transaction的大小，这样文件系统就知道要等待多少个之前的transaction结束。所以这里还有不少的记录工作，这样文件系统才能理解所有旧的transaction的状态。</p>
+</blockquote>
 <p>有关如何重用log空间，这里有个小细节。</p>
 <p>在log的最开始有一个super block，所以在任何时候log都是由一个super block和一些transaction组成。</p>
 <p>假设T4是最新的transaction，之前是T1，T2，T3。</p>
@@ -886,7 +892,8 @@
 <p>现在的问题是恢复软件如何可靠的区分出来呢？是的，每个descriptor和commit block都以某个魔法数字作为起始，这是一个32bit的数字。</p>
 <p>所以如果扫描完了T8，下一个block以魔法数字作为起始，那么恢复软件就会认为这是一个descriptor block。</p>
 <blockquote>
-<p>（注，也有可能T5正好完美的跟在T8后面，也就是说T8的commit block之后就是T5的descriptor block，同时T5的commit block也存在，所以这里必然还需要一些其他的机制，我猜是用到了transaction的序列号）</p></blockquote>
+<p>（注，也有可能T5正好完美的跟在T8后面，也就是说T8的commit block之后就是T5的descriptor block，同时T5的commit block也存在，所以这里必然还需要一些其他的机制，我猜是用到了transaction的序列号）</p>
+</blockquote>
 <p>但是，现在我们看到的block可能是包含了任意数据的data block，所以它可能是文件中的一个data block并且也是以魔法数字作为起始。</p>
 <p>所以这里的最后一个细节是，logging系统需要能区分一个以魔法数字作为起始的descriptor block和一个以魔法数字作为起始的data block。</p>
 <p>你可以想到各种方法来实现这种区分，ext3是这样做的，当它向log写一个block时，如果这个block既不是descriptor block也不是commit block，但是又以魔法数字作为起始，文件系统会以0替换前32bit，并在transaction的descriptor block中为该data block设置一个bit。</p>
@@ -910,7 +917,8 @@
 <p>学生提问：但是在XV6我还是可以有多个transaction，只是说不能异步的执行它们，对吗？</p>
 <p>Robert教授：这里其实有点模糊，XV6实际上允许在一个transaction中包含多个系统调用（注，详见15.8），所以XV6有一些并发和batching的能力，但是当XV6决定要commit一个transaction时，在完全完成这个transaction之前，是不能执行任何新的系统调用的。</p>
 <p>因为直到前一个transaction完全完成，并没有log空间来存放新的系统调用。</p>
-<p>所以XV6要么是在运行一些系统调用，要么是在commit transaction，但是它不能同时干这两件事情，而ext3可以同时干这两件事情。</p></blockquote>
+<p>所以XV6要么是在运行一些系统调用，要么是在commit transaction，但是它不能同时干这两件事情，而ext3可以同时干这两件事情。</p>
+</blockquote>
 <h2 id="为什么新transaction需要等前一个transaction中系统调用执行完成">为什么新transaction需要等前一个transaction中系统调用执行完成
 </h2><p>以上就是ext3中相对来说直观的部分。实际上还有一些棘手的细节我想讨论一下。</p>
 <p>之前我提到过，ext3中存在一个open transaction，但是当ext3决定要关闭该transaction时，它需要等待该transaction中的所有系统调用都结束，之后才能开始新的transaction。</p>
@@ -943,7 +951,8 @@
 <p>因为直到T1 commit了，整个unlink都不被允许执行。</p>
 <blockquote>
 <p>学生提问：当你关闭一个open transaction时，具体会发生什么呢？会对当前的缓存做一个快照吗？</p>
-<p>Robert教授：会的，当我们关闭一个transaction，文件系统会拷贝被transaction中的系统调用所修改的所有block，之后transaction才会commit这些block。后面的transaction会在真正的block cache上运行。当将block都commit到log之后，对于block cache的拷贝就可以丢弃了。</p></blockquote>
+<p>Robert教授：会的，当我们关闭一个transaction，文件系统会拷贝被transaction中的系统调用所修改的所有block，之后transaction才会commit这些block。后面的transaction会在真正的block cache上运行。当将block都commit到log之后，对于block cache的拷贝就可以丢弃了。</p>
+</blockquote>
 <h2 id="总结">总结
 </h2><p>最后我希望同学们记住的有关logging和ext3的是：</p>
 <ul>
@@ -998,7 +1007,8 @@
 <p>ext3的ordered data通过先写入文件内容到磁盘中，再commit修改了的inode来解决这里的问题。</p>
 <p>如果你是个应用程序，你写了一个文件并导致一个新的文件系统data block被分配出来，文件系统会将新的文件内容写到新分配的data block中，之后才会commit transaction，进而导致inode更新并包含新分配的data block编号。</p>
 <p>如果在写文件数据和更新inode之间发生了crash，你也看不到其他人的旧的数据，因为这时就算有了更新了的data block，但是也没关系，因为现在不仅inode没有更新，连bitmap block也没更新，相应的data block还处于空闲状态，并且可以分配给其他的程序，你并不会因此丢失block。</p>
-<p>这里的效果就是我们写了一个data block但是最终并没有被任何文件所使用。</p></blockquote>
+<p>这里的效果就是我们写了一个data block但是最终并没有被任何文件所使用。</p>
+</blockquote>
 <h2 id="qa">Q&amp;A
 </h2><h2 id="拷贝具体过程">拷贝具体过程
 </h2><p>在 ext3 文件系统中，当关闭一个开放的事务（open transaction）时，涉及的拷贝过程是为了保证事务的一致性和数据的原子性。让我们逐步解析这个拷贝过程，了解它的各个环节及其对后续事务的影响。</p>
@@ -1649,7 +1659,7 @@
         
         
 
-        共 765849 字 , 39 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        共 742374 字 , 39 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
         主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 

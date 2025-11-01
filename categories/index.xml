@@ -7,7 +7,31 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>echudet</copyright>
-        <lastBuildDate>Mon, 08 Sep 2025 18:16:29 +0800</lastBuildDate><atom:link href="https://echudet.github.io/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 01 Nov 2025 19:46:45 +0800</lastBuildDate><atom:link href="https://echudet.github.io/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Ai Assist</title>
+        <link>https://echudet.github.io/categories/ai-assist/</link>
+        <pubDate>Fri, 10 Oct 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://echudet.github.io/categories/ai-assist/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Net</title>
+        <link>https://echudet.github.io/categories/net/</link>
+        <pubDate>Fri, 10 Oct 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://echudet.github.io/categories/net/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Ai</title>
+        <link>https://echudet.github.io/categories/ai/</link>
+        <pubDate>Sat, 13 Sep 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://echudet.github.io/categories/ai/</guid>
+        <description></description>
+        </item>
+        <item>
         <title>Face-Recognition</title>
         <link>https://echudet.github.io/categories/face-recognition/</link>
         <pubDate>Sun, 07 Sep 2025 00:00:00 +0000</pubDate>
@@ -40,17 +64,9 @@
         <description></description>
         </item>
         <item>
-        <title>Ai</title>
-        <link>https://echudet.github.io/categories/ai/</link>
-        <pubDate>Sun, 01 Dec 2024 00:00:00 +0000</pubDate>
-        
-        <guid>https://echudet.github.io/categories/ai/</guid>
-        <description></description>
-        </item>
-        <item>
         <title>Database</title>
         <link>https://echudet.github.io/categories/database/</link>
-        <pubDate>Wed, 27 Nov 2024 00:00:00 +0000</pubDate>
+        <pubDate>Sun, 24 Nov 2024 00:00:00 +0000</pubDate>
         
         <guid>https://echudet.github.io/categories/database/</guid>
         <description></description>
@@ -61,14 +77,6 @@
         <pubDate>Thu, 21 Nov 2024 00:00:00 +0000</pubDate>
         
         <guid>https://echudet.github.io/categories/network/</guid>
-        <description></description>
-        </item>
-        <item>
-        <title>Rust</title>
-        <link>https://echudet.github.io/categories/rust/</link>
-        <pubDate>Thu, 21 Nov 2024 00:00:00 +0000</pubDate>
-        
-        <guid>https://echudet.github.io/categories/rust/</guid>
         <description></description>
         </item>
         <item>

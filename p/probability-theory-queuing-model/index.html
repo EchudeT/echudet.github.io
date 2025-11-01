@@ -1,0 +1,2089 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="目录 基本概念回顾 排队模型分类 主要排队模型及其推导 3.1 M/M/1 模型 3.2 M/M/c 模型 3.3 M/G/1 模型 3.4 G/M/1 模型 3.5 M/D/1 模型 3.6 G/G/1 模型 关键性能指标的推导 概率论原理在推导中的应用 排队理论在计算机网络中路由器节点的应用 6.1 路由器缓冲区设计 6.2 数据包排队与丢弃策略 6.3 负载均衡与资源分配 6.4 路由器决策中的排队理论应用实例 6.5 优先级排队策略 6.6 排队理论在路由器中的综合应用 6.7 路由器缓冲区扩展与拥塞控制 基本概念回顾 在深入模型推导之前，简要回顾一些基本概念：\n">
+<title>Probability theory queuing model</title>
+
+<link rel='canonical' href='https://echudet.github.io/p/probability-theory-queuing-model/'>
+
+<link rel="stylesheet" href="/scss/style.min.209f2315995b57a9cdd733e5afe32e05ebb1138a0b3bb750cfcb86dff885e546.css"><meta property='og:title' content="Probability theory queuing model">
+<meta property='og:description' content="目录 基本概念回顾 排队模型分类 主要排队模型及其推导 3.1 M/M/1 模型 3.2 M/M/c 模型 3.3 M/G/1 模型 3.4 G/M/1 模型 3.5 M/D/1 模型 3.6 G/G/1 模型 关键性能指标的推导 概率论原理在推导中的应用 排队理论在计算机网络中路由器节点的应用 6.1 路由器缓冲区设计 6.2 数据包排队与丢弃策略 6.3 负载均衡与资源分配 6.4 路由器决策中的排队理论应用实例 6.5 优先级排队策略 6.6 排队理论在路由器中的综合应用 6.7 路由器缓冲区扩展与拥塞控制 基本概念回顾 在深入模型推导之前，简要回顾一些基本概念：\n">
+<meta property='og:url' content='https://echudet.github.io/p/probability-theory-queuing-model/'>
+<meta property='og:site_name' content='echudet'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-12-02T22:52:25&#43;08:00'/><meta property='article:modified_time' content='2025-11-01T19:46:45&#43;08:00'/>
+<meta name="twitter:title" content="Probability theory queuing model">
+<meta name="twitter:description" content="目录 基本概念回顾 排队模型分类 主要排队模型及其推导 3.1 M/M/1 模型 3.2 M/M/c 模型 3.3 M/G/1 模型 3.4 G/M/1 模型 3.5 M/D/1 模型 3.6 G/G/1 模型 关键性能指标的推导 概率论原理在推导中的应用 排队理论在计算机网络中路由器节点的应用 6.1 路由器缓冲区设计 6.2 数据包排队与丢弃策略 6.3 负载均衡与资源分配 6.4 路由器决策中的排队理论应用实例 6.5 优先级排队策略 6.6 排队理论在路由器中的综合应用 6.7 路由器缓冲区扩展与拥塞控制 基本概念回顾 在深入模型推导之前，简要回顾一些基本概念：\n">
+    <link rel="shortcut icon" href="/timer.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_67bf1327fc98b60.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">⌨️</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">echudet</a></h1>
+            <h2 class="site-description">探索编程的学生一枚</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/EchudeT'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://twitter.com'
+                        target="_blank"
+                        title="Twitter"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>档案</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#基本概念回顾">基本概念回顾</a></li>
+    <li><a href="#排队模型分类">排队模型分类</a></li>
+    <li><a href="#主要排队模型及其推导">主要排队模型及其推导</a>
+      <ol>
+        <li><a href="#mm1-模型">M/M/1 模型</a>
+          <ol>
+            <li></li>
+          </ol>
+        </li>
+        <li><a href="#mmc-模型">M/M/c 模型</a>
+          <ol>
+            <li></li>
+          </ol>
+        </li>
+        <li><a href="#mg1-模型">M/G/1 模型</a>
+          <ol>
+            <li></li>
+          </ol>
+        </li>
+        <li><a href="#gm1-模型">G/M/1 模型</a>
+          <ol>
+            <li></li>
+          </ol>
+        </li>
+        <li><a href="#md1-模型">M/D/1 模型</a>
+          <ol>
+            <li></li>
+          </ol>
+        </li>
+        <li><a href="#gg1-模型">G/G/1 模型</a>
+          <ol>
+            <li></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#关键性能指标的推导">关键性能指标的推导</a></li>
+    <li><a href="#概率论原理在推导中的应用">概率论原理在推导中的应用</a></li>
+    <li><a href="#排队理论在计算机网络中路由器节点的应用">排队理论在计算机网络中路由器节点的应用</a>
+      <ol>
+        <li><a href="#路由器缓冲区设计">路由器缓冲区设计</a>
+          <ol>
+            <li><a href="#mm1-模型应用">M/M/1 模型应用</a></li>
+            <li><a href="#mmc-模型应用">M/M/c 模型应用</a></li>
+          </ol>
+        </li>
+        <li><a href="#数据包排队与丢弃策略">数据包排队与丢弃策略</a></li>
+        <li><a href="#负载均衡与资源分配">负载均衡与资源分配</a></li>
+        <li><a href="#路由器决策中的排队理论应用实例">路由器决策中的排队理论应用实例</a></li>
+        <li><a href="#优先级排队策略">优先级排队策略</a></li>
+        <li><a href="#排队理论在路由器中的综合应用">排队理论在路由器中的综合应用</a></li>
+        <li><a href="#路由器缓冲区扩展与拥塞控制">路由器缓冲区扩展与拥塞控制</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+
+
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/probability-theory-queuing-model/">Probability theory queuing model</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2024-12-02</time>
+            </div>
+        
+
+        
+            <div>
+                <?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="792px" height="792px" viewBox="0 0 792 792" style="enable-background:new 0 0 792 792;" xml:space="preserve">
+<g>
+	<g id="_x31_0_19_">
+		<g>
+			<path d="M643.5,742.5H594V569.25C594,473.566,516.434,396,420.75,396C516.434,396,594,318.434,594,222.75V49.5h49.5
+				c13.662,0,24.75-11.088,24.75-24.75S657.162,0,643.5,0h-495c-13.662,0-24.75,11.088-24.75,24.75S134.838,49.5,148.5,49.5H198
+				v173.25C198,318.434,275.566,396,371.25,396C275.566,396,198,473.566,198,569.25V742.5h-49.5c-13.662,0-24.75,11.088-24.75,24.75
+				S134.838,792,148.5,792h495c13.662,0,24.75-11.088,24.75-24.75S657.162,742.5,643.5,742.5z M247.5,222.75
+				c0-43.387,0-173.25,0-173.25h297c0,0,0,133.427,0,173.25c0,68.335-58.188,123.75-129.938,123.75h-37.125
+				C305.687,346.5,247.5,291.085,247.5,222.75z M544.5,742.5h-297c0,0,0-129.888,0-173.25c0-68.335,58.187-123.75,129.938-123.75
+				h37.125c71.75,0,129.938,55.415,129.938,123.75C544.5,609.072,544.5,742.5,544.5,742.5z"/>
+		</g>
+	</g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+</svg>
+
+                <time class="article-time--reading">
+                    阅读时长: 22 分钟
+                </time>
+            </div>
+        
+
+         
+        <div>
+            <?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="79.536px" height="79.536px" viewBox="0 0 79.536 79.536" style="enable-background:new 0 0 79.536 79.536;"
+	 xml:space="preserve">
+<g>
+	<path style="fill:#010002;" d="M40.162,17.906C37.415,15.275,21.614,6.141,0,15.451c0,0.138,0,2.722,0,6.654v44.418h32.747
+		c1.126,0.968,3.798,1.651,6.926,1.651c3.119,0,5.802-0.684,6.931-1.651h32.933V22.105c0-3.933,0-6.517,0-6.654
+		C58.813,6.314,42.257,15.982,40.162,17.906z M37.229,63.349c0-1.75-15.372-11.981-33.125-0.818V19.216
+		c3.516-2.014,8.246-3.249,13.463-3.249c10.864,0,19.662,3.562,19.662,10.175V63.349z M75.684,62.53
+		c-17.751-11.163-33.108-0.932-33.108,0.818V26.146c0-6.612,8.792-10.175,19.646-10.175c5.22,0,9.952,1.235,13.463,3.249V62.53z"/>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+</svg>
+
+            <time class="article-words">
+                文章字数：10964字
+            </time>
+        </div>
+        <div class="article-lastmod">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time>
+                    Nov 01, 2025 19:46 &#43;0800
+                </time>
+            </div></footer>
+    
+
+    
+
+
+
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="目录">目录
+</h1><ol>
+<li><a class="link" href="#%e4%b8%80%e5%9f%ba%e6%9c%ac%e6%a6%82%e5%bf%b5%e5%9b%9e%e9%a1%be" >基本概念回顾</a>
+
+</li>
+<li><a class="link" href="#%e4%ba%8c%e6%8e%92%e9%98%9f%e6%a8%a1%e5%9e%8b%e5%88%86%e7%b1%bb" >排队模型分类</a>
+
+</li>
+<li><a class="link" href="#%e4%b8%89%e4%b8%bb%e8%a6%81%e6%8e%92%e9%98%9f%e6%a8%a1%e5%9e%8b%e5%8f%8a%e5%85%b6%e6%8e%a8%e5%af%bc" >主要排队模型及其推导</a>
+
+
+<ul>
+<li><a class="link" href="#31-mm1-%e6%a8%a1%e5%9e%8b" >3.1 M/M/1 模型</a>
+
+</li>
+<li><a class="link" href="#32-mmc-%e6%a8%a1%e5%9e%8b" >3.2 M/M/c 模型</a>
+
+</li>
+<li><a class="link" href="#33-mg1-%e6%a8%a1%e5%9e%8b" >3.3 M/G/1 模型</a>
+
+</li>
+<li><a class="link" href="#34-gm1-%e6%a8%a1%e5%9e%8b" >3.4 G/M/1 模型</a>
+
+</li>
+<li><a class="link" href="#35-md1-%e6%a8%a1%e5%9e%8b" >3.5 M/D/1 模型</a>
+
+</li>
+<li><a class="link" href="#36-gg1-%e6%a8%a1%e5%9e%8b" >3.6 G/G/1 模型</a>
+
+</li>
+</ul>
+</li>
+<li><a class="link" href="#%e5%9b%9b%e5%85%b3%e9%94%ae%e6%80%a7%e8%83%bd%e6%8c%87%e6%a0%87%e7%9a%84%e6%8e%a8%e5%af%bc" >关键性能指标的推导</a>
+
+</li>
+<li><a class="link" href="#%e4%ba%94%e6%a6%82%e7%8e%87%e8%ae%ba%e5%8e%9f%e7%90%86%e5%9c%a8%e6%8e%a8%e5%af%bc%e4%b8%ad%e7%9a%84%e5%ba%94%e7%94%a8" >概率论原理在推导中的应用</a>
+
+</li>
+<li><a class="link" href="#%e5%85%ad%e6%8e%92%e9%98%9f%e7%90%86%e8%ae%ba%e5%9c%a8%e8%ae%a1%e7%ae%97%e6%9c%ba%e7%bd%91%e7%bb%9c%e4%b8%ad%e8%b7%af%e7%94%b1%e5%99%a8%e8%8a%82%e7%82%b9%e7%9a%84%e5%ba%94%e7%94%a8" >排队理论在计算机网络中路由器节点的应用</a>
+
+
+<ul>
+<li><a class="link" href="#61-%e8%b7%af%e7%94%b1%e5%99%a8%e7%bc%93%e5%86%b2%e5%8c%ba%e8%ae%be%e8%ae%a1" >6.1 路由器缓冲区设计</a>
+
+</li>
+<li><a class="link" href="#62-%e6%95%b0%e6%8d%ae%e5%8c%85%e6%8e%92%e9%98%9f%e4%b8%8e%e4%b8%a2%e5%bc%83%e7%ad%96%e7%95%a5" >6.2 数据包排队与丢弃策略</a>
+
+</li>
+<li><a class="link" href="#63-%e8%b4%9f%e8%bd%bd%e5%9d%87%e8%a1%a1%e4%b8%8e%e8%b5%84%e6%ba%90%e5%88%86%e9%85%8d" >6.3 负载均衡与资源分配</a>
+
+</li>
+<li><a class="link" href="#64-%e8%b7%af%e7%94%b1%e5%99%a8%e5%86%b3%e7%ad%96%e4%b8%ad%e7%9a%84%e6%8e%92%e9%98%9f%e7%90%86%e8%ae%ba%e5%ba%94%e7%94%a8%e5%ae%9e%e4%be%8b" >6.4 路由器决策中的排队理论应用实例</a>
+
+</li>
+<li><a class="link" href="#64-%e8%b7%af%e7%94%b1%e5%99%a8%e5%86%b3%e7%ad%96%e4%b8%ad%e7%9a%84%e6%8e%92%e9%98%9f%e7%90%86%e8%ae%ba%e5%ba%94%e7%94%a8%e5%ae%9e%e4%be%8b" >6.5 优先级排队策略</a>
+
+</li>
+<li><a class="link" href="#64-%e8%b7%af%e7%94%b1%e5%99%a8%e5%86%b3%e7%ad%96%e4%b8%ad%e7%9a%84%e6%8e%92%e9%98%9f%e7%90%86%e8%ae%ba%e5%ba%94%e7%94%a8%e5%ae%9e%e4%be%8b" >6.6 排队理论在路由器中的综合应用</a>
+
+</li>
+<li><a class="link" href="#64-%e8%b7%af%e7%94%b1%e5%99%a8%e5%86%b3%e7%ad%96%e4%b8%ad%e7%9a%84%e6%8e%92%e9%98%9f%e7%90%86%e8%ae%ba%e5%ba%94%e7%94%a8%e5%ae%9e%e4%be%8b" >6.7 路由器缓冲区扩展与拥塞控制</a>
+
+</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="基本概念回顾">基本概念回顾
+</h2><p>在深入模型推导之前，简要回顾一些基本概念：</p>
+<ul>
+<li><strong>顾客（Customer）</strong>：需要服务的实体，如人、数据包等。</li>
+<li><strong>服务台（Server）</strong>：提供服务的设施或人员，如计算机网络中的路由器。</li>
+<li><strong>到达过程（Arrival Process）</strong>：顾客到达系统的方式，通常使用泊松过程描述。</li>
+<li><strong>服务过程（Service Process）</strong>：服务时间的分布，常见为指数分布（Markovian）、确定分布等。</li>
+<li><strong>排队规则（Queue Discipline）</strong>：如先到先服务（FCFS）。</li>
+<li><strong>系统容量（System Capacity）</strong>：系统能够容纳的最大顾客数。</li>
+<li><strong>稳态（Steady State）</strong>：系统在长期运行后的平衡状态。</li>
+</ul>
+<h2 id="排队模型分类">排队模型分类
+</h2><p>排队模型通常使用 <strong>Kendall 表示法</strong> 表示，形式为 <strong>A/S/c/K/N/D</strong>，其中：</p>
+<ul>
+<li><strong>A（Arrival process）</strong>：到达过程的概率分布</li>
+<li><strong>S（Service process）</strong>：服务过程的概率分布</li>
+<li><strong>c（Number of servers）</strong>：服务台的数量</li>
+<li><strong>K（System capacity）</strong>：系统容量（可选）</li>
+<li><strong>N（Population size）</strong>：顾客源的容量（可选）</li>
+<li><strong>D（Queue discipline）</strong>：排队规则（可选）</li>
+</ul>
+<p>常见的概率分布表示：</p>
+<ul>
+<li><strong>M（Markovian）</strong>：泊松过程（指数分布）</li>
+<li><strong>D（Deterministic）</strong>：确定性分布</li>
+<li><strong>G（General）</strong>：一般分布</li>
+</ul>
+<p>简化形式通常只写前三项，如 M/M/1、M/M/c 等。</p>
+<h2 id="主要排队模型及其推导">主要排队模型及其推导
+</h2><p>下面将详细推导几个主要的排队模型，重点介绍其公式的来源和概率论原理的应用。</p>
+<hr>
+<h3 id="mm1-模型">M/M/1 模型
+</h3><h5 id="定义">定义
+</h5><ul>
+<li><strong>到达过程</strong>：泊松过程（λ），即顾客到达的间隔时间服从指数分布。</li>
+<li><strong>服务过程</strong>：单服务台，服务时间服从指数分布（μ）。</li>
+<li><strong>服务台数量</strong>：1</li>
+<li><strong>系统容量</strong>：无限</li>
+<li><strong>顾客源</strong>：无限</li>
+<li><strong>排队规则</strong>：先到先服务（FCFS）</li>
+</ul>
+<h5 id="稳态条件"><strong>稳态条件</strong>
+</h5><p>系统达到稳态的条件是 <strong>λ &lt; μ</strong>。</p>
+<h5 id="关键性能指标"><strong>关键性能指标</strong>
+</h5><ul>
+<li><strong>系统利用率（ρ）</strong>：ρ = λ / μ</li>
+<li><strong>平均系统内顾客数（L）</strong>：L = ρ / (1 - ρ)</li>
+<li><strong>平均排队长度（Lq）</strong>：Lq = ρ² / (1 - ρ)</li>
+<li><strong>平均等待时间（Wq）</strong>：Wq = ρ / (μ - λ)</li>
+<li><strong>平均逗留时间（W）</strong>：W = 1 / (μ - λ)</li>
+</ul>
+<h5 id="推导过程"><strong>推导过程</strong>
+</h5><p><strong>1. 到达过程与服务过程</strong></p>
+<ul>
+<li>
+<p><strong>到达过程</strong>：假设顾客到达服从泊松过程，参数为 λ。这意味着在时间间隔 t 内，顾客到达的概率为：</p>
+$$
+  P(\text{n 个到达}) = \frac{(\lambda t)^n e^{-\lambda t}}{n!}
+  $$</li>
+<li>
+<p><strong>服务过程</strong>：服务时间服从指数分布，参数为 μ，概率密度函数为：</p>
+$$
+  f_S(s) = μ e^{-μ s}
+  $$</li>
+</ul>
+<p><strong>2. 马尔可夫性质</strong></p>
+<p>由于到达和服务过程均为无记忆的（Markovian），系统状态只依赖于当前状态，与过去无关。这使得排队过程成为 <strong>马尔可夫链</strong>。</p>
+<p><strong>3. 平稳状态下的平衡方程</strong></p>
+<p>设 <strong>P_n</strong> 为系统中有 n 个顾客的稳态概率。根据平稳状态下的流入率和流出率相等，得到：</p>
+$$
+λ P_n = μ P_{n+1}, \quad \text{对于 } n \geq 0
+$$<p>从这个关系中，可以递归地求得 P_n：</p>
+$$
+P_{n+1} = \frac{λ}{μ} P_n = ρ P_n
+$$<p>其中，<strong>ρ = λ / μ</strong>。</p>
+<p><strong>4. 求解稳态概率</strong></p>
+<p>考虑系统的总概率：</p>
+$$
+\sum_{n=0}^{\infty} P_n = 1
+$$<p>利用递推关系：</p>
+$$
+P_n = ρ^n P_0
+$$<p>代入总概率：</p>
+$$
+P_0 \sum_{n=0}^{\infty} ρ^n = 1
+$$<p>这是一个等比数列，收敛条件是 ρ &lt; 1（即 λ &lt; μ）。</p>
+$$
+P_0 \cdot \frac{1}{1 - ρ} = 1 \Rightarrow P_0 = 1 - ρ
+$$<p>因此，</p>
+$$
+P_n = (1 - ρ) ρ^n
+$$<p><strong>5. 计算性能指标</strong></p>
+<ul>
+<li>
+<p><strong>系统利用率（ρ）</strong>：</p>
+$$
+  ρ = \frac{λ}{μ}
+  $$</li>
+<li>
+<p><strong>平均系统内顾客数（L）</strong>：</p>
+$$
+  L = \sum_{n=0}^{\infty} n P_n = (1 - ρ) \sum_{n=0}^{\infty} n ρ^n
+  $$<p>使用概率论中的 <strong>期望公式</strong>：</p>
+$$
+  \sum_{n=0}^{\infty} n ρ^n = \frac{ρ}{(1 - ρ)^2}
+  $$<p>因此，</p>
+$$
+  L = (1 - ρ) \cdot \frac{ρ}{(1 - ρ)^2} = \frac{ρ}{1 - ρ}
+  $$</li>
+<li>
+<p><strong>平均排队长度（Lq）</strong>：</p>
+$$
+  Lq = L - \rho^0 P_0 = L - P_0 = \frac{ρ}{1 - ρ} - (1 - ρ) = \frac{ρ^2}{1 - ρ}
+  $$</li>
+<li>
+<p><strong>平均等待时间（Wq）</strong>：</p>
+<p>由 <strong>Little 定理</strong>：</p>
+$$
+  Wq = \frac{Lq}{λ} = \frac{ρ^2}{λ(1 - ρ)} = \frac{ρ}{μ - λ}
+  $$</li>
+<li>
+<p><strong>平均逗留时间（W）</strong>：</p>
+$$
+  W = \frac{L}{λ} = \frac{1}{μ - λ}
+  $$</li>
+</ul>
+<p><strong>6. 使用 Little 定理</strong></p>
+<p><strong>Little 定理</strong>表述如下：</p>
+$$
+L = λ W
+$$<p>
+</p>
+$$
+Lq = λ Wq
+$$<p>该定理适用于广义的排队系统，只要满足稳定状态和某些基本假设。</p>
+<p>通过上述步骤，我们从基本的泊松到达过程和指数服务时间出发，利用马尔可夫链的平稳状态平衡方程，推导出 M/M/1 模型的各项性能指标。关键使用的概率论原理包括：</p>
+<ul>
+<li><strong>泊松过程</strong>和<strong>指数分布</strong>的无记忆性（Markov性质）</li>
+<li><strong>递推关系</strong>和<strong>稳态平衡方程</strong></li>
+<li><strong>期望的线性性</strong>和<strong>等比数列求和公式</strong></li>
+<li><strong>Little 定理</strong>连接系统状态与时间性能指标</li>
+</ul>
+<hr>
+<h3 id="mmc-模型">M/M/c 模型
+</h3><h5 id="定义-1"><strong>定义</strong>
+</h5><ul>
+<li><strong>到达过程</strong>：泊松过程（λ）</li>
+<li><strong>服务过程</strong>：c 个服务台，服务时间独立同分布，服从指数分布（μ）</li>
+<li><strong>服务台数量</strong>：c</li>
+<li><strong>系统容量</strong>：无限</li>
+<li><strong>顾客源</strong>：无限</li>
+<li><strong>排队规则</strong>：先到先服务（FCFS）</li>
+</ul>
+<h5 id="稳态条件-1"><strong>稳态条件</strong>
+</h5><p>系统达到稳态的条件是 <strong>λ &lt; cμ</strong>。</p>
+<h5 id="关键性能指标-1"><strong>关键性能指标</strong>
+</h5><ul>
+<li><strong>系统利用率（ρ）</strong>：ρ = λ / (cμ)</li>
+<li><strong>无阻塞概率（P₀）</strong>：详见下文</li>
+<li><strong>平均系统内顾客数（L）</strong></li>
+<li><strong>平均排队长度（Lq）</strong></li>
+<li><strong>平均等待时间（Wq）</strong></li>
+<li><strong>平均逗留时间（W）</strong></li>
+</ul>
+<h5 id="推导过程-1"><strong>推导过程</strong>
+</h5><p><strong>1. 系统状态</strong></p>
+<p>设系统中有 n 个顾客（n ≥ 0）。因为有 c 个服务台，系统的状态可以分为：</p>
+<ul>
+<li><strong>n &lt; c</strong>：所有顾客都在接受服务，没有排队。</li>
+<li><strong>n ≥ c</strong>：有 (n - c) 个顾客在排队。</li>
+</ul>
+<p><strong>2. 平衡方程</strong></p>
+<p>在稳态下，流入速率等于流出速率。对于各状态 n：</p>
+<ul>
+<li>
+<p><strong>n &lt; c</strong>：</p>
+$$
+  λ P_n = μ P_{n+1}
+  $$</li>
+<li>
+<p><strong>n ≥ c</strong>：</p>
+$$
+  λ P_n = c μ P_{n+1}
+  $$</li>
+</ul>
+<p><strong>3. 求解 P₀</strong></p>
+<p>利用递推关系，可以表达 P_n 为 P₀ 的函数。</p>
+<ul>
+<li>
+<p><strong>对于 n &lt; c</strong>：</p>
+$$
+  P_n = \frac{λ^n}{μ^n n!} P_0 = \frac{ρ^n}{n!} P_0
+  $$</li>
+<li>
+<p><strong>对于 n ≥ c</strong>：</p>
+$$
+  P_n = \frac{λ^n}{c^c μ^n c!} P_0 = \frac{ρ^n}{c! c^{n - c}} P_0 = \frac{ρ^c}{c!} \left(\frac{λ}{c μ}\right)^{n - c} P_0 = \frac{ρ^c}{c!} \cdot ρ^{n - c} P_0 = \frac{ρ^n}{c!} P_0
+  $$</li>
+</ul>
+<p>其中，<strong>ρ = λ / μ</strong>。</p>
+<p>系统的总概率为 1：</p>
+$$
+\sum_{n=0}^{\infty} P_n = 1
+$$<p>将 P_n 表达式代入：</p>
+$$
+\sum_{n=0}^{c-1} \frac{ρ^n}{n!} P_0 + \sum_{n=c}^{\infty} \frac{ρ^n}{c!} P_0 = 1
+$$<p>分开求和：</p>
+$$
+P_0 \left( \sum_{n=0}^{c-1} \frac{ρ^n}{n!} + \frac{ρ^c}{c!} \sum_{n=0}^{\infty} \frac{ρ^n}{c^n} \right) = 1
+$$<p>简化第二个求和：</p>
+$$
+\sum_{n=0}^{\infty} \frac{ρ^n}{c^n} = \sum_{n=0}^{\infty} \left(\frac{ρ}{c}\right)^n = \frac{1}{1 - \frac{ρ}{c}} = \frac{c}{c - ρ}, \quad \text{当 } ρ < c
+$$<p>因此，</p>
+$$
+P_0 \left( \sum_{n=0}^{c-1} \frac{ρ^n}{n!} + \frac{ρ^c}{c!} \cdot \frac{c}{c - ρ} \right) = 1
+$$<p>整理得：</p>
+$$
+P_0 = \left[ \sum_{n=0}^{c-1} \frac{ρ^n}{n!} + \frac{ρ^c}{c!} \cdot \frac{c}{c - ρ} \right]^{-1}
+$$<p>这被称为 <strong>Erlang C 公式</strong> 的一部分。</p>
+<p><strong>4. 计算性能指标</strong></p>
+<ul>
+<li>
+<p><strong>无阻塞概率（P₀）</strong>：</p>
+$$
+  P_0 = \left[ \sum_{n=0}^{c-1} \frac{ρ^n}{n!} + \frac{ρ^c}{c!} \cdot \frac{c}{c - ρ} \right]^{-1}
+  $$</li>
+<li>
+<p><strong>平均排队长度（Lq）</strong>：</p>
+<p>使用 Erlang C 公式：</p>
+$$
+  Lq = \frac{P_0 \cdot \frac{ρ^{c+1}}{c! (c - ρ)}}{(1 - ρ)^2} = \frac{P_0 \cdot \rho^{c+1}}{c! (c - \rho)^2}
+  $$</li>
+<li>
+<p><strong>平均系统内顾客数（L）</strong>：</p>
+$$
+  L = Lq + \frac{λ}{μ} = Lq + ρ
+  $$</li>
+<li>
+<p><strong>平均等待时间（Wq）</strong>：</p>
+<p>由 <strong>Little 定理</strong>：</p>
+$$
+  Wq = \frac{Lq}{λ} = \frac{ρ^{c+1} P_0}{c! (c - \rho)^2 λ} = \frac{Lq}{λ}
+  $$</li>
+<li>
+<p><strong>平均逗留时间（W）</strong>：</p>
+$$
+  W = Wq + \frac{1}{μ} = \frac{Lq}{λ} + \frac{1}{μ}
+  $$</li>
+</ul>
+<p><strong>5. 概率论原理应用</strong></p>
+<p>在 M/M/c 模型的推导中，应用了以下概率论原理：</p>
+<ul>
+<li><strong>泊松过程的性质</strong>：独立性和无记忆性。</li>
+<li><strong>马尔可夫链的稳态平衡方程</strong>。</li>
+<li><strong>递推关系</strong>：通过递推关系求解稳态概率。</li>
+<li><strong>等比数列求和</strong>：用于简化无限级数求和。</li>
+<li><strong>生成函数方法（间接使用）</strong>：在某些推导中用于处理复杂的级数求和。</li>
+<li><strong>Little 定理</strong>：连接时间和人数的期望值。</li>
+</ul>
+<p><strong>6. 例子</strong></p>
+<p>假设有 3 个服务台（c = 3），到达率 λ = 2 顾客/分钟，服务率 μ = 1 顾客/分钟。</p>
+<p>计算：</p>
+<ul>
+<li>
+<p><strong>ρ = λ / μ = 2 / 1 = 2</strong></p>
+</li>
+<li>
+<p><strong>稳态条件</strong>：λ &lt; cμ ⇒ 2 &lt; 3×1 ⇒ 成立。</p>
+</li>
+<li>
+<p><strong>计算 P₀</strong>：</p>
+$$
+  P_0 = \left[ \sum_{n=0}^{2} \frac{2^n}{n!} + \frac{2^3}{3!} \cdot \frac{3}{3 - 2} \right]^{-1} = \left[1 + 2 + 2 + \frac{8}{6} \times 3 \right]^{-1} = \left[5 + 4\right]^{-1} = \frac{1}{9}
+  $$</li>
+<li>
+<p><strong>计算 Lq</strong>：</p>
+$$
+  Lq = \frac{P_0 \cdot 2^{4}}{3! (3 - 2)^2} = \frac{\frac{1}{9} \times 16}{6 \times 1} = \frac{16}{54} = \frac{8}{27} \approx 0.296
+  $$</li>
+<li>
+<p><strong>计算 L</strong>：</p>
+$$
+  L = Lq + \frac{λ}{μ} = \frac{8}{27} + 2 \approx 2.296
+  $$</li>
+<li>
+<p><strong>计算 Wq</strong>：</p>
+$$
+  Wq = \frac{Lq}{λ} = \frac{8/27}{2} = \frac{4}{27} \approx 0.148 \text{ 分钟}
+  $$</li>
+<li>
+<p><strong>计算 W</strong>：</p>
+$$
+  W = Wq + \frac{1}{μ} = \frac{4}{27} + 1 \approx 1.148 \text{ 分钟}
+  $$</li>
+</ul>
+<hr>
+<h3 id="mg1-模型">M/G/1 模型
+</h3><h5 id="定义-2"><strong>定义</strong>
+</h5><ul>
+<li><strong>到达过程</strong>：泊松过程（λ）</li>
+<li><strong>服务过程</strong>：单服务台，服务时间服从一般分布（G），具有已知的均值 E[S] 和方差 Var(S)</li>
+<li><strong>服务台数量</strong>：1</li>
+<li><strong>系统容量</strong>：无限</li>
+<li><strong>顾客源</strong>：无限</li>
+<li><strong>排队规则</strong>：先到先服务（FCFS）</li>
+</ul>
+<h5 id="稳态条件-2"><strong>稳态条件</strong>
+</h5><p>系统达到稳态的条件是 <strong>λ E[S] &lt; 1</strong>，即 <strong>ρ = λ E[S] &lt; 1</strong></p>
+<h5 id="关键性能指标-2"><strong>关键性能指标</strong>
+</h5><ul>
+<li>
+<p><strong>平均等待时间（Wq）</strong>：</p>
+$$
+  Wq = \frac{λ E[S^2]}{2(1 - \rho)}
+  $$</li>
+<li>
+<p><strong>平均排队长度（Lq）</strong>：</p>
+$$
+  Lq = \lambda Wq = \frac{\lambda^2 E[S^2]}{2(1 - \rho)}
+  $$</li>
+<li>
+<p><strong>平均系统内顾客数（L）</strong>：</p>
+$$
+  L = Lq + \rho = \frac{\lambda^2 E[S^2]}{2(1 - \rho)} + \rho
+  $$</li>
+<li>
+<p><strong>平均逗留时间（W）</strong>：</p>
+$$
+  W = Wq + E[S] = \frac{\lambda E[S^2]}{2(1 - \rho)} + E[S]
+  $$</li>
+</ul>
+<h5 id="推导过程-2"><strong>推导过程</strong>
+</h5><p><strong>1. 到达过程与服务过程</strong></p>
+<ul>
+<li><strong>到达过程</strong>：泊松过程，λ。</li>
+<li><strong>服务过程</strong>：一般分布，具有均值 E[S] 和二阶矩 E[S²]。</li>
+</ul>
+<p><strong>2. 利用 Pollaczek-Khinchin (P-K) 公式</strong></p>
+<p>M/G/1 模型的等待时间和排队长度可通过 P-K 公式推导得出。</p>
+<p><strong>3. P-K 公式推导</strong></p>
+<p><strong>步骤概述</strong>：</p>
+<ol>
+<li><strong>构建平稳状态下的生成函数</strong>。</li>
+<li><strong>利用泊松到达过程的特点</strong>。</li>
+<li><strong>应用概率论中的条件期望</strong>。</li>
+</ol>
+<p>具体推导较为复杂，涉及到生成函数和复合泊松过程的性质，这里简要概述核心思想。</p>
+<p><strong>4. 计算 Wq 和 Lq</strong></p>
+<p>通过 P-K 公式，可以得到：</p>
+$$
+Wq = \frac{λ E[S^2]}{2(1 - \rho)}
+$$<p>
+</p>
+$$
+Lq = \lambda Wq = \frac{\lambda^2 E[S^2]}{2(1 - \rho)}
+$$<p>其中，<strong>E[S^2]</strong> 是服务时间的二阶矩。</p>
+<p><strong>5. 使用 Little 定理</strong></p>
+<p><strong>Little 定理</strong>：</p>
+$$
+Lq = \lambda Wq
+$$<p>适用于广义的排队系统。</p>
+<h5 id="概率论原理应用"><strong>概率论原理应用</strong>
+</h5><ul>
+<li><strong>泊松过程的独立增量性质</strong></li>
+<li><strong>期望的线性性</strong></li>
+<li><strong>条件期望</strong></li>
+<li><strong>生成函数的使用</strong></li>
+<li><strong>P-K 公式</strong>：结合概率论和随机过程理论得出。</li>
+</ul>
+<hr>
+<h3 id="gm1-模型">G/M/1 模型
+</h3><h5 id="定义-3"><strong>定义</strong>
+</h5><ul>
+<li><strong>到达过程</strong>：一般分布（G）</li>
+<li><strong>服务过程</strong>：单服务台，服务时间服从指数分布（μ）</li>
+<li><strong>服务台数量</strong>：1</li>
+<li><strong>系统容量</strong>：无限</li>
+<li><strong>顾客源</strong>：无限</li>
+<li><strong>排队规则</strong>：先到先服务（FCFS）</li>
+</ul>
+<h5 id="稳态条件-3"><strong>稳态条件</strong>
+</h5><p>系统达到稳态的条件是 <strong>λ &lt; μ</strong></p>
+<h5 id="关键性能指标-3"><strong>关键性能指标</strong>
+</h5><p>由于服务过程为 Markovian，尽管到达过程是一般分布，但可以通过嵌入 Markov 链的方法进行分析。具体性能指标的表达式较为复杂，通常使用近似方法或数值解。</p>
+<h5 id="推导过程-3"><strong>推导过程</strong>
+</h5><p>G/M/1 模型的详细推导涉及到：</p>
+<ol>
+<li><strong>构建系统状态的转移概率</strong></li>
+<li><strong>利用嵌入 Markov 链的方法</strong></li>
+<li><strong>求解稳态概率</strong></li>
+</ol>
+<p>由于到达过程不是 Markovian，这使得分析复杂化。通常，性能指标需要借助数值方法或仿真进行估计。</p>
+<h5 id="概率论原理应用-1"><strong>概率论原理应用</strong>
+</h5><ul>
+<li><strong>嵌入 Markov 链</strong>：将非 Markovian过程嵌入到 Markov 框架中。</li>
+<li><strong>稳态平衡方程</strong>。</li>
+<li><strong>条件期望</strong>。</li>
+</ul>
+<hr>
+<h3 id="md1-模型">M/D/1 模型
+</h3><h5 id="定义-4"><strong>定义</strong>
+</h5><ul>
+<li><strong>到达过程</strong>：泊松过程（λ）</li>
+<li><strong>服务过程</strong>：单服务台，服务时间为确定常数 D</li>
+<li><strong>服务台数量</strong>：1</li>
+<li><strong>系统容量</strong>：无限</li>
+<li><strong>顾客源</strong>：无限</li>
+<li><strong>排队规则</strong>：先到先服务（FCFS）</li>
+</ul>
+<h5 id="稳态条件-4"><strong>稳态条件</strong>
+</h5><p>系统达到稳态的条件是 <strong>λ D &lt; 1</strong>，即 <strong>ρ = λ D &lt; 1</strong></p>
+<h5 id="关键性能指标-4"><strong>关键性能指标</strong>
+</h5><ul>
+<li>
+<p><strong>平均等待时间（Wq）</strong>：</p>
+$$
+  Wq = \frac{λ D^2}{2(1 - ρ)}
+  $$</li>
+<li>
+<p><strong>平均排队长度（Lq）</strong>：</p>
+$$
+  Lq = \lambda Wq = \frac{\lambda^2 D^2}{2(1 - ρ)}
+  $$</li>
+<li>
+<p><strong>平均系统内顾客数（L）</strong>：</p>
+$$
+  L = Lq + \rho = \frac{\lambda^2 D^2}{2(1 - ρ)} + \rho
+  $$</li>
+<li>
+<p><strong>平均逗留时间（W）</strong>：</p>
+$$
+  W = Wq + D = \frac{\lambda D^2}{2(1 - ρ)} + D
+  $$</li>
+</ul>
+<h5 id="推导过程-4"><strong>推导过程</strong>
+</h5><p><strong>1. 到达过程与服务过程</strong></p>
+<ul>
+<li><strong>到达过程</strong>：泊松过程，λ。</li>
+<li><strong>服务过程</strong>：确定的服务时间 D。</li>
+</ul>
+<p><strong>2. 计算 Wq 和 Lq</strong></p>
+<p>由于服务时间确定，可以使用 M/D/1 模型的特定公式：</p>
+$$
+Wq = \frac{λ D^2}{2(1 - ρ)}
+$$<p>
+</p>
+$$
+Lq = \lambda Wq = \frac{\lambda^2 D^2}{2(1 - ρ)}
+$$<p><strong>3. 使用 Little 定理</strong></p>
+$$
+Lq = \lambda Wq
+$$<p><strong>4. 概率论原理应用</strong></p>
+<ul>
+<li><strong>泊松过程的无记忆性</strong></li>
+<li><strong>期望的线性性</strong></li>
+<li><strong>确定性服务时间的影响</strong>：减少了服务时间的不确定性，导致排队长度和等待时间的计算有所不同。</li>
+</ul>
+<hr>
+<h3 id="gg1-模型">G/G/1 模型
+</h3><h5 id="定义-5"><strong>定义</strong>
+</h5><ul>
+<li><strong>到达过程</strong>：一般分布（G）</li>
+<li><strong>服务过程</strong>：一般分布（G）</li>
+<li><strong>服务台数量</strong>：1</li>
+<li><strong>系统容量</strong>：无限</li>
+<li><strong>顾客源</strong>：无限</li>
+<li><strong>排队规则</strong>：先到先服务（FCFS）</li>
+</ul>
+<h5 id="稳态条件-5"><strong>稳态条件</strong>
+</h5><p>系统达到稳态的条件是 <strong>ρ = λ E[S] &lt; 1</strong></p>
+<h5 id="关键性能指标-5"><strong>关键性能指标</strong>
+</h5><p>G/G/1 模型是最一般的单服务器排队模型，通常不具有闭式解。性能指标通常通过近似公式或仿真方法获得。</p>
+<p><strong>主要近似公式</strong></p>
+<p><strong>Kendall&rsquo;s 表达式</strong>：</p>
+$$
+Wq \approx \frac{ρ}{1 - ρ} \left( \frac{C_a^2 + C_s^2}{2} \right) \cdot \frac{1}{μ}
+$$<p>其中：</p>
+<ul>
+<li><strong>C_a</strong>：到达过程的变异系数（标准差 / 均值）</li>
+<li><strong>C_s</strong>：服务过程的变异系数</li>
+<li><strong>μ</strong>：服务率</li>
+</ul>
+<h5 id="推导过程-5"><strong>推导过程</strong>
+</h5><p>G/G/1 模型的详细推导涉及到复合随机过程和复杂的概率论技术，通常不适合手工推导。性能指标需要通过仿真或近似方法获得。</p>
+<h5 id="概率论原理应用-2"><strong>概率论原理应用</strong>
+</h5><ul>
+<li><strong>复合随机过程</strong></li>
+<li><strong>条件期望</strong></li>
+<li><strong>变异系数</strong></li>
+<li><strong>近似方法</strong></li>
+</ul>
+<hr>
+<h2 id="关键性能指标的推导">关键性能指标的推导
+</h2><p>关键性能指标包括：</p>
+<ol>
+<li><strong>系统利用率（ρ）</strong>：表示系统的繁忙程度。</li>
+<li><strong>平均系统内顾客数（L）</strong>：系统中平均存在的顾客数量。</li>
+<li><strong>平均排队长度（Lq）</strong>：排队中顾客的平均数量。</li>
+<li><strong>平均等待时间（Wq）</strong>：顾客在队列中等待的平均时间。</li>
+<li><strong>平均逗留时间（W）</strong>：顾客在系统中的平均总时间，包括等待和服务时间。</li>
+<li><strong>服务水平（Service Level）</strong>：如等待时间小于某值的概率。</li>
+</ol>
+<p>Little 定理</p>
+<p>Little 定理是连接人数与时间的重要工具，表述如下：</p>
+$$
+L = λ W
+$$<p>
+</p>
+$$
+Lq = λ Wq
+$$<p>其中：</p>
+<ul>
+<li><strong>L</strong>：系统内平均顾客数</li>
+<li><strong>Lq</strong>：排队中平均顾客数</li>
+<li><strong>λ</strong>：到达率</li>
+<li><strong>W</strong>：系统内平均逗留时间</li>
+<li><strong>Wq</strong>：排队中平均等待时间</li>
+</ul>
+<p><strong>Little 定理的推导</strong>基于<strong>稳态假设</strong>和<strong>基本概率原理</strong>，它适用于广泛的排队系统。</p>
+<hr>
+<h2 id="概率论原理在推导中的应用">概率论原理在推导中的应用
+</h2><p>在排队模型的推导过程中，广泛应用了概率论的多个核心原理：</p>
+<ol>
+<li><strong>泊松过程</strong>：用于描述到达过程，具有独立增量和无记忆性。</li>
+<li><strong>指数分布</strong>：服务时间的概率分布，具有无记忆性，使得系统具有 Markov 性质。</li>
+<li><strong>马尔可夫链</strong>：用于描述系统状态的转移，尤其在 M/M/c 模型中。</li>
+<li><strong>稳态平衡方程</strong>：确保在稳态条件下，流入率等于流出率。</li>
+<li><strong>递推关系</strong>：通过递推求解稳态概率。</li>
+<li><strong>等比数列求和</strong>：在求解 P₀ 时，利用了等比数列的求和公式。</li>
+<li><strong>生成函数</strong>：在一些高级模型（如 M/G/1）中，用于处理复杂的级数和期望计算。</li>
+<li><strong>条件期望</strong>：在 P-K 公式的推导中应用，用于处理随机变量的条件期望。</li>
+<li><strong>Little 定理</strong>：连接人数与时间的期望值，广泛应用于各种排队系统的性能指标计算。</li>
+</ol>
+<h2 id="排队理论在计算机网络中路由器节点的应用">排队理论在计算机网络中路由器节点的应用
+</h2><p>排队理论在计算机网络中，特别是在路由器节点的设计与优化中，起着至关重要的作用。通过数学模型，网络工程师能够分析和预测路由器在不同负载条件下的性能，进而做出优化决策。以下将详细介绍排队理论在路由器节点中的具体应用，并结合相关公式进行说明。</p>
+<h3 id="路由器缓冲区设计">路由器缓冲区设计
+</h3><p><strong>应用模型</strong>：M/M/1 或 M/M/c 模型</p>
+<p><strong>应用说明</strong>：</p>
+<p>路由器的缓冲区（Buffer）用于临时存储等待处理的数据包。缓冲区的设计直接影响路由器的吞吐量、延迟和丢包率。通过应用排队理论中的M/M/1或M/M/c模型，可以分析和优化缓冲区的大小及路由器的服务能力。</p>
+<ul>
+<li><strong>M/M/1模型</strong>适用于单处理单元的路由器。</li>
+<li><strong>M/M/c模型</strong>适用于具有多个处理单元或多核处理器的路由器。</li>
+</ul>
+<p><strong>关键参数</strong>：</p>
+<ul>
+<li><strong>到达率（λ）</strong>：单位时间内到达路由器的数据包数量。</li>
+<li><strong>服务率（μ）</strong>：单位时间内路由器处理数据包的能力（数据包/秒）。</li>
+<li><strong>服务台数量（c）</strong>：路由器的处理单元数量。</li>
+</ul>
+<p><strong>公式应用</strong>：</p>
+<h4 id="mm1-模型应用">M/M/1 模型应用
+</h4><ol>
+<li>
+<p><strong>系统利用率（ρ）</strong>：</p>
+$$
+   \rho = \frac{\lambda}{\mu}
+   $$<p>ρ 表示路由器的繁忙程度。当 ρ 接近 1 时，路由器接近饱和状态，可能导致高延迟和丢包。</p>
+</li>
+<li>
+<p><strong>平均系统内数据包数（L）</strong>：</p>
+$$
+   L = \frac{\rho}{1 - \rho}
+   $$</li>
+<li>
+<p><strong>平均排队长度（Lq）</strong>：</p>
+$$
+   Lq = \frac{\rho^2}{1 - \rho}
+   $$</li>
+<li>
+<p><strong>平均等待时间（Wq）</strong>：</p>
+$$
+   Wq = \frac{\rho}{\mu - \lambda}
+   $$</li>
+<li>
+<p><strong>平均逗留时间（W）</strong>：</p>
+$$
+   W = \frac{1}{\mu - \lambda}
+   $$</li>
+</ol>
+<p><strong>决策影响</strong>：</p>
+<ul>
+<li>
+<p><strong>缓冲区大小</strong>：通过计算平均排队长度 Lq，可以确定需要多少缓冲空间以容纳平均等待的数据包数量。例如，如果期望 Lq ≤ 10 数据包，可以通过调整 λ 和 μ 使得 \(\frac{\rho^2}{1 - \rho} ≤ 10\)。</p>
+</li>
+<li>
+<p><strong>服务能力（μ）</strong>：提高路由器的处理能力 μ 可以降低系统利用率 ρ，从而减少平均等待时间和排队长度。可以通过升级硬件或优化处理算法来实现。</p>
+</li>
+</ul>
+<h4 id="mmc-模型应用">M/M/c 模型应用
+</h4><p>对于具有多个处理单元的路由器，M/M/c 模型更为适用。</p>
+<ol>
+<li>
+<p><strong>系统利用率（ρ）</strong>：</p>
+$$
+   \rho = \frac{\lambda}{c \mu}
+   $$</li>
+<li>
+<p><strong>无阻塞概率（P₀）</strong>：</p>
+$$
+   P_0 = \left[ \sum_{n=0}^{c-1} \frac{(\lambda/\mu)^n}{n!} + \frac{(\lambda/\mu)^c}{c!} \cdot \frac{c \mu}{c \mu - \lambda} \right]^{-1}
+   $$</li>
+<li>
+<p><strong>平均排队长度（Lq）</strong>：</p>
+$$
+   Lq = \frac{P_0 \cdot (\lambda/\mu)^c \cdot \rho}{c! (1 - \rho)^2}
+   $$</li>
+<li>
+<p><strong>平均系统内数据包数（L）</strong>：</p>
+$$
+   L = Lq + \frac{\lambda}{\mu}
+   $$</li>
+<li>
+<p><strong>平均等待时间（Wq）</strong>：</p>
+$$
+   Wq = \frac{Lq}{\lambda}
+   $$</li>
+<li>
+<p><strong>平均逗留时间（W）</strong>：</p>
+$$
+   W = Wq + \frac{1}{\mu}
+   $$</li>
+</ol>
+<p><strong>决策影响</strong>：</p>
+<ul>
+<li>
+<p><strong>处理单元数量（c）</strong>：通过增加处理单元数量 c，可以提高服务率 cμ，从而降低系统利用率 ρ，减少排队长度和等待时间。</p>
+</li>
+<li>
+<p><strong>缓冲区优化</strong>：计算无阻塞概率 P₀ 和平均排队长度 Lq，可以合理设计缓冲区大小，避免过大或过小带来的资源浪费或高丢包率。</p>
+</li>
+</ul>
+<h3 id="数据包排队与丢弃策略">数据包排队与丢弃策略
+</h3><p><strong>应用模型</strong>：M/M/1/K 模型（有限容量）</p>
+<p><strong>应用说明</strong>：</p>
+<p>在实际网络中，路由器的缓冲区是有限的。当缓冲区满时，新到达的数据包将被丢弃。M/M/1/K模型用于分析有限容量系统下的性能，包括丢包率和系统利用率。</p>
+<p><strong>关键参数</strong>：</p>
+<ul>
+<li><strong>系统容量（K）</strong>：包括正在处理和排队的数据包总数。</li>
+<li><strong>丢包率（P_loss）</strong>：新到达数据包被丢弃的概率。</li>
+</ul>
+<p><strong>公式应用</strong>：</p>
+<ol>
+<li>
+<p><strong>无阻塞概率（P₀）</strong>：</p>
+$$
+   P_0 = \left[ \sum_{n=0}^{K} \frac{(\lambda/\mu)^n}{n!} \right]^{-1}
+   $$</li>
+<li>
+<p><strong>丢包率（P_{K+1}}）</strong>：</p>
+<p>当系统达到容量 K 时，任何新到达的数据包都会被丢弃。丢包率 P_loss 即为系统处于容量 K 时的概率：</p>
+$$
+   P_{K+1} = P_K \cdot \frac{\lambda}{c \mu}
+   $$<p>其中 P_K 是系统处于容量 K 时的概率。</p>
+</li>
+</ol>
+<p><strong>决策影响</strong>：</p>
+<ul>
+<li>
+<p><strong>缓冲区容量（K）</strong>：通过分析丢包率与缓冲区容量的关系，确定一个合适的缓冲区大小。例如，若目标是 P_loss ≤ 1%，可通过调整 K 使得 P_K ≤ 1%。</p>
+</li>
+<li>
+<p><strong>丢包策略选择</strong>：选择合适的数据包丢弃策略（如 FIFO、优先级排队、RED）可以优化网络性能，减少关键数据包的丢失。</p>
+</li>
+</ul>
+<p><strong>示例计算</strong>：</p>
+<p>假设路由器的到达率 λ = 100 数据包/秒，服务率 μ = 120 数据包/秒，系统容量 K = 50。</p>
+<ol>
+<li>
+<p><strong>计算 P₀</strong>：</p>
+$$
+   P_0 = \left[ \sum_{n=0}^{50} \frac{(100/120)^n}{n!} \right]^{-1}
+   $$<p>由于 K 很大，近似为 P₀ ≈ 0。</p>
+</li>
+<li>
+<p><strong>计算丢包率 P_loss</strong>：</p>
+$$
+   P_loss \approx P_K = \frac{(\lambda/\mu)^K}{K!} P_0
+   $$<p>由于 P₀ ≈ 0，P_loss 也非常小，表示缓冲区容量 K = 50 足以满足低丢包率需求。</p>
+</li>
+</ol>
+<h3 id="负载均衡与资源分配">负载均衡与资源分配
+</h3><p><strong>应用模型</strong>：M/M/c 模型</p>
+<p><strong>应用说明</strong>：</p>
+<p>在多路由器或多处理单元的网络中，负载均衡策略决定了如何将流量分配到不同的路由器。M/M/c模型帮助分析多服务台系统的性能，如多个处理单元或多个路由器节点的整体性能。</p>
+<p><strong>关键参数</strong>：</p>
+<ul>
+<li><strong>到达率（λ）</strong>：每个路由器的数据包到达率。</li>
+<li><strong>服务率（μ）</strong>：每个路由器的服务能力。</li>
+<li><strong>服务台数量（c）</strong>：处理单元数量。</li>
+</ul>
+<p><strong>公式应用</strong>：</p>
+<p>使用M/M/c模型中的公式，可以计算系统利用率、平均排队长度等关键性能指标，进而指导负载均衡策略的制定。</p>
+<ol>
+<li>
+<p><strong>系统利用率（ρ）</strong>：</p>
+$$
+   \rho = \frac{\lambda}{c \mu}
+   $$</li>
+<li>
+<p><strong>无阻塞概率（P₀）</strong>：</p>
+$$
+   P_0 = \left[ \sum_{n=0}^{c-1} \frac{(\lambda/\mu)^n}{n!} + \frac{(\lambda/\mu)^c}{c!} \cdot \frac{c \mu}{c \mu - \lambda} \right]^{-1}
+   $$</li>
+<li>
+<p><strong>平均排队长度（Lq）</strong>：</p>
+$$
+   Lq = \frac{P_0 \cdot (\lambda/\mu)^c \cdot \rho}{c! (1 - \rho)^2}
+   $$</li>
+<li>
+<p><strong>平均等待时间（Wq）</strong>：</p>
+$$
+   Wq = \frac{Lq}{\lambda}
+   $$</li>
+</ol>
+<p><strong>决策影响</strong>：</p>
+<ul>
+<li>
+<p><strong>负载分配策略</strong>：根据各路由器的利用率和排队长度，动态调整数据包的分配，避免部分路由器过载而其他路由器闲置。</p>
+</li>
+<li>
+<p><strong>资源扩展</strong>：通过分析系统利用率，决定是否需要增加处理单元或路由器节点，以提高整体网络的处理能力。</p>
+</li>
+</ul>
+<p><strong>示例应用</strong>：</p>
+<p>假设有 4 个路由器，每个路由器的到达率 λ = 50 数据包/秒，服务率 μ = 100 数据包/秒，服务台数量 c = 2。</p>
+<ol>
+<li>
+<p><strong>计算系统利用率（ρ）</strong>：</p>
+$$
+   \rho = \frac{50}{2 \times 100} = 0.25
+   $$</li>
+<li>
+<p><strong>计算无阻塞概率（P₀）</strong>：</p>
+$$
+   P_0 = \left[ \sum_{n=0}^{2-1} \frac{(50/100)^n}{n!} + \frac{(50/100)^2}{2!} \cdot \frac{2 \times 100}{2 \times 100 - 50} \right]^{-1}
+   $$<p>
+</p>
+$$
+   P_0 = \left[ 1 + 0.5 + \frac{0.25}{2} \cdot \frac{200}{150} \right]^{-1} = \left[ 1 + 0.5 + \frac{0.125 \times 200}{150} \right]^{-1}
+   $$<p>
+</p>
+$$
+   P_0 = \left[ 1 + 0.5 + \frac{25}{150} \right]^{-1} = \left[ 1.5 + 0.1667 \right]^{-1} = \frac{1}{1.6667} \approx 0.6
+   $$</li>
+<li>
+<p><strong>计算平均排队长度（Lq）</strong>：</p>
+$$
+   Lq = \frac{0.6 \times (0.5)^2 \times 0.25}{2! \times (1 - 0.25)^2} = \frac{0.6 \times 0.25 \times 0.25}{2 \times 0.5625} = \frac{0.0375}{1.125} \approx 0.033
+   $$</li>
+<li>
+<p><strong>计算平均等待时间（Wq）</strong>：</p>
+$$
+   Wq = \frac{0.033}{50} \approx 0.00066 \text{ 秒} = 0.66 \text{ 毫秒}
+   $$</li>
+</ol>
+<p><strong>决策影响</strong>：</p>
+<ul>
+<li>
+<p><strong>负载均衡</strong>：每个路由器的平均等待时间极低，表明当前配置下路由器处理能力充足，可以维持现有负载。</p>
+</li>
+<li>
+<p><strong>资源分配</strong>：若某个路由器的负载增加，需重新分配数据包流量或增加处理单元，以保持低延迟和高吞吐量。</p>
+</li>
+</ul>
+<h3 id="路由器决策中的排队理论应用实例">路由器决策中的排队理论应用实例
+</h3><p><strong>实例</strong>：动态调整路由器服务速率以适应流量变化</p>
+<p><strong>应用模型</strong>：M/G/1 模型</p>
+<p><strong>应用说明</strong>：</p>
+<p>在高动态网络环境中，数据包的服务时间可能变化较大，例如不同类型的数据包可能需要不同的处理时间。M/G/1模型适用于这种情况，可以帮助路由器动态调整服务速率，以适应不同流量条件下的性能需求。</p>
+<p><strong>关键参数</strong>：</p>
+<ul>
+<li><strong>到达率（λ）</strong>：每秒到达的数据包数量。</li>
+<li><strong>服务时间（S）</strong>：数据包处理时间，具有一般分布，具有均值 E[S] 和二阶矩 E[S²]。</li>
+<li><strong>服务率（μ）</strong>：μ = 1 / E[S]</li>
+</ul>
+<p><strong>公式应用</strong>：</p>
+<ol>
+<li>
+<p><strong>系统利用率（ρ）</strong>：</p>
+$$
+   \rho = \lambda E[S]
+   $$</li>
+<li>
+<p><strong>平均等待时间（Wq）</strong>（通过 Pollaczek-Khinchin 公式）：</p>
+$$
+   Wq = \frac{\lambda E[S^2]}{2(1 - \rho)}
+   $$</li>
+<li>
+<p><strong>平均排队长度（Lq）</strong>：</p>
+$$
+   Lq = \lambda Wq = \frac{\lambda^2 E[S^2]}{2(1 - \rho)}
+   $$</li>
+</ol>
+<p><strong>决策影响</strong>：</p>
+<ul>
+<li>
+<p><strong>动态调整服务速率（μ）</strong>：根据当前流量情况，调整处理能力。例如，在高流量时提升 μ 以降低 ρ，减少延迟；在低流量时降低 μ 以节省能源。</p>
+</li>
+<li>
+<p><strong>队列管理策略</strong>：根据等待时间和排队长度，调整数据包的优先级或采取不同的排队策略，以优化网络性能。</p>
+</li>
+</ul>
+<p><strong>示例计算</strong>：</p>
+<p>假设路由器当前的到达率 λ = 80 数据包/秒，服务时间 S 服从一般分布，E[S] = 0.01 秒，Var(S) = 0.002 秒²。</p>
+<ol>
+<li>
+<p><strong>计算系统利用率（ρ）</strong>：</p>
+$$
+   \rho = \lambda E[S] = 80 \times 0.01 = 0.8
+   $$<p>系统处于高负载状态，接近饱和。</p>
+</li>
+<li>
+<p><strong>计算二阶矩 E[S²]</strong>：</p>
+$$
+   E[S^2] = Var(S) + (E[S])^2 = 0.002 + 0.0001 = 0.0021 \text{ 秒}²
+   $$</li>
+<li>
+<p><strong>计算平均等待时间（Wq）</strong>：</p>
+$$
+   Wq = \frac{80 \times 0.0021}{2(1 - 0.8)} = \frac{0.168}{0.4} = 0.42 \text{ 秒}
+   $$</li>
+<li>
+<p><strong>计算平均排队长度（Lq）</strong>：</p>
+$$
+   Lq = 80 \times 0.42 = 33.6 \text{ 数据包}
+   $$</li>
+</ol>
+<p><strong>决策措施</strong>：</p>
+<ul>
+<li>
+<p><strong>提升服务速率</strong>：由于 ρ = 0.8，路由器接近饱和状态，建议提升处理能力，例如增加处理单元或优化算法，使 μ 增大，降低 ρ 至 0.7 以下。</p>
+</li>
+<li>
+<p><strong>优化队列管理</strong>：根据高排队长度 Lq，可以引入优先级队列或数据包调度算法，优先处理关键数据包，减少关键数据包的延迟。</p>
+</li>
+</ul>
+<hr>
+<h3 id="优先级排队策略">优先级排队策略
+</h3><p><strong>应用模型</strong>：M/M/1 with Priority Queues 或 M/M/c with Priority Queues</p>
+<p><strong>应用说明</strong>：</p>
+<p>在实际网络中，不同类型的数据包可能具有不同的优先级（如实时视频数据包优先于普通网页数据包）。通过引入优先级排队策略，可以优化关键数据包的传输性能。</p>
+<p><strong>关键参数</strong>：</p>
+<ul>
+<li><strong>高优先级数据包到达率（λ₁）</strong></li>
+<li><strong>低优先级数据包到达率（λ₂）</strong></li>
+<li><strong>服务率（μ）</strong></li>
+</ul>
+<p><strong>公式应用</strong>：</p>
+<ol>
+<li>
+<p><strong>系统利用率（ρ）</strong>：</p>
+$$
+   \rho = \frac{\lambda₁ + \lambda₂}{\mu}
+   $$</li>
+<li>
+<p><strong>高优先级数据包的平均等待时间（Wq₁）</strong>：</p>
+$$
+   Wq₁ = \frac{\rho}{\mu - \lambda₁ - \lambda₂}
+   $$</li>
+<li>
+<p><strong>低优先级数据包的平均等待时间（Wq₂）</strong>：</p>
+$$
+   Wq₂ = \frac{\lambda₁}{\mu (\mu - \lambda₁ - \lambda₂)} + \frac{\rho}{\mu - \lambda₁ - \lambda₂}
+   $$</li>
+</ol>
+<p><strong>决策影响</strong>：</p>
+<ul>
+<li>
+<p><strong>数据包优先级设置</strong>：通过设定不同的数据包优先级，可以确保关键数据包（如语音、视频）的低延迟传输。</p>
+</li>
+<li>
+<p><strong>资源分配</strong>：根据优先级调整资源分配，例如为高优先级数据包分配更多的处理资源或更快的服务速率。</p>
+</li>
+</ul>
+<p><strong>示例应用</strong>：</p>
+<p>假设路由器处理两类数据包：</p>
+<ul>
+<li><strong>高优先级</strong>：λ₁ = 30 数据包/秒，μ = 100 数据包/秒</li>
+<li><strong>低优先级</strong>：λ₂ = 50 数据包/秒</li>
+</ul>
+<ol>
+<li>
+<p><strong>计算系统利用率（ρ）</strong>：</p>
+$$
+   \rho = \frac{30 + 50}{100} = 0.8
+   $$</li>
+<li>
+<p><strong>计算高优先级数据包的平均等待时间（Wq₁）</strong>：</p>
+$$
+   Wq₁ = \frac{0.8}{100 - 30 - 50} = \frac{0.8}{20} = 0.04 \text{ 秒}
+   $$</li>
+<li>
+<p><strong>计算低优先级数据包的平均等待时间（Wq₂）</strong>：</p>
+$$
+   Wq₂ = \frac{30}{100 \times (100 - 30 - 50)} + \frac{0.8}{100 - 30 - 50} = \frac{30}{100 \times 20} + \frac{0.8}{20} = 0.015 + 0.04 = 0.055 \text{ 秒}
+   $$</li>
+</ol>
+<p><strong>决策措施</strong>：</p>
+<ul>
+<li>
+<p><strong>优化优先级策略</strong>：确保高优先级数据包具有较低的等待时间，通过调整处理速率或增加高优先级数据包的处理资源。</p>
+</li>
+<li>
+<p><strong>监控系统利用率</strong>：保持系统利用率在合理范围（如 ρ ≤ 0.7），以避免过高的等待时间和排队长度。</p>
+</li>
+</ul>
+<hr>
+<h3 id="排队理论在路由器中的综合应用">排队理论在路由器中的综合应用
+</h3><p><strong>综合应用</strong>：</p>
+<p>在实际网络环境中，路由器节点需要同时考虑缓冲区设计、数据包排队与丢弃策略、负载均衡与资源分配以及优先级排队策略。以下是一个综合应用的示例：</p>
+<p><strong>实例</strong>：设计一个多核路由器的缓冲区与负载均衡策略</p>
+<p><strong>场景描述</strong>：</p>
+<ul>
+<li><strong>路由器</strong>：4核处理器（c = 4），每核服务率 μ = 150 数据包/秒。</li>
+<li><strong>数据包到达率</strong>：高优先级 λ₁ = 200 数据包/秒，低优先级 λ₂ = 300 数据包/秒。</li>
+<li><strong>缓冲区容量</strong>：K = 1000 数据包。</li>
+<li><strong>目标</strong>：确保高优先级数据包的丢包率 ≤ 0.1%，低优先级数据包的丢包率 ≤ 1%。</li>
+</ul>
+<p><strong>步骤</strong>：</p>
+<ol>
+<li>
+<p><strong>计算系统利用率（ρ）</strong>：</p>
+$$
+   \rho = \frac{\lambda₁ + \lambda₂}{c \mu} = \frac{200 + 300}{4 \times 150} = \frac{500}{600} \approx 0.833
+   $$<p>系统处于高负载状态，需优化。</p>
+</li>
+<li>
+<p><strong>计算无阻塞概率（P₀）</strong>（使用 M/M/c/K 模型）：</p>
+$$
+   P_0 = \left[ \sum_{n=0}^{4-1} \frac{(500/600)^n}{n!} + \frac{(500/600)^4}{4!} \cdot \frac{4 \times 150}{4 \times 150 - 500} \right]^{-1}
+   $$<p>
+</p>
+$$
+   P_0 = \left[ 1 + \frac{5}{6} + \frac{(5/6)^2}{2} + \frac{(5/6)^3}{6} + \frac{(5/6)^4}{24} \cdot \frac{600}{100} \right]^{-1}
+   $$<p>
+</p>
+$$
+   P_0 = \left[ 1 + 0.833 + 0.347 + 0.115 + \frac{0.482}{24} \times 6 \right]^{-1}
+   $$<p>
+</p>
+$$
+   P_0 = \left[ 1 + 0.833 + 0.347 + 0.115 + 0.120 \right]^{-1} = \left[ 2.415 \right]^{-1} \approx 0.414
+   $$</li>
+<li>
+<p><strong>计算丢包率</strong>：</p>
+<ul>
+<li>
+<p><strong>丢包率（P_loss）</strong>：</p>
+$$
+     P_loss = P_K = P_0 \cdot \frac{(\lambda/\mu)^c}{c!} \cdot \frac{c \mu}{c \mu - \lambda} = 0.414 \times \frac{(500/600)^4}{24} \times \frac{600}{100}
+     $$<p>
+</p>
+$$
+     P_loss = 0.414 \times \frac{0.482}{24} \times 6 \approx 0.414 \times 0.120 \approx 0.0497 \approx 4.97\%
+     $$<p>目前丢包率超过目标，需要优化。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>优化措施</strong>：</p>
+<ul>
+<li><strong>增加服务率（μ）</strong>：提高每核处理能力，降低 ρ。</li>
+<li><strong>增加服务台数量（c）</strong>：增加处理单元，降低系统利用率。</li>
+<li><strong>扩展缓冲区容量（K）</strong>：减少丢包概率。</li>
+</ul>
+</li>
+<li>
+<p><strong>调整参数</strong>：</p>
+<p>假设通过优化，增加每核服务率至 μ = 200 数据包/秒。</p>
+<ul>
+<li>
+<p><strong>新的系统利用率（ρ）</strong>：</p>
+$$
+     \rho = \frac{200 + 300}{4 \times 200} = \frac{500}{800} = 0.625
+     $$</li>
+<li>
+<p><strong>重新计算无阻塞概率（P₀）</strong>：</p>
+$$
+     P_0 = \left[ \sum_{n=0}^{3} \frac{(500/800)^n}{n!} + \frac{(500/800)^4}{4!} \cdot \frac{800}{800 - 500} \right]^{-1}
+     $$<p>
+</p>
+$$
+     P_0 = \left[ 1 + 0.625 + \frac{0.3906}{2} + \frac{0.2441}{6} + \frac{0.1526}{24} \times \frac{800}{300} \right]^{-1}
+     $$<p>
+</p>
+$$
+     P_0 = \left[ 1 + 0.625 + 0.1953 + 0.0407 + 0.1526 \right]^{-1} \approx \left[ 2.013 \right]^{-1} \approx 0.497
+     $$</li>
+<li>
+<p><strong>重新计算丢包率（P_loss）</strong>：</p>
+$$
+     P_loss = 0.497 \times \frac{(500/800)^4}{24} \times \frac{800}{300} \approx 0.497 \times \frac{0.2441}{24} \times 2.666 \approx 0.497 \times 0.0102 \times 2.666 \approx 0.0135 \approx 1.35\%
+     $$<p>仍高于高优先级目标，进一步优化。</p>
+</li>
+<li>
+<p><strong>进一步调整</strong>：增加服务台数量 c = 5，保持 μ = 200 数据包/秒。</p>
+<ul>
+<li>
+<p><strong>新的系统利用率（ρ）</strong>：</p>
+$$
+       \rho = \frac{200 + 300}{5 \times 200} = \frac{500}{1000} = 0.5
+       $$</li>
+<li>
+<p><strong>重新计算无阻塞概率（P₀）</strong>：</p>
+$$
+       P_0 = \left[ \sum_{n=0}^{4} \frac{(500/1000)^n}{n!} + \frac{(500/1000)^5}{5!} \cdot \frac{1000}{1000 - 500} \right]^{-1}
+       $$<p>
+</p>
+$$
+       P_0 = \left[ 1 + 0.5 + 0.125 + 0.0208 + 0.0026 + \frac{0.03125}{120} \times 2 \right]^{-1} \approx \left[ 1 + 0.5 + 0.125 + 0.0208 + 0.0026 + 0.00052 \right]^{-1} \approx \left[ 1.648 \right]^{-1} \approx 0.607
+       $$</li>
+<li>
+<p><strong>重新计算丢包率（P_loss）</strong>：</p>
+$$
+       P_loss = 0.607 \times \frac{(500/1000)^5}{120} \times \frac{1000}{500} = 0.607 \times \frac{0.03125}{120} \times 2 = 0.607 \times 0.0002604 \times 2 \approx 0.000315 \approx 0.0315\%
+       $$</li>
+<li>
+<p><strong>最终结果</strong>：丢包率 P_loss ≈ 0.0315%，满足高优先级数据包的丢包率目标（≤ 0.1%），同时低优先级数据包的丢包率也得到了有效控制。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p><strong>决策措施</strong>：</p>
+<ul>
+<li>
+<p><strong>增加处理单元数量（c）</strong>：通过增加服务台数量，降低系统利用率 ρ，显著减少丢包率。</p>
+</li>
+<li>
+<p><strong>优化服务速率（μ）</strong>：提升处理速率，进一步降低 ρ，优化系统性能。</p>
+</li>
+<li>
+<p><strong>缓冲区管理</strong>：根据调整后的丢包率，确认缓冲区容量是否满足需求，确保系统在高负载下依然稳定运行。</p>
+</li>
+</ul>
+<hr>
+<h3 id="路由器缓冲区扩展与拥塞控制">路由器缓冲区扩展与拥塞控制
+</h3><p><strong>应用模型</strong>：M/M/c/K 模型与 RED（Random Early Detection）策略</p>
+<p><strong>应用说明</strong>：</p>
+<p>在高流量条件下，路由器缓冲区可能会出现拥塞，导致高延迟和丢包。通过结合M/M/c/K模型与拥塞控制策略（如RED），可以有效管理网络流量，预防拥塞发生。</p>
+<p><strong>关键参数</strong>：</p>
+<ul>
+<li><strong>缓冲区容量（K）</strong></li>
+<li><strong>丢包概率（P_loss）</strong></li>
+<li><strong>拥塞阈值（minimum threshold, maximum threshold）</strong></li>
+</ul>
+<p><strong>公式应用</strong>：</p>
+<ol>
+<li>
+<p><strong>系统利用率（ρ）</strong>：</p>
+$$
+   \rho = \frac{\lambda}{c \mu}
+   $$</li>
+<li>
+<p><strong>无阻塞概率（P₀）</strong>：</p>
+$$
+   P_0 = \left[ \sum_{n=0}^{c-1} \frac{(\lambda/\mu)^n}{n!} + \frac{(\lambda/\mu)^c}{c!} \cdot \frac{c \mu}{c \mu - \lambda} \right]^{-1}
+   $$</li>
+<li>
+<p><strong>丢包率（P_loss）</strong>：</p>
+$$
+   P_loss = P_K = P_0 \cdot \frac{(\lambda/\mu)^c}{c!} \cdot \frac{c \mu}{c \mu - \lambda}
+   $$</li>
+</ol>
+<p><strong>决策影响</strong>：</p>
+<ul>
+<li>
+<p><strong>缓冲区容量调整</strong>：根据流量预测和系统利用率，调整缓冲区容量以平衡延迟和丢包率。</p>
+</li>
+<li>
+<p><strong>拥塞控制策略</strong>：采用RED等策略，提前检测和防止拥塞，通过随机丢包降低系统负载，保持系统稳定。</p>
+</li>
+</ul>
+<p><strong>示例应用</strong>：</p>
+<p>假设路由器有 3 个处理单元（c = 3），服务率 μ = 100 数据包/秒，数据包到达率 λ = 250 数据包/秒，缓冲区容量 K = 100。</p>
+<ol>
+<li>
+<p><strong>计算系统利用率（ρ）</strong>：</p>
+$$
+   \rho = \frac{250}{3 \times 100} \approx 0.833
+   $$</li>
+<li>
+<p><strong>计算无阻塞概率（P₀）</strong>：</p>
+$$
+   P_0 = \left[ \sum_{n=0}^{2} \frac{(250/100)^n}{n!} + \frac{(250/100)^3}{3!} \cdot \frac{300}{300 - 250} \right]^{-1} = \left[ 1 + 2.5 + \frac{6.25}{2} + \frac{15.625}{6} \cdot \frac{300}{50} \right]^{-1}
+   $$<p>
+</p>
+$$
+   P_0 = \left[ 1 + 2.5 + 3.125 + \frac{15.625 \times 6}{6} \right]^{-1} = \left[ 1 + 2.5 + 3.125 + 15.625 \right]^{-1} = \left[ 22.25 \right]^{-1} \approx 0.045
+   $$</li>
+<li>
+<p><strong>计算丢包率（P_loss）</strong>：</p>
+$$
+   P_loss = P_K = 0.045 \times \frac{(2.5)^3}{6} \times \frac{300}{50} = 0.045 \times \frac{15.625}{6} \times 6 = 0.045 \times 15.625 = 0.703 \approx 70.3\%
+   $$<p>丢包率过高，需优化。</p>
+</li>
+<li>
+<p><strong>采用RED策略</strong>：</p>
+<ul>
+<li><strong>设置最小阈值（min_threshold）</strong>：例如，当缓冲区中数据包数超过 50 时，开始随机丢包。</li>
+<li><strong>设置最大阈值（max_threshold）</strong>：例如，当缓冲区中数据包数超过 80 时，大幅增加丢包概率。</li>
+</ul>
+</li>
+<li>
+<p><strong>调整缓冲区容量</strong>：</p>
+<p>若缓冲区容量增加至 K = 200：</p>
+<ul>
+<li>
+<p><strong>重新计算 P₀ 和 P_loss</strong>：</p>
+$$
+     P_0 = \left[ \sum_{n=0}^{2} \frac{2.5^n}{n!} + \frac{2.5^3}{6} \cdot \frac{300}{50} + \sum_{n=4}^{200} \frac{2.5^n}{6} \cdot \frac{300}{50} \right]^{-1}
+     $$<p>由于K增加，P_loss 将显著降低，满足较低的丢包率需求。</p>
+</li>
+</ul>
+</li>
+</ol>
+<p><strong>决策措施</strong>：</p>
+<ul>
+<li>
+<p><strong>合理设置RED阈值</strong>：通过流量分析，确定合适的最小和最大阈值，以有效预防拥塞。</p>
+</li>
+<li>
+<p><strong>优化缓冲区容量</strong>：在保证低丢包率的前提下，尽量减少缓冲区容量，以节省资源。</p>
+</li>
+</ul>
+<p>Other Link</p>
+<p><a class="link" href="https://zhuanlan.zhihu.com/p/375681567"  target="_blank" rel="noopener"
+    >https://zhuanlan.zhihu.com/p/375681567</a>
+
+</p>
+<p><a class="link" href="https://zhuanlan.zhihu.com/p/90923312"  target="_blank" rel="noopener"
+    >https://zhuanlan.zhihu.com/p/90923312</a>
+
+</p>
+<p><a class="link" href="https://blog.csdn.net/qq_39543783/article/details/107915998"  target="_blank" rel="noopener"
+    >https://blog.csdn.net/qq_39543783/article/details/107915998</a>
+
+</p>
+<p><a class="link" href="https://blog.csdn.net/Douglassssssss/article/details/134063217"  target="_blank" rel="noopener"
+    >https://blog.csdn.net/Douglassssssss/article/details/134063217</a>
+
+</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <span>
+            最后更新于 Nov 01, 2025 19:46 &#43;0800
+        </span>
+    </section></footer>
+
+
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2025 echudet
+    </section>
+    
+    <section class="powerby">
+        
+
+
+        <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+
+        <script language="javascript"> 
+            var now = new Date();
+            function createtime(){
+                now.setTime(now.getTime()+250);
+                var grt= new Date("2024/11/10 00:00:00"); 
+                days = (now - grt ) / 1000 / 60 / 60 / 24;
+                dnum = Math.floor(days);
+                hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+                hnum = Math.floor(hours);
+                if(String(hnum).length ==1 ){hnum = "0" + hnum;}
+                minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+                mnum = Math.floor(minutes);
+                if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+                seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+                snum = Math.round(seconds);
+                if(String(snum).length ==1 ){snum = "0" + snum;}
+
+                document.getElementById("timeDate").innerHTML = "本站已稳定运行"+dnum+" 天 ";
+                document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒<br>"
+            }
+            setInterval("createtime()",250); 
+        </script> 
+
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        
+    
+        
+         
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+        
+
+        共 742374 字 , 39 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+
+</footer>
+
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+
+    </body>
+</html>

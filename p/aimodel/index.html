@@ -6,11 +6,11 @@
 
 <link rel='canonical' href='https://echudet.github.io/p/aimodel/'>
 
-<link rel="stylesheet" href="/scss/style.min.86fc5e5efb829fb1bdd7a2d2275017fb3ae01ba7fcf491e347d76495ae5e3ae2.css"><meta property='og:title' content="aimodel">
+<link rel="stylesheet" href="/scss/style.min.209f2315995b57a9cdd733e5afe32e05ebb1138a0b3bb750cfcb86dff885e546.css"><meta property='og:title' content="aimodel">
 <meta property='og:description' content="大一立项时对三维重建midas微模型的理解和训练">
 <meta property='og:url' content='https://echudet.github.io/p/aimodel/'>
 <meta property='og:site_name' content='echudet'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-12-01T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-09-03T22:10:01&#43;08:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-12-01T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-11-01T19:46:45&#43;08:00'/>
 <meta name="twitter:title" content="aimodel">
 <meta name="twitter:description" content="大一立项时对三维重建midas微模型的理解和训练">
     <link rel="shortcut icon" href="/timer.ico" />
@@ -328,7 +328,6 @@
         <li><a href="#超参数的影响">超参数的影响</a></li>
       </ol>
     </li>
-    <li><a href="#参考">参考</a></li>
   </ol>
 </nav>
         </div>
@@ -351,6 +350,10 @@
         
             <a href="/categories/ai/" >
                 Ai
+            </a>
+        
+            <a href="/categories/ai-assist/" >
+                Ai Assist
             </a>
         
     </header>
@@ -441,7 +444,7 @@
 </svg>
 
                 <time class="article-time--reading">
-                    阅读时长: 29 分钟
+                    阅读时长: 28 分钟
                 </time>
             </div>
         
@@ -494,7 +497,7 @@
 </svg>
 
             <time class="article-words">
-                文章字数：14176字
+                文章字数：13958字
             </time>
         </div>
         <div class="article-lastmod">
@@ -507,7 +510,7 @@
 
 
                 <time>
-                    Sep 03, 2025 22:10 &#43;0800
+                    Nov 01, 2025 19:46 &#43;0800
                 </time>
             </div></footer>
     
@@ -928,7 +931,8 @@
 <li>卷积操作使用空间形式 [B, C, H, W]</li>
 <li>两种形式可以相互转换</li>
 <li>特征维度（C）和空间分辨率（H,W）在两种形式中都保持不变</li>
-</ol></blockquote>
+</ol>
+</blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -3134,45 +3138,6 @@
 <li><strong>批次大小</strong>：需要根据 GPU 内存大小进行设置，较大的批次大小可以稳定梯度，但会占用更多内存。</li>
 <li><strong>权重衰减</strong>：防止模型过拟合，通常设置为 <code>1e-4</code> 或 <code>1e-5</code>。</li>
 </ul>
-<hr>
-<h2 id="参考">参考
-</h2><ol>
-<li><strong>Swin Transformer: Hierarchical Vision Transformer using Shifted Windows</strong>
-<ul>
-<li>作者：Ze Liu, Yutong Lin, Yue Cao, et al.</li>
-<li>链接：<a class="link" href="https://arxiv.org/abs/2103.14030"  target="_blank" rel="noopener"
-    >https://arxiv.org/abs/2103.14030</a>
-
-</li>
-</ul>
-</li>
-<li><strong>MiDaS: Robust Monocular Depth Estimation with Mix and Match of Dense and Sparse Depth Samples</strong>
-<ul>
-<li>作者：René Ranftl, Katrin Lasinger, David Hafner, et al.</li>
-<li>链接：<a class="link" href="https://arxiv.org/abs/1907.01341"  target="_blank" rel="noopener"
-    >https://arxiv.org/abs/1907.01341</a>
-
-</li>
-</ul>
-</li>
-<li><strong>PyTorch 官方文档</strong>
-<ul>
-<li>链接：<a class="link" href="https://pytorch.org/docs/"  target="_blank" rel="noopener"
-    >https://pytorch.org/docs/</a>
-
-</li>
-</ul>
-</li>
-<li><strong>timm: PyTorch Image Models</strong>
-<ul>
-<li>作者：Ross Wightman</li>
-<li>链接：<a class="link" href="https://github.com/rwightman/pytorch-image-models"  target="_blank" rel="noopener"
-    >https://github.com/rwightman/pytorch-image-models</a>
-
-</li>
-</ul>
-</li>
-</ol>
 
 </section>
 
@@ -3190,7 +3155,7 @@
 
 
         <span>
-            最后更新于 Sep 03, 2025 22:10 &#43;0800
+            最后更新于 Nov 01, 2025 19:46 &#43;0800
         </span>
     </section></footer>
 
@@ -3227,6 +3192,91 @@
     
 
     
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/cs144-code-analysis/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">cs144 code analysis</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/transformer%E6%8E%A2%E7%A9%B6/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Transformer探究</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/vllm-service/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">vLLM Service</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/face-recognition-list/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">face-recognition-list</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/simple-database/">
+        
+        
+            <div class="article-image">
+                <img src="/p/simple-database/bg.ffde7ff5e016b8481b8449ddaf9d6ceb_hu_78b5206a8e5797e2.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Simple Database"
+                        
+                        data-hash="md5-/95/9eAWuEgbhEndr51s6w==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Simple Database</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
 
      
     
@@ -3437,7 +3487,7 @@
         
         
 
-        共 765849 字 , 39 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        共 742374 字 , 39 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
         主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 

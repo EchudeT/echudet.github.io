@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://echudet.github.io/p/mit6s08121networking/'>
 
-<link rel="stylesheet" href="/scss/style.min.86fc5e5efb829fb1bdd7a2d2275017fb3ae01ba7fcf491e347d76495ae5e3ae2.css"><meta property='og:title' content="MIT6S081：21Networking">
+<link rel="stylesheet" href="/scss/style.min.209f2315995b57a9cdd733e5afe32e05ebb1138a0b3bb750cfcb86dff885e546.css"><meta property='og:title' content="MIT6S081：21Networking">
 <meta property='og:description' content="在网络协议栈中，接收活锁（Receive Livelock）是一个重要的问题，这是在高流量条件下系统因频繁处理中断而陷入的性能瓶颈现象。为了解决这一问题，采用轮询机制代替传统中断驱动，以减少高负载下的中断频率，能够提高系统性能的稳定性。此外，网卡的Ring Buffer 结构和 DMA 传输机制有助于数据包在网卡与系统内存之间高效传输。">
 <meta property='og:url' content='https://echudet.github.io/p/mit6s08121networking/'>
 <meta property='og:site_name' content='echudet'>
@@ -862,7 +862,8 @@
 <blockquote>
 <p>学生提问：硬件用来识别以太网packet的开头和结束的标志是不是类似于lab中的End of Packets？</p>
 <p>Robert教授：并不是的，EOP是帮助驱动和网卡之间通信的机制。</p>
-<p>这里的开头和结束的标志是在线缆中传输的电信号或者光信号，这些标志位通常在一个packet中是不可能出现的。以结束的FCS为例，它的值通常是packet header和payload的校验和，可以用来判断packet是否合法。</p></blockquote>
+<p>这里的开头和结束的标志是在线缆中传输的电信号或者光信号，这些标志位通常在一个packet中是不可能出现的。以结束的FCS为例，它的值通常是packet header和payload的校验和，可以用来判断packet是否合法。</p>
+</blockquote>
 <p>有关以太网48bit地址，是为了给每一个制造出来的网卡分配一个唯一的ID，所以这里有大量的可用数字。</p>
 <p>这里48bit地址中，前24bit表示的是制造商，每个网卡制造商都有自己唯一的编号，并且会出现在前24bit中。后24bit是由网卡制造商提供的任意唯一数字，通常网卡制造商是递增的分配数字。</p>
 <p>所以，如果你从一个网卡制造商买了一批网卡，每个网卡都会被写入属于自己的地址，并且如果你查看这些地址，你可以发现，这批网卡的高24bit是一样的，而低24bit极有可能是一些连续的数字。</p>
@@ -959,7 +960,8 @@
 <p>现在我们是在以太网中发送ARP packet，以太网packet也包含了以太网地址，所以，如果在以太网上运行ARP，这些信息是冗余的。</p>
 <p>但是如果在其他的网络上运行ARP，你或许需要这些信息，因为其他网络的packet中并没有包含以太网地址。</p>
 <p>学生提问：tcpdump中原始数据的右侧是什么内容？</p>
-<p>Robert教授：这些是原始数据对应的ASCII码，“.”对应了一个字节并没有相应的ASCII码，0x52对应了R，0x55对应了U。当我们发送的packet包含了ASCII字符时，这里的信息会更加有趣。</p></blockquote>
+<p>Robert教授：这些是原始数据对应的ASCII码，“.”对应了一个字节并没有相应的ASCII码，0x52对应了R，0x55对应了U。当我们发送的packet包含了ASCII字符时，这里的信息会更加有趣。</p>
+</blockquote>
 <p>我希望你们在刚刚的讨论中注意到这一点，网络协议和网络协议header是嵌套的。我们刚刚看到的是一个packet拥有了ethernet header和ethernet payload。</p>
 <p>在ethernet payload中，首先出现的是ARP header，对于ARP来说并没有的payload。</p>
 <p>但是在ethernet packet中还可以包含其他更复杂的结构，比如说ethernet payload中包含一个IP packet，IP packet中又包含了一个UDP packet，所以IP header之后是UDP header。</p>
@@ -1128,7 +1130,8 @@
 </li>
 </ul>
 <p>所以，以太网有1500或者9000字节的最大packet限制。</p>
-<p>除此之外，所有的协议都有长度字段，例如UDP的长度字段是16bit。所以即使以太网支持传输更大的packet，协议本身对于数据长度也有限制。</p></blockquote>
+<p>除此之外，所有的协议都有长度字段，例如UDP的长度字段是16bit。所以即使以太网支持传输更大的packet，协议本身对于数据长度也有限制。</p>
+</blockquote>
 <p>以上就是UDP的介绍。在lab的最后你们会通过实验提供的代码来向谷歌的DNS server发送一个查询，收到回复之后代码会打印输出。你们需要在设备驱动侧完成以太网数据的处理。</p>
 <hr>
 <h2 id="网络协议栈network-stack">网络协议栈（Network Stack）
@@ -1215,7 +1218,8 @@
 <p>比如说我家里的wifi路由器，它就有两张网卡，其中一个网卡连接到线缆并进一步连接到整个互联网，另一个网卡是wifi网卡。</p>
 <p>有很多服务器也有多个网卡，尤其是对于web服务器来说，会有一个网卡连接互联网，另一个网卡连接你的私有的敏感的数据库信息。两个网卡连接的是完全不同的网络。</p>
 <p>学生提问：所以多网卡的场景在于想要连接不同的网络？</p>
-<p>Robert教授：是的。如果你想要连接不同的网络，那么你需要有多块网卡。</p></blockquote>
+<p>Robert教授：是的。如果你想要连接不同的网络，那么你需要有多块网卡。</p>
+</blockquote>
 <p>我想再讨论一下当packet送到网卡时，网卡会做什么操作？这与networking lab非常相关。</p>
 <p>对于一个网卡的结构，会有一根线缆连接到外面的世界。网卡会检查线缆上的电信号，并将电信号转换成packet。网卡会接入到一个主机上，主机会带有网卡的驱动软件。我们需要将网卡解码出来的packet传递给主机的内存，这样软件才能解析packet。</p>
 <p>网卡内有许多内置的内存，当packet到达时，网卡会将packet存在自己的缓存中，并向主机发送中断，所以网卡内部会有一个队列。而主机的驱动包含了一个循环，它会与网卡交互，并询问当前是否缓存了packet。</p>
@@ -1271,7 +1275,8 @@
 <p>网卡通过总线，并经过一些可编程芯片连接到了DRAM，我认为在现代的计算机中，你可以设置好地址翻译表，这样网卡可以使用虚拟内存地址，虚拟内存地址会由网卡和DRAM之间的硬件翻译，这对于一些场景还是很有价值的。</p>
 <p>另一方面，如果网卡需要读写一些内存地址，而内存数据现在正在CPU的cache中，那么意味着内存对应的最新数据位于CPU cache中，而不是在RAM。这种情况下，当网卡执行DMA时，我们希望网卡能读取CPU的cache而不是RAM。</p>
 <p>在Intel的机器上，有一些精心设计的机制可以确保当网卡需要从内存读取数据而最新的内存数据在CPU cache中时，CPU cache而不是RAM会返回数据。一些软件基于这种机制来获得高性能。对于写数据同样的也适用，网卡可以直接将数据写到CPU cache中，这样CPU可以非常快的读到数据。</p>
-<p>我们介绍的E1000的结构非常简单，但是实际中的网卡机制非常的复杂。</p></blockquote>
+<p>我们介绍的E1000的结构非常简单，但是实际中的网卡机制非常的复杂。</p>
+</blockquote>
 <hr>
 <h2 id="receive-livelock-1">Receive Livelock
 </h2><p>接下来我们看一下今天的<a class="link" href="https://pdos.csail.mit.edu/6.828/2020/readings/mogul96usenix.pdf"  target="_blank" rel="noopener"
@@ -1297,13 +1302,15 @@
 ></p>
 <p>首先，为什么这条曲线开始会上升？</p>
 <blockquote>
-<p>学生回答：在到达处理的瓶颈之前，路由器可以处理更多的接收方向的packet，也可以处理更多的发送发向的packet。</p></blockquote>
+<p>学生回答：在到达处理的瓶颈之前，路由器可以处理更多的接收方向的packet，也可以处理更多的发送发向的packet。</p>
+</blockquote>
 <p>完全正确，在出现错误之前，对于每个接收到的packet，路由器都可以转发出去。比如说当packet以2000pps的速度接收时，路由器直接将packet从输入网卡拷贝到输出网卡，所以路由器的发送速率与接收速率一样，都是2000pps，所以这里X轴与Y轴的值相等。这种状态一直保持，直到曲线到达转折点。</p>
 <p>那么为什么曲线不是一直上升的呢？</p>
 <blockquote>
 <p>学生回答：是不是因为中断不能被处理导致的？</p>
 <p>Robert教授：这个其实是为什么曲线会下降的原因。我这里的问题是为什么曲线在某个点之后就不再上升了。假设这里的设计是合理的，对于一个合理的系统，对应的曲线会一直上升吗？</p>
-<p>学生回答：我认为不会，就算系统能足够快的处理packet，对于足够多的packet，还是可能触发系统的瓶颈。</p></blockquote>
+<p>学生回答：我认为不会，就算系统能足够快的处理packet，对于足够多的packet，还是可能触发系统的瓶颈。</p>
+</blockquote>
 <p>是的，CPU的算力并不是无限的，CPU最多每秒执行一定数量的指令。</p>
 <p>对于每个packet，IP软件会查看packet的header，检查校验和，根据目的地址查找转发表等等，这个过程会消耗数百甚至数千条CPU指令时间来处理一个packet。所以，我们不能期望曲线能一直向上走，它必然会在某个位置停止向上。</p>
 <p>上面的图中，曲线在5000的位置就停止不再上升了，这告诉我们这台机器处理每个packet要消耗200微秒。所以，曲线的转折点隐含的包含了处理一个packet需要的时间信息。</p>
@@ -1371,7 +1378,8 @@
 <p>Livelock发生的根本原因是我们浪费时间处理了一些最终会被丢弃的packet，这里的处理是徒劳。</p>
 <p>另一种发生Livelock的可能是，当负载增加时，我们可能会消耗100%的CPU时间在packet处理线程上，而留给应用程序的CPU时间为0，这时还是会发生Livelock。</p>
 <p>论文在第六节中有相应的介绍，如果一个packet将要被传输给本地的应用程序，网络线程会查看应用程序的socket buffer，如果socket buffer过满的话，网络线程会停止从网卡读取packet，直到socket buffer变小。</p>
-<p>这意味着网络线程会停止运行，并给应用程序机会运行并处理packet，所以如果你不够小心的话，你可能会在任何阶段都经历类似Livelock的问题。</p></blockquote>
+<p>这意味着网络线程会停止运行，并给应用程序机会运行并处理packet，所以如果你不够小心的话，你可能会在任何阶段都经历类似Livelock的问题。</p>
+</blockquote>
 
 </section>
 
@@ -1765,7 +1773,7 @@
         
         
 
-        共 765849 字 , 39 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        共 742374 字 , 39 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
         主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 

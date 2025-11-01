@@ -1,0 +1,2573 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="cs144代码解析">
+<title>cs144 code analysis</title>
+
+<link rel='canonical' href='https://echudet.github.io/p/cs144-code-analysis/'>
+
+<link rel="stylesheet" href="/scss/style.min.209f2315995b57a9cdd733e5afe32e05ebb1138a0b3bb750cfcb86dff885e546.css"><meta property='og:title' content="cs144 code analysis">
+<meta property='og:description' content="cs144代码解析">
+<meta property='og:url' content='https://echudet.github.io/p/cs144-code-analysis/'>
+<meta property='og:site_name' content='echudet'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-10-10T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-11-01T19:46:45&#43;08:00'/>
+<meta name="twitter:title" content="cs144 code analysis">
+<meta name="twitter:description" content="cs144代码解析">
+    <link rel="shortcut icon" href="/timer.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_67bf1327fc98b60.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">⌨️</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">echudet</a></h1>
+            <h2 class="site-description">探索编程的学生一枚</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/EchudeT'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://twitter.com'
+                        target="_blank"
+                        title="Twitter"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>档案</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#util">Util</a>
+      <ol>
+        <li><a href="#基础的工具类">基础的工具类</a></li>
+        <li><a href="#系统抽象层">系统抽象层</a></li>
+        <li><a href="#网络基础类">网络基础类</a></li>
+        <li><a href="#网络协议消息格式">网络协议消息格式</a></li>
+        <li><a href="#tcp协议相关">TCP协议相关</a></li>
+        <li><a href="#高级抽象和适配器">高级抽象和适配器</a></li>
+        <li><a href="#特殊设备">特殊设备</a></li>
+        <li><a href="#整体数据流动路径">整体数据流动路径</a></li>
+      </ol>
+    </li>
+    <li><a href="#lab">Lab</a>
+      <ol>
+        <li><a href="#基础数据结构">基础数据结构</a></li>
+        <li><a href="#接收端组件">接收端组件</a></li>
+        <li><a href="#发送端组件">发送端组件</a></li>
+        <li><a href="#连接管理">连接管理</a></li>
+        <li><a href="#网络层和链路层">网络层和链路层</a></li>
+        <li><a href="#应用层接口">应用层接口</a></li>
+        <li><a href="#组件之间的依赖关系">组件之间的依赖关系</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+
+
+    
+    <header class="article-category">
+        
+            <a href="/categories/net/" >
+                Net
+            </a>
+        
+            <a href="/categories/ai-assist/" >
+                Ai Assist
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/cs144-code-analysis/">cs144 code analysis</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            cs144代码解析
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-10-10</time>
+            </div>
+        
+
+        
+            <div>
+                <?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="792px" height="792px" viewBox="0 0 792 792" style="enable-background:new 0 0 792 792;" xml:space="preserve">
+<g>
+	<g id="_x31_0_19_">
+		<g>
+			<path d="M643.5,742.5H594V569.25C594,473.566,516.434,396,420.75,396C516.434,396,594,318.434,594,222.75V49.5h49.5
+				c13.662,0,24.75-11.088,24.75-24.75S657.162,0,643.5,0h-495c-13.662,0-24.75,11.088-24.75,24.75S134.838,49.5,148.5,49.5H198
+				v173.25C198,318.434,275.566,396,371.25,396C275.566,396,198,473.566,198,569.25V742.5h-49.5c-13.662,0-24.75,11.088-24.75,24.75
+				S134.838,792,148.5,792h495c13.662,0,24.75-11.088,24.75-24.75S657.162,742.5,643.5,742.5z M247.5,222.75
+				c0-43.387,0-173.25,0-173.25h297c0,0,0,133.427,0,173.25c0,68.335-58.188,123.75-129.938,123.75h-37.125
+				C305.687,346.5,247.5,291.085,247.5,222.75z M544.5,742.5h-297c0,0,0-129.888,0-173.25c0-68.335,58.187-123.75,129.938-123.75
+				h37.125c71.75,0,129.938,55.415,129.938,123.75C544.5,609.072,544.5,742.5,544.5,742.5z"/>
+		</g>
+	</g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+</svg>
+
+                <time class="article-time--reading">
+                    阅读时长: 26 分钟
+                </time>
+            </div>
+        
+
+         
+        <div>
+            <?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="79.536px" height="79.536px" viewBox="0 0 79.536 79.536" style="enable-background:new 0 0 79.536 79.536;"
+	 xml:space="preserve">
+<g>
+	<path style="fill:#010002;" d="M40.162,17.906C37.415,15.275,21.614,6.141,0,15.451c0,0.138,0,2.722,0,6.654v44.418h32.747
+		c1.126,0.968,3.798,1.651,6.926,1.651c3.119,0,5.802-0.684,6.931-1.651h32.933V22.105c0-3.933,0-6.517,0-6.654
+		C58.813,6.314,42.257,15.982,40.162,17.906z M37.229,63.349c0-1.75-15.372-11.981-33.125-0.818V19.216
+		c3.516-2.014,8.246-3.249,13.463-3.249c10.864,0,19.662,3.562,19.662,10.175V63.349z M75.684,62.53
+		c-17.751-11.163-33.108-0.932-33.108,0.818V26.146c0-6.612,8.792-10.175,19.646-10.175c5.22,0,9.952,1.235,13.463,3.249V62.53z"/>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+</svg>
+
+            <time class="article-words">
+                文章字数：12618字
+            </time>
+        </div>
+        <div class="article-lastmod">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time>
+                    Nov 01, 2025 19:46 &#43;0800
+                </time>
+            </div></footer>
+    
+
+    
+
+
+
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>cs144整个工程主要由cpp语言构成，代码集中分布在apps, src, tests, util这四个文件夹下。</p>
+<p>apps属于网络栈的上层应用，主要用于调用我们实现的底层库来实现相关的网络功能，实验中仅在lab0和最后的综合lab中用到。src文件夹存放着主要的实验代码，包含大部分的lab，需要我们自己实现。tests文件夹下存放着测试lab代码正确性的测例代码。暂时忽略。util文件夹存放着网络栈的基本构成组分，是除了src里面实现的网络栈主要逻辑之外的其他网络栈构成部分。同时，也是整个工程最底层的部分。</p>
+<p>这里给出详细的文件组成</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">apps:
+</span></span><span class="line"><span class="cl">CMakeLists.txt
+</span></span><span class="line"><span class="cl">bidirectional_stream_copy.cc
+</span></span><span class="line"><span class="cl">bidirectional_stream_copy.hh
+</span></span><span class="line"><span class="cl">endtoend.cc
+</span></span><span class="line"><span class="cl">tcp_ipv4.cc
+</span></span><span class="line"><span class="cl">tcp_native.cc
+</span></span><span class="line"><span class="cl">webget.cc
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">src:
+</span></span><span class="line"><span class="cl">CMakeLists.txt
+</span></span><span class="line"><span class="cl">byte_stream.cc
+</span></span><span class="line"><span class="cl">byte_stream.hh
+</span></span><span class="line"><span class="cl">byte_stream_helpers.cc
+</span></span><span class="line"><span class="cl">network_interface.cc
+</span></span><span class="line"><span class="cl">network_interface.hh
+</span></span><span class="line"><span class="cl">reassembler.cc
+</span></span><span class="line"><span class="cl">reassembler.hh
+</span></span><span class="line"><span class="cl">router.cc
+</span></span><span class="line"><span class="cl">router.hh
+</span></span><span class="line"><span class="cl">tcp_minnow_socket.cc
+</span></span><span class="line"><span class="cl">tcp_receiver.cc
+</span></span><span class="line"><span class="cl">tcp_receiver.hh
+</span></span><span class="line"><span class="cl">tcp_sender.cc
+</span></span><span class="line"><span class="cl">tcp_sender.hh
+</span></span><span class="line"><span class="cl">wrapping_integers.cc
+</span></span><span class="line"><span class="cl">wrapping_integers.hh
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">util:
+</span></span><span class="line"><span class="cl">CMakeLists.txt
+</span></span><span class="line"><span class="cl">address.cc
+</span></span><span class="line"><span class="cl">address.hh
+</span></span><span class="line"><span class="cl">arp_message.cc
+</span></span><span class="line"><span class="cl">arp_message.hh
+</span></span><span class="line"><span class="cl">checksum.hh
+</span></span><span class="line"><span class="cl">ethernet_frame.hh
+</span></span><span class="line"><span class="cl">ethernet_header.cc
+</span></span><span class="line"><span class="cl">ethernet_header.hh
+</span></span><span class="line"><span class="cl">eventloop.cc
+</span></span><span class="line"><span class="cl">eventloop.hh
+</span></span><span class="line"><span class="cl">exception.hh
+</span></span><span class="line"><span class="cl">fd_adapter.hh
+</span></span><span class="line"><span class="cl">file_descriptor.cc
+</span></span><span class="line"><span class="cl">file_descriptor.hh
+</span></span><span class="line"><span class="cl">ipv4_datagram.hh
+</span></span><span class="line"><span class="cl">ipv4_header.cc
+</span></span><span class="line"><span class="cl">ipv4_header.hh
+</span></span><span class="line"><span class="cl">lossy_fd_adapter.hh
+</span></span><span class="line"><span class="cl">parser.hh
+</span></span><span class="line"><span class="cl">random.cc
+</span></span><span class="line"><span class="cl">random.hh
+</span></span><span class="line"><span class="cl">socket.cc
+</span></span><span class="line"><span class="cl">socket.hh
+</span></span><span class="line"><span class="cl">tcp_config.hh
+</span></span><span class="line"><span class="cl">tcp_minnow_socket.hh
+</span></span><span class="line"><span class="cl">tcp_minnow_socket_impl.hh
+</span></span><span class="line"><span class="cl">tcp_over_ip.cc
+</span></span><span class="line"><span class="cl">tcp_over_ip.hh
+</span></span><span class="line"><span class="cl">tcp_peer.hh
+</span></span><span class="line"><span class="cl">tcp_receiver_message.hh
+</span></span><span class="line"><span class="cl">tcp_segment.cc
+</span></span><span class="line"><span class="cl">tcp_segment.hh
+</span></span><span class="line"><span class="cl">tcp_sender_message.hh
+</span></span><span class="line"><span class="cl">tun.cc
+</span></span><span class="line"><span class="cl">tun.hh
+</span></span><span class="line"><span class="cl">tuntap_adapter.cc
+</span></span><span class="line"><span class="cl">tuntap_adapter.hh
+</span></span><span class="line"><span class="cl">udinfo.hh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="util">Util
+</h2><p>首先看util文件夹，根据里面文件的功能，可以分为不同的文件组进行阅读。</p>
+<h3 id="基础的工具类">基础的工具类
+</h3><p><strong>exception.hh</strong>定义了错误处理体系。system_error是std库自带的基类，tagged_error继承自它并添加了错误类别和上下文信息，可以标记错误发生在哪个操作中。unix_error进一步简化了Unix系统调用错误的封装，会自动捕获errno并包装成异常。这个继承链使得错误处理更加精确和易于调试。并且此处的CheckSystemCall用于捕捉系统调用的错误返回，在整个工程中极为常用。</p>
+<blockquote>
+<p>注意：下面列举的代码是文件的精简版，并不代表文件里的所有内容。</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">tagged_error</span> <span class="o">:</span> <span class="k">public</span> <span class="n">std</span><span class="o">::</span><span class="n">system_error</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">unix_error</span> <span class="o">:</span> <span class="k">public</span> <span class="n">tagged_error</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl"><span class="kr">inline</span> <span class="kt">int</span> <span class="n">CheckSystemCall</span><span class="p">(</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string_view</span> <span class="n">s_attempt</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">return_value</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span> <span class="n">return_value</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">return_value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">throw</span> <span class="n">unix_error</span> <span class="p">{</span> <span class="n">s_attempt</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>parser.hh/cc</strong>实现了网络协议的二进制序列化和反序列化框架。Serializer负责将数据转换为字节流，支持将整数、字符串等各种类型按顺序写入二进制缓冲区，并自动处理字节序转换。Parser则进行反向操作，按网络字节序即大端序进行解析，高位在前。Parser内部维护了一个BufferList，这是一个用deque管理的缓冲区链表，避免了频繁的内存拷贝。Parser的remove_prefix方法用于跳过已处理的字节，配合skip_和size_字段实现高效的缓冲区管理。整个设计体现了零拷贝优化的思想，通过链式缓冲区减少数据移动。</p>
+<p>网络框架的解析基础，在arp_message, ethrtnet_header, ipv4_header, tcp_segment等文件中用到。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Serializer</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">output_</span><span class="p">;</span>  <span class="c1">// 输出缓冲区列表
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">buffer_</span><span class="p">;</span>               <span class="c1">// 当前正在写入的缓冲区
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">void</span> <span class="nf">integer</span><span class="p">(</span> <span class="k">const</span> <span class="n">T</span> <span class="n">val</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">buffer</span><span class="p">(</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">buf</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">buffer</span><span class="p">(</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">bufs</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">flush</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">output</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">BufferList</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">deque</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">buffer_</span><span class="p">;</span>  <span class="c1">// 多个字符串缓冲区
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">uint64_t</span> <span class="n">skip_</span><span class="p">;</span>                   <span class="c1">// 当前缓冲区的跳过字节数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">uint64_t</span> <span class="n">size_</span><span class="p">;</span>                   <span class="c1">// 总剩余字节数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Parser</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">     <span class="n">BufferList</span> <span class="n">input_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">     <span class="kt">bool</span> <span class="n">error_</span> <span class="p">{};</span>
+</span></span><span class="line"><span class="cl">     <span class="kt">void</span> <span class="nf">integer</span><span class="p">(</span> <span class="n">T</span><span class="o">&amp;</span> <span class="n">out</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">     <span class="kt">void</span> <span class="nf">string</span><span class="p">(</span> <span class="n">std</span><span class="o">::</span><span class="n">span</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;</span> <span class="n">out</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">     <span class="kt">void</span> <span class="nf">all_remaining</span><span class="p">(</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">out</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">     <span class="p">...</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>random.hh/cc</strong>提供线程安全的随机数生成器。这个工具主要用于测试和模拟场景，比如生成随机的初始序列号ISN，或者在LossyFdAdapter中模拟随机丢包。</p>
+<p><strong>checksum.hh/cc</strong>实现了互联网校验和算法。InternetChecksum类提供add方法接收数据，内部按照RFC 1071定义的16位反码求和算法进行累加计算。计算完成后通过value方法获取最终的校验和值。这个校验和用于TCP和IP头部的完整性验证。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">InternetChecksum</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint32_t</span> <span class="n">sum_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="n">parity_</span> <span class="p">{};</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">add</span><span class="p">(</span> <span class="n">std</span><span class="o">::</span><span class="n">string_view</span> <span class="n">data</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint16_t</span> <span class="nf">value</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">add</span><span class="p">(</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">data</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">add</span><span class="p">(</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string_view</span><span class="o">&gt;&amp;</span> <span class="n">data</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="系统抽象层">系统抽象层
+</h3><p>这一层对Unix底层系统调用进行了封装，还没有涉及具体的网络操作。</p>
+<p><strong>file_descriptor.hh/cc</strong>采用RAII风格管理文件描述符的生命周期。FDWrapper类负责fd的自动关闭，防止资源泄漏。FileDescriptor类在此基础上提供了更高级的操作接口，封装了open、close、read、write、fcntl等系统调用。所有的系统调用都进行了错误处理，自动处理EINTR中断信号，并支持移动语义。set_blocking方法可以方便地设置非阻塞模式，这对后续的事件循环至关重要。这层封装的意义在于统一错误处理、简化资源管理、提供更符合C++习惯的接口。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">FDWrapper</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">fd_</span><span class="p">;</span>                    <span class="c1">// The file descriptor number returned by the kernel
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">bool</span> <span class="n">eof_</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>          <span class="c1">// Flag indicating whether FDWrapper::fd_ is at EOF
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">bool</span> <span class="n">closed_</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>       <span class="c1">// Flag indicating whether FDWrapper::fd_ has been closed
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">bool</span> <span class="n">non_blocking_</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span> <span class="c1">// Flag indicating whether FDWrapper::fd_ is non-blocking
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">unsigned</span> <span class="n">read_count_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>   <span class="c1">// The number of times FDWrapper::fd_ has been read
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">unsigned</span> <span class="n">write_count_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>  <span class="c1">// The numberof times FDWrapper::fd_ has been written
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">FileDescriptor</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// A reference-counted handle to a shared FDWrapper
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">FDWrapper</span><span class="o">&gt;</span> <span class="n">internal_fd_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// size of buffer to allocate for read()
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">static</span> <span class="k">constexpr</span> <span class="n">size_t</span> <span class="n">kReadBufferSize</span> <span class="o">=</span> <span class="mi">16384</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">set_eof</span><span class="p">()</span> <span class="p">{</span> <span class="n">internal_fd_</span><span class="o">-&gt;</span><span class="n">eof_</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">register_read</span><span class="p">()</span> <span class="p">{</span> <span class="o">++</span><span class="n">internal_fd_</span><span class="o">-&gt;</span><span class="n">read_count_</span><span class="p">;</span> <span class="p">}</span>   <span class="c1">// increment read count
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">void</span> <span class="nf">register_write</span><span class="p">()</span> <span class="p">{</span> <span class="o">++</span><span class="n">internal_fd_</span><span class="o">-&gt;</span><span class="n">write_count_</span><span class="p">;</span> <span class="p">}</span> <span class="c1">// increment write count
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    
+</span></span><span class="line"><span class="cl">  <span class="c1">// Read into `buffer`
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">void</span> <span class="nf">read</span><span class="p">(</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">buffer</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">read</span><span class="p">(</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">buffers</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// Attempt to write a buffer, returns number of bytes written
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">size_t</span> <span class="nf">write</span><span class="p">(</span> <span class="n">std</span><span class="o">::</span><span class="n">string_view</span> <span class="n">buffer</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">size_t</span> <span class="nf">write</span><span class="p">(</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string_view</span><span class="o">&gt;&amp;</span> <span class="n">buffers</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">size_t</span> <span class="nf">write</span><span class="p">(</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">buffers</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// Close the underlying file descriptor
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">void</span> <span class="nf">close</span><span class="p">()</span> <span class="p">{</span> <span class="n">internal_fd_</span><span class="o">-&gt;</span><span class="n">close</span><span class="p">();</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// Copy a FileDescriptor explicitly, increasing the FDWrapper refcount
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">FileDescriptor</span> <span class="nf">duplicate</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// Set blocking(true) or non-blocking(false)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">void</span> <span class="nf">set_blocking</span><span class="p">(</span> <span class="kt">bool</span> <span class="n">blocking</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// Size of file
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">off_t</span> <span class="nf">size</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// FDWrapper accessors
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">int</span> <span class="nf">fd_num</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">internal_fd_</span><span class="o">-&gt;</span><span class="n">fd_</span><span class="p">;</span> <span class="p">}</span>                   <span class="c1">// underlying descriptor number
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">bool</span> <span class="nf">eof</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">internal_fd_</span><span class="o">-&gt;</span><span class="n">eof_</span><span class="p">;</span> <span class="p">}</span>                   <span class="c1">// EOF flag state
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">bool</span> <span class="nf">closed</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">internal_fd_</span><span class="o">-&gt;</span><span class="n">closed_</span><span class="p">;</span> <span class="p">}</span>             <span class="c1">// closed flag state
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">unsigned</span> <span class="kt">int</span> <span class="nf">read_count</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">internal_fd_</span><span class="o">-&gt;</span><span class="n">read_count_</span><span class="p">;</span> <span class="p">}</span>   <span class="c1">// number of reads
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">unsigned</span> <span class="kt">int</span> <span class="nf">write_count</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">internal_fd_</span><span class="o">-&gt;</span><span class="n">write_count_</span><span class="p">;</span> <span class="p">}</span> <span class="c1">// number of writes
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>eventloop.hh/cc</strong>实现了事件驱动编程框架。add_rule方法可以添加两种监听规则，一种是监听文件描述符的可读可写事件，另一种是定时任务。wait_next_event是主事件循环的核心，内部使用poll或epoll机制监听多个fd的事件。当事件发生时，会调用之前注册的回调函数。这个框架支持超时机制，可以处理定时器触发的任务。整个设计使得异步I/O编程变得简洁，为上层的网络通信提供了基础。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">using</span> <span class="n">CallbackT</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span> <span class="kt">void</span> <span class="p">)</span><span class="o">&gt;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="n">InterestT</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">bool</span><span class="p">(</span> <span class="kt">void</span> <span class="p">)</span><span class="o">&gt;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Indicates interest in reading (In) or writing (Out) a polled fd.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">enum</span> <span class="k">class</span> <span class="nc">Direction</span> <span class="o">:</span> <span class="kt">int16_t</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">In</span> <span class="o">=</span> <span class="n">POLLIN</span><span class="p">,</span>  <span class="c1">// Callback will be triggered when Rule::fd is readable.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">Out</span> <span class="o">=</span> <span class="n">POLLOUT</span> <span class="c1">// Callback will be triggered when Rule::fd is writable.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">RuleCategory</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">BasicRule</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">size_t</span> <span class="n">category_id</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">InterestT</span> <span class="n">interest</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">CallbackT</span> <span class="n">callback</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="n">cancel_requested</span> <span class="p">{};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">BasicRule</span><span class="p">(</span> <span class="n">size_t</span> <span class="n">s_category_id</span><span class="p">,</span> <span class="n">InterestT</span> <span class="n">s_interest</span><span class="p">,</span> <span class="n">CallbackT</span> <span class="n">s_callback</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">FDRule</span> <span class="o">:</span> <span class="k">public</span> <span class="n">BasicRule</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">FileDescriptor</span> <span class="n">fd</span><span class="p">;</span>   <span class="c1">// FileDescriptor to monitor for activity.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">Direction</span> <span class="n">direction</span><span class="p">;</span> <span class="c1">// Direction::In for reading from fd, Direction::Out for writing to fd.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">CallbackT</span> <span class="n">cancel</span><span class="p">;</span>    <span class="c1">// A callback that is called when the rule is cancelled (e.g. on EOF or hangup)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">CallbackT</span> <span class="n">error</span><span class="p">;</span>     <span class="c1">// A callback that is called when the fd has an error before cancellation
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">  <span class="n">FDRule</span><span class="p">(</span> <span class="n">BasicRule</span><span class="o">&amp;&amp;</span> <span class="n">base</span><span class="p">,</span> <span class="n">FileDescriptor</span><span class="o">&amp;&amp;</span> <span class="n">s_fd</span><span class="p">,</span> <span class="n">Direction</span> <span class="n">s_direction</span><span class="p">,</span> <span class="n">CallbackT</span> <span class="n">s_cancel</span><span class="p">,</span> <span class="n">CallbackT</span> <span class="n">s_error</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// Returns the number of times fd has been read or written, depending on the value of Rule::direction.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// This function is used internally by EventLoop; you will not need to call it
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">unsigned</span> <span class="kt">int</span> <span class="nf">service_count</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">RuleHandle</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">std</span><span class="o">::</span><span class="n">weak_ptr</span><span class="o">&lt;</span><span class="n">BasicRule</span><span class="o">&gt;</span> <span class="n">rule_weak_ptr_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">RuleType</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">explicit</span> <span class="n">RuleHandle</span><span class="p">(</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">RuleType</span><span class="o">&gt;</span> <span class="n">x</span> <span class="p">)</span> <span class="o">:</span> <span class="n">rule_weak_ptr_</span><span class="p">(</span> <span class="n">x</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">cancel</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Returned by each call to EventLoop::wait_next_event.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">enum</span> <span class="k">class</span> <span class="nc">Result</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Success</span><span class="p">,</span> <span class="c1">// At least one Rule was triggered.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">Timeout</span><span class="p">,</span> <span class="c1">// No rules were triggered before timeout.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">Exit</span>     <span class="c1">// All rules have been canceled or were uninterested; make no further calls to
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>           <span class="c1">// EventLoop::wait_next_event.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">EventLoop</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">RuleCategory</span><span class="o">&gt;</span> <span class="n">_rule_categories</span> <span class="p">{};</span>
+</span></span><span class="line"><span class="cl">  <span class="n">std</span><span class="o">::</span><span class="n">list</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">FDRule</span><span class="o">&gt;&gt;</span> <span class="n">_fd_rules</span> <span class="p">{};</span>
+</span></span><span class="line"><span class="cl">  <span class="n">std</span><span class="o">::</span><span class="n">list</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">BasicRule</span><span class="o">&gt;&gt;</span> <span class="n">_non_fd_rules</span> <span class="p">{};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">RuleHandle</span> <span class="n">add_rule</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">size_t</span> <span class="n">category_id</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">FileDescriptor</span><span class="o">&amp;</span> <span class="n">fd</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Direction</span> <span class="n">direction</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="n">CallbackT</span><span class="o">&amp;</span> <span class="n">callback</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="n">InterestT</span><span class="o">&amp;</span> <span class="n">interest</span> <span class="o">=</span> <span class="p">[]</span> <span class="p">{</span> <span class="k">return</span> <span class="nb">true</span><span class="p">;</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="n">CallbackT</span><span class="o">&amp;</span> <span class="n">cancel</span> <span class="o">=</span> <span class="p">[]</span> <span class="p">{},</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="n">CallbackT</span><span class="o">&amp;</span> <span class="n">error</span> <span class="o">=</span> <span class="p">[]</span> <span class="p">{}</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">RuleHandle</span> <span class="n">add_rule</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">size_t</span> <span class="n">category_id</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="n">CallbackT</span><span class="o">&amp;</span> <span class="n">callback</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="n">InterestT</span><span class="o">&amp;</span> <span class="n">interest</span> <span class="o">=</span> <span class="p">[]</span> <span class="p">{</span> <span class="k">return</span> <span class="nb">true</span><span class="p">;</span> <span class="p">}</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// Calls [poll(2)](man2::poll) and then executes callback for each ready fd.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">Result</span> <span class="nf">wait_next_event</span><span class="p">(</span> <span class="kt">int</span> <span class="n">timeout_ms</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="网络基础类">网络基础类
+</h3><p><strong>address.hh/cc</strong>对IP地址和端口进行了封装。内部基于sockaddr_storage实现，这个结构体可以兼容IPv4和IPv6。Address类支持多种构造方式，可以从字符串、数值、域名等创建地址对象。ipv4_numeric方法返回网络字节序的IP地址数值。这个类隐藏了底层sockaddr结构的复杂性，提供了类型安全的接口。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">exclude</span> <span class="n">lib</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">struct</span> <span class="nc">sockaddr_storage</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">__SOCKADDR_COMMON</span> <span class="p">(</span><span class="n">ss_</span><span class="p">);</span>	<span class="cm">/* Address family, etc.  */</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="n">__ss_padding</span><span class="p">[</span><span class="n">_SS_PADSIZE</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="n">__ss_aligntype</span> <span class="n">__ss_align</span><span class="p">;</span>	<span class="cm">/* Force desired alignment.  */</span>
+</span></span><span class="line"><span class="cl">  <span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Raw</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">sockaddr_storage</span> <span class="n">storage</span> <span class="p">{};</span> <span class="c1">// The wrapped struct itself.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">...</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Address</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">socklen_t</span> <span class="n">_size</span><span class="p">;</span> <span class="c1">// Size of the wrapped address.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">Raw</span> <span class="n">_address</span> <span class="p">{};</span> <span class="c1">// A wrapped [sockaddr_storage](man7::socket) containing the address.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    
+</span></span><span class="line"><span class="cl">  <span class="c1">// Constructor from ip/host, service/port, and hints to the resolver.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">Address</span><span class="p">(</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">node</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">service</span><span class="p">,</span> <span class="k">const</span> <span class="n">addrinfo</span><span class="o">&amp;</span> <span class="n">hints</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// Construct by resolving a hostname and servicename.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">Address</span><span class="p">(</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">hostname</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">service</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// Construct from dotted-quad string (&#34;18.243.0.1&#34;) and numeric port.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">explicit</span> <span class="nf">Address</span><span class="p">(</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">ip</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="kt">uint16_t</span> <span class="n">port</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// Construct from a [sockaddr *](@ref man7::socket).
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">Address</span><span class="p">(</span> <span class="k">const</span> <span class="n">sockaddr</span><span class="o">*</span> <span class="n">addr</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">size_t</span> <span class="n">size</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">  <span class="c1">// Conversions
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// Dotted-quad IP address string (&#34;18.243.0.1&#34;) and numeric port.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span> <span class="kt">uint16_t</span><span class="o">&gt;</span> <span class="n">ip_port</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// Dotted-quad IP address string (&#34;18.243.0.1&#34;).
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">ip</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="nf">ip_port</span><span class="p">().</span><span class="n">first</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// Numeric port (host byte order).
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">uint16_t</span> <span class="nf">port</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">ip_port</span><span class="p">().</span><span class="n">second</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// Numeric IP address as an integer (i.e., in [host byte order](man3::byteorder)).
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">uint32_t</span> <span class="nf">ipv4_numeric</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// Create an Address from a 32-bit raw numeric IP address
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">static</span> <span class="n">Address</span> <span class="nf">from_ipv4_numeric</span><span class="p">(</span> <span class="kt">uint32_t</span> <span class="n">ip_address</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// Human-readable string, e.g., &#34;8.8.8.8:53&#34;.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">to_string</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// Low-level operations
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// Size of the underlying address storage.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">socklen_t</span> <span class="nf">size</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_size</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// Const pointer to the underlying socket address storage.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">const</span> <span class="n">sockaddr</span><span class="o">*</span> <span class="nf">raw</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">sockaddr</span><span class="o">*&gt;</span><span class="p">(</span> <span class="n">_address</span> <span class="p">);</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// Safely convert to underlying sockaddr type
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">sockaddr_type</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">const</span> <span class="n">sockaddr_type</span><span class="o">*</span> <span class="n">as</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>socket.hh/cc</strong>实现了Socket类继承体系。Socket作为基类继承自FileDescriptor，这样socket也具有文件描述符的所有特性。Socket定义了bind、connect、shutdown、listen、accept等基本操作。在此基础上派生出DatagramSocket和TCPSocket两个分支。DatagramSocket表示数据报套接字，支持无连接的通信，定义了recv、sendto、send等操作。从DatagramSocket又派生出UDPSocket用于UDP通信，PacketSocket用于原始套接字访问，LocalDatagramSocket用于Unix域数据报通信。TCPSocket则表示流式套接字，用于面向连接的TCP通信，还有LocalStreamSocket用于Unix域流通信。这个继承层次清晰地体现了不同类型socket的共性和差异。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Socket</span> <span class="o">:</span> <span class="k">public</span> <span class="n">FileDescriptor</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// Get the local or peer address the socket is connected to
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">Address</span> <span class="nf">get_address</span><span class="p">(</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name_of_function</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                       <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">(</span> <span class="kt">int</span><span class="p">,</span> <span class="n">sockaddr</span><span class="o">*</span><span class="p">,</span> <span class="n">socklen_t</span><span class="o">*</span> <span class="p">)</span><span class="o">&gt;&amp;</span> <span class="n">function</span> <span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// Construct via [socket(2)](man2::socket)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">Socket</span><span class="p">(</span> <span class="kt">int</span> <span class="n">domain</span><span class="p">,</span> <span class="kt">int</span> <span class="n">type</span><span class="p">,</span> <span class="kt">int</span> <span class="n">protocol</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// Construct from a file descriptor.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">Socket</span><span class="p">(</span> <span class="n">FileDescriptor</span><span class="o">&amp;&amp;</span> <span class="n">fd</span><span class="p">,</span> <span class="kt">int</span> <span class="n">domain</span><span class="p">,</span> <span class="kt">int</span> <span class="n">type</span><span class="p">,</span> <span class="kt">int</span> <span class="n">protocol</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// Bind a socket to a specified address with [bind(2)](man2::bind), usually for listen/accept
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">void</span> <span class="nf">bind</span><span class="p">(</span> <span class="k">const</span> <span class="n">Address</span><span class="o">&amp;</span> <span class="n">address</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// Bind a socket to a specified device
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">void</span> <span class="nf">bind_to_device</span><span class="p">(</span> <span class="n">std</span><span class="o">::</span><span class="n">string_view</span> <span class="n">device_name</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// Connect a socket to a specified peer address with [connect(2)](\ref man2::connect)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">void</span> <span class="nf">connect</span><span class="p">(</span> <span class="k">const</span> <span class="n">Address</span><span class="o">&amp;</span> <span class="n">address</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// Shut down a socket via [shutdown(2)](man2::shutdown)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">void</span> <span class="nf">shutdown</span><span class="p">(</span> <span class="kt">int</span> <span class="n">how</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// Get local address of socket with [getsockname(2)](man2::getsockname)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">Address</span> <span class="nf">local_address</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// Get peer address of socket with [getpeername(2)](man2::getpeername)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">Address</span> <span class="nf">peer_address</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">DatagramSocket</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Socket</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// Receive a datagram and the Address of its sender
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">void</span> <span class="nf">recv</span><span class="p">(</span> <span class="n">Address</span><span class="o">&amp;</span> <span class="n">source_address</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">payload</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// Send a datagram to specified Address
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">void</span> <span class="nf">sendto</span><span class="p">(</span> <span class="k">const</span> <span class="n">Address</span><span class="o">&amp;</span> <span class="n">destination</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string_view</span> <span class="n">payload</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// Send datagram to the socket&#39;s connected address (must call connect() first)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">void</span> <span class="nf">send</span><span class="p">(</span> <span class="n">std</span><span class="o">::</span><span class="n">string_view</span> <span class="n">payload</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">TCPSocket</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Socket</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// Mark a socket as listening for incoming connections
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">void</span> <span class="nf">listen</span><span class="p">(</span> <span class="kt">int</span> <span class="n">backlog</span> <span class="o">=</span> <span class="mi">16</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// Accept a new incoming connection
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">TCPSocket</span> <span class="nf">accept</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// more...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">UDPSocket</span><span class="p">(</span> <span class="n">FileDescriptor</span><span class="o">&amp;&amp;</span> <span class="n">fd</span> <span class="p">)</span> <span class="o">:</span> <span class="n">DatagramSocket</span><span class="p">(</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span> <span class="n">fd</span> <span class="p">),</span> <span class="n">AF_INET</span><span class="p">,</span> <span class="n">SOCK_DGRAM</span> <span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="n">UDPSocket</span><span class="p">()</span> <span class="o">:</span> <span class="n">DatagramSocket</span><span class="p">(</span> <span class="n">AF_INET</span><span class="p">,</span> <span class="n">SOCK_DGRAM</span> <span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="n">TCPSocket</span><span class="p">(</span> <span class="n">FileDescriptor</span><span class="o">&amp;&amp;</span> <span class="n">fd</span> <span class="p">)</span> <span class="o">:</span> <span class="n">Socket</span><span class="p">(</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span> <span class="n">fd</span> <span class="p">),</span> <span class="n">AF_INET</span><span class="p">,</span> <span class="n">SOCK_STREAM</span><span class="p">,</span> <span class="n">IPPROTO_TCP</span> <span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="n">TCPSocket</span><span class="p">()</span> <span class="o">:</span> <span class="n">Socket</span><span class="p">(</span> <span class="n">AF_INET</span><span class="p">,</span> <span class="n">SOCK_STREAM</span> <span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="n">PacketSocket</span><span class="p">(</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">type</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">protocol</span> <span class="p">)</span> <span class="o">:</span> <span class="n">DatagramSocket</span><span class="p">(</span> <span class="n">AF_PACKET</span><span class="p">,</span> <span class="n">type</span><span class="p">,</span> <span class="n">protocol</span> <span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="n">LocalStreamSocket</span><span class="p">(</span> <span class="n">FileDescriptor</span><span class="o">&amp;&amp;</span> <span class="n">fd</span> <span class="p">)</span> <span class="o">:</span> <span class="n">Socket</span><span class="p">(</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span> <span class="n">fd</span> <span class="p">),</span> <span class="n">AF_UNIX</span><span class="p">,</span> <span class="n">SOCK_STREAM</span> <span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="n">LocalDatagramSocket</span><span class="p">(</span> <span class="n">FileDescriptor</span><span class="o">&amp;&amp;</span> <span class="n">fd</span> <span class="p">)</span> <span class="o">:</span> <span class="n">DatagramSocket</span><span class="p">(</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span> <span class="n">fd</span> <span class="p">),</span> <span class="n">AF_UNIX</span><span class="p">,</span> <span class="n">SOCK_DGRAM</span> <span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="n">LocalDatagramSocket</span><span class="p">()</span> <span class="o">:</span> <span class="n">DatagramSocket</span><span class="p">(</span> <span class="n">AF_UNIX</span><span class="p">,</span> <span class="n">SOCK_DGRAM</span> <span class="p">)</span> <span class="p">{}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="网络协议消息格式">网络协议消息格式
+</h3><p>这一层定义的都是协议数据单元PDU的C++表示，每个类都实现了parse和serialize方法用于序列化和反序列化，并在需要时计算校验和。</p>
+<p><strong>ethernet_header.hh/cc</strong>定义以太网帧头部结构，包含源MAC地址、目标MAC地址和类型字段。头部长度固定为14字节。类型字段的预定义值包括TYPE_IPv4为0x800表示承载IPv4数据报，TYPE_ARP为0x806表示承载ARP消息。通过parser和serializer可以将二进制数据与EthernetHeader对象相互转换，这是学习二层协议格式的基础。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// Helper type for an Ethernet address (an array of six bytes)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">using</span> <span class="n">EthernetAddress</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="o">&lt;</span><span class="kt">uint8_t</span><span class="p">,</span> <span class="mi">6</span><span class="o">&gt;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="k">constexpr</span> <span class="n">size_t</span> <span class="n">LENGTH</span> <span class="o">=</span> <span class="mi">14</span><span class="p">;</span>         <span class="c1">// Ethernet header length in bytes
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">static</span> <span class="k">constexpr</span> <span class="kt">uint16_t</span> <span class="n">TYPE_IPv4</span> <span class="o">=</span> <span class="mh">0x800</span><span class="p">;</span> <span class="c1">// Type number for [IPv4](rfc::rfc791)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">static</span> <span class="k">constexpr</span> <span class="kt">uint16_t</span> <span class="n">TYPE_ARP</span> <span class="o">=</span> <span class="mh">0x806</span><span class="p">;</span>  <span class="c1">// Type number for [ARP](rfc::rfc826)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// Ethernet frame header
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">struct</span> <span class="nc">EthernetHeader</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">EthernetAddress</span> <span class="n">dst</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">EthernetAddress</span> <span class="n">src</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">uint16_t</span> <span class="n">type</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// Return a string containing a header in human-readable format
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">to_string</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">parse</span><span class="p">(</span> <span class="n">Parser</span><span class="o">&amp;</span> <span class="n">parser</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">serialize</span><span class="p">(</span> <span class="n">Serializer</span><span class="o">&amp;</span> <span class="n">serializer</span> <span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>ethernet_frame.hh</strong>定义完整的以太网帧，包含以太网头部和载荷payload。EthernetFrame类组合了EthernetHeader和数据部分，实现了完整帧的序列化和反序列化。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">EthernetFrame</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">EthernetHeader</span> <span class="n">header</span> <span class="p">{};</span>
+</span></span><span class="line"><span class="cl">  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">payload</span> <span class="p">{};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">parse</span><span class="p">(</span> <span class="n">Parser</span><span class="o">&amp;</span> <span class="n">parser</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">serialize</span><span class="p">(</span> <span class="n">Serializer</span><span class="o">&amp;</span> <span class="n">serializer</span> <span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>arp_message.hh/cc</strong>定义ARP协议消息格式，用于实现MAC地址和IP地址的映射。ARP消息包含硬件类型hardware_type通常为以太网，协议类型protocol_type通常为IPv4，硬件地址长度和协议地址长度字段，操作码opcode表示是请求还是响应。主要数据包括发送者的以太网地址sender_ethernet_address和IP地址sender_ip_address，以及目标的以太网地址target_ethernet_address和IP地址target_ip_address。通过ARP协议可以在二层和三层之间建立地址映射关系。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">static</span> <span class="k">constexpr</span> <span class="n">size_t</span> <span class="n">LENGTH</span> <span class="o">=</span> <span class="mi">28</span><span class="p">;</span>         <span class="c1">// ARP message length in bytes
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">static</span> <span class="k">constexpr</span> <span class="kt">uint16_t</span> <span class="n">TYPE_ETHERNET</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// ARP type for Ethernet/Wi-Fi as link-layer protocol
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">static</span> <span class="k">constexpr</span> <span class="kt">uint16_t</span> <span class="n">OPCODE_REQUEST</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="k">constexpr</span> <span class="kt">uint16_t</span> <span class="n">OPCODE_REPLY</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// [ARP](rfc::rfc826) message
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">struct</span> <span class="nc">ARPMessage</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">uint16_t</span> <span class="n">hardware_type</span> <span class="o">=</span> <span class="n">TYPE_ETHERNET</span><span class="p">;</span>             <span class="c1">// Type of the link-layer protocol (generally Ethernet/Wi-Fi)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">uint16_t</span> <span class="n">protocol_type</span> <span class="o">=</span> <span class="n">EthernetHeader</span><span class="o">::</span><span class="n">TYPE_IPv4</span><span class="p">;</span> <span class="c1">// Type of the Internet-layer protocol (generally IPv4)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    
+</span></span><span class="line"><span class="cl">  <span class="kt">uint8_t</span> <span class="n">hardware_address_size</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span> <span class="n">EthernetHeader</span><span class="o">::</span><span class="n">src</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">uint8_t</span> <span class="n">protocol_address_size</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span> <span class="n">IPv4Header</span><span class="o">::</span><span class="n">src</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="c1">// Request or reply
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">uint16_t</span> <span class="n">opcode</span> <span class="p">{};</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">EthernetAddress</span> <span class="n">sender_ethernet_address</span> <span class="p">{};</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">uint32_t</span> <span class="n">sender_ip_address</span> <span class="p">{};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">EthernetAddress</span> <span class="n">target_ethernet_address</span> <span class="p">{};</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">uint32_t</span> <span class="n">target_ip_address</span> <span class="p">{};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// Return a string containing the ARP message in human-readable format
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">to_string</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// Is this type of ARP message supported by the parser?
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">bool</span> <span class="nf">supported</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">parse</span><span class="p">(</span> <span class="n">Parser</span><span class="o">&amp;</span> <span class="n">parser</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">serialize</span><span class="p">(</span> <span class="n">Serializer</span><span class="o">&amp;</span> <span class="n">serializer</span> <span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>ipv4_header.hh/cc</strong>定义IPv4头部结构。重要字段包括版本号ver固定为4，服务类型tos，总长度len包含头部和载荷，生存时间ttl默认64，协议号proto其中6表示TCP、17表示UDP，源IP地址src和目标IP地址dst。IPv4头部还包含校验和字段，校验和的计算仅针对头部不包括载荷。parse方法会验证校验和的正确性，serialize方法会自动计算并填充校验和。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">static</span> <span class="k">constexpr</span> <span class="n">size_t</span> <span class="n">LENGTH</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>        <span class="c1">// IPv4 header length, not including options
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">static</span> <span class="k">constexpr</span> <span class="kt">uint8_t</span> <span class="n">DEFAULT_TTL</span> <span class="o">=</span> <span class="mi">128</span><span class="p">;</span> <span class="c1">// A reasonable default TTL value
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">static</span> <span class="k">constexpr</span> <span class="kt">uint8_t</span> <span class="n">PROTO_TCP</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span>     <span class="c1">// Protocol number for TCP
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="k">constexpr</span> <span class="kt">uint64_t</span> <span class="nf">serialized_length</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">LENGTH</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">  *   0                   1                   2                   3
+</span></span></span><span class="line"><span class="cl"><span class="cm">  *   0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+</span></span></span><span class="line"><span class="cl"><span class="cm">  *  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+</span></span></span><span class="line"><span class="cl"><span class="cm">  *  |Version|  IHL  |Type of Service|          Total Length         |
+</span></span></span><span class="line"><span class="cl"><span class="cm">  *  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+</span></span></span><span class="line"><span class="cl"><span class="cm">  *  |         Identification        |Flags|      Fragment Offset    |
+</span></span></span><span class="line"><span class="cl"><span class="cm">  *  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+</span></span></span><span class="line"><span class="cl"><span class="cm">  *  |  Time to Live |    Protocol   |         Header Checksum       |
+</span></span></span><span class="line"><span class="cl"><span class="cm">  *  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+</span></span></span><span class="line"><span class="cl"><span class="cm">  *  |                       Source Address                          |
+</span></span></span><span class="line"><span class="cl"><span class="cm">  *  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+</span></span></span><span class="line"><span class="cl"><span class="cm">  *  |                    Destination Address                        |
+</span></span></span><span class="line"><span class="cl"><span class="cm">  *  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+</span></span></span><span class="line"><span class="cl"><span class="cm">  *  |                    Options                    |    Padding    |
+</span></span></span><span class="line"><span class="cl"><span class="cm">  *  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// IPv4 Internet datagram header (note: IP options are not supported)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">struct</span> <span class="nc">IPv4Header</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// IPv4 Header fields
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">uint8_t</span> <span class="n">ver</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>           <span class="c1">// IP version
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">uint8_t</span> <span class="n">hlen</span> <span class="o">=</span> <span class="n">LENGTH</span> <span class="o">/</span> <span class="mi">4</span><span class="p">;</span> <span class="c1">// header length (multiples of 32 bits)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">uint8_t</span> <span class="n">tos</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>           <span class="c1">// type of service
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">uint16_t</span> <span class="n">len</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>          <span class="c1">// total length of packet
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">uint16_t</span> <span class="n">id</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>           <span class="c1">// identification number
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">bool</span> <span class="n">df</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>            <span class="c1">// don&#39;t fragment flag
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">bool</span> <span class="n">mf</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>           <span class="c1">// more fragments flag
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">uint16_t</span> <span class="n">offset</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>       <span class="c1">// fragment offset field
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">uint8_t</span> <span class="n">ttl</span> <span class="o">=</span> <span class="n">DEFAULT_TTL</span><span class="p">;</span> <span class="c1">// time to live field
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">uint8_t</span> <span class="n">proto</span> <span class="o">=</span> <span class="n">PROTO_TCP</span><span class="p">;</span> <span class="c1">// protocol field
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">uint16_t</span> <span class="n">cksum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>        <span class="c1">// checksum field
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">uint32_t</span> <span class="n">src</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>          <span class="c1">// src address
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">uint32_t</span> <span class="n">dst</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>          <span class="c1">// dst address
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">  <span class="c1">// Length of the payload
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">uint16_t</span> <span class="nf">payload_length</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// Pseudo-header&#39;s contribution to the TCP checksum
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">uint32_t</span> <span class="nf">pseudo_checksum</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// Set checksum to correct value
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">void</span> <span class="nf">compute_checksum</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// Return a string containing a header in human-readable format
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">to_string</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">parse</span><span class="p">(</span> <span class="n">Parser</span><span class="o">&amp;</span> <span class="n">parser</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">serialize</span><span class="p">(</span> <span class="n">Serializer</span><span class="o">&amp;</span> <span class="n">serializer</span> <span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>ipv4_datagram.hh</strong>定义完整的IP数据报，由IPv4Header和payload载荷组成。IPv4Datagram类实现了完整数据报的序列化和反序列化，是三层协议的完整封装。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// [IPv4](rfc::rfc791) Internet datagram
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">struct</span> <span class="nc">IPv4Datagram</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">IPv4Header</span> <span class="n">header</span> <span class="p">{};</span>
+</span></span><span class="line"><span class="cl">  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">payload</span> <span class="p">{};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">parse</span><span class="p">(</span> <span class="n">Parser</span><span class="o">&amp;</span> <span class="n">parser</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">serialize</span><span class="p">(</span> <span class="n">Serializer</span><span class="o">&amp;</span> <span class="n">serializer</span> <span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="tcp协议相关">TCP协议相关
+</h3><p><strong>tcp_config.hh</strong>将TCP的配置参数打包成一个类。这些参数包括接收窗口大小、重传超时时间等。这只是一个简单的配置结构体，用于在创建TCP连接时传递参数</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">static</span> <span class="k">constexpr</span> <span class="n">size_t</span> <span class="n">DEFAULT_CAPACITY</span> <span class="o">=</span> <span class="mi">64000</span><span class="p">;</span> <span class="c1">// Default capacity
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">static</span> <span class="k">constexpr</span> <span class="n">size_t</span> <span class="n">MAX_PAYLOAD_SIZE</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">;</span>  <span class="c1">// Conservative max payload size for real Internet
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">static</span> <span class="k">constexpr</span> <span class="kt">uint16_t</span> <span class="n">TIMEOUT_DFLT</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">;</span>    <span class="c1">// Default re-transmit timeout is 1 second
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">static</span> <span class="k">constexpr</span> <span class="kt">unsigned</span> <span class="n">MAX_RETX_ATTEMPTS</span> <span class="o">=</span> <span class="mi">8</span><span class="p">;</span>  <span class="c1">// Maximum re-transmit attempts before giving up
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// Config for TCP sender and receiver
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">class</span> <span class="nc">TCPConfig</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">uint16_t</span> <span class="n">rt_timeout</span> <span class="o">=</span> <span class="n">TIMEOUT_DFLT</span><span class="p">;</span>      <span class="c1">// Initial value of the retransmission timeout, in milliseconds
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">size_t</span> <span class="n">recv_capacity</span> <span class="o">=</span> <span class="n">DEFAULT_CAPACITY</span><span class="p">;</span> <span class="c1">// Receive capacity, in bytes
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">size_t</span> <span class="n">send_capacity</span> <span class="o">=</span> <span class="n">DEFAULT_CAPACITY</span><span class="p">;</span> <span class="c1">// Sender capacity, in bytes
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">Wrap32</span> <span class="n">isn</span> <span class="p">{</span> <span class="mi">137</span> <span class="p">};</span>                      <span class="c1">// Default initial sequence number
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Config for classes derived from FdAdapter
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">class</span> <span class="nc">FdAdapterConfig</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Address</span> <span class="n">source</span> <span class="p">{</span> <span class="s">&#34;0&#34;</span><span class="p">,</span> <span class="mi">0</span> <span class="p">};</span>      <span class="c1">// Source address and port
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">Address</span> <span class="n">destination</span> <span class="p">{</span> <span class="s">&#34;0&#34;</span><span class="p">,</span> <span class="mi">0</span> <span class="p">};</span> <span class="c1">// Destination address and port
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">  <span class="kt">uint16_t</span> <span class="n">loss_rate_dn</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// Downlink loss rate (for LossyFdAdapter)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">uint16_t</span> <span class="n">loss_rate_up</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// Uplink loss rate (for LossyFdAdapter)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>tcp_receiver_message.hh</strong>定义TCP接收方发送的消息格式。TCPReceiverMessage包含ackno表示确认号，使用optional类型因为在连接建立前可能没有确认号。window_size表示接收窗口大小，告诉发送方还能接收多少数据。RST标志位表示是否要重置连接。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">TCPReceiverMessage</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">std</span><span class="o">::</span><span class="n">optional</span><span class="o">&lt;</span><span class="n">Wrap32</span><span class="o">&gt;</span> <span class="n">ackno</span> <span class="p">{};</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">uint16_t</span> <span class="n">window_size</span> <span class="p">{};</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="n">RST</span> <span class="p">{};</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>tcp_sender_message.hh</strong>定义TCP发送方发送的消息格式。TCPSenderMessage包含seqno序列号表示数据的位置，SYN标志位表示连接建立，payload承载实际数据，FIN标志位表示数据发送完毕，RST标志位表示连接重置。这些字段对应TCP发送方需要传递的所有信息。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">TCPSenderMessage</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Wrap32</span> <span class="n">seqno</span> <span class="p">{</span> <span class="mi">0</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="n">SYN</span> <span class="p">{};</span>
+</span></span><span class="line"><span class="cl">  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">payload</span> <span class="p">{};</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="n">FIN</span> <span class="p">{};</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="n">RST</span> <span class="p">{};</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>tcp_segment.hh/cc</strong>定义完整的TCP段封装。TCPMessage组合了sender消息和receiver消息，这种分离设计的原因是发送方和接收方关心的信息不同，但在实际的TCP段中需要同时包含双向的信息。TCPSegment在TCPMessage基础上添加了UserDatagramInfo，其中包含源地址src和目标地址dst。之所以需要UserDatagramInfo是因为TCP是面向连接的，但底层IP是无连接的，每个段都需要知道源和目的的IP地址和端口号才能正确路由。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">TCPMessage</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">TCPSenderMessage</span> <span class="n">sender</span> <span class="p">{};</span>
+</span></span><span class="line"><span class="cl">  <span class="n">TCPReceiverMessage</span> <span class="n">receiver</span> <span class="p">{};</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">TCPSegment</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">TCPMessage</span> <span class="n">message</span> <span class="p">{};</span>
+</span></span><span class="line"><span class="cl">  <span class="n">UserDatagramInfo</span> <span class="n">udinfo</span> <span class="p">{};</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>tcp_over_ip.hh/cc</strong>实现TCP段和IP数据报之间的转换。这是一个转换器，负责将TCPSegment封装成IPv4Datagram，以及从IPv4Datagram中提取TCPSegment。在封装过程中需要设置IP协议号为6表示TCP，计算TCP校验和时需要包含伪头部pseudo-header，伪头部包含源IP、目标IP、协议号等信息。这个模块连接了传输层和网络层。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// A converter from TCP segments to serialized IPv4 datagrams
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">class</span> <span class="nc">TCPOverIPv4Adapter</span> <span class="o">:</span> <span class="k">public</span> <span class="n">FdAdapterBase</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">std</span><span class="o">::</span><span class="n">optional</span><span class="o">&lt;</span><span class="n">TCPMessage</span><span class="o">&gt;</span> <span class="n">unwrap_tcp_in_ip</span><span class="p">(</span> <span class="k">const</span> <span class="n">InternetDatagram</span><span class="o">&amp;</span> <span class="n">ip_dgram</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">InternetDatagram</span> <span class="nf">wrap_tcp_in_ip</span><span class="p">(</span> <span class="k">const</span> <span class="n">TCPMessage</span><span class="o">&amp;</span> <span class="n">msg</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="高级抽象和适配器">高级抽象和适配器
+</h3><p><strong>tcp_peer.hh</strong>是最重要的集成类，它将Lab中实现的所有组件组装成一个完整的TCP端点。TCPPeer内部包含inbound_入站字节流和outbound_出站字节流，reassembler_重组器处理乱序到达的数据，receiver_接收端实现TCP接收逻辑，sender_发送端实现TCP发送逻辑，connection_表示TCP连接状态机。这个类是对你实现的所有TCP组件的最终组装，提供了一个完整可用的TCP协议栈端点。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">using</span> <span class="n">TransmitFunction</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span> <span class="n">TCPMessage</span> <span class="p">)</span><span class="o">&gt;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">TCPPeer</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">TCPConfig</span> <span class="n">cfg_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">TCPSender</span> <span class="n">sender_</span> <span class="p">{</span> <span class="n">ByteStream</span> <span class="p">{</span> <span class="n">cfg_</span><span class="p">.</span><span class="n">send_capacity</span> <span class="p">},</span> <span class="n">cfg_</span><span class="p">.</span><span class="n">isn</span><span class="p">,</span> <span class="n">cfg_</span><span class="p">.</span><span class="n">rt_timeout</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl">  <span class="n">TCPReceiver</span> <span class="n">receiver_</span> <span class="p">{</span> <span class="n">Reassembler</span> <span class="p">{</span> <span class="n">ByteStream</span> <span class="p">{</span> <span class="n">cfg_</span><span class="p">.</span><span class="n">recv_capacity</span> <span class="p">}</span> <span class="p">}</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="n">need_send_</span> <span class="p">{};</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="n">linger_after_streams_finish_</span> <span class="p">{</span> <span class="nb">true</span> <span class="p">};</span> <span class="c1">// one peer may need to linger to make sure all closure conditions met
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">uint64_t</span> <span class="n">cumulative_time_</span> <span class="p">{};</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">uint64_t</span> <span class="n">time_of_last_receipt_</span> <span class="p">{};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// Testing interface
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">const</span> <span class="n">TCPReceiver</span><span class="o">&amp;</span> <span class="n">receiver</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">receiver_</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">const</span> <span class="n">TCPSender</span><span class="o">&amp;</span> <span class="n">sender</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">sender_</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="cm">/* Is the peer still active? */</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="nf">active</span><span class="p">()</span> <span class="k">const</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="n">receive</span><span class="p">(</span> <span class="n">TCPMessage</span> <span class="n">msg</span><span class="p">,</span> <span class="k">const</span> <span class="n">TransmitFunction</span><span class="o">&amp;</span> <span class="n">transmit</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">send</span><span class="p">(</span> <span class="k">const</span> <span class="n">TCPSenderMessage</span><span class="o">&amp;</span> <span class="n">sender_message</span><span class="p">,</span> <span class="k">const</span> <span class="n">TransmitFunction</span><span class="o">&amp;</span> <span class="n">transmit</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="cm">/* Passthrough methods */</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">push</span><span class="p">(</span> <span class="k">const</span> <span class="n">TransmitFunction</span><span class="o">&amp;</span> <span class="n">transmit</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">tick</span><span class="p">(</span> <span class="kt">uint64_t</span> <span class="n">t</span><span class="p">,</span> <span class="k">const</span> <span class="n">TransmitFunction</span><span class="o">&amp;</span> <span class="n">transmit</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="nf">has_ackno</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">  <span class="n">Writer</span><span class="o">&amp;</span> <span class="n">outbound_writer</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">sender_</span><span class="p">.</span><span class="n">writer</span><span class="p">();</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Reader</span><span class="o">&amp;</span> <span class="n">inbound_reader</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">receiver_</span><span class="p">.</span><span class="n">reader</span><span class="p">();</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">TCPPeer</span><span class="p">(</span> <span class="k">const</span> <span class="n">TCPConfig</span><span class="o">&amp;</span> <span class="n">cfg</span> <span class="p">)</span> <span class="o">:</span> <span class="n">cfg_</span><span class="p">(</span> <span class="n">cfg</span> <span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">auto</span> <span class="nf">make_send</span><span class="p">(</span> <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">transmit</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>tcp_minnow_socket.hh</strong>定义TCP Socket的外部接口，这是用户API层。它提供了类似BSD socket的接口，比如connect、bind、listen、accept、read、write等方法，使得上层应用可以像使用标准socket一样使用你实现的TCP。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">//! Multithreaded wrapper around TCPPeer that approximates the Unix sockets API
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">template</span><span class="o">&lt;</span><span class="n">TCPDatagramAdapter</span> <span class="n">AdaptT</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">TCPMinnowSocket</span> <span class="o">:</span> <span class="k">public</span> <span class="n">LocalStreamSocket</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// Adapter to underlying datagram socket (e.g., UDP or IP)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">AdaptT</span> <span class="n">_datagram_adapter</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// Stream socket for reads and writes between owner and TCP thread
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">LocalStreamSocket</span> <span class="n">_thread_data</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// TCP state machine
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">std</span><span class="o">::</span><span class="n">optional</span><span class="o">&lt;</span><span class="n">TCPPeer</span><span class="o">&gt;</span> <span class="n">_tcp</span> <span class="p">{};</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// eventloop that handles all the events (new inbound datagram, new outbound bytes, new inbound bytes)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">EventLoop</span> <span class="n">_eventloop</span> <span class="p">{};</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// Handle to the TCPPeer thread; owner thread calls join() in the destructor
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">std</span><span class="o">::</span><span class="kr">thread</span> <span class="n">_tcp_thread</span> <span class="p">{};</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// Flag used by the owner to force the TCPPeer thread to shut down
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">std</span><span class="o">::</span><span class="n">atomic_bool</span> <span class="n">_abort</span> <span class="p">{</span> <span class="nb">false</span> <span class="p">};</span> 
+</span></span><span class="line"><span class="cl">  <span class="c1">// Has TCPMinnowSocket shut down the incoming data to the owner?
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">bool</span> <span class="n">_inbound_shutdown</span> <span class="p">{</span> <span class="nb">false</span> <span class="p">};</span> 
+</span></span><span class="line"><span class="cl">  <span class="c1">// Has the owner shut down the outbound data to the TCP connection?
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">bool</span> <span class="n">_outbound_shutdown</span> <span class="p">{</span> <span class="nb">false</span> <span class="p">};</span> 
+</span></span><span class="line"><span class="cl">  <span class="c1">// Has the outbound data been fully acknowledged by the peer?
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">bool</span> <span class="n">_fully_acked</span> <span class="p">{</span> <span class="nb">false</span> <span class="p">};</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// Construct from the interface that the TCPPeer thread will use to read and write datagrams
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">TCPMinnowSocket</span><span class="p">(</span> <span class="n">AdaptT</span><span class="o">&amp;&amp;</span> <span class="n">datagram_interface</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// Construct LocalStreamSocket fds from socket pair, initialize eventloop
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">TCPMinnowSocket</span><span class="p">(</span> <span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">FileDescriptor</span><span class="p">,</span> <span class="n">FileDescriptor</span><span class="o">&gt;</span> <span class="n">data_socket_pair</span><span class="p">,</span> <span class="n">AdaptT</span><span class="o">&amp;&amp;</span> <span class="n">datagram_interface</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// Close socket, and wait for TCPPeer to finish
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">void</span> <span class="nf">wait_until_closed</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// Connect using the specified configurations; blocks until connect succeeds or fails
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">void</span> <span class="nf">connect</span><span class="p">(</span> <span class="k">const</span> <span class="n">TCPConfig</span><span class="o">&amp;</span> <span class="n">c_tcp</span><span class="p">,</span> <span class="k">const</span> <span class="n">FdAdapterConfig</span><span class="o">&amp;</span> <span class="n">c_ad</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// Listen and accept using the specified configurations; blocks until accept succeeds or fails  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">void</span> <span class="nf">listen_and_accept</span><span class="p">(</span> <span class="k">const</span> <span class="n">TCPConfig</span><span class="o">&amp;</span> <span class="n">c_tcp</span><span class="p">,</span> <span class="k">const</span> <span class="n">FdAdapterConfig</span><span class="o">&amp;</span> <span class="n">c_ad</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// When a connected socket is destructed, it will send a RST
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="o">~</span><span class="n">TCPMinnowSocket</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">bind</span><span class="p">(</span> <span class="k">const</span> <span class="n">Address</span><span class="o">&amp;</span> <span class="n">address</span> <span class="p">)</span> <span class="o">=</span> <span class="k">delete</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Address</span> <span class="nf">local_address</span><span class="p">()</span> <span class="k">const</span> <span class="o">=</span> <span class="k">delete</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">set_reuseaddr</span><span class="p">()</span> <span class="o">=</span> <span class="k">delete</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="c1">// Return peer address from underlying datagram adapter
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">const</span> <span class="n">Address</span><span class="o">&amp;</span> <span class="n">peer_address</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_datagram_adapter</span><span class="p">.</span><span class="n">config</span><span class="p">().</span><span class="n">destination</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>tcp_minnow_socket_impl.hh</strong>定义TCP Socket的实现细节接口（类似于tcp_minnow_socket.cc）。CS144TCPSocket类实现了TCPMinnowSocket接口，内部使用TCPPeer来完成实际的TCP协议处理。这是实现层，处理具体的协议逻辑。</p>
+<p><strong>fd_adapter.hh</strong>实现文件描述符适配器，这是连接TCP层和系统I/O的桥梁。FdAdapterBase定义了适配器接口，包括read方法在fd可读时调用，write方法在fd可写时调用，tick方法处理定时器触发。适配器的作用是将TCP事件映射到文件描述符事件，将EventLoop的事件分发给TCP协议栈。典型的使用场景是从TUN设备读取数据后喂给TCP处理，或者将TCP产生的数据写入TUN设备。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">FdAdapterBase</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">FdAdapterConfig</span> <span class="n">_cfg</span> <span class="p">{};</span> <span class="c1">// Configuration values
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">bool</span> <span class="n">_listen</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>    <span class="c1">// Is the connected TCP FSM in listen state?
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">set_listening</span><span class="p">(</span> <span class="k">const</span> <span class="kt">bool</span> <span class="n">l</span> <span class="p">)</span> <span class="p">{</span> <span class="n">_listen</span> <span class="o">=</span> <span class="n">l</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="nf">listening</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_listen</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">const</span> <span class="n">FdAdapterConfig</span><span class="o">&amp;</span> <span class="n">config</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_cfg</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="n">FdAdapterConfig</span><span class="o">&amp;</span> <span class="n">config_mut</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_cfg</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">tick</span><span class="p">(</span> <span class="k">const</span> <span class="n">size_t</span> <span class="n">unused</span> <span class="na">[[maybe_unused]]</span> <span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>lossy_fd_adapter.hh</strong>在FdAdapter基础上添加丢包模拟功能。LossyFdAdapter继承自FdAdapter，增加了loss_rate_丢包率字段。在write方法中会根据随机数决定是否真正写出数据，从而模拟网络丢包。这个适配器专门用于测试TCP的可靠性机制，验证重传、快速重传等功能是否正确实现。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">AdapterT</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">LossyFdAdapter</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">std</span><span class="o">::</span><span class="n">default_random_engine</span> <span class="n">_rand</span> <span class="p">{</span> <span class="n">get_random_engine</span><span class="p">()</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl">  <span class="n">AdapterT</span> <span class="n">_adapter</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">  <span class="c1">// Construct from a FileDescriptor appropriate to the AdapterT constructor
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">explicit</span> <span class="nf">LossyFdAdapter</span><span class="p">(</span> <span class="n">AdapterT</span><span class="o">&amp;&amp;</span> <span class="n">adapter</span> <span class="p">)</span> <span class="o">:</span> <span class="n">_adapter</span><span class="p">(</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span> <span class="n">adapter</span> <span class="p">)</span> <span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// Determine whether or not to drop a given read or write
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">bool</span> <span class="nf">_should_drop</span><span class="p">(</span> <span class="kt">bool</span> <span class="n">uplink</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">FileDescriptor</span><span class="o">&amp;</span> <span class="n">fd</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_adapter</span><span class="p">.</span><span class="n">fd</span><span class="p">();</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="n">std</span><span class="o">::</span><span class="n">optional</span><span class="o">&lt;</span><span class="n">TCPMessage</span><span class="o">&gt;</span> <span class="n">read</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">write</span><span class="p">(</span> <span class="k">const</span> <span class="n">TCPMessage</span><span class="o">&amp;</span> <span class="n">seg</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">  <span class="c1">// Passthrough functions to the underlying AdapterT instance
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">void</span> <span class="nf">set_listening</span><span class="p">(</span> <span class="k">const</span> <span class="kt">bool</span> <span class="n">l</span> <span class="p">)</span> <span class="p">{</span> <span class="n">_adapter</span><span class="p">.</span><span class="n">set_listening</span><span class="p">(</span> <span class="n">l</span> <span class="p">);</span> <span class="p">}</span> <span class="c1">// FdAdapterBase::set_listening passthrough
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">const</span> <span class="n">FdAdapterConfig</span><span class="o">&amp;</span> <span class="n">config</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_adapter</span><span class="p">.</span><span class="n">config</span><span class="p">();</span> <span class="p">}</span> <span class="c1">// FdAdapterBase::config passthrough
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">FdAdapterConfig</span><span class="o">&amp;</span> <span class="n">config_mut</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_adapter</span><span class="p">.</span><span class="n">config_mut</span><span class="p">();</span> <span class="p">}</span>     <span class="c1">// FdAdapterBase::config_mut passthrough
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">void</span> <span class="nf">tick</span><span class="p">(</span> <span class="k">const</span> <span class="n">size_t</span> <span class="n">ms_since_last_tick</span> <span class="p">)</span> <span class="p">{</span> <span class="n">_adapter</span><span class="p">.</span><span class="n">tick</span><span class="p">(</span> <span class="n">ms_since_last_tick</span> <span class="p">);</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="特殊设备">特殊设备
+</h3><p><strong>tun.hh/cc</strong>封装TUN虚拟网络设备。TUN设备是虚拟的三层网络设备，工作在IP层。TunFD类可以创建并配置TUN设备，设置IP地址和路由。应用程序可以从TUN设备读取IP数据包，也可以向TUN设备写入IP数据包。工作原理是应用程序写入TUN设备的数据会被内核网络栈接收，而内核路由到TUN设备的数据会被应用程序读取。这样就可以在用户空间实现IP协议栈。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">TunTapFD</span> <span class="o">:</span> <span class="k">public</span> <span class="n">FileDescriptor</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// Open an existing persistent [TUN or TAP device](https://www.kernel.org/doc/Documentation/networking/tuntap.txt).
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">explicit</span> <span class="nf">TunTapFD</span><span class="p">(</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">devname</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">is_tun</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">TunFD</span><span class="p">(</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">devname</span> <span class="p">)</span> <span class="o">:</span> <span class="n">TunTapFD</span><span class="p">(</span> <span class="n">devname</span><span class="p">,</span> <span class="nb">true</span> <span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="n">TapFD</span><span class="p">(</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">devname</span> <span class="p">)</span> <span class="o">:</span> <span class="n">TunTapFD</span><span class="p">(</span> <span class="n">devname</span><span class="p">,</span> <span class="nb">false</span> <span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">TunTapFD</span><span class="o">::</span><span class="n">TunTapFD</span><span class="p">(</span> <span class="k">const</span> <span class="n">string</span><span class="o">&amp;</span> <span class="n">devname</span><span class="p">,</span> <span class="k">const</span> <span class="kt">bool</span> <span class="n">is_tun</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="o">:</span> <span class="n">FileDescriptor</span><span class="p">(</span> <span class="o">::</span><span class="n">CheckSystemCall</span><span class="p">(</span> <span class="s">&#34;open&#34;</span><span class="p">,</span> <span class="n">open</span><span class="p">(</span> <span class="n">CLONEDEV</span><span class="p">,</span> <span class="n">O_RDWR</span> <span class="o">|</span> <span class="n">O_CLOEXEC</span> <span class="p">)</span> <span class="p">)</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">struct</span> <span class="nc">ifreq</span> <span class="n">tun_req</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">tun_req</span><span class="p">.</span><span class="n">ifr_flags</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">int16_t</span><span class="o">&gt;</span><span class="p">(</span> <span class="p">(</span> <span class="n">is_tun</span> <span class="o">?</span> <span class="nl">IFF_TUN</span> <span class="p">:</span> <span class="n">IFF_TAP</span> <span class="p">)</span> <span class="o">|</span> <span class="n">IFF_NO_PI</span> <span class="p">);</span> <span class="c1">// no packetinfo
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// copy devname to ifr_name, making sure to null terminate
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">  <span class="n">strncpy</span><span class="p">(</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">*&gt;</span><span class="p">(</span> <span class="n">tun_req</span><span class="p">.</span><span class="n">ifr_name</span> <span class="p">),</span> <span class="n">devname</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span> <span class="n">IFNAMSIZ</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">tun_req</span><span class="p">.</span><span class="n">ifr_name</span><span class="p">[</span><span class="n">IFNAMSIZ</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;\0&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">CheckSystemCall</span><span class="p">(</span> <span class="s">&#34;ioctl&#34;</span><span class="p">,</span> <span class="n">ioctl</span><span class="p">(</span> <span class="n">fd_num</span><span class="p">(),</span> <span class="n">TUNSETIFF</span><span class="p">,</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">void</span><span class="o">*&gt;</span><span class="p">(</span> <span class="o">&amp;</span><span class="n">tun_req</span> <span class="p">)</span> <span class="p">)</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>tuntap_adapter.hh/cc</strong>是TUN/TAP设备的高级封装，将TUN设备集成到EventLoop中。TunTapAdapter会自动配置IP地址和路由，连接到NetworkInterface，并自动处理所有进出的数据包。这个适配器简化了TUN设备的使用，提供了更高层的抽象，使得网络层和数据链路层的连接变得透明。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">TCPOverIPv4OverTunFdAdapter</span> <span class="o">:</span> <span class="k">public</span> <span class="n">TCPOverIPv4Adapter</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">TunFD</span> <span class="n">_tun</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">  <span class="c1">//! Construct from a TunFD
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">TCPOverIPv4OverTunFdAdapter</span><span class="p">(</span> <span class="n">TunFD</span><span class="o">&amp;&amp;</span> <span class="n">tun</span> <span class="p">)</span> <span class="o">:</span> <span class="n">_tun</span><span class="p">(</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span> <span class="n">tun</span> <span class="p">)</span> <span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">//! Attempts to read and parse an IPv4 datagram containing a TCP segment related to the current connection
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">std</span><span class="o">::</span><span class="n">optional</span><span class="o">&lt;</span><span class="n">TCPMessage</span><span class="o">&gt;</span> <span class="n">read</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">//! Creates an IPv4 datagram from a TCP segment and writes it to the TUN device
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">void</span> <span class="nf">write</span><span class="p">(</span> <span class="k">const</span> <span class="n">TCPMessage</span><span class="o">&amp;</span> <span class="n">seg</span> <span class="p">)</span> <span class="p">{</span> <span class="n">_tun</span><span class="p">.</span><span class="n">write</span><span class="p">(</span> <span class="n">serialize</span><span class="p">(</span> <span class="n">wrap_tcp_in_ip</span><span class="p">(</span> <span class="n">seg</span> <span class="p">)</span> <span class="p">)</span> <span class="p">);</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">//! Access underlying file descriptor
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">FileDescriptor</span><span class="o">&amp;</span> <span class="n">fd</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_tun</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>udinfo.hh</strong>定义用户数据报信息结构UserDatagramInfo，包含源地址和目标地址。这个结构体用于携带UDP相关的辅助信息，在处理数据包时需要知道来源和目的地。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">UserDatagramInfo</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">uint16_t</span> <span class="n">src_port</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">uint16_t</span> <span class="n">dst_port</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">uint16_t</span> <span class="n">cksum</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="整体数据流动路径">整体数据流动路径
+</h3><p>从应用程序发送数据的完整路径是：应用程序通过TCPMinnowSocket的write方法写入数据，数据进入TCPPeer的outbound字节流，TCPSender从字节流读取数据并封装成TCPSegment，TCPConnection完善TCP头部信息，通过tcp_over_ip转换成IPv4Datagram，经过FdAdapter写入TUN设备，内核接收后根据路由转发，对端从TUN设备读取数据，经过反向的解析过程，最终到达对端应用程序。整个过程中每一层都只关心自己的职责，通过适配器连接不同的抽象层次。</p>
+<h2 id="lab">Lab
+</h2><p>src目录包含了整个Lab需要实现的核心组件，这些文件按照TCP/IP协议栈的不同层次和功能模块组织。可以按照Lab的顺序和组件的依赖关系分层理解。</p>
+<h3 id="基础数据结构">基础数据结构
+</h3><p><strong>byte_stream.hh/cc</strong>实现了字节流抽象，这是Lab0的核心内容。ByteStream类提供了一个有容量限制的FIFO字节队列，支持写入和读取操作。内部使用deque或其他容器存储数据，维护已写入的总字节数和已读取的总字节数。write方法将数据写入流中，但不能超过容量限制。read方法从流中读取指定数量的字节并返回。peek方法可以查看数据但不移除。is_finished方法检查输入端是否已关闭且所有数据都已读取。set_error方法用于标记流出现错误。这个类是整个TCP实现的基础，因为TCP本质上就是在不可靠的网络上提供可靠的字节流服务。ByteStream的容量限制对应TCP的接收窗口概念，流控制就是通过限制ByteStream的可用空间实现的。</p>
+<p><strong>byte_stream_helpers.cc</strong>提供了一些辅助函数，用于简化ByteStream的常见操作。这些辅助函数可能包括从文件描述符读取数据到ByteStream，或者将ByteStream的数据写入文件描述符等便捷操作。</p>
+<p><strong>wrapping_integers.hh/cc</strong>实现了序列号的包装和解包装逻辑，这是Lab1的重要部分。TCP使用32位序列号，但序列号会回绕。Wrap32类型表示包装后的32位序列号。wrap方法将64位的绝对序列号转换为32位的包装序列号，需要提供初始序列号ISN作为偏移。unwrap方法执行反向操作，将32位包装序列号转换回64位绝对序列号，但因为序列号会循环，所以需要一个checkpoint作为参考点，选择距离checkpoint最近的可能值。这个设计解决了序列号回绕的问题，使得内部可以用64位绝对序列号简化逻辑，对外则使用32位序列号保持协议兼容。</p>
+<h3 id="接收端组件">接收端组件
+</h3><p><strong>reassembler.hh/cc</strong>实现了流重组器，这是Lab1的核心内容。Reassembler类负责将乱序到达的数据片段按正确顺序重组后写入ByteStream。insert方法接收一个数据片段，包含数据内容、在流中的起始位置索引、以及是否是最后一个片段的标志。内部需要维护一个数据结构存储未组装的片段，可能是map或set存储区间。重组器需要处理重叠、乱序、重复等各种情况。当某个片段恰好填补了空缺，使得一段连续数据就绪时，就将这段数据写入关联的ByteStream。如果收到最后一个片段且所有数据都已重组，就关闭ByteStream的输入端。bytes_pending方法返回已接收但尚未重组的字节数，这对应TCP的接收缓冲区中的乱序数据。这个组件体现了TCP可靠性的关键机制之一，即使数据包乱序到达也能正确重组。</p>
+<p><strong>tcp_receiver.hh/cc</strong>实现了TCP接收端，这是Lab2的核心内容。TCPReceiver类管理接收窗口和确认号的计算。内部包含一个Reassembler用于重组数据，以及用于接收的ByteStream。receive方法接收TCPSenderMessage，提取序列号、数据、SYN和FIN标志。需要将32位序列号转换为绝对序列号，然后调用Reassembler的insert方法。send方法返回TCPReceiverMessage，包含确认号ackno和窗口大小window_size。确认号的计算需要考虑SYN和FIN也占用一个序列号。窗口大小是ByteStream的剩余容量，告诉发送方还能接收多少数据。TCPReceiver还需要处理连接建立过程中的状态，比如在收到SYN之前不能接收数据。这个组件实现了TCP的流量控制机制，通过调整窗口大小控制发送方的发送速率。</p>
+<h3 id="发送端组件">发送端组件
+</h3><p><strong>tcp_sender.hh/cc</strong>实现了TCP发送端，这是Lab3的核心内容。TCPSender类负责从ByteStream读取数据并封装成TCP段发送，同时处理重传和拥塞控制。内部维护已发送但未确认的段outstanding_segments，使用序列号跟踪发送进度。push方法从ByteStream读取数据，创建TCPSenderMessage并发送，需要考虑接收窗口大小的限制，不能发送超过窗口的数据。receive方法处理收到的TCPReceiverMessage，根据确认号ackno释放已确认的段，更新发送窗口。tick方法处理时间流逝，当重传定时器超时且有未确认的段时，需要重传最早的未确认段。重传定时器使用指数退避策略，每次超时后超时时间翻倍。send方法返回待发送的段队列。TCPSender需要正确处理SYN和FIN的发送和确认，它们各占用一个序列号。这个组件实现了TCP的可靠传输机制，通过超时重传保证数据最终能够送达。</p>
+<h3 id="连接管理">连接管理
+</h3><p>在2020版的CS144中，没有这个lab。TCP连接需要组合TCPReceiver和TCPSender，管理连接的完整生命周期包括建立、数据传输、关闭。连接需要处理三次握手和四次挥手，维护TCP状态机，协调发送端和接收端的交互。</p>
+<h3 id="网络层和链路层">网络层和链路层
+</h3><p><strong>network_interface.hh/cc</strong>实现了网络接口，这是Lab5的内容。NetworkInterface类处理以太网帧和IP数据报之间的转换，实现ARP协议。内部维护ARP缓存，存储IP地址到MAC地址的映射关系。send_datagram方法接收IP数据报，如果知道目标IP的MAC地址就直接封装成以太网帧发送，否则发送ARP请求并缓存该数据报。recv_frame方法接收以太网帧，如果是ARP消息就更新ARP缓存，如果是IP数据报就提取出来。ARP缓存需要有过期机制，过期的条目需要删除。如果收到ARP请求且目标IP是本机，需要发送ARP响应。这个组件实现了二层和三层的协议转换，使得TCP/IP协议栈可以在以太网上工作。</p>
+<p><strong>router.hh/cc</strong>实现了路由器功能，这是Lab6的内容。Router类维护路由表，根据目标IP地址决定数据包的转发路径。add_route方法添加路由条目，包含目标网络地址、子网掩码、下一跳地址、出接口。route方法查找路由表，使用最长前缀匹配算法找到最佳路由，然后将数据报转发到相应的网络接口。路由器需要处理TTL递减，如果TTL变为0则丢弃数据包。可能还需要处理ICMP消息，比如目标不可达、TTL超时等。Router可以连接多个NetworkInterface，实现多网段的互联。这个组件实现了网络层的路由功能，是构建复杂网络拓扑的基础。</p>
+<h3 id="应用层接口">应用层接口
+</h3><p><strong>tcp_minnow_socket.cc</strong>实现了TCPMinnowSocket的具体逻辑，对应tcp_minnow_socket.hh中定义的接口。这个文件将底层的TCP组件封装成类似BSD socket的API。connect方法发起TCP连接，内部会触发三次握手。listen和accept方法实现服务器端的监听和接受连接。read方法从接收的ByteStream读取数据返回给应用层。write方法将应用数据写入发送的ByteStream。close方法关闭连接，触发FIN的发送。这个文件是应用程序和TCP协议栈之间的桥梁，隐藏了底层的复杂性，提供了简洁的编程接口。</p>
+<h3 id="组件之间的依赖关系">组件之间的依赖关系
+</h3><p>整个实现的依赖层次是清晰的。ByteStream是最基础的组件，不依赖其他任何组件。Reassembler依赖ByteStream，将重组后的数据写入流中。TCPReceiver依赖Reassembler和ByteStream，还需要wrapping_integers来处理序列号。TCPSender依赖ByteStream读取待发送的数据，也需要wrapping_integers。TCP连接层组合TCPReceiver和TCPSender，协调两者的工作。NetworkInterface工作在更低的层次，处理以太网和IP的转换。Router在NetworkInterface之上，实现路由功能。最顶层的TCPMinnowSocket将所有这些组件整合起来，提供给应用程序使用。</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <span>
+            最后更新于 Nov 01, 2025 19:46 &#43;0800
+        </span>
+    </section></footer>
+
+
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/face-recognition-list/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">face-recognition-list</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/aimodel/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">aimodel</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/simple-database/">
+        
+        
+            <div class="article-image">
+                <img src="/p/simple-database/bg.ffde7ff5e016b8481b8449ddaf9d6ceb_hu_78b5206a8e5797e2.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Simple Database"
+                        
+                        data-hash="md5-/95/9eAWuEgbhEndr51s6w==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Simple Database</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/network-protocol-archive/">
+        
+        
+            <div class="article-image">
+                <img src="/p/network-protocol-archive/bg.2ed5eec0fc56fbdf9525214b84b2f0ee_hu_14ab31eaefce141b.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Network Protocol Archive"
+                        
+                        data-hash="md5-LtXuwPxW&#43;9&#43;VJSFLhLLw7g==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Network Protocol Archive</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/simple-network/">
+        
+        
+            <div class="article-image">
+                <img src="/p/simple-network/bg.d266c4a87c29396fe7fc417cff63212a_hu_3d450349083fed81.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Simple Network"
+                        
+                        data-hash="md5-0mbEqHwpOW/n/EF8/2MhKg==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Simple Network</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2025 echudet
+    </section>
+    
+    <section class="powerby">
+        
+
+
+        <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+
+        <script language="javascript"> 
+            var now = new Date();
+            function createtime(){
+                now.setTime(now.getTime()+250);
+                var grt= new Date("2024/11/10 00:00:00"); 
+                days = (now - grt ) / 1000 / 60 / 60 / 24;
+                dnum = Math.floor(days);
+                hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+                hnum = Math.floor(hours);
+                if(String(hnum).length ==1 ){hnum = "0" + hnum;}
+                minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+                mnum = Math.floor(minutes);
+                if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+                seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+                snum = Math.round(seconds);
+                if(String(snum).length ==1 ){snum = "0" + snum;}
+
+                document.getElementById("timeDate").innerHTML = "本站已稳定运行"+dnum+" 天 ";
+                document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒<br>"
+            }
+            setInterval("createtime()",250); 
+        </script> 
+
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        
+    
+        
+         
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+             
+        
+        
+
+        共 742374 字 , 39 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+
+</footer>
+
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+
+    </body>
+</html>
