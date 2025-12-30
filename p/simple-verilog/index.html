@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-cn" dir="ltr">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="对verilog知识的简单梳理，便于日后查阅">
 <title>Simple Verilog</title>
@@ -59,7 +59,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu_67bf1327fc98b60.png" width="300"
+                        <img src="/img/avatar_hu_c2920364e6534697.png" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -304,8 +304,8 @@
     <header class="article-header">
         <div class="article-image">
             <a href="/p/simple-verilog/">
-                <img src="/p/simple-verilog/bg_hu_c5b6a29fb47fd323.png"
-                        srcset="/p/simple-verilog/bg_hu_c5b6a29fb47fd323.png 800w, /p/simple-verilog/bg_hu_df4d92d76123c663.png 1600w"
+                <img src="/p/simple-verilog/bg_hu_3ea069d64ada6a37.png"
+                        srcset="/p/simple-verilog/bg_hu_3ea069d64ada6a37.png 800w, /p/simple-verilog/bg_hu_68cb1235face681a.png 1600w"
                         width="800" 
                         height="600" 
                         loading="lazy"
@@ -554,12 +554,12 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-verilog" data-lang="verilog"><span class="line"><span class="cl"><span class="kt">reg</span> <span class="n">a</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="k">assign</span> <span class="n">a</span> <span class="o">=</span> <span class="n">b</span> <span class="o">&amp;</span> <span class="n">c</span><span class="p">;</span> <span class="c1">// 错误：不能使用 assign 语句驱动 reg 类型
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">//正确做法
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">reg</span> <span class="n">a</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">reg</span> <span class="n">a</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="k">always</span> <span class="p">@(</span><span class="o">*</span><span class="p">)</span> <span class="k">begin</span>
 </span></span><span class="line"><span class="cl">    <span class="n">a</span> <span class="o">=</span> <span class="n">b</span> <span class="o">&amp;</span> <span class="n">c</span><span class="p">;</span> <span class="c1">// 使用过程块内的赋值
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">end</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">end</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p><strong>错误</strong>：在过程块内对 <code>wire</code> 进行赋值。</p>
@@ -578,10 +578,10 @@
 <pre tabindex="0" class="chroma"><code class="language-verilog" data-lang="verilog"><span class="line"><span class="cl"><span class="kt">wire</span> <span class="n">a</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="k">always</span> <span class="p">@(</span><span class="o">*</span><span class="p">)</span> <span class="k">begin</span>
 </span></span><span class="line"><span class="cl">    <span class="n">a</span> <span class="o">=</span> <span class="n">b</span> <span class="o">&amp;</span> <span class="n">c</span><span class="p">;</span> <span class="c1">// 错误：不能在过程块内赋值 wire 类型
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">end</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">end</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">//正确做法
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">wire</span> <span class="n">a</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">wire</span> <span class="n">a</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="k">assign</span> <span class="n">a</span> <span class="o">=</span> <span class="n">b</span> <span class="o">&amp;</span> <span class="n">c</span><span class="p">;</span> <span class="c1">// 使用 assign 语句
 </span></span></span></code></pre></td></tr></table>
 </div>
@@ -603,16 +603,16 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-verilog" data-lang="verilog"><span class="line"><span class="cl"><span class="c1">// 错误示例：将需要存储状态的信号声明为 wire
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">wire</span> <span class="p">[</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">count</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">wire</span> <span class="p">[</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">count</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="k">always</span> <span class="p">@(</span><span class="k">posedge</span> <span class="n">clk</span><span class="p">)</span> <span class="k">begin</span>
 </span></span><span class="line"><span class="cl">    <span class="n">count</span> <span class="o">&lt;=</span> <span class="n">count</span> <span class="o">+</span> <span class="mh">1</span><span class="p">;</span> <span class="c1">// 错误：wire 类型不能在过程块中赋值
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">end</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">end</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 正确做法
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">reg</span> <span class="p">[</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">count</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">reg</span> <span class="p">[</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">count</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="k">always</span> <span class="p">@(</span><span class="k">posedge</span> <span class="n">clk</span><span class="p">)</span> <span class="k">begin</span>
 </span></span><span class="line"><span class="cl">    <span class="n">count</span> <span class="o">&lt;=</span> <span class="n">count</span> <span class="o">+</span> <span class="mh">1</span><span class="p">;</span> <span class="c1">// 使用 reg 类型
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">end</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">end</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>多重驱动信号</p>
@@ -643,7 +643,7 @@
 <pre tabindex="0" class="chroma"><code class="language-verilog" data-lang="verilog"><span class="line"><span class="cl"><span class="kt">reg</span> <span class="p">[</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">count</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="k">always</span> <span class="p">@(</span><span class="k">posedge</span> <span class="n">clk</span><span class="p">)</span> <span class="k">begin</span>
 </span></span><span class="line"><span class="cl">    <span class="n">count</span> <span class="o">&lt;=</span> <span class="n">count</span> <span class="o">+</span> <span class="mh">1</span><span class="p">;</span> <span class="c1">// count 未初始化，仿真时可能为 x
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">end</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">end</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p><strong>解决方法</strong>：</p>
@@ -684,7 +684,7 @@
 <pre tabindex="0" class="chroma"><code class="language-verilog" data-lang="verilog"><span class="line"><span class="cl"><span class="kt">reg</span> <span class="n">a</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="k">always</span> <span class="p">@(</span><span class="o">*</span><span class="p">)</span> <span class="k">begin</span>
 </span></span><span class="line"><span class="cl">    <span class="n">a</span> <span class="o">=</span> <span class="n">b</span> <span class="o">&amp;</span> <span class="n">c</span><span class="p">;</span> <span class="c1">// 组合逻辑中的 reg，实际硬件中不生成寄存器
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">end</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">end</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p><strong>解释</strong>：在组合逻辑中使用 <code>reg</code> 只是因为需要在过程块内赋值，并不意味着硬件中会有实际的寄存器。</p></div>
@@ -710,13 +710,13 @@
 </span></span><span class="line"><span class="cl"><span class="kt">reg</span>  <span class="p">[</span><span class="err">高位</span><span class="o">:</span><span class="err">低位</span><span class="p">]</span> <span class="err">信号名</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">//具体来说
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">wire</span> <span class="p">[</span><span class="mh">7</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">data_bus</span><span class="p">;</span>    <span class="c1">// 8位数据总线，位7到位0
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">wire</span> <span class="p">[</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">nibble</span><span class="p">;</span>      <span class="c1">// 4位半字节，位3到位0
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">reg</span> <span class="p">[</span><span class="mh">31</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">address</span><span class="p">;</span>     <span class="c1">// 32位地址信号，位31到位0
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">wire</span> <span class="p">[</span><span class="mh">7</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">data_bus</span><span class="p">;</span>    <span class="c1">// 8位数据总线，位7到位0
+</span></span></span><span class="line"><span class="cl"><span class="kt">wire</span> <span class="p">[</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">nibble</span><span class="p">;</span>      <span class="c1">// 4位半字节，位3到位0
+</span></span></span><span class="line"><span class="cl"><span class="kt">reg</span> <span class="p">[</span><span class="mh">31</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">address</span><span class="p">;</span>     <span class="c1">// 32位地址信号，位31到位0
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">//Verilog允许指定向量的高位到低位，也可以反向指定
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">wire</span> <span class="p">[</span><span class="mh">7</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">data_bus</span><span class="p">;</span>    <span class="c1">// 位7是最高位，位0是最低位
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">wire</span> <span class="p">[</span><span class="mh">0</span><span class="o">:</span><span class="mh">7</span><span class="p">]</span> <span class="n">data_bus_rev</span><span class="p">;</span> <span class="c1">// 位0是最高位，位7是最低位
+</span></span></span><span class="line"><span class="cl"><span class="kt">wire</span> <span class="p">[</span><span class="mh">7</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">data_bus</span><span class="p">;</span>    <span class="c1">// 位7是最高位，位0是最低位
+</span></span></span><span class="line"><span class="cl"><span class="kt">wire</span> <span class="p">[</span><span class="mh">0</span><span class="o">:</span><span class="mh">7</span><span class="p">]</span> <span class="n">data_bus_rev</span><span class="p">;</span> <span class="c1">// 位0是最高位，位7是最低位
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>在verilog中，还允许对向量进行诸多操作，如连接与拼接、位选取与范围选择、位切片、赋值等，详细见下。</p>
@@ -746,14 +746,14 @@
 </span></span><span class="line"><span class="cl"><span class="kt">wire</span> <span class="p">[</span><span class="mh">7</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="kt">byte</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 拼接
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">assign</span> <span class="kt">byte</span> <span class="o">=</span> <span class="p">{</span><span class="n">nibble1</span><span class="p">,</span> <span class="n">nibble2</span><span class="p">};</span> <span class="c1">// 将nibble1作为高位，nibble2作为低位
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl"><span class="k">assign</span> <span class="kt">byte</span> <span class="o">=</span> <span class="p">{</span><span class="n">nibble1</span><span class="p">,</span> <span class="n">nibble2</span><span class="p">};</span> <span class="c1">// 将nibble1作为高位，nibble2作为低位
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 拆分
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">assign</span> <span class="p">{</span><span class="n">nibble1</span><span class="p">,</span> <span class="n">nibble2</span><span class="p">}</span> <span class="o">=</span> <span class="kt">byte</span><span class="p">;</span> <span class="c1">// 从byte中提取高4位到nibble1，低4位到nibble2
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl"><span class="k">assign</span> <span class="p">{</span><span class="n">nibble1</span><span class="p">,</span> <span class="n">nibble2</span><span class="p">}</span> <span class="o">=</span> <span class="kt">byte</span><span class="p">;</span> <span class="c1">// 从byte中提取高4位到nibble1，低4位到nibble2
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">//甚至还可以↓
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{</span><span class="mh">4</span><span class="p">{</span><span class="n">w</span><span class="p">}}</span>       <span class="c1">//这等同于{w,w,w,w}
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{</span><span class="n">b</span><span class="p">,{</span><span class="mh">3</span><span class="p">{</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">}}}</span> <span class="c1">//这等同于{b,a,b,a,b,a,b}
+</span></span></span><span class="line"><span class="cl"><span class="p">{</span><span class="mh">4</span><span class="p">{</span><span class="n">w</span><span class="p">}}</span>       <span class="c1">//这等同于{w,w,w,w}
+</span></span></span><span class="line"><span class="cl"><span class="p">{</span><span class="n">b</span><span class="p">,{</span><span class="mh">3</span><span class="p">{</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">}}}</span> <span class="c1">//这等同于{b,a,b,a,b,a,b}
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><ol start="2">
@@ -776,14 +776,14 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-verilog" data-lang="verilog"><span class="line"><span class="cl"><span class="c1">//单比特选取
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">wire</span> <span class="p">[</span><span class="mh">7</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">data_bus</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">wire</span> <span class="p">[</span><span class="mh">7</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">data_bus</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kt">wire</span> <span class="n">bit7</span> <span class="o">=</span> <span class="n">data_bus</span><span class="p">[</span><span class="mh">7</span><span class="p">];</span> <span class="c1">// 访问第7位
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">wire</span> <span class="n">bit0</span> <span class="o">=</span> <span class="n">data_bus</span><span class="p">[</span><span class="mh">0</span><span class="p">];</span> <span class="c1">// 访问第0位
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">wire</span> <span class="n">bit0</span> <span class="o">=</span> <span class="n">data_bus</span><span class="p">[</span><span class="mh">0</span><span class="p">];</span> <span class="c1">// 访问第0位
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">//范围选取
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">wire</span> <span class="p">[</span><span class="mh">15</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">word</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">wire</span> <span class="p">[</span><span class="mh">15</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">word</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kt">wire</span> <span class="p">[</span><span class="mh">7</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">lower_byte</span> <span class="o">=</span> <span class="n">word</span><span class="p">[</span><span class="mh">7</span><span class="o">:</span><span class="mh">0</span><span class="p">];</span>    <span class="c1">// 访问低8位
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">wire</span> <span class="p">[</span><span class="mh">7</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">upper_byte</span> <span class="o">=</span> <span class="n">word</span><span class="p">[</span><span class="mh">15</span><span class="o">:</span><span class="mh">8</span><span class="p">];</span>   <span class="c1">// 访问高8位
+</span></span></span><span class="line"><span class="cl"><span class="kt">wire</span> <span class="p">[</span><span class="mh">7</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">upper_byte</span> <span class="o">=</span> <span class="n">word</span><span class="p">[</span><span class="mh">15</span><span class="o">:</span><span class="mh">8</span><span class="p">];</span>   <span class="c1">// 访问高8位
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><ol start="3">
@@ -832,11 +832,11 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-verilog" data-lang="verilog"><span class="line"><span class="cl"><span class="c1">//连续赋值
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">wire</span> <span class="p">[</span><span class="mh">7</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">wire</span> <span class="p">[</span><span class="mh">7</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="k">assign</span> <span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">&amp;</span> <span class="n">b</span><span class="p">;</span> <span class="c1">// 位与操作
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">//过程赋值
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">reg</span> <span class="p">[</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">counter</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">reg</span> <span class="p">[</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">counter</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="k">always</span> <span class="p">@(</span><span class="k">posedge</span> <span class="n">clk</span><span class="p">)</span> <span class="k">begin</span>
 </span></span><span class="line"><span class="cl">    <span class="n">counter</span> <span class="o">&lt;=</span> <span class="n">counter</span> <span class="o">+</span> <span class="mh">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="k">end</span>
@@ -880,13 +880,13 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-verilog" data-lang="verilog"><span class="line"><span class="cl"><span class="kt">reg</span> <span class="p">[</span><span class="mh">31</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">data1</span> <span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kt">reg</span> <span class="p">[</span><span class="mh">7</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span>  <span class="n">byte1</span> <span class="p">[</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">];</span> <span class="c1">//数组变量
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">integer</span>    <span class="n">j</span><span class="p">;</span>           <span class="c1">//整型变量，用来辅助生成数字电路
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl"><span class="k">integer</span>    <span class="n">j</span><span class="p">;</span>           <span class="c1">//整型变量，用来辅助生成数字电路
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">always</span><span class="p">@</span><span class="o">*</span> <span class="k">begin</span>
 </span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="n">j</span><span class="o">=</span><span class="mh">0</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;=</span><span class="mh">3</span><span class="p">;</span><span class="n">j</span><span class="o">=</span><span class="n">j</span><span class="o">+</span><span class="mh">1</span><span class="p">)</span> <span class="k">begin</span>
 </span></span><span class="line"><span class="cl">        <span class="n">byte1</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">data1</span><span class="p">[(</span><span class="n">j</span><span class="o">+</span><span class="mh">1</span><span class="p">)</span><span class="o">*</span><span class="mh">8</span><span class="o">-</span><span class="mh">1</span> <span class="o">:</span> <span class="n">j</span><span class="o">*</span><span class="mh">8</span><span class="p">];</span>  
 </span></span><span class="line"><span class="cl">        	<span class="c1">//把data1[7:0]…data1[31:24] 依次赋值给 byte1[0][7:0]…byte[3][7:0]
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">end</span>
+</span></span></span><span class="line"><span class="cl">        <span class="k">end</span>
 </span></span><span class="line"><span class="cl"><span class="k">end</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -916,7 +916,7 @@
 </span></span><span class="line"><span class="cl"> 
 </span></span><span class="line"><span class="cl"><span class="k">initial</span> <span class="k">begin</span>
 </span></span><span class="line"><span class="cl">    <span class="n">temp</span> <span class="o">=</span> <span class="n">data1</span> <span class="p">;</span> <span class="c1">//temp 值的大小为3
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">end</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">end</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p><strong>时间（time）</strong></p>
@@ -934,7 +934,7 @@
 </span></span><span class="line"><span class="cl"><span class="k">initial</span> <span class="k">begin</span>
 </span></span><span class="line"><span class="cl">       <span class="p">#</span><span class="mh">100</span> <span class="p">;</span>
 </span></span><span class="line"><span class="cl">       <span class="n">current_time</span> <span class="o">=</span> <span class="nb">$time</span> <span class="p">;</span> <span class="c1">//current_time 的大小为 100
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">end</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">end</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p><strong>数组</strong></p>
@@ -950,11 +950,11 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-verilog" data-lang="verilog"><span class="line"><span class="cl"><span class="k">integer</span>          <span class="n">flag</span> <span class="p">[</span><span class="mh">7</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="p">;</span>     <span class="c1">//8个整数组成的数组
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">reg</span>  <span class="p">[</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span>       <span class="n">counter</span> <span class="p">[</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="p">;</span>  <span class="c1">//由4个4bit计数器组成的数组
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">wire</span> <span class="p">[</span><span class="mh">7</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span>       <span class="n">addr_bus</span> <span class="p">[</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="p">;</span> <span class="c1">//由4个8bit wire型变量组成的数组
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">reg</span>  <span class="p">[</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span>       <span class="n">counter</span> <span class="p">[</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="p">;</span>  <span class="c1">//由4个4bit计数器组成的数组
+</span></span></span><span class="line"><span class="cl"><span class="kt">wire</span> <span class="p">[</span><span class="mh">7</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span>       <span class="n">addr_bus</span> <span class="p">[</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="p">;</span> <span class="c1">//由4个8bit wire型变量组成的数组
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kt">wire</span>             <span class="n">data_bit</span><span class="p">[</span><span class="mh">7</span><span class="o">:</span><span class="mh">0</span><span class="p">][</span><span class="mh">5</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="p">;</span>             <span class="c1">//声明1bit wire型变量的二维数组
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">reg</span> <span class="p">[</span><span class="mh">31</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span>       <span class="n">data_4d</span><span class="p">[</span><span class="mh">11</span><span class="o">:</span><span class="mh">0</span><span class="p">][</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">][</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">][</span><span class="mh">255</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="p">;</span> <span class="c1">//声明4维的32bit数据变量数组
+</span></span></span><span class="line"><span class="cl"><span class="kt">reg</span> <span class="p">[</span><span class="mh">31</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span>       <span class="n">data_4d</span><span class="p">[</span><span class="mh">11</span><span class="o">:</span><span class="mh">0</span><span class="p">][</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">][</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">][</span><span class="mh">255</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="p">;</span> <span class="c1">//声明4维的32bit数据变量数组
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>虽然数组与向量的访问方式在一定程度上类似，但不要将向量和数组混淆。向量是一个单独的元件，位宽为 n；数组由多个元件组成，其中每个元件的位宽为 n 或 1。它们在结构的定义上就有所区别。</p>
@@ -968,8 +968,8 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-verilog" data-lang="verilog"><span class="line"><span class="cl"><span class="kt">reg</span>               <span class="n">membit</span><span class="p">[</span><span class="mh">0</span><span class="o">:</span><span class="mh">255</span><span class="p">]</span> <span class="p">;</span>  <span class="c1">//256bit的1bit存储器
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">reg</span>  <span class="p">[</span><span class="mh">7</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span>        <span class="n">mem</span><span class="p">[</span><span class="mh">0</span><span class="o">:</span><span class="mh">1023</span><span class="p">]</span> <span class="p">;</span>    <span class="c1">//1Kbyte存储器，位宽8bit
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">mem</span><span class="p">[</span><span class="mh">511</span><span class="p">]</span> <span class="o">=</span> <span class="mh">8</span><span class="mb">&#39;b0</span> <span class="p">;</span>                  <span class="c1">//令第512个8bit的存储单元值为0
+</span></span></span><span class="line"><span class="cl"><span class="kt">reg</span>  <span class="p">[</span><span class="mh">7</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span>        <span class="n">mem</span><span class="p">[</span><span class="mh">0</span><span class="o">:</span><span class="mh">1023</span><span class="p">]</span> <span class="p">;</span>    <span class="c1">//1Kbyte存储器，位宽8bit
+</span></span></span><span class="line"><span class="cl"><span class="n">mem</span><span class="p">[</span><span class="mh">511</span><span class="p">]</span> <span class="o">=</span> <span class="mh">8</span><span class="mb">&#39;b0</span> <span class="p">;</span>                  <span class="c1">//令第512个8bit的存储单元值为0
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><p><strong>参数</strong></p>
@@ -1349,7 +1349,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-verilog" data-lang="verilog"><span class="line"><span class="cl"><span class="mh">4</span><span class="mb">&#39;b1011</span>         <span class="c1">// 4bit 数值
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="mh">32&#39;h3022</span><span class="n">_c0de</span>   <span class="c1">// 32bit 的数值
+</span></span></span><span class="line"><span class="cl"><span class="mh">32&#39;h3022</span><span class="n">_c0de</span>   <span class="c1">// 32bit 的数值
 </span></span></span><span class="line"><span class="cl"><span class="c1">//下划线 _ 是为了增强代码的可读性
 </span></span></span></code></pre></td></tr></table>
 </div>
@@ -1362,7 +1362,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-verilog" data-lang="verilog"><span class="line"><span class="cl"><span class="n">counter</span> <span class="o">=</span> <span class="mi">&#39;d100</span> <span class="p">;</span>  <span class="c1">//一般会根据编译器自动分频位宽，常见的为32bit*
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">counter</span> <span class="o">=</span> <span class="mh">100</span> <span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="n">counter</span> <span class="o">=</span> <span class="mh">100</span> <span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="n">counter</span> <span class="o">=</span> <span class="mh">32&#39;h64</span> <span class="p">;</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -1380,9 +1380,9 @@
 <pre tabindex="0" class="chroma"><code class="language-verilog" data-lang="verilog"><span class="line"><span class="cl"><span class="o">-</span><span class="mh">6</span><span class="mi">&#39;d15</span>  
 </span></span><span class="line"><span class="cl"><span class="o">-</span><span class="mh">15</span>
 </span></span><span class="line"><span class="cl"><span class="c1">//-15 在 5 位二进制中的形式为 5&#39;b10001, 在 6 位二进制中的形式为 6&#39;b11_0001
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">//需要注意的是，减号放在基数和数字之间是非法的
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="mh">4</span><span class="p">&#39;</span><span class="n">d</span><span class="o">-</span><span class="mh">2</span> <span class="c1">//非法说明
+</span></span></span><span class="line"><span class="cl"><span class="mh">4</span><span class="p">&#39;</span><span class="n">d</span><span class="o">-</span><span class="mh">2</span> <span class="c1">//非法说明
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><p><span class="red">实数表示方法</span></p>
@@ -1402,15 +1402,15 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-verilog" data-lang="verilog"><span class="line"><span class="cl"><span class="c1">//十进制
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="mf">30.123</span>
+</span></span></span><span class="line"><span class="cl"><span class="mf">30.123</span>
 </span></span><span class="line"><span class="cl"><span class="mf">6.0</span>
 </span></span><span class="line"><span class="cl"><span class="mf">3.0</span>
 </span></span><span class="line"><span class="cl"><span class="mf">0.001</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">//科学计数法
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="mf">1.2e4</span>         <span class="c1">//大小为12000
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="mh">1</span><span class="n">_0001e4</span>      <span class="c1">//大小为100010000
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="mf">1E-3</span>          <span class="c1">//大小为0.001
+</span></span></span><span class="line"><span class="cl"><span class="mf">1.2e4</span>         <span class="c1">//大小为12000
+</span></span></span><span class="line"><span class="cl"><span class="mh">1</span><span class="n">_0001e4</span>      <span class="c1">//大小为100010000
+</span></span></span><span class="line"><span class="cl"><span class="mf">1E-3</span>          <span class="c1">//大小为0.001
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><p><span class="red">字符串表示方法</span></p>
@@ -1524,16 +1524,16 @@
 </span></span><span class="line"><span class="cl"><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// 状态编码 using localparam
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">localparam</span> <span class="p">[</span><span class="mh">1</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> 
+</span></span></span><span class="line"><span class="cl">    <span class="k">localparam</span> <span class="p">[</span><span class="mh">1</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> 
 </span></span><span class="line"><span class="cl">        <span class="n">STATE_IDLE</span>    <span class="o">=</span> <span class="mh">2</span><span class="mb">&#39;b00</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">        <span class="n">STATE_ACTIVE</span>  <span class="o">=</span> <span class="mh">2</span><span class="mb">&#39;b01</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">        <span class="n">STATE_DONE</span>    <span class="o">=</span> <span class="mh">2</span><span class="mb">&#39;b10</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// 状态寄存器
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">reg</span> <span class="p">[</span><span class="mh">1</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">current_state</span><span class="p">,</span> <span class="n">next_state</span><span class="p">;</span>  
+</span></span></span><span class="line"><span class="cl">    <span class="kt">reg</span> <span class="p">[</span><span class="mh">1</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">current_state</span><span class="p">,</span> <span class="n">next_state</span><span class="p">;</span>  
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// 状态机第一段，时序逻辑，非阻塞赋值，传递寄存器的状态
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">always</span> <span class="p">@(</span><span class="k">posedge</span> <span class="n">clk</span> <span class="k">or</span> <span class="k">negedge</span> <span class="n">rst_n</span><span class="p">)</span> <span class="k">begin</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">always</span> <span class="p">@(</span><span class="k">posedge</span> <span class="n">clk</span> <span class="k">or</span> <span class="k">negedge</span> <span class="n">rst_n</span><span class="p">)</span> <span class="k">begin</span>
 </span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">rst_n</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">            <span class="n">current_state</span> <span class="o">&lt;=</span> <span class="n">STATE_IDLE</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        <span class="k">else</span>
@@ -1541,7 +1541,7 @@
 </span></span><span class="line"><span class="cl">    <span class="k">end</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// 状态机第二段，组合逻辑，阻塞赋值，根据当前状态和当前输入，确定下一个状态机的状态
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">always</span> <span class="p">@(</span><span class="o">*</span><span class="p">)</span> <span class="k">begin</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">always</span> <span class="p">@(</span><span class="o">*</span><span class="p">)</span> <span class="k">begin</span>
 </span></span><span class="line"><span class="cl">        <span class="k">case</span> <span class="p">(</span><span class="n">current_state</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">            <span class="nl">STATE_IDLE:</span> <span class="k">begin</span>
 </span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">input_signal</span><span class="p">)</span>
@@ -1562,8 +1562,8 @@
 </span></span><span class="line"><span class="cl">    <span class="k">end</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// 状态机第三代，时序逻辑，非阻塞赋值，因为是 Mealy 型状态机，
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 根据当前状态和当前输入，确定输出信号
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">always</span> <span class="p">@(</span><span class="o">*</span><span class="p">)</span> <span class="k">begin</span>
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// 根据当前状态和当前输入，确定输出信号
+</span></span></span><span class="line"><span class="cl">    <span class="k">always</span> <span class="p">@(</span><span class="o">*</span><span class="p">)</span> <span class="k">begin</span>
 </span></span><span class="line"><span class="cl">        <span class="k">case</span> <span class="p">(</span><span class="n">current_state</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">            <span class="nl">STATE_IDLE:</span> <span class="k">begin</span>
 </span></span><span class="line"><span class="cl">                <span class="n">output_signal</span> <span class="o">=</span> <span class="mh">0</span><span class="p">;</span>
@@ -1622,7 +1622,7 @@
 </span></span><span class="line"><span class="cl"><span class="k">end</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">//不会带来竞争冒险
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">always</span> <span class="p">@(</span><span class="k">posedge</span> <span class="n">clk</span><span class="p">)</span> <span class="k">begin</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">always</span> <span class="p">@(</span><span class="k">posedge</span> <span class="n">clk</span><span class="p">)</span> <span class="k">begin</span>
 </span></span><span class="line"><span class="cl">    <span class="n">a</span> <span class="o">&lt;=</span> <span class="n">b</span> <span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="n">b</span> <span class="o">&lt;=</span> <span class="n">a</span> <span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="k">end</span>
@@ -1647,7 +1647,7 @@
 </span></span><span class="line"><span class="cl">    <span class="n">F</span> <span class="o">&lt;=</span> <span class="n">C</span> <span class="o">&amp;</span> <span class="n">D</span> <span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="k">end</span>
 </span></span><span class="line"><span class="cl"><span class="c1">//fix ↓
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">always</span> <span class="p">@(</span><span class="o">*</span><span class="p">)</span> <span class="k">begin</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">always</span> <span class="p">@(</span><span class="o">*</span><span class="p">)</span> <span class="k">begin</span>
 </span></span><span class="line"><span class="cl">    <span class="n">C</span> <span class="o">=</span> <span class="n">A</span> <span class="o">&amp;</span> <span class="n">B</span> <span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="n">F</span> <span class="o">=</span> <span class="n">C</span> <span class="o">&amp;</span> <span class="n">D</span> <span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="k">end</span>
@@ -1672,7 +1672,7 @@
 </span></span><span class="line"><span class="cl">    <span class="k">end</span>
 </span></span><span class="line"><span class="cl">    <span class="k">else</span> <span class="k">begin</span>
 </span></span><span class="line"><span class="cl">        <span class="n">q</span> <span class="o">&lt;=</span> <span class="n">a</span> <span class="o">&amp;</span> <span class="n">b</span><span class="p">;</span>  <span class="c1">//即便有组合逻辑，也不要写成：q = a &amp; b
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>     <span class="k">end</span>
+</span></span></span><span class="line"><span class="cl">     <span class="k">end</span>
 </span></span><span class="line"><span class="cl"><span class="k">end</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -1816,12 +1816,12 @@
 <pre tabindex="0" class="chroma"><code class="language-verilog" data-lang="verilog"><span class="line"><span class="cl"><span class="k">initial</span> <span class="k">begin</span>
 </span></span><span class="line"><span class="cl">    <span class="n">clk</span> <span class="o">=</span> <span class="mh">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="k">forever</span> <span class="p">#</span><span class="mh">5</span> <span class="n">clk</span> <span class="o">=</span> <span class="o">~</span><span class="n">clk</span><span class="p">;</span> <span class="c1">// 生成时钟，周期10个时间单位
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">end</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">end</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">initial</span> <span class="k">begin</span>
 </span></span><span class="line"><span class="cl">    <span class="n">rst_n</span> <span class="o">=</span> <span class="mh">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">#</span><span class="mh">10</span> <span class="n">rst_n</span> <span class="o">=</span> <span class="mh">1</span><span class="p">;</span> <span class="c1">// 释放复位
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">end</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">end</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div></li>
@@ -1861,8 +1861,8 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-verilog" data-lang="verilog"><span class="line"><span class="cl"><span class="k">initial</span> <span class="k">begin</span>
 </span></span><span class="line"><span class="cl">    <span class="p">#</span><span class="mh">100</span><span class="p">;</span> <span class="c1">// 仿真时间
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nb">$finish</span><span class="p">;</span> <span class="c1">// 结束仿真
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">end</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nb">$finish</span><span class="p">;</span> <span class="c1">// 结束仿真
+</span></span></span><span class="line"><span class="cl"><span class="k">end</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div></li>
@@ -1909,8 +1909,8 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-verilog" data-lang="verilog"><span class="line"><span class="cl"><span class="k">initial</span> <span class="k">begin</span>
 </span></span><span class="line"><span class="cl">    <span class="n">$dumpfile</span><span class="p">(</span><span class="s">&#34;testbench.vcd&#34;</span><span class="p">);</span> <span class="c1">// 指定波形文件名
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">$dumpvars</span><span class="p">(</span><span class="mh">0</span><span class="p">,</span> <span class="n">testbench_name</span><span class="p">);</span> <span class="c1">// 记录所有信号
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">end</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">$dumpvars</span><span class="p">(</span><span class="mh">0</span><span class="p">,</span> <span class="n">testbench_name</span><span class="p">);</span> <span class="c1">// 记录所有信号
+</span></span></span><span class="line"><span class="cl"><span class="k">end</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div></li>
@@ -2016,15 +2016,15 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-verilog" data-lang="verilog"><span class="line"><span class="cl"><span class="c1">// repeat语句的使用格式为：
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">repeat</span><span class="p">(</span><span class="err">循环次数的表达式</span><span class="p">)</span> <span class="k">begin</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">repeat</span><span class="p">(</span><span class="err">循环次数的表达式</span><span class="p">)</span> <span class="k">begin</span>
 </span></span><span class="line"><span class="cl">	<span class="c1">//语句或者语句块
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">end</span> 
+</span></span></span><span class="line"><span class="cl"><span class="k">end</span> 
 </span></span><span class="line"><span class="cl"><span class="c1">//单个语句不需要begin和end
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// while语句的使用格式为：
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">while</span><span class="p">(</span><span class="err">循环执行的条件表达式</span><span class="p">)</span> <span class="k">begin</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">while</span><span class="p">(</span><span class="err">循环执行的条件表达式</span><span class="p">)</span> <span class="k">begin</span>
 </span></span><span class="line"><span class="cl">	<span class="c1">//语句或者语句块
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">end</span> 
+</span></span></span><span class="line"><span class="cl"><span class="k">end</span> 
 </span></span><span class="line"><span class="cl"><span class="c1">//单个语句不需要begin和end
 </span></span></span></code></pre></td></tr></table>
 </div>
@@ -2051,7 +2051,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-verilog" data-lang="verilog"><span class="line"><span class="cl"><span class="c1">//1位全加器的门级结构描述
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">module</span> <span class="n">full_adder1</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">cin</span><span class="p">,</span><span class="n">sum</span><span class="p">,</span><span class="n">cout</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">module</span> <span class="n">full_adder1</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">cin</span><span class="p">,</span><span class="n">sum</span><span class="p">,</span><span class="n">cout</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="k">input</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">cin</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="k">output</span> <span class="n">sum</span><span class="p">,</span><span class="n">cout</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="kt">wire</span> <span class="n">a_n</span><span class="p">,</span> <span class="n">b_n</span><span class="p">,</span> <span class="n">cin_n</span><span class="p">,</span> <span class="n">sum_p1</span><span class="p">,</span><span class="n">sum_p2</span><span class="p">,</span><span class="n">sum_p3</span><span class="p">,</span><span class="n">sum_p4</span><span class="p">,</span> <span class="n">cout_p1</span><span class="p">,</span> <span class="n">cout_p2</span><span class="p">,</span> <span class="n">cout_p3</span><span class="p">;</span>
@@ -2075,7 +2075,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-verilog" data-lang="verilog"><span class="line"><span class="cl"><span class="c1">//1位全加器的数据流描述
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">module</span> <span class="n">full_adder1</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">cin</span><span class="p">,</span><span class="n">sum</span><span class="p">,</span><span class="n">cout</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">module</span> <span class="n">full_adder1</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">cin</span><span class="p">,</span><span class="n">sum</span><span class="p">,</span><span class="n">cout</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="k">input</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">cin</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="k">output</span> <span class="n">sum</span><span class="p">,</span><span class="n">cout</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="k">assign</span> <span class="n">sum</span> <span class="o">=</span> <span class="p">(</span><span class="o">~</span><span class="n">a</span><span class="o">&amp;~</span><span class="n">b</span><span class="o">&amp;</span><span class="n">cin</span><span class="p">)</span><span class="o">|</span><span class="p">(</span><span class="o">~</span><span class="n">a</span><span class="o">&amp;</span><span class="n">b</span><span class="o">&amp;~</span><span class="n">cin</span><span class="p">)</span><span class="o">|</span><span class="p">(</span><span class="n">a</span><span class="o">&amp;~</span><span class="n">b</span><span class="o">&amp;~</span><span class="n">cin</span><span class="p">)</span><span class="o">|</span><span class="p">(</span><span class="n">a</span><span class="o">&amp;</span><span class="n">b</span><span class="o">&amp;</span><span class="n">cin</span><span class="p">);</span>
@@ -2097,7 +2097,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-verilog" data-lang="verilog"><span class="line"><span class="cl"><span class="c1">//1位全加器的行为级描述
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">module</span> <span class="n">full_adder1</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">cin</span><span class="p">,</span><span class="n">sum</span><span class="p">,</span><span class="n">cout</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">module</span> <span class="n">full_adder1</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">cin</span><span class="p">,</span><span class="n">sum</span><span class="p">,</span><span class="n">cout</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="k">input</span> <span class="kt">wire</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span><span class="n">cin</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="k">output</span> <span class="kt">reg</span> <span class="n">sum</span><span class="p">,</span><span class="n">cout</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="k">always</span> <span class="p">@</span><span class="o">*</span> <span class="k">begin</span>
@@ -2126,7 +2126,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-verilog" data-lang="verilog"><span class="line"><span class="cl"><span class="c1">//1位全加器的行为级描述
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">module</span> <span class="n">full_adder4</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">cin</span><span class="p">,</span><span class="n">sum</span><span class="p">,</span><span class="n">cout</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">module</span> <span class="n">full_adder4</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">cin</span><span class="p">,</span><span class="n">sum</span><span class="p">,</span><span class="n">cout</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="k">input</span> <span class="n">cin</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="k">input</span> <span class="p">[</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="k">output</span> <span class="p">[</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="n">sum</span><span class="p">;</span>
@@ -2345,29 +2345,29 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-verilog" data-lang="verilog"><span class="line"><span class="cl"><span class="c1">// 模块声明，定义模块名和参数
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">module</span> <span class="n">counter</span> <span class="p">#(</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">module</span> <span class="n">counter</span> <span class="p">#(</span>
 </span></span><span class="line"><span class="cl">    <span class="k">parameter</span> <span class="n">WIDTH</span> <span class="o">=</span> <span class="mh">4</span>  <span class="c1">// 参数定义，计数器的位宽
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">)(</span>
+</span></span></span><span class="line"><span class="cl"><span class="p">)(</span>
 </span></span><span class="line"><span class="cl">    <span class="k">input</span> <span class="kt">wire</span> <span class="n">clk</span><span class="p">,</span>       <span class="c1">// 输入信号：时钟
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">input</span> <span class="kt">wire</span> <span class="n">rst_n</span><span class="p">,</span>     <span class="c1">// 输入信号：同步复位（低有效）
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">input</span> <span class="kt">wire</span> <span class="n">en</span><span class="p">,</span>        <span class="c1">// 输入信号：使能
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">output</span> <span class="kt">reg</span> <span class="p">[</span><span class="n">WIDTH</span><span class="o">-</span><span class="mh">1</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">count</span>  <span class="c1">// 输出信号：计数值
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">input</span> <span class="kt">wire</span> <span class="n">rst_n</span><span class="p">,</span>     <span class="c1">// 输入信号：同步复位（低有效）
+</span></span></span><span class="line"><span class="cl">    <span class="k">input</span> <span class="kt">wire</span> <span class="n">en</span><span class="p">,</span>        <span class="c1">// 输入信号：使能
+</span></span></span><span class="line"><span class="cl">    <span class="k">output</span> <span class="kt">reg</span> <span class="p">[</span><span class="n">WIDTH</span><span class="o">-</span><span class="mh">1</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">count</span>  <span class="c1">// 输出信号：计数值
+</span></span></span><span class="line"><span class="cl"><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 内部信号声明
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">wire</span> <span class="n">rst</span> <span class="o">=</span> <span class="o">~</span><span class="n">rst_n</span><span class="p">;</span>  <span class="c1">// 使用wire类型定义内部复位信号
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">wire</span> <span class="n">rst</span> <span class="o">=</span> <span class="o">~</span><span class="n">rst_n</span><span class="p">;</span>  <span class="c1">// 使用wire类型定义内部复位信号
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 计数逻辑
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">always</span> <span class="p">@(</span><span class="k">posedge</span> <span class="n">clk</span> <span class="k">or</span> <span class="k">posedge</span> <span class="n">rst</span><span class="p">)</span> <span class="k">begin</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">always</span> <span class="p">@(</span><span class="k">posedge</span> <span class="n">clk</span> <span class="k">or</span> <span class="k">posedge</span> <span class="n">rst</span><span class="p">)</span> <span class="k">begin</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">rst</span><span class="p">)</span> <span class="k">begin</span>
 </span></span><span class="line"><span class="cl">        <span class="n">count</span> <span class="o">&lt;=</span> <span class="mh">0</span><span class="p">;</span>  <span class="c1">// 复位时计数器清零
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">end</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">en</span><span class="p">)</span> <span class="k">begin</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">end</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">en</span><span class="p">)</span> <span class="k">begin</span>
 </span></span><span class="line"><span class="cl">        <span class="n">count</span> <span class="o">&lt;=</span> <span class="n">count</span> <span class="o">+</span> <span class="mh">1</span><span class="p">;</span>  <span class="c1">// 使能时计数器加一
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">end</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">end</span>
 </span></span><span class="line"><span class="cl"><span class="k">end</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 初始块，用于仿真时初始化
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">initial</span> <span class="k">begin</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">initial</span> <span class="k">begin</span>
 </span></span><span class="line"><span class="cl">    <span class="n">count</span> <span class="o">=</span> <span class="mh">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="k">end</span>
 </span></span><span class="line"><span class="cl">
@@ -2499,18 +2499,18 @@ initial过程语句不带出发条件且仅执行一次。initial语句通常用
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-verilog" data-lang="verilog"><span class="line"><span class="cl"><span class="c1">// counter_tb.v
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">module</span> <span class="n">counter_tb</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">module</span> <span class="n">counter_tb</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// 输入信号
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">reg</span> <span class="n">clk</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">    <span class="kt">reg</span> <span class="n">clk</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="kt">reg</span> <span class="n">rst_n</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="kt">reg</span> <span class="n">en</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// 输出信号
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">wire</span> <span class="p">[</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">count</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">    <span class="kt">wire</span> <span class="p">[</span><span class="mh">3</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">count</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// 实例化被测模块
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">counter</span> <span class="n">uut</span> <span class="p">(</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">counter</span> <span class="n">uut</span> <span class="p">(</span>
 </span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="n">clk</span><span class="p">(</span><span class="n">clk</span><span class="p">),</span>
 </span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="n">rst_n</span><span class="p">(</span><span class="n">rst_n</span><span class="p">),</span>
 </span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="n">en</span><span class="p">(</span><span class="n">en</span><span class="p">),</span>
@@ -2518,19 +2518,19 @@ initial过程语句不带出发条件且仅执行一次。initial语句通常用
 </span></span><span class="line"><span class="cl">    <span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// 生成波形文件
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">initial</span> <span class="k">begin</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">initial</span> <span class="k">begin</span>
 </span></span><span class="line"><span class="cl">        <span class="n">$dumpfile</span><span class="p">(</span><span class="s">&#34;counter_tb.vcd&#34;</span><span class="p">);</span> <span class="c1">// 指定波形文件名
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">$dumpvars</span><span class="p">(</span><span class="mh">0</span><span class="p">,</span> <span class="n">counter_tb</span><span class="p">);</span>     <span class="c1">// 记录所有信号
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">end</span>
+</span></span></span><span class="line"><span class="cl">        <span class="n">$dumpvars</span><span class="p">(</span><span class="mh">0</span><span class="p">,</span> <span class="n">counter_tb</span><span class="p">);</span>     <span class="c1">// 记录所有信号
+</span></span></span><span class="line"><span class="cl">    <span class="k">end</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// 生成时钟信号，周期10个时间单位
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">initial</span> <span class="k">begin</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">initial</span> <span class="k">begin</span>
 </span></span><span class="line"><span class="cl">        <span class="n">clk</span> <span class="o">=</span> <span class="mh">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        <span class="k">forever</span> <span class="p">#</span><span class="mh">5</span> <span class="n">clk</span> <span class="o">=</span> <span class="o">~</span><span class="n">clk</span><span class="p">;</span> <span class="c1">// 每5个时间单位反转一次
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">end</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">end</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// 生成复位和使能信号的任务
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">task</span> <span class="n">reset</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">task</span> <span class="n">reset</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        <span class="k">begin</span>
 </span></span><span class="line"><span class="cl">            <span class="n">rst_n</span> <span class="o">=</span> <span class="mh">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">            <span class="n">en</span> <span class="o">=</span> <span class="mh">0</span><span class="p">;</span>
@@ -2549,27 +2549,27 @@ initial过程语句不带出发条件且仅执行一次。initial语句通常用
 </span></span><span class="line"><span class="cl">    <span class="k">endtask</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// Testbench 主过程
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">initial</span> <span class="k">begin</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">initial</span> <span class="k">begin</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// 初始化信号
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">rst_n</span> <span class="o">=</span> <span class="mh">0</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">        <span class="n">rst_n</span> <span class="o">=</span> <span class="mh">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        <span class="n">en</span> <span class="o">=</span> <span class="mh">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">        <span class="c1">// 调用复位任务
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">reset</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">        <span class="n">reset</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">        <span class="c1">// 启动计数
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">enable_count</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">        <span class="n">enable_count</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">        <span class="c1">// 再次复位
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">reset</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">        <span class="n">reset</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">        <span class="c1">// 结束仿真
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">#</span><span class="mh">20</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">        <span class="p">#</span><span class="mh">20</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        <span class="nb">$finish</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="k">end</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// 监控信号变化
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">initial</span> <span class="k">begin</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">initial</span> <span class="k">begin</span>
 </span></span><span class="line"><span class="cl">        <span class="nb">$monitor</span><span class="p">(</span><span class="s">&#34;Time=%0t | rst_n=%b | en=%b | count=%d&#34;</span><span class="p">,</span> <span class="nb">$time</span><span class="p">,</span> <span class="n">rst_n</span><span class="p">,</span> <span class="n">en</span><span class="p">,</span> <span class="n">count</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="k">end</span>
 </span></span><span class="line"><span class="cl">
@@ -2650,28 +2650,28 @@ initial过程语句不带出发条件且仅执行一次。initial语句通常用
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-verilog" data-lang="verilog"><span class="line"><span class="cl"><span class="c1">// 顶层模块声明
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">module</span> <span class="n">traffic_light_controller</span> <span class="p">(</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">module</span> <span class="n">traffic_light_controller</span> <span class="p">(</span>
 </span></span><span class="line"><span class="cl">    <span class="k">input</span> <span class="kt">wire</span> <span class="n">clk</span><span class="p">,</span>          <span class="c1">// 时钟信号
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">input</span> <span class="kt">wire</span> <span class="n">rst_n</span><span class="p">,</span>        <span class="c1">// 复位信号，低有效
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">output</span> <span class="kt">reg</span> <span class="n">red</span><span class="p">,</span>          <span class="c1">// 红灯输出
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">output</span> <span class="kt">reg</span> <span class="n">yellow</span><span class="p">,</span>       <span class="c1">// 黄灯输出
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">output</span> <span class="kt">reg</span> <span class="n">green</span>         <span class="c1">// 绿灯输出
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">input</span> <span class="kt">wire</span> <span class="n">rst_n</span><span class="p">,</span>        <span class="c1">// 复位信号，低有效
+</span></span></span><span class="line"><span class="cl">    <span class="k">output</span> <span class="kt">reg</span> <span class="n">red</span><span class="p">,</span>          <span class="c1">// 红灯输出
+</span></span></span><span class="line"><span class="cl">    <span class="k">output</span> <span class="kt">reg</span> <span class="n">yellow</span><span class="p">,</span>       <span class="c1">// 黄灯输出
+</span></span></span><span class="line"><span class="cl">    <span class="k">output</span> <span class="kt">reg</span> <span class="n">green</span>         <span class="c1">// 绿灯输出
+</span></span></span><span class="line"><span class="cl"><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 状态定义 using localparam
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">localparam</span> <span class="p">[</span><span class="mh">1</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> 
+</span></span></span><span class="line"><span class="cl"><span class="k">localparam</span> <span class="p">[</span><span class="mh">1</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> 
 </span></span><span class="line"><span class="cl">    <span class="n">RED_STATE</span>    <span class="o">=</span> <span class="mh">2</span><span class="mb">&#39;b00</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">    <span class="n">GREEN_STATE</span>  <span class="o">=</span> <span class="mh">2</span><span class="mb">&#39;b01</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">    <span class="n">YELLOW_STATE</span> <span class="o">=</span> <span class="mh">2</span><span class="mb">&#39;b10</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 当前状态和下一个状态
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">reg</span> <span class="p">[</span><span class="mh">1</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">current_state</span><span class="p">,</span> <span class="n">next_state</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">reg</span> <span class="p">[</span><span class="mh">1</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">current_state</span><span class="p">,</span> <span class="n">next_state</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 连续赋值使用 assign
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">wire</span> <span class="n">rst</span> <span class="o">=</span> <span class="o">~</span><span class="n">rst_n</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">wire</span> <span class="n">rst</span> <span class="o">=</span> <span class="o">~</span><span class="n">rst_n</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 状态转移逻辑
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">always</span> <span class="p">@(</span><span class="k">posedge</span> <span class="n">clk</span> <span class="k">or</span> <span class="k">posedge</span> <span class="n">rst</span><span class="p">)</span> <span class="k">begin</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">always</span> <span class="p">@(</span><span class="k">posedge</span> <span class="n">clk</span> <span class="k">or</span> <span class="k">posedge</span> <span class="n">rst</span><span class="p">)</span> <span class="k">begin</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">rst</span><span class="p">)</span> <span class="k">begin</span>
 </span></span><span class="line"><span class="cl">        <span class="n">current_state</span> <span class="o">&lt;=</span> <span class="n">RED_STATE</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="k">end</span> <span class="k">else</span> <span class="k">begin</span>
@@ -2680,7 +2680,7 @@ initial过程语句不带出发条件且仅执行一次。initial语句通常用
 </span></span><span class="line"><span class="cl"><span class="k">end</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 下一个状态的组合逻辑
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">always</span> <span class="p">@(</span><span class="o">*</span><span class="p">)</span> <span class="k">begin</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">always</span> <span class="p">@(</span><span class="o">*</span><span class="p">)</span> <span class="k">begin</span>
 </span></span><span class="line"><span class="cl">    <span class="k">case</span> <span class="p">(</span><span class="n">current_state</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">        <span class="nl">RED_STATE:</span> <span class="k">begin</span>
 </span></span><span class="line"><span class="cl">            <span class="n">next_state</span> <span class="o">=</span> <span class="n">GREEN_STATE</span><span class="p">;</span>
@@ -2698,9 +2698,9 @@ initial过程语句不带出发条件且仅执行一次。initial语句通常用
 </span></span><span class="line"><span class="cl"><span class="k">end</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 输出逻辑
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">always</span> <span class="p">@(</span><span class="o">*</span><span class="p">)</span> <span class="k">begin</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">always</span> <span class="p">@(</span><span class="o">*</span><span class="p">)</span> <span class="k">begin</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 默认所有灯关闭
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">red</span> <span class="o">=</span> <span class="mh">0</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">red</span> <span class="o">=</span> <span class="mh">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="n">yellow</span> <span class="o">=</span> <span class="mh">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="n">green</span> <span class="o">=</span> <span class="mh">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="k">case</span> <span class="p">(</span><span class="n">current_state</span><span class="p">)</span>
@@ -2763,7 +2763,7 @@ initial过程语句不带出发条件且仅执行一次。initial语句通常用
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-verilog" data-lang="verilog"><span class="line"><span class="cl"><span class="k">always</span> <span class="p">@(</span><span class="o">*</span><span class="p">)</span> <span class="k">begin</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 组合逻辑内容
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">end</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">end</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div></li>
@@ -2789,10 +2789,10 @@ initial过程语句不带出发条件且仅执行一次。initial语句通常用
 </span></span><span class="line"><span class="cl">        <span class="n">next_state</span> <span class="o">=</span> <span class="n">GREEN_STATE</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="k">end</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 其他状态
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">default</span><span class="o">:</span><span class="k">begin</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">default</span><span class="o">:</span><span class="k">begin</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">//default分支:在case语句中使用default处理未定义的情况
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    	<span class="c1">//....
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">end</span>
+</span></span></span><span class="line"><span class="cl">    	<span class="c1">//....
+</span></span></span><span class="line"><span class="cl">    <span class="k">end</span>
 </span></span><span class="line"><span class="cl"><span class="k">endcase</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -3036,7 +3036,7 @@ initial过程语句不带出发条件且仅执行一次。initial语句通常用
 <pre tabindex="0" class="chroma"><code class="language-verilog" data-lang="verilog"><span class="line"><span class="cl"><span class="no">`timescale</span> <span class="mh">1</span><span class="n">ns</span> <span class="o">/</span> <span class="mh">1</span><span class="n">ps</span>
 </span></span><span class="line"><span class="cl"><span class="c1">//该模块实现了一个UART（通用异步收发传输器）接收器，用于接收串行数据并将其转换为并行数据。
 </span></span></span><span class="line"><span class="cl"><span class="c1">//主要功能包括检测起始位、接收数据位、检测停止位，并在接收完成后输出有效信号和接收到的数据。
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">module</span> <span class="n">uart_recv</span><span class="p">(</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">module</span> <span class="n">uart_recv</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">    <span class="k">input</span>               <span class="n">clk</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">    <span class="k">input</span>               <span class="n">rst</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">    <span class="k">input</span>               <span class="n">din</span><span class="p">,</span>
@@ -3114,7 +3114,7 @@ initial过程语句不带出发条件且仅执行一次。initial语句通常用
 </span></span><span class="line"><span class="cl">            <span class="k">end</span>
 </span></span><span class="line"><span class="cl">            <span class="nl">STOP:</span> <span class="k">begin</span>
 </span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">baud_tick</span><span class="p">)</span>  <span class="c1">// Sample stop bit
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="n">next_state</span> <span class="o">=</span> <span class="n">IDLE</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">                    <span class="n">next_state</span> <span class="o">=</span> <span class="n">IDLE</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">                <span class="k">else</span>
 </span></span><span class="line"><span class="cl">                    <span class="n">next_state</span> <span class="o">=</span> <span class="n">STOP</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">            <span class="k">end</span>
@@ -3153,7 +3153,7 @@ initial过程语句不带出发条件且仅执行一次。initial语句通常用
 </span></span><span class="line"><span class="cl"><span class="k">endmodule</span>
 </span></span><span class="line"><span class="cl"><span class="c1">//该模块实现了一个UART发送器，用于将并行数据转换为串行数据进行发送。
 </span></span></span><span class="line"><span class="cl"><span class="c1">//主要功能包括发送起始位、数据位和停止位，并在发送完成后返回到空闲状态。
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">module</span> <span class="n">uart_send</span><span class="p">(</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">module</span> <span class="n">uart_send</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">    <span class="k">input</span>        <span class="n">clk</span><span class="p">,</span>        
 </span></span><span class="line"><span class="cl">    <span class="k">input</span>        <span class="n">rst</span><span class="p">,</span>       
 </span></span><span class="line"><span class="cl">    <span class="k">input</span>        <span class="n">valid</span><span class="p">,</span>      
@@ -3460,7 +3460,7 @@ initial过程语句不带出发条件且仅执行一次。initial语句通常用
 </span></span><span class="line"><span class="cl">        <span class="k">end</span>
 </span></span><span class="line"><span class="cl">        <span class="nl">STOP:</span> <span class="k">begin</span>
 </span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">baud_tick</span><span class="p">)</span>  <span class="c1">// Sample stop bit
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">next_state</span> <span class="o">=</span> <span class="n">IDLE</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">                <span class="n">next_state</span> <span class="o">=</span> <span class="n">IDLE</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">            <span class="k">else</span>
 </span></span><span class="line"><span class="cl">                <span class="n">next_state</span> <span class="o">=</span> <span class="n">STOP</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        <span class="k">end</span>
@@ -4134,7 +4134,7 @@ initial过程语句不带出发条件且仅执行一次。initial语句通常用
         
         
 
-        共 742374 字 , 39 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        共 741930 字 , 39 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
         主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 

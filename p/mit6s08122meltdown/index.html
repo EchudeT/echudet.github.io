@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-cn" dir="ltr">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Meltdown漏洞破坏了这种隔离机制，使攻击者能够访问内核内存。这一漏洞不依赖操作系统或软件漏洞，而是通过利用处理器硬件特性来实施攻击。这一漏洞广泛影响了个人计算机、云服务器中的虚拟机等设备。">
 <title>MIT6S081：22Meltdown</title>
@@ -59,7 +59,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu_67bf1327fc98b60.png" width="300"
+                        <img src="/img/avatar_hu_c2920364e6534697.png" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -306,8 +306,8 @@
     <header class="article-header">
         <div class="article-image">
             <a href="/p/mit6s08122meltdown/">
-                <img src="/p/mit6s08122meltdown/19_hu_9c0d7b23e3728c68.jpg"
-                        srcset="/p/mit6s08122meltdown/19_hu_9c0d7b23e3728c68.jpg 800w, /p/mit6s08122meltdown/19_hu_5f73d2416c1abb28.jpg 1600w"
+                <img src="/p/mit6s08122meltdown/19_hu_bd238d0bd4ea8de8.jpg"
+                        srcset="/p/mit6s08122meltdown/19_hu_bd238d0bd4ea8de8.jpg 800w, /p/mit6s08122meltdown/19_hu_987bd40a9e1ddbaf.jpg 1600w"
                         width="800" 
                         height="500" 
                         loading="lazy"
@@ -725,7 +725,7 @@
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">condition</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// 关键指令在这里执行
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -770,7 +770,7 @@
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">__builtin_prefetch</span><span class="p">((</span><span class="kt">void</span><span class="o">*</span><span class="p">)</span><span class="n">kernel_address</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 后续操作触发缓存侧信道攻击
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div></li>
@@ -832,7 +832,7 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">start_time</span> <span class="o">=</span> <span class="nf">rdtsc</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl"><span class="nf">access</span><span class="p">(</span><span class="n">shared_memory_address</span><span class="p">);</span>  <span class="c1">// 访问目标内存地址
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">end_time</span> <span class="o">=</span> <span class="nf">rdtsc</span><span class="p">();</span>
+</span></span></span><span class="line"><span class="cl"><span class="n">end_time</span> <span class="o">=</span> <span class="nf">rdtsc</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl"><span class="n">time_diff</span> <span class="o">=</span> <span class="n">end_time</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">;</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -1006,12 +1006,12 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nf">setjmp</span><span class="p">(</span><span class="n">buf</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 这里执行 Meltdown 攻击的代码
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">kernel_data</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="n">kernel_address</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">kernel_data</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="n">kernel_address</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="n">array</span><span class="p">[</span><span class="n">kernel_data</span> <span class="o">*</span> <span class="mi">4096</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 异常发生时的处理逻辑
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 可以重试或者记录错误
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// 可以重试或者记录错误
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>通过 <code>setjmp</code> 和 <code>longjmp</code>，程序可以在发生非法访问异常后返回并继续执行。</p>
@@ -1158,7 +1158,7 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">result</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">retries</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>  <span class="c1">// 设定重试次数
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">do</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">do</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="n">result</span> <span class="o">=</span> <span class="nf">attempt_to_read_data</span><span class="p">(</span><span class="n">kernel_address</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="n">retries</span><span class="o">--</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="n">result</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">retries</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">);</span>  <span class="c1">// 重试，直到获取到非 0 的数据或达到重试上限
@@ -1201,7 +1201,7 @@
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">offset</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">offset</span> <span class="o">&lt;</span> <span class="n">data_size</span><span class="p">;</span> <span class="n">offset</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">value</span> <span class="o">=</span> <span class="nf">read_byte</span><span class="p">(</span><span class="n">kernel_address</span> <span class="o">+</span> <span class="n">offset</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 处理读取的 value
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div></li>
@@ -1225,7 +1225,7 @@
 </span></span><span class="line"><span class="cl">    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">buffer</span><span class="p">[</span><span class="n">n</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">memcpy</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="n">kernel_address</span> <span class="o">+</span> <span class="n">offset</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 处理读取的 buffer
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div></li>
@@ -1400,7 +1400,7 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">r0</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">something</span><span class="o">&gt;</span>
 </span></span><span class="line"><span class="cl"><span class="n">r1</span> <span class="o">=</span> <span class="n">valid</span> <span class="c1">//r1 is a register; valid is in RAM
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">if</span><span class="p">(</span><span class="n">r1</span> <span class="o">==</span> <span class="mi">1</span><span class="p">){</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">r1</span> <span class="o">==</span> <span class="mi">1</span><span class="p">){</span>
 </span></span><span class="line"><span class="cl">  <span class="n">r2</span> <span class="o">=</span> <span class="o">*</span><span class="n">r0</span>
 </span></span><span class="line"><span class="cl">  <span class="n">r3</span> <span class="o">=</span> <span class="n">r2</span> <span class="o">+</span> <span class="mi">1</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="k">else</span><span class="p">{</span>
@@ -1455,7 +1455,7 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">r0</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">something</span><span class="o">&gt;</span>
 </span></span><span class="line"><span class="cl"><span class="n">r1</span> <span class="o">=</span> <span class="n">valid</span> <span class="c1">//r1 is a register; valid is in RAM
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">if</span><span class="p">(</span><span class="n">r1</span> <span class="o">==</span> <span class="mi">1</span><span class="p">){</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">r1</span> <span class="o">==</span> <span class="mi">1</span><span class="p">){</span>
 </span></span><span class="line"><span class="cl">  <span class="n">r2</span> <span class="o">=</span> <span class="o">*</span><span class="n">r0</span>
 </span></span><span class="line"><span class="cl">  <span class="n">r3</span> <span class="o">=</span> <span class="n">r2</span> <span class="o">+</span> <span class="mi">1</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="k">else</span><span class="p">{</span>
@@ -1502,7 +1502,7 @@
 <p><img src="/p/mit6s08122meltdown/p67.png"
 	width="970"
 	height="832"
-	srcset="/p/mit6s08122meltdown/p67_hu_f5b48b30308ed274.png 480w, /p/mit6s08122meltdown/p67_hu_abc45426d1d850bc.png 1024w"
+	srcset="/p/mit6s08122meltdown/p67_hu_c2cfb38d83903353.png 480w, /p/mit6s08122meltdown/p67_hu_49922114e10bb0e3.png 1024w"
 	loading="lazy"
 	
 		alt="p67"
@@ -1624,27 +1624,27 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">char</span> <span class="n">buf</span><span class="p">[</span><span class="mi">8192</span><span class="p">]</span>       <span class="c1">// L1
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// the Flush of Flush+Reload
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">clflush</span> <span class="n">buf</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span></span></span><span class="line"><span class="cl"><span class="n">clflush</span> <span class="n">buf</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </span></span><span class="line"><span class="cl"><span class="n">clflush</span> <span class="n">buf</span><span class="p">[</span><span class="mi">4096</span><span class="p">]</span>    <span class="c1">// L5
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="n">some</span> <span class="n">expensive</span> <span class="n">instruction</span> <span class="n">like</span> <span class="n">divide</span><span class="o">&gt;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">r1</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">a</span> <span class="n">kernel</span> <span class="n">virtual</span> <span class="n">address</span><span class="o">&gt;</span>
 </span></span><span class="line"><span class="cl"><span class="n">r2</span> <span class="o">=</span> <span class="o">*</span><span class="n">r1</span>             <span class="c1">// L10
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">r2</span> <span class="o">=</span> <span class="n">r2</span> <span class="o">&amp;</span> <span class="mi">1</span>          <span class="c1">// speculated
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">r2</span> <span class="o">=</span> <span class="n">r2</span> <span class="o">*</span> <span class="mi">4096</span>       <span class="c1">// speculated
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">r3</span> <span class="o">=</span> <span class="n">buf</span><span class="p">[</span><span class="n">r2</span><span class="p">]</span>         <span class="c1">// speculated
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl"><span class="n">r2</span> <span class="o">=</span> <span class="n">r2</span> <span class="o">&amp;</span> <span class="mi">1</span>          <span class="c1">// speculated
+</span></span></span><span class="line"><span class="cl"><span class="n">r2</span> <span class="o">=</span> <span class="n">r2</span> <span class="o">*</span> <span class="mi">4096</span>       <span class="c1">// speculated
+</span></span></span><span class="line"><span class="cl"><span class="n">r3</span> <span class="o">=</span> <span class="n">buf</span><span class="p">[</span><span class="n">r2</span><span class="p">]</span>         <span class="c1">// speculated
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="n">handle</span> <span class="n">the</span> <span class="n">page</span> <span class="n">fault</span> <span class="n">from</span> <span class="s">&#34;r2 = *r1&#34;</span><span class="o">&gt;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// the Reload of Flush+Reload
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">a</span> <span class="o">=</span> <span class="n">rdtsc</span>            <span class="c1">// L18
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">r0</span> <span class="o">=</span> <span class="n">buf</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span></span></span><span class="line"><span class="cl"><span class="n">a</span> <span class="o">=</span> <span class="n">rdtsc</span>            <span class="c1">// L18
+</span></span></span><span class="line"><span class="cl"><span class="n">r0</span> <span class="o">=</span> <span class="n">buf</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </span></span><span class="line"><span class="cl"><span class="n">b</span> <span class="o">=</span> <span class="n">rdtsc</span>
 </span></span><span class="line"><span class="cl"><span class="n">r1</span> <span class="o">=</span> <span class="n">buf</span><span class="p">[</span><span class="mi">4096</span><span class="p">]</span>       <span class="c1">// L21
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">c</span> <span class="o">=</span> <span class="n">rdtsc</span>
+</span></span></span><span class="line"><span class="cl"><span class="n">c</span> <span class="o">=</span> <span class="n">rdtsc</span>
 </span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="n">b</span><span class="o">-</span><span class="n">a</span> <span class="o">&lt;</span> <span class="n">c</span><span class="o">-</span><span class="nl">b</span><span class="p">:</span>
 </span></span><span class="line"><span class="cl">  <span class="n">low</span> <span class="n">bit</span> <span class="n">was</span> <span class="n">probably</span> <span class="n">a</span> <span class="mi">1</span>   <span class="c1">// L24
 </span></span></span></code></pre></td></tr></table>
@@ -1816,7 +1816,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08123rcu/bg.91a08bf3fe0a8ca435e8fbc902291fd5_hu_50da030b7ba2cbe7.jpg" 
+                <img src="/p/mit6s08123rcu/bg.91a08bf3fe0a8ca435e8fbc902291fd5_hu_b6ef8ea2c8ceedc0.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -1840,7 +1840,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08121networking/bg.68c4376fd87b0b35da07319dd155c90d_hu_b8a716243c6f9679.jpg" 
+                <img src="/p/mit6s08121networking/bg.68c4376fd87b0b35da07319dd155c90d_hu_702cc6dbf23ff4b6.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -1864,7 +1864,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08120kernels-and-hll/bg.4175e6a2793e0fc340e5aced2529e40b_hu_de82d011b3d97ace.jpg" 
+                <img src="/p/mit6s08120kernels-and-hll/bg.4175e6a2793e0fc340e5aced2529e40b_hu_900f2fcc83e9e964.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -1888,7 +1888,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08119virtual-machines/bg.b02a7ba1d946705c0cf2809bcf960db8_hu_77df69a362eba544.jpg" 
+                <img src="/p/mit6s08119virtual-machines/bg.b02a7ba1d946705c0cf2809bcf960db8_hu_3d3ad0ec0320c7b4.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -1912,7 +1912,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08118os-organization/bg.6254618fb3eb08f3bf5d7cd89d4cd672_hu_845b73e21b5a04f1.jpg" 
+                <img src="/p/mit6s08118os-organization/bg.6254618fb3eb08f3bf5d7cd89d4cd672_hu_646dc659ecd15a3f.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -2143,7 +2143,7 @@
         
         
 
-        共 742374 字 , 39 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        共 741930 字 , 39 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
         主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 

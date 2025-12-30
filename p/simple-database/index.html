@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-cn" dir="ltr">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="数据库知识的简单梳理。">
 <title>Simple Database</title>
@@ -59,7 +59,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu_67bf1327fc98b60.png" width="300"
+                        <img src="/img/avatar_hu_c2920364e6534697.png" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -775,8 +775,8 @@
     <header class="article-header">
         <div class="article-image">
             <a href="/p/simple-database/">
-                <img src="/p/simple-database/bg_hu_badfe4c0066ad917.jpg"
-                        srcset="/p/simple-database/bg_hu_badfe4c0066ad917.jpg 800w, /p/simple-database/bg_hu_5ea406615f210a35.jpg 1600w"
+                <img src="/p/simple-database/bg_hu_1d93e83be34c1cf6.jpg"
+                        srcset="/p/simple-database/bg_hu_1d93e83be34c1cf6.jpg 800w, /p/simple-database/bg_hu_5e80261a51b7e1f1.jpg 1600w"
                         width="800" 
                         height="450" 
                         loading="lazy"
@@ -1557,9 +1557,9 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">EXPLAIN</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">Employees</span><span class="p">.</span><span class="n">Name</span><span class="p">,</span><span class="w"> </span><span class="n">Departments</span><span class="p">.</span><span class="n">DeptName</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">FROM</span><span class="w"> </span><span class="n">Employees</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">Departments</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">Employees</span><span class="p">.</span><span class="n">DeptID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Departments</span><span class="p">.</span><span class="n">ID</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">WHERE</span><span class="w"> </span><span class="n">Employees</span><span class="p">.</span><span class="n">Age</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">30</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">FROM</span><span class="w"> </span><span class="n">Employees</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">Departments</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">Employees</span><span class="p">.</span><span class="n">DeptID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Departments</span><span class="p">.</span><span class="n">ID</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">WHERE</span><span class="w"> </span><span class="n">Employees</span><span class="p">.</span><span class="n">Age</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">30</span><span class="p">;</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="索引优化">索引优化
@@ -1608,7 +1608,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_age</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">Employees</span><span class="p">(</span><span class="n">Age</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_deptid_name</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">Employees</span><span class="p">(</span><span class="n">DeptID</span><span class="p">,</span><span class="w"> </span><span class="n">Name</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_deptid_name</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">Employees</span><span class="p">(</span><span class="n">DeptID</span><span class="p">,</span><span class="w"> </span><span class="n">Name</span><span class="p">);</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="查询重写query-rewrite">查询重写（Query Rewrite）
@@ -1647,7 +1647,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="s1">&#39;user1&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;password&#39;</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="p">,</span><span class="w"> </span><span class="k">INSERT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">Employees</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">&#39;user1&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="p">,</span><span class="w"> </span><span class="k">INSERT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">Employees</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">&#39;user1&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span><span class="p">;</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="角色与权限管理">角色与权限管理
@@ -1661,8 +1661,8 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">CREATE</span><span class="w"> </span><span class="k">ROLE</span><span class="w"> </span><span class="s1">&#39;read_write&#39;</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="p">,</span><span class="w"> </span><span class="k">INSERT</span><span class="p">,</span><span class="w"> </span><span class="k">UPDATE</span><span class="p">,</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">Employees</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">&#39;read_write&#39;</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">GRANT</span><span class="w"> </span><span class="s1">&#39;read_write&#39;</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">&#39;user1&#39;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="p">,</span><span class="w"> </span><span class="k">INSERT</span><span class="p">,</span><span class="w"> </span><span class="k">UPDATE</span><span class="p">,</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">Employees</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">&#39;read_write&#39;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">GRANT</span><span class="w"> </span><span class="s1">&#39;read_write&#39;</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">&#39;user1&#39;</span><span class="p">;</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="数据加密">数据加密
@@ -1678,7 +1678,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="c1">-- 开启SSL连接
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">ALTER</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="s1">&#39;user1&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span><span class="w"> </span><span class="n">REQUIRE</span><span class="w"> </span><span class="n">SSL</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">ALTER</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="s1">&#39;user1&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span><span class="w"> </span><span class="n">REQUIRE</span><span class="w"> </span><span class="n">SSL</span><span class="p">;</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="审计与监控">审计与监控
@@ -1691,7 +1691,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="c1">-- 启用审计日志
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">AUDIT</span><span class="w"> </span><span class="k">SELECT</span><span class="p">,</span><span class="w"> </span><span class="k">INSERT</span><span class="p">,</span><span class="w"> </span><span class="k">UPDATE</span><span class="p">,</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">Employees</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">user1</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="n">AUDIT</span><span class="w"> </span><span class="k">SELECT</span><span class="p">,</span><span class="w"> </span><span class="k">INSERT</span><span class="p">,</span><span class="w"> </span><span class="k">UPDATE</span><span class="p">,</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">Employees</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">user1</span><span class="p">;</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="数据库备份与恢复">数据库备份与恢复
@@ -1719,10 +1719,10 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="c1">-- 完全备份
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">BACKUP</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">Employees</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">DISK</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;backup_employees.bak&#39;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="n">BACKUP</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">Employees</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">DISK</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;backup_employees.bak&#39;</span><span class="p">;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">-- 恢复数据库
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">RESTORE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">Employees</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">DISK</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;backup_employees.bak&#39;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c1">-- 恢复数据库
+</span></span></span><span class="line"><span class="cl"><span class="n">RESTORE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">Employees</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">DISK</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;backup_employees.bak&#39;</span><span class="p">;</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="高可用性方案">高可用性方案
@@ -1739,8 +1739,8 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="c1">-- 设置主从复制
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">CHANGE</span><span class="w"> </span><span class="n">MASTER</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">MASTER_HOST</span><span class="o">=</span><span class="s1">&#39;master_host&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">MASTER_USER</span><span class="o">=</span><span class="s1">&#39;replica_user&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">MASTER_PASSWORD</span><span class="o">=</span><span class="s1">&#39;password&#39;</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">START</span><span class="w"> </span><span class="n">SLAVE</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="n">CHANGE</span><span class="w"> </span><span class="n">MASTER</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">MASTER_HOST</span><span class="o">=</span><span class="s1">&#39;master_host&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">MASTER_USER</span><span class="o">=</span><span class="s1">&#39;replica_user&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">MASTER_PASSWORD</span><span class="o">=</span><span class="s1">&#39;password&#39;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">START</span><span class="w"> </span><span class="n">SLAVE</span><span class="p">;</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="rdbms的性能优化">RDBMS的性能优化
@@ -1768,7 +1768,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="c1">-- 重建索引
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">ALTER</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_age</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">Employees</span><span class="w"> </span><span class="n">REBUILD</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">ALTER</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_age</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">Employees</span><span class="w"> </span><span class="n">REBUILD</span><span class="p">;</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="数据库参数调整">数据库参数调整
@@ -1794,7 +1794,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SET</span><span class="w"> </span><span class="k">GLOBAL</span><span class="w"> </span><span class="n">query_cache_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">262144</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">SET</span><span class="w"> </span><span class="k">GLOBAL</span><span class="w"> </span><span class="n">query_cache_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">SET</span><span class="w"> </span><span class="k">GLOBAL</span><span class="w"> </span><span class="n">query_cache_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="sql与查询优化">SQL与查询优化
@@ -1822,9 +1822,9 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">Name</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">Age</span><span class="w"> </span><span class="nb">INT</span><span class="p">,</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">DeptID</span><span class="w"> </span><span class="nb">INT</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Employees</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">Salary</span><span class="w"> </span><span class="nb">DECIMAL</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">DROP</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Employees</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Employees</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">Salary</span><span class="w"> </span><span class="nb">DECIMAL</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">DROP</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Employees</span><span class="p">;</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div></li>
@@ -1841,8 +1841,8 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">Employees</span><span class="w"> </span><span class="p">(</span><span class="n">ID</span><span class="p">,</span><span class="w"> </span><span class="n">Name</span><span class="p">,</span><span class="w"> </span><span class="n">Age</span><span class="p">,</span><span class="w"> </span><span class="n">DeptID</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Alice&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w"> </span><span class="mi">101</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">UPDATE</span><span class="w"> </span><span class="n">Employees</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">Salary</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">75000</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">ID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Employees</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">Age</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">25</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">UPDATE</span><span class="w"> </span><span class="n">Employees</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">Salary</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">75000</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">ID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Employees</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">Age</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">25</span><span class="p">;</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div></li>
@@ -1872,7 +1872,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="p">,</span><span class="w"> </span><span class="k">INSERT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">Employees</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">&#39;user1&#39;</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">REVOKE</span><span class="w"> </span><span class="k">INSERT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">Employees</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="s1">&#39;user1&#39;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">REVOKE</span><span class="w"> </span><span class="k">INSERT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">Employees</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="s1">&#39;user1&#39;</span><span class="p">;</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div></li>
@@ -1935,7 +1935,7 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">Name</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Employees</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="p">(</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">SELECT</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Departments</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">ManagerID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">ID</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">);</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div></li>
@@ -1952,8 +1952,8 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">TotalEmployees</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Employees</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">SELECT</span><span class="w"> </span><span class="k">AVG</span><span class="p">(</span><span class="n">Salary</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">AvgSalary</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Employees</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">SELECT</span><span class="w"> </span><span class="k">MAX</span><span class="p">(</span><span class="n">Age</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">OldestEmployee</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Employees</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="k">AVG</span><span class="p">(</span><span class="n">Salary</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">AvgSalary</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Employees</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="k">MAX</span><span class="p">(</span><span class="n">Age</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">OldestEmployee</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Employees</span><span class="p">;</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div></li>
@@ -1971,9 +1971,9 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">BEGIN</span><span class="w"> </span><span class="k">TRANSACTION</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">UPDATE</span><span class="w"> </span><span class="n">Employees</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">Salary</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Salary</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">DeptID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">101</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Employees</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">Age</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">COMMIT</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">UPDATE</span><span class="w"> </span><span class="n">Employees</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">Salary</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Salary</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">DeptID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">101</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Employees</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">Age</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">COMMIT</span><span class="p">;</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div></li>
@@ -2075,7 +2075,7 @@
 <pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Employees_2023</span><span class="w"> </span><span class="n">PARTITION</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">RANGE</span><span class="w"> </span><span class="p">(</span><span class="n">HireDate</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">PARTITION</span><span class="w"> </span><span class="n">p1</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="k">LESS</span><span class="w"> </span><span class="k">THAN</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;2023-01-01&#39;</span><span class="p">),</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">PARTITION</span><span class="w"> </span><span class="n">p2</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="k">LESS</span><span class="w"> </span><span class="k">THAN</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;2023-12-31&#39;</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">);</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div></li>
@@ -2093,7 +2093,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SET</span><span class="w"> </span><span class="k">GLOBAL</span><span class="w"> </span><span class="n">query_cache_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1048576</span><span class="p">;</span><span class="w">  </span><span class="c1">-- 设置缓存大小
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">SET</span><span class="w"> </span><span class="k">GLOBAL</span><span class="w"> </span><span class="n">query_cache_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w">       </span><span class="c1">-- 开启查询缓存
+</span></span></span><span class="line"><span class="cl"><span class="k">SET</span><span class="w"> </span><span class="k">GLOBAL</span><span class="w"> </span><span class="n">query_cache_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w">       </span><span class="c1">-- 开启查询缓存
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div></li>
@@ -2137,7 +2137,7 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Employees</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">Age</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">30</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">DeptID</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="p">(</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">SELECT</span><span class="w"> </span><span class="n">ID</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Departments</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="k">Location</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;New York&#39;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">);</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div></li>
@@ -2163,9 +2163,9 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">Name</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">Age</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">FROM</span><span class="w"> </span><span class="n">Employees</span><span class="w"> </span><span class="n">e</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">Departments</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">DeptID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">ID</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">WHERE</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">Age</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">30</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="k">Location</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;New York&#39;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">FROM</span><span class="w"> </span><span class="n">Employees</span><span class="w"> </span><span class="n">e</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">Departments</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">DeptID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">ID</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">WHERE</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">Age</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">30</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="k">Location</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;New York&#39;</span><span class="p">;</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div></li>
@@ -2178,7 +2178,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_dept_location</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">Departments</span><span class="p">(</span><span class="k">Location</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_employees_age</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">Employees</span><span class="p">(</span><span class="n">Age</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_employees_age</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">Employees</span><span class="p">(</span><span class="n">Age</span><span class="p">);</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div></li>
@@ -2993,13 +2993,13 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="o">@</span><span class="n">UserID</span><span class="w"> </span><span class="nb">INT</span><span class="p">,</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="o">@</span><span class="n">ProductID</span><span class="w"> </span><span class="nb">INT</span><span class="p">,</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="o">@</span><span class="n">Quantity</span><span class="w"> </span><span class="nb">INT</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">AS</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">BEGIN</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">AS</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">BEGIN</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">-- 检查用户是否存在
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">    </span><span class="k">IF</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Users</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">UserID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@</span><span class="n">UserID</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">IF</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Users</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">UserID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@</span><span class="n">UserID</span><span class="p">)</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">BEGIN</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">-- 插入订单
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">        </span><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">Orders</span><span class="w"> </span><span class="p">(</span><span class="n">UserID</span><span class="p">,</span><span class="w"> </span><span class="n">ProductID</span><span class="p">,</span><span class="w"> </span><span class="n">Quantity</span><span class="p">,</span><span class="w"> </span><span class="n">OrderDate</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">Orders</span><span class="w"> </span><span class="p">(</span><span class="n">UserID</span><span class="p">,</span><span class="w"> </span><span class="n">ProductID</span><span class="p">,</span><span class="w"> </span><span class="n">Quantity</span><span class="p">,</span><span class="w"> </span><span class="n">OrderDate</span><span class="p">)</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="o">@</span><span class="n">UserID</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">ProductID</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">Quantity</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">())</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">PRINT</span><span class="w"> </span><span class="s1">&#39;订单已成功添加。&#39;</span><span class="w">
@@ -3008,7 +3008,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">BEGIN</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">PRINT</span><span class="w"> </span><span class="s1">&#39;用户不存在，无法添加订单。&#39;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">END</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">END</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">END</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>通过调用 <code>AddOrder</code> 存储过程，开发人员无需每次都编写复杂的SQL语句，只需传递必要的参数即可完成操作。</p>
@@ -3075,15 +3075,15 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">CREATE</span><span class="w"> </span><span class="k">TRIGGER</span><span class="w"> </span><span class="n">trg_UpdateInventory</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">ON</span><span class="w"> </span><span class="n">Orders</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">AFTER</span><span class="w"> </span><span class="k">INSERT</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">AS</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">BEGIN</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">ON</span><span class="w"> </span><span class="n">Orders</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">AFTER</span><span class="w"> </span><span class="k">INSERT</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">AS</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">BEGIN</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">UPDATE</span><span class="w"> </span><span class="n">Products</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">SET</span><span class="w"> </span><span class="n">Stock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Stock</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">i</span><span class="p">.</span><span class="n">Quantity</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">FROM</span><span class="w"> </span><span class="n">Products</span><span class="w"> </span><span class="n">p</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">inserted</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">ProductID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">.</span><span class="n">ProductID</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">END</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">END</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>此触发器在订单插入后自动执行，确保库存数据的一致性。</p>
@@ -3169,10 +3169,10 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">CREATE</span><span class="w"> </span><span class="k">TRIGGER</span><span class="w"> </span><span class="n">trg_PreventDuplicateUser</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">ON</span><span class="w"> </span><span class="n">Users</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">INSTEAD</span><span class="w"> </span><span class="k">OF</span><span class="w"> </span><span class="k">INSERT</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">AS</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">BEGIN</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">ON</span><span class="w"> </span><span class="n">Users</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">INSTEAD</span><span class="w"> </span><span class="k">OF</span><span class="w"> </span><span class="k">INSERT</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">AS</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">BEGIN</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">IF</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Users</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">Username</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="n">Username</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">inserted</span><span class="p">))</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">BEGIN</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">RAISERROR</span><span class="p">(</span><span class="s1">&#39;用户名已存在，无法重复注册。&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w">
@@ -3182,7 +3182,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">Users</span><span class="w"> </span><span class="p">(</span><span class="n">Username</span><span class="p">,</span><span class="w"> </span><span class="n">Password</span><span class="p">,</span><span class="w"> </span><span class="n">Email</span><span class="p">)</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">SELECT</span><span class="w"> </span><span class="n">Username</span><span class="p">,</span><span class="w"> </span><span class="n">Password</span><span class="p">,</span><span class="w"> </span><span class="n">Email</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">inserted</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">END</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">END</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">END</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>此触发器在用户插入操作前检查用户名是否已存在，防止重复注册。</p>
@@ -3209,12 +3209,12 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">CREATE</span><span class="w"> </span><span class="k">FUNCTION</span><span class="w"> </span><span class="n">dbo</span><span class="p">.</span><span class="n">CalculateTotalAmount</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">(</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="o">@</span><span class="n">OrderID</span><span class="w"> </span><span class="nb">INT</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">RETURNS</span><span class="w"> </span><span class="nb">DECIMAL</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">AS</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">BEGIN</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">RETURNS</span><span class="w"> </span><span class="nb">DECIMAL</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">AS</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">BEGIN</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">Total</span><span class="w"> </span><span class="nb">DECIMAL</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">SELECT</span><span class="w"> </span><span class="o">@</span><span class="n">Total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">SUM</span><span class="p">(</span><span class="n">Quantity</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">UnitPrice</span><span class="p">)</span><span class="w">
@@ -3222,7 +3222,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">WHERE</span><span class="w"> </span><span class="n">OrderID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@</span><span class="n">OrderID</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">RETURN</span><span class="w"> </span><span class="o">@</span><span class="n">Total</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">END</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">END</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>通过调用 <code>dbo.CalculateTotalAmount</code> 函数，可以轻松获取特定订单的总金额。</p>
@@ -3376,20 +3376,20 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="o">@</span><span class="n">FromAccountID</span><span class="w"> </span><span class="nb">INT</span><span class="p">,</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="o">@</span><span class="n">ToAccountID</span><span class="w"> </span><span class="nb">INT</span><span class="p">,</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="o">@</span><span class="n">Amount</span><span class="w"> </span><span class="nb">DECIMAL</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">AS</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">BEGIN</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">AS</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">BEGIN</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">BEGIN</span><span class="w"> </span><span class="k">TRANSACTION</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">-- 检查账户余额
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">    </span><span class="k">IF</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="n">Balance</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Accounts</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">AccountID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@</span><span class="n">FromAccountID</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="o">@</span><span class="n">Amount</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">IF</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="n">Balance</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">Accounts</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">AccountID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@</span><span class="n">FromAccountID</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="o">@</span><span class="n">Amount</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">BEGIN</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">-- 扣除转出账户余额
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">        </span><span class="k">UPDATE</span><span class="w"> </span><span class="n">Accounts</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">UPDATE</span><span class="w"> </span><span class="n">Accounts</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">SET</span><span class="w"> </span><span class="n">Balance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Balance</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="o">@</span><span class="n">Amount</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">WHERE</span><span class="w"> </span><span class="n">AccountID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@</span><span class="n">FromAccountID</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">-- 增加转入账户余额
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">        </span><span class="k">UPDATE</span><span class="w"> </span><span class="n">Accounts</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">UPDATE</span><span class="w"> </span><span class="n">Accounts</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">SET</span><span class="w"> </span><span class="n">Balance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Balance</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">@</span><span class="n">Amount</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">WHERE</span><span class="w"> </span><span class="n">AccountID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@</span><span class="n">ToAccountID</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        
@@ -3401,7 +3401,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">ROLLBACK</span><span class="w"> </span><span class="k">TRANSACTION</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">PRINT</span><span class="w"> </span><span class="s1">&#39;余额不足，转账失败。&#39;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">END</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">END</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">END</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>此存储过程封装了转账操作的逻辑，确保在扣除和增加账户余额时的一致性和安全性。</p>
@@ -3421,14 +3421,14 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">CREATE</span><span class="w"> </span><span class="k">TRIGGER</span><span class="w"> </span><span class="n">trg_LogTransaction</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">ON</span><span class="w"> </span><span class="n">Transactions</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">AFTER</span><span class="w"> </span><span class="k">INSERT</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">AS</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">BEGIN</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">ON</span><span class="w"> </span><span class="n">Transactions</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">AFTER</span><span class="w"> </span><span class="k">INSERT</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">AS</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">BEGIN</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">TransactionLogs</span><span class="w"> </span><span class="p">(</span><span class="n">TransactionID</span><span class="p">,</span><span class="w"> </span><span class="n">AccountID</span><span class="p">,</span><span class="w"> </span><span class="n">Amount</span><span class="p">,</span><span class="w"> </span><span class="n">TransactionDate</span><span class="p">)</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">SELECT</span><span class="w"> </span><span class="n">TransactionID</span><span class="p">,</span><span class="w"> </span><span class="n">AccountID</span><span class="p">,</span><span class="w"> </span><span class="n">Amount</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">()</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">FROM</span><span class="w"> </span><span class="n">inserted</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">END</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">END</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>此触发器在新交易记录插入后自动将交易信息记录到日志表中，便于后续的审计和监控。</p>
@@ -3480,9 +3480,9 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="n">PreparedStatement</span><span class="w"> </span><span class="n">pstmt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">connection</span><span class="p">.</span><span class="n">prepareStatement</span><span class="p">(</span><span class="s2">&#34;SELECT * FROM Users WHERE Username = ? AND Password = ?&#34;</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">pstmt</span><span class="p">.</span><span class="n">setString</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">username</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">pstmt</span><span class="p">.</span><span class="n">setString</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">password</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">ResultSet</span><span class="w"> </span><span class="n">rs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pstmt</span><span class="p">.</span><span class="n">executeQuery</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="n">pstmt</span><span class="p">.</span><span class="n">setString</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">username</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="n">pstmt</span><span class="p">.</span><span class="n">setString</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">password</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="n">ResultSet</span><span class="w"> </span><span class="n">rs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pstmt</span><span class="p">.</span><span class="n">executeQuery</span><span class="p">();</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div></li>
@@ -3599,19 +3599,19 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="c1">-- 创建角色
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">CREATE</span><span class="w"> </span><span class="k">ROLE</span><span class="w"> </span><span class="n">db_admin</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">CREATE</span><span class="w"> </span><span class="k">ROLE</span><span class="w"> </span><span class="n">data_analyst</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">CREATE</span><span class="w"> </span><span class="k">ROLE</span><span class="w"> </span><span class="n">application_user</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">CREATE</span><span class="w"> </span><span class="k">ROLE</span><span class="w"> </span><span class="n">db_admin</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">CREATE</span><span class="w"> </span><span class="k">ROLE</span><span class="w"> </span><span class="n">data_analyst</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">CREATE</span><span class="w"> </span><span class="k">ROLE</span><span class="w"> </span><span class="n">application_user</span><span class="p">;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">-- 分配权限
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">GRANT</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">SalesDB</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">db_admin</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="p">,</span><span class="w"> </span><span class="k">INSERT</span><span class="p">,</span><span class="w"> </span><span class="k">UPDATE</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Sales</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">data_analyst</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Products</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">application_user</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c1">-- 分配权限
+</span></span></span><span class="line"><span class="cl"><span class="k">GRANT</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">SalesDB</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">db_admin</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="p">,</span><span class="w"> </span><span class="k">INSERT</span><span class="p">,</span><span class="w"> </span><span class="k">UPDATE</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Sales</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">data_analyst</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Products</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">application_user</span><span class="p">;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">-- 将用户分配到角色
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">GRANT</span><span class="w"> </span><span class="n">db_admin</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">Alice</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">GRANT</span><span class="w"> </span><span class="n">data_analyst</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">Bob</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">GRANT</span><span class="w"> </span><span class="n">application_user</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">Charlie</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c1">-- 将用户分配到角色
+</span></span></span><span class="line"><span class="cl"><span class="k">GRANT</span><span class="w"> </span><span class="n">db_admin</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">Alice</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">GRANT</span><span class="w"> </span><span class="n">data_analyst</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">Bob</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">GRANT</span><span class="w"> </span><span class="n">application_user</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">Charlie</span><span class="p">;</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>通过上述操作，Alice拥有SalesDB数据库的所有权限，Bob可以查询和修改Sales表的数据，而Charlie只能读取Products表的数据。</p>
@@ -3651,15 +3651,15 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="c1">-- 创建加密密钥
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">CREATE</span><span class="w"> </span><span class="n">MASTER</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="n">ENCRYPTION</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">PASSWORD</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;StrongPassword!&#39;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">CREATE</span><span class="w"> </span><span class="n">MASTER</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="n">ENCRYPTION</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">PASSWORD</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;StrongPassword!&#39;</span><span class="p">;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">-- 创建加密证书
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">CREATE</span><span class="w"> </span><span class="n">CERTIFICATE</span><span class="w"> </span><span class="n">MyCertificate</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="n">SUBJECT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Data Encryption&#39;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c1">-- 创建加密证书
+</span></span></span><span class="line"><span class="cl"><span class="k">CREATE</span><span class="w"> </span><span class="n">CERTIFICATE</span><span class="w"> </span><span class="n">MyCertificate</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="n">SUBJECT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Data Encryption&#39;</span><span class="p">;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">-- 加密列
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Customers</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">ADD</span><span class="w"> </span><span class="n">EncryptedSSN</span><span class="w"> </span><span class="n">VARBINARY</span><span class="p">(</span><span class="mi">128</span><span class="p">)</span><span class="w"> 
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">ENCRYPTED</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="p">(</span><span class="n">ENCRYPTION_TYPE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">COLUMN_ENCRYPTION_KEY</span><span class="p">,</span><span class="w"> </span><span class="n">ALGORITHM</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;AEAD_AES_256_CBC_HMAC_SHA_256&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">COLUMN_ENCRYPTION_KEY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MyColumnKey</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c1">-- 加密列
+</span></span></span><span class="line"><span class="cl"><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Customers</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">ADD</span><span class="w"> </span><span class="n">EncryptedSSN</span><span class="w"> </span><span class="n">VARBINARY</span><span class="p">(</span><span class="mi">128</span><span class="p">)</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="k">ENCRYPTED</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="p">(</span><span class="n">ENCRYPTION_TYPE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">COLUMN_ENCRYPTION_KEY</span><span class="p">,</span><span class="w"> </span><span class="n">ALGORITHM</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;AEAD_AES_256_CBC_HMAC_SHA_256&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">COLUMN_ENCRYPTION_KEY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MyColumnKey</span><span class="p">);</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div></li>
@@ -3694,10 +3694,10 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="c1">-- 配置SQL Server使用TLS
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">EXEC</span><span class="w"> </span><span class="n">sp_configure</span><span class="w"> </span><span class="s1">&#39;show advanced options&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">RECONFIGURE</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">EXEC</span><span class="w"> </span><span class="n">sp_configure</span><span class="w"> </span><span class="s1">&#39;force encryption&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">RECONFIGURE</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">EXEC</span><span class="w"> </span><span class="n">sp_configure</span><span class="w"> </span><span class="s1">&#39;show advanced options&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="n">RECONFIGURE</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">EXEC</span><span class="w"> </span><span class="n">sp_configure</span><span class="w"> </span><span class="s1">&#39;force encryption&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="n">RECONFIGURE</span><span class="p">;</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div></li>
@@ -3765,18 +3765,18 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="c1">-- SQL Server审计示例
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">CREATE</span><span class="w"> </span><span class="n">SERVER</span><span class="w"> </span><span class="n">AUDIT</span><span class="w"> </span><span class="n">Audit_SalesDB</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">TO</span><span class="w"> </span><span class="n">FILE</span><span class="w"> </span><span class="p">(</span><span class="n">FILEPATH</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;C:\Audits\&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">MAXSIZE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="n">MB</span><span class="p">,</span><span class="w"> </span><span class="n">MAX_ROLLOVER_FILES</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">WITH</span><span class="w"> </span><span class="p">(</span><span class="n">ON_FAILURE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">CONTINUE</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">CREATE</span><span class="w"> </span><span class="n">SERVER</span><span class="w"> </span><span class="n">AUDIT</span><span class="w"> </span><span class="n">Audit_SalesDB</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">TO</span><span class="w"> </span><span class="n">FILE</span><span class="w"> </span><span class="p">(</span><span class="n">FILEPATH</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;C:\Audits\&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">MAXSIZE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="n">MB</span><span class="p">,</span><span class="w"> </span><span class="n">MAX_ROLLOVER_FILES</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">WITH</span><span class="w"> </span><span class="p">(</span><span class="n">ON_FAILURE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">CONTINUE</span><span class="p">);</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">CREATE</span><span class="w"> </span><span class="n">SERVER</span><span class="w"> </span><span class="n">AUDIT</span><span class="w"> </span><span class="n">SPECIFICATION</span><span class="w"> </span><span class="n">Audit_SalesDB_Spec</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">FOR</span><span class="w"> </span><span class="n">SERVER</span><span class="w"> </span><span class="n">AUDIT</span><span class="w"> </span><span class="n">Audit_SalesDB</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">ADD</span><span class="w"> </span><span class="p">(</span><span class="n">SCHEMA_OBJECT_CHANGE_GROUP</span><span class="p">),</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">ADD</span><span class="w"> </span><span class="p">(</span><span class="n">SUCCESSFUL_LOGIN_GROUP</span><span class="p">),</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">ADD</span><span class="w"> </span><span class="p">(</span><span class="n">FAILED_LOGIN_GROUP</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">CREATE</span><span class="w"> </span><span class="n">SERVER</span><span class="w"> </span><span class="n">AUDIT</span><span class="w"> </span><span class="n">SPECIFICATION</span><span class="w"> </span><span class="n">Audit_SalesDB_Spec</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">FOR</span><span class="w"> </span><span class="n">SERVER</span><span class="w"> </span><span class="n">AUDIT</span><span class="w"> </span><span class="n">Audit_SalesDB</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">ADD</span><span class="w"> </span><span class="p">(</span><span class="n">SCHEMA_OBJECT_CHANGE_GROUP</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">ADD</span><span class="w"> </span><span class="p">(</span><span class="n">SUCCESSFUL_LOGIN_GROUP</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">ADD</span><span class="w"> </span><span class="p">(</span><span class="n">FAILED_LOGIN_GROUP</span><span class="p">);</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">ALTER</span><span class="w"> </span><span class="n">SERVER</span><span class="w"> </span><span class="n">AUDIT</span><span class="w"> </span><span class="n">Audit_SalesDB</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="p">(</span><span class="k">STATE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">ON</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">ALTER</span><span class="w"> </span><span class="n">SERVER</span><span class="w"> </span><span class="n">AUDIT</span><span class="w"> </span><span class="n">SPECIFICATION</span><span class="w"> </span><span class="n">Audit_SalesDB_Spec</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="p">(</span><span class="k">STATE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">ON</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">ALTER</span><span class="w"> </span><span class="n">SERVER</span><span class="w"> </span><span class="n">AUDIT</span><span class="w"> </span><span class="n">Audit_SalesDB</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="p">(</span><span class="k">STATE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">ON</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">ALTER</span><span class="w"> </span><span class="n">SERVER</span><span class="w"> </span><span class="n">AUDIT</span><span class="w"> </span><span class="n">SPECIFICATION</span><span class="w"> </span><span class="n">Audit_SalesDB_Spec</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="p">(</span><span class="k">STATE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">ON</span><span class="p">);</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div></li>
@@ -4073,11 +4073,11 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="c1">-- SQL Server 完全备份
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">BACKUP</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">SalesDB</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">TO</span><span class="w"> </span><span class="n">DISK</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;C:\Backups\SalesDB_full.bak&#39;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">WITH</span><span class="w"> </span><span class="n">FORMAT</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">MEDIANAME</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;SalesDBBackup&#39;</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">NAME</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Full Backup of SalesDB&#39;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="n">BACKUP</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">SalesDB</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">TO</span><span class="w"> </span><span class="n">DISK</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;C:\Backups\SalesDB_full.bak&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">WITH</span><span class="w"> </span><span class="n">FORMAT</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="n">MEDIANAME</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;SalesDBBackup&#39;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="n">NAME</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Full Backup of SalesDB&#39;</span><span class="p">;</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><p><strong>恢复命令：</strong></p>
@@ -4091,10 +4091,10 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="c1">-- SQL Server 恢复数据库
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">RESTORE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">SalesDB</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">FROM</span><span class="w"> </span><span class="n">DISK</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;C:\Backups\SalesDB_full.bak&#39;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">WITH</span><span class="w"> </span><span class="k">REPLACE</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">RECOVERY</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="n">RESTORE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">SalesDB</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">FROM</span><span class="w"> </span><span class="n">DISK</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;C:\Backups\SalesDB_full.bak&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">WITH</span><span class="w"> </span><span class="k">REPLACE</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="n">RECOVERY</span><span class="p">;</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><p><strong>示例：</strong></p>
@@ -4708,7 +4708,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// 在MongoDB中插入一个文档
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">insertOne</span><span class="p">({</span>
+</span></span></span><span class="line"><span class="cl"><span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">insertOne</span><span class="p">({</span>
 </span></span><span class="line"><span class="cl">  <span class="s2">&#34;user_id&#34;</span><span class="o">:</span> <span class="mi">1000</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="s2">&#34;name&#34;</span><span class="o">:</span> <span class="s2">&#34;John Doe&#34;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="s2">&#34;orders&#34;</span><span class="o">:</span> <span class="p">[</span>
@@ -4718,7 +4718,7 @@
 </span></span><span class="line"><span class="cl"><span class="p">});</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 查询用户ID为1000的用户
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span> <span class="s2">&#34;user_id&#34;</span><span class="o">:</span> <span class="mi">1000</span> <span class="p">})</span>
+</span></span></span><span class="line"><span class="cl"><span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span> <span class="s2">&#34;user_id&#34;</span><span class="o">:</span> <span class="mi">1000</span> <span class="p">})</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="列族存储数据库">列族存储数据库
@@ -4747,16 +4747,16 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-cql" data-lang="cql"><span class="line"><span class="cl"><span class="c1">-- 在Cassandra中创建一个表
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">users</span><span class="w"> </span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">users</span><span class="w"> </span><span class="p">(</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">user_id</span><span class="w"> </span><span class="nb">UUID</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">email</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">created_at</span><span class="w"> </span><span class="nb">TIMESTAMP</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">);</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">-- 插入数据
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="k">users</span><span class="w"> </span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">email</span><span class="p">,</span><span class="w"> </span><span class="n">created_at</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="nb">uuid</span><span class="p">(),</span><span class="w"> </span><span class="s1">&#39;John Doe&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;john.doe@example.com&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">toTimestamp</span><span class="p">(</span><span class="n">now</span><span class="p">()));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c1">-- 插入数据
+</span></span></span><span class="line"><span class="cl"><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="k">users</span><span class="w"> </span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">email</span><span class="p">,</span><span class="w"> </span><span class="n">created_at</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="nb">uuid</span><span class="p">(),</span><span class="w"> </span><span class="s1">&#39;John Doe&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;john.doe@example.com&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">toTimestamp</span><span class="p">(</span><span class="n">now</span><span class="p">()));</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="图数据库">图数据库
@@ -4876,13 +4876,13 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// 在ArangoDB中插入文档和图数据
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">insert</span><span class="p">({</span> <span class="s2">&#34;user_id&#34;</span><span class="o">:</span> <span class="mi">1000</span><span class="p">,</span> <span class="s2">&#34;name&#34;</span><span class="o">:</span> <span class="s2">&#34;John Doe&#34;</span> <span class="p">});</span>
+</span></span></span><span class="line"><span class="cl"><span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">insert</span><span class="p">({</span> <span class="s2">&#34;user_id&#34;</span><span class="o">:</span> <span class="mi">1000</span><span class="p">,</span> <span class="s2">&#34;name&#34;</span><span class="o">:</span> <span class="s2">&#34;John Doe&#34;</span> <span class="p">});</span>
 </span></span><span class="line"><span class="cl"><span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">insert</span><span class="p">({</span> <span class="s2">&#34;user_id&#34;</span><span class="o">:</span> <span class="mi">1001</span><span class="p">,</span> <span class="s2">&#34;name&#34;</span><span class="o">:</span> <span class="s2">&#34;Jane Smith&#34;</span> <span class="p">});</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="nx">db</span><span class="p">.</span><span class="nx">relationships</span><span class="p">.</span><span class="nx">insert</span><span class="p">({</span> <span class="s2">&#34;_from&#34;</span><span class="o">:</span> <span class="s2">&#34;users/1000&#34;</span><span class="p">,</span> <span class="s2">&#34;_to&#34;</span><span class="o">:</span> <span class="s2">&#34;users/1001&#34;</span><span class="p">,</span> <span class="s2">&#34;relation&#34;</span><span class="o">:</span> <span class="s2">&#34;friends&#34;</span> <span class="p">});</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 查询用户及其朋友
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">FOR</span> <span class="nx">user</span> <span class="nx">IN</span> <span class="nx">users</span>
+</span></span></span><span class="line"><span class="cl"><span class="nx">FOR</span> <span class="nx">user</span> <span class="nx">IN</span> <span class="nx">users</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">FILTER</span> <span class="nx">user</span><span class="p">.</span><span class="nx">name</span> <span class="o">==</span> <span class="s2">&#34;John Doe&#34;</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">FOR</span> <span class="nx">friend</span> <span class="nx">IN</span> <span class="nx">OUTBOUND</span> <span class="nx">user</span> <span class="nx">relationships</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">RETURN</span> <span class="nx">friend</span><span class="p">.</span><span class="nx">name</span>
@@ -4920,10 +4920,10 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 使用AWS CLI创建DynamoDB表</span>
 </span></span><span class="line"><span class="cl">aws dynamodb create-table <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --table-name Users <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --attribute-definitions <span class="nv">AttributeName</span><span class="o">=</span>UserID,AttributeType<span class="o">=</span>S <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --key-schema <span class="nv">AttributeName</span><span class="o">=</span>UserID,KeyType<span class="o">=</span>HASH <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --provisioned-throughput <span class="nv">ReadCapacityUnits</span><span class="o">=</span>5,WriteCapacityUnits<span class="o">=</span><span class="m">5</span>
+</span></span></span><span class="line"><span class="cl">    --table-name Users <span class="se">\
+</span></span></span><span class="line"><span class="cl">    --attribute-definitions <span class="nv">AttributeName</span><span class="o">=</span>UserID,AttributeType<span class="o">=</span>S <span class="se">\
+</span></span></span><span class="line"><span class="cl">    --key-schema <span class="nv">AttributeName</span><span class="o">=</span>UserID,KeyType<span class="o">=</span>HASH <span class="se">\
+</span></span></span><span class="line"><span class="cl">    --provisioned-throughput <span class="nv">ReadCapacityUnits</span><span class="o">=</span>5,WriteCapacityUnits<span class="o">=</span><span class="m">5</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="实验与案例研究-2">实验与案例研究
@@ -5003,7 +5003,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// 插入文档
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">insertOne</span><span class="p">({</span>
+</span></span></span><span class="line"><span class="cl"><span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">insertOne</span><span class="p">({</span>
 </span></span><span class="line"><span class="cl">  <span class="s2">&#34;user_id&#34;</span><span class="o">:</span> <span class="mi">1000</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="s2">&#34;name&#34;</span><span class="o">:</span> <span class="s2">&#34;John Doe&#34;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="s2">&#34;email&#34;</span><span class="o">:</span> <span class="s2">&#34;john.doe@example.com&#34;</span><span class="p">,</span>
@@ -5011,19 +5011,19 @@
 </span></span><span class="line"><span class="cl"><span class="p">});</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 查询文档
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span> <span class="s2">&#34;user_id&#34;</span><span class="o">:</span> <span class="mi">1000</span> <span class="p">});</span>
+</span></span></span><span class="line"><span class="cl"><span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span> <span class="s2">&#34;user_id&#34;</span><span class="o">:</span> <span class="mi">1000</span> <span class="p">});</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 更新文档
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">updateOne</span><span class="p">(</span>
+</span></span></span><span class="line"><span class="cl"><span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">updateOne</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">  <span class="p">{</span> <span class="s2">&#34;user_id&#34;</span><span class="o">:</span> <span class="mi">1000</span> <span class="p">},</span>
 </span></span><span class="line"><span class="cl">  <span class="p">{</span> <span class="nx">$set</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&#34;email&#34;</span><span class="o">:</span> <span class="s2">&#34;john.doe@newdomain.com&#34;</span> <span class="p">}</span> <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 删除文档
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">deleteOne</span><span class="p">({</span> <span class="s2">&#34;user_id&#34;</span><span class="o">:</span> <span class="mi">1000</span> <span class="p">});</span>
+</span></span></span><span class="line"><span class="cl"><span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">deleteOne</span><span class="p">({</span> <span class="s2">&#34;user_id&#34;</span><span class="o">:</span> <span class="mi">1000</span> <span class="p">});</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 创建索引
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">createIndex</span><span class="p">({</span> <span class="s2">&#34;email&#34;</span><span class="o">:</span> <span class="mi">1</span> <span class="p">});</span>
+</span></span></span><span class="line"><span class="cl"><span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">createIndex</span><span class="p">({</span> <span class="s2">&#34;email&#34;</span><span class="o">:</span> <span class="mi">1</span> <span class="p">});</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="数据库设计案例-2">数据库设计案例
@@ -5083,13 +5083,13 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// 在ArangoDB中插入文档和图数据
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">insert</span><span class="p">({</span> <span class="s2">&#34;user_id&#34;</span><span class="o">:</span> <span class="mi">1000</span><span class="p">,</span> <span class="s2">&#34;name&#34;</span><span class="o">:</span> <span class="s2">&#34;John Doe&#34;</span> <span class="p">});</span>
+</span></span></span><span class="line"><span class="cl"><span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">insert</span><span class="p">({</span> <span class="s2">&#34;user_id&#34;</span><span class="o">:</span> <span class="mi">1000</span><span class="p">,</span> <span class="s2">&#34;name&#34;</span><span class="o">:</span> <span class="s2">&#34;John Doe&#34;</span> <span class="p">});</span>
 </span></span><span class="line"><span class="cl"><span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">insert</span><span class="p">({</span> <span class="s2">&#34;user_id&#34;</span><span class="o">:</span> <span class="mi">1001</span><span class="p">,</span> <span class="s2">&#34;name&#34;</span><span class="o">:</span> <span class="s2">&#34;Jane Smith&#34;</span> <span class="p">});</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="nx">db</span><span class="p">.</span><span class="nx">relationships</span><span class="p">.</span><span class="nx">insert</span><span class="p">({</span> <span class="s2">&#34;_from&#34;</span><span class="o">:</span> <span class="s2">&#34;users/1000&#34;</span><span class="p">,</span> <span class="s2">&#34;_to&#34;</span><span class="o">:</span> <span class="s2">&#34;users/1001&#34;</span><span class="p">,</span> <span class="s2">&#34;relation&#34;</span><span class="o">:</span> <span class="s2">&#34;friends&#34;</span> <span class="p">});</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 查询用户及其朋友
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">FOR</span> <span class="nx">user</span> <span class="nx">IN</span> <span class="nx">users</span>
+</span></span></span><span class="line"><span class="cl"><span class="nx">FOR</span> <span class="nx">user</span> <span class="nx">IN</span> <span class="nx">users</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">FILTER</span> <span class="nx">user</span><span class="p">.</span><span class="nx">name</span> <span class="o">==</span> <span class="s2">&#34;John Doe&#34;</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">FOR</span> <span class="nx">friend</span> <span class="nx">IN</span> <span class="nx">OUTBOUND</span> <span class="nx">user</span> <span class="nx">relationships</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">RETURN</span> <span class="nx">friend</span><span class="p">.</span><span class="nx">name</span>
@@ -5127,10 +5127,10 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 使用AWS CLI创建DynamoDB表</span>
 </span></span><span class="line"><span class="cl">aws dynamodb create-table <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --table-name Users <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --attribute-definitions <span class="nv">AttributeName</span><span class="o">=</span>UserID,AttributeType<span class="o">=</span>S <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --key-schema <span class="nv">AttributeName</span><span class="o">=</span>UserID,KeyType<span class="o">=</span>HASH <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --provisioned-throughput <span class="nv">ReadCapacityUnits</span><span class="o">=</span>5,WriteCapacityUnits<span class="o">=</span><span class="m">5</span>
+</span></span></span><span class="line"><span class="cl">    --table-name Users <span class="se">\
+</span></span></span><span class="line"><span class="cl">    --attribute-definitions <span class="nv">AttributeName</span><span class="o">=</span>UserID,AttributeType<span class="o">=</span>S <span class="se">\
+</span></span></span><span class="line"><span class="cl">    --key-schema <span class="nv">AttributeName</span><span class="o">=</span>UserID,KeyType<span class="o">=</span>HASH <span class="se">\
+</span></span></span><span class="line"><span class="cl">    --provisioned-throughput <span class="nv">ReadCapacityUnits</span><span class="o">=</span>5,WriteCapacityUnits<span class="o">=</span><span class="m">5</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="实验与案例研究-3">实验与案例研究
@@ -5210,7 +5210,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// 插入文档
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">insertOne</span><span class="p">({</span>
+</span></span></span><span class="line"><span class="cl"><span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">insertOne</span><span class="p">({</span>
 </span></span><span class="line"><span class="cl">  <span class="s2">&#34;user_id&#34;</span><span class="o">:</span> <span class="mi">1000</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="s2">&#34;name&#34;</span><span class="o">:</span> <span class="s2">&#34;John Doe&#34;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="s2">&#34;email&#34;</span><span class="o">:</span> <span class="s2">&#34;john.doe@example.com&#34;</span><span class="p">,</span>
@@ -5218,19 +5218,19 @@
 </span></span><span class="line"><span class="cl"><span class="p">});</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 查询文档
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span> <span class="s2">&#34;user_id&#34;</span><span class="o">:</span> <span class="mi">1000</span> <span class="p">});</span>
+</span></span></span><span class="line"><span class="cl"><span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span> <span class="s2">&#34;user_id&#34;</span><span class="o">:</span> <span class="mi">1000</span> <span class="p">});</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 更新文档
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">updateOne</span><span class="p">(</span>
+</span></span></span><span class="line"><span class="cl"><span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">updateOne</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">  <span class="p">{</span> <span class="s2">&#34;user_id&#34;</span><span class="o">:</span> <span class="mi">1000</span> <span class="p">},</span>
 </span></span><span class="line"><span class="cl">  <span class="p">{</span> <span class="nx">$set</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&#34;email&#34;</span><span class="o">:</span> <span class="s2">&#34;john.doe@newdomain.com&#34;</span> <span class="p">}</span> <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 删除文档
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">deleteOne</span><span class="p">({</span> <span class="s2">&#34;user_id&#34;</span><span class="o">:</span> <span class="mi">1000</span> <span class="p">});</span>
+</span></span></span><span class="line"><span class="cl"><span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">deleteOne</span><span class="p">({</span> <span class="s2">&#34;user_id&#34;</span><span class="o">:</span> <span class="mi">1000</span> <span class="p">});</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 创建索引
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">createIndex</span><span class="p">({</span> <span class="s2">&#34;email&#34;</span><span class="o">:</span> <span class="mi">1</span> <span class="p">});</span>
+</span></span></span><span class="line"><span class="cl"><span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">createIndex</span><span class="p">({</span> <span class="s2">&#34;email&#34;</span><span class="o">:</span> <span class="mi">1</span> <span class="p">});</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="数据库设计案例-3">数据库设计案例
@@ -5300,13 +5300,13 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// 在ArangoDB中插入文档和图数据
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">insert</span><span class="p">({</span> <span class="s2">&#34;user_id&#34;</span><span class="o">:</span> <span class="mi">1000</span><span class="p">,</span> <span class="s2">&#34;name&#34;</span><span class="o">:</span> <span class="s2">&#34;John Doe&#34;</span> <span class="p">});</span>
+</span></span></span><span class="line"><span class="cl"><span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">insert</span><span class="p">({</span> <span class="s2">&#34;user_id&#34;</span><span class="o">:</span> <span class="mi">1000</span><span class="p">,</span> <span class="s2">&#34;name&#34;</span><span class="o">:</span> <span class="s2">&#34;John Doe&#34;</span> <span class="p">});</span>
 </span></span><span class="line"><span class="cl"><span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">insert</span><span class="p">({</span> <span class="s2">&#34;user_id&#34;</span><span class="o">:</span> <span class="mi">1001</span><span class="p">,</span> <span class="s2">&#34;name&#34;</span><span class="o">:</span> <span class="s2">&#34;Jane Smith&#34;</span> <span class="p">});</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="nx">db</span><span class="p">.</span><span class="nx">relationships</span><span class="p">.</span><span class="nx">insert</span><span class="p">({</span> <span class="s2">&#34;_from&#34;</span><span class="o">:</span> <span class="s2">&#34;users/1000&#34;</span><span class="p">,</span> <span class="s2">&#34;_to&#34;</span><span class="o">:</span> <span class="s2">&#34;users/1001&#34;</span><span class="p">,</span> <span class="s2">&#34;relation&#34;</span><span class="o">:</span> <span class="s2">&#34;friends&#34;</span> <span class="p">});</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 查询用户及其朋友
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">FOR</span> <span class="nx">user</span> <span class="nx">IN</span> <span class="nx">users</span>
+</span></span></span><span class="line"><span class="cl"><span class="nx">FOR</span> <span class="nx">user</span> <span class="nx">IN</span> <span class="nx">users</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">FILTER</span> <span class="nx">user</span><span class="p">.</span><span class="nx">name</span> <span class="o">==</span> <span class="s2">&#34;John Doe&#34;</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">FOR</span> <span class="nx">friend</span> <span class="nx">IN</span> <span class="nx">OUTBOUND</span> <span class="nx">user</span> <span class="nx">relationships</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">RETURN</span> <span class="nx">friend</span><span class="p">.</span><span class="nx">name</span>
@@ -5344,10 +5344,10 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 使用AWS CLI创建DynamoDB表</span>
 </span></span><span class="line"><span class="cl">aws dynamodb create-table <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --table-name Users <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --attribute-definitions <span class="nv">AttributeName</span><span class="o">=</span>UserID,AttributeType<span class="o">=</span>S <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --key-schema <span class="nv">AttributeName</span><span class="o">=</span>UserID,KeyType<span class="o">=</span>HASH <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --provisioned-throughput <span class="nv">ReadCapacityUnits</span><span class="o">=</span>5,WriteCapacityUnits<span class="o">=</span><span class="m">5</span>
+</span></span></span><span class="line"><span class="cl">    --table-name Users <span class="se">\
+</span></span></span><span class="line"><span class="cl">    --attribute-definitions <span class="nv">AttributeName</span><span class="o">=</span>UserID,AttributeType<span class="o">=</span>S <span class="se">\
+</span></span></span><span class="line"><span class="cl">    --key-schema <span class="nv">AttributeName</span><span class="o">=</span>UserID,KeyType<span class="o">=</span>HASH <span class="se">\
+</span></span></span><span class="line"><span class="cl">    --provisioned-throughput <span class="nv">ReadCapacityUnits</span><span class="o">=</span>5,WriteCapacityUnits<span class="o">=</span><span class="m">5</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="实验与案例研究-4">实验与案例研究
@@ -5427,7 +5427,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// 插入文档
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">insertOne</span><span class="p">({</span>
+</span></span></span><span class="line"><span class="cl"><span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">insertOne</span><span class="p">({</span>
 </span></span><span class="line"><span class="cl">  <span class="s2">&#34;user_id&#34;</span><span class="o">:</span> <span class="mi">1000</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="s2">&#34;name&#34;</span><span class="o">:</span> <span class="s2">&#34;John Doe&#34;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="s2">&#34;email&#34;</span><span class="o">:</span> <span class="s2">&#34;john.doe@example.com&#34;</span><span class="p">,</span>
@@ -5435,19 +5435,19 @@
 </span></span><span class="line"><span class="cl"><span class="p">});</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 查询文档
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span> <span class="s2">&#34;user_id&#34;</span><span class="o">:</span> <span class="mi">1000</span> <span class="p">});</span>
+</span></span></span><span class="line"><span class="cl"><span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span> <span class="s2">&#34;user_id&#34;</span><span class="o">:</span> <span class="mi">1000</span> <span class="p">});</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 更新文档
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">updateOne</span><span class="p">(</span>
+</span></span></span><span class="line"><span class="cl"><span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">updateOne</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">  <span class="p">{</span> <span class="s2">&#34;user_id&#34;</span><span class="o">:</span> <span class="mi">1000</span> <span class="p">},</span>
 </span></span><span class="line"><span class="cl">  <span class="p">{</span> <span class="nx">$set</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&#34;email&#34;</span><span class="o">:</span> <span class="s2">&#34;john.doe@newdomain.com&#34;</span> <span class="p">}</span> <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 删除文档
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">deleteOne</span><span class="p">({</span> <span class="s2">&#34;user_id&#34;</span><span class="o">:</span> <span class="mi">1000</span> <span class="p">});</span>
+</span></span></span><span class="line"><span class="cl"><span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">deleteOne</span><span class="p">({</span> <span class="s2">&#34;user_id&#34;</span><span class="o">:</span> <span class="mi">1000</span> <span class="p">});</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 创建索引
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">createIndex</span><span class="p">({</span> <span class="s2">&#34;email&#34;</span><span class="o">:</span> <span class="mi">1</span> <span class="p">});</span>
+</span></span></span><span class="line"><span class="cl"><span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">createIndex</span><span class="p">({</span> <span class="s2">&#34;email&#34;</span><span class="o">:</span> <span class="mi">1</span> <span class="p">});</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="数据库设计案例-4">数据库设计案例
@@ -5521,7 +5521,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// 在Firestore中添加文档
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">firebase</span><span class="p">.</span><span class="nx">firestore</span><span class="p">().</span><span class="nx">collection</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">({</span>
+</span></span></span><span class="line"><span class="cl"><span class="nx">firebase</span><span class="p">.</span><span class="nx">firestore</span><span class="p">().</span><span class="nx">collection</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">({</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">user_id</span><span class="o">:</span> <span class="mi">1000</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;John Doe&#39;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">email</span><span class="o">:</span> <span class="s1">&#39;john.doe@example.com&#39;</span><span class="p">,</span>
@@ -5529,7 +5529,7 @@
 </span></span><span class="line"><span class="cl"><span class="p">});</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 查询文档
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">firebase</span><span class="p">.</span><span class="nx">firestore</span><span class="p">().</span><span class="nx">collection</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">).</span><span class="nx">where</span><span class="p">(</span><span class="s1">&#39;user_id&#39;</span><span class="p">,</span> <span class="s1">&#39;==&#39;</span><span class="p">,</span> <span class="mi">1000</span><span class="p">).</span><span class="nx">get</span><span class="p">()</span>
+</span></span></span><span class="line"><span class="cl"><span class="nx">firebase</span><span class="p">.</span><span class="nx">firestore</span><span class="p">().</span><span class="nx">collection</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">).</span><span class="nx">where</span><span class="p">(</span><span class="s1">&#39;user_id&#39;</span><span class="p">,</span> <span class="s1">&#39;==&#39;</span><span class="p">,</span> <span class="mi">1000</span><span class="p">).</span><span class="nx">get</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">querySnapshot</span> <span class="p">=&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">querySnapshot</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">doc</span> <span class="p">=&gt;</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">doc</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span> <span class="s1">&#39; =&gt; &#39;</span><span class="p">,</span> <span class="nx">doc</span><span class="p">.</span><span class="nx">data</span><span class="p">());</span>
@@ -5909,7 +5909,7 @@
         
         
             <div class="article-image">
-                <img src="/p/network-protocol-archive/bg.2ed5eec0fc56fbdf9525214b84b2f0ee_hu_14ab31eaefce141b.png" 
+                <img src="/p/network-protocol-archive/bg.2ed5eec0fc56fbdf9525214b84b2f0ee_hu_9cd6263e9ca3a9aa.png" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -5933,7 +5933,7 @@
         
         
             <div class="article-image">
-                <img src="/p/simple-network/bg.d266c4a87c29396fe7fc417cff63212a_hu_3d450349083fed81.png" 
+                <img src="/p/simple-network/bg.d266c4a87c29396fe7fc417cff63212a_hu_8cc073256b77554d.png" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -6164,7 +6164,7 @@
         
         
 
-        共 742374 字 , 39 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        共 741930 字 , 39 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
         主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 

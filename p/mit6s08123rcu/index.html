@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-cn" dir="ltr">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Read-Copy Update在Linux内核中作为一种同步机制。RCU允许多个线程安全地读取数据，尽管数据可能会在后台更新。RCU的设计包括两个主要操作：RCU读侧临界区确保读者安全读取数据，RCU同步等待所有读操作完成后进行更新。RCU的优势在于高并发、低开销和确定的操作完成时间，使其在Linux内核中尤其适用于高频读、低频写的场景，如网络栈和文件系统。">
 <title>MIT6S081：23RCU</title>
@@ -59,7 +59,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu_67bf1327fc98b60.png" width="300"
+                        <img src="/img/avatar_hu_c2920364e6534697.png" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -306,8 +306,8 @@
     <header class="article-header">
         <div class="article-image">
             <a href="/p/mit6s08123rcu/">
-                <img src="/p/mit6s08123rcu/bg_hu_fa99297850ae1824.jpg"
-                        srcset="/p/mit6s08123rcu/bg_hu_fa99297850ae1824.jpg 800w, /p/mit6s08123rcu/bg_hu_d2cf5a775f5575ef.jpg 1600w"
+                <img src="/p/mit6s08123rcu/bg_hu_4440fbed1c7fc08d.jpg"
+                        srcset="/p/mit6s08123rcu/bg_hu_4440fbed1c7fc08d.jpg 800w, /p/mit6s08123rcu/bg_hu_f1d1d704be1655da.jpg 1600w"
                         width="800" 
                         height="496" 
                         loading="lazy"
@@ -672,13 +672,13 @@
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kt">my_data_t</span> <span class="o">*</span><span class="n">data</span> <span class="o">=</span> <span class="nf">container_of</span><span class="p">(</span><span class="n">head</span><span class="p">,</span> <span class="kt">my_data_t</span><span class="p">,</span> <span class="n">rcu</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">free</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>  <span class="c1">// 安全地释放内存
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">remove_data</span><span class="p">(</span><span class="kt">my_data_t</span> <span class="o">*</span><span class="n">data</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 从数据结构中移除 data
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">call_rcu</span><span class="p">(</span><span class="o">&amp;</span><span class="n">data</span><span class="o">-&gt;</span><span class="n">rcu</span><span class="p">,</span> <span class="n">my_callback</span><span class="p">);</span>  <span class="c1">// 异步安排内存清理
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nf">call_rcu</span><span class="p">(</span><span class="o">&amp;</span><span class="n">data</span><span class="o">-&gt;</span><span class="n">rcu</span><span class="p">,</span> <span class="n">my_callback</span><span class="p">);</span>  <span class="c1">// 异步安排内存清理
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><ol start="3">
@@ -732,7 +732,7 @@
 </span></span><span class="line"><span class="cl">    <span class="n">opts</span> <span class="o">=</span> <span class="nf">rcu_dereference</span><span class="p">(</span><span class="n">sock</span><span class="o">-&gt;</span><span class="n">opts</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">opts</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// 处理 IP 选项
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">rcu_read_unlock</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
@@ -797,24 +797,24 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">handle_nmi</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">rcu_read_lock</span><span class="p">();</span>  <span class="c1">// 进入 RCU 临界区
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">rcu_list_for_each</span><span class="p">(</span><span class="o">&amp;</span><span class="n">nmi_list</span><span class="p">,</span> <span class="kt">handler_t</span> <span class="n">cb</span><span class="p">)</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nf">rcu_list_for_each</span><span class="p">(</span><span class="o">&amp;</span><span class="n">nmi_list</span><span class="p">,</span> <span class="kt">handler_t</span> <span class="n">cb</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="nf">cb</span><span class="p">();</span>  <span class="c1">// 调用每个 NMI 处理程序
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">rcu_read_unlock</span><span class="p">();</span>  <span class="c1">// 退出 RCU 临界区
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">register_nmi_handler</span><span class="p">(</span><span class="kt">handler_t</span> <span class="n">cb</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">spin_lock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">nmi_list_lock</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">rcu_list_add</span><span class="p">(</span><span class="o">&amp;</span><span class="n">nmi_list</span><span class="p">,</span> <span class="n">cb</span><span class="p">);</span>  <span class="c1">// 注册新的 NMI 处理程序
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">spin_unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">nmi_list_lock</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nf">spin_unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">nmi_list_lock</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">unregister_nmi_handler</span><span class="p">(</span><span class="kt">handler_t</span> <span class="n">cb</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">spin_lock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">nmi_list_lock</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">rcu_list_remove</span><span class="p">(</span><span class="o">&amp;</span><span class="n">nmi_list</span><span class="p">,</span> <span class="n">cb</span><span class="p">);</span>  <span class="c1">// 从列表中移除处理程序
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">spin_unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">nmi_list_lock</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nf">spin_unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">nmi_list_lock</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">synchronize_rcu</span><span class="p">();</span>  <span class="c1">// 等待所有 NMI 操作完成
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>通过上面的代码，NMI 处理程序的注册和注销可以在高并发的环境下安全进行。<code>synchronize_rcu</code> 用于确保注销处理程序时，所有正在执行的 NMI 操作已经结束，防止无效指针访问导致的系统崩溃。</p>
@@ -952,25 +952,25 @@
 </span></span><span class="line"><span class="cl">    <span class="kt">process_t</span> <span class="o">*</span><span class="n">p</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="nf">rcu_read_lock</span><span class="p">();</span>  <span class="c1">// 进入 RCU 临界区
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">p</span> <span class="o">=</span> <span class="n">pid_table</span><span class="p">[</span><span class="nf">pid_hash</span><span class="p">(</span><span class="n">pid</span><span class="p">)].</span><span class="n">process</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">p</span> <span class="o">=</span> <span class="n">pid_table</span><span class="p">[</span><span class="nf">pid_hash</span><span class="p">(</span><span class="n">pid</span><span class="p">)].</span><span class="n">process</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">p</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">        <span class="nf">atomic_inc</span><span class="p">(</span><span class="o">&amp;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">ref</span><span class="p">);</span>  <span class="c1">// 增加引用计数
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    
+</span></span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="nf">rcu_read_unlock</span><span class="p">();</span>  <span class="c1">// 退出 RCU 临界区
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="n">p</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">p</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">pid_remove</span><span class="p">(</span><span class="kt">int</span> <span class="n">pid</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kt">process_t</span> <span class="o">**</span><span class="n">p</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="nf">spin_lock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pid_table</span><span class="p">[</span><span class="nf">pid_hash</span><span class="p">(</span><span class="n">pid</span><span class="p">)].</span><span class="n">lock</span><span class="p">);</span>  <span class="c1">// 使用自旋锁同步写操作
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">p</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">pid_table</span><span class="p">[</span><span class="nf">pid_hash</span><span class="p">(</span><span class="n">pid</span><span class="p">)].</span><span class="n">process</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">p</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">pid_table</span><span class="p">[</span><span class="nf">pid_hash</span><span class="p">(</span><span class="n">pid</span><span class="p">)].</span><span class="n">process</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">rcu_assign_pointer</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>  <span class="c1">// 安全发布 NULL
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">spin_unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pid_table</span><span class="p">[</span><span class="nf">pid_hash</span><span class="p">(</span><span class="n">pid</span><span class="p">)].</span><span class="n">lock</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nf">spin_unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pid_table</span><span class="p">[</span><span class="nf">pid_hash</span><span class="p">(</span><span class="n">pid</span><span class="p">)].</span><span class="n">lock</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">*</span><span class="n">p</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">        <span class="nf">call_rcu</span><span class="p">(</span><span class="n">pid_free</span><span class="p">,</span> <span class="o">*</span><span class="n">p</span><span class="p">);</span>  <span class="c1">// 使用 RCU 异步释放旧数据
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>在这个例子中，RCU 的读操作是并发的，且不需要阻塞写操作。写操作通过自旋锁保护，并在合适的时间点调用 <code>call_rcu</code> 异步释放旧数据。</p>
@@ -1081,35 +1081,35 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// 引用计数方式实现类型安全内存
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">struct</span> <span class="n">my_object</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="n">my_object</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kt">atomic_t</span> <span class="n">refcount</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 数据字段
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">};</span>
+</span></span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">acquire_object</span><span class="p">(</span><span class="k">struct</span> <span class="n">my_object</span> <span class="o">*</span><span class="n">obj</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">atomic_inc</span><span class="p">(</span><span class="o">&amp;</span><span class="n">obj</span><span class="o">-&gt;</span><span class="n">refcount</span><span class="p">);</span>  <span class="c1">// 增加引用计数
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">release_object</span><span class="p">(</span><span class="k">struct</span> <span class="n">my_object</span> <span class="o">*</span><span class="n">obj</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nf">atomic_dec_and_test</span><span class="p">(</span><span class="o">&amp;</span><span class="n">obj</span><span class="o">-&gt;</span><span class="n">refcount</span><span class="p">))</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="nf">free</span><span class="p">(</span><span class="n">obj</span><span class="p">);</span>  <span class="c1">// 当引用计数为 0 时，释放对象
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// RCU 方式实现类型安全内存
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">struct</span> <span class="n">my_rcu_object</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="n">my_rcu_object</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">struct</span> <span class="n">rcu_head</span> <span class="n">rcu</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 数据字段
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">};</span>
+</span></span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">free_rcu_object</span><span class="p">(</span><span class="k">struct</span> <span class="n">rcu_head</span> <span class="o">*</span><span class="n">head</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">struct</span> <span class="n">my_rcu_object</span> <span class="o">*</span><span class="n">obj</span> <span class="o">=</span> <span class="nf">container_of</span><span class="p">(</span><span class="n">head</span><span class="p">,</span> <span class="k">struct</span> <span class="n">my_rcu_object</span><span class="p">,</span> <span class="n">rcu</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">free</span><span class="p">(</span><span class="n">obj</span><span class="p">);</span>  <span class="c1">// 释放对象
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">release_rcu_object</span><span class="p">(</span><span class="k">struct</span> <span class="n">my_rcu_object</span> <span class="o">*</span><span class="n">obj</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">call_rcu</span><span class="p">(</span><span class="o">&amp;</span><span class="n">obj</span><span class="o">-&gt;</span><span class="n">rcu</span><span class="p">,</span> <span class="n">free_rcu_object</span><span class="p">);</span>  <span class="c1">// 安排异步释放
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
@@ -1232,9 +1232,9 @@
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="nf">rcu_read_lock</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">    <span class="n">local_table</span> <span class="o">=</span> <span class="nf">rcu_dereference</span><span class="p">(</span><span class="n">table</span><span class="p">);</span>  <span class="c1">// 获取最新的系统调用表
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">local_table</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">local_table</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">        <span class="n">r</span> <span class="o">=</span> <span class="n">local_table</span><span class="p">[</span><span class="n">number</span><span class="p">](</span><span class="n">args</span><span class="p">);</span>     <span class="c1">// 执行系统调用
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">rcu_read_unlock</span><span class="p">();</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nf">rcu_read_unlock</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">r</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
@@ -1245,11 +1245,11 @@
 </span></span><span class="line"><span class="cl">    <span class="nf">spin_lock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">table_lock</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="n">local_table</span> <span class="o">=</span> <span class="n">table</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">rcu_assign_pointer</span><span class="p">(</span><span class="o">&amp;</span><span class="n">table</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>      <span class="c1">// 将系统调用表指针设置为 NULL
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">spin_unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">table_lock</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nf">spin_unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">table_lock</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="nf">synchronize_rcu</span><span class="p">();</span>                     <span class="c1">// 等待所有读取操作结束
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">kfree</span><span class="p">(</span><span class="n">local_table</span><span class="p">);</span>                    <span class="c1">// 释放旧的系统调用表
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nf">kfree</span><span class="p">(</span><span class="n">local_table</span><span class="p">);</span>                    <span class="c1">// 释放旧的系统调用表
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>发布-订阅模式关键在于：</p>
@@ -1379,11 +1379,11 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">//A simplified version of Linux&#39;s read/write lock.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">//n=0  -&gt; not locked
 </span></span></span><span class="line"><span class="cl"><span class="c1">//n=-1 -&gt; locked by one writer
 </span></span></span><span class="line"><span class="cl"><span class="c1">//n&gt;0  -&gt; locked by n readers
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">struct</span> <span class="n">rwlock</span><span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="n">rwlock</span><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span><span class="o">:</span>
 </span></span><span class="line"><span class="cl"><span class="nf">r_lock</span><span class="p">(</span><span class="n">l</span><span class="p">)</span><span class="o">:</span>
@@ -1396,7 +1396,7 @@
 </span></span><span class="line"><span class="cl"><span class="c1">//CAS(p,a,b)is atomic compare-and-swap instruction
 </span></span></span><span class="line"><span class="cl"><span class="c1">//if *p ==a,set *p = b,return true
 </span></span></span><span class="line"><span class="cl"><span class="c1">//else return false
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">w_lock</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">:</span>
+</span></span></span><span class="line"><span class="cl"><span class="nf">w_lock</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">:</span>
 </span></span><span class="line"><span class="cl">  <span class="k">while</span> <span class="mi">1</span><span class="o">:</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nf">CAS</span><span class="p">(</span><span class="o">&amp;</span><span class="n">l</span><span class="o">-&gt;</span><span class="n">n</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">      <span class="k">return</span>
@@ -1461,7 +1461,7 @@
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="nf">r_lock</span><span class="p">(</span><span class="n">l</span><span class="p">)</span><span class="o">:</span>
 </span></span><span class="line"><span class="cl">  <span class="k">while</span> <span class="mi">1</span><span class="o">:</span>
 </span></span><span class="line"><span class="cl">    <span class="n">x</span> <span class="o">=</span> <span class="n">l</span><span class="o">-&gt;</span><span class="n">n</span> <span class="c1">//THIS
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span>
 </span></span><span class="line"><span class="cl">       <span class="k">continue</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nf">CAS</span><span class="p">(</span><span class="o">&amp;</span><span class="n">l</span><span class="o">-&gt;</span><span class="n">n</span><span class="p">,</span><span class="n">X</span><span class="p">,</span><span class="err">×</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">       <span class="k">return</span>
@@ -1502,7 +1502,7 @@
 <p><img src="/p/mit6s08123rcu/p68.png"
 	width="1536"
 	height="734"
-	srcset="/p/mit6s08123rcu/p68_hu_f1e333d783ff820f.png 480w, /p/mit6s08123rcu/p68_hu_788ee9961a0864c3.png 1024w"
+	srcset="/p/mit6s08123rcu/p68_hu_9e262bfafc1cebf8.png 480w, /p/mit6s08123rcu/p68_hu_c8d645430ff99a0d.png 1024w"
 	loading="lazy"
 	
 		alt="p68"
@@ -1534,7 +1534,7 @@
 <p><img src="/p/mit6s08123rcu/p69.png"
 	width="1130"
 	height="622"
-	srcset="/p/mit6s08123rcu/p69_hu_4f0d3273e42e4955.png 480w, /p/mit6s08123rcu/p69_hu_b7c2274f0c6a46c.png 1024w"
+	srcset="/p/mit6s08123rcu/p69_hu_34713bba9eb5b9bb.png 480w, /p/mit6s08123rcu/p69_hu_573e7ed24715b881.png 1024w"
 	loading="lazy"
 	
 		alt="p69"
@@ -1682,7 +1682,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">//list reader:
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="nf">rcu_read_lock</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl"><span class="n">e</span> <span class="o">=</span> <span class="n">head</span>
 </span></span><span class="line"><span class="cl"><span class="k">while</span><span class="p">(</span><span class="n">p</span><span class="p">){</span>
@@ -1693,7 +1693,7 @@
 </span></span><span class="line"><span class="cl"><span class="nf">rcu_read_unlock</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">              
 </span></span><span class="line"><span class="cl"><span class="c1">//replace the first list element:
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>              
+</span></span></span><span class="line"><span class="cl">              
 </span></span><span class="line"><span class="cl"><span class="nf">acquire</span><span class="p">(</span><span class="n">lock</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="n">old</span> <span class="o">=</span> <span class="n">head</span>
 </span></span><span class="line"><span class="cl"><span class="n">e</span> <span class="o">=</span> <span class="nf">alloc</span><span class="p">()</span>
@@ -1854,7 +1854,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08122meltdown/19.8d880549dccba2f0c1613b3e41a721e5_hu_1493d831cda8626c.jpg" 
+                <img src="/p/mit6s08122meltdown/19.8d880549dccba2f0c1613b3e41a721e5_hu_914e4a4b73e7f898.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -1878,7 +1878,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08121networking/bg.68c4376fd87b0b35da07319dd155c90d_hu_b8a716243c6f9679.jpg" 
+                <img src="/p/mit6s08121networking/bg.68c4376fd87b0b35da07319dd155c90d_hu_702cc6dbf23ff4b6.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -1902,7 +1902,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08120kernels-and-hll/bg.4175e6a2793e0fc340e5aced2529e40b_hu_de82d011b3d97ace.jpg" 
+                <img src="/p/mit6s08120kernels-and-hll/bg.4175e6a2793e0fc340e5aced2529e40b_hu_900f2fcc83e9e964.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -1926,7 +1926,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08119virtual-machines/bg.b02a7ba1d946705c0cf2809bcf960db8_hu_77df69a362eba544.jpg" 
+                <img src="/p/mit6s08119virtual-machines/bg.b02a7ba1d946705c0cf2809bcf960db8_hu_3d3ad0ec0320c7b4.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -1950,7 +1950,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08118os-organization/bg.6254618fb3eb08f3bf5d7cd89d4cd672_hu_845b73e21b5a04f1.jpg" 
+                <img src="/p/mit6s08118os-organization/bg.6254618fb3eb08f3bf5d7cd89d4cd672_hu_646dc659ecd15a3f.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -2181,7 +2181,7 @@
         
         
 
-        共 742374 字 , 39 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        共 741930 字 , 39 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
         主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 

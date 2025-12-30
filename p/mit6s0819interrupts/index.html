@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-cn" dir="ltr">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="中断是实现实时响应和异步事件处理的关键机制。它能够在设备或其他事件需要CPU的即时处理时，通过硬件信号打断当前执行流程，将控制权迅速转移给操作系统的中断处理程序。操作系统会保存当前的执行状态，处理中断请求，然后恢复原先的操作。此机制允许CPU高效地处理外部设备事件，如输入输出操作、定时器溢出等，而无需轮询资源状态，从而提高系统效率和响应速度。中断确保了系统对外部变化的敏捷反应，是现代计算环境下实现多任务处理和实时操作的基础。">
 <title>MIT6S081：9Interrupts</title>
@@ -59,7 +59,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu_67bf1327fc98b60.png" width="300"
+                        <img src="/img/avatar_hu_c2920364e6534697.png" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -294,8 +294,8 @@
     <header class="article-header">
         <div class="article-image">
             <a href="/p/mit6s0819interrupts/">
-                <img src="/p/mit6s0819interrupts/bg_hu_45e697697379f3a9.jpg"
-                        srcset="/p/mit6s0819interrupts/bg_hu_45e697697379f3a9.jpg 800w, /p/mit6s0819interrupts/bg_hu_4794f8a380aeb256.jpg 1600w"
+                <img src="/p/mit6s0819interrupts/bg_hu_831c7d51793a3c7d.jpg"
+                        srcset="/p/mit6s0819interrupts/bg_hu_831c7d51793a3c7d.jpg 800w, /p/mit6s0819interrupts/bg_hu_584bc3574f717289.jpg 1600w"
                         width="800" 
                         height="450" 
                         loading="lazy"
@@ -654,7 +654,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">//init.c中的main函数，这是系统启动后运行的第一个进程。
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">int</span>
 </span></span><span class="line"><span class="cl"><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="err">）</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">pid</span><span class="p">,</span><span class="n">wpid</span><span class="p">;</span>
@@ -1281,19 +1281,19 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">start</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// ... 初始化代码 ...
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// 设置定时器：编程 CLINT
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="n">interval</span> <span class="o">=</span> <span class="mi">1000000</span><span class="p">;</span> <span class="c1">// 定时器间隔，时间单位依赖于时钟频率
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="o">*</span><span class="p">(</span><span class="n">uint64</span><span class="o">*</span><span class="p">)</span><span class="nf">CLINT_MTIMECMP</span><span class="p">(</span><span class="n">hartid</span><span class="p">)</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="n">uint64</span><span class="o">*</span><span class="p">)</span><span class="n">CLINT_MTIME</span> <span class="o">+</span> <span class="n">interval</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">interval</span> <span class="o">=</span> <span class="mi">1000000</span><span class="p">;</span> <span class="c1">// 定时器间隔，时间单位依赖于时钟频率
+</span></span></span><span class="line"><span class="cl">    <span class="o">*</span><span class="p">(</span><span class="n">uint64</span><span class="o">*</span><span class="p">)</span><span class="nf">CLINT_MTIMECMP</span><span class="p">(</span><span class="n">hartid</span><span class="p">)</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="n">uint64</span><span class="o">*</span><span class="p">)</span><span class="n">CLINT_MTIME</span> <span class="o">+</span> <span class="n">interval</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// 启用定时器中断
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">w_mie</span><span class="p">(</span><span class="nf">r_mie</span><span class="p">()</span> <span class="o">|</span> <span class="n">MIE_MTIE</span><span class="p">);</span>  <span class="c1">// 允许机器模式定时器中断
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl">    <span class="nf">w_mie</span><span class="p">(</span><span class="nf">r_mie</span><span class="p">()</span> <span class="o">|</span> <span class="n">MIE_MTIE</span><span class="p">);</span>  <span class="c1">// 允许机器模式定时器中断
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// 设置 mtvec 指向定时器中断处理程序 timervec
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">w_mtvec</span><span class="p">((</span><span class="n">uint64</span><span class="p">)</span><span class="n">timervec</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nf">w_mtvec</span><span class="p">((</span><span class="n">uint64</span><span class="p">)</span><span class="n">timervec</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// 进入内核主程序
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">main</span><span class="p">();</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nf">main</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -1400,7 +1400,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08123rcu/bg.91a08bf3fe0a8ca435e8fbc902291fd5_hu_50da030b7ba2cbe7.jpg" 
+                <img src="/p/mit6s08123rcu/bg.91a08bf3fe0a8ca435e8fbc902291fd5_hu_b6ef8ea2c8ceedc0.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -1424,7 +1424,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08122meltdown/19.8d880549dccba2f0c1613b3e41a721e5_hu_1493d831cda8626c.jpg" 
+                <img src="/p/mit6s08122meltdown/19.8d880549dccba2f0c1613b3e41a721e5_hu_914e4a4b73e7f898.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -1448,7 +1448,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08121networking/bg.68c4376fd87b0b35da07319dd155c90d_hu_b8a716243c6f9679.jpg" 
+                <img src="/p/mit6s08121networking/bg.68c4376fd87b0b35da07319dd155c90d_hu_702cc6dbf23ff4b6.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -1472,7 +1472,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08120kernels-and-hll/bg.4175e6a2793e0fc340e5aced2529e40b_hu_de82d011b3d97ace.jpg" 
+                <img src="/p/mit6s08120kernels-and-hll/bg.4175e6a2793e0fc340e5aced2529e40b_hu_900f2fcc83e9e964.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -1496,7 +1496,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08119virtual-machines/bg.b02a7ba1d946705c0cf2809bcf960db8_hu_77df69a362eba544.jpg" 
+                <img src="/p/mit6s08119virtual-machines/bg.b02a7ba1d946705c0cf2809bcf960db8_hu_3d3ad0ec0320c7b4.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -1727,7 +1727,7 @@
         
         
 
-        共 742374 字 , 39 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        共 741930 字 , 39 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
         主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 

@@ -5,9 +5,9 @@
         <link>https://echudet.github.io/categories/ai/</link>
         <description>Recent content in Ai on echudet</description>
         <generator>Hugo -- gohugo.io</generator>
-        <language>zh-cn</language>
+        <language>en-us</language>
         <copyright>echudet</copyright>
-        <lastBuildDate>Sat, 01 Nov 2025 19:46:45 +0800</lastBuildDate><atom:link href="https://echudet.github.io/categories/ai/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 30 Dec 2025 18:11:49 +0800</lastBuildDate><atom:link href="https://echudet.github.io/categories/ai/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Transformer探究</title>
         <link>https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/</link>
         <pubDate>Sat, 13 Sep 2025 00:00:00 +0000</pubDate>
@@ -24,7 +24,7 @@
 &lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/en-de.png&#34;
 	width=&#34;1319&#34;
 	height=&#34;935&#34;
-	srcset=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/en-de_hu_6f426a3f66b30ff1.png 480w, https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/en-de_hu_bef70536c233f457.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/en-de_hu_37dd6d825a2f6f89.png 480w, https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/en-de_hu_2b65e097f734f1ef.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;en-de&#34;
@@ -46,7 +46,7 @@
 &lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/self-attention.png&#34;
 	width=&#34;630&#34;
 	height=&#34;618&#34;
-	srcset=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/self-attention_hu_a42a98bcd5308b23.png 480w, https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/self-attention_hu_e7f54b9b6e10c2e.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/self-attention_hu_cd716d2dff48e181.png 480w, https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/self-attention_hu_12d73356d9401c7.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;self-attention&#34;
@@ -64,7 +64,7 @@
 &lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/encoder_with_tensors_2.png&#34;
 	width=&#34;1268&#34;
 	height=&#34;771&#34;
-	srcset=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/encoder_with_tensors_2_hu_2eceb48ed69e48b4.png 480w, https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/encoder_with_tensors_2_hu_606d7ea7ac509e29.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/encoder_with_tensors_2_hu_bc89721e601002a3.png 480w, https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/encoder_with_tensors_2_hu_a80f107ae2b9f9d0.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;encoder_with_tensors_2&#34;
@@ -94,7 +94,7 @@
 &lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/self-attention2.png&#34;
 	width=&#34;1109&#34;
 	height=&#34;1162&#34;
-	srcset=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/self-attention2_hu_95aad7cb0c730ba4.png 480w, https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/self-attention2_hu_a83290a92f152107.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/self-attention2_hu_6b4f3efe9943d1a2.png 480w, https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/self-attention2_hu_57381d88438b7f1f.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;self-attention2&#34;
@@ -111,7 +111,7 @@
 &lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/self-attention-matrix-calculation.png&#34;
 	width=&#34;581&#34;
 	height=&#34;658&#34;
-	srcset=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/self-attention-matrix-calculation_hu_9c897284d2e8432.png 480w, https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/self-attention-matrix-calculation_hu_41f2416af9f7c03.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/self-attention-matrix-calculation_hu_b95fb88addb8957a.png 480w, https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/self-attention-matrix-calculation_hu_1d1ae9aeeeae6448.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;self-attention-matrix-calculation&#34;
@@ -126,7 +126,7 @@
 &lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/self-attention-matrix-calculation-2.png&#34;
 	width=&#34;893&#34;
 	height=&#34;349&#34;
-	srcset=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/self-attention-matrix-calculation-2_hu_cad135bd56c93184.png 480w, https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/self-attention-matrix-calculation-2_hu_619d452627693f3b.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/self-attention-matrix-calculation-2_hu_a35bcc245811b4b6.png 480w, https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/self-attention-matrix-calculation-2_hu_b5ab2e60c4f0e05e.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;self-attention-matrix-calculation-2&#34;
@@ -154,7 +154,7 @@
 &lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/transformer_attention_heads_qkv.png&#34;
 	width=&#34;1310&#34;
 	height=&#34;774&#34;
-	srcset=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/transformer_attention_heads_qkv_hu_9bc04b9209a178fc.png 480w, https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/transformer_attention_heads_qkv_hu_eca9cf4f72e8acc8.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/transformer_attention_heads_qkv_hu_bee1f5273ba0ca4a.png 480w, https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/transformer_attention_heads_qkv_hu_2561badbe5db3408.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;transformer_attention_heads_qkv&#34;
@@ -172,7 +172,7 @@
 &lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/transformer_attention_heads_weight_matrix_o.png&#34;
 	width=&#34;1372&#34;
 	height=&#34;759&#34;
-	srcset=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/transformer_attention_heads_weight_matrix_o_hu_50b84b9827074158.png 480w, https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/transformer_attention_heads_weight_matrix_o_hu_aa11f938095a88ae.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/transformer_attention_heads_weight_matrix_o_hu_8a75e75079b48bf.png 480w, https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/transformer_attention_heads_weight_matrix_o_hu_1310815a6ede0e81.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;transformer_attention_heads_weight_matrix_o&#34;
@@ -196,7 +196,7 @@
 &lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/transformer_positional_encoding_vectors.png&#34;
 	width=&#34;1438&#34;
 	height=&#34;793&#34;
-	srcset=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/transformer_positional_encoding_vectors_hu_ce670065d195f36b.png 480w, https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/transformer_positional_encoding_vectors_hu_23f97f095153c536.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/transformer_positional_encoding_vectors_hu_193de9b8083cc85c.png 480w, https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/transformer_positional_encoding_vectors_hu_c015391a3ee56a5c.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;transformer_positional_encoding_vectors&#34;
@@ -213,7 +213,7 @@
 &lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/transformer_positional_encoding_large_example.png&#34;
 	width=&#34;1238&#34;
 	height=&#34;907&#34;
-	srcset=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/transformer_positional_encoding_large_example_hu_fc1050dc4802f425.png 480w, https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/transformer_positional_encoding_large_example_hu_386e0007a94bdb6c.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/transformer_positional_encoding_large_example_hu_94bf188211c845db.png 480w, https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/transformer_positional_encoding_large_example_hu_617a367a7c4ccb47.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;transformer_positional_encoding_large_example&#34;
@@ -234,7 +234,7 @@
 &lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/transformer_resideual_layer_norm_2.png&#34;
 	width=&#34;712&#34;
 	height=&#34;666&#34;
-	srcset=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/transformer_resideual_layer_norm_2_hu_80a81a94d0dd503d.png 480w, https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/transformer_resideual_layer_norm_2_hu_9b0c6ede5f221a74.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/transformer_resideual_layer_norm_2_hu_6ca7359a8dfa2afa.png 480w, https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/transformer_resideual_layer_norm_2_hu_4ede346610adf1d2.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;transformer_resideual_layer_norm_2&#34;
@@ -249,7 +249,7 @@
 &lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/transformer_resideual_layer_norm_3.png&#34;
 	width=&#34;1415&#34;
 	height=&#34;804&#34;
-	srcset=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/transformer_resideual_layer_norm_3_hu_bdb27ccfef4b06d1.png 480w, https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/transformer_resideual_layer_norm_3_hu_3d83b009eb8bed6e.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/transformer_resideual_layer_norm_3_hu_bed3f55e2282630d.png 480w, https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/transformer_resideual_layer_norm_3_hu_7387b3fd343b5989.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;transformer_resideual_layer_norm_3&#34;
@@ -286,7 +286,7 @@
 &lt;p&gt;&lt;img src=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/one-hot-vocabulary-example.png&#34;
 	width=&#34;1259&#34;
 	height=&#34;640&#34;
-	srcset=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/one-hot-vocabulary-example_hu_e279a78071018bf1.png 480w, https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/one-hot-vocabulary-example_hu_adff6db62bf30bbe.png 1024w&#34;
+	srcset=&#34;https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/one-hot-vocabulary-example_hu_8ee80695fb6c0987.png 480w, https://echudet.github.io/p/transformer%E6%8E%A2%E7%A9%B6/one-hot-vocabulary-example_hu_c725b61cc494d3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;one-hot-vocabulary-example&#34;

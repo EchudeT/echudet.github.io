@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-cn" dir="ltr">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="进程的“睡眠”和“唤醒”机制是进程调度和资源管理的重要部分。其原理是通过将不需要立即执行的进程置于睡眠状态，释放CPU资源，从而提高系统效率。当进程进入睡眠状态时，它会主动放弃CPU，进行等待某事件的完成。一旦该事件发生，操作系统会通过中断、信号或条件变量等方式唤醒进程，重新将其调度到可执行状态。睡眠和唤醒机制有助于优化资源分配，减少忙等，提高多任务处理的效率，并确保系统响应性和性能的优化。">
 <title>MIT6S081：13Sleep &amp; Wake up</title>
@@ -59,7 +59,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu_67bf1327fc98b60.png" width="300"
+                        <img src="/img/avatar_hu_c2920364e6534697.png" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -298,8 +298,8 @@
     <header class="article-header">
         <div class="article-image">
             <a href="/p/mit6s08113sleep-wake-up/">
-                <img src="/p/mit6s08113sleep-wake-up/bg_hu_63c2a321f495ecf6.jpg"
-                        srcset="/p/mit6s08113sleep-wake-up/bg_hu_63c2a321f495ecf6.jpg 800w, /p/mit6s08113sleep-wake-up/bg_hu_d55aac7393a9e178.jpg 1600w"
+                <img src="/p/mit6s08113sleep-wake-up/bg_hu_a9d6123a56a991f4.jpg"
+                        srcset="/p/mit6s08113sleep-wake-up/bg_hu_a9d6123a56a991f4.jpg 800w, /p/mit6s08113sleep-wake-up/bg_hu_a537c6a6ab22bb43.jpg 1600w"
                         width="800" 
                         height="450" 
                         loading="lazy"
@@ -581,13 +581,13 @@
 </span></span><span class="line"><span class="cl">    <span class="nf">acquire</span><span class="p">(</span><span class="o">&amp;</span><span class="n">s</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="n">s</span><span class="o">-&gt;</span><span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">wakeup</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>  <span class="c1">// !pay attention
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">release</span><span class="p">(</span><span class="o">&amp;</span><span class="n">s</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nf">release</span><span class="p">(</span><span class="o">&amp;</span><span class="n">s</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">P</span><span class="p">(</span><span class="k">struct</span> <span class="n">semaphore</span><span class="o">*</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="p">(</span><span class="n">s</span><span class="o">-&gt;</span><span class="n">count</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">        <span class="nf">sleep</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>  <span class="c1">// !pay attention
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">acquire</span><span class="p">(</span><span class="o">&amp;</span><span class="n">s</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nf">acquire</span><span class="p">(</span><span class="o">&amp;</span><span class="n">s</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="n">s</span><span class="o">-&gt;</span><span class="n">count</span> <span class="o">-=</span> <span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">release</span><span class="p">(</span><span class="o">&amp;</span><span class="n">s</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
@@ -628,7 +628,7 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">P</span><span class="p">(</span><span class="k">struct</span> <span class="n">semaphore</span><span class="o">*</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">acquire</span><span class="p">(</span><span class="o">&amp;</span><span class="n">s</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>  <span class="c1">// !pay attention
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">while</span> <span class="p">(</span><span class="n">s</span><span class="o">-&gt;</span><span class="n">count</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="p">(</span><span class="n">s</span><span class="o">-&gt;</span><span class="n">count</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">        <span class="nf">sleep</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="n">s</span><span class="o">-&gt;</span><span class="n">count</span> <span class="o">-=</span> <span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">release</span><span class="p">(</span><span class="o">&amp;</span><span class="n">s</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>
@@ -671,7 +671,7 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="p">(</span><span class="n">s</span><span class="o">-&gt;</span><span class="n">count</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">        <span class="nf">sleep</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">s</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>  <span class="c1">// !pay attention
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">s</span><span class="o">-&gt;</span><span class="n">count</span> <span class="o">-=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">s</span><span class="o">-&gt;</span><span class="n">count</span> <span class="o">-=</span> <span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">release</span><span class="p">(</span><span class="o">&amp;</span><span class="n">s</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
@@ -735,33 +735,33 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// Atomically release lock and sleep on chan.
 </span></span></span><span class="line"><span class="cl"><span class="c1">// Reacquires lock when awakened.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">void</span>
 </span></span><span class="line"><span class="cl"><span class="nf">sleep</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">chan</span><span class="p">,</span> <span class="k">struct</span> <span class="n">spinlock</span> <span class="o">*</span><span class="n">lk</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="k">struct</span> <span class="n">proc</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="nf">myproc</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// Must acquire p-&gt;lock in order to
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// change p-&gt;state and then call sched.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// Once we hold p-&gt;lock, we can be
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// guaranteed that we won&#39;t miss any wakeup
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// (wakeup locks p-&gt;lock),
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// so it&#39;s okay to release lk.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">if</span><span class="p">(</span><span class="n">lk</span> <span class="o">!=</span> <span class="o">&amp;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">){</span>  <span class="c1">//DOC: sleeplock0
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">acquire</span><span class="p">(</span><span class="o">&amp;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>  <span class="c1">//DOC: sleeplock1
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">release</span><span class="p">(</span><span class="n">lk</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// change p-&gt;state and then call sched.
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// Once we hold p-&gt;lock, we can be
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// guaranteed that we won&#39;t miss any wakeup
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// (wakeup locks p-&gt;lock),
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// so it&#39;s okay to release lk.
+</span></span></span><span class="line"><span class="cl">  <span class="k">if</span><span class="p">(</span><span class="n">lk</span> <span class="o">!=</span> <span class="o">&amp;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">){</span>  <span class="c1">//DOC: sleeplock0
+</span></span></span><span class="line"><span class="cl">    <span class="nf">acquire</span><span class="p">(</span><span class="o">&amp;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>  <span class="c1">//DOC: sleeplock1
+</span></span></span><span class="line"><span class="cl">    <span class="nf">release</span><span class="p">(</span><span class="n">lk</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// Go to sleep.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">p</span><span class="o">-&gt;</span><span class="n">chan</span> <span class="o">=</span> <span class="n">chan</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">  <span class="n">p</span><span class="o">-&gt;</span><span class="n">chan</span> <span class="o">=</span> <span class="n">chan</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="n">p</span><span class="o">-&gt;</span><span class="n">state</span> <span class="o">=</span> <span class="n">SLEEPING</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="nf">sched</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// Tidy up.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">p</span><span class="o">-&gt;</span><span class="n">chan</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">  <span class="n">p</span><span class="o">-&gt;</span><span class="n">chan</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// Reacquire original lock.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">if</span><span class="p">(</span><span class="n">lk</span> <span class="o">!=</span> <span class="o">&amp;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">){</span>
+</span></span></span><span class="line"><span class="cl">  <span class="k">if</span><span class="p">(</span><span class="n">lk</span> <span class="o">!=</span> <span class="o">&amp;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">){</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">release</span><span class="p">(</span><span class="o">&amp;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">acquire</span><span class="p">(</span><span class="n">lk</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
@@ -770,7 +770,7 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// Wake up all processes sleeping on chan.
 </span></span></span><span class="line"><span class="cl"><span class="c1">// Must be called without any p-&gt;lock.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">void</span>
 </span></span><span class="line"><span class="cl"><span class="nf">wakeup</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">chan</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="k">struct</span> <span class="n">proc</span> <span class="o">*</span><span class="n">p</span><span class="p">;</span>
@@ -839,10 +839,10 @@
 </span></span><span class="line"><span class="cl">  <span class="k">struct</span> <span class="n">spinlock</span> <span class="n">lock</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="kt">char</span> <span class="n">data</span><span class="p">[</span><span class="n">PIPESIZE</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl">  <span class="n">uint</span> <span class="n">nread</span><span class="p">;</span>     <span class="c1">// number of bytes read
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">uint</span> <span class="n">nwrite</span><span class="p">;</span>    <span class="c1">// number of bytes written
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">int</span> <span class="n">readopen</span><span class="p">;</span>   <span class="c1">// read fd is still open
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">int</span> <span class="n">writeopen</span><span class="p">;</span>  <span class="c1">// write fd is still open
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">};</span>
+</span></span></span><span class="line"><span class="cl">  <span class="n">uint</span> <span class="n">nwrite</span><span class="p">;</span>    <span class="c1">// number of bytes written
+</span></span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">readopen</span><span class="p">;</span>   <span class="c1">// read fd is still open
+</span></span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">writeopen</span><span class="p">;</span>  <span class="c1">// write fd is still open
+</span></span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>字段<code>nread</code>和<code>nwrite</code>统计从缓冲区读取和写入缓冲区的总字节数。</p>
@@ -1045,7 +1045,7 @@
 <p><img src="/p/mit6s08113sleep-wake-up/p13.png"
 	width="488"
 	height="416"
-	srcset="/p/mit6s08113sleep-wake-up/p13_hu_68995124b57ad737.png 480w, /p/mit6s08113sleep-wake-up/p13_hu_36281ce44cbc01ca.png 1024w"
+	srcset="/p/mit6s08113sleep-wake-up/p13_hu_cb3b1231df265f2f.png 480w, /p/mit6s08113sleep-wake-up/p13_hu_f501c77238409611.png 1024w"
 	loading="lazy"
 	
 		alt="p13"
@@ -1068,7 +1068,7 @@
 <p><img src="/p/mit6s08113sleep-wake-up/p14.png"
 	width="1032"
 	height="622"
-	srcset="/p/mit6s08113sleep-wake-up/p14_hu_8633bda5d47cff41.png 480w, /p/mit6s08113sleep-wake-up/p14_hu_1af33a56a0024260.png 1024w"
+	srcset="/p/mit6s08113sleep-wake-up/p14_hu_4fb9f357a035ec14.png 480w, /p/mit6s08113sleep-wake-up/p14_hu_ae70077a1f16c06c.png 1024w"
 	loading="lazy"
 	
 		alt="p14"
@@ -1145,7 +1145,7 @@
 <p><img src="/p/mit6s08113sleep-wake-up/p15.png"
 	width="652"
 	height="436"
-	srcset="/p/mit6s08113sleep-wake-up/p15_hu_dac96dcb197dce3d.png 480w, /p/mit6s08113sleep-wake-up/p15_hu_82530e4f90dcb542.png 1024w"
+	srcset="/p/mit6s08113sleep-wake-up/p15_hu_8739aabd792c1e6d.png 480w, /p/mit6s08113sleep-wake-up/p15_hu_8468341a4a0d7c0f.png 1024w"
 	loading="lazy"
 	
 		alt="p15"
@@ -1160,7 +1160,7 @@
 <p><img src="/p/mit6s08113sleep-wake-up/p16.png"
 	width="644"
 	height="284"
-	srcset="/p/mit6s08113sleep-wake-up/p16_hu_3005c5368077ec98.png 480w, /p/mit6s08113sleep-wake-up/p16_hu_77a56ed73c0e5d12.png 1024w"
+	srcset="/p/mit6s08113sleep-wake-up/p16_hu_5483eb55ad199770.png 480w, /p/mit6s08113sleep-wake-up/p16_hu_679666c6bb92757c.png 1024w"
 	loading="lazy"
 	
 		alt="p16"
@@ -1177,7 +1177,7 @@
 <p><img src="/p/mit6s08113sleep-wake-up/p17.png"
 	width="544"
 	height="532"
-	srcset="/p/mit6s08113sleep-wake-up/p17_hu_72599940914e0604.png 480w, /p/mit6s08113sleep-wake-up/p17_hu_8a51c874e91257cd.png 1024w"
+	srcset="/p/mit6s08113sleep-wake-up/p17_hu_bde62d6df7b3509b.png 480w, /p/mit6s08113sleep-wake-up/p17_hu_fa45997b39c790a6.png 1024w"
 	loading="lazy"
 	
 		alt="p17"
@@ -1232,7 +1232,7 @@
 <p><img src="/p/mit6s08113sleep-wake-up/p18.png"
 	width="316"
 	height="104"
-	srcset="/p/mit6s08113sleep-wake-up/p18_hu_95a1a1783fad0f06.png 480w, /p/mit6s08113sleep-wake-up/p18_hu_dcc1046ee0e0837b.png 1024w"
+	srcset="/p/mit6s08113sleep-wake-up/p18_hu_bd6ea1cb52bb7b32.png 480w, /p/mit6s08113sleep-wake-up/p18_hu_2c52683db890d03c.png 1024w"
 	loading="lazy"
 	
 		alt="p18"
@@ -1280,7 +1280,7 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">//Wake up all processes sleeping on chan.
 </span></span></span><span class="line"><span class="cl"><span class="c1">//Must be called without any p-&gt;lock.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">void</span>
 </span></span><span class="line"><span class="cl"><span class="nf">wakeup</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">chan</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">proc</span> <span class="o">*</span><span class="n">p</span><span class="p">;</span>
@@ -1337,33 +1337,33 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// Atomically release lock and sleep on chan.
 </span></span></span><span class="line"><span class="cl"><span class="c1">// Reacquires lock when awakened.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">void</span>
 </span></span><span class="line"><span class="cl"><span class="nf">sleep</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">chan</span><span class="p">,</span> <span class="k">struct</span> <span class="n">spinlock</span> <span class="o">*</span><span class="n">lk</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="k">struct</span> <span class="n">proc</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="nf">myproc</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// Must acquire p-&gt;lock in order to
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// change p-&gt;state and then call sched.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// Once we hold p-&gt;lock, we can be
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// guaranteed that we won&#39;t miss any wakeup
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// (wakeup locks p-&gt;lock),
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// so it&#39;s okay to release lk.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">if</span><span class="p">(</span><span class="n">lk</span> <span class="o">!=</span> <span class="o">&amp;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">){</span>  <span class="c1">//DOC: sleeplock0
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">acquire</span><span class="p">(</span><span class="o">&amp;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>  <span class="c1">//DOC: sleeplock1
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">release</span><span class="p">(</span><span class="n">lk</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// change p-&gt;state and then call sched.
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// Once we hold p-&gt;lock, we can be
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// guaranteed that we won&#39;t miss any wakeup
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// (wakeup locks p-&gt;lock),
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// so it&#39;s okay to release lk.
+</span></span></span><span class="line"><span class="cl">  <span class="k">if</span><span class="p">(</span><span class="n">lk</span> <span class="o">!=</span> <span class="o">&amp;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">){</span>  <span class="c1">//DOC: sleeplock0
+</span></span></span><span class="line"><span class="cl">    <span class="nf">acquire</span><span class="p">(</span><span class="o">&amp;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>  <span class="c1">//DOC: sleeplock1
+</span></span></span><span class="line"><span class="cl">    <span class="nf">release</span><span class="p">(</span><span class="n">lk</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// Go to sleep.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">p</span><span class="o">-&gt;</span><span class="n">chan</span> <span class="o">=</span> <span class="n">chan</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">  <span class="n">p</span><span class="o">-&gt;</span><span class="n">chan</span> <span class="o">=</span> <span class="n">chan</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="n">p</span><span class="o">-&gt;</span><span class="n">state</span> <span class="o">=</span> <span class="n">SLEEPING</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="nf">sched</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// Tidy up.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">p</span><span class="o">-&gt;</span><span class="n">chan</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">  <span class="n">p</span><span class="o">-&gt;</span><span class="n">chan</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// Reacquire original lock.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">if</span><span class="p">(</span><span class="n">lk</span> <span class="o">!=</span> <span class="o">&amp;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">){</span>
+</span></span></span><span class="line"><span class="cl">  <span class="k">if</span><span class="p">(</span><span class="n">lk</span> <span class="o">!=</span> <span class="o">&amp;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">){</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">release</span><span class="p">(</span><span class="o">&amp;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">acquire</span><span class="p">(</span><span class="n">lk</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
@@ -1381,7 +1381,7 @@
 <p><img src="/p/mit6s08113sleep-wake-up/p15.png"
 	width="652"
 	height="436"
-	srcset="/p/mit6s08113sleep-wake-up/p15_hu_dac96dcb197dce3d.png 480w, /p/mit6s08113sleep-wake-up/p15_hu_82530e4f90dcb542.png 1024w"
+	srcset="/p/mit6s08113sleep-wake-up/p15_hu_8739aabd792c1e6d.png 480w, /p/mit6s08113sleep-wake-up/p15_hu_8468341a4a0d7c0f.png 1024w"
 	loading="lazy"
 	
 		alt="p15"
@@ -1453,21 +1453,21 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="nf">acquire</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pi</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="k">while</span><span class="p">(</span><span class="n">pi</span><span class="o">-&gt;</span><span class="n">nread</span> <span class="o">==</span> <span class="n">pi</span><span class="o">-&gt;</span><span class="n">nwrite</span> <span class="o">&amp;&amp;</span> <span class="n">pi</span><span class="o">-&gt;</span><span class="n">writeopen</span><span class="p">){</span>  <span class="c1">//DOC: pipe-empty
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span><span class="p">(</span><span class="n">pr</span><span class="o">-&gt;</span><span class="n">killed</span><span class="p">){</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">pr</span><span class="o">-&gt;</span><span class="n">killed</span><span class="p">){</span>
 </span></span><span class="line"><span class="cl">      <span class="nf">release</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pi</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">sleep</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pi</span><span class="o">-&gt;</span><span class="n">nread</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">pi</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span> <span class="c1">//DOC: piperead-sleep
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">}</span>
+</span></span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  <span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>  <span class="c1">//DOC: piperead-copy
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span><span class="p">(</span><span class="n">pi</span><span class="o">-&gt;</span><span class="n">nread</span> <span class="o">==</span> <span class="n">pi</span><span class="o">-&gt;</span><span class="n">nwrite</span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">pi</span><span class="o">-&gt;</span><span class="n">nread</span> <span class="o">==</span> <span class="n">pi</span><span class="o">-&gt;</span><span class="n">nwrite</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">      <span class="k">break</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="n">ch</span> <span class="o">=</span> <span class="n">pi</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">[</span><span class="n">pi</span><span class="o">-&gt;</span><span class="n">nread</span><span class="o">++</span> <span class="o">%</span> <span class="n">PIPESIZE</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="nf">copyout</span><span class="p">(</span><span class="n">pr</span><span class="o">-&gt;</span><span class="n">pagetable</span><span class="p">,</span> <span class="n">addr</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ch</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">      <span class="k">break</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  <span class="nf">wakeup</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pi</span><span class="o">-&gt;</span><span class="n">nwrite</span><span class="p">);</span>  <span class="c1">//DOC: piperead-wakeup
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nf">release</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pi</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">  <span class="nf">release</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pi</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">i</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
@@ -1517,7 +1517,7 @@
 </span></span><span class="line"><span class="cl">  <span class="nf">acquire</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pi</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
 </span></span><span class="line"><span class="cl">    <span class="k">while</span><span class="p">(</span><span class="n">pi</span><span class="o">-&gt;</span><span class="n">nwrite</span> <span class="o">==</span> <span class="n">pi</span><span class="o">-&gt;</span><span class="n">nread</span> <span class="o">+</span> <span class="n">PIPESIZE</span><span class="p">){</span>  <span class="c1">//DOC: pipewrite-full
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="k">if</span><span class="p">(</span><span class="n">pi</span><span class="o">-&gt;</span><span class="n">readopen</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">pr</span><span class="o">-&gt;</span><span class="n">killed</span><span class="p">){</span>
+</span></span></span><span class="line"><span class="cl">      <span class="k">if</span><span class="p">(</span><span class="n">pi</span><span class="o">-&gt;</span><span class="n">readopen</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">pr</span><span class="o">-&gt;</span><span class="n">killed</span><span class="p">){</span>
 </span></span><span class="line"><span class="cl">        <span class="nf">release</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pi</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">      <span class="p">}</span>
@@ -1638,7 +1638,7 @@
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// Exit the current process.  Does not return.
 </span></span></span><span class="line"><span class="cl"><span class="c1">// An exited process remains in the zombie state
 </span></span></span><span class="line"><span class="cl"><span class="c1">// until its parent calls wait().
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">void</span>
 </span></span><span class="line"><span class="cl"><span class="nf">exit</span><span class="p">(</span><span class="kt">int</span> <span class="n">status</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="k">struct</span> <span class="n">proc</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="nf">myproc</span><span class="p">();</span>
@@ -1647,7 +1647,7 @@
 </span></span><span class="line"><span class="cl">    <span class="nf">panic</span><span class="p">(</span><span class="s">&#34;init exiting&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// Close all open files.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">fd</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">fd</span> <span class="o">&lt;</span> <span class="n">NOFILE</span><span class="p">;</span> <span class="n">fd</span><span class="o">++</span><span class="p">){</span>
+</span></span></span><span class="line"><span class="cl">  <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">fd</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">fd</span> <span class="o">&lt;</span> <span class="n">NOFILE</span><span class="p">;</span> <span class="n">fd</span><span class="o">++</span><span class="p">){</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">ofile</span><span class="p">[</span><span class="n">fd</span><span class="p">]){</span>
 </span></span><span class="line"><span class="cl">      <span class="k">struct</span> <span class="n">file</span> <span class="o">*</span><span class="n">f</span> <span class="o">=</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">ofile</span><span class="p">[</span><span class="n">fd</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl">      <span class="nf">fileclose</span><span class="p">(</span><span class="n">f</span><span class="p">);</span>
@@ -1661,35 +1661,35 @@
 </span></span><span class="line"><span class="cl">  <span class="n">p</span><span class="o">-&gt;</span><span class="n">cwd</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// we might re-parent a child to init. we can&#39;t be precise about
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// waking up init, since we can&#39;t acquire its lock once we&#39;ve
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// acquired any other proc lock. so wake up init whether that&#39;s
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// necessary or not. init may miss this wakeup, but that seems
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// harmless.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nf">acquire</span><span class="p">(</span><span class="o">&amp;</span><span class="n">initproc</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// waking up init, since we can&#39;t acquire its lock once we&#39;ve
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// acquired any other proc lock. so wake up init whether that&#39;s
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// necessary or not. init may miss this wakeup, but that seems
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// harmless.
+</span></span></span><span class="line"><span class="cl">  <span class="nf">acquire</span><span class="p">(</span><span class="o">&amp;</span><span class="n">initproc</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="nf">wakeup1</span><span class="p">(</span><span class="n">initproc</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="nf">release</span><span class="p">(</span><span class="o">&amp;</span><span class="n">initproc</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// grab a copy of p-&gt;parent, to ensure that we unlock the same
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// parent we locked. in case our parent gives us away to init while
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// we&#39;re waiting for the parent lock. we may then race with an
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// exiting parent, but the result will be a harmless spurious wakeup
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// to a dead or wrong process; proc structs are never re-allocated
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// as anything else.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nf">acquire</span><span class="p">(</span><span class="o">&amp;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// parent we locked. in case our parent gives us away to init while
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// we&#39;re waiting for the parent lock. we may then race with an
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// exiting parent, but the result will be a harmless spurious wakeup
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// to a dead or wrong process; proc structs are never re-allocated
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// as anything else.
+</span></span></span><span class="line"><span class="cl">  <span class="nf">acquire</span><span class="p">(</span><span class="o">&amp;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="k">struct</span> <span class="n">proc</span> <span class="o">*</span><span class="n">original_parent</span> <span class="o">=</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">parent</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="nf">release</span><span class="p">(</span><span class="o">&amp;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// we need the parent&#39;s lock in order to wake it up from wait().
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// the parent-then-child rule says we have to lock it first.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nf">acquire</span><span class="p">(</span><span class="o">&amp;</span><span class="n">original_parent</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// the parent-then-child rule says we have to lock it first.
+</span></span></span><span class="line"><span class="cl">  <span class="nf">acquire</span><span class="p">(</span><span class="o">&amp;</span><span class="n">original_parent</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="nf">acquire</span><span class="p">(</span><span class="o">&amp;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// Give any children to init.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nf">reparent</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">  <span class="nf">reparent</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// Parent might be sleeping in wait().
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nf">wakeup1</span><span class="p">(</span><span class="n">original_parent</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">  <span class="nf">wakeup1</span><span class="p">(</span><span class="n">original_parent</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="n">p</span><span class="o">-&gt;</span><span class="n">xstate</span> <span class="o">=</span> <span class="n">status</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="n">p</span><span class="o">-&gt;</span><span class="n">state</span> <span class="o">=</span> <span class="n">ZOMBIE</span><span class="p">;</span>
@@ -1697,7 +1697,7 @@
 </span></span><span class="line"><span class="cl">  <span class="nf">release</span><span class="p">(</span><span class="o">&amp;</span><span class="n">original_parent</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// Jump into the scheduler, never to return.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nf">sched</span><span class="p">();</span>
+</span></span></span><span class="line"><span class="cl">  <span class="nf">sched</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">  <span class="nf">panic</span><span class="p">(</span><span class="s">&#34;zombie exit&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
@@ -1740,16 +1740,16 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl">  <span class="c1">// we need the parent&#39;s lock in order to wake it up from wait().
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// the parent-then-child rule says we have to lock it first.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nf">acquire</span><span class="p">(</span><span class="o">&amp;</span><span class="n">original_parent</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// the parent-then-child rule says we have to lock it first.
+</span></span></span><span class="line"><span class="cl">  <span class="nf">acquire</span><span class="p">(</span><span class="o">&amp;</span><span class="n">original_parent</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="nf">acquire</span><span class="p">(</span><span class="o">&amp;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// Give any children to init.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nf">reparent</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">  <span class="nf">reparent</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// Parent might be sleeping in wait().
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nf">wakeup1</span><span class="p">(</span><span class="n">original_parent</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">  <span class="nf">wakeup1</span><span class="p">(</span><span class="n">original_parent</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="n">p</span><span class="o">-&gt;</span><span class="n">xstate</span> <span class="o">=</span> <span class="n">status</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="n">p</span><span class="o">-&gt;</span><span class="n">state</span> <span class="o">=</span> <span class="n">ZOMBIE</span><span class="p">;</span>
@@ -1757,7 +1757,7 @@
 </span></span><span class="line"><span class="cl">  <span class="nf">release</span><span class="p">(</span><span class="o">&amp;</span><span class="n">original_parent</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// Jump into the scheduler, never to return.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nf">sched</span><span class="p">();</span>
+</span></span></span><span class="line"><span class="cl">  <span class="nf">sched</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">  <span class="nf">panic</span><span class="p">(</span><span class="s">&#34;zombie exit&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
@@ -1833,7 +1833,7 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// Wait for a child process to exit and return its pid.
 </span></span></span><span class="line"><span class="cl"><span class="c1">// Return -1 if this process has no children.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">int</span>
 </span></span><span class="line"><span class="cl"><span class="nf">wait</span><span class="p">(</span><span class="n">uint64</span> <span class="n">addr</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="k">struct</span> <span class="n">proc</span> <span class="o">*</span><span class="n">np</span><span class="p">;</span>
@@ -1841,24 +1841,24 @@
 </span></span><span class="line"><span class="cl">  <span class="k">struct</span> <span class="n">proc</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="nf">myproc</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// hold p-&gt;lock for the whole time to avoid lost
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// wakeups from a child&#39;s exit().
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nf">acquire</span><span class="p">(</span><span class="o">&amp;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// wakeups from a child&#39;s exit().
+</span></span></span><span class="line"><span class="cl">  <span class="nf">acquire</span><span class="p">(</span><span class="o">&amp;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="k">for</span><span class="p">(;;){</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// Scan through table looking for exited children.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">havekids</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">havekids</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="n">np</span> <span class="o">=</span> <span class="n">proc</span><span class="p">;</span> <span class="n">np</span> <span class="o">&lt;</span> <span class="o">&amp;</span><span class="n">proc</span><span class="p">[</span><span class="n">NPROC</span><span class="p">];</span> <span class="n">np</span><span class="o">++</span><span class="p">){</span>
 </span></span><span class="line"><span class="cl">      <span class="c1">// this code uses np-&gt;parent without holding np-&gt;lock.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="c1">// acquiring the lock first would cause a deadlock,
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="c1">// since np might be an ancestor, and we already hold p-&gt;lock.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="k">if</span><span class="p">(</span><span class="n">np</span><span class="o">-&gt;</span><span class="n">parent</span> <span class="o">==</span> <span class="n">p</span><span class="p">){</span>
+</span></span></span><span class="line"><span class="cl">      <span class="c1">// acquiring the lock first would cause a deadlock,
+</span></span></span><span class="line"><span class="cl">      <span class="c1">// since np might be an ancestor, and we already hold p-&gt;lock.
+</span></span></span><span class="line"><span class="cl">      <span class="k">if</span><span class="p">(</span><span class="n">np</span><span class="o">-&gt;</span><span class="n">parent</span> <span class="o">==</span> <span class="n">p</span><span class="p">){</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// np-&gt;parent can&#39;t change between the check and the acquire()
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// because only the parent changes it, and we&#39;re the parent.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nf">acquire</span><span class="p">(</span><span class="o">&amp;</span><span class="n">np</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">        <span class="c1">// because only the parent changes it, and we&#39;re the parent.
+</span></span></span><span class="line"><span class="cl">        <span class="nf">acquire</span><span class="p">(</span><span class="o">&amp;</span><span class="n">np</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">        <span class="n">havekids</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">np</span><span class="o">-&gt;</span><span class="n">state</span> <span class="o">==</span> <span class="n">ZOMBIE</span><span class="p">){</span>
 </span></span><span class="line"><span class="cl">          <span class="c1">// Found one.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>          <span class="n">pid</span> <span class="o">=</span> <span class="n">np</span><span class="o">-&gt;</span><span class="n">pid</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">          <span class="n">pid</span> <span class="o">=</span> <span class="n">np</span><span class="o">-&gt;</span><span class="n">pid</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">          <span class="k">if</span><span class="p">(</span><span class="n">addr</span> <span class="o">!=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="nf">copyout</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">pagetable</span><span class="p">,</span> <span class="n">addr</span><span class="p">,</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">np</span><span class="o">-&gt;</span><span class="n">xstate</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">                                  <span class="k">sizeof</span><span class="p">(</span><span class="n">np</span><span class="o">-&gt;</span><span class="n">xstate</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            <span class="nf">release</span><span class="p">(</span><span class="o">&amp;</span><span class="n">np</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>
@@ -1875,14 +1875,14 @@
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// No point waiting if we don&#39;t have any children.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">havekids</span> <span class="o">||</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">killed</span><span class="p">){</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">havekids</span> <span class="o">||</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">killed</span><span class="p">){</span>
 </span></span><span class="line"><span class="cl">      <span class="nf">release</span><span class="p">(</span><span class="o">&amp;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// Wait for a child to exit.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">sleep</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>  <span class="c1">//DOC: wait-sleep
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">}</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nf">sleep</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>  <span class="c1">//DOC: wait-sleep
+</span></span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -1919,7 +1919,7 @@
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// free a proc structure and the data hanging from it,
 </span></span></span><span class="line"><span class="cl"><span class="c1">// including user pages.
 </span></span></span><span class="line"><span class="cl"><span class="c1">// p-&gt;lock must be held.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">static</span> <span class="kt">void</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="kt">void</span>
 </span></span><span class="line"><span class="cl"><span class="nf">freeproc</span><span class="p">(</span><span class="k">struct</span> <span class="n">proc</span> <span class="o">*</span><span class="n">p</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="k">if</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">trapframe</span><span class="p">)</span>
@@ -2002,7 +2002,7 @@
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// Kill the process with the given pid.
 </span></span></span><span class="line"><span class="cl"><span class="c1">// The victim won&#39;t exit until it tries to return
 </span></span></span><span class="line"><span class="cl"><span class="c1">// to user space (see usertrap() in trap.c).
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">int</span>
 </span></span><span class="line"><span class="cl"><span class="nf">kill</span><span class="p">(</span><span class="kt">int</span> <span class="n">pid</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="k">struct</span> <span class="n">proc</span> <span class="o">*</span><span class="n">p</span><span class="p">;</span>
@@ -2013,7 +2013,7 @@
 </span></span><span class="line"><span class="cl">      <span class="n">p</span><span class="o">-&gt;</span><span class="n">killed</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">      <span class="k">if</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">state</span> <span class="o">==</span> <span class="n">SLEEPING</span><span class="p">){</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// Wake process from sleep().
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">p</span><span class="o">-&gt;</span><span class="n">state</span> <span class="o">=</span> <span class="n">RUNNABLE</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">        <span class="n">p</span><span class="o">-&gt;</span><span class="n">state</span> <span class="o">=</span> <span class="n">RUNNABLE</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">      <span class="p">}</span>
 </span></span><span class="line"><span class="cl">      <span class="nf">release</span><span class="p">(</span><span class="o">&amp;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
@@ -2085,7 +2085,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="c1">// handle an interrupt, exception, or system call from user space.
 </span></span></span><span class="line"><span class="cl"><span class="c1">// called from trampoline.S
 </span></span></span><span class="line"><span class="cl"><span class="c1">//
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">void</span>
 </span></span><span class="line"><span class="cl"><span class="nf">usertrap</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">which_dev</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
@@ -2094,32 +2094,32 @@
 </span></span><span class="line"><span class="cl">    <span class="nf">panic</span><span class="p">(</span><span class="s">&#34;usertrap: not from user mode&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// send interrupts and exceptions to kerneltrap(),
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// since we&#39;re now in the kernel.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nf">w_stvec</span><span class="p">((</span><span class="n">uint64</span><span class="p">)</span><span class="n">kernelvec</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// since we&#39;re now in the kernel.
+</span></span></span><span class="line"><span class="cl">  <span class="nf">w_stvec</span><span class="p">((</span><span class="n">uint64</span><span class="p">)</span><span class="n">kernelvec</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="k">struct</span> <span class="n">proc</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="nf">myproc</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// save user program counter.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">p</span><span class="o">-&gt;</span><span class="n">trapframe</span><span class="o">-&gt;</span><span class="n">epc</span> <span class="o">=</span> <span class="nf">r_sepc</span><span class="p">();</span>
+</span></span></span><span class="line"><span class="cl">  <span class="n">p</span><span class="o">-&gt;</span><span class="n">trapframe</span><span class="o">-&gt;</span><span class="n">epc</span> <span class="o">=</span> <span class="nf">r_sepc</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="k">if</span><span class="p">(</span><span class="nf">r_scause</span><span class="p">()</span> <span class="o">==</span> <span class="mi">8</span><span class="p">){</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// system call
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">killed</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">      <span class="nf">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// sepc points to the ecall instruction,
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// but we want to return to the next instruction.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">p</span><span class="o">-&gt;</span><span class="n">trapframe</span><span class="o">-&gt;</span><span class="n">epc</span> <span class="o">+=</span> <span class="mi">4</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// but we want to return to the next instruction.
+</span></span></span><span class="line"><span class="cl">    <span class="n">p</span><span class="o">-&gt;</span><span class="n">trapframe</span><span class="o">-&gt;</span><span class="n">epc</span> <span class="o">+=</span> <span class="mi">4</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// an interrupt will change sstatus &amp;c registers,
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// so don&#39;t enable until done with those registers.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">intr_on</span><span class="p">();</span>
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// so don&#39;t enable until done with those registers.
+</span></span></span><span class="line"><span class="cl">    <span class="nf">intr_on</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="nf">syscall</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">((</span><span class="n">which_dev</span> <span class="o">=</span> <span class="nf">devintr</span><span class="p">())</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">){</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// ok
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;usertrap(): unexpected scause %p pid=%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="nf">r_scause</span><span class="p">(),</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">pid</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;            sepc=%p stval=%p</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="nf">r_sepc</span><span class="p">(),</span> <span class="nf">r_stval</span><span class="p">());</span>
 </span></span><span class="line"><span class="cl">    <span class="n">p</span><span class="o">-&gt;</span><span class="n">killed</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
@@ -2176,7 +2176,7 @@
 </span></span><span class="line"><span class="cl">      <span class="n">p</span><span class="o">-&gt;</span><span class="n">killed</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">      <span class="k">if</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">state</span> <span class="o">==</span> <span class="n">SLEEPING</span><span class="p">){</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// Wake process from sleep().
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">p</span><span class="o">-&gt;</span><span class="n">state</span> <span class="o">=</span> <span class="n">RUNNABLE</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">        <span class="n">p</span><span class="o">-&gt;</span><span class="n">state</span> <span class="o">=</span> <span class="n">RUNNABLE</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">      <span class="p">}</span>
 </span></span><span class="line"><span class="cl">      <span class="nf">release</span><span class="p">(</span><span class="o">&amp;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
@@ -2229,21 +2229,21 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="nf">acquire</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pi</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="k">while</span><span class="p">(</span><span class="n">pi</span><span class="o">-&gt;</span><span class="n">nread</span> <span class="o">==</span> <span class="n">pi</span><span class="o">-&gt;</span><span class="n">nwrite</span> <span class="o">&amp;&amp;</span> <span class="n">pi</span><span class="o">-&gt;</span><span class="n">writeopen</span><span class="p">){</span>  <span class="c1">//DOC: pipe-empty
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span><span class="p">(</span><span class="n">pr</span><span class="o">-&gt;</span><span class="n">killed</span><span class="p">){</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">pr</span><span class="o">-&gt;</span><span class="n">killed</span><span class="p">){</span>
 </span></span><span class="line"><span class="cl">      <span class="nf">release</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pi</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">sleep</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pi</span><span class="o">-&gt;</span><span class="n">nread</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">pi</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span> <span class="c1">//DOC: piperead-sleep
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">}</span>
+</span></span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  <span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>  <span class="c1">//DOC: piperead-copy
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span><span class="p">(</span><span class="n">pi</span><span class="o">-&gt;</span><span class="n">nread</span> <span class="o">==</span> <span class="n">pi</span><span class="o">-&gt;</span><span class="n">nwrite</span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">pi</span><span class="o">-&gt;</span><span class="n">nread</span> <span class="o">==</span> <span class="n">pi</span><span class="o">-&gt;</span><span class="n">nwrite</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">      <span class="k">break</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="n">ch</span> <span class="o">=</span> <span class="n">pi</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">[</span><span class="n">pi</span><span class="o">-&gt;</span><span class="n">nread</span><span class="o">++</span> <span class="o">%</span> <span class="n">PIPESIZE</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="nf">copyout</span><span class="p">(</span><span class="n">pr</span><span class="o">-&gt;</span><span class="n">pagetable</span><span class="p">,</span> <span class="n">addr</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ch</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">      <span class="k">break</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  <span class="nf">wakeup</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pi</span><span class="o">-&gt;</span><span class="n">nwrite</span><span class="p">);</span>  <span class="c1">//DOC: piperead-wakeup
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nf">release</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pi</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">  <span class="nf">release</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pi</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">i</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
@@ -2267,7 +2267,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">//Wait for virtio_disk_intr()to say request has finished.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">while</span><span class="p">(</span><span class="n">b</span><span class="o">-&gt;</span><span class="n">disk</span> <span class="o">==</span> <span class="mi">1</span><span class="p">){</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">while</span><span class="p">(</span><span class="n">b</span><span class="o">-&gt;</span><span class="n">disk</span> <span class="o">==</span> <span class="mi">1</span><span class="p">){</span>
 </span></span><span class="line"><span class="cl">	<span class="nf">sleep</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">disk</span><span class="p">.</span><span class="n">vdisk_lock</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
@@ -2386,7 +2386,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08123rcu/bg.91a08bf3fe0a8ca435e8fbc902291fd5_hu_50da030b7ba2cbe7.jpg" 
+                <img src="/p/mit6s08123rcu/bg.91a08bf3fe0a8ca435e8fbc902291fd5_hu_b6ef8ea2c8ceedc0.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -2410,7 +2410,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08122meltdown/19.8d880549dccba2f0c1613b3e41a721e5_hu_1493d831cda8626c.jpg" 
+                <img src="/p/mit6s08122meltdown/19.8d880549dccba2f0c1613b3e41a721e5_hu_914e4a4b73e7f898.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -2434,7 +2434,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08121networking/bg.68c4376fd87b0b35da07319dd155c90d_hu_b8a716243c6f9679.jpg" 
+                <img src="/p/mit6s08121networking/bg.68c4376fd87b0b35da07319dd155c90d_hu_702cc6dbf23ff4b6.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -2458,7 +2458,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08120kernels-and-hll/bg.4175e6a2793e0fc340e5aced2529e40b_hu_de82d011b3d97ace.jpg" 
+                <img src="/p/mit6s08120kernels-and-hll/bg.4175e6a2793e0fc340e5aced2529e40b_hu_900f2fcc83e9e964.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -2482,7 +2482,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08119virtual-machines/bg.b02a7ba1d946705c0cf2809bcf960db8_hu_77df69a362eba544.jpg" 
+                <img src="/p/mit6s08119virtual-machines/bg.b02a7ba1d946705c0cf2809bcf960db8_hu_3d3ad0ec0320c7b4.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -2713,7 +2713,7 @@
         
         
 
-        共 742374 字 , 39 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        共 741930 字 , 39 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
         主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 

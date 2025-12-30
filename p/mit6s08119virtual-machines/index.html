@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-cn" dir="ltr">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="VMM提供了对于操作系统的一种不同视角。在操作系统的架构中，内核之上提供的封装单元是我们熟悉的进程，内核管理的是多个用户进程。而在VMM的架构中，VMM之上提供的封装单元是对计算机的模拟。VMM的架构使得我们可以从另一个角度重新审视我们讨论过的内容，例如内存分配，线程调度等等，这或许可以给我们一些新的思路并带回到传统的操作系统内核中。">
 <title>MIT6S081：19Virtual Machines  </title>
@@ -59,7 +59,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu_67bf1327fc98b60.png" width="300"
+                        <img src="/img/avatar_hu_c2920364e6534697.png" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -316,8 +316,8 @@
     <header class="article-header">
         <div class="article-image">
             <a href="/p/mit6s08119virtual-machines/">
-                <img src="/p/mit6s08119virtual-machines/bg_hu_8997448f15c879d7.jpg"
-                        srcset="/p/mit6s08119virtual-machines/bg_hu_8997448f15c879d7.jpg 800w, /p/mit6s08119virtual-machines/bg_hu_5b6105d5c5131518.jpg 1600w"
+                <img src="/p/mit6s08119virtual-machines/bg_hu_a3ae5f8111a1a299.jpg"
+                        srcset="/p/mit6s08119virtual-machines/bg_hu_a3ae5f8111a1a299.jpg 800w, /p/mit6s08119virtual-machines/bg_hu_b3ca7477353c6045.jpg 1600w"
                         width="800" 
                         height="529" 
                         loading="lazy"
@@ -1554,27 +1554,27 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">ccodepreviewrun</span><span class="c1">// 伪代码示例，实际情况可能更复杂
 </span></span></span><span class="line"><span class="cl"><span class="c1">// 攻击者构造的恶意ELF头部
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">struct</span> <span class="n">elf_header</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="n">elf_header</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 正常的ELF头部
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>   <span class="kt">char</span> <span class="n">e_ident</span><span class="p">[</span><span class="mi">16</span><span class="p">];</span> <span class="c1">// ELF标识
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">uint16_t</span> <span class="n">e_type</span><span class="p">;</span>  <span class="c1">// 文件类型
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>   <span class="kt">uint16_t</span> <span class="n">e_machine</span><span class="p">;</span> <span class="c1">// 机器类型
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">uint32_t</span> <span class="n">e_version</span><span class="p">;</span> <span class="c1">// 版本
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">uint64_t</span> <span class="n">e_entry</span><span class="p">;</span>   <span class="c1">// 入口点
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">uint64_t</span> <span class="n">e_phoff</span><span class="p">;</span>   <span class="c1">// 程序头偏移
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">uint64_t</span> <span class="n">e_shoff</span><span class="p">;</span>   <span class="c1">// 节头偏移
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">uint32_t</span> <span class="n">e_flags</span><span class="p">;</span>   <span class="c1">// 标志
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">uint16_t</span> <span class="n">e_ehsize</span><span class="p">;</span>  <span class="c1">// ELF头大小
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">uint16_t</span> <span class="n">e_phentsize</span><span class="p">;</span> <span class="c1">// 程序头项大小
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">uint16_t</span> <span class="n">e_phnum</span><span class="p">;</span>     <span class="c1">// 程序头项数目
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">uint16_t</span> <span class="n">e_shentsize</span><span class="p">;</span> <span class="c1">// 节头项大小
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">uint16_t</span> <span class="n">e_shnum</span><span class="p">;</span>     <span class="c1">// 节头项数目
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">uint16_t</span> <span class="n">e_shstrndx</span><span class="p">;</span>  <span class="c1">// 字符串节索引
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl">   <span class="kt">char</span> <span class="n">e_ident</span><span class="p">[</span><span class="mi">16</span><span class="p">];</span> <span class="c1">// ELF标识
+</span></span></span><span class="line"><span class="cl">    <span class="kt">uint16_t</span> <span class="n">e_type</span><span class="p">;</span>  <span class="c1">// 文件类型
+</span></span></span><span class="line"><span class="cl">   <span class="kt">uint16_t</span> <span class="n">e_machine</span><span class="p">;</span> <span class="c1">// 机器类型
+</span></span></span><span class="line"><span class="cl">    <span class="kt">uint32_t</span> <span class="n">e_version</span><span class="p">;</span> <span class="c1">// 版本
+</span></span></span><span class="line"><span class="cl">    <span class="kt">uint64_t</span> <span class="n">e_entry</span><span class="p">;</span>   <span class="c1">// 入口点
+</span></span></span><span class="line"><span class="cl">    <span class="kt">uint64_t</span> <span class="n">e_phoff</span><span class="p">;</span>   <span class="c1">// 程序头偏移
+</span></span></span><span class="line"><span class="cl">    <span class="kt">uint64_t</span> <span class="n">e_shoff</span><span class="p">;</span>   <span class="c1">// 节头偏移
+</span></span></span><span class="line"><span class="cl">    <span class="kt">uint32_t</span> <span class="n">e_flags</span><span class="p">;</span>   <span class="c1">// 标志
+</span></span></span><span class="line"><span class="cl">    <span class="kt">uint16_t</span> <span class="n">e_ehsize</span><span class="p">;</span>  <span class="c1">// ELF头大小
+</span></span></span><span class="line"><span class="cl">    <span class="kt">uint16_t</span> <span class="n">e_phentsize</span><span class="p">;</span> <span class="c1">// 程序头项大小
+</span></span></span><span class="line"><span class="cl">    <span class="kt">uint16_t</span> <span class="n">e_phnum</span><span class="p">;</span>     <span class="c1">// 程序头项数目
+</span></span></span><span class="line"><span class="cl">    <span class="kt">uint16_t</span> <span class="n">e_shentsize</span><span class="p">;</span> <span class="c1">// 节头项大小
+</span></span></span><span class="line"><span class="cl">    <span class="kt">uint16_t</span> <span class="n">e_shnum</span><span class="p">;</span>     <span class="c1">// 节头项数目
+</span></span></span><span class="line"><span class="cl">    <span class="kt">uint16_t</span> <span class="n">e_shstrndx</span><span class="p">;</span>  <span class="c1">// 字符串节索引
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// 溢出部分
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">char</span> <span class="n">overflow</span><span class="p">[</span><span class="mi">1024</span><span class="p">];</span> <span class="c1">// 超长字段，企图溢出缓冲区
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">uint64_t</span> <span class="n">malicious_code</span><span class="p">;</span> <span class="c1">// 恶意代码地点
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">};</span>
+</span></span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="n">overflow</span><span class="p">[</span><span class="mi">1024</span><span class="p">];</span> <span class="c1">// 超长字段，企图溢出缓冲区
+</span></span></span><span class="line"><span class="cl">    <span class="kt">uint64_t</span> <span class="n">malicious_code</span><span class="p">;</span> <span class="c1">// 恶意代码地点
+</span></span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>攻击者可以通过修改上述字段，例如设置虚拟地址段为指向<code>malicious_code</code>部分，使加载器在解析阶段受溢出影响，将控制权转移到恶意代码。</p>
@@ -1643,13 +1643,13 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// 初始加载器的简化伪代码
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">initial_loader</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">secondary_loader_path</span><span class="p">)</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">initial_loader</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">secondary_loader_path</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl"><span class="c1">// 加载静态二进制文件
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">load_static_binary</span><span class="p">(</span><span class="s">&#34;/path/to/sandbox_runtime&#34;</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="nf">load_static_binary</span><span class="p">(</span><span class="s">&#34;/path/to/sandbox_runtime&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="c1">// 加载二级加载器
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">load_static_binary</span><span class="p">(</span><span class="n">secondary_loader_path</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="nf">load_static_binary</span><span class="p">(</span><span class="n">secondary_loader_path</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="c1">// 跳转执行二级加载器
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">jump_to_entry_point</span><span class="p">(</span><span class="n">secondary_loader_path</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="nf">jump_to_entry_point</span><span class="p">(</span><span class="n">secondary_loader_path</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -1680,13 +1680,13 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// 继续初始加载器的伪代码
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">initial_loader</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">secondary_loader_path</span><span class="p">)</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">initial_loader</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">secondary_loader_path</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl"><span class="c1">// 加载静态二进制文件
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">load_static_binary</span><span class="p">(</span><span class="s">&#34;/path/to/sandbox_runtime&#34;</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="nf">load_static_binary</span><span class="p">(</span><span class="s">&#34;/path/to/sandbox_runtime&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="c1">// 加载二级加载器
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">load_static_binary</span><span class="p">(</span><span class="n">secondary_loader_path</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="nf">load_static_binary</span><span class="p">(</span><span class="n">secondary_loader_path</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="c1">// 跳转执行二级加载器
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">jump_to_entry_point</span><span class="p">(</span><span class="n">secondary_loader_path</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="nf">jump_to_entry_point</span><span class="p">(</span><span class="n">secondary_loader_path</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="nf">initial_loader</span><span class="p">(</span><span class="s">&#34;/lib64/ld-linux-x86-64.so.2&#34;</span><span class="p">);</span>
@@ -1713,7 +1713,7 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp"># 使用ld-linux.so加载并执行不可信二进制文件
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="o">/</span><span class="n">lib64</span><span class="o">/</span><span class="n">ld</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">x86</span><span class="o">-</span><span class="mf">64.</span><span class="n">so</span><span class="mf">.2</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">untrusted_app</span>
+</span></span></span><span class="line"><span class="cl"><span class="o">/</span><span class="n">lib64</span><span class="o">/</span><span class="n">ld</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">x86</span><span class="o">-</span><span class="mf">64.</span><span class="n">so</span><span class="mf">.2</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">untrusted_app</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><ol start="4">
@@ -1799,11 +1799,11 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// 伪代码示例：内核启动的部分
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">kernel_startup</span><span class="p">()</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">kernel_startup</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl"><span class="c1">// 切换到Dune模式，初始化安全环境
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">enter_dune_mode</span><span class="p">();</span>
+</span></span></span><span class="line"><span class="cl"><span class="nf">enter_dune_mode</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl"><span class="c1">// 加载并执行初始加载器
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">load_initial_loader</span><span class="p">(</span><span class="s">&#34;/path/to/minimal_loader&#34;</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="nf">load_initial_loader</span><span class="p">(</span><span class="s">&#34;/path/to/minimal_loader&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -1826,13 +1826,13 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// 初始加载器的伪代码
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">initial_loader</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">secondary_loader_path</span><span class="p">)</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">initial_loader</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">secondary_loader_path</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl"><span class="c1">// 设置基本的安全环境，如页表、GDT、IDT、TSS等
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">setup_basic_environment</span><span class="p">();</span>
+</span></span></span><span class="line"><span class="cl"><span class="nf">setup_basic_environment</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl"><span class="c1">// 加载高级加载器
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">load_static_binary</span><span class="p">(</span><span class="n">secondary_loader_path</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="nf">load_static_binary</span><span class="p">(</span><span class="n">secondary_loader_path</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="c1">// 转移控制权到高级加载器
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">jump_to_entry_point</span><span class="p">(</span><span class="n">secondary_loader_path</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="nf">jump_to_entry_point</span><span class="p">(</span><span class="n">secondary_loader_path</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="nf">initial_loader</span><span class="p">(</span><span class="s">&#34;/lib64/ld-linux-x86-64.so.2&#34;</span><span class="p">);</span>
 </span></span></code></pre></td></tr></table>
@@ -1849,7 +1849,7 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp"># 使用高级加载器加载并执行不可信二进制文件
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="o">/</span><span class="n">lib64</span><span class="o">/</span><span class="n">ld</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">x86</span><span class="o">-</span><span class="mf">64.</span><span class="n">so</span><span class="mf">.2</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">untrusted_app</span>
+</span></span></span><span class="line"><span class="cl"><span class="o">/</span><span class="n">lib64</span><span class="o">/</span><span class="n">ld</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">x86</span><span class="o">-</span><span class="mf">64.</span><span class="n">so</span><span class="mf">.2</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">untrusted_app</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>通过以上解释和示例可以看到，初始加载器在设置和限制高级加载器的运行环境方面起到了关键作用。没有初始加载器的附加保护，高级加载器的环境将无法控制，容易受到恶意代码的攻击和干扰。初始加载器确保了安全的环境初始化和基本配置，从而为高级加载器提供了一个安全和受控的执行环境。这种分离策略不仅提高了加载过程的安全性，还限制了恶意代码的攻击范围，确保整个系统的稳定和安全。</p>
@@ -2199,7 +2199,7 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 <p><img src="/p/mit6s08119virtual-machines/p45.png"
 	width="1146"
 	height="725"
-	srcset="/p/mit6s08119virtual-machines/p45_hu_eb1fcdab6c59b2f5.png 480w, /p/mit6s08119virtual-machines/p45_hu_db58a8fae0c6948e.png 1024w"
+	srcset="/p/mit6s08119virtual-machines/p45_hu_6b36bd8f85d97de.png 480w, /p/mit6s08119virtual-machines/p45_hu_e33cccd85fad6b63.png 1024w"
 	loading="lazy"
 	
 		alt="p45"
@@ -2352,7 +2352,7 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
 <p><img src="/p/mit6s08119virtual-machines/p46.png"
 	width="1115"
 	height="728"
-	srcset="/p/mit6s08119virtual-machines/p46_hu_49f9170a10c11261.png 480w, /p/mit6s08119virtual-machines/p46_hu_a680f5eac4bc5bf0.png 1024w"
+	srcset="/p/mit6s08119virtual-machines/p46_hu_e764bac2090d4ff7.png 480w, /p/mit6s08119virtual-machines/p46_hu_455978ea86bb609f.png 1024w"
 	loading="lazy"
 	
 		alt="p46"
@@ -2791,7 +2791,7 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
         
         
             <div class="article-image">
-                <img src="/p/mit6s08123rcu/bg.91a08bf3fe0a8ca435e8fbc902291fd5_hu_50da030b7ba2cbe7.jpg" 
+                <img src="/p/mit6s08123rcu/bg.91a08bf3fe0a8ca435e8fbc902291fd5_hu_b6ef8ea2c8ceedc0.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -2815,7 +2815,7 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
         
         
             <div class="article-image">
-                <img src="/p/mit6s08122meltdown/19.8d880549dccba2f0c1613b3e41a721e5_hu_1493d831cda8626c.jpg" 
+                <img src="/p/mit6s08122meltdown/19.8d880549dccba2f0c1613b3e41a721e5_hu_914e4a4b73e7f898.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -2839,7 +2839,7 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
         
         
             <div class="article-image">
-                <img src="/p/mit6s08121networking/bg.68c4376fd87b0b35da07319dd155c90d_hu_b8a716243c6f9679.jpg" 
+                <img src="/p/mit6s08121networking/bg.68c4376fd87b0b35da07319dd155c90d_hu_702cc6dbf23ff4b6.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -2863,7 +2863,7 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
         
         
             <div class="article-image">
-                <img src="/p/mit6s08120kernels-and-hll/bg.4175e6a2793e0fc340e5aced2529e40b_hu_de82d011b3d97ace.jpg" 
+                <img src="/p/mit6s08120kernels-and-hll/bg.4175e6a2793e0fc340e5aced2529e40b_hu_900f2fcc83e9e964.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -2887,7 +2887,7 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
         
         
             <div class="article-image">
-                <img src="/p/mit6s08118os-organization/bg.6254618fb3eb08f3bf5d7cd89d4cd672_hu_845b73e21b5a04f1.jpg" 
+                <img src="/p/mit6s08118os-organization/bg.6254618fb3eb08f3bf5d7cd89d4cd672_hu_646dc659ecd15a3f.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -3118,7 +3118,7 @@ Dune可能包括一些用户态的库或运行时（runtime），这些库或运
         
         
 
-        共 742374 字 , 39 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        共 741930 字 , 39 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
         主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 

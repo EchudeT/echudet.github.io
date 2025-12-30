@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-cn" dir="ltr">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="cs144代码解析">
 <title>cs144 code analysis</title>
@@ -58,7 +58,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu_67bf1327fc98b60.png" width="300"
+                        <img src="/img/avatar_hu_c2920364e6534697.png" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -703,8 +703,8 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Serializer</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">output_</span><span class="p">;</span>  <span class="c1">// 输出缓冲区列表
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">buffer_</span><span class="p">;</span>               <span class="c1">// 当前正在写入的缓冲区
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">void</span> <span class="nf">integer</span><span class="p">(</span> <span class="k">const</span> <span class="n">T</span> <span class="n">val</span> <span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">buffer_</span><span class="p">;</span>               <span class="c1">// 当前正在写入的缓冲区
+</span></span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">integer</span><span class="p">(</span> <span class="k">const</span> <span class="n">T</span> <span class="n">val</span> <span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">buffer</span><span class="p">(</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">buf</span> <span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">buffer</span><span class="p">(</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">bufs</span> <span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">flush</span><span class="p">();</span>
@@ -713,9 +713,9 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">BufferList</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">deque</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">buffer_</span><span class="p">;</span>  <span class="c1">// 多个字符串缓冲区
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">uint64_t</span> <span class="n">skip_</span><span class="p">;</span>                   <span class="c1">// 当前缓冲区的跳过字节数
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">uint64_t</span> <span class="n">size_</span><span class="p">;</span>                   <span class="c1">// 总剩余字节数
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></span><span class="line"><span class="cl">    <span class="kt">uint64_t</span> <span class="n">skip_</span><span class="p">;</span>                   <span class="c1">// 当前缓冲区的跳过字节数
+</span></span></span><span class="line"><span class="cl">    <span class="kt">uint64_t</span> <span class="n">size_</span><span class="p">;</span>                   <span class="c1">// 总剩余字节数
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Parser</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
@@ -814,53 +814,53 @@
 <pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">FDWrapper</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">fd_</span><span class="p">;</span>                    <span class="c1">// The file descriptor number returned by the kernel
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">bool</span> <span class="n">eof_</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>          <span class="c1">// Flag indicating whether FDWrapper::fd_ is at EOF
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">bool</span> <span class="n">closed_</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>       <span class="c1">// Flag indicating whether FDWrapper::fd_ has been closed
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">bool</span> <span class="n">non_blocking_</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span> <span class="c1">// Flag indicating whether FDWrapper::fd_ is non-blocking
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">unsigned</span> <span class="n">read_count_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>   <span class="c1">// The number of times FDWrapper::fd_ has been read
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">unsigned</span> <span class="n">write_count_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>  <span class="c1">// The numberof times FDWrapper::fd_ has been written
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="n">eof_</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>          <span class="c1">// Flag indicating whether FDWrapper::fd_ is at EOF
+</span></span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="n">closed_</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>       <span class="c1">// Flag indicating whether FDWrapper::fd_ has been closed
+</span></span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="n">non_blocking_</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span> <span class="c1">// Flag indicating whether FDWrapper::fd_ is non-blocking
+</span></span></span><span class="line"><span class="cl">    <span class="kt">unsigned</span> <span class="n">read_count_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>   <span class="c1">// The number of times FDWrapper::fd_ has been read
+</span></span></span><span class="line"><span class="cl">    <span class="kt">unsigned</span> <span class="n">write_count_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>  <span class="c1">// The numberof times FDWrapper::fd_ has been written
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">FileDescriptor</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// A reference-counted handle to a shared FDWrapper
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">FDWrapper</span><span class="o">&gt;</span> <span class="n">internal_fd_</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">  <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">FDWrapper</span><span class="o">&gt;</span> <span class="n">internal_fd_</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// size of buffer to allocate for read()
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">static</span> <span class="k">constexpr</span> <span class="n">size_t</span> <span class="n">kReadBufferSize</span> <span class="o">=</span> <span class="mi">16384</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">  <span class="k">static</span> <span class="k">constexpr</span> <span class="n">size_t</span> <span class="n">kReadBufferSize</span> <span class="o">=</span> <span class="mi">16384</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">set_eof</span><span class="p">()</span> <span class="p">{</span> <span class="n">internal_fd_</span><span class="o">-&gt;</span><span class="n">eof_</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span> <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">register_read</span><span class="p">()</span> <span class="p">{</span> <span class="o">++</span><span class="n">internal_fd_</span><span class="o">-&gt;</span><span class="n">read_count_</span><span class="p">;</span> <span class="p">}</span>   <span class="c1">// increment read count
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">void</span> <span class="nf">register_write</span><span class="p">()</span> <span class="p">{</span> <span class="o">++</span><span class="n">internal_fd_</span><span class="o">-&gt;</span><span class="n">write_count_</span><span class="p">;</span> <span class="p">}</span> <span class="c1">// increment write count
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    
+</span></span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">register_write</span><span class="p">()</span> <span class="p">{</span> <span class="o">++</span><span class="n">internal_fd_</span><span class="o">-&gt;</span><span class="n">write_count_</span><span class="p">;</span> <span class="p">}</span> <span class="c1">// increment write count
+</span></span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">  <span class="c1">// Read into `buffer`
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">void</span> <span class="nf">read</span><span class="p">(</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">buffer</span> <span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">read</span><span class="p">(</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">buffer</span> <span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">read</span><span class="p">(</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">buffers</span> <span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// Attempt to write a buffer, returns number of bytes written
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">size_t</span> <span class="nf">write</span><span class="p">(</span> <span class="n">std</span><span class="o">::</span><span class="n">string_view</span> <span class="n">buffer</span> <span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">  <span class="n">size_t</span> <span class="nf">write</span><span class="p">(</span> <span class="n">std</span><span class="o">::</span><span class="n">string_view</span> <span class="n">buffer</span> <span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="n">size_t</span> <span class="nf">write</span><span class="p">(</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string_view</span><span class="o">&gt;&amp;</span> <span class="n">buffers</span> <span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="n">size_t</span> <span class="nf">write</span><span class="p">(</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">buffers</span> <span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// Close the underlying file descriptor
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">void</span> <span class="nf">close</span><span class="p">()</span> <span class="p">{</span> <span class="n">internal_fd_</span><span class="o">-&gt;</span><span class="n">close</span><span class="p">();</span> <span class="p">}</span>
+</span></span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">close</span><span class="p">()</span> <span class="p">{</span> <span class="n">internal_fd_</span><span class="o">-&gt;</span><span class="n">close</span><span class="p">();</span> <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// Copy a FileDescriptor explicitly, increasing the FDWrapper refcount
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">FileDescriptor</span> <span class="nf">duplicate</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">  <span class="n">FileDescriptor</span> <span class="nf">duplicate</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// Set blocking(true) or non-blocking(false)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">void</span> <span class="nf">set_blocking</span><span class="p">(</span> <span class="kt">bool</span> <span class="n">blocking</span> <span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">set_blocking</span><span class="p">(</span> <span class="kt">bool</span> <span class="n">blocking</span> <span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// Size of file
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">off_t</span> <span class="nf">size</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">  <span class="n">off_t</span> <span class="nf">size</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// FDWrapper accessors
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">int</span> <span class="nf">fd_num</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">internal_fd_</span><span class="o">-&gt;</span><span class="n">fd_</span><span class="p">;</span> <span class="p">}</span>                   <span class="c1">// underlying descriptor number
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">bool</span> <span class="nf">eof</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">internal_fd_</span><span class="o">-&gt;</span><span class="n">eof_</span><span class="p">;</span> <span class="p">}</span>                   <span class="c1">// EOF flag state
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">bool</span> <span class="nf">closed</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">internal_fd_</span><span class="o">-&gt;</span><span class="n">closed_</span><span class="p">;</span> <span class="p">}</span>             <span class="c1">// closed flag state
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">unsigned</span> <span class="kt">int</span> <span class="nf">read_count</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">internal_fd_</span><span class="o">-&gt;</span><span class="n">read_count_</span><span class="p">;</span> <span class="p">}</span>   <span class="c1">// number of reads
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">unsigned</span> <span class="kt">int</span> <span class="nf">write_count</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">internal_fd_</span><span class="o">-&gt;</span><span class="n">write_count_</span><span class="p">;</span> <span class="p">}</span> <span class="c1">// number of writes
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="nf">fd_num</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">internal_fd_</span><span class="o">-&gt;</span><span class="n">fd_</span><span class="p">;</span> <span class="p">}</span>                   <span class="c1">// underlying descriptor number
+</span></span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="nf">eof</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">internal_fd_</span><span class="o">-&gt;</span><span class="n">eof_</span><span class="p">;</span> <span class="p">}</span>                   <span class="c1">// EOF flag state
+</span></span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="nf">closed</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">internal_fd_</span><span class="o">-&gt;</span><span class="n">closed_</span><span class="p">;</span> <span class="p">}</span>             <span class="c1">// closed flag state
+</span></span></span><span class="line"><span class="cl">  <span class="kt">unsigned</span> <span class="kt">int</span> <span class="nf">read_count</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">internal_fd_</span><span class="o">-&gt;</span><span class="n">read_count_</span><span class="p">;</span> <span class="p">}</span>   <span class="c1">// number of reads
+</span></span></span><span class="line"><span class="cl">  <span class="kt">unsigned</span> <span class="kt">int</span> <span class="nf">write_count</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">internal_fd_</span><span class="o">-&gt;</span><span class="n">write_count_</span><span class="p">;</span> <span class="p">}</span> <span class="c1">// number of writes
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p><strong>eventloop.hh/cc</strong>实现了事件驱动编程框架。add_rule方法可以添加两种监听规则，一种是监听文件描述符的可读可写事件，另一种是定时任务。wait_next_event是主事件循环的核心，内部使用poll或epoll机制监听多个fd的事件。当事件发生时，会调用之前注册的回调函数。这个框架支持超时机制，可以处理定时器触发的任务。整个设计使得异步I/O编程变得简洁，为上层的网络通信提供了基础。</p>
@@ -956,11 +956,11 @@
 </span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="n">InterestT</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">bool</span><span class="p">(</span> <span class="kt">void</span> <span class="p">)</span><span class="o">&gt;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// Indicates interest in reading (In) or writing (Out) a polled fd.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">enum</span> <span class="k">class</span> <span class="nc">Direction</span> <span class="o">:</span> <span class="kt">int16_t</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">enum</span> <span class="k">class</span> <span class="nc">Direction</span> <span class="o">:</span> <span class="kt">int16_t</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="n">In</span> <span class="o">=</span> <span class="n">POLLIN</span><span class="p">,</span>  <span class="c1">// Callback will be triggered when Rule::fd is readable.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">Out</span> <span class="o">=</span> <span class="n">POLLOUT</span> <span class="c1">// Callback will be triggered when Rule::fd is writable.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">};</span>
+</span></span></span><span class="line"><span class="cl">  <span class="n">Out</span> <span class="o">=</span> <span class="n">POLLOUT</span> <span class="c1">// Callback will be triggered when Rule::fd is writable.
+</span></span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">RuleCategory</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
@@ -980,15 +980,15 @@
 </span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">FDRule</span> <span class="o">:</span> <span class="k">public</span> <span class="n">BasicRule</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="n">FileDescriptor</span> <span class="n">fd</span><span class="p">;</span>   <span class="c1">// FileDescriptor to monitor for activity.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">Direction</span> <span class="n">direction</span><span class="p">;</span> <span class="c1">// Direction::In for reading from fd, Direction::Out for writing to fd.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">CallbackT</span> <span class="n">cancel</span><span class="p">;</span>    <span class="c1">// A callback that is called when the rule is cancelled (e.g. on EOF or hangup)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">CallbackT</span> <span class="n">error</span><span class="p">;</span>     <span class="c1">// A callback that is called when the fd has an error before cancellation
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl">  <span class="n">Direction</span> <span class="n">direction</span><span class="p">;</span> <span class="c1">// Direction::In for reading from fd, Direction::Out for writing to fd.
+</span></span></span><span class="line"><span class="cl">  <span class="n">CallbackT</span> <span class="n">cancel</span><span class="p">;</span>    <span class="c1">// A callback that is called when the rule is cancelled (e.g. on EOF or hangup)
+</span></span></span><span class="line"><span class="cl">  <span class="n">CallbackT</span> <span class="n">error</span><span class="p">;</span>     <span class="c1">// A callback that is called when the fd has an error before cancellation
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="n">FDRule</span><span class="p">(</span> <span class="n">BasicRule</span><span class="o">&amp;&amp;</span> <span class="n">base</span><span class="p">,</span> <span class="n">FileDescriptor</span><span class="o">&amp;&amp;</span> <span class="n">s_fd</span><span class="p">,</span> <span class="n">Direction</span> <span class="n">s_direction</span><span class="p">,</span> <span class="n">CallbackT</span> <span class="n">s_cancel</span><span class="p">,</span> <span class="n">CallbackT</span> <span class="n">s_error</span> <span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// Returns the number of times fd has been read or written, depending on the value of Rule::direction.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// This function is used internally by EventLoop; you will not need to call it
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">unsigned</span> <span class="kt">int</span> <span class="nf">service_count</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// This function is used internally by EventLoop; you will not need to call it
+</span></span></span><span class="line"><span class="cl">  <span class="kt">unsigned</span> <span class="kt">int</span> <span class="nf">service_count</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">RuleHandle</span>
@@ -1005,13 +1005,13 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// Returned by each call to EventLoop::wait_next_event.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">enum</span> <span class="k">class</span> <span class="nc">Result</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">enum</span> <span class="k">class</span> <span class="nc">Result</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="n">Success</span><span class="p">,</span> <span class="c1">// At least one Rule was triggered.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">Timeout</span><span class="p">,</span> <span class="c1">// No rules were triggered before timeout.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">Exit</span>     <span class="c1">// All rules have been canceled or were uninterested; make no further calls to
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>           <span class="c1">// EventLoop::wait_next_event.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">};</span>
+</span></span></span><span class="line"><span class="cl">  <span class="n">Timeout</span><span class="p">,</span> <span class="c1">// No rules were triggered before timeout.
+</span></span></span><span class="line"><span class="cl">  <span class="n">Exit</span>     <span class="c1">// All rules have been canceled or were uninterested; make no further calls to
+</span></span></span><span class="line"><span class="cl">           <span class="c1">// EventLoop::wait_next_event.
+</span></span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">EventLoop</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
@@ -1034,7 +1034,7 @@
 </span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="n">InterestT</span><span class="o">&amp;</span> <span class="n">interest</span> <span class="o">=</span> <span class="p">[]</span> <span class="p">{</span> <span class="k">return</span> <span class="nb">true</span><span class="p">;</span> <span class="p">}</span> <span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// Calls [poll(2)](man2::poll) and then executes callback for each ready fd.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">Result</span> <span class="nf">wait_next_event</span><span class="p">(</span> <span class="kt">int</span> <span class="n">timeout_ms</span> <span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">  <span class="n">Result</span> <span class="nf">wait_next_event</span><span class="p">(</span> <span class="kt">int</span> <span class="n">timeout_ms</span> <span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -1109,45 +1109,45 @@
 </span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Raw</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="n">sockaddr_storage</span> <span class="n">storage</span> <span class="p">{};</span> <span class="c1">// The wrapped struct itself.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">...</span>
+</span></span></span><span class="line"><span class="cl">  <span class="p">...</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Address</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="n">socklen_t</span> <span class="n">_size</span><span class="p">;</span> <span class="c1">// Size of the wrapped address.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">Raw</span> <span class="n">_address</span> <span class="p">{};</span> <span class="c1">// A wrapped [sockaddr_storage](man7::socket) containing the address.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    
+</span></span></span><span class="line"><span class="cl">  <span class="n">Raw</span> <span class="n">_address</span> <span class="p">{};</span> <span class="c1">// A wrapped [sockaddr_storage](man7::socket) containing the address.
+</span></span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">  <span class="c1">// Constructor from ip/host, service/port, and hints to the resolver.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">Address</span><span class="p">(</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">node</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">service</span><span class="p">,</span> <span class="k">const</span> <span class="n">addrinfo</span><span class="o">&amp;</span> <span class="n">hints</span> <span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">  <span class="n">Address</span><span class="p">(</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">node</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">service</span><span class="p">,</span> <span class="k">const</span> <span class="n">addrinfo</span><span class="o">&amp;</span> <span class="n">hints</span> <span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// Construct by resolving a hostname and servicename.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">Address</span><span class="p">(</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">hostname</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">service</span> <span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">  <span class="n">Address</span><span class="p">(</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">hostname</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">service</span> <span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// Construct from dotted-quad string (&#34;18.243.0.1&#34;) and numeric port.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">explicit</span> <span class="nf">Address</span><span class="p">(</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">ip</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="kt">uint16_t</span> <span class="n">port</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">  <span class="k">explicit</span> <span class="nf">Address</span><span class="p">(</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">ip</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="kt">uint16_t</span> <span class="n">port</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// Construct from a [sockaddr *](@ref man7::socket).
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">Address</span><span class="p">(</span> <span class="k">const</span> <span class="n">sockaddr</span><span class="o">*</span> <span class="n">addr</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">size_t</span> <span class="n">size</span> <span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">  <span class="n">Address</span><span class="p">(</span> <span class="k">const</span> <span class="n">sockaddr</span><span class="o">*</span> <span class="n">addr</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">size_t</span> <span class="n">size</span> <span class="p">);</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">  <span class="c1">// Conversions
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// Dotted-quad IP address string (&#34;18.243.0.1&#34;) and numeric port.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span> <span class="kt">uint16_t</span><span class="o">&gt;</span> <span class="n">ip_port</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// Dotted-quad IP address string (&#34;18.243.0.1&#34;) and numeric port.
+</span></span></span><span class="line"><span class="cl">  <span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span> <span class="kt">uint16_t</span><span class="o">&gt;</span> <span class="n">ip_port</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// Dotted-quad IP address string (&#34;18.243.0.1&#34;).
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">ip</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="nf">ip_port</span><span class="p">().</span><span class="n">first</span><span class="p">;</span> <span class="p">}</span>
+</span></span></span><span class="line"><span class="cl">  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">ip</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="nf">ip_port</span><span class="p">().</span><span class="n">first</span><span class="p">;</span> <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// Numeric port (host byte order).
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">uint16_t</span> <span class="nf">port</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">ip_port</span><span class="p">().</span><span class="n">second</span><span class="p">;</span> <span class="p">}</span>
+</span></span></span><span class="line"><span class="cl">  <span class="kt">uint16_t</span> <span class="nf">port</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">ip_port</span><span class="p">().</span><span class="n">second</span><span class="p">;</span> <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// Numeric IP address as an integer (i.e., in [host byte order](man3::byteorder)).
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">uint32_t</span> <span class="nf">ipv4_numeric</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">  <span class="kt">uint32_t</span> <span class="nf">ipv4_numeric</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// Create an Address from a 32-bit raw numeric IP address
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">static</span> <span class="n">Address</span> <span class="nf">from_ipv4_numeric</span><span class="p">(</span> <span class="kt">uint32_t</span> <span class="n">ip_address</span> <span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">  <span class="k">static</span> <span class="n">Address</span> <span class="nf">from_ipv4_numeric</span><span class="p">(</span> <span class="kt">uint32_t</span> <span class="n">ip_address</span> <span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// Human-readable string, e.g., &#34;8.8.8.8:53&#34;.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">to_string</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">to_string</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// Low-level operations
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// Size of the underlying address storage.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">socklen_t</span> <span class="nf">size</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_size</span><span class="p">;</span> <span class="p">}</span>
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// Size of the underlying address storage.
+</span></span></span><span class="line"><span class="cl">  <span class="n">socklen_t</span> <span class="nf">size</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_size</span><span class="p">;</span> <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// Const pointer to the underlying socket address storage.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">const</span> <span class="n">sockaddr</span><span class="o">*</span> <span class="nf">raw</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">sockaddr</span><span class="o">*&gt;</span><span class="p">(</span> <span class="n">_address</span> <span class="p">);</span> <span class="p">}</span>
+</span></span></span><span class="line"><span class="cl">  <span class="k">const</span> <span class="n">sockaddr</span><span class="o">*</span> <span class="nf">raw</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">sockaddr</span><span class="o">*&gt;</span><span class="p">(</span> <span class="n">_address</span> <span class="p">);</span> <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// Safely convert to underlying sockaddr type
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">sockaddr_type</span><span class="o">&gt;</span>
+</span></span></span><span class="line"><span class="cl">  <span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">sockaddr_type</span><span class="o">&gt;</span>
 </span></span><span class="line"><span class="cl">  <span class="k">const</span> <span class="n">sockaddr_type</span><span class="o">*</span> <span class="n">as</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
@@ -1218,54 +1218,54 @@
 <pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Socket</span> <span class="o">:</span> <span class="k">public</span> <span class="n">FileDescriptor</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// Get the local or peer address the socket is connected to
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">Address</span> <span class="nf">get_address</span><span class="p">(</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name_of_function</span><span class="p">,</span>
+</span></span></span><span class="line"><span class="cl">  <span class="n">Address</span> <span class="nf">get_address</span><span class="p">(</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name_of_function</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">                       <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">(</span> <span class="kt">int</span><span class="p">,</span> <span class="n">sockaddr</span><span class="o">*</span><span class="p">,</span> <span class="n">socklen_t</span><span class="o">*</span> <span class="p">)</span><span class="o">&gt;&amp;</span> <span class="n">function</span> <span class="p">)</span> <span class="k">const</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// Construct via [socket(2)](man2::socket)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">Socket</span><span class="p">(</span> <span class="kt">int</span> <span class="n">domain</span><span class="p">,</span> <span class="kt">int</span> <span class="n">type</span><span class="p">,</span> <span class="kt">int</span> <span class="n">protocol</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">  <span class="n">Socket</span><span class="p">(</span> <span class="kt">int</span> <span class="n">domain</span><span class="p">,</span> <span class="kt">int</span> <span class="n">type</span><span class="p">,</span> <span class="kt">int</span> <span class="n">protocol</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// Construct from a file descriptor.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">Socket</span><span class="p">(</span> <span class="n">FileDescriptor</span><span class="o">&amp;&amp;</span> <span class="n">fd</span><span class="p">,</span> <span class="kt">int</span> <span class="n">domain</span><span class="p">,</span> <span class="kt">int</span> <span class="n">type</span><span class="p">,</span> <span class="kt">int</span> <span class="n">protocol</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">  <span class="n">Socket</span><span class="p">(</span> <span class="n">FileDescriptor</span><span class="o">&amp;&amp;</span> <span class="n">fd</span><span class="p">,</span> <span class="kt">int</span> <span class="n">domain</span><span class="p">,</span> <span class="kt">int</span> <span class="n">type</span><span class="p">,</span> <span class="kt">int</span> <span class="n">protocol</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// Bind a socket to a specified address with [bind(2)](man2::bind), usually for listen/accept
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">void</span> <span class="nf">bind</span><span class="p">(</span> <span class="k">const</span> <span class="n">Address</span><span class="o">&amp;</span> <span class="n">address</span> <span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">bind</span><span class="p">(</span> <span class="k">const</span> <span class="n">Address</span><span class="o">&amp;</span> <span class="n">address</span> <span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// Bind a socket to a specified device
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">void</span> <span class="nf">bind_to_device</span><span class="p">(</span> <span class="n">std</span><span class="o">::</span><span class="n">string_view</span> <span class="n">device_name</span> <span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">bind_to_device</span><span class="p">(</span> <span class="n">std</span><span class="o">::</span><span class="n">string_view</span> <span class="n">device_name</span> <span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// Connect a socket to a specified peer address with [connect(2)](\ref man2::connect)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">void</span> <span class="nf">connect</span><span class="p">(</span> <span class="k">const</span> <span class="n">Address</span><span class="o">&amp;</span> <span class="n">address</span> <span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">connect</span><span class="p">(</span> <span class="k">const</span> <span class="n">Address</span><span class="o">&amp;</span> <span class="n">address</span> <span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// Shut down a socket via [shutdown(2)](man2::shutdown)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">void</span> <span class="nf">shutdown</span><span class="p">(</span> <span class="kt">int</span> <span class="n">how</span> <span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">shutdown</span><span class="p">(</span> <span class="kt">int</span> <span class="n">how</span> <span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// Get local address of socket with [getsockname(2)](man2::getsockname)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">Address</span> <span class="nf">local_address</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">  <span class="n">Address</span> <span class="nf">local_address</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// Get peer address of socket with [getpeername(2)](man2::getpeername)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">Address</span> <span class="nf">peer_address</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">  <span class="n">Address</span> <span class="nf">peer_address</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">DatagramSocket</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Socket</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// Receive a datagram and the Address of its sender
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">void</span> <span class="nf">recv</span><span class="p">(</span> <span class="n">Address</span><span class="o">&amp;</span> <span class="n">source_address</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">payload</span> <span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">recv</span><span class="p">(</span> <span class="n">Address</span><span class="o">&amp;</span> <span class="n">source_address</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">payload</span> <span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// Send a datagram to specified Address
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">void</span> <span class="nf">sendto</span><span class="p">(</span> <span class="k">const</span> <span class="n">Address</span><span class="o">&amp;</span> <span class="n">destination</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string_view</span> <span class="n">payload</span> <span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">sendto</span><span class="p">(</span> <span class="k">const</span> <span class="n">Address</span><span class="o">&amp;</span> <span class="n">destination</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string_view</span> <span class="n">payload</span> <span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// Send datagram to the socket&#39;s connected address (must call connect() first)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">void</span> <span class="nf">send</span><span class="p">(</span> <span class="n">std</span><span class="o">::</span><span class="n">string_view</span> <span class="n">payload</span> <span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">send</span><span class="p">(</span> <span class="n">std</span><span class="o">::</span><span class="n">string_view</span> <span class="n">payload</span> <span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">TCPSocket</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Socket</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// Mark a socket as listening for incoming connections
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">void</span> <span class="nf">listen</span><span class="p">(</span> <span class="kt">int</span> <span class="n">backlog</span> <span class="o">=</span> <span class="mi">16</span> <span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">listen</span><span class="p">(</span> <span class="kt">int</span> <span class="n">backlog</span> <span class="o">=</span> <span class="mi">16</span> <span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// Accept a new incoming connection
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">TCPSocket</span> <span class="nf">accept</span><span class="p">();</span>
+</span></span></span><span class="line"><span class="cl">  <span class="n">TCPSocket</span> <span class="nf">accept</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// more...
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">UDPSocket</span><span class="p">(</span> <span class="n">FileDescriptor</span><span class="o">&amp;&amp;</span> <span class="n">fd</span> <span class="p">)</span> <span class="o">:</span> <span class="n">DatagramSocket</span><span class="p">(</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span> <span class="n">fd</span> <span class="p">),</span> <span class="n">AF_INET</span><span class="p">,</span> <span class="n">SOCK_DGRAM</span> <span class="p">)</span> <span class="p">{}</span>
+</span></span></span><span class="line"><span class="cl"><span class="n">UDPSocket</span><span class="p">(</span> <span class="n">FileDescriptor</span><span class="o">&amp;&amp;</span> <span class="n">fd</span> <span class="p">)</span> <span class="o">:</span> <span class="n">DatagramSocket</span><span class="p">(</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span> <span class="n">fd</span> <span class="p">),</span> <span class="n">AF_INET</span><span class="p">,</span> <span class="n">SOCK_DGRAM</span> <span class="p">)</span> <span class="p">{}</span>
 </span></span><span class="line"><span class="cl"><span class="n">UDPSocket</span><span class="p">()</span> <span class="o">:</span> <span class="n">DatagramSocket</span><span class="p">(</span> <span class="n">AF_INET</span><span class="p">,</span> <span class="n">SOCK_DGRAM</span> <span class="p">)</span> <span class="p">{}</span>
 </span></span><span class="line"><span class="cl"><span class="n">TCPSocket</span><span class="p">(</span> <span class="n">FileDescriptor</span><span class="o">&amp;&amp;</span> <span class="n">fd</span> <span class="p">)</span> <span class="o">:</span> <span class="n">Socket</span><span class="p">(</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span> <span class="n">fd</span> <span class="p">),</span> <span class="n">AF_INET</span><span class="p">,</span> <span class="n">SOCK_STREAM</span><span class="p">,</span> <span class="n">IPPROTO_TCP</span> <span class="p">)</span> <span class="p">{}</span>
 </span></span><span class="line"><span class="cl"><span class="n">TCPSocket</span><span class="p">()</span> <span class="o">:</span> <span class="n">Socket</span><span class="p">(</span> <span class="n">AF_INET</span><span class="p">,</span> <span class="n">SOCK_STREAM</span> <span class="p">)</span> <span class="p">{}</span>
@@ -1302,20 +1302,20 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// Helper type for an Ethernet address (an array of six bytes)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">using</span> <span class="n">EthernetAddress</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="o">&lt;</span><span class="kt">uint8_t</span><span class="p">,</span> <span class="mi">6</span><span class="o">&gt;</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="n">EthernetAddress</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="o">&lt;</span><span class="kt">uint8_t</span><span class="p">,</span> <span class="mi">6</span><span class="o">&gt;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="k">constexpr</span> <span class="n">size_t</span> <span class="n">LENGTH</span> <span class="o">=</span> <span class="mi">14</span><span class="p">;</span>         <span class="c1">// Ethernet header length in bytes
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">static</span> <span class="k">constexpr</span> <span class="kt">uint16_t</span> <span class="n">TYPE_IPv4</span> <span class="o">=</span> <span class="mh">0x800</span><span class="p">;</span> <span class="c1">// Type number for [IPv4](rfc::rfc791)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">static</span> <span class="k">constexpr</span> <span class="kt">uint16_t</span> <span class="n">TYPE_ARP</span> <span class="o">=</span> <span class="mh">0x806</span><span class="p">;</span>  <span class="c1">// Type number for [ARP](rfc::rfc826)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="k">constexpr</span> <span class="kt">uint16_t</span> <span class="n">TYPE_IPv4</span> <span class="o">=</span> <span class="mh">0x800</span><span class="p">;</span> <span class="c1">// Type number for [IPv4](rfc::rfc791)
+</span></span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="k">constexpr</span> <span class="kt">uint16_t</span> <span class="n">TYPE_ARP</span> <span class="o">=</span> <span class="mh">0x806</span><span class="p">;</span>  <span class="c1">// Type number for [ARP](rfc::rfc826)
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// Ethernet frame header
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">struct</span> <span class="nc">EthernetHeader</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">EthernetHeader</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="n">EthernetAddress</span> <span class="n">dst</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="n">EthernetAddress</span> <span class="n">src</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="kt">uint16_t</span> <span class="n">type</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// Return a string containing a header in human-readable format
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">to_string</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">to_string</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">parse</span><span class="p">(</span> <span class="n">Parser</span><span class="o">&amp;</span> <span class="n">parser</span> <span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">serialize</span><span class="p">(</span> <span class="n">Serializer</span><span class="o">&amp;</span> <span class="n">serializer</span> <span class="p">)</span> <span class="k">const</span><span class="p">;</span>
@@ -1383,21 +1383,21 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">static</span> <span class="k">constexpr</span> <span class="n">size_t</span> <span class="n">LENGTH</span> <span class="o">=</span> <span class="mi">28</span><span class="p">;</span>         <span class="c1">// ARP message length in bytes
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">static</span> <span class="k">constexpr</span> <span class="kt">uint16_t</span> <span class="n">TYPE_ETHERNET</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// ARP type for Ethernet/Wi-Fi as link-layer protocol
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">static</span> <span class="k">constexpr</span> <span class="kt">uint16_t</span> <span class="n">OPCODE_REQUEST</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="k">constexpr</span> <span class="kt">uint16_t</span> <span class="n">TYPE_ETHERNET</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// ARP type for Ethernet/Wi-Fi as link-layer protocol
+</span></span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="k">constexpr</span> <span class="kt">uint16_t</span> <span class="n">OPCODE_REQUEST</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="k">constexpr</span> <span class="kt">uint16_t</span> <span class="n">OPCODE_REPLY</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// [ARP](rfc::rfc826) message
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">struct</span> <span class="nc">ARPMessage</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">ARPMessage</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="kt">uint16_t</span> <span class="n">hardware_type</span> <span class="o">=</span> <span class="n">TYPE_ETHERNET</span><span class="p">;</span>             <span class="c1">// Type of the link-layer protocol (generally Ethernet/Wi-Fi)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">uint16_t</span> <span class="n">protocol_type</span> <span class="o">=</span> <span class="n">EthernetHeader</span><span class="o">::</span><span class="n">TYPE_IPv4</span><span class="p">;</span> <span class="c1">// Type of the Internet-layer protocol (generally IPv4)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    
+</span></span></span><span class="line"><span class="cl">  <span class="kt">uint16_t</span> <span class="n">protocol_type</span> <span class="o">=</span> <span class="n">EthernetHeader</span><span class="o">::</span><span class="n">TYPE_IPv4</span><span class="p">;</span> <span class="c1">// Type of the Internet-layer protocol (generally IPv4)
+</span></span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">  <span class="kt">uint8_t</span> <span class="n">hardware_address_size</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span> <span class="n">EthernetHeader</span><span class="o">::</span><span class="n">src</span> <span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="kt">uint8_t</span> <span class="n">protocol_address_size</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span> <span class="n">IPv4Header</span><span class="o">::</span><span class="n">src</span> <span class="p">);</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// Request or reply
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">uint16_t</span> <span class="n">opcode</span> <span class="p">{};</span> 
+</span></span></span><span class="line"><span class="cl">  <span class="kt">uint16_t</span> <span class="n">opcode</span> <span class="p">{};</span> 
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="n">EthernetAddress</span> <span class="n">sender_ethernet_address</span> <span class="p">{};</span>
 </span></span><span class="line"><span class="cl">  <span class="kt">uint32_t</span> <span class="n">sender_ip_address</span> <span class="p">{};</span>
@@ -1406,10 +1406,10 @@
 </span></span><span class="line"><span class="cl">  <span class="kt">uint32_t</span> <span class="n">target_ip_address</span> <span class="p">{};</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// Return a string containing the ARP message in human-readable format
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">to_string</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">to_string</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// Is this type of ARP message supported by the parser?
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">bool</span> <span class="nf">supported</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="nf">supported</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">parse</span><span class="p">(</span> <span class="n">Parser</span><span class="o">&amp;</span> <span class="n">parser</span> <span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">serialize</span><span class="p">(</span> <span class="n">Serializer</span><span class="o">&amp;</span> <span class="n">serializer</span> <span class="p">)</span> <span class="k">const</span><span class="p">;</span>
@@ -1479,9 +1479,9 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">static</span> <span class="k">constexpr</span> <span class="n">size_t</span> <span class="n">LENGTH</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>        <span class="c1">// IPv4 header length, not including options
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">static</span> <span class="k">constexpr</span> <span class="kt">uint8_t</span> <span class="n">DEFAULT_TTL</span> <span class="o">=</span> <span class="mi">128</span><span class="p">;</span> <span class="c1">// A reasonable default TTL value
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">static</span> <span class="k">constexpr</span> <span class="kt">uint8_t</span> <span class="n">PROTO_TCP</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span>     <span class="c1">// Protocol number for TCP
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="k">constexpr</span> <span class="kt">uint8_t</span> <span class="n">DEFAULT_TTL</span> <span class="o">=</span> <span class="mi">128</span><span class="p">;</span> <span class="c1">// A reasonable default TTL value
+</span></span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="k">constexpr</span> <span class="kt">uint8_t</span> <span class="n">PROTO_TCP</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span>     <span class="c1">// Protocol number for TCP
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="k">constexpr</span> <span class="kt">uint64_t</span> <span class="nf">serialized_length</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">LENGTH</span><span class="p">;</span> <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="cm">/*
@@ -1502,35 +1502,35 @@
 </span></span></span><span class="line"><span class="cl"><span class="cm">  *  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 </span></span></span><span class="line"><span class="cl"><span class="cm">*/</span>
 </span></span><span class="line"><span class="cl"><span class="c1">// IPv4 Internet datagram header (note: IP options are not supported)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">struct</span> <span class="nc">IPv4Header</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">IPv4Header</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// IPv4 Header fields
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">uint8_t</span> <span class="n">ver</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>           <span class="c1">// IP version
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">uint8_t</span> <span class="n">hlen</span> <span class="o">=</span> <span class="n">LENGTH</span> <span class="o">/</span> <span class="mi">4</span><span class="p">;</span> <span class="c1">// header length (multiples of 32 bits)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">uint8_t</span> <span class="n">tos</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>           <span class="c1">// type of service
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">uint16_t</span> <span class="n">len</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>          <span class="c1">// total length of packet
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">uint16_t</span> <span class="n">id</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>           <span class="c1">// identification number
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">bool</span> <span class="n">df</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>            <span class="c1">// don&#39;t fragment flag
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">bool</span> <span class="n">mf</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>           <span class="c1">// more fragments flag
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">uint16_t</span> <span class="n">offset</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>       <span class="c1">// fragment offset field
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">uint8_t</span> <span class="n">ttl</span> <span class="o">=</span> <span class="n">DEFAULT_TTL</span><span class="p">;</span> <span class="c1">// time to live field
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">uint8_t</span> <span class="n">proto</span> <span class="o">=</span> <span class="n">PROTO_TCP</span><span class="p">;</span> <span class="c1">// protocol field
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">uint16_t</span> <span class="n">cksum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>        <span class="c1">// checksum field
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">uint32_t</span> <span class="n">src</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>          <span class="c1">// src address
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">uint32_t</span> <span class="n">dst</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>          <span class="c1">// dst address
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl">  <span class="kt">uint8_t</span> <span class="n">ver</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>           <span class="c1">// IP version
+</span></span></span><span class="line"><span class="cl">  <span class="kt">uint8_t</span> <span class="n">hlen</span> <span class="o">=</span> <span class="n">LENGTH</span> <span class="o">/</span> <span class="mi">4</span><span class="p">;</span> <span class="c1">// header length (multiples of 32 bits)
+</span></span></span><span class="line"><span class="cl">  <span class="kt">uint8_t</span> <span class="n">tos</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>           <span class="c1">// type of service
+</span></span></span><span class="line"><span class="cl">  <span class="kt">uint16_t</span> <span class="n">len</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>          <span class="c1">// total length of packet
+</span></span></span><span class="line"><span class="cl">  <span class="kt">uint16_t</span> <span class="n">id</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>           <span class="c1">// identification number
+</span></span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="n">df</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>            <span class="c1">// don&#39;t fragment flag
+</span></span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="n">mf</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>           <span class="c1">// more fragments flag
+</span></span></span><span class="line"><span class="cl">  <span class="kt">uint16_t</span> <span class="n">offset</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>       <span class="c1">// fragment offset field
+</span></span></span><span class="line"><span class="cl">  <span class="kt">uint8_t</span> <span class="n">ttl</span> <span class="o">=</span> <span class="n">DEFAULT_TTL</span><span class="p">;</span> <span class="c1">// time to live field
+</span></span></span><span class="line"><span class="cl">  <span class="kt">uint8_t</span> <span class="n">proto</span> <span class="o">=</span> <span class="n">PROTO_TCP</span><span class="p">;</span> <span class="c1">// protocol field
+</span></span></span><span class="line"><span class="cl">  <span class="kt">uint16_t</span> <span class="n">cksum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>        <span class="c1">// checksum field
+</span></span></span><span class="line"><span class="cl">  <span class="kt">uint32_t</span> <span class="n">src</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>          <span class="c1">// src address
+</span></span></span><span class="line"><span class="cl">  <span class="kt">uint32_t</span> <span class="n">dst</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>          <span class="c1">// dst address
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">  <span class="c1">// Length of the payload
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">uint16_t</span> <span class="nf">payload_length</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">  <span class="kt">uint16_t</span> <span class="nf">payload_length</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// Pseudo-header&#39;s contribution to the TCP checksum
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">uint32_t</span> <span class="nf">pseudo_checksum</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">  <span class="kt">uint32_t</span> <span class="nf">pseudo_checksum</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// Set checksum to correct value
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">void</span> <span class="nf">compute_checksum</span><span class="p">();</span>
+</span></span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">compute_checksum</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// Return a string containing a header in human-readable format
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">to_string</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">to_string</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">parse</span><span class="p">(</span> <span class="n">Parser</span><span class="o">&amp;</span> <span class="n">parser</span> <span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">serialize</span><span class="p">(</span> <span class="n">Serializer</span><span class="o">&amp;</span> <span class="n">serializer</span> <span class="p">)</span> <span class="k">const</span><span class="p">;</span>
@@ -1552,7 +1552,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// [IPv4](rfc::rfc791) Internet datagram
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">struct</span> <span class="nc">IPv4Datagram</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">IPv4Datagram</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="n">IPv4Header</span> <span class="n">header</span> <span class="p">{};</span>
 </span></span><span class="line"><span class="cl">  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">payload</span> <span class="p">{};</span>
@@ -1592,28 +1592,28 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">static</span> <span class="k">constexpr</span> <span class="n">size_t</span> <span class="n">DEFAULT_CAPACITY</span> <span class="o">=</span> <span class="mi">64000</span><span class="p">;</span> <span class="c1">// Default capacity
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">static</span> <span class="k">constexpr</span> <span class="n">size_t</span> <span class="n">MAX_PAYLOAD_SIZE</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">;</span>  <span class="c1">// Conservative max payload size for real Internet
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">static</span> <span class="k">constexpr</span> <span class="kt">uint16_t</span> <span class="n">TIMEOUT_DFLT</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">;</span>    <span class="c1">// Default re-transmit timeout is 1 second
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">static</span> <span class="k">constexpr</span> <span class="kt">unsigned</span> <span class="n">MAX_RETX_ATTEMPTS</span> <span class="o">=</span> <span class="mi">8</span><span class="p">;</span>  <span class="c1">// Maximum re-transmit attempts before giving up
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="k">constexpr</span> <span class="n">size_t</span> <span class="n">MAX_PAYLOAD_SIZE</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">;</span>  <span class="c1">// Conservative max payload size for real Internet
+</span></span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="k">constexpr</span> <span class="kt">uint16_t</span> <span class="n">TIMEOUT_DFLT</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">;</span>    <span class="c1">// Default re-transmit timeout is 1 second
+</span></span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="k">constexpr</span> <span class="kt">unsigned</span> <span class="n">MAX_RETX_ATTEMPTS</span> <span class="o">=</span> <span class="mi">8</span><span class="p">;</span>  <span class="c1">// Maximum re-transmit attempts before giving up
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// Config for TCP sender and receiver
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">class</span> <span class="nc">TCPConfig</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">TCPConfig</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="kt">uint16_t</span> <span class="n">rt_timeout</span> <span class="o">=</span> <span class="n">TIMEOUT_DFLT</span><span class="p">;</span>      <span class="c1">// Initial value of the retransmission timeout, in milliseconds
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">size_t</span> <span class="n">recv_capacity</span> <span class="o">=</span> <span class="n">DEFAULT_CAPACITY</span><span class="p">;</span> <span class="c1">// Receive capacity, in bytes
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">size_t</span> <span class="n">send_capacity</span> <span class="o">=</span> <span class="n">DEFAULT_CAPACITY</span><span class="p">;</span> <span class="c1">// Sender capacity, in bytes
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">Wrap32</span> <span class="n">isn</span> <span class="p">{</span> <span class="mi">137</span> <span class="p">};</span>                      <span class="c1">// Default initial sequence number
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">};</span>
+</span></span></span><span class="line"><span class="cl">  <span class="n">size_t</span> <span class="n">recv_capacity</span> <span class="o">=</span> <span class="n">DEFAULT_CAPACITY</span><span class="p">;</span> <span class="c1">// Receive capacity, in bytes
+</span></span></span><span class="line"><span class="cl">  <span class="n">size_t</span> <span class="n">send_capacity</span> <span class="o">=</span> <span class="n">DEFAULT_CAPACITY</span><span class="p">;</span> <span class="c1">// Sender capacity, in bytes
+</span></span></span><span class="line"><span class="cl">  <span class="n">Wrap32</span> <span class="n">isn</span> <span class="p">{</span> <span class="mi">137</span> <span class="p">};</span>                      <span class="c1">// Default initial sequence number
+</span></span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// Config for classes derived from FdAdapter
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">class</span> <span class="nc">FdAdapterConfig</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">FdAdapterConfig</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="n">Address</span> <span class="n">source</span> <span class="p">{</span> <span class="s">&#34;0&#34;</span><span class="p">,</span> <span class="mi">0</span> <span class="p">};</span>      <span class="c1">// Source address and port
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">Address</span> <span class="n">destination</span> <span class="p">{</span> <span class="s">&#34;0&#34;</span><span class="p">,</span> <span class="mi">0</span> <span class="p">};</span> <span class="c1">// Destination address and port
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl">  <span class="n">Address</span> <span class="n">destination</span> <span class="p">{</span> <span class="s">&#34;0&#34;</span><span class="p">,</span> <span class="mi">0</span> <span class="p">};</span> <span class="c1">// Destination address and port
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="kt">uint16_t</span> <span class="n">loss_rate_dn</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// Downlink loss rate (for LossyFdAdapter)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">uint16_t</span> <span class="n">loss_rate_up</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// Uplink loss rate (for LossyFdAdapter)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">};</span>
+</span></span></span><span class="line"><span class="cl">  <span class="kt">uint16_t</span> <span class="n">loss_rate_up</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// Uplink loss rate (for LossyFdAdapter)
+</span></span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p><strong>tcp_receiver_message.hh</strong>定义TCP接收方发送的消息格式。TCPReceiverMessage包含ackno表示确认号，使用optional类型因为在连接建立前可能没有确认号。window_size表示接收窗口大小，告诉发送方还能接收多少数据。RST标志位表示是否要重置连接。</p>
@@ -1700,7 +1700,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// A converter from TCP segments to serialized IPv4 datagrams
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">class</span> <span class="nc">TCPOverIPv4Adapter</span> <span class="o">:</span> <span class="k">public</span> <span class="n">FdAdapterBase</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">TCPOverIPv4Adapter</span> <span class="o">:</span> <span class="k">public</span> <span class="n">FdAdapterBase</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="n">std</span><span class="o">::</span><span class="n">optional</span><span class="o">&lt;</span><span class="n">TCPMessage</span><span class="o">&gt;</span> <span class="n">unwrap_tcp_in_ip</span><span class="p">(</span> <span class="k">const</span> <span class="n">InternetDatagram</span><span class="o">&amp;</span> <span class="n">ip_dgram</span> <span class="p">);</span>
 </span></span><span class="line"><span class="cl">
@@ -1756,11 +1756,11 @@
 </span></span><span class="line"><span class="cl">  <span class="n">TCPReceiver</span> <span class="n">receiver_</span> <span class="p">{</span> <span class="n">Reassembler</span> <span class="p">{</span> <span class="n">ByteStream</span> <span class="p">{</span> <span class="n">cfg_</span><span class="p">.</span><span class="n">recv_capacity</span> <span class="p">}</span> <span class="p">}</span> <span class="p">};</span>
 </span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="n">need_send_</span> <span class="p">{};</span>
 </span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="n">linger_after_streams_finish_</span> <span class="p">{</span> <span class="nb">true</span> <span class="p">};</span> <span class="c1">// one peer may need to linger to make sure all closure conditions met
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">uint64_t</span> <span class="n">cumulative_time_</span> <span class="p">{};</span>
+</span></span></span><span class="line"><span class="cl">  <span class="kt">uint64_t</span> <span class="n">cumulative_time_</span> <span class="p">{};</span>
 </span></span><span class="line"><span class="cl">  <span class="kt">uint64_t</span> <span class="n">time_of_last_receipt_</span> <span class="p">{};</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// Testing interface
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">const</span> <span class="n">TCPReceiver</span><span class="o">&amp;</span> <span class="n">receiver</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">receiver_</span><span class="p">;</span> <span class="p">}</span>
+</span></span></span><span class="line"><span class="cl">  <span class="k">const</span> <span class="n">TCPReceiver</span><span class="o">&amp;</span> <span class="n">receiver</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">receiver_</span><span class="p">;</span> <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  <span class="k">const</span> <span class="n">TCPSender</span><span class="o">&amp;</span> <span class="n">sender</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">sender_</span><span class="p">;</span> <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="cm">/* Is the peer still active? */</span>
@@ -1832,48 +1832,48 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">//! Multithreaded wrapper around TCPPeer that approximates the Unix sockets API
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">template</span><span class="o">&lt;</span><span class="n">TCPDatagramAdapter</span> <span class="n">AdaptT</span><span class="o">&gt;</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">template</span><span class="o">&lt;</span><span class="n">TCPDatagramAdapter</span> <span class="n">AdaptT</span><span class="o">&gt;</span>
 </span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">TCPMinnowSocket</span> <span class="o">:</span> <span class="k">public</span> <span class="n">LocalStreamSocket</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// Adapter to underlying datagram socket (e.g., UDP or IP)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">AdaptT</span> <span class="n">_datagram_adapter</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">  <span class="n">AdaptT</span> <span class="n">_datagram_adapter</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// Stream socket for reads and writes between owner and TCP thread
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">LocalStreamSocket</span> <span class="n">_thread_data</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">  <span class="n">LocalStreamSocket</span> <span class="n">_thread_data</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// TCP state machine
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">std</span><span class="o">::</span><span class="n">optional</span><span class="o">&lt;</span><span class="n">TCPPeer</span><span class="o">&gt;</span> <span class="n">_tcp</span> <span class="p">{};</span>
+</span></span></span><span class="line"><span class="cl">  <span class="n">std</span><span class="o">::</span><span class="n">optional</span><span class="o">&lt;</span><span class="n">TCPPeer</span><span class="o">&gt;</span> <span class="n">_tcp</span> <span class="p">{};</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// eventloop that handles all the events (new inbound datagram, new outbound bytes, new inbound bytes)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">EventLoop</span> <span class="n">_eventloop</span> <span class="p">{};</span>
+</span></span></span><span class="line"><span class="cl">  <span class="n">EventLoop</span> <span class="n">_eventloop</span> <span class="p">{};</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// Handle to the TCPPeer thread; owner thread calls join() in the destructor
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">std</span><span class="o">::</span><span class="kr">thread</span> <span class="n">_tcp_thread</span> <span class="p">{};</span>
+</span></span></span><span class="line"><span class="cl">  <span class="n">std</span><span class="o">::</span><span class="kr">thread</span> <span class="n">_tcp_thread</span> <span class="p">{};</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// Flag used by the owner to force the TCPPeer thread to shut down
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">std</span><span class="o">::</span><span class="n">atomic_bool</span> <span class="n">_abort</span> <span class="p">{</span> <span class="nb">false</span> <span class="p">};</span> 
+</span></span></span><span class="line"><span class="cl">  <span class="n">std</span><span class="o">::</span><span class="n">atomic_bool</span> <span class="n">_abort</span> <span class="p">{</span> <span class="nb">false</span> <span class="p">};</span> 
 </span></span><span class="line"><span class="cl">  <span class="c1">// Has TCPMinnowSocket shut down the incoming data to the owner?
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">bool</span> <span class="n">_inbound_shutdown</span> <span class="p">{</span> <span class="nb">false</span> <span class="p">};</span> 
+</span></span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="n">_inbound_shutdown</span> <span class="p">{</span> <span class="nb">false</span> <span class="p">};</span> 
 </span></span><span class="line"><span class="cl">  <span class="c1">// Has the owner shut down the outbound data to the TCP connection?
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">bool</span> <span class="n">_outbound_shutdown</span> <span class="p">{</span> <span class="nb">false</span> <span class="p">};</span> 
+</span></span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="n">_outbound_shutdown</span> <span class="p">{</span> <span class="nb">false</span> <span class="p">};</span> 
 </span></span><span class="line"><span class="cl">  <span class="c1">// Has the outbound data been fully acknowledged by the peer?
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">bool</span> <span class="n">_fully_acked</span> <span class="p">{</span> <span class="nb">false</span> <span class="p">};</span> 
+</span></span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="n">_fully_acked</span> <span class="p">{</span> <span class="nb">false</span> <span class="p">};</span> 
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// Construct from the interface that the TCPPeer thread will use to read and write datagrams
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">TCPMinnowSocket</span><span class="p">(</span> <span class="n">AdaptT</span><span class="o">&amp;&amp;</span> <span class="n">datagram_interface</span> <span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">  <span class="n">TCPMinnowSocket</span><span class="p">(</span> <span class="n">AdaptT</span><span class="o">&amp;&amp;</span> <span class="n">datagram_interface</span> <span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// Construct LocalStreamSocket fds from socket pair, initialize eventloop
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">TCPMinnowSocket</span><span class="p">(</span> <span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">FileDescriptor</span><span class="p">,</span> <span class="n">FileDescriptor</span><span class="o">&gt;</span> <span class="n">data_socket_pair</span><span class="p">,</span> <span class="n">AdaptT</span><span class="o">&amp;&amp;</span> <span class="n">datagram_interface</span> <span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">  <span class="n">TCPMinnowSocket</span><span class="p">(</span> <span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">FileDescriptor</span><span class="p">,</span> <span class="n">FileDescriptor</span><span class="o">&gt;</span> <span class="n">data_socket_pair</span><span class="p">,</span> <span class="n">AdaptT</span><span class="o">&amp;&amp;</span> <span class="n">datagram_interface</span> <span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// Close socket, and wait for TCPPeer to finish
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">void</span> <span class="nf">wait_until_closed</span><span class="p">();</span>
+</span></span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">wait_until_closed</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// Connect using the specified configurations; blocks until connect succeeds or fails
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">void</span> <span class="nf">connect</span><span class="p">(</span> <span class="k">const</span> <span class="n">TCPConfig</span><span class="o">&amp;</span> <span class="n">c_tcp</span><span class="p">,</span> <span class="k">const</span> <span class="n">FdAdapterConfig</span><span class="o">&amp;</span> <span class="n">c_ad</span> <span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">connect</span><span class="p">(</span> <span class="k">const</span> <span class="n">TCPConfig</span><span class="o">&amp;</span> <span class="n">c_tcp</span><span class="p">,</span> <span class="k">const</span> <span class="n">FdAdapterConfig</span><span class="o">&amp;</span> <span class="n">c_ad</span> <span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// Listen and accept using the specified configurations; blocks until accept succeeds or fails  
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">void</span> <span class="nf">listen_and_accept</span><span class="p">(</span> <span class="k">const</span> <span class="n">TCPConfig</span><span class="o">&amp;</span> <span class="n">c_tcp</span><span class="p">,</span> <span class="k">const</span> <span class="n">FdAdapterConfig</span><span class="o">&amp;</span> <span class="n">c_ad</span> <span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">listen_and_accept</span><span class="p">(</span> <span class="k">const</span> <span class="n">TCPConfig</span><span class="o">&amp;</span> <span class="n">c_tcp</span><span class="p">,</span> <span class="k">const</span> <span class="n">FdAdapterConfig</span><span class="o">&amp;</span> <span class="n">c_ad</span> <span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// When a connected socket is destructed, it will send a RST
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="o">~</span><span class="n">TCPMinnowSocket</span><span class="p">();</span>
+</span></span></span><span class="line"><span class="cl">  <span class="o">~</span><span class="n">TCPMinnowSocket</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">bind</span><span class="p">(</span> <span class="k">const</span> <span class="n">Address</span><span class="o">&amp;</span> <span class="n">address</span> <span class="p">)</span> <span class="o">=</span> <span class="k">delete</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="n">Address</span> <span class="nf">local_address</span><span class="p">()</span> <span class="k">const</span> <span class="o">=</span> <span class="k">delete</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">set_reuseaddr</span><span class="p">()</span> <span class="o">=</span> <span class="k">delete</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="c1">// Return peer address from underlying datagram adapter
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">const</span> <span class="n">Address</span><span class="o">&amp;</span> <span class="n">peer_address</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_datagram_adapter</span><span class="p">.</span><span class="n">config</span><span class="p">().</span><span class="n">destination</span><span class="p">;</span> <span class="p">}</span>
+</span></span></span><span class="line"><span class="cl">  <span class="k">const</span> <span class="n">Address</span><span class="o">&amp;</span> <span class="n">peer_address</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_datagram_adapter</span><span class="p">.</span><span class="n">config</span><span class="p">().</span><span class="n">destination</span><span class="p">;</span> <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -1898,8 +1898,8 @@
 <pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">FdAdapterBase</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="n">FdAdapterConfig</span> <span class="n">_cfg</span> <span class="p">{};</span> <span class="c1">// Configuration values
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">bool</span> <span class="n">_listen</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>    <span class="c1">// Is the connected TCP FSM in listen state?
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="n">_listen</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>    <span class="c1">// Is the connected TCP FSM in listen state?
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">set_listening</span><span class="p">(</span> <span class="k">const</span> <span class="kt">bool</span> <span class="n">l</span> <span class="p">)</span> <span class="p">{</span> <span class="n">_listen</span> <span class="o">=</span> <span class="n">l</span><span class="p">;</span> <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="nf">listening</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_listen</span><span class="p">;</span> <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
@@ -1942,19 +1942,19 @@
 </span></span><span class="line"><span class="cl">  <span class="n">AdapterT</span> <span class="n">_adapter</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">  <span class="c1">// Construct from a FileDescriptor appropriate to the AdapterT constructor
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">explicit</span> <span class="nf">LossyFdAdapter</span><span class="p">(</span> <span class="n">AdapterT</span><span class="o">&amp;&amp;</span> <span class="n">adapter</span> <span class="p">)</span> <span class="o">:</span> <span class="n">_adapter</span><span class="p">(</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span> <span class="n">adapter</span> <span class="p">)</span> <span class="p">)</span> <span class="p">{}</span>
+</span></span></span><span class="line"><span class="cl">  <span class="k">explicit</span> <span class="nf">LossyFdAdapter</span><span class="p">(</span> <span class="n">AdapterT</span><span class="o">&amp;&amp;</span> <span class="n">adapter</span> <span class="p">)</span> <span class="o">:</span> <span class="n">_adapter</span><span class="p">(</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span> <span class="n">adapter</span> <span class="p">)</span> <span class="p">)</span> <span class="p">{}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// Determine whether or not to drop a given read or write
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">bool</span> <span class="nf">_should_drop</span><span class="p">(</span> <span class="kt">bool</span> <span class="n">uplink</span> <span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="nf">_should_drop</span><span class="p">(</span> <span class="kt">bool</span> <span class="n">uplink</span> <span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="n">FileDescriptor</span><span class="o">&amp;</span> <span class="n">fd</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_adapter</span><span class="p">.</span><span class="n">fd</span><span class="p">();</span> <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  <span class="n">std</span><span class="o">::</span><span class="n">optional</span><span class="o">&lt;</span><span class="n">TCPMessage</span><span class="o">&gt;</span> <span class="n">read</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">write</span><span class="p">(</span> <span class="k">const</span> <span class="n">TCPMessage</span><span class="o">&amp;</span> <span class="n">seg</span> <span class="p">);</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">  <span class="c1">// Passthrough functions to the underlying AdapterT instance
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">void</span> <span class="nf">set_listening</span><span class="p">(</span> <span class="k">const</span> <span class="kt">bool</span> <span class="n">l</span> <span class="p">)</span> <span class="p">{</span> <span class="n">_adapter</span><span class="p">.</span><span class="n">set_listening</span><span class="p">(</span> <span class="n">l</span> <span class="p">);</span> <span class="p">}</span> <span class="c1">// FdAdapterBase::set_listening passthrough
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">const</span> <span class="n">FdAdapterConfig</span><span class="o">&amp;</span> <span class="n">config</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_adapter</span><span class="p">.</span><span class="n">config</span><span class="p">();</span> <span class="p">}</span> <span class="c1">// FdAdapterBase::config passthrough
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">FdAdapterConfig</span><span class="o">&amp;</span> <span class="n">config_mut</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_adapter</span><span class="p">.</span><span class="n">config_mut</span><span class="p">();</span> <span class="p">}</span>     <span class="c1">// FdAdapterBase::config_mut passthrough
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">void</span> <span class="nf">tick</span><span class="p">(</span> <span class="k">const</span> <span class="n">size_t</span> <span class="n">ms_since_last_tick</span> <span class="p">)</span> <span class="p">{</span> <span class="n">_adapter</span><span class="p">.</span><span class="n">tick</span><span class="p">(</span> <span class="n">ms_since_last_tick</span> <span class="p">);</span> <span class="p">}</span>
+</span></span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">set_listening</span><span class="p">(</span> <span class="k">const</span> <span class="kt">bool</span> <span class="n">l</span> <span class="p">)</span> <span class="p">{</span> <span class="n">_adapter</span><span class="p">.</span><span class="n">set_listening</span><span class="p">(</span> <span class="n">l</span> <span class="p">);</span> <span class="p">}</span> <span class="c1">// FdAdapterBase::set_listening passthrough
+</span></span></span><span class="line"><span class="cl">  <span class="k">const</span> <span class="n">FdAdapterConfig</span><span class="o">&amp;</span> <span class="n">config</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_adapter</span><span class="p">.</span><span class="n">config</span><span class="p">();</span> <span class="p">}</span> <span class="c1">// FdAdapterBase::config passthrough
+</span></span></span><span class="line"><span class="cl">  <span class="n">FdAdapterConfig</span><span class="o">&amp;</span> <span class="n">config_mut</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_adapter</span><span class="p">.</span><span class="n">config_mut</span><span class="p">();</span> <span class="p">}</span>     <span class="c1">// FdAdapterBase::config_mut passthrough
+</span></span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">tick</span><span class="p">(</span> <span class="k">const</span> <span class="n">size_t</span> <span class="n">ms_since_last_tick</span> <span class="p">)</span> <span class="p">{</span> <span class="n">_adapter</span><span class="p">.</span><span class="n">tick</span><span class="p">(</span> <span class="n">ms_since_last_tick</span> <span class="p">);</span> <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -1991,7 +1991,7 @@
 <pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">TunTapFD</span> <span class="o">:</span> <span class="k">public</span> <span class="n">FileDescriptor</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// Open an existing persistent [TUN or TAP device](https://www.kernel.org/doc/Documentation/networking/tuntap.txt).
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">explicit</span> <span class="nf">TunTapFD</span><span class="p">(</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">devname</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">is_tun</span> <span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">  <span class="k">explicit</span> <span class="nf">TunTapFD</span><span class="p">(</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">devname</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">is_tun</span> <span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">TunFD</span><span class="p">(</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">devname</span> <span class="p">)</span> <span class="o">:</span> <span class="n">TunTapFD</span><span class="p">(</span> <span class="n">devname</span><span class="p">,</span> <span class="nb">true</span> <span class="p">)</span> <span class="p">{}</span>
@@ -2004,9 +2004,9 @@
 </span></span><span class="line"><span class="cl">  <span class="p">{};</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="n">tun_req</span><span class="p">.</span><span class="n">ifr_flags</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">int16_t</span><span class="o">&gt;</span><span class="p">(</span> <span class="p">(</span> <span class="n">is_tun</span> <span class="o">?</span> <span class="nl">IFF_TUN</span> <span class="p">:</span> <span class="n">IFF_TAP</span> <span class="p">)</span> <span class="o">|</span> <span class="n">IFF_NO_PI</span> <span class="p">);</span> <span class="c1">// no packetinfo
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// copy devname to ifr_name, making sure to null terminate
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="n">strncpy</span><span class="p">(</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">*&gt;</span><span class="p">(</span> <span class="n">tun_req</span><span class="p">.</span><span class="n">ifr_name</span> <span class="p">),</span> <span class="n">devname</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span> <span class="n">IFNAMSIZ</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="n">tun_req</span><span class="p">.</span><span class="n">ifr_name</span><span class="p">[</span><span class="n">IFNAMSIZ</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;\0&#39;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
@@ -2039,15 +2039,15 @@
 </span></span><span class="line"><span class="cl">  <span class="n">TunFD</span> <span class="n">_tun</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">  <span class="c1">//! Construct from a TunFD
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">TCPOverIPv4OverTunFdAdapter</span><span class="p">(</span> <span class="n">TunFD</span><span class="o">&amp;&amp;</span> <span class="n">tun</span> <span class="p">)</span> <span class="o">:</span> <span class="n">_tun</span><span class="p">(</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span> <span class="n">tun</span> <span class="p">)</span> <span class="p">)</span> <span class="p">{}</span>
+</span></span></span><span class="line"><span class="cl">  <span class="n">TCPOverIPv4OverTunFdAdapter</span><span class="p">(</span> <span class="n">TunFD</span><span class="o">&amp;&amp;</span> <span class="n">tun</span> <span class="p">)</span> <span class="o">:</span> <span class="n">_tun</span><span class="p">(</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span> <span class="n">tun</span> <span class="p">)</span> <span class="p">)</span> <span class="p">{}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">//! Attempts to read and parse an IPv4 datagram containing a TCP segment related to the current connection
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">std</span><span class="o">::</span><span class="n">optional</span><span class="o">&lt;</span><span class="n">TCPMessage</span><span class="o">&gt;</span> <span class="n">read</span><span class="p">();</span>
+</span></span></span><span class="line"><span class="cl">  <span class="n">std</span><span class="o">::</span><span class="n">optional</span><span class="o">&lt;</span><span class="n">TCPMessage</span><span class="o">&gt;</span> <span class="n">read</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">//! Creates an IPv4 datagram from a TCP segment and writes it to the TUN device
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">void</span> <span class="nf">write</span><span class="p">(</span> <span class="k">const</span> <span class="n">TCPMessage</span><span class="o">&amp;</span> <span class="n">seg</span> <span class="p">)</span> <span class="p">{</span> <span class="n">_tun</span><span class="p">.</span><span class="n">write</span><span class="p">(</span> <span class="n">serialize</span><span class="p">(</span> <span class="n">wrap_tcp_in_ip</span><span class="p">(</span> <span class="n">seg</span> <span class="p">)</span> <span class="p">)</span> <span class="p">);</span> <span class="p">}</span>
+</span></span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">write</span><span class="p">(</span> <span class="k">const</span> <span class="n">TCPMessage</span><span class="o">&amp;</span> <span class="n">seg</span> <span class="p">)</span> <span class="p">{</span> <span class="n">_tun</span><span class="p">.</span><span class="n">write</span><span class="p">(</span> <span class="n">serialize</span><span class="p">(</span> <span class="n">wrap_tcp_in_ip</span><span class="p">(</span> <span class="n">seg</span> <span class="p">)</span> <span class="p">)</span> <span class="p">);</span> <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">//! Access underlying file descriptor
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">FileDescriptor</span><span class="o">&amp;</span> <span class="n">fd</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_tun</span><span class="p">;</span> <span class="p">}</span>
+</span></span></span><span class="line"><span class="cl">  <span class="n">FileDescriptor</span><span class="o">&amp;</span> <span class="n">fd</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_tun</span><span class="p">;</span> <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -2184,7 +2184,7 @@
         
         
             <div class="article-image">
-                <img src="/p/simple-database/bg.ffde7ff5e016b8481b8449ddaf9d6ceb_hu_78b5206a8e5797e2.jpg" 
+                <img src="/p/simple-database/bg.ffde7ff5e016b8481b8449ddaf9d6ceb_hu_7fece58f19f32ba4.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -2208,7 +2208,7 @@
         
         
             <div class="article-image">
-                <img src="/p/network-protocol-archive/bg.2ed5eec0fc56fbdf9525214b84b2f0ee_hu_14ab31eaefce141b.png" 
+                <img src="/p/network-protocol-archive/bg.2ed5eec0fc56fbdf9525214b84b2f0ee_hu_9cd6263e9ca3a9aa.png" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -2232,7 +2232,7 @@
         
         
             <div class="article-image">
-                <img src="/p/simple-network/bg.d266c4a87c29396fe7fc417cff63212a_hu_3d450349083fed81.png" 
+                <img src="/p/simple-network/bg.d266c4a87c29396fe7fc417cff63212a_hu_8cc073256b77554d.png" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -2463,7 +2463,7 @@
         
         
 
-        共 742374 字 , 39 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        共 741930 字 , 39 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
         主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 

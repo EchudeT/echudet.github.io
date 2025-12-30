@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-cn" dir="ltr">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="多处理器系统和锁机制是实现高效并行计算和数据一致性的关键因素。多处理器在于利用多个CPU同时执行任务，显著提升计算能力和系统吞吐量。随着多处理器系统的普及，资源竞争问题变得更加突出，这时锁机制的地位显得尤为重要。锁通过对共享资源的访问进行同步控制，防止多个处理器同时修改数据导致的不一致问题。常用的锁机制包括互斥锁、读写锁和自旋锁，确保在多处理环境下保持数据的完整性和正确性。这种结合实现了高效的资源利用率，保证了多处理系统对复杂任务的快速响应和可靠处理。">
 <title>MIT6S081：10Multiprocessors and locking</title>
@@ -59,7 +59,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu_67bf1327fc98b60.png" width="300"
+                        <img src="/img/avatar_hu_c2920364e6534697.png" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -305,8 +305,8 @@
     <header class="article-header">
         <div class="article-image">
             <a href="/p/mit6s08110multiprocessors-and-locking/">
-                <img src="/p/mit6s08110multiprocessors-and-locking/bg_hu_7ebddf435fd82350.png"
-                        srcset="/p/mit6s08110multiprocessors-and-locking/bg_hu_7ebddf435fd82350.png 800w, /p/mit6s08110multiprocessors-and-locking/bg_hu_504c02fafd7113bd.png 1600w"
+                <img src="/p/mit6s08110multiprocessors-and-locking/bg_hu_52cd0482e74d4cf1.png"
+                        srcset="/p/mit6s08110multiprocessors-and-locking/bg_hu_52cd0482e74d4cf1.png 800w, /p/mit6s08110multiprocessors-and-locking/bg_hu_2bba5615d36863ac.png 1600w"
                         width="800" 
                         height="1200" 
                         loading="lazy"
@@ -639,7 +639,7 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">void</span>
 </span></span><span class="line"><span class="cl"><span class="nf">acquire</span><span class="p">(</span><span class="k">struct</span> <span class="n">spinlock</span><span class="o">*</span> <span class="n">lk</span><span class="p">)</span> <span class="c1">// does not work!
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="k">for</span><span class="p">(;;)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">lk</span><span class="o">-&gt;</span><span class="n">locked</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="n">lk</span><span class="o">-&gt;</span><span class="n">locked</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
@@ -993,11 +993,11 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">//the transmit output buffer.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">struct</span> <span class="n">spinlock</span> <span class="n">uart_tx_lock</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="n">spinlock</span> <span class="n">uart_tx_lock</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="cp">#define UART_TX_BUF_SIZE 32
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">char</span> <span class="n">uart_tx_buf</span> <span class="p">[</span><span class="n">UART_TX_BUF_SIZE</span><span class="p">];</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">char</span> <span class="n">uart_tx_buf</span> <span class="p">[</span><span class="n">UART_TX_BUF_SIZE</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">uart_tx_w</span><span class="p">;</span><span class="c1">//write next to uart_tx_buf[uart_tx_w++]
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="n">uart_tx_r</span><span class="p">;</span><span class="c1">//read next from uart_tx_buf[uar_tx_r++]
+</span></span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">uart_tx_r</span><span class="p">;</span><span class="c1">//read next from uart_tx_buf[uar_tx_r++]
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>所以你可以认为对于UART模块来说，现在是一个coarse-grained lock的设计。</p>
@@ -1048,7 +1048,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="c1">// because it may block, it can&#39;t be called
 </span></span></span><span class="line"><span class="cl"><span class="c1">// from interrupts; it&#39;s only suitable for use
 </span></span></span><span class="line"><span class="cl"><span class="c1">// by write().
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">void</span>
 </span></span><span class="line"><span class="cl"><span class="nf">uartputc</span><span class="p">(</span><span class="kt">int</span> <span class="n">c</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="nf">acquire</span><span class="p">(</span><span class="o">&amp;</span><span class="n">uart_tx_lock</span><span class="p">);</span>
@@ -1061,8 +1061,8 @@
 </span></span><span class="line"><span class="cl">  <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">){</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(((</span><span class="n">uart_tx_w</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">UART_TX_BUF_SIZE</span><span class="p">)</span> <span class="o">==</span> <span class="n">uart_tx_r</span><span class="p">){</span>
 </span></span><span class="line"><span class="cl">      <span class="c1">// buffer is full.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="c1">// wait for uartstart() to open up space in the buffer.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="nf">sleep</span><span class="p">(</span><span class="o">&amp;</span><span class="n">uart_tx_r</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">uart_tx_lock</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">      <span class="c1">// wait for uartstart() to open up space in the buffer.
+</span></span></span><span class="line"><span class="cl">      <span class="nf">sleep</span><span class="p">(</span><span class="o">&amp;</span><span class="n">uart_tx_r</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">uart_tx_lock</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="n">uart_tx_buf</span><span class="p">[</span><span class="n">uart_tx_w</span><span class="p">]</span> <span class="o">=</span> <span class="n">c</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">      <span class="n">uart_tx_w</span> <span class="o">=</span> <span class="p">(</span><span class="n">uart_tx_w</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">UART_TX_BUF_SIZE</span><span class="p">;</span>
@@ -1115,27 +1115,27 @@
 </span></span></span><span class="line"><span class="cl"><span class="c1">// in the transmit buffer, send it.
 </span></span></span><span class="line"><span class="cl"><span class="c1">// caller must hold uart_tx_lock.
 </span></span></span><span class="line"><span class="cl"><span class="c1">// called from both the top- and bottom-half.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">void</span>
 </span></span><span class="line"><span class="cl"><span class="nf">uartstart</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">){</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">uart_tx_w</span> <span class="o">==</span> <span class="n">uart_tx_r</span><span class="p">){</span>
 </span></span><span class="line"><span class="cl">      <span class="c1">// transmit buffer is empty.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="k">return</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">      <span class="k">return</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">((</span><span class="nf">ReadReg</span><span class="p">(</span><span class="n">LSR</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">LSR_TX_IDLE</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">){</span>
 </span></span><span class="line"><span class="cl">      <span class="c1">// the UART transmit holding register is full,
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="c1">// so we cannot give it another byte.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="c1">// it will interrupt when it&#39;s ready for a new byte.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="k">return</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">      <span class="c1">// so we cannot give it another byte.
+</span></span></span><span class="line"><span class="cl">      <span class="c1">// it will interrupt when it&#39;s ready for a new byte.
+</span></span></span><span class="line"><span class="cl">      <span class="k">return</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">c</span> <span class="o">=</span> <span class="n">uart_tx_buf</span><span class="p">[</span><span class="n">uart_tx_r</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl">    <span class="n">uart_tx_r</span> <span class="o">=</span> <span class="p">(</span><span class="n">uart_tx_r</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">UART_TX_BUF_SIZE</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// maybe uartputc() is waiting for space in the buffer.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">wakeup</span><span class="p">(</span><span class="o">&amp;</span><span class="n">uart_tx_r</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nf">wakeup</span><span class="p">(</span><span class="o">&amp;</span><span class="n">uart_tx_r</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="nf">WriteReg</span><span class="p">(</span><span class="n">THR</span><span class="p">,</span> <span class="n">c</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
@@ -1176,11 +1176,11 @@
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// handle a uart interrupt, raised because input has
 </span></span></span><span class="line"><span class="cl"><span class="c1">// arrived, or the uart is ready for more output, or
 </span></span></span><span class="line"><span class="cl"><span class="c1">// both. called from trap.c.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">void</span>
 </span></span><span class="line"><span class="cl"><span class="nf">uartintr</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// read and process incoming characters.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">){</span>
+</span></span></span><span class="line"><span class="cl">  <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">){</span>
 </span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">c</span> <span class="o">=</span> <span class="nf">uartgetc</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">c</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">      <span class="k">break</span><span class="p">;</span>
@@ -1188,7 +1188,7 @@
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// send buffered characters.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nf">acquire</span><span class="p">(</span><span class="o">&amp;</span><span class="n">uart_tx_lock</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">  <span class="nf">acquire</span><span class="p">(</span><span class="o">&amp;</span><span class="n">uart_tx_lock</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="nf">uartstart</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">  <span class="nf">release</span><span class="p">(</span><span class="o">&amp;</span><span class="n">uart_tx_lock</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
@@ -1236,13 +1236,13 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// Mutual exclusion lock.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">struct</span> <span class="n">spinlock</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="n">spinlock</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="n">uint</span> <span class="n">locked</span><span class="p">;</span>       <span class="c1">// Is the lock held?
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// For debugging:
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">char</span> <span class="o">*</span><span class="n">name</span><span class="p">;</span>        <span class="c1">// Name of lock.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">struct</span> <span class="n">cpu</span> <span class="o">*</span><span class="n">cpu</span><span class="p">;</span>   <span class="c1">// The cpu holding the lock.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">};</span>
+</span></span></span><span class="line"><span class="cl">  <span class="kt">char</span> <span class="o">*</span><span class="n">name</span><span class="p">;</span>        <span class="c1">// Name of lock.
+</span></span></span><span class="line"><span class="cl">  <span class="k">struct</span> <span class="n">cpu</span> <span class="o">*</span><span class="n">cpu</span><span class="p">;</span>   <span class="c1">// The cpu holding the lock.
+</span></span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>里面有spinlock结构体的定义。内容也比较简单，包含了locked字段表明当前是否上锁，其他两个字段主要是用来输出调试信息，一个是锁的名字，另一个是持有锁的CPU。</p>
@@ -1278,28 +1278,28 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// Acquire the lock.
 </span></span></span><span class="line"><span class="cl"><span class="c1">// Loops (spins) until the lock is acquired.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">void</span>
 </span></span><span class="line"><span class="cl"><span class="nf">acquire</span><span class="p">(</span><span class="k">struct</span> <span class="n">spinlock</span> <span class="o">*</span><span class="n">lk</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="nf">push_off</span><span class="p">();</span> <span class="c1">// disable interrupts to avoid deadlock.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">if</span><span class="p">(</span><span class="nf">holding</span><span class="p">(</span><span class="n">lk</span><span class="p">))</span>
+</span></span></span><span class="line"><span class="cl">  <span class="k">if</span><span class="p">(</span><span class="nf">holding</span><span class="p">(</span><span class="n">lk</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">panic</span><span class="p">(</span><span class="s">&#34;acquire&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// On RISC-V, sync_lock_test_and_set turns into an atomic swap:
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">//   a5 = 1
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">//   s1 = &amp;lk-&gt;locked
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">//   amoswap.w.aq a5, a5, (s1)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">while</span><span class="p">(</span><span class="nf">__sync_lock_test_and_set</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lk</span><span class="o">-&gt;</span><span class="n">locked</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl">  <span class="c1">//   a5 = 1
+</span></span></span><span class="line"><span class="cl">  <span class="c1">//   s1 = &amp;lk-&gt;locked
+</span></span></span><span class="line"><span class="cl">  <span class="c1">//   amoswap.w.aq a5, a5, (s1)
+</span></span></span><span class="line"><span class="cl">  <span class="k">while</span><span class="p">(</span><span class="nf">__sync_lock_test_and_set</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lk</span><span class="o">-&gt;</span><span class="n">locked</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// Tell the C compiler and the processor to not move loads or stores
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// past this point, to ensure that the critical section&#39;s memory
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// references happen strictly after the lock is acquired.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// On RISC-V, this emits a fence instruction.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nf">__sync_synchronize</span><span class="p">();</span>
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// past this point, to ensure that the critical section&#39;s memory
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// references happen strictly after the lock is acquired.
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// On RISC-V, this emits a fence instruction.
+</span></span></span><span class="line"><span class="cl">  <span class="nf">__sync_synchronize</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// Record info about lock acquisition for holding() and debugging.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">lk</span><span class="o">-&gt;</span><span class="n">cpu</span> <span class="o">=</span> <span class="nf">mycpu</span><span class="p">();</span>
+</span></span></span><span class="line"><span class="cl">  <span class="n">lk</span><span class="o">-&gt;</span><span class="n">cpu</span> <span class="o">=</span> <span class="nf">mycpu</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -1344,7 +1344,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// Release the lock.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">void</span>
 </span></span><span class="line"><span class="cl"><span class="nf">release</span><span class="p">(</span><span class="k">struct</span> <span class="n">spinlock</span> <span class="o">*</span><span class="n">lk</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nf">holding</span><span class="p">(</span><span class="n">lk</span><span class="p">))</span>
@@ -1353,21 +1353,21 @@
 </span></span><span class="line"><span class="cl">  <span class="n">lk</span><span class="o">-&gt;</span><span class="n">cpu</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// Tell the C compiler and the CPU to not move loads or stores
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// past this point, to ensure that all the stores in the critical
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// section are visible to other CPUs before the lock is released,
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// and that loads in the critical section occur strictly before
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// the lock is released.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// On RISC-V, this emits a fence instruction.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nf">__sync_synchronize</span><span class="p">();</span>
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// past this point, to ensure that all the stores in the critical
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// section are visible to other CPUs before the lock is released,
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// and that loads in the critical section occur strictly before
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// the lock is released.
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// On RISC-V, this emits a fence instruction.
+</span></span></span><span class="line"><span class="cl">  <span class="nf">__sync_synchronize</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// Release the lock, equivalent to lk-&gt;locked = 0.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// This code doesn&#39;t use a C assignment, since the C standard
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// implies that an assignment might be implemented with
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// multiple store instructions.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// On RISC-V, sync_lock_release turns into an atomic swap:
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">//   s1 = &amp;lk-&gt;locked
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">//   amoswap.w zero, zero, (s1)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nf">__sync_lock_release</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lk</span><span class="o">-&gt;</span><span class="n">locked</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// This code doesn&#39;t use a C assignment, since the C standard
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// implies that an assignment might be implemented with
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// multiple store instructions.
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// On RISC-V, sync_lock_release turns into an atomic swap:
+</span></span></span><span class="line"><span class="cl">  <span class="c1">//   s1 = &amp;lk-&gt;locked
+</span></span></span><span class="line"><span class="cl">  <span class="c1">//   amoswap.w zero, zero, (s1)
+</span></span></span><span class="line"><span class="cl">  <span class="nf">__sync_lock_release</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lk</span><span class="o">-&gt;</span><span class="n">locked</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="nf">pop_off</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
@@ -1480,7 +1480,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08123rcu/bg.91a08bf3fe0a8ca435e8fbc902291fd5_hu_50da030b7ba2cbe7.jpg" 
+                <img src="/p/mit6s08123rcu/bg.91a08bf3fe0a8ca435e8fbc902291fd5_hu_b6ef8ea2c8ceedc0.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -1504,7 +1504,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08122meltdown/19.8d880549dccba2f0c1613b3e41a721e5_hu_1493d831cda8626c.jpg" 
+                <img src="/p/mit6s08122meltdown/19.8d880549dccba2f0c1613b3e41a721e5_hu_914e4a4b73e7f898.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -1528,7 +1528,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08121networking/bg.68c4376fd87b0b35da07319dd155c90d_hu_b8a716243c6f9679.jpg" 
+                <img src="/p/mit6s08121networking/bg.68c4376fd87b0b35da07319dd155c90d_hu_702cc6dbf23ff4b6.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -1552,7 +1552,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08120kernels-and-hll/bg.4175e6a2793e0fc340e5aced2529e40b_hu_de82d011b3d97ace.jpg" 
+                <img src="/p/mit6s08120kernels-and-hll/bg.4175e6a2793e0fc340e5aced2529e40b_hu_900f2fcc83e9e964.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -1576,7 +1576,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08119virtual-machines/bg.b02a7ba1d946705c0cf2809bcf960db8_hu_77df69a362eba544.jpg" 
+                <img src="/p/mit6s08119virtual-machines/bg.b02a7ba1d946705c0cf2809bcf960db8_hu_3d3ad0ec0320c7b4.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -1807,7 +1807,7 @@
         
         
 
-        共 742374 字 , 39 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        共 741930 字 , 39 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
         主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-cn" dir="ltr">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="课程讨论使用高级编程语言实现操作系统的优点和代价。而论文探讨了在高性能操作系统内核中使用高级语言的可行性，特别是与传统C语言的对比。内核Biscuit得以构建，该内核使用Go语言编写，支持POSIX系统调用子集，并通过实验评估其性能与安全性。主要目标是研究高级语言在编写内核时带来的性能开销、实现挑战、以及编程效率和安全性。">
 <title>MIT6S081：20Kernels and HLL</title>
@@ -59,7 +59,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu_67bf1327fc98b60.png" width="300"
+                        <img src="/img/avatar_hu_c2920364e6534697.png" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -327,8 +327,8 @@
     <header class="article-header">
         <div class="article-image">
             <a href="/p/mit6s08120kernels-and-hll/">
-                <img src="/p/mit6s08120kernels-and-hll/bg_hu_e58348972d83c6d3.jpg"
-                        srcset="/p/mit6s08120kernels-and-hll/bg_hu_e58348972d83c6d3.jpg 800w, /p/mit6s08120kernels-and-hll/bg_hu_b7cf7c380f40f713.jpg 1600w"
+                <img src="/p/mit6s08120kernels-and-hll/bg_hu_b8078947c1860d1e.jpg"
+                        srcset="/p/mit6s08120kernels-and-hll/bg_hu_b8078947c1860d1e.jpg 800w, /p/mit6s08120kernels-and-hll/bg_hu_8cb45919aba40f96.jpg 1600w"
                         width="800" 
                         height="350" 
                         loading="lazy"
@@ -794,21 +794,21 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span><span class="w"> </span><span class="nx">main</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="p">(</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="s">&#34;encoding/json&#34;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="s">&#34;log&#34;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="s">&#34;net/http&#34;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="s">&#34;time&#34;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">)</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// 定义一个结构体来表示 JSON 响应的格式</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">type</span><span class="w"> </span><span class="nx">Response</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 定义一个结构体来表示 JSON 响应的格式</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kd">type</span><span class="w"> </span><span class="nx">Response</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">Message</span><span class="w">   </span><span class="kt">string</span><span class="w">    </span><span class="s">`json:&#34;message&#34;`</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">Timestamp</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Time</span><span class="w"> </span><span class="s">`json:&#34;timestamp&#34;`</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// 处理根路径请求的处理函数</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">func</span><span class="w"> </span><span class="nf">helloHandler</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 处理根路径请求的处理函数</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kd">func</span><span class="w"> </span><span class="nf">helloHandler</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">Response</span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">     </span><span class="nx">Message</span><span class="p">:</span><span class="w">   </span><span class="s">&#34;Welcome to the Go Web Server!&#34;</span><span class="p">,</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">     </span><span class="nx">Timestamp</span><span class="p">:</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nf">Now</span><span class="p">(),</span><span class="w">
@@ -822,9 +822,9 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">     </span><span class="nx">http</span><span class="p">.</span><span class="nf">Error</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">(),</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusInternalServerError</span><span class="p">)</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">     </span><span class="k">return</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">func</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kd">func</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="c1">// 将 / 路由绑定到 helloHandler 函数</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nf">HandleFunc</span><span class="p">(</span><span class="s">&#34;/&#34;</span><span class="p">,</span><span class="w"> </span><span class="nx">helloHandler</span><span class="p">)</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
@@ -833,7 +833,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nf">ListenAndServe</span><span class="p">(</span><span class="s">&#34;:8080&#34;</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span><span class="p">);</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">     </span><span class="nx">log</span><span class="p">.</span><span class="nf">Fatalf</span><span class="p">(</span><span class="s">&#34;Could not start server: %s\n&#34;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">())</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>代码说明：</p>
@@ -1103,13 +1103,13 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">var</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">10</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">var</span><span class="w"> </span><span class="nx">s</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&#34;hello&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kd">var</span><span class="w"> </span><span class="nx">s</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&#34;hello&#34;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// 编译时会报错，因为 i 是整数，而 s 是字符串</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nx">s</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">i</span><span class="w">  </span><span class="c1">// 错误：cannot use i (type int) as type string in assignment</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 编译时会报错，因为 i 是整数，而 s 是字符串</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nx">s</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">i</span><span class="w">  </span><span class="c1">// 错误：cannot use i (type int) as type string in assignment</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// 必须使用显式的转换</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nx">s</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">strconv</span><span class="p">.</span><span class="nf">Itoa</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span><span class="w"> </span><span class="c1">// 正确：将 int 转为 string</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 必须使用显式的转换</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nx">s</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">strconv</span><span class="p">.</span><span class="nf">Itoa</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span><span class="w"> </span><span class="c1">// 正确：将 int 转为 string</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>Type-safe 的作用</p>
@@ -1324,21 +1324,21 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">//代码举例
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#include</span> <span class="cpf">&lt;pthread.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;pthread.h&gt;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kt">pthread_mutex_t</span> <span class="n">lock</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kt">void</span><span class="o">*</span> <span class="nf">thread_function</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span> <span class="n">arg</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">pthread_mutex_lock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lock</span><span class="p">);</span>  <span class="c1">// 加锁，进入临界区
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Thread %d is accessing the critical section</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span><span class="n">arg</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Thread %d is accessing the critical section</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span><span class="n">arg</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">pthread_mutex_unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lock</span><span class="p">);</span>  <span class="c1">// 解锁，离开临界区
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">pthread_mutex_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lock</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>  <span class="c1">// 初始化互斥锁
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">pthread_t</span> <span class="n">thread1</span><span class="p">,</span> <span class="n">thread2</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">    <span class="kt">pthread_t</span> <span class="n">thread1</span><span class="p">,</span> <span class="n">thread2</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">thread1_id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">thread2_id</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="nf">pthread_create</span><span class="p">(</span><span class="o">&amp;</span><span class="n">thread1</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">thread_function</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">thread1_id</span><span class="p">);</span>
@@ -1348,7 +1348,7 @@
 </span></span><span class="line"><span class="cl">    <span class="nf">pthread_join</span><span class="p">(</span><span class="n">thread2</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="nf">pthread_mutex_destroy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lock</span><span class="p">);</span>  <span class="c1">// 销毁互斥锁
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -1433,7 +1433,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">futex_word</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">futex_wait</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="n">futex_addr</span><span class="p">,</span> <span class="kt">int</span> <span class="n">expected</span><span class="p">)</span> <span class="p">{</span>
@@ -1447,14 +1447,14 @@
 </span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">lock</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="p">(</span><span class="nf">__sync_lock_test_and_set</span><span class="p">(</span><span class="o">&amp;</span><span class="n">futex_word</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// 进入内核等待 futex 被唤醒
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nf">futex_wait</span><span class="p">(</span><span class="o">&amp;</span><span class="n">futex_word</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">        <span class="nf">futex_wait</span><span class="p">(</span><span class="o">&amp;</span><span class="n">futex_word</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">unlock</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">__sync_lock_release</span><span class="p">(</span><span class="o">&amp;</span><span class="n">futex_word</span><span class="p">);</span>  <span class="c1">// 释放锁
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">futex_wake</span><span class="p">(</span><span class="o">&amp;</span><span class="n">futex_word</span><span class="p">);</span>  <span class="c1">// 唤醒等待中的线程
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nf">futex_wake</span><span class="p">(</span><span class="o">&amp;</span><span class="n">futex_word</span><span class="p">);</span>  <span class="c1">// 唤醒等待中的线程
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kt">void</span><span class="o">*</span> <span class="nf">thread_function</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span> <span class="n">arg</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">lock</span><span class="p">();</span>
@@ -2335,8 +2335,8 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">x</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>    <span class="c1">// 写入数据
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">memory_fence</span><span class="p">();</span> <span class="c1">// 内存屏障
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">flag</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>  <span class="c1">// 设置标志位
+</span></span></span><span class="line"><span class="cl"><span class="nf">memory_fence</span><span class="p">();</span> <span class="c1">// 内存屏障
+</span></span></span><span class="line"><span class="cl"><span class="n">flag</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>  <span class="c1">// 设置标志位
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div></li>
@@ -2352,7 +2352,7 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">flag</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 确保读取的是最新的 x 值
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -2504,16 +2504,16 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">struct</span> <span class="n">pollfd</span> <span class="n">fds</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>  <span class="c1">// 创建两个文件描述符的数组
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">fds</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">fd</span> <span class="o">=</span> <span class="n">socket_fd</span><span class="p">;</span>  <span class="c1">// 监听的套接字文件描述符
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">fds</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">events</span> <span class="o">=</span> <span class="n">POLLIN</span><span class="p">;</span> <span class="c1">// 监听可读事件
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl"><span class="n">fds</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">fd</span> <span class="o">=</span> <span class="n">socket_fd</span><span class="p">;</span>  <span class="c1">// 监听的套接字文件描述符
+</span></span></span><span class="line"><span class="cl"><span class="n">fds</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">events</span> <span class="o">=</span> <span class="n">POLLIN</span><span class="p">;</span> <span class="c1">// 监听可读事件
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">fds</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">fd</span> <span class="o">=</span> <span class="n">another_fd</span><span class="p">;</span>  <span class="c1">// 另一个文件描述符
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">fds</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">events</span> <span class="o">=</span> <span class="n">POLLOUT</span><span class="p">;</span> <span class="c1">// 监听可写事件
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl"><span class="n">fds</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">events</span> <span class="o">=</span> <span class="n">POLLOUT</span><span class="p">;</span> <span class="c1">// 监听可写事件
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="nf">poll</span><span class="p">(</span><span class="n">fds</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">timeout</span><span class="p">);</span>  <span class="c1">// 调用 poll，等待事件
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">if</span> <span class="p">(</span><span class="n">fds</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">revents</span> <span class="o">&amp;</span> <span class="n">POLLIN</span><span class="p">)</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">fds</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">revents</span> <span class="o">&amp;</span> <span class="n">POLLIN</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 如果 fds[0] 的文件描述符准备好读取数据
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">read</span><span class="p">(</span><span class="n">socket_fd</span><span class="p">,</span> <span class="n">buffer</span><span class="p">,</span> <span class="n">length</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nf">read</span><span class="p">(</span><span class="n">socket_fd</span><span class="p">,</span> <span class="n">buffer</span><span class="p">,</span> <span class="n">length</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -2753,7 +2753,7 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 <p><img src="/p/mit6s08120kernels-and-hll/p47.png"
 	width="1145"
 	height="733"
-	srcset="/p/mit6s08120kernels-and-hll/p47_hu_b6c10a97f439dd16.png 480w, /p/mit6s08120kernels-and-hll/p47_hu_1c46cd6a41713d29.png 1024w"
+	srcset="/p/mit6s08120kernels-and-hll/p47_hu_db54fa89e147200.png 480w, /p/mit6s08120kernels-and-hll/p47_hu_4fe6683fd10cea66.png 1024w"
 	loading="lazy"
 	
 		alt="p47"
@@ -2848,7 +2848,7 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 <p><img src="/p/mit6s08120kernels-and-hll/p48.png"
 	width="1006"
 	height="766"
-	srcset="/p/mit6s08120kernels-and-hll/p48_hu_dc62c247b84a1c0e.png 480w, /p/mit6s08120kernels-and-hll/p48_hu_a93f66125ea71f15.png 1024w"
+	srcset="/p/mit6s08120kernels-and-hll/p48_hu_6ff144ad2cd09d79.png 480w, /p/mit6s08120kernels-and-hll/p48_hu_4a06ba5af09f734.png 1024w"
 	loading="lazy"
 	
 		alt="p48"
@@ -2902,7 +2902,7 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 <p><img src="/p/mit6s08120kernels-and-hll/p49.png"
 	width="1149"
 	height="683"
-	srcset="/p/mit6s08120kernels-and-hll/p49_hu_a1bbc1026c5a68b9.png 480w, /p/mit6s08120kernels-and-hll/p49_hu_7748da5172e96a39.png 1024w"
+	srcset="/p/mit6s08120kernels-and-hll/p49_hu_7b35992efebd6e7a.png 480w, /p/mit6s08120kernels-and-hll/p49_hu_7ffc539841b26621.png 1024w"
 	loading="lazy"
 	
 		alt="p49"
@@ -2925,7 +2925,7 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 </h2><p><img src="/p/mit6s08120kernels-and-hll/p50.png"
 	width="1141"
 	height="609"
-	srcset="/p/mit6s08120kernels-and-hll/p50_hu_e80716dab620e6d4.png 480w, /p/mit6s08120kernels-and-hll/p50_hu_1b657a780cc827bf.png 1024w"
+	srcset="/p/mit6s08120kernels-and-hll/p50_hu_4c1ec05d1e70869b.png 480w, /p/mit6s08120kernels-and-hll/p50_hu_6c464b2e503a7762.png 1024w"
 	loading="lazy"
 	
 		alt="p50"
@@ -2940,7 +2940,7 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 <p><img src="/p/mit6s08120kernels-and-hll/p51.png"
 	width="1135"
 	height="1034"
-	srcset="/p/mit6s08120kernels-and-hll/p51_hu_bfe4486f053aaf59.png 480w, /p/mit6s08120kernels-and-hll/p51_hu_64a5d178d033ed19.png 1024w"
+	srcset="/p/mit6s08120kernels-and-hll/p51_hu_407c742dfee87774.png 480w, /p/mit6s08120kernels-and-hll/p51_hu_273d0899ca88c25c.png 1024w"
 	loading="lazy"
 	
 		alt="p51"
@@ -2966,7 +2966,7 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
 <p><img src="/p/mit6s08120kernels-and-hll/p52.png"
 	width="1137"
 	height="538"
-	srcset="/p/mit6s08120kernels-and-hll/p52_hu_5af1a039de7cea44.png 480w, /p/mit6s08120kernels-and-hll/p52_hu_6b28141069bdfc11.png 1024w"
+	srcset="/p/mit6s08120kernels-and-hll/p52_hu_5d582305a707e1fe.png 480w, /p/mit6s08120kernels-and-hll/p52_hu_9e382c74d1982adb.png 1024w"
 	loading="lazy"
 	
 		alt="p52"
@@ -3123,7 +3123,7 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
         
         
             <div class="article-image">
-                <img src="/p/mit6s08123rcu/bg.91a08bf3fe0a8ca435e8fbc902291fd5_hu_50da030b7ba2cbe7.jpg" 
+                <img src="/p/mit6s08123rcu/bg.91a08bf3fe0a8ca435e8fbc902291fd5_hu_b6ef8ea2c8ceedc0.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -3147,7 +3147,7 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
         
         
             <div class="article-image">
-                <img src="/p/mit6s08122meltdown/19.8d880549dccba2f0c1613b3e41a721e5_hu_1493d831cda8626c.jpg" 
+                <img src="/p/mit6s08122meltdown/19.8d880549dccba2f0c1613b3e41a721e5_hu_914e4a4b73e7f898.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -3171,7 +3171,7 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
         
         
             <div class="article-image">
-                <img src="/p/mit6s08121networking/bg.68c4376fd87b0b35da07319dd155c90d_hu_b8a716243c6f9679.jpg" 
+                <img src="/p/mit6s08121networking/bg.68c4376fd87b0b35da07319dd155c90d_hu_702cc6dbf23ff4b6.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -3195,7 +3195,7 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
         
         
             <div class="article-image">
-                <img src="/p/mit6s08119virtual-machines/bg.b02a7ba1d946705c0cf2809bcf960db8_hu_77df69a362eba544.jpg" 
+                <img src="/p/mit6s08119virtual-machines/bg.b02a7ba1d946705c0cf2809bcf960db8_hu_3d3ad0ec0320c7b4.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -3219,7 +3219,7 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
         
         
             <div class="article-image">
-                <img src="/p/mit6s08118os-organization/bg.6254618fb3eb08f3bf5d7cd89d4cd672_hu_845b73e21b5a04f1.jpg" 
+                <img src="/p/mit6s08118os-organization/bg.6254618fb3eb08f3bf5d7cd89d4cd672_hu_646dc659ecd15a3f.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -3450,7 +3450,7 @@ Go 运行时管理着 goroutine 的调度，这涉及到 goroutine 的上下文�
         
         
 
-        共 742374 字 , 39 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        共 741930 字 , 39 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
         主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 

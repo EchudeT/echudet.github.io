@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-cn" dir="ltr">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="文件系统是数据存储和组织的核心组件。文件系统的原理在于通过层次结构将数据管理为文件和目录，提供命名、存储、检索、访问和保护数据的机制。它将逻辑文件名映射到物理存储位置，支持多种存储设备，并处理读写请求、权限管理及空间分配。文件系统为用户和应用程序提供了一种直观的方式来处理大量数据，确保数据能够安全、高效和可靠地存取，是操作系统实现持久化存储和数据共享的重要基础。">
 <title>MIT6S081：14File Systems</title>
@@ -59,7 +59,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu_67bf1327fc98b60.png" width="300"
+                        <img src="/img/avatar_hu_c2920364e6534697.png" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -303,8 +303,8 @@
     <header class="article-header">
         <div class="article-image">
             <a href="/p/mit6s08114file-systems/">
-                <img src="/p/mit6s08114file-systems/bg_hu_6e6f64e47b36e811.jpg"
-                        srcset="/p/mit6s08114file-systems/bg_hu_6e6f64e47b36e811.jpg 800w, /p/mit6s08114file-systems/bg_hu_c2091137a52185ae.jpg 1600w"
+                <img src="/p/mit6s08114file-systems/bg_hu_75789eef487b84e7.jpg"
+                        srcset="/p/mit6s08114file-systems/bg_hu_75789eef487b84e7.jpg 800w, /p/mit6s08114file-systems/bg_hu_43e9e74dde0e8357.jpg 1600w"
                         width="800" 
                         height="800" 
                         loading="lazy"
@@ -544,7 +544,7 @@
 <p><img src="/p/mit6s08114file-systems/p19.png"
 	width="880"
 	height="216"
-	srcset="/p/mit6s08114file-systems/p19_hu_d88f031b16f60064.png 480w, /p/mit6s08114file-systems/p19_hu_3b0b4df05b5dbf5d.png 1024w"
+	srcset="/p/mit6s08114file-systems/p19_hu_18a726b152a7710e.png 480w, /p/mit6s08114file-systems/p19_hu_d5725f9cfe700505.png 1024w"
 	loading="lazy"
 	
 		alt="p19"
@@ -655,14 +655,14 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// On-disk inode structure
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">struct</span> <span class="n">dinode</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="n">dinode</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="kt">short</span> <span class="n">type</span><span class="p">;</span>           <span class="c1">// File type
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">short</span> <span class="n">major</span><span class="p">;</span>          <span class="c1">// Major device number (T_DEVICE only)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">short</span> <span class="n">minor</span><span class="p">;</span>          <span class="c1">// Minor device number (T_DEVICE only)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">short</span> <span class="n">nlink</span><span class="p">;</span>          <span class="c1">// Number of links to inode in file system
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">uint</span> <span class="n">size</span><span class="p">;</span>            <span class="c1">// Size of file (bytes)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">uint</span> <span class="n">addrs</span><span class="p">[</span><span class="n">NDIRECT</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>   <span class="c1">// Data block addresses
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">};</span>
+</span></span></span><span class="line"><span class="cl">  <span class="kt">short</span> <span class="n">major</span><span class="p">;</span>          <span class="c1">// Major device number (T_DEVICE only)
+</span></span></span><span class="line"><span class="cl">  <span class="kt">short</span> <span class="n">minor</span><span class="p">;</span>          <span class="c1">// Minor device number (T_DEVICE only)
+</span></span></span><span class="line"><span class="cl">  <span class="kt">short</span> <span class="n">nlink</span><span class="p">;</span>          <span class="c1">// Number of links to inode in file system
+</span></span></span><span class="line"><span class="cl">  <span class="n">uint</span> <span class="n">size</span><span class="p">;</span>            <span class="c1">// Size of file (bytes)
+</span></span></span><span class="line"><span class="cl">  <span class="n">uint</span> <span class="n">addrs</span><span class="p">[</span><span class="n">NDIRECT</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>   <span class="c1">// Data block addresses
+</span></span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>字段<code>type</code>区分文件、目录和特殊文件（设备）。<code>type</code>为零表示磁盘inode是空闲的。</p>
@@ -1081,7 +1081,7 @@
 <p><img src="/p/mit6s08114file-systems/p20.png"
 	width="804"
 	height="702"
-	srcset="/p/mit6s08114file-systems/p20_hu_898da9ee18604c95.png 480w, /p/mit6s08114file-systems/p20_hu_5b94dc3692fe1cca.png 1024w"
+	srcset="/p/mit6s08114file-systems/p20_hu_ec4496ab8d37cf3f.png 480w, /p/mit6s08114file-systems/p20_hu_18d07ccea5100062.png 1024w"
 	loading="lazy"
 	
 		alt="p20"
@@ -1592,7 +1592,7 @@
 <p><img src="/p/mit6s08114file-systems/p21.png"
 	width="1037"
 	height="605"
-	srcset="/p/mit6s08114file-systems/p21_hu_ac76c99026bd1625.png 480w, /p/mit6s08114file-systems/p21_hu_d60d407b97d0a22f.png 1024w"
+	srcset="/p/mit6s08114file-systems/p21_hu_d52826353f6bf9f3.png 480w, /p/mit6s08114file-systems/p21_hu_a7b9b3b991b8e809.png 1024w"
 	loading="lazy"
 	
 		alt="p21"
@@ -1623,7 +1623,7 @@
 <p><img src="/p/mit6s08114file-systems/p22.png"
 	width="1030"
 	height="617"
-	srcset="/p/mit6s08114file-systems/p22_hu_f35d9f9677c0c60.png 480w, /p/mit6s08114file-systems/p22_hu_8730adb2d1fcfd09.png 1024w"
+	srcset="/p/mit6s08114file-systems/p22_hu_3c11f53100bc1293.png 480w, /p/mit6s08114file-systems/p22_hu_1cc5ea2c80202be5.png 1024w"
 	loading="lazy"
 	
 		alt="p22"
@@ -1759,7 +1759,7 @@
 <p><img src="/p/mit6s08114file-systems/p23.png"
 	width="412"
 	height="324"
-	srcset="/p/mit6s08114file-systems/p23_hu_8c223bcf548d3539.png 480w, /p/mit6s08114file-systems/p23_hu_de6f3d2a6854c063.png 1024w"
+	srcset="/p/mit6s08114file-systems/p23_hu_d1c5393081dd45d6.png 480w, /p/mit6s08114file-systems/p23_hu_c50a39ed27631128.png 1024w"
 	loading="lazy"
 	
 		alt="p23"
@@ -1775,7 +1775,7 @@
 <p><img src="/p/mit6s08114file-systems/p25.png"
 	width="242"
 	height="384"
-	srcset="/p/mit6s08114file-systems/p25_hu_4eded010cb47991c.png 480w, /p/mit6s08114file-systems/p25_hu_e00a68ddb77039e0.png 1024w"
+	srcset="/p/mit6s08114file-systems/p25_hu_b919d0cd5387c4ba.png 480w, /p/mit6s08114file-systems/p25_hu_621984c5b97ca48e.png 1024w"
 	loading="lazy"
 	
 		alt="p25"
@@ -1790,7 +1790,7 @@
 <p><img src="/p/mit6s08114file-systems/p24.png"
 	width="1024"
 	height="428"
-	srcset="/p/mit6s08114file-systems/p24_hu_f57a4d727690e409.png 480w, /p/mit6s08114file-systems/p24_hu_19594915c1fcab6.png 1024w"
+	srcset="/p/mit6s08114file-systems/p24_hu_5f491f059ea67b4.png 480w, /p/mit6s08114file-systems/p24_hu_5ce4508e6a90aa7a.png 1024w"
 	loading="lazy"
 	
 		alt="p24"
@@ -2051,10 +2051,10 @@
 </span></span><span class="line"><span class="cl">  <span class="nf">iupdate</span><span class="p">(</span><span class="n">ip</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="k">if</span><span class="p">(</span><span class="n">type</span> <span class="o">==</span> <span class="n">T_DIR</span><span class="p">){</span>  <span class="c1">// Create . and .. entries.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">dp</span><span class="o">-&gt;</span><span class="n">nlink</span><span class="o">++</span><span class="p">;</span>  <span class="c1">// for &#34;..&#34;
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">iupdate</span><span class="p">(</span><span class="n">dp</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">dp</span><span class="o">-&gt;</span><span class="n">nlink</span><span class="o">++</span><span class="p">;</span>  <span class="c1">// for &#34;..&#34;
+</span></span></span><span class="line"><span class="cl">    <span class="nf">iupdate</span><span class="p">(</span><span class="n">dp</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// No ip-&gt;nlink++ for &#34;.&#34;: avoid cyclic ref count.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span><span class="p">(</span><span class="nf">dirlink</span><span class="p">(</span><span class="n">ip</span><span class="p">,</span> <span class="s">&#34;.&#34;</span><span class="p">,</span> <span class="n">ip</span><span class="o">-&gt;</span><span class="n">inum</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="nf">dirlink</span><span class="p">(</span><span class="n">ip</span><span class="p">,</span> <span class="s">&#34;..&#34;</span><span class="p">,</span> <span class="n">dp</span><span class="o">-&gt;</span><span class="n">inum</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="nf">dirlink</span><span class="p">(</span><span class="n">ip</span><span class="p">,</span> <span class="s">&#34;.&#34;</span><span class="p">,</span> <span class="n">ip</span><span class="o">-&gt;</span><span class="n">inum</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="nf">dirlink</span><span class="p">(</span><span class="n">ip</span><span class="p">,</span> <span class="s">&#34;..&#34;</span><span class="p">,</span> <span class="n">dp</span><span class="o">-&gt;</span><span class="n">inum</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">      <span class="nf">panic</span><span class="p">(</span><span class="s">&#34;create dots&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
@@ -2099,7 +2099,7 @@
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// Allocate an inode on device dev.
 </span></span></span><span class="line"><span class="cl"><span class="c1">// Mark it as allocated by  giving it type type.
 </span></span></span><span class="line"><span class="cl"><span class="c1">// Returns an unlocked but allocated and referenced inode.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">struct</span> <span class="n">inode</span><span class="o">*</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="n">inode</span><span class="o">*</span>
 </span></span><span class="line"><span class="cl"><span class="nf">ialloc</span><span class="p">(</span><span class="n">uint</span> <span class="n">dev</span><span class="p">,</span> <span class="kt">short</span> <span class="n">type</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">inum</span><span class="p">;</span>
@@ -2110,10 +2110,10 @@
 </span></span><span class="line"><span class="cl">    <span class="n">bp</span> <span class="o">=</span> <span class="nf">bread</span><span class="p">(</span><span class="n">dev</span><span class="p">,</span> <span class="nf">IBLOCK</span><span class="p">(</span><span class="n">inum</span><span class="p">,</span> <span class="n">sb</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl">    <span class="n">dip</span> <span class="o">=</span> <span class="p">(</span><span class="k">struct</span> <span class="n">dinode</span><span class="o">*</span><span class="p">)</span><span class="n">bp</span><span class="o">-&gt;</span><span class="n">data</span> <span class="o">+</span> <span class="n">inum</span><span class="o">%</span><span class="n">IPB</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">dip</span><span class="o">-&gt;</span><span class="n">type</span> <span class="o">==</span> <span class="mi">0</span><span class="p">){</span>  <span class="c1">// a free inode
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="nf">memset</span><span class="p">(</span><span class="n">dip</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="o">*</span><span class="n">dip</span><span class="p">));</span>
+</span></span></span><span class="line"><span class="cl">      <span class="nf">memset</span><span class="p">(</span><span class="n">dip</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="o">*</span><span class="n">dip</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl">      <span class="n">dip</span><span class="o">-&gt;</span><span class="n">type</span> <span class="o">=</span> <span class="n">type</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">      <span class="nf">log_write</span><span class="p">(</span><span class="n">bp</span><span class="p">);</span>   <span class="c1">// mark it allocated on the disk
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="nf">brelse</span><span class="p">(</span><span class="n">bp</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">      <span class="nf">brelse</span><span class="p">(</span><span class="n">bp</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="nf">iget</span><span class="p">(</span><span class="n">dev</span><span class="p">,</span> <span class="n">inum</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">brelse</span><span class="p">(</span><span class="n">bp</span><span class="p">);</span>
@@ -2148,7 +2148,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// Return a locked buf with the contents of the indicated block.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">struct</span> <span class="n">buf</span><span class="o">*</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="n">buf</span><span class="o">*</span>
 </span></span><span class="line"><span class="cl"><span class="nf">bread</span><span class="p">(</span><span class="n">uint</span> <span class="n">dev</span><span class="p">,</span> <span class="n">uint</span> <span class="n">blockno</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="k">struct</span> <span class="n">buf</span> <span class="o">*</span><span class="n">b</span><span class="p">;</span>
@@ -2205,7 +2205,7 @@
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// Look through buffer cache for block on device dev.
 </span></span></span><span class="line"><span class="cl"><span class="c1">// If not found, allocate a buffer.
 </span></span></span><span class="line"><span class="cl"><span class="c1">// In either case, return locked buffer.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">static</span> <span class="k">struct</span> <span class="n">buf</span><span class="o">*</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="k">struct</span> <span class="n">buf</span><span class="o">*</span>
 </span></span><span class="line"><span class="cl"><span class="nf">bget</span><span class="p">(</span><span class="n">uint</span> <span class="n">dev</span><span class="p">,</span> <span class="n">uint</span> <span class="n">blockno</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="k">struct</span> <span class="n">buf</span> <span class="o">*</span><span class="n">b</span><span class="p">;</span>
@@ -2213,7 +2213,7 @@
 </span></span><span class="line"><span class="cl">  <span class="nf">acquire</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bcache</span><span class="p">.</span><span class="n">lock</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// Is the block already cached?
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">for</span><span class="p">(</span><span class="n">b</span> <span class="o">=</span> <span class="n">bcache</span><span class="p">.</span><span class="n">head</span><span class="p">.</span><span class="n">next</span><span class="p">;</span> <span class="n">b</span> <span class="o">!=</span> <span class="o">&amp;</span><span class="n">bcache</span><span class="p">.</span><span class="n">head</span><span class="p">;</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">){</span>
+</span></span></span><span class="line"><span class="cl">  <span class="k">for</span><span class="p">(</span><span class="n">b</span> <span class="o">=</span> <span class="n">bcache</span><span class="p">.</span><span class="n">head</span><span class="p">.</span><span class="n">next</span><span class="p">;</span> <span class="n">b</span> <span class="o">!=</span> <span class="o">&amp;</span><span class="n">bcache</span><span class="p">.</span><span class="n">head</span><span class="p">;</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">){</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">b</span><span class="o">-&gt;</span><span class="n">dev</span> <span class="o">==</span> <span class="n">dev</span> <span class="o">&amp;&amp;</span> <span class="n">b</span><span class="o">-&gt;</span><span class="n">blockno</span> <span class="o">==</span> <span class="n">blockno</span><span class="p">){</span>
 </span></span><span class="line"><span class="cl">      <span class="n">b</span><span class="o">-&gt;</span><span class="n">refcnt</span><span class="o">++</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">      <span class="nf">release</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bcache</span><span class="p">.</span><span class="n">lock</span><span class="p">);</span>
@@ -2223,8 +2223,8 @@
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// Not cached.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// Recycle the least recently used (LRU) unused buffer.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">for</span><span class="p">(</span><span class="n">b</span> <span class="o">=</span> <span class="n">bcache</span><span class="p">.</span><span class="n">head</span><span class="p">.</span><span class="n">prev</span><span class="p">;</span> <span class="n">b</span> <span class="o">!=</span> <span class="o">&amp;</span><span class="n">bcache</span><span class="p">.</span><span class="n">head</span><span class="p">;</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="o">-&gt;</span><span class="n">prev</span><span class="p">){</span>
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// Recycle the least recently used (LRU) unused buffer.
+</span></span></span><span class="line"><span class="cl">  <span class="k">for</span><span class="p">(</span><span class="n">b</span> <span class="o">=</span> <span class="n">bcache</span><span class="p">.</span><span class="n">head</span><span class="p">.</span><span class="n">prev</span><span class="p">;</span> <span class="n">b</span> <span class="o">!=</span> <span class="o">&amp;</span><span class="n">bcache</span><span class="p">.</span><span class="n">head</span><span class="p">;</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="o">-&gt;</span><span class="n">prev</span><span class="p">){</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">b</span><span class="o">-&gt;</span><span class="n">refcnt</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="n">b</span><span class="o">-&gt;</span><span class="n">dev</span> <span class="o">=</span> <span class="n">dev</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">      <span class="n">b</span><span class="o">-&gt;</span><span class="n">blockno</span> <span class="o">=</span> <span class="n">blockno</span><span class="p">;</span>
@@ -2340,7 +2340,7 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// Release a locked buffer.
 </span></span></span><span class="line"><span class="cl"><span class="c1">// Move to the head of the most-recently-used list.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">void</span>
 </span></span><span class="line"><span class="cl"><span class="nf">brelse</span><span class="p">(</span><span class="k">struct</span> <span class="n">buf</span> <span class="o">*</span><span class="n">b</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nf">holdingsleep</span><span class="p">(</span><span class="o">&amp;</span><span class="n">b</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">))</span>
@@ -2352,7 +2352,7 @@
 </span></span><span class="line"><span class="cl">  <span class="n">b</span><span class="o">-&gt;</span><span class="n">refcnt</span><span class="o">--</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="n">b</span><span class="o">-&gt;</span><span class="n">refcnt</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// no one is waiting for it.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">b</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">-&gt;</span><span class="n">prev</span> <span class="o">=</span> <span class="n">b</span><span class="o">-&gt;</span><span class="n">prev</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">b</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">-&gt;</span><span class="n">prev</span> <span class="o">=</span> <span class="n">b</span><span class="o">-&gt;</span><span class="n">prev</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="n">b</span><span class="o">-&gt;</span><span class="n">prev</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">b</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="n">b</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">bcache</span><span class="p">.</span><span class="n">head</span><span class="p">.</span><span class="n">next</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="n">b</span><span class="o">-&gt;</span><span class="n">prev</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">bcache</span><span class="p">.</span><span class="n">head</span><span class="p">;</span>
@@ -2450,7 +2450,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08123rcu/bg.91a08bf3fe0a8ca435e8fbc902291fd5_hu_50da030b7ba2cbe7.jpg" 
+                <img src="/p/mit6s08123rcu/bg.91a08bf3fe0a8ca435e8fbc902291fd5_hu_b6ef8ea2c8ceedc0.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -2474,7 +2474,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08122meltdown/19.8d880549dccba2f0c1613b3e41a721e5_hu_1493d831cda8626c.jpg" 
+                <img src="/p/mit6s08122meltdown/19.8d880549dccba2f0c1613b3e41a721e5_hu_914e4a4b73e7f898.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -2498,7 +2498,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08121networking/bg.68c4376fd87b0b35da07319dd155c90d_hu_b8a716243c6f9679.jpg" 
+                <img src="/p/mit6s08121networking/bg.68c4376fd87b0b35da07319dd155c90d_hu_702cc6dbf23ff4b6.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -2522,7 +2522,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08120kernels-and-hll/bg.4175e6a2793e0fc340e5aced2529e40b_hu_de82d011b3d97ace.jpg" 
+                <img src="/p/mit6s08120kernels-and-hll/bg.4175e6a2793e0fc340e5aced2529e40b_hu_900f2fcc83e9e964.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -2546,7 +2546,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08119virtual-machines/bg.b02a7ba1d946705c0cf2809bcf960db8_hu_77df69a362eba544.jpg" 
+                <img src="/p/mit6s08119virtual-machines/bg.b02a7ba1d946705c0cf2809bcf960db8_hu_3d3ad0ec0320c7b4.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -2777,7 +2777,7 @@
         
         
 
-        共 742374 字 , 39 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        共 741930 字 , 39 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
         主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 

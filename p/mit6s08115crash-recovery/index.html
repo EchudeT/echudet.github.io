@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-cn" dir="ltr">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="崩溃恢复是保障系统可靠性和数据完整性的关键机制，其重要性在于能够在系统遭遇故障或意外关机时，迅速恢复到一致性状态，防止数据丢失和损坏。崩溃恢复通常依赖于日志系统或检查点机制，通过记录操作日志或定期保存系统状态，实现恢复过程。在系统重新启动后，操作系统会借助这些日志或检查点信息重做或撤销未完成的操作，以此来重建数据的一致性状态。这一过程极大地减少了停机时间和服务中断，确保关键应用能够不间断运行，从而增强系统的稳健性。">
 <title>MIT6S081：15Crash recovery</title>
@@ -59,7 +59,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu_67bf1327fc98b60.png" width="300"
+                        <img src="/img/avatar_hu_c2920364e6534697.png" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -303,8 +303,8 @@
     <header class="article-header">
         <div class="article-image">
             <a href="/p/mit6s08115crash-recovery/">
-                <img src="/p/mit6s08115crash-recovery/bg_hu_4d76acea792673c3.jpg"
-                        srcset="/p/mit6s08115crash-recovery/bg_hu_4d76acea792673c3.jpg 800w, /p/mit6s08115crash-recovery/bg_hu_f668c6ab9b6f0864.jpg 1600w"
+                <img src="/p/mit6s08115crash-recovery/bg_hu_5586ca3842462681.jpg"
+                        srcset="/p/mit6s08115crash-recovery/bg_hu_5586ca3842462681.jpg 800w, /p/mit6s08115crash-recovery/bg_hu_1181bc7c2435a2de.jpg 1600w"
                         width="800" 
                         height="450" 
                         loading="lazy"
@@ -694,7 +694,7 @@
 <p><img src="/p/mit6s08115crash-recovery/p26.png"
 	width="1017"
 	height="212"
-	srcset="/p/mit6s08115crash-recovery/p26_hu_978f381d13f88975.png 480w, /p/mit6s08115crash-recovery/p26_hu_d07d18a5ce537542.png 1024w"
+	srcset="/p/mit6s08115crash-recovery/p26_hu_fb70da8c8d35cb5e.png 480w, /p/mit6s08115crash-recovery/p26_hu_fbb21315e5e1ea8e.png 1024w"
 	loading="lazy"
 	
 		alt="p26"
@@ -723,7 +723,7 @@
 <p><img src="/p/mit6s08115crash-recovery/p27.png"
 	width="914"
 	height="299"
-	srcset="/p/mit6s08115crash-recovery/p27_hu_c2d90ec799d04ff.png 480w, /p/mit6s08115crash-recovery/p27_hu_1e360d2369b5bebc.png 1024w"
+	srcset="/p/mit6s08115crash-recovery/p27_hu_90657e65e8295d69.png 480w, /p/mit6s08115crash-recovery/p27_hu_c54d0314188af0e7.png 1024w"
 	loading="lazy"
 	
 		alt="p27"
@@ -745,7 +745,7 @@
 <p><img src="/p/mit6s08115crash-recovery/p28.png"
 	width="1028"
 	height="155"
-	srcset="/p/mit6s08115crash-recovery/p28_hu_b42d6d26595c642e.png 480w, /p/mit6s08115crash-recovery/p28_hu_d9630584af84d757.png 1024w"
+	srcset="/p/mit6s08115crash-recovery/p28_hu_8a7e0ffeabbd8137.png 480w, /p/mit6s08115crash-recovery/p28_hu_91f9d34483555a98.png 1024w"
 	loading="lazy"
 	
 		alt="p28"
@@ -916,7 +916,7 @@
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="nf">begin_op</span><span class="p">();</span><span class="c1">//THIS
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="k">if</span><span class="p">(</span><span class="n">omode</span> <span class="o">&amp;</span> <span class="n">O_CREATE</span><span class="p">){</span>
 </span></span><span class="line"><span class="cl">    <span class="n">ip</span> <span class="o">=</span> <span class="nf">create</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">T_FILE</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">ip</span> <span class="o">==</span> <span class="mi">0</span><span class="p">){</span>
@@ -967,7 +967,7 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="nf">iunlock</span><span class="p">(</span><span class="n">ip</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="nf">end_op</span><span class="p">();</span><span class="c1">//THIS
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">fd</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
@@ -1012,7 +1012,7 @@
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// Allocate an inode on device dev.
 </span></span></span><span class="line"><span class="cl"><span class="c1">// Mark it as allocated by  giving it type type.
 </span></span></span><span class="line"><span class="cl"><span class="c1">// Returns an unlocked but allocated and referenced inode.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">struct</span> <span class="n">inode</span><span class="o">*</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="n">inode</span><span class="o">*</span>
 </span></span><span class="line"><span class="cl"><span class="nf">ialloc</span><span class="p">(</span><span class="n">uint</span> <span class="n">dev</span><span class="p">,</span> <span class="kt">short</span> <span class="n">type</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">inum</span><span class="p">;</span>
@@ -1023,10 +1023,10 @@
 </span></span><span class="line"><span class="cl">    <span class="n">bp</span> <span class="o">=</span> <span class="nf">bread</span><span class="p">(</span><span class="n">dev</span><span class="p">,</span> <span class="nf">IBLOCK</span><span class="p">(</span><span class="n">inum</span><span class="p">,</span> <span class="n">sb</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl">    <span class="n">dip</span> <span class="o">=</span> <span class="p">(</span><span class="k">struct</span> <span class="n">dinode</span><span class="o">*</span><span class="p">)</span><span class="n">bp</span><span class="o">-&gt;</span><span class="n">data</span> <span class="o">+</span> <span class="n">inum</span><span class="o">%</span><span class="n">IPB</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">dip</span><span class="o">-&gt;</span><span class="n">type</span> <span class="o">==</span> <span class="mi">0</span><span class="p">){</span>  <span class="c1">// a free inode
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="nf">memset</span><span class="p">(</span><span class="n">dip</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="o">*</span><span class="n">dip</span><span class="p">));</span>
+</span></span></span><span class="line"><span class="cl">      <span class="nf">memset</span><span class="p">(</span><span class="n">dip</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="o">*</span><span class="n">dip</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl">      <span class="n">dip</span><span class="o">-&gt;</span><span class="n">type</span> <span class="o">=</span> <span class="n">type</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">      <span class="nf">log_write</span><span class="p">(</span><span class="n">bp</span><span class="p">);</span>   <span class="c1">// mark it allocated on the disk
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="nf">brelse</span><span class="p">(</span><span class="n">bp</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">      <span class="nf">brelse</span><span class="p">(</span><span class="n">bp</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="nf">iget</span><span class="p">(</span><span class="n">dev</span><span class="p">,</span> <span class="n">inum</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">brelse</span><span class="p">(</span><span class="n">bp</span><span class="p">);</span>
@@ -1083,7 +1083,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="c1">//   modify bp-&gt;data[]
 </span></span></span><span class="line"><span class="cl"><span class="c1">//   log_write(bp)
 </span></span></span><span class="line"><span class="cl"><span class="c1">//   brelse(bp)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">void</span>
 </span></span><span class="line"><span class="cl"><span class="nf">log_write</span><span class="p">(</span><span class="k">struct</span> <span class="n">buf</span> <span class="o">*</span><span class="n">b</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
@@ -1096,11 +1096,11 @@
 </span></span><span class="line"><span class="cl">  <span class="nf">acquire</span><span class="p">(</span><span class="o">&amp;</span><span class="n">log</span><span class="p">.</span><span class="n">lock</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">log</span><span class="p">.</span><span class="n">lh</span><span class="p">.</span><span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">log</span><span class="p">.</span><span class="n">lh</span><span class="p">.</span><span class="n">block</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">b</span><span class="o">-&gt;</span><span class="n">blockno</span><span class="p">)</span>   <span class="c1">// log absorbtion
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="k">break</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">      <span class="k">break</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  <span class="n">log</span><span class="p">.</span><span class="n">lh</span><span class="p">.</span><span class="n">block</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">b</span><span class="o">-&gt;</span><span class="n">blockno</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">log</span><span class="p">.</span><span class="n">lh</span><span class="p">.</span><span class="n">n</span><span class="p">)</span> <span class="p">{</span>  <span class="c1">// Add new block to log?
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">bpin</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nf">bpin</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="n">log</span><span class="p">.</span><span class="n">lh</span><span class="p">.</span><span class="n">n</span><span class="o">++</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  <span class="nf">release</span><span class="p">(</span><span class="o">&amp;</span><span class="n">log</span><span class="p">.</span><span class="n">lock</span><span class="p">);</span>
@@ -1162,7 +1162,7 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// called at the end of each FS system call.
 </span></span></span><span class="line"><span class="cl"><span class="c1">// commits if this was the last outstanding operation.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">void</span>
 </span></span><span class="line"><span class="cl"><span class="nf">end_op</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">do_commit</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
@@ -1176,16 +1176,16 @@
 </span></span><span class="line"><span class="cl">    <span class="n">log</span><span class="p">.</span><span class="n">committing</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// begin_op() may be waiting for log space,
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// and decrementing log.outstanding has decreased
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// the amount of reserved space.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">wakeup</span><span class="p">(</span><span class="o">&amp;</span><span class="n">log</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// and decrementing log.outstanding has decreased
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// the amount of reserved space.
+</span></span></span><span class="line"><span class="cl">    <span class="nf">wakeup</span><span class="p">(</span><span class="o">&amp;</span><span class="n">log</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  <span class="nf">release</span><span class="p">(</span><span class="o">&amp;</span><span class="n">log</span><span class="p">.</span><span class="n">lock</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="k">if</span><span class="p">(</span><span class="n">do_commit</span><span class="p">){</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// call commit w/o holding locks, since not allowed
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// to sleep with locks.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">commit</span><span class="p">();</span>
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// to sleep with locks.
+</span></span></span><span class="line"><span class="cl">    <span class="nf">commit</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">acquire</span><span class="p">(</span><span class="o">&amp;</span><span class="n">log</span><span class="p">.</span><span class="n">lock</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="n">log</span><span class="p">.</span><span class="n">committing</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">wakeup</span><span class="p">(</span><span class="o">&amp;</span><span class="n">log</span><span class="p">);</span>
@@ -1217,11 +1217,11 @@
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="n">log</span><span class="p">.</span><span class="n">lh</span><span class="p">.</span><span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">write_log</span><span class="p">();</span>     <span class="c1">// Write modified blocks from cache to log
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">write_head</span><span class="p">();</span>    <span class="c1">// Write header to disk -- the real commit
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">install_trans</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span> <span class="c1">// Now install writes to home locations
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">log</span><span class="p">.</span><span class="n">lh</span><span class="p">.</span><span class="n">n</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nf">write_head</span><span class="p">();</span>    <span class="c1">// Write header to disk -- the real commit
+</span></span></span><span class="line"><span class="cl">    <span class="nf">install_trans</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span> <span class="c1">// Now install writes to home locations
+</span></span></span><span class="line"><span class="cl">    <span class="n">log</span><span class="p">.</span><span class="n">lh</span><span class="p">.</span><span class="n">n</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">write_head</span><span class="p">();</span>    <span class="c1">// Erase the transaction from the log
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">}</span>
+</span></span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -1256,17 +1256,17 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// Copy modified blocks from cache to log.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">static</span> <span class="kt">void</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="kt">void</span>
 </span></span><span class="line"><span class="cl"><span class="nf">write_log</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">tail</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="n">tail</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">tail</span> <span class="o">&lt;</span> <span class="n">log</span><span class="p">.</span><span class="n">lh</span><span class="p">.</span><span class="n">n</span><span class="p">;</span> <span class="n">tail</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">struct</span> <span class="n">buf</span> <span class="o">*</span><span class="n">to</span> <span class="o">=</span> <span class="nf">bread</span><span class="p">(</span><span class="n">log</span><span class="p">.</span><span class="n">dev</span><span class="p">,</span> <span class="n">log</span><span class="p">.</span><span class="n">start</span><span class="o">+</span><span class="n">tail</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span> <span class="c1">// log block
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">struct</span> <span class="n">buf</span> <span class="o">*</span><span class="n">from</span> <span class="o">=</span> <span class="nf">bread</span><span class="p">(</span><span class="n">log</span><span class="p">.</span><span class="n">dev</span><span class="p">,</span> <span class="n">log</span><span class="p">.</span><span class="n">lh</span><span class="p">.</span><span class="n">block</span><span class="p">[</span><span class="n">tail</span><span class="p">]);</span> <span class="c1">// cache block
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">memmove</span><span class="p">(</span><span class="n">to</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">,</span> <span class="n">from</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">,</span> <span class="n">BSIZE</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">struct</span> <span class="n">buf</span> <span class="o">*</span><span class="n">from</span> <span class="o">=</span> <span class="nf">bread</span><span class="p">(</span><span class="n">log</span><span class="p">.</span><span class="n">dev</span><span class="p">,</span> <span class="n">log</span><span class="p">.</span><span class="n">lh</span><span class="p">.</span><span class="n">block</span><span class="p">[</span><span class="n">tail</span><span class="p">]);</span> <span class="c1">// cache block
+</span></span></span><span class="line"><span class="cl">    <span class="nf">memmove</span><span class="p">(</span><span class="n">to</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">,</span> <span class="n">from</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">,</span> <span class="n">BSIZE</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">bwrite</span><span class="p">(</span><span class="n">to</span><span class="p">);</span>  <span class="c1">// write the log
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">brelse</span><span class="p">(</span><span class="n">from</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nf">brelse</span><span class="p">(</span><span class="n">from</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">brelse</span><span class="p">(</span><span class="n">to</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
@@ -1300,7 +1300,7 @@
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// Write in-memory log header to disk.
 </span></span></span><span class="line"><span class="cl"><span class="c1">// This is the true point at which the
 </span></span></span><span class="line"><span class="cl"><span class="c1">// current transaction commits.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">static</span> <span class="kt">void</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="kt">void</span>
 </span></span><span class="line"><span class="cl"><span class="nf">write_head</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="k">struct</span> <span class="n">buf</span> <span class="o">*</span><span class="n">buf</span> <span class="o">=</span> <span class="nf">bread</span><span class="p">(</span><span class="n">log</span><span class="p">.</span><span class="n">dev</span><span class="p">,</span> <span class="n">log</span><span class="p">.</span><span class="n">start</span><span class="p">);</span>
@@ -1348,17 +1348,17 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// Copy committed blocks from log to their home location
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">static</span> <span class="kt">void</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="kt">void</span>
 </span></span><span class="line"><span class="cl"><span class="nf">install_trans</span><span class="p">(</span><span class="kt">int</span> <span class="n">recovering</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">tail</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="n">tail</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">tail</span> <span class="o">&lt;</span> <span class="n">log</span><span class="p">.</span><span class="n">lh</span><span class="p">.</span><span class="n">n</span><span class="p">;</span> <span class="n">tail</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">struct</span> <span class="n">buf</span> <span class="o">*</span><span class="n">lbuf</span> <span class="o">=</span> <span class="nf">bread</span><span class="p">(</span><span class="n">log</span><span class="p">.</span><span class="n">dev</span><span class="p">,</span> <span class="n">log</span><span class="p">.</span><span class="n">start</span><span class="o">+</span><span class="n">tail</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span> <span class="c1">// read log block
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">struct</span> <span class="n">buf</span> <span class="o">*</span><span class="n">dbuf</span> <span class="o">=</span> <span class="nf">bread</span><span class="p">(</span><span class="n">log</span><span class="p">.</span><span class="n">dev</span><span class="p">,</span> <span class="n">log</span><span class="p">.</span><span class="n">lh</span><span class="p">.</span><span class="n">block</span><span class="p">[</span><span class="n">tail</span><span class="p">]);</span> <span class="c1">// read dst
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">memmove</span><span class="p">(</span><span class="n">dbuf</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">,</span> <span class="n">lbuf</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">,</span> <span class="n">BSIZE</span><span class="p">);</span>  <span class="c1">// copy block to dst
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">bwrite</span><span class="p">(</span><span class="n">dbuf</span><span class="p">);</span>  <span class="c1">// write dst to disk
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span><span class="p">(</span><span class="n">recovering</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">struct</span> <span class="n">buf</span> <span class="o">*</span><span class="n">dbuf</span> <span class="o">=</span> <span class="nf">bread</span><span class="p">(</span><span class="n">log</span><span class="p">.</span><span class="n">dev</span><span class="p">,</span> <span class="n">log</span><span class="p">.</span><span class="n">lh</span><span class="p">.</span><span class="n">block</span><span class="p">[</span><span class="n">tail</span><span class="p">]);</span> <span class="c1">// read dst
+</span></span></span><span class="line"><span class="cl">    <span class="nf">memmove</span><span class="p">(</span><span class="n">dbuf</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">,</span> <span class="n">lbuf</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">,</span> <span class="n">BSIZE</span><span class="p">);</span>  <span class="c1">// copy block to dst
+</span></span></span><span class="line"><span class="cl">    <span class="nf">bwrite</span><span class="p">(</span><span class="n">dbuf</span><span class="p">);</span>  <span class="c1">// write dst to disk
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">recovering</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">      <span class="nf">bunpin</span><span class="p">(</span><span class="n">dbuf</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">brelse</span><span class="p">(</span><span class="n">lbuf</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">brelse</span><span class="p">(</span><span class="n">dbuf</span><span class="p">);</span>
@@ -1427,9 +1427,9 @@
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="nf">read_head</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">  <span class="nf">install_trans</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="c1">// if committed, copy from log to disk
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">log</span><span class="p">.</span><span class="n">lh</span><span class="p">.</span><span class="n">n</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">  <span class="n">log</span><span class="p">.</span><span class="n">lh</span><span class="p">.</span><span class="n">n</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="nf">write_head</span><span class="p">();</span> <span class="c1">// clear the log
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>recover_from_log先调用read_head函数从磁盘中读取header，之后调用install_trans函数。</p>
@@ -1449,7 +1449,7 @@
 <p><img src="/p/mit6s08115crash-recovery/p29.png"
 	width="248"
 	height="604"
-	srcset="/p/mit6s08115crash-recovery/p29_hu_67d5959d0590b9e1.png 480w, /p/mit6s08115crash-recovery/p29_hu_6f55fd5a74eeb7bb.png 1024w"
+	srcset="/p/mit6s08115crash-recovery/p29_hu_af3641ae41f55a6f.png 480w, /p/mit6s08115crash-recovery/p29_hu_16a6b7149a299546.png 1024w"
 	loading="lazy"
 	
 		alt="p29"
@@ -1568,7 +1568,7 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// Write to file f.
 </span></span></span><span class="line"><span class="cl"><span class="c1">// addr is a user virtual address.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">int</span>
 </span></span><span class="line"><span class="cl"><span class="nf">filewrite</span><span class="p">(</span><span class="k">struct</span> <span class="n">file</span> <span class="o">*</span><span class="n">f</span><span class="p">,</span> <span class="n">uint64</span> <span class="n">addr</span><span class="p">,</span> <span class="kt">int</span> <span class="n">n</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">r</span><span class="p">,</span> <span class="n">ret</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
@@ -1584,12 +1584,12 @@
 </span></span><span class="line"><span class="cl">    <span class="n">ret</span> <span class="o">=</span> <span class="n">devsw</span><span class="p">[</span><span class="n">f</span><span class="o">-&gt;</span><span class="n">major</span><span class="p">].</span><span class="nf">write</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">addr</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">f</span><span class="o">-&gt;</span><span class="n">type</span> <span class="o">==</span> <span class="n">FD_INODE</span><span class="p">){</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// write a few blocks at a time to avoid exceeding
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// the maximum log transaction size, including
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// i-node, indirect block, allocation blocks,
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// and 2 blocks of slop for non-aligned writes.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// this really belongs lower down, since writei()
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// might be writing a device like the console.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="n">max</span> <span class="o">=</span> <span class="p">((</span><span class="n">MAXOPBLOCKS</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">BSIZE</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// the maximum log transaction size, including
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// i-node, indirect block, allocation blocks,
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// and 2 blocks of slop for non-aligned writes.
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// this really belongs lower down, since writei()
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// might be writing a device like the console.
+</span></span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">max</span> <span class="o">=</span> <span class="p">((</span><span class="n">MAXOPBLOCKS</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">BSIZE</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="k">while</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">){</span>
 </span></span><span class="line"><span class="cl">      <span class="kt">int</span> <span class="n">n1</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="n">i</span><span class="p">;</span>
@@ -1605,7 +1605,7 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">      <span class="k">if</span><span class="p">(</span><span class="n">r</span> <span class="o">!=</span> <span class="n">n1</span><span class="p">){</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// error from writei
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">break</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">        <span class="k">break</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">      <span class="p">}</span>
 </span></span><span class="line"><span class="cl">      <span class="n">i</span> <span class="o">+=</span> <span class="n">r</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
@@ -1661,7 +1661,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// called at the start of each FS system call.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">void</span>
 </span></span><span class="line"><span class="cl"><span class="nf">begin_op</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="nf">acquire</span><span class="p">(</span><span class="o">&amp;</span><span class="n">log</span><span class="p">.</span><span class="n">lock</span><span class="p">);</span>
@@ -1670,7 +1670,7 @@
 </span></span><span class="line"><span class="cl">      <span class="nf">sleep</span><span class="p">(</span><span class="o">&amp;</span><span class="n">log</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">log</span><span class="p">.</span><span class="n">lock</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">log</span><span class="p">.</span><span class="n">lh</span><span class="p">.</span><span class="n">n</span> <span class="o">+</span> <span class="p">(</span><span class="n">log</span><span class="p">.</span><span class="n">outstanding</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">MAXOPBLOCKS</span> <span class="o">&gt;</span> <span class="n">LOGSIZE</span><span class="p">){</span>
 </span></span><span class="line"><span class="cl">      <span class="c1">// this op might exhaust log space; wait for commit.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="nf">sleep</span><span class="p">(</span><span class="o">&amp;</span><span class="n">log</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">log</span><span class="p">.</span><span class="n">lock</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">      <span class="nf">sleep</span><span class="p">(</span><span class="o">&amp;</span><span class="n">log</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">log</span><span class="p">.</span><span class="n">lock</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="n">log</span><span class="p">.</span><span class="n">outstanding</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">      <span class="nf">release</span><span class="p">(</span><span class="o">&amp;</span><span class="n">log</span><span class="p">.</span><span class="n">lock</span><span class="p">);</span>
@@ -1722,7 +1722,7 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// called at the end of each FS system call.
 </span></span></span><span class="line"><span class="cl"><span class="c1">// commits if this was the last outstanding operation.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">void</span>
 </span></span><span class="line"><span class="cl"><span class="nf">end_op</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">do_commit</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
@@ -1736,16 +1736,16 @@
 </span></span><span class="line"><span class="cl">    <span class="n">log</span><span class="p">.</span><span class="n">committing</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// begin_op() may be waiting for log space,
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// and decrementing log.outstanding has decreased
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// the amount of reserved space.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">wakeup</span><span class="p">(</span><span class="o">&amp;</span><span class="n">log</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// and decrementing log.outstanding has decreased
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// the amount of reserved space.
+</span></span></span><span class="line"><span class="cl">    <span class="nf">wakeup</span><span class="p">(</span><span class="o">&amp;</span><span class="n">log</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  <span class="nf">release</span><span class="p">(</span><span class="o">&amp;</span><span class="n">log</span><span class="p">.</span><span class="n">lock</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="k">if</span><span class="p">(</span><span class="n">do_commit</span><span class="p">){</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// call commit w/o holding locks, since not allowed
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// to sleep with locks.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">commit</span><span class="p">();</span>
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// to sleep with locks.
+</span></span></span><span class="line"><span class="cl">    <span class="nf">commit</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">acquire</span><span class="p">(</span><span class="o">&amp;</span><span class="n">log</span><span class="p">.</span><span class="n">lock</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="n">log</span><span class="p">.</span><span class="n">committing</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">wakeup</span><span class="p">(</span><span class="o">&amp;</span><span class="n">log</span><span class="p">);</span>
@@ -1832,7 +1832,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08123rcu/bg.91a08bf3fe0a8ca435e8fbc902291fd5_hu_50da030b7ba2cbe7.jpg" 
+                <img src="/p/mit6s08123rcu/bg.91a08bf3fe0a8ca435e8fbc902291fd5_hu_b6ef8ea2c8ceedc0.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -1856,7 +1856,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08122meltdown/19.8d880549dccba2f0c1613b3e41a721e5_hu_1493d831cda8626c.jpg" 
+                <img src="/p/mit6s08122meltdown/19.8d880549dccba2f0c1613b3e41a721e5_hu_914e4a4b73e7f898.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -1880,7 +1880,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08121networking/bg.68c4376fd87b0b35da07319dd155c90d_hu_b8a716243c6f9679.jpg" 
+                <img src="/p/mit6s08121networking/bg.68c4376fd87b0b35da07319dd155c90d_hu_702cc6dbf23ff4b6.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -1904,7 +1904,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08120kernels-and-hll/bg.4175e6a2793e0fc340e5aced2529e40b_hu_de82d011b3d97ace.jpg" 
+                <img src="/p/mit6s08120kernels-and-hll/bg.4175e6a2793e0fc340e5aced2529e40b_hu_900f2fcc83e9e964.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -1928,7 +1928,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08119virtual-machines/bg.b02a7ba1d946705c0cf2809bcf960db8_hu_77df69a362eba544.jpg" 
+                <img src="/p/mit6s08119virtual-machines/bg.b02a7ba1d946705c0cf2809bcf960db8_hu_3d3ad0ec0320c7b4.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -2159,7 +2159,7 @@
         
         
 
-        共 742374 字 , 39 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        共 741930 字 , 39 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
         主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 

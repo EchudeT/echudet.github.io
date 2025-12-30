@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-cn" dir="ltr">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="线程切换是实现多线程并发执行的核心机制。线程切换的原理在于操作系统在同一进程内或不同进程间调度不同的线程，以便在多核处理器上并发执行任务，提高系统利用率和响应性。切换时，操作系统会保存当前线程的上下文（如寄存器状态和程序计数器），加载下一个被调度线程的上下文，恢复其执行状态。线程切换使得多任务处理更加高效，有助于资源共享、任务并行和提高应用程序的性能，是现代操作系统实现高速并发计算的基础。">
 <title>MIT6S081：11Thread switching</title>
@@ -59,7 +59,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu_67bf1327fc98b60.png" width="300"
+                        <img src="/img/avatar_hu_c2920364e6534697.png" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -300,8 +300,8 @@
     <header class="article-header">
         <div class="article-image">
             <a href="/p/mit6s08111thread-switching/">
-                <img src="/p/mit6s08111thread-switching/bg_hu_d5fdd348b50b5c3e.jpg"
-                        srcset="/p/mit6s08111thread-switching/bg_hu_d5fdd348b50b5c3e.jpg 800w, /p/mit6s08111thread-switching/bg_hu_f84bb70c20abbc7f.jpg 1600w"
+                <img src="/p/mit6s08111thread-switching/bg_hu_1acba93833f8842e.jpg"
+                        srcset="/p/mit6s08111thread-switching/bg_hu_1acba93833f8842e.jpg 800w, /p/mit6s08111thread-switching/bg_hu_ee348e5aed1ccf3f.jpg 1600w"
                         width="800" 
                         height="450" 
                         loading="lazy"
@@ -561,7 +561,7 @@
 <p><img src="/p/mit6s08111thread-switching/p1.png"
 	width="1280"
 	height="534"
-	srcset="/p/mit6s08111thread-switching/p1_hu_3d8a6b1724a682a4.png 480w, /p/mit6s08111thread-switching/p1_hu_65c434905c5b26f7.png 1024w"
+	srcset="/p/mit6s08111thread-switching/p1_hu_6953f7aa979766b2.png 480w, /p/mit6s08111thread-switching/p1_hu_672a2bc33581718a.png 1024w"
 	loading="lazy"
 	
 		alt="p1"
@@ -763,13 +763,13 @@
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">ccodepreviewrunvoid</span> <span class="nf">coroutineA</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;In coroutineA</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">yield</span><span class="p">();</span>  <span class="c1">// 暂停并交出控制权
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Back to coroutineA</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Back to coroutineA</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">coroutineB</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;In coroutineB</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">yield</span><span class="p">();</span>  <span class="c1">// 暂停并交出控制权
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">startCoroutine</span><span class="p">(</span><span class="n">coroutineA</span><span class="p">);</span>
@@ -1206,27 +1206,27 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// Per-process state
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">struct</span> <span class="n">proc</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="n">proc</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="k">struct</span> <span class="n">spinlock</span> <span class="n">lock</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// p-&gt;lock must be held when using these:
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">enum</span> <span class="n">procstate</span> <span class="n">state</span><span class="p">;</span>        <span class="c1">// Process state
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">struct</span> <span class="n">proc</span> <span class="o">*</span><span class="n">parent</span><span class="p">;</span>         <span class="c1">// Parent process
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">void</span> <span class="o">*</span><span class="n">chan</span><span class="p">;</span>                  <span class="c1">// If non-zero, sleeping on chan
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">int</span> <span class="n">killed</span><span class="p">;</span>                  <span class="c1">// If non-zero, have been killed
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">int</span> <span class="n">xstate</span><span class="p">;</span>                  <span class="c1">// Exit status to be returned to parent&#39;s wait
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">int</span> <span class="n">pid</span><span class="p">;</span>                     <span class="c1">// Process ID
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl">  <span class="k">enum</span> <span class="n">procstate</span> <span class="n">state</span><span class="p">;</span>        <span class="c1">// Process state
+</span></span></span><span class="line"><span class="cl">  <span class="k">struct</span> <span class="n">proc</span> <span class="o">*</span><span class="n">parent</span><span class="p">;</span>         <span class="c1">// Parent process
+</span></span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="o">*</span><span class="n">chan</span><span class="p">;</span>                  <span class="c1">// If non-zero, sleeping on chan
+</span></span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">killed</span><span class="p">;</span>                  <span class="c1">// If non-zero, have been killed
+</span></span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">xstate</span><span class="p">;</span>                  <span class="c1">// Exit status to be returned to parent&#39;s wait
+</span></span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">pid</span><span class="p">;</span>                     <span class="c1">// Process ID
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// these are private to the process, so p-&gt;lock need not be held.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">uint64</span> <span class="n">kstack</span><span class="p">;</span>               <span class="c1">// Virtual address of kernel stack
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">uint64</span> <span class="n">sz</span><span class="p">;</span>                   <span class="c1">// Size of process memory (bytes)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">pagetable_t</span> <span class="n">pagetable</span><span class="p">;</span>       <span class="c1">// User page table
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">struct</span> <span class="n">trapframe</span> <span class="o">*</span><span class="n">trapframe</span><span class="p">;</span> <span class="c1">// data page for trampoline.S
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">struct</span> <span class="n">context</span> <span class="n">context</span><span class="p">;</span>      <span class="c1">// swtch() here to run process
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">struct</span> <span class="n">file</span> <span class="o">*</span><span class="n">ofile</span><span class="p">[</span><span class="n">NOFILE</span><span class="p">];</span>  <span class="c1">// Open files
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">struct</span> <span class="n">inode</span> <span class="o">*</span><span class="n">cwd</span><span class="p">;</span>           <span class="c1">// Current directory
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">char</span> <span class="n">name</span><span class="p">[</span><span class="mi">16</span><span class="p">];</span>               <span class="c1">// Process name (debugging)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">};</span>
+</span></span></span><span class="line"><span class="cl">  <span class="n">uint64</span> <span class="n">kstack</span><span class="p">;</span>               <span class="c1">// Virtual address of kernel stack
+</span></span></span><span class="line"><span class="cl">  <span class="n">uint64</span> <span class="n">sz</span><span class="p">;</span>                   <span class="c1">// Size of process memory (bytes)
+</span></span></span><span class="line"><span class="cl">  <span class="kt">pagetable_t</span> <span class="n">pagetable</span><span class="p">;</span>       <span class="c1">// User page table
+</span></span></span><span class="line"><span class="cl">  <span class="k">struct</span> <span class="n">trapframe</span> <span class="o">*</span><span class="n">trapframe</span><span class="p">;</span> <span class="c1">// data page for trampoline.S
+</span></span></span><span class="line"><span class="cl">  <span class="k">struct</span> <span class="n">context</span> <span class="n">context</span><span class="p">;</span>      <span class="c1">// swtch() here to run process
+</span></span></span><span class="line"><span class="cl">  <span class="k">struct</span> <span class="n">file</span> <span class="o">*</span><span class="n">ofile</span><span class="p">[</span><span class="n">NOFILE</span><span class="p">];</span>  <span class="c1">// Open files
+</span></span></span><span class="line"><span class="cl">  <span class="k">struct</span> <span class="n">inode</span> <span class="o">*</span><span class="n">cwd</span><span class="p">;</span>           <span class="c1">// Current directory
+</span></span></span><span class="line"><span class="cl">  <span class="kt">char</span> <span class="n">name</span><span class="p">[</span><span class="mi">16</span><span class="p">];</span>               <span class="c1">// Process name (debugging)
+</span></span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
@@ -1239,7 +1239,7 @@
 <p>接下来会运行一个简单的演示程序，在这个程序中我们会从一个进程切换到另一个。<img src="/p/mit6s08111thread-switching/p2.png"
 	width="562"
 	height="544"
-	srcset="/p/mit6s08111thread-switching/p2_hu_691008196811dfe4.png 480w, /p/mit6s08111thread-switching/p2_hu_228aa05e68038c95.png 1024w"
+	srcset="/p/mit6s08111thread-switching/p2_hu_c15cd320fb0eccdb.png 480w, /p/mit6s08111thread-switching/p2_hu_b6c890782f702e6b.png 1024w"
 	loading="lazy"
 	
 		alt="image"
@@ -1258,7 +1258,7 @@
 <p>接下来运行spin程序，<img src="/p/mit6s08111thread-switching/p3.png"
 	width="724"
 	height="324"
-	srcset="/p/mit6s08111thread-switching/p3_hu_d95fab29915914fc.png 480w, /p/mit6s08111thread-switching/p3_hu_f8da2e407ec97f76.png 1024w"
+	srcset="/p/mit6s08111thread-switching/p3_hu_762447f08099452c.png 480w, /p/mit6s08111thread-switching/p3_hu_f150995145f1e517.png 1024w"
 	loading="lazy"
 	
 		alt="p3"
@@ -1276,7 +1276,7 @@
 <p><img src="/p/mit6s08111thread-switching/p4.png"
 	width="918"
 	height="1036"
-	srcset="/p/mit6s08111thread-switching/p4_hu_bdb8e8a29947d0d1.png 480w, /p/mit6s08111thread-switching/p4_hu_5ea85d5a7936ec2a.png 1024w"
+	srcset="/p/mit6s08111thread-switching/p4_hu_1b886555d0a975a8.png 480w, /p/mit6s08111thread-switching/p4_hu_a01d76584a65ce9d.png 1024w"
 	loading="lazy"
 	
 		alt="p4"
@@ -1290,7 +1290,7 @@
 <p><img src="/p/mit6s08111thread-switching/p5.png"
 	width="798"
 	height="86"
-	srcset="/p/mit6s08111thread-switching/p5_hu_ff5c7d04005d72e4.png 480w, /p/mit6s08111thread-switching/p5_hu_115b2b104cc2f7be.png 1024w"
+	srcset="/p/mit6s08111thread-switching/p5_hu_d3190ddf18ff9d71.png 480w, /p/mit6s08111thread-switching/p5_hu_38008fa79549d376.png 1024w"
 	loading="lazy"
 	
 		alt="p5"
@@ -1305,7 +1305,7 @@
 <p><img src="/p/mit6s08111thread-switching/p6.png"
 	width="780"
 	height="152"
-	srcset="/p/mit6s08111thread-switching/p6_hu_8f933fd47f869dd6.png 480w, /p/mit6s08111thread-switching/p6_hu_660c0477e12ef336.png 1024w"
+	srcset="/p/mit6s08111thread-switching/p6_hu_3c249ea36c3b8228.png 480w, /p/mit6s08111thread-switching/p6_hu_9ac71e905b6d730.png 1024w"
 	loading="lazy"
 	
 		alt="p6"
@@ -1321,7 +1321,7 @@
 <p><img src="/p/mit6s08111thread-switching/p7.png"
 	width="714"
 	height="334"
-	srcset="/p/mit6s08111thread-switching/p7_hu_7054b9f699f5f13b.png 480w, /p/mit6s08111thread-switching/p7_hu_e3f8b4a99f1a4b57.png 1024w"
+	srcset="/p/mit6s08111thread-switching/p7_hu_1a17bc9ed9e8a86.png 480w, /p/mit6s08111thread-switching/p7_hu_871f72588abff933.png 1024w"
 	loading="lazy"
 	
 		alt="p7"
@@ -1336,7 +1336,7 @@
 <p><img src="/p/mit6s08111thread-switching/p8.png"
 	width="760"
 	height="224"
-	srcset="/p/mit6s08111thread-switching/p8_hu_8dc2b7ddbaab9b30.png 480w, /p/mit6s08111thread-switching/p8_hu_4e159fb09b94065b.png 1024w"
+	srcset="/p/mit6s08111thread-switching/p8_hu_804160031a5caf88.png 480w, /p/mit6s08111thread-switching/p8_hu_cd05a61532d4270.png 1024w"
 	loading="lazy"
 	
 		alt="p8"
@@ -1404,7 +1404,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// Give up the CPU for one scheduling round.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">void</span>
 </span></span><span class="line"><span class="cl"><span class="nf">yield</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="k">struct</span> <span class="n">proc</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="nf">myproc</span><span class="p">();</span>
@@ -1461,7 +1461,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="c1">// be proc-&gt;intena and proc-&gt;noff, but that would
 </span></span></span><span class="line"><span class="cl"><span class="c1">// break in the few places where a lock is held but
 </span></span></span><span class="line"><span class="cl"><span class="c1">// there&#39;s no process.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">void</span>
 </span></span><span class="line"><span class="cl"><span class="nf">sched</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">intena</span><span class="p">;</span>
@@ -1495,7 +1495,7 @@
 <p><img src="/p/mit6s08111thread-switching/p9.png"
 	width="958"
 	height="118"
-	srcset="/p/mit6s08111thread-switching/p9_hu_432db08261c6d4aa.png 480w, /p/mit6s08111thread-switching/p9_hu_3b8005bac571a085.png 1024w"
+	srcset="/p/mit6s08111thread-switching/p9_hu_1c4709ccef53efe5.png 480w, /p/mit6s08111thread-switching/p9_hu_f4dcc0f323bd92b8.png 1024w"
 	loading="lazy"
 	
 		alt="p9"
@@ -1512,7 +1512,7 @@
 <p><img src="/p/mit6s08111thread-switching/p10.png"
 	width="704"
 	height="70"
-	srcset="/p/mit6s08111thread-switching/p10_hu_70a2a7ca6fd2ffab.png 480w, /p/mit6s08111thread-switching/p10_hu_86566cec5537ed23.png 1024w"
+	srcset="/p/mit6s08111thread-switching/p10_hu_de2de85b514137ca.png 480w, /p/mit6s08111thread-switching/p10_hu_21b2b37940d0ef33.png 1024w"
 	loading="lazy"
 	
 		alt="p10"
@@ -1573,7 +1573,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="c1">#   void swtch(struct context *old, struct context *new);
 </span></span></span><span class="line"><span class="cl"><span class="c1"># 
 </span></span></span><span class="line"><span class="cl"><span class="c1"># Save current registers in old. Load from new.	
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="na">.globl</span> <span class="no">swtch</span>
+</span></span></span><span class="line"><span class="cl"><span class="na">.globl</span> <span class="no">swtch</span>
 </span></span><span class="line"><span class="cl"><span class="nl">swtch:</span>
 </span></span><span class="line"><span class="cl">        <span class="nf">sd</span> <span class="no">ra</span><span class="p">,</span> <span class="mi">0</span><span class="p">(</span><span class="no">a0</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">        <span class="nf">sd</span> <span class="no">sp</span><span class="p">,</span> <span class="mi">8</span><span class="p">(</span><span class="no">a0</span><span class="p">)</span>
@@ -1705,7 +1705,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="c1">//  - swtch to start running that process.
 </span></span></span><span class="line"><span class="cl"><span class="c1">//  - eventually that process transfers control
 </span></span></span><span class="line"><span class="cl"><span class="c1">//    via swtch back to the scheduler.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">void</span>
 </span></span><span class="line"><span class="cl"><span class="nf">scheduler</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="k">struct</span> <span class="n">proc</span> <span class="o">*</span><span class="n">p</span><span class="p">;</span>
@@ -1714,7 +1714,7 @@
 </span></span><span class="line"><span class="cl">  <span class="n">c</span><span class="o">-&gt;</span><span class="n">proc</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="k">for</span><span class="p">(;;){</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// Avoid deadlock by ensuring that devices can interrupt.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">intr_on</span><span class="p">();</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nf">intr_on</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">nproc</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="n">p</span> <span class="o">=</span> <span class="n">proc</span><span class="p">;</span> <span class="n">p</span> <span class="o">&lt;</span> <span class="o">&amp;</span><span class="n">proc</span><span class="p">[</span><span class="n">NPROC</span><span class="p">];</span> <span class="n">p</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
@@ -1724,20 +1724,20 @@
 </span></span><span class="line"><span class="cl">      <span class="p">}</span>
 </span></span><span class="line"><span class="cl">      <span class="k">if</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">state</span> <span class="o">==</span> <span class="n">RUNNABLE</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// Switch to chosen process.  It is the process&#39;s job
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// to release its lock and then reacquire it
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// before jumping back to us.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">p</span><span class="o">-&gt;</span><span class="n">state</span> <span class="o">=</span> <span class="n">RUNNING</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">        <span class="c1">// to release its lock and then reacquire it
+</span></span></span><span class="line"><span class="cl">        <span class="c1">// before jumping back to us.
+</span></span></span><span class="line"><span class="cl">        <span class="n">p</span><span class="o">-&gt;</span><span class="n">state</span> <span class="o">=</span> <span class="n">RUNNING</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        <span class="n">c</span><span class="o">-&gt;</span><span class="n">proc</span> <span class="o">=</span> <span class="n">p</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        <span class="nf">swtch</span><span class="p">(</span><span class="o">&amp;</span><span class="n">c</span><span class="o">-&gt;</span><span class="n">context</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">context</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">        <span class="c1">// Process is done running for now.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// It should have changed its p-&gt;state before coming back.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">c</span><span class="o">-&gt;</span><span class="n">proc</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">        <span class="c1">// It should have changed its p-&gt;state before coming back.
+</span></span></span><span class="line"><span class="cl">        <span class="n">c</span><span class="o">-&gt;</span><span class="n">proc</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">      <span class="p">}</span>
 </span></span><span class="line"><span class="cl">      <span class="nf">release</span><span class="p">(</span><span class="o">&amp;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">nproc</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>   <span class="c1">// only init and sh exist
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="nf">intr_on</span><span class="p">();</span>
+</span></span></span><span class="line"><span class="cl">      <span class="nf">intr_on</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">      <span class="k">asm</span> <span class="k">volatile</span><span class="p">(</span><span class="s">&#34;wfi&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
@@ -1777,7 +1777,7 @@
 <p><img src="/p/mit6s08111thread-switching/p11.png"
 	width="718"
 	height="412"
-	srcset="/p/mit6s08111thread-switching/p11_hu_fb0779744dd79a74.png 480w, /p/mit6s08111thread-switching/p11_hu_52e384a4dd73542f.png 1024w"
+	srcset="/p/mit6s08111thread-switching/p11_hu_34820b23d957079a.png 480w, /p/mit6s08111thread-switching/p11_hu_716b3da8b94ff473.png 1024w"
 	loading="lazy"
 	
 		alt="p11"
@@ -1844,7 +1844,7 @@
 <p><img src="/p/mit6s08111thread-switching/p12.png"
 	width="536"
 	height="170"
-	srcset="/p/mit6s08111thread-switching/p12_hu_f15c8c22dd57218c.png 480w, /p/mit6s08111thread-switching/p12_hu_410de157f51f6227.png 1024w"
+	srcset="/p/mit6s08111thread-switching/p12_hu_3b8083320f48aa79.png 480w, /p/mit6s08111thread-switching/p12_hu_417fff4dd19d7880.png 1024w"
 	loading="lazy"
 	
 		alt="p12"
@@ -1889,19 +1889,19 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// A fork child&#39;s very first scheduling by scheduler()
 </span></span></span><span class="line"><span class="cl"><span class="c1">// will swtch to forkret.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">void</span>
 </span></span><span class="line"><span class="cl"><span class="nf">forkret</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="kt">int</span> <span class="n">first</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// Still holding p-&gt;lock from scheduler.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">release</span><span class="p">(</span><span class="o">&amp;</span><span class="nf">myproc</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="nf">release</span><span class="p">(</span><span class="o">&amp;</span><span class="nf">myproc</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">first</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl"> <span class="c1">// File system initialization must be run in the context of a
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span> <span class="c1">// regular process (e.g., because it calls sleep), and thus cannot
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span> <span class="c1">// be run from main().
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span> <span class="n">first</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"> <span class="c1">// regular process (e.g., because it calls sleep), and thus cannot
+</span></span></span><span class="line"><span class="cl"> <span class="c1">// be run from main().
+</span></span></span><span class="line"><span class="cl"> <span class="n">first</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"> <span class="nf">fsinit</span><span class="p">(</span><span class="n">ROOTDEV</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
@@ -1943,7 +1943,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// Set up first user process.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">void</span>
 </span></span><span class="line"><span class="cl"><span class="nf">userinit</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="n">proc</span> <span class="o">*</span><span class="n">p</span><span class="p">;</span>
@@ -1953,13 +1953,13 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// allocate one user page and copy init&#39;s instructions
 </span></span></span><span class="line"><span class="cl"><span class="c1">// and data into it.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">uvminit</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">pagetable</span><span class="p">,</span> <span class="n">initcode</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">initcode</span><span class="p">));</span>
+</span></span></span><span class="line"><span class="cl"><span class="nf">uvminit</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">pagetable</span><span class="p">,</span> <span class="n">initcode</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">initcode</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">-&gt;</span><span class="n">sz</span> <span class="o">=</span> <span class="n">PGSIZE</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// prepare for the very first &#34;return&#34; from kernel to user.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">p</span><span class="o">-&gt;</span><span class="n">trapframe</span><span class="o">-&gt;</span><span class="n">epc</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>      <span class="c1">// user program counter
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">p</span><span class="o">-&gt;</span><span class="n">trapframe</span><span class="o">-&gt;</span><span class="n">sp</span> <span class="o">=</span> <span class="n">PGSIZE</span><span class="p">;</span>  <span class="c1">// user stack pointer
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">-&gt;</span><span class="n">trapframe</span><span class="o">-&gt;</span><span class="n">epc</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>      <span class="c1">// user program counter
+</span></span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">-&gt;</span><span class="n">trapframe</span><span class="o">-&gt;</span><span class="n">sp</span> <span class="o">=</span> <span class="n">PGSIZE</span><span class="p">;</span>  <span class="c1">// user stack pointer
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="nf">safestrcpy</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">,</span> <span class="s">&#34;initcode&#34;</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">-&gt;</span><span class="n">cwd</span> <span class="o">=</span> <span class="nf">namei</span><span class="p">(</span><span class="s">&#34;/&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
@@ -2040,7 +2040,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08123rcu/bg.91a08bf3fe0a8ca435e8fbc902291fd5_hu_50da030b7ba2cbe7.jpg" 
+                <img src="/p/mit6s08123rcu/bg.91a08bf3fe0a8ca435e8fbc902291fd5_hu_b6ef8ea2c8ceedc0.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -2064,7 +2064,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08122meltdown/19.8d880549dccba2f0c1613b3e41a721e5_hu_1493d831cda8626c.jpg" 
+                <img src="/p/mit6s08122meltdown/19.8d880549dccba2f0c1613b3e41a721e5_hu_914e4a4b73e7f898.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -2088,7 +2088,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08121networking/bg.68c4376fd87b0b35da07319dd155c90d_hu_b8a716243c6f9679.jpg" 
+                <img src="/p/mit6s08121networking/bg.68c4376fd87b0b35da07319dd155c90d_hu_702cc6dbf23ff4b6.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -2112,7 +2112,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08120kernels-and-hll/bg.4175e6a2793e0fc340e5aced2529e40b_hu_de82d011b3d97ace.jpg" 
+                <img src="/p/mit6s08120kernels-and-hll/bg.4175e6a2793e0fc340e5aced2529e40b_hu_900f2fcc83e9e964.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -2136,7 +2136,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08119virtual-machines/bg.b02a7ba1d946705c0cf2809bcf960db8_hu_77df69a362eba544.jpg" 
+                <img src="/p/mit6s08119virtual-machines/bg.b02a7ba1d946705c0cf2809bcf960db8_hu_3d3ad0ec0320c7b4.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -2367,7 +2367,7 @@
         
         
 
-        共 742374 字 , 39 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        共 741930 字 , 39 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
         主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 

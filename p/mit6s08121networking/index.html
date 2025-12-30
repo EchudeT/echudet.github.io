@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-cn" dir="ltr">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="在网络协议栈中，接收活锁（Receive Livelock）是一个重要的问题，这是在高流量条件下系统因频繁处理中断而陷入的性能瓶颈现象。为了解决这一问题，采用轮询机制代替传统中断驱动，以减少高负载下的中断频率，能够提高系统性能的稳定性。此外，网卡的Ring Buffer 结构和 DMA 传输机制有助于数据包在网卡与系统内存之间高效传输。">
 <title>MIT6S081：21Networking</title>
@@ -59,7 +59,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu_67bf1327fc98b60.png" width="300"
+                        <img src="/img/avatar_hu_c2920364e6534697.png" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -299,8 +299,8 @@
     <header class="article-header">
         <div class="article-image">
             <a href="/p/mit6s08121networking/">
-                <img src="/p/mit6s08121networking/bg_hu_c132faa1d26b8a94.jpg"
-                        srcset="/p/mit6s08121networking/bg_hu_c132faa1d26b8a94.jpg 800w, /p/mit6s08121networking/bg_hu_ebcce394213e46d8.jpg 1600w"
+                <img src="/p/mit6s08121networking/bg_hu_e230612293aa3221.jpg"
+                        srcset="/p/mit6s08121networking/bg_hu_e230612293aa3221.jpg 800w, /p/mit6s08121networking/bg_hu_5f9e03db63b69833.jpg 1600w"
                         width="800" 
                         height="567" 
                         loading="lazy"
@@ -697,7 +697,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;arpa/inet.h&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">server_fd</span><span class="p">,</span> <span class="n">new_socket</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="k">struct</span> <span class="n">sockaddr_in</span> <span class="n">address</span><span class="p">;</span>
@@ -706,37 +706,37 @@
 </span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="n">buffer</span><span class="p">[</span><span class="mi">1024</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// 创建套接字
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">server_fd</span> <span class="o">=</span> <span class="nf">socket</span><span class="p">(</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">SOCK_STREAM</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">server_fd</span> <span class="o">=</span> <span class="nf">socket</span><span class="p">(</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">SOCK_STREAM</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">server_fd</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="nf">perror</span><span class="p">(</span><span class="s">&#34;socket failed&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">        <span class="nf">exit</span><span class="p">(</span><span class="n">EXIT_FAILURE</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// 绑定地址和端口
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">address</span><span class="p">.</span><span class="n">sin_family</span> <span class="o">=</span> <span class="n">AF_INET</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">address</span><span class="p">.</span><span class="n">sin_family</span> <span class="o">=</span> <span class="n">AF_INET</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="n">address</span><span class="p">.</span><span class="n">sin_addr</span><span class="p">.</span><span class="n">s_addr</span> <span class="o">=</span> <span class="n">INADDR_ANY</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="n">address</span><span class="p">.</span><span class="n">sin_port</span> <span class="o">=</span> <span class="nf">htons</span><span class="p">(</span><span class="mi">8080</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="nf">bind</span><span class="p">(</span><span class="n">server_fd</span><span class="p">,</span> <span class="p">(</span><span class="k">struct</span> <span class="n">sockaddr</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">address</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">address</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// 监听
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">listen</span><span class="p">(</span><span class="n">server_fd</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nf">listen</span><span class="p">(</span><span class="n">server_fd</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Server is listening on port 8080</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// 接受客户端连接
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">new_socket</span> <span class="o">=</span> <span class="nf">accept</span><span class="p">(</span><span class="n">server_fd</span><span class="p">,</span> <span class="p">(</span><span class="k">struct</span> <span class="n">sockaddr</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">address</span><span class="p">,</span> <span class="p">(</span><span class="kt">socklen_t</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">addrlen</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">new_socket</span> <span class="o">=</span> <span class="nf">accept</span><span class="p">(</span><span class="n">server_fd</span><span class="p">,</span> <span class="p">(</span><span class="k">struct</span> <span class="n">sockaddr</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">address</span><span class="p">,</span> <span class="p">(</span><span class="kt">socklen_t</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">addrlen</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// 读取数据
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">read</span><span class="p">(</span><span class="n">new_socket</span><span class="p">,</span> <span class="n">buffer</span><span class="p">,</span> <span class="mi">1024</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nf">read</span><span class="p">(</span><span class="n">new_socket</span><span class="p">,</span> <span class="n">buffer</span><span class="p">,</span> <span class="mi">1024</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Received: %s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">buffer</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// 发送响应
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">char</span> <span class="o">*</span><span class="n">response</span> <span class="o">=</span> <span class="s">&#34;Hello from server&#34;</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="o">*</span><span class="n">response</span> <span class="o">=</span> <span class="s">&#34;Hello from server&#34;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">send</span><span class="p">(</span><span class="n">new_socket</span><span class="p">,</span> <span class="n">response</span><span class="p">,</span> <span class="nf">strlen</span><span class="p">(</span><span class="n">response</span><span class="p">),</span> <span class="mi">0</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// 关闭连接
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">close</span><span class="p">(</span><span class="n">new_socket</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nf">close</span><span class="p">(</span><span class="n">new_socket</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">close</span><span class="p">(</span><span class="n">server_fd</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
@@ -843,7 +843,7 @@
 <p><img src="/p/mit6s08121networking/p53.png"
 	width="1116"
 	height="630"
-	srcset="/p/mit6s08121networking/p53_hu_6bae518fbd9fa527.png 480w, /p/mit6s08121networking/p53_hu_46127d8c1634925c.png 1024w"
+	srcset="/p/mit6s08121networking/p53_hu_1edf47a99460b81.png 480w, /p/mit6s08121networking/p53_hu_393aa9c31cb5ff3e.png 1024w"
 	loading="lazy"
 	
 		alt="p53"
@@ -873,7 +873,7 @@
 <p><img src="/p/mit6s08121networking/p54.png"
 	width="916"
 	height="190"
-	srcset="/p/mit6s08121networking/p54_hu_abdf84825194e52c.png 480w, /p/mit6s08121networking/p54_hu_c4feb6f9e7c4667c.png 1024w"
+	srcset="/p/mit6s08121networking/p54_hu_97468ea270dde737.png 480w, /p/mit6s08121networking/p54_hu_d861d141325d35d5.png 1024w"
 	loading="lazy"
 	
 		alt="p54"
@@ -911,7 +911,7 @@
 <p><img src="/p/mit6s08121networking/p55.png"
 	width="1094"
 	height="771"
-	srcset="/p/mit6s08121networking/p55_hu_96dcda9212cf8fbb.png 480w, /p/mit6s08121networking/p55_hu_bc0852ffb3d2106b.png 1024w"
+	srcset="/p/mit6s08121networking/p55_hu_53c7e6c6525994d4.png 480w, /p/mit6s08121networking/p55_hu_cecc08dc0fec8caf.png 1024w"
 	loading="lazy"
 	
 		alt="p55"
@@ -931,7 +931,7 @@
 <p><img src="/p/mit6s08121networking/p56.png"
 	width="898"
 	height="282"
-	srcset="/p/mit6s08121networking/p56_hu_888433ec2e62d2a.png 480w, /p/mit6s08121networking/p56_hu_ab8f96f54cb71352.png 1024w"
+	srcset="/p/mit6s08121networking/p56_hu_a66974e0daa872ca.png 480w, /p/mit6s08121networking/p56_hu_20cf9781e33e7738.png 1024w"
 	loading="lazy"
 	
 		alt="p56"
@@ -990,7 +990,7 @@
 <p><img src="/p/mit6s08121networking/p57.png"
 	width="1119"
 	height="651"
-	srcset="/p/mit6s08121networking/p57_hu_1d685c0d2cd3d71e.png 480w, /p/mit6s08121networking/p57_hu_f44a3a022a63fd46.png 1024w"
+	srcset="/p/mit6s08121networking/p57_hu_b419e7725643ba1a.png 480w, /p/mit6s08121networking/p57_hu_8fbdab120f41618f.png 1024w"
 	loading="lazy"
 	
 		alt="p57"
@@ -1025,7 +1025,7 @@
 <p><img src="/p/mit6s08121networking/p58.png"
 	width="888"
 	height="210"
-	srcset="/p/mit6s08121networking/p58_hu_1b6cd2f45a03982a.png 480w, /p/mit6s08121networking/p58_hu_6e1de8902dc79b16.png 1024w"
+	srcset="/p/mit6s08121networking/p58_hu_531c6226f054647b.png 480w, /p/mit6s08121networking/p58_hu_428fac2b1e6c6545.png 1024w"
 	loading="lazy"
 	
 		alt="p58"
@@ -1042,7 +1042,7 @@
 <p><img src="/p/mit6s08121networking/p59.png"
 	width="886"
 	height="210"
-	srcset="/p/mit6s08121networking/p59_hu_47a55a370c4020d6.png 480w, /p/mit6s08121networking/p59_hu_a2158fb9932e8aac.png 1024w"
+	srcset="/p/mit6s08121networking/p59_hu_5382d8894e437711.png 480w, /p/mit6s08121networking/p59_hu_5537878339c069c7.png 1024w"
 	loading="lazy"
 	
 		alt="p59"
@@ -1071,7 +1071,7 @@
 <p><img src="/p/mit6s08121networking/p60.png"
 	width="878"
 	height="254"
-	srcset="/p/mit6s08121networking/p60_hu_cc90c954207ab1b8.png 480w, /p/mit6s08121networking/p60_hu_8f19cc39fd11a7ed.png 1024w"
+	srcset="/p/mit6s08121networking/p60_hu_57118317d650f083.png 480w, /p/mit6s08121networking/p60_hu_a251b69154fa0623.png 1024w"
 	loading="lazy"
 	
 		alt="p60"
@@ -1093,7 +1093,7 @@
 <p><img src="/p/mit6s08121networking/p61.png"
 	width="898"
 	height="186"
-	srcset="/p/mit6s08121networking/p61_hu_12e75554548378f8.png 480w, /p/mit6s08121networking/p61_hu_5557b2f2a425fe97.png 1024w"
+	srcset="/p/mit6s08121networking/p61_hu_933990988d80cdda.png 480w, /p/mit6s08121networking/p61_hu_8af8573f628b22ba.png 1024w"
 	loading="lazy"
 	
 		alt="p61"
@@ -1153,7 +1153,7 @@
 <p><img src="/p/mit6s08121networking/p62.png"
 	width="1143"
 	height="832"
-	srcset="/p/mit6s08121networking/p62_hu_da9d5cbdfd7726e0.png 480w, /p/mit6s08121networking/p62_hu_33d1f4a54f3403d6.png 1024w"
+	srcset="/p/mit6s08121networking/p62_hu_c720b3a62232ef75.png 480w, /p/mit6s08121networking/p62_hu_a736b6e19e53adbf.png 1024w"
 	loading="lazy"
 	
 		alt="p62"
@@ -1186,7 +1186,7 @@
 <p><img src="/p/mit6s08121networking/p63.png"
 	width="1137"
 	height="877"
-	srcset="/p/mit6s08121networking/p63_hu_3cb73f3d86c9b0e.png 480w, /p/mit6s08121networking/p63_hu_e12ae4207c1d6c40.png 1024w"
+	srcset="/p/mit6s08121networking/p63_hu_4d2bb14439bf2ede.png 480w, /p/mit6s08121networking/p63_hu_9ff11fab0c11c78e.png 1024w"
 	loading="lazy"
 	
 		alt="p63"
@@ -1239,7 +1239,7 @@
 <p><img src="/p/mit6s08121networking/p64.png"
 	width="1137"
 	height="830"
-	srcset="/p/mit6s08121networking/p64_hu_70361db660bb4911.png 480w, /p/mit6s08121networking/p64_hu_985fd72f7403c52.png 1024w"
+	srcset="/p/mit6s08121networking/p64_hu_b4d040d8e8e2297.png 480w, /p/mit6s08121networking/p64_hu_94dc0daf77160168.png 1024w"
 	loading="lazy"
 	
 		alt="p64"
@@ -1289,7 +1289,7 @@
 <p><img src="/p/mit6s08121networking/p65.png"
 	width="1121"
 	height="553"
-	srcset="/p/mit6s08121networking/p65_hu_8d455a421605cea5.png 480w, /p/mit6s08121networking/p65_hu_e2a80390e90a59b1.png 1024w"
+	srcset="/p/mit6s08121networking/p65_hu_f4abcffd73fd1f72.png 480w, /p/mit6s08121networking/p65_hu_ecab728949464420.png 1024w"
 	loading="lazy"
 	
 		alt="p65"
@@ -1336,7 +1336,7 @@
 <p><img src="/p/mit6s08121networking/p66.png"
 	width="1136"
 	height="554"
-	srcset="/p/mit6s08121networking/p66_hu_b07f82fedde846dc.png 480w, /p/mit6s08121networking/p66_hu_8086efcd9066ae63.png 1024w"
+	srcset="/p/mit6s08121networking/p66_hu_e38bd4de4a74c33d.png 480w, /p/mit6s08121networking/p66_hu_2ec2764ac3c642d9.png 1024w"
 	loading="lazy"
 	
 		alt="p66"
@@ -1446,7 +1446,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08123rcu/bg.91a08bf3fe0a8ca435e8fbc902291fd5_hu_50da030b7ba2cbe7.jpg" 
+                <img src="/p/mit6s08123rcu/bg.91a08bf3fe0a8ca435e8fbc902291fd5_hu_b6ef8ea2c8ceedc0.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -1470,7 +1470,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08122meltdown/19.8d880549dccba2f0c1613b3e41a721e5_hu_1493d831cda8626c.jpg" 
+                <img src="/p/mit6s08122meltdown/19.8d880549dccba2f0c1613b3e41a721e5_hu_914e4a4b73e7f898.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -1494,7 +1494,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08120kernels-and-hll/bg.4175e6a2793e0fc340e5aced2529e40b_hu_de82d011b3d97ace.jpg" 
+                <img src="/p/mit6s08120kernels-and-hll/bg.4175e6a2793e0fc340e5aced2529e40b_hu_900f2fcc83e9e964.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -1518,7 +1518,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08119virtual-machines/bg.b02a7ba1d946705c0cf2809bcf960db8_hu_77df69a362eba544.jpg" 
+                <img src="/p/mit6s08119virtual-machines/bg.b02a7ba1d946705c0cf2809bcf960db8_hu_3d3ad0ec0320c7b4.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -1542,7 +1542,7 @@
         
         
             <div class="article-image">
-                <img src="/p/mit6s08118os-organization/bg.6254618fb3eb08f3bf5d7cd89d4cd672_hu_845b73e21b5a04f1.jpg" 
+                <img src="/p/mit6s08118os-organization/bg.6254618fb3eb08f3bf5d7cd89d4cd672_hu_646dc659ecd15a3f.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -1773,7 +1773,7 @@
         
         
 
-        共 742374 字 , 39 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        共 741930 字 , 39 篇文章<br>使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
         主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 
